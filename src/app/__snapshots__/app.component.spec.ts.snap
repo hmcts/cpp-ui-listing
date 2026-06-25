@@ -854,7 +854,7 @@ exports[`App page component when search is available should compile correctly  1
                           class="pdk-searchbar__label govuk-visually-hidden"
                           pdk-visually-hidden=""
                         >
-                           Search by case reference, application reference or PNC ID
+                           Search by case reference, application reference or PNC ID 
                         </span>
                       </button>
                     </div>
