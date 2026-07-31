@@ -66,10 +66,6 @@ export class SubMenuComponent {
             linkText: 'Unallocated Hearings'
           },
           {
-            routerLink: '/allocated',
-            linkText: 'Allocated Hearings'
-          },
-          {
             routerLink: '/create-a-list',
             linkText: hasCpsAccessOnly
               ? `Download Magistrates' hearing lists`

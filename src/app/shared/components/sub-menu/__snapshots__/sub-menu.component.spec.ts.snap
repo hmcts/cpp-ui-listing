@@ -45,17 +45,6 @@ exports[`SubMenuComponent should not render when the user does not have Court Ca
               routerlinkactive=""
             >
               <a
-                href="/allocated"
-              >
-                Allocated Hearings
-              </a>
-            </li>
-            <li
-              class="pdk-service-nav-list-item govuk-service-navigation__item"
-              pdk-service-nav-list-item=""
-              routerlinkactive=""
-            >
-              <a
                 href="/create-a-list"
               >
                 Publish and download hearing lists
@@ -117,17 +106,6 @@ exports[`SubMenuComponent should render 1`] = `
                 href="/unallocated"
               >
                 Unallocated Hearings
-              </a>
-            </li>
-            <li
-              class="pdk-service-nav-list-item govuk-service-navigation__item"
-              pdk-service-nav-list-item=""
-              routerlinkactive=""
-            >
-              <a
-                href="/allocated"
-              >
-                Allocated Hearings
               </a>
             </li>
             <li
@@ -205,17 +183,6 @@ exports[`SubMenuComponent should render when the user has CPS access only 1`] = 
               routerlinkactive=""
             >
               <a
-                href="/allocated"
-              >
-                Allocated Hearings
-              </a>
-            </li>
-            <li
-              class="pdk-service-nav-list-item govuk-service-navigation__item"
-              pdk-service-nav-list-item=""
-              routerlinkactive=""
-            >
-              <a
                 href="/create-a-list"
               >
                 Download Magistrates' hearing lists
@@ -277,17 +244,6 @@ exports[`SubMenuComponent should render when the user has Court Calendar access 
                 href="/unallocated"
               >
                 Unallocated Hearings
-              </a>
-            </li>
-            <li
-              class="pdk-service-nav-list-item govuk-service-navigation__item"
-              pdk-service-nav-list-item=""
-              routerlinkactive=""
-            >
-              <a
-                href="/allocated"
-              >
-                Allocated Hearings
               </a>
             </li>
             <li
