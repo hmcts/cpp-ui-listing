@@ -90,7 +90,7 @@ describe('MagsPublishListComponent', () => {
     fixture.detectChanges();
 
     const items = fixture.debugElement.queryAll(By.css('[mags-publish-list-item]'));
-    const labels = items.map((el) => el.componentInstance.label());
+    const labels = items.map(el => el.componentInstance.label());
     expect(labels).toContain('Online public court list');
     expect(labels).toContain('Standard court list');
     expect(items.length).toBe(2);
@@ -102,7 +102,7 @@ describe('MagsPublishListComponent', () => {
     fixture.detectChanges();
 
     const items = fixture.debugElement.queryAll(By.css('[mags-publish-list-item]'));
-    const labels = items.map((el) => el.componentInstance.label());
+    const labels = items.map(el => el.componentInstance.label());
     expect(labels).not.toContain('Online public court list');
     expect(labels).toContain('Standard court list');
     expect(items.length).toBe(1);
@@ -116,7 +116,7 @@ describe('MagsPublishListComponent', () => {
 
     const items = fixture.debugElement.queryAll(By.css('[mags-publish-list-item]'));
     const onlinePublicItem = items.find(
-      (el) => el.componentInstance.label() === 'Online public court list'
+      el => el.componentInstance.label() === 'Online public court list'
     );
     const btn = onlinePublicItem?.query(By.css('button'));
     btn?.nativeElement.click();

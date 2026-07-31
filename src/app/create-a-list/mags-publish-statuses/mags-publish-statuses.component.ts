@@ -51,7 +51,7 @@ export class MagsPublishStatusesComponent {
 
   constructor() {
     afterRenderEffect({
-      write: (onCleanup) => {
+      write: onCleanup => {
         const panels = this.panelRefs();
         const first = panels?.length ? panels[0] : null;
         if (first?.nativeElement) {

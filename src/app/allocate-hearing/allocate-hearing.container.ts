@@ -200,6 +200,11 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
         })
       );
     } else {
+      if (updatedHearing.nonDefaultDays.length > 0) {
+        updatedHearing.nonDefaultDays.forEach((day, index) => {
+          updatedHearing.nonDefaultDays[index].startTime = this.dateUtil.toUtcISO(day.startTime);
+        });
+      }
       this.store.dispatch(new AllocateHearingAction({ originHearing, updatedHearing }));
     }
   }

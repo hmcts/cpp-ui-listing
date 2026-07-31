@@ -148,7 +148,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
 
   set courtCentres(courtCentres: CourtCentre[]) {
     // Construct the court centre options for use in the form autosuggest
-    this.courtCentreOptions = courtCentres.map((item) => ({
+    this.courtCentreOptions = courtCentres.map(item => ({
       label: item?.name,
       value: item?.id
     }));
@@ -176,7 +176,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
     this.store
       .select(getReferenceDataHearingTypeById(hearing.type.id))
       .pipe(take(1))
-      .subscribe((hearingType) => {
+      .subscribe(hearingType => {
         this.hearingTypeDefaultDuration = hearingType ? hearingType.defaultDurationMin : undefined;
 
         this.updateSendNotificationFlag(hearingType?.hearingDescription);
@@ -186,7 +186,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
   @Input()
   set hearingTypes(hearingTypes: HearingType[]) {
     // Construct the hearing type options for use in the form typeaheads
-    this.hearingTypeOptions = hearingTypes.map((hearingType) => ({
+    this.hearingTypeOptions = hearingTypes.map(hearingType => ({
       value: hearingType?.id,
       label: hearingType?.name
     }));
@@ -421,7 +421,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
   // centre. When no court centre is provided, we empty the available court rooms.
   setCourtCentreAndRoomOptions(courtCentreId: string) {
     if (courtCentreId) {
-      const courtCentre = this.courtCentres.find((cc) => {
+      const courtCentre = this.courtCentres.find(cc => {
         return cc.id === courtCentreId;
       });
       if (courtCentre) {
@@ -447,7 +447,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
   getSuggestions(searchValue: string, options: FilterOption[]) {
     if (searchValue) {
       return options.filter(
-        (option) => option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
+        option => option.label.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
       );
     }
     return [];
@@ -551,7 +551,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
     let formedDuration: number;
     const startDateHearingDay =
       (this.hearingDays &&
-        this.hearingDays.find((hd) =>
+        this.hearingDays.find(hd =>
           moment(hd.hearingDate, moment.ISO_8601).isSame(moment(startDate, moment.ISO_8601))
         )) ||
       undefined;
@@ -622,7 +622,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
       matchedHearingDay && this.hearing.hearingDays.indexOf(matchedHearingDay) === 0;
 
     let nonDefaultDays: NonDefaultDay[] = this.data.nonDefaultDays
-      .map((nonDefaultDay) => {
+      .map(nonDefaultDay => {
         const ndf = { ...nonDefaultDay };
         if (!ndf.courtCentreId || !ndf.roomId) {
           // injecting court room/house ids into any non default days that have been created programatically
@@ -654,7 +654,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
         }
         return ndf;
       })
-      .filter((ndf) => !!ndf);
+      .filter(ndf => !!ndf);
 
     if (this.isWeekCommencing) {
       const durationSplit = this.data.duration.split(':');
@@ -683,7 +683,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
       const [hoursStr, minutesStr] = duration.split(':');
       const hours = parseInt(hoursStr, 10);
       const minutes = parseInt(minutesStr, 10);
-      const selectedCourtCentre = courtCentres.find((cc) => cc.id === values.courtCentreId);
+      const selectedCourtCentre = courtCentres.find(cc => cc.id === values.courtCentreId);
       // Fixed Date Scenario
       // We build the nonDefaultDay object here
       const nonDefaultDay: NonDefaultDay = {
@@ -711,7 +711,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
 
     if (values.courtCentreId) {
       jurisdictionType =
-        courtCentres.find((c) => c.id === values.courtCentreId).courtCode.toUpperCase() === 'C'
+        courtCentres.find(c => c.id === values.courtCentreId).courtCode.toUpperCase() === 'C'
           ? 'CROWN'
           : 'MAGISTRATES';
     }
@@ -761,7 +761,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
     }
 
     function removeNonDefaultDayMatchingDate(date: string, format: string): NonDefaultDay[] {
-      return nonDefaultDays.filter((ndd) => {
+      return nonDefaultDays.filter(ndd => {
         const nddStartDate = moment(ndd.startTime).startOf('day').format(format);
         return nddStartDate !== date;
       });
@@ -778,7 +778,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
      */
     function shouldAddToNonDefaultDays(isMultiDay: boolean): boolean {
       if (!isMultiDay) {
-        const selectedCourtCentre = courtCentres.find((cc) => cc.id === values.courtCentreId);
+        const selectedCourtCentre = courtCentres.find(cc => cc.id === values.courtCentreId);
         const defaultStartTime = selectedCourtCentre?.defaultStartTime;
         const defaultDurationFmt = convertDurationStringToHoursMinutesFormat(
           selectedCourtCentre.defaultDuration
@@ -833,7 +833,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
 
     type = Object.assign({}, type);
 
-    judiciary = [...judiciary].filter((judic) => !!judic); // this is to move Winger 2 to 1 in local state, when 1 is empty but 2 is present
+    judiciary = [...judiciary].filter(judic => !!judic); // this is to move Winger 2 to 1 in local state, when 1 is empty but 2 is present
     nonDefaultDays = this.constructedDefaultDay
       ? [...nonDefaultDays, this.constructedDefaultDay]
       : nonDefaultDays;
@@ -866,7 +866,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
 
 function findNonDefaultDay(nonDefaultDays: NonDefaultDay[], searchDate: string) {
   return nonDefaultDays.find(
-    (ndd) =>
+    ndd =>
       moment(ndd.startTime).startOf('day').format(`${getCPPDate().US_DATE_FORMAT}`) === searchDate
   );
 }

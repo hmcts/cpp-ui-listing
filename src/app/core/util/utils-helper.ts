@@ -48,10 +48,10 @@ export function findDataFromSelectionValues<
   const selectedValueToCompare = selectedPropChild
     ? selection[selectionProp][selectedPropChild]
     : selectionProp
-    ? selection[selectionProp]
-    : typeof selection === 'string' || typeof selection === 'number'
-    ? selection
-    : null;
+      ? selection[selectionProp]
+      : typeof selection === 'string' || typeof selection === 'number'
+        ? selection
+        : null;
 
   if (!selectedValueToCompare) {
     return null;

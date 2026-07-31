@@ -447,7 +447,8 @@ describe('ListingService', () => {
         ...hearing,
         weekCommencingStartDate: '2018-05-30',
         weekCommencingEndDate: '2018-05-30',
-        weekCommencingDurationInWeeks: 1
+        weekCommencingDurationInWeeks: 1,
+        courtRoomId: undefined
       };
       const prosecutionCases = [];
       const splitHearingUnallocated = true;
@@ -1295,6 +1296,28 @@ describe('ListingService', () => {
         requestType: 'application/vnd.listing.command.restrict-court-list+json',
         body: restriction,
         successEvent: 'public.listing.court-list-restricted'
+      });
+    });
+
+    describe('Download Prison List', () => {
+      it('should download Prison list document', () => {
+        const params = toHttpParams(mockFilterOptionsForDownloadPrisonList);
+        const httpResponse$ = cold('-a|', { a: 'textstream' });
+        const expected$ = cold('-b|', {
+          b: new Blob(['textstream'], { type: 'application/pdf' })
+        });
+
+        http.query = jasmine.createSpy().and.returnValue(httpResponse$);
+        const query$ = service.downloadPrisonList(mockFilterOptionsForDownloadPrisonList);
+
+        expect(query$).toBeObservable(expected$);
+
+        expect(http.query).toHaveBeenCalledWith({
+          url: '/progression-query-api/query/api/rest/progression/courtlist',
+          requestType: 'application/vnd.progression.search.prison.court.list+json',
+          responseType: 'blob',
+          params
+        });
       });
     });
 

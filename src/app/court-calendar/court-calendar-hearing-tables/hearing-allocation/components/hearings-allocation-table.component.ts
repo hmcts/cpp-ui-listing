@@ -142,7 +142,7 @@ export class HearingsAllocationTableComponent
 
   isSelected(hearing: HearingRowVM) {
     return this.selectedHearings().some(
-      (h) => h.hearingId === hearing.id && h.hearingDateTime === hearing.dateTime
+      h => h.hearingId === hearing.id && h.hearingDateTime === hearing.dateTime
     );
   }
 

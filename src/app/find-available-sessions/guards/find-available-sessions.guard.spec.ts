@@ -60,7 +60,7 @@ describe('findAvailableSessionsGuard', () => {
   const createActivatedRouteSnapshot = (params?: Record<string, unknown>) =>
     ({
       queryParams: params ? { mf: JSON.stringify(params) } : {}
-    } as ActivatedRouteSnapshot);
+    }) as ActivatedRouteSnapshot;
 
   it('should reset available slots and allow navigation if no search parameter is provided', () => {
     const snapshot = createActivatedRouteSnapshot();

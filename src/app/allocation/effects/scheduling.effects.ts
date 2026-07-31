@@ -99,8 +99,8 @@ export class SchedulingEffects {
                 rotaBusinessType && rotaBusinessType.duration
                   ? duration || defaultDuration
                   : defaultHearingType
-                  ? defaultHearingType.defaultDurationMin
-                  : 1;
+                    ? defaultHearingType.defaultDurationMin
+                    : 1;
               return {
                 startTime: hearingSlotTime,
                 duration: finalDuration,

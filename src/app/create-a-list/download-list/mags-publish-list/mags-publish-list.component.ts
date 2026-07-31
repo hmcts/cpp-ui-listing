@@ -28,10 +28,10 @@ export class MagsPublishListComponent {
   onDownloadMagsPublishedList = output<{ listType: CourtListType; fileId: string }>();
 
   readonly onlinePublicStatus = computed(() =>
-    this.statuses().find((s) => s.listType === CourtListType.ONLINE_PUBLIC)
+    this.statuses().find(s => s.listType === CourtListType.ONLINE_PUBLIC)
   );
   readonly standardStatus = computed(() =>
-    this.statuses().find((s) => s.listType === CourtListType.STANDARD)
+    this.statuses().find(s => s.listType === CourtListType.STANDARD)
   );
 
   readonly hasDownload = computed(() => this.statuses().some(({ fileId }) => !!fileId));

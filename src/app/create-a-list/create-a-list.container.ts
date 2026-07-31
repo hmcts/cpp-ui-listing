@@ -148,7 +148,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
   isHmctsUser$: Observable<boolean>;
   readonly magsCourtListPublishStore = inject(MagsCourtListPublishSignalStore);
   readonly magsPublishStatusesWithAlert = computed(() =>
-    (this.magsCourtListPublishStore.statuses() ?? []).filter((status) => !!status.alert)
+    (this.magsCourtListPublishStore.statuses() ?? []).filter(status => !!status.alert)
   );
 
   get crownSelected() {
@@ -166,7 +166,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
     this.store
       .select(getUserHasCpsAccessOnly)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((hasCpsAccessOnly) => (this.hasCpsAccessOnly = hasCpsAccessOnly));
+      .subscribe(hasCpsAccessOnly => (this.hasCpsAccessOnly = hasCpsAccessOnly));
 
     this.cppDate = getCPPDate();
   }
@@ -177,14 +177,14 @@ export class CreateAListContainer implements OnInit, OnDestroy {
     this.store
       .select(getCourtCentres)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((courtCentres) => {
+      .subscribe(courtCentres => {
         this.courtCentres = courtCentres;
       });
     // Logic for week commencing crown
     this.store
       .select(getWeekCommencingHearings)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((pagedHearing) => {
+      .subscribe(pagedHearing => {
         if (
           pagedHearing &&
           this.selectedOptions &&
@@ -216,7 +216,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
     this.store
       .select(getPagedCourtList)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((pagedCourtList) => {
+      .subscribe(pagedCourtList => {
         if (
           (pagedCourtList &&
             this.selectedOptions &&
@@ -268,7 +268,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
   onSelectCourtCentre(event?: { value: string; type?: string }) {
     if (event) {
       this.selectedCourtCentre = this.courtCentres.find(
-        (courtCentre) => courtCentre.id === event.value
+        courtCentre => courtCentre.id === event.value
       );
     } else {
       this.selectedCourtCentre = undefined;
@@ -363,18 +363,18 @@ export class CreateAListContainer implements OnInit, OnDestroy {
     const rangeByDay = Array.from(range.by('day'));
 
     return rangeByDay
-      .map((d) => {
+      .map(d => {
         return {
           date: d.format(this.FORMAT_YYYY_MM_DD),
           hearingsGroupedByJudiciaryAndRoom: this.getHearingsGroupedByJudiciaryAndRoom(
-            hearings.filter((h) =>
-              h.hearingDays.some((hd) => hd.hearingDate === d.format(this.FORMAT_YYYY_MM_DD))
+            hearings.filter(h =>
+              h.hearingDays.some(hd => hd.hearingDate === d.format(this.FORMAT_YYYY_MM_DD))
             ),
             rangeByDay
           )
         };
       })
-      .filter((h) => h.hearingsGroupedByJudiciaryAndRoom.length > 0);
+      .filter(h => h.hearingsGroupedByJudiciaryAndRoom.length > 0);
   }
 
   getWeekCommencingHearingsGroupedByDateAndRoom(
@@ -387,20 +387,20 @@ export class CreateAListContainer implements OnInit, OnDestroy {
         moment(this.selectedOptions.endDate)
       );
       return Array.from(range.by('day'))
-        .map((d) => {
+        .map(d => {
           return {
             date: d.format(this.FORMAT_YYYY_MM_DD),
             hearingsGroupedByJudiciaryAndRoom:
               this.getWeekCommencingHearingsGroupedByJudiciaryAndRoom(
-                hearings.filter((h) =>
-                  h.hearingDays.some((hd) => hd.hearingDate === d.format(this.FORMAT_YYYY_MM_DD))
+                hearings.filter(h =>
+                  h.hearingDays.some(hd => hd.hearingDate === d.format(this.FORMAT_YYYY_MM_DD))
                 ),
                 true,
                 d.format(this.FORMAT_YYYY_MM_DD)
               )
           };
         })
-        .filter((h) => h.hearingsGroupedByJudiciaryAndRoom.length > 0);
+        .filter(h => h.hearingsGroupedByJudiciaryAndRoom.length > 0);
     } else {
       return [
         {
@@ -409,7 +409,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
           hearingsGroupedByJudiciaryAndRoom:
             this.getWeekCommencingHearingsGroupedByJudiciaryAndRoom(hearings, fixed)
         }
-      ].filter((h) => h.hearingsGroupedByJudiciaryAndRoom.length > 0);
+      ].filter(h => h.hearingsGroupedByJudiciaryAndRoom.length > 0);
     }
   }
 
@@ -418,9 +418,9 @@ export class CreateAListContainer implements OnInit, OnDestroy {
     fixed = false,
     targetDate?: string
   ): HearingsGroupedByJudiciaryAndRoom[] {
-    const filteredHearings = hearings.filter((h) => {
+    const filteredHearings = hearings.filter(h => {
       const hasValidCourtroom = this.selectedCourtCentre.courtRooms.some(
-        (cRoom) => cRoom.id === h.courtRoomId || h.courtRoomId === this.NO_COURTROOM
+        cRoom => cRoom.id === h.courtRoomId || h.courtRoomId === this.NO_COURTROOM
       );
 
       if (fixed) {
@@ -434,7 +434,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
 
     const getHearingCourtroomID = (h: Hearing) => {
       if (h.hearingDays?.length > 0 && targetDate) {
-        const matchingDay = h.hearingDays.find((hd) => hd.hearingDate === targetDate);
+        const matchingDay = h.hearingDays.find(hd => hd.hearingDate === targetDate);
         if (matchingDay) {
           return matchingDay.courtRoomId;
         }
@@ -446,7 +446,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
       const roomID = getHearingCourtroomID(h);
 
       if (roomID && roomID !== this.NO_COURTROOM) {
-        const courtRoom = this.selectedCourtCentre.courtRooms.find((r) => r.id === roomID);
+        const courtRoom = this.selectedCourtCentre.courtRooms.find(r => r.id === roomID);
         if (courtRoom) {
           acc.push(courtRoom);
         }
@@ -460,8 +460,8 @@ export class CreateAListContainer implements OnInit, OnDestroy {
       return uniqBy(acc, 'id');
     }, [] as CourtRoom[]);
 
-    return sortBy(courtrooms, 'name').map((room) => {
-      const hearingsInRoom = filteredHearings.filter((h) => getHearingCourtroomID(h) === room.id);
+    return sortBy(courtrooms, 'name').map(room => {
+      const hearingsInRoom = filteredHearings.filter(h => getHearingCourtroomID(h) === room.id);
 
       return {
         courtRoom: room,
@@ -479,9 +479,9 @@ export class CreateAListContainer implements OnInit, OnDestroy {
       selectedCourtRoomId: string
     ): boolean => {
       return hearingDays.some(
-        (day) =>
+        day =>
           day.courtRoomId === selectedCourtRoomId &&
-          range.some((rangeDay) => rangeDay.format(this.FORMAT_YYYY_MM_DD) === day.hearingDate)
+          range.some(rangeDay => rangeDay.format(this.FORMAT_YYYY_MM_DD) === day.hearingDate)
       );
     };
 
@@ -504,7 +504,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
           )
           .sort((a, b) => (a < b ? -1 : 1))
       )
-    ).map((roomName) => {
+    ).map(roomName => {
       const room = this.selectedCourtCentre.courtRooms.find(({ name }) => name === roomName);
       return {
         courtRoom: room,
@@ -517,9 +517,9 @@ export class CreateAListContainer implements OnInit, OnDestroy {
 
   getJudiciaryHearings(allocatedHearings: Hearing[]): HearingsGroupedByJudiciary[] {
     return Object.entries(
-      groupBy(allocatedHearings, (h) => JSON.stringify(this.sortJudiciary(h.judiciary)))
+      groupBy(allocatedHearings, h => JSON.stringify(this.sortJudiciary(h.judiciary)))
     )
-      .map((item) => ({
+      .map(item => ({
         judiciary: item[0],
         hearings: item[1]
       }))
@@ -567,19 +567,19 @@ export class CreateAListContainer implements OnInit, OnDestroy {
   checkListForRestrictions(hearingsByRoom: HearingsGroupedByDateAndRoom[]) {
     let restrictionsExist = false;
     if (hearingsByRoom && hearingsByRoom.length > 0) {
-      hearingsByRoom.forEach((hearingByRoom) => {
-        return hearingByRoom.hearingsGroupedByJudiciaryAndRoom.map((hearingByJudiciaryAndRoom) => {
-          return hearingByJudiciaryAndRoom.hearingsGroupedByJudiciary.map((hearingByJudiciary) => {
-            return hearingByJudiciary.hearings.map((hearing) => {
+      hearingsByRoom.forEach(hearingByRoom => {
+        return hearingByRoom.hearingsGroupedByJudiciaryAndRoom.map(hearingByJudiciaryAndRoom => {
+          return hearingByJudiciaryAndRoom.hearingsGroupedByJudiciary.map(hearingByJudiciary => {
+            return hearingByJudiciary.hearings.map(hearing => {
               if (hearing.listedCases) {
-                return hearing.listedCases.map((listedCase) => {
+                return hearing.listedCases.map(listedCase => {
                   if (this.checkCaseForRestrictions(listedCase)) {
                     restrictionsExist = true;
                   }
                 });
               }
               if (hearing.courtApplications) {
-                return hearing.courtApplications.map((application) => {
+                return hearing.courtApplications.map(application => {
                   if (this.checkApplicationForRestrictions(application)) {
                     restrictionsExist = true;
                   }
@@ -599,9 +599,9 @@ export class CreateAListContainer implements OnInit, OnDestroy {
       return true;
     }
     if (listedCase.defendants) {
-      listedCase.defendants.forEach((caseDefendant) => {
+      listedCase.defendants.forEach(caseDefendant => {
         if (caseDefendant.offences) {
-          caseDefendant.offences.forEach((defendantOffence) => {
+          caseDefendant.offences.forEach(defendantOffence => {
             if (defendantOffence.shadowListed) {
               restrictionExists = true;
               return;
@@ -624,7 +624,7 @@ export class CreateAListContainer implements OnInit, OnDestroy {
       return true;
     }
     if (courtApplication.respondents) {
-      courtApplication.respondents.forEach((respondent) => {
+      courtApplication.respondents.forEach(respondent => {
         if (respondent.restrictFromCourtList) {
           restrictionExists = true;
           return;
