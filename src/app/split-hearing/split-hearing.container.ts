@@ -86,7 +86,6 @@ export class SplitHearingContainer implements OnInit {
       this.store.dispatch(setSelectedHearingData({ selectedHearing: unallocatedHearing }));
     }
 
-    unallocatedHearing.allocated ? 'allocated' : 'unallocated';
     let queryParams = {
       ...this.route.snapshot?.queryParams,
       allocated: unallocatedHearing?.allocated,
@@ -106,7 +105,7 @@ export class SplitHearingContainer implements OnInit {
     if (this.referrer) {
       return '/court-calendar';
     }
-    return this.selectedHearing?.allocated ? '/allocated' : '/unallocated';
+    return '/unallocated';
   }
 
   get referrer(): boolean {
