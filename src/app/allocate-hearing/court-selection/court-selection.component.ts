@@ -7,7 +7,8 @@ import {
   PdkCore,
   PdkForm,
   PdkRadio,
-  PdkButton
+  PdkButton,
+  PdkBackLink
 } from '@cpp/pdk';
 import { OrganisationUnit, OrganisationUnitAutosuggestComponent } from '@cpp/reference-data';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +27,7 @@ import { RouterLink } from '@angular/router';
     PdkRadio,
     OrganisationUnitAutosuggestComponent,
     PdkButton,
+    PdkBackLink,
     RouterLink
   ]
 })

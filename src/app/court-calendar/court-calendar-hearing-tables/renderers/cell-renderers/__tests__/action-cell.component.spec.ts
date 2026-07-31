@@ -6,7 +6,7 @@ import {
   HearingTableActionsState,
   MoveEvent
 } from '../../../../court-calendar-hearing-tables/component-store/hearing-table-actions.store';
-import { BaseHearingRowDataVM } from '../../../../../court-calendar/model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../../../../court-calendar/model/hearing-table-renderer.interfaces';
 import {
   HearingDropdownActions,
   HearingRowActionItem
@@ -110,8 +110,8 @@ describe('ActionsCellComponent', () => {
       it('should return only master rows from group', () => {
         const masterRows = component.masterRows;
         expect(masterRows).toHaveLength(2);
-        expect(masterRows.every((row) => row.isMaster)).toBe(true);
-        expect(masterRows.map((row) => row.id)).toEqual(['hearing-123', 'hearing-456']);
+        expect(masterRows.every(row => row.isMaster)).toBe(true);
+        expect(masterRows.map(row => row.id)).toEqual(['hearing-123', 'hearing-456']);
       });
 
       it('should return empty array when group has no master rows', () => {

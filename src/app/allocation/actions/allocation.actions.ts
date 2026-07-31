@@ -1,12 +1,13 @@
 import { createAction, props } from '@ngrx/store';
-import { AllocateHearingFilters } from '../../core';
 import { HearingSlotAllocation } from '@cpp/scheduling';
+import { AllocateHearingFilters, HearingType } from '../../core/model/hearing';
 
-export const allocateMagistratesHearing = createAction(
-  'ALLOCATE_MAGISTRATES_HEARING',
+export const allocateHearing = createAction(
+  'ALLOCATE_HEARING',
   props<{
     hearingId: string;
     hearingSlotAllocations: HearingSlotAllocation[];
+    hearingType?: HearingType;
     filters?: AllocateHearingFilters;
     redirectTo: string[];
     sendNotificationToParties: boolean;

@@ -2,21 +2,18 @@
 
 exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons when no checkboxes are selected 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedHearings={[Function Function]}
   allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function Observable]}
-  destroy$={[Function Subject]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function Observable]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -203,7 +200,7 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                 >
                   <div>
                     <pdk-checkbox
-                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine"
                       name="selectAll"
                     >
                       <div
@@ -211,6 +208,7 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                       >
                         <input
                           class="govuk-checkboxes__input"
+                          disabled=""
                           id="select-all-checkbox"
                           name="selectAll"
                           type="checkbox"
@@ -321,6 +319,7 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
               </tr>
             </thead>
             <tr
+              aria-level="1"
               class="govuk-table__row"
               data-test-id="hearing-table-section-header"
               pdk-table-row=""
@@ -367,21 +366,18 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
 
 exports[`CourtCalendarContainer should display Add Unallocated Hearings button when the courtType is CROWN and there are no results. 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
-  allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function _Store]}
-  destroy$={[Function Subject]}
+  allocatedHearings={[Function Function]}
+  allocatedTableElement={[Function ElementRef]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function _Store]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -443,6 +439,22 @@ exports[`CourtCalendarContainer should display Add Unallocated Hearings button w
       class="govuk-grid-column-full"
       full=""
     >
+      <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <court-result-summary>
+          <p>
+            No hearings found for selected filters.
+          </p>
+        </court-result-summary>
+        <button
+          aria-label="Add unallocated hearings"
+          class="govuk-button govuk-button--secondary"
+          pdk-button="secondary"
+        >
+           Add unallocated hearings 
+        </button>
+      </div>
       <div
         class="govuk-!-margin-bottom-2"
         pdk-margin-bottom="2"
@@ -457,21 +469,18 @@ exports[`CourtCalendarContainer should display Add Unallocated Hearings button w
 
 exports[`CourtCalendarContainer should display Add Unallocated Hearings button when the courtType is MAGISTRATES and there are no results. 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
-  allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function _Store]}
-  destroy$={[Function Subject]}
+  allocatedHearings={[Function Function]}
+  allocatedTableElement={[Function ElementRef]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function _Store]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -534,6 +543,22 @@ exports[`CourtCalendarContainer should display Add Unallocated Hearings button w
       full=""
     >
       <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <court-result-summary>
+          <p>
+            No hearings found for selected filters.
+          </p>
+        </court-result-summary>
+        <button
+          aria-label="Add unallocated hearings"
+          class="govuk-button govuk-button--secondary"
+          pdk-button="secondary"
+        >
+           Add unallocated hearings 
+        </button>
+      </div>
+      <div
         class="govuk-!-margin-bottom-2"
         pdk-margin-bottom="2"
       >
@@ -547,21 +572,18 @@ exports[`CourtCalendarContainer should display Add Unallocated Hearings button w
 
 exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons only when courtType is CROWN 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedHearings={[Function Function]}
   allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function Observable]}
-  destroy$={[Function Subject]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function Observable]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -748,7 +770,7 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                 >
                   <div>
                     <pdk-checkbox
-                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine"
                       name="selectAll"
                     >
                       <div
@@ -756,6 +778,7 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                       >
                         <input
                           class="govuk-checkboxes__input"
+                          disabled=""
                           id="select-all-checkbox"
                           name="selectAll"
                           type="checkbox"
@@ -866,6 +889,7 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
               </tr>
             </thead>
             <tr
+              aria-level="1"
               class="govuk-table__row"
               data-test-id="hearing-table-section-header"
               pdk-table-row=""
@@ -912,21 +936,18 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
 
 exports[`CourtCalendarContainer should display Reallocate button  when courtType is  MAGISTRATES 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedHearings={[Function Function]}
   allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function Observable]}
-  destroy$={[Function Subject]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function Observable]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -1106,7 +1127,7 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                 >
                   <div>
                     <pdk-checkbox
-                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine"
                       name="selectAll"
                     >
                       <div
@@ -1114,6 +1135,7 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                       >
                         <input
                           class="govuk-checkboxes__input"
+                          disabled=""
                           id="select-all-checkbox"
                           name="selectAll"
                           type="checkbox"
@@ -1224,6 +1246,7 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
               </tr>
             </thead>
             <tr
+              aria-level="1"
               class="govuk-table__row"
               data-test-id="hearing-table-section-header"
               pdk-table-row=""
@@ -1270,21 +1293,18 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
 
 exports[`CourtCalendarContainer should display the Add Unallocated Hearings button when courtType is CROWN 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
-  allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function _Store]}
-  destroy$={[Function Subject]}
+  allocatedHearings={[Function Function]}
+  allocatedTableElement={[Function ElementRef]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function Observable]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -1346,6 +1366,52 @@ exports[`CourtCalendarContainer should display the Add Unallocated Hearings butt
       class="govuk-grid-column-full"
       full=""
     >
+      <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <court-result-summary>
+          <p
+            class="d-flex"
+            data-test-id="result-summary"
+            id="resultSummary"
+          >
+             Showing 
+            <span
+              class="govuk-!-margin-right-1 govuk-!-margin-left-1 govuk-heading-s"
+              pdk-margin-left="1"
+              pdk-margin-right="1"
+              pdk-typography="heading-small"
+            >
+               1 of 1 
+            </span>
+             hearing 
+            <span
+              class="govuk-!-margin-right-1 govuk-!-margin-left-1 govuk-heading-s"
+              pdk-margin-left="1"
+              pdk-margin-right="1"
+              pdk-typography="heading-small"
+            >
+               on 03/06/2026 
+            </span>
+             at 
+            <span
+              class="govuk-!-margin-right-1 govuk-!-margin-left-1 govuk-heading-s"
+              pdk-margin-left="1"
+              pdk-margin-right="1"
+              pdk-typography="heading-small"
+            >
+               Mock Centre 
+            </span>
+          </p>
+        </court-result-summary>
+        <button
+          aria-label="Add unallocated hearings"
+          class="govuk-button govuk-button--secondary"
+          pdk-button="secondary"
+        >
+           Add unallocated hearings 
+        </button>
+      </div>
       <div
         class="govuk-!-margin-bottom-2"
         pdk-margin-bottom="2"
@@ -1360,21 +1426,18 @@ exports[`CourtCalendarContainer should display the Add Unallocated Hearings butt
 
 exports[`CourtCalendarContainer should display the Add Unallocated Hearings button when courtType is MAGISTRATES 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
-  allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function _Store]}
-  destroy$={[Function Subject]}
+  allocatedHearings={[Function Function]}
+  allocatedTableElement={[Function ElementRef]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function Observable]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -1437,6 +1500,52 @@ exports[`CourtCalendarContainer should display the Add Unallocated Hearings butt
       full=""
     >
       <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <court-result-summary>
+          <p
+            class="d-flex"
+            data-test-id="result-summary"
+            id="resultSummary"
+          >
+             Showing 
+            <span
+              class="govuk-!-margin-right-1 govuk-!-margin-left-1 govuk-heading-s"
+              pdk-margin-left="1"
+              pdk-margin-right="1"
+              pdk-typography="heading-small"
+            >
+               1 of 1 
+            </span>
+             hearing 
+            <span
+              class="govuk-!-margin-right-1 govuk-!-margin-left-1 govuk-heading-s"
+              pdk-margin-left="1"
+              pdk-margin-right="1"
+              pdk-typography="heading-small"
+            >
+               on 05/09/2026 
+            </span>
+             at 
+            <span
+              class="govuk-!-margin-right-1 govuk-!-margin-left-1 govuk-heading-s"
+              pdk-margin-left="1"
+              pdk-margin-right="1"
+              pdk-typography="heading-small"
+            >
+               Mock Centre 
+            </span>
+          </p>
+        </court-result-summary>
+        <button
+          aria-label="Add unallocated hearings"
+          class="govuk-button govuk-button--secondary"
+          pdk-button="secondary"
+        >
+           Add unallocated hearings 
+        </button>
+      </div>
+      <div
         class="govuk-!-margin-bottom-2"
         pdk-margin-bottom="2"
       >
@@ -1450,21 +1559,18 @@ exports[`CourtCalendarContainer should display the Add Unallocated Hearings butt
 
 exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons when checkboxes are selected 1`] = `
 <court-calendar-container
-  alert$={[Function _Store]}
-  allocateHearingFactory={[Function Object]}
+  _rawFilterOptions={[Function Function]}
+  alertState={[Function Function]}
   allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedHearings={[Function Function]}
   allocatedTableElement="undefined"
-  caseNotesMap$={[Function _Store]}
-  courtCalendarHearingsVM$={[Function Observable]}
-  destroy$={[Function Subject]}
+  caseNotesMap={[Function Function]}
+  courtCalendarHearingsVM={[Function Function]}
   errors={[Function Array]}
-  filterOptions$={[Function Observable]}
-  hearingMovestate$={[Function Observable]}
+  filterOptions={[Function Function]}
   modalService={[Function _ModalService]}
-  organisationUnits$={[Function _Store]}
-  positionedHearingsState$={[Function Observable]}
+  organisationUnits={[Function Function]}
   route={[Function Object]}
-  selectedHearings$={[Function ReplaySubject]}
   store={[Function _MockStore]}
 >
   <pdk-grid
@@ -1651,7 +1757,7 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                 >
                   <div>
                     <pdk-checkbox
-                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine"
                       name="selectAll"
                     >
                       <div
@@ -1659,6 +1765,7 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                       >
                         <input
                           class="govuk-checkboxes__input"
+                          disabled=""
                           id="select-all-checkbox"
                           name="selectAll"
                           type="checkbox"
@@ -1769,6 +1876,7 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
               </tr>
             </thead>
             <tr
+              aria-level="1"
               class="govuk-table__row"
               data-test-id="hearing-table-section-header"
               pdk-table-row=""

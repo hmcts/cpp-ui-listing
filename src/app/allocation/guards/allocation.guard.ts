@@ -30,13 +30,10 @@ export class AllocationGuard {
       ...params,
       pageSize: 10
     };
-    if (searchParams.courtRoomId === 'NONE') {
-      searchParams = _.omit(searchParams, 'courtRoomId');
-    }
 
     return this.scheduling.searchHearingSlots(searchParams).pipe(
       tap(
-        (result) => {
+        result => {
           this.store.dispatch(
             loadHearingSlotsSuccess({
               params: searchParams,
@@ -55,9 +52,9 @@ export class AllocationGuard {
   canActivate({ params, queryParams }: ActivatedRouteSnapshot) {
     return this.store.pipe(
       select(getHearingById(params.id)),
-      filter((hearing) => !!hearing),
+      filter(hearing => !!hearing),
       take(1),
-      switchMap((hearing) => {
+      switchMap(hearing => {
         const { mf } = queryParams as MagistratesSchedulingQueryParams;
         if (mf) {
           return this.searchWithParams(JSON.parse(mf));
@@ -69,7 +66,7 @@ export class AllocationGuard {
         );
       }),
       catchError(() => of(false)),
-      tap((canActivate) => {
+      tap(canActivate => {
         if (!canActivate) {
           this.router.navigate(['/technical-error']);
         }

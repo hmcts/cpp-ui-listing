@@ -1,7 +1,8 @@
+@let h = hearing();
 <h2 pdk-typography="heading-small" pdk-visually-hidden>Hearing details</h2>
 
 <div pdk-padding-horizontal="8">
-  @if (hearing().allocated === false && hearing().jurisdictionType === 'CROWN') {
+  @if (h.allocated === false && h.jurisdictionType === 'CROWN') {
   <form
     #publicListNoteForm="ngForm"
     pdk-form
@@ -155,7 +156,7 @@
             <b>Hearing language</b>
           </dt>
           <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
-            <span> {{hearing()?.hearingLanguage | titlecase}}</span>
+            <span> {{h?.hearingLanguage | titlecase}}</span>
           </dd>
         </div>
         <div
@@ -170,11 +171,10 @@
             <b>Video hearing</b>
           </dt>
           <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
-            <span>{{ hearing().hasVideoLink ? 'Yes' : 'No' }}</span>
+            <span>{{ h.hasVideoLink ? 'Yes' : 'No' }}</span>
           </dd>
         </div>
-        @if (hearing().allocated === true && hearing().jurisdictionType === 'CROWN' &&
-        hearing().publicListNote) {
+        @if (h.allocated === true && h.jurisdictionType === 'CROWN' && h.publicListNote) {
         <div
           pdk-grid
           container
@@ -187,10 +187,10 @@
             <b>Public list note</b>
           </dt>
           <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
-            <span>{{ hearing().publicListNote}}</span>
+            <span>{{ h.publicListNote}}</span>
           </dd>
         </div>
-        } @if (hearing()?.hearingDayCount > 1) {
+        } @if (h?.hearingDayCount > 1) {
         <div
           pdk-grid
           container
@@ -206,11 +206,11 @@
             <div class="flex-display flex-display-column">
               <div>
                 <span> Start date:&nbsp; </span>
-                <span> {{ hearing()?.startDate | date : 'dd/MM/yyyy' }}</span>
+                <span> {{ h?.startDate | date : 'dd/MM/yyyy' }}</span>
               </div>
               <div>
                 <span> End date:&nbsp; </span>
-                <span> {{ hearing()?.endDate | date : 'dd/MM/yyyy' }}</span>
+                <span> {{ h?.endDate | date : 'dd/MM/yyyy' }}</span>
               </div>
             </div>
           </dd>

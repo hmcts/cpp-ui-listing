@@ -112,7 +112,8 @@ export const generateNonDefaultDays = (
       session: hearingSlot.courtSession,
       oucode: hearingSlot.ouCode,
       courtRoomId: hearingSlot.courtRoomNumber,
-      roomId: hearingSlot.courtRoomId
+      roomId: hearingSlot.courtRoomId,
+      virtual: true
     };
   });
 };

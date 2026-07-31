@@ -1,13 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
-import { ValidationError, SelectOption } from '@cpp/pdk';
+import { ValidationError } from '@cpp/pdk';
 
 import { AllFutureHearingDaysSelectedContainer } from '../all-upcoming-hearing-days-selected/all-upcoming-hearingdays-selected.container';
-import { ChangeCourtroomStateService } from '../../component-store/change-courtroom-state.service';
+import { ChangeCourtroomStore } from '../../component-store/change-courtroom.store';
 import { AppConfigService } from '../../../../config';
 import { ChangeCourtroomVM, HearingDayVM, caseReferncesVM } from '../../../model';
+import { JurisdictionType } from '../../../../core';
 
 interface CourtRoom {
   id: string;
@@ -23,7 +24,7 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
   let fixture: ComponentFixture<AllFutureHearingDaysSelectedContainer>;
   let mockRouter: any;
   let mockActivatedRoute: any;
-  let mockChangeCourtroomStateService: any;
+  let mockChangeCourtroomStore: any;
   let mockAppConfigService: any;
 
   const mockCases: caseReferncesVM[] = [
@@ -85,27 +86,35 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
     totalHearingDaysCount: 2,
     hasReportingRestriction: false,
     courtCentre: 'Central Court',
-    courtRooms: mockCourtRooms,
+    courtRooms: mockCourtRooms as any,
     startDate: '2024-02-01',
-    endDate: '2024-02-02'
+    endDate: '2024-02-02',
+    ouCode: 'OU001',
+    jurisdictionType: 'CROWN' as JurisdictionType
   };
 
-  const mockCourtRoomOptions: SelectOption<string>[] = [
-    { label: 'Court Room 1', value: 'room1' },
-    { label: 'Court Room 2', value: 'room2' }
-  ];
-
   beforeEach(async () => {
+    mockChangeCourtroomStore = {
+      hearingVM: signal(mockHearingVM),
+      selectedCourtroom: signal(''),
+      selectedHearingDays: signal([]),
+      hearingSlots: signal([]),
+      courtRooms: signal(mockCourtRooms.map(r => ({ label: r.courtroomName, value: r.id }))),
+      upcomingHearingDays: signal(mockFutureHearingDays),
+      setSelectedHearingDays: jest.fn(),
+      updateSelectedHearingDays: jest.fn(),
+      loadHearingSlots: jest.fn(),
+      cancelChange: jest.fn(),
+      confirmChange: jest.fn(),
+      reset: jest.fn()
+    };
+
     await TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
         {
-          provide: ChangeCourtroomStateService,
-          useValue: {
-            hearingVM$: of(mockHearingVM),
-            getCourtRooms: of(mockCourtRoomOptions),
-            updateSelectedHearingDays: jest.fn()
-          }
+          provide: ChangeCourtroomStore,
+          useValue: mockChangeCourtroomStore
         },
         {
           provide: AppConfigService,
@@ -121,7 +130,6 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
 
     mockRouter = TestBed.inject(Router);
     mockActivatedRoute = TestBed.inject(ActivatedRoute);
-    mockChangeCourtroomStateService = TestBed.inject(ChangeCourtroomStateService);
     mockAppConfigService = TestBed.inject(AppConfigService);
 
     jest.spyOn(mockRouter, 'navigate').mockImplementation(() => Promise.resolve(true));
@@ -134,41 +142,32 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
 
     it('should initialize with correct default values', () => {
       expect(component.errors).toBeNull();
-      expect(component.selectedCourtRoomId).toBeNull();
+      expect(component.selectedCourtRoomId()).toBeNull();
     });
 
     it('should inject all required services', () => {
       expect(component.router).toBe(mockRouter);
       expect(component.route).toBe(mockActivatedRoute);
-      expect(component.changeCourtroomStateService).toBe(mockChangeCourtroomStateService);
+      expect(component.store).toBe(mockChangeCourtroomStore);
       expect(component.appConfig).toBe(mockAppConfigService);
     });
   });
 
-  describe('ngOnInit', () => {
-    it('should set up observables correctly', () => {
-      component.ngOnInit();
-
-      expect(component.hearingVM$).toBe(mockChangeCourtroomStateService.hearingVM$);
-      expect(component.courtRoomOptions$).toBe(mockChangeCourtroomStateService.getCourtRooms);
+  describe('Store signal access', () => {
+    it('should expose hearingVM from store', () => {
+      expect(component.store.hearingVM()).toEqual(mockHearingVM);
     });
 
-    it('should get hearing VM data from service', (done) => {
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM).toEqual(mockHearingVM);
-        done();
-      });
+    it('should expose upcomingHearingDays from store', () => {
+      expect(component.store.upcomingHearingDays()).toEqual(mockFutureHearingDays);
     });
 
-    it('should get court room options from service', (done) => {
-      component.ngOnInit();
-
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options).toEqual(mockCourtRoomOptions);
-        done();
-      });
+    it('should expose courtRooms from store', () => {
+      const rooms = component.store.courtRooms();
+      expect(rooms).toEqual([
+        { label: 'Court Room 1', value: 'room1' },
+        { label: 'Court Room 2', value: 'room2' }
+      ]);
     });
   });
 
@@ -199,33 +198,16 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
   });
 
   describe('handleSubmit', () => {
-    beforeEach(() => {
-      component.ngOnInit();
-      jest.clearAllMocks();
-    });
-
     it('should call updateSelectedHearingDays with correct HearingDayVM properties', () => {
       const courtRoomId = 'room2';
       const formValue = { courtRoomId };
 
       component.handleSubmit(formValue);
 
-      const expectedHearingDays = mockHearingVM.upComingHearingDays;
-      expect(mockChangeCourtroomStateService.updateSelectedHearingDays).toHaveBeenCalledWith({
-        hearingDays: expectedHearingDays,
-        courtRoomId: courtRoomId
+      expect(mockChangeCourtroomStore.updateSelectedHearingDays).toHaveBeenCalledWith({
+        hearingDays: mockHearingVM.upComingHearingDays,
+        courtRoomId
       });
-
-      const callArgs = mockChangeCourtroomStateService.updateSelectedHearingDays.mock.calls[0][0];
-      expect(callArgs.hearingDays[0].hearingDate).toBe('2024-02-01');
-      expect(callArgs.hearingDays[0].startTime).toBe('10:00');
-      expect(callArgs.hearingDays[0].endTime).toBe('16:00');
-      expect(callArgs.hearingDays[0].durationMinutes).toBe(360);
-      expect(callArgs.hearingDays[0].sequence).toBe(1);
-      expect(callArgs.hearingDays[0].position).toBe(1);
-      expect(callArgs.hearingDays[0].matchedWithQuery).toBe(true);
-      expect(callArgs.hearingDays[0].courtCentreId).toBe('centre1');
-      expect(callArgs.hearingDays[0].courtScheduleId).toBe('schedule1');
     });
 
     it('should navigate to confirmation page', () => {
@@ -246,9 +228,9 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
 
       component.handleSubmit(formValue);
 
-      expect(mockChangeCourtroomStateService.updateSelectedHearingDays).toHaveBeenCalledWith({
+      expect(mockChangeCourtroomStore.updateSelectedHearingDays).toHaveBeenCalledWith({
         hearingDays: mockHearingVM.upComingHearingDays,
-        courtRoomId: courtRoomId
+        courtRoomId
       });
     });
 
@@ -258,24 +240,23 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
         upComingHearingDays: []
       };
 
-      mockChangeCourtroomStateService.hearingVM$ = of(emptyHearingVM);
-      component.ngOnInit();
+      mockChangeCourtroomStore.hearingVM = signal(emptyHearingVM);
 
       const courtRoomId = 'room2';
       const formValue = { courtRoomId };
 
       component.handleSubmit(formValue);
 
-      expect(mockChangeCourtroomStateService.updateSelectedHearingDays).toHaveBeenCalledWith({
+      expect(mockChangeCourtroomStore.updateSelectedHearingDays).toHaveBeenCalledWith({
         hearingDays: [],
-        courtRoomId: courtRoomId
+        courtRoomId
       });
     });
   });
 
   describe('getBaseUrl', () => {
     it('should get base URL from app config service', () => {
-      const result = component.getBaseUrl();
+      const result = component.appConfig.getBaseUrl();
 
       expect(result).toBe('test-app.com');
       expect(mockAppConfigService.getBaseUrl).toHaveBeenCalled();
@@ -284,123 +265,60 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
     it('should handle empty base URL', () => {
       mockAppConfigService.getBaseUrl.mockReturnValue('');
 
-      const result = component.getBaseUrl();
+      const result = component.appConfig.getBaseUrl();
 
       expect(result).toBe('');
     });
   });
 
-  describe('Observable Data Flow', () => {
-    it('should handle hearing VM observable changes', (done) => {
-      const newHearingVM: ChangeCourtroomVM = {
-        ...mockHearingVM,
-        time: '2:00 PM',
-        totalHearingDaysCount: 3,
-        upComingHearingDays: [
-          ...mockFutureHearingDays,
-          {
-            courtRoomId: 'room2',
-            hearingDate: '2024-02-03',
-            startTime: '14:00',
-            endTime: '17:00',
-            durationMinutes: 180,
-            sequence: 3,
-            matchedWithQuery: true,
-            courtCentreId: 'centre1',
-            courtScheduleId: 'schedule3',
-            position: 3
-          }
-        ]
-      };
-
-      const hearingVMSubject = new Subject<ChangeCourtroomVM>();
-      mockChangeCourtroomStateService.hearingVM$ = hearingVMSubject.asObservable();
-
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM).toEqual(newHearingVM);
-        done();
-      });
-
-      hearingVMSubject.next(newHearingVM);
+  describe('Component State Management', () => {
+    it('should update selectedCourtRoomId when changed', () => {
+      component.selectedCourtRoomId.set('room2');
+      expect(component.selectedCourtRoomId()).toBe('room2');
     });
 
-    it('should handle court room options observable changes', (done) => {
-      const newOptions: SelectOption<string>[] = [{ label: 'Court Room 3', value: 'room3' }];
+    it('should reset selectedCourtRoomId to null', () => {
+      component.selectedCourtRoomId.set('room1');
+      component.selectedCourtRoomId.set(null);
+      expect(component.selectedCourtRoomId()).toBeNull();
+    });
 
-      const courtRoomOptionsSubject = new Subject<SelectOption<string>[]>();
-      mockChangeCourtroomStateService.getCourtRooms = courtRoomOptionsSubject.asObservable();
+    it('should handle court room data structure correctly', () => {
+      const hearingVM = component.store.hearingVM();
+      const courtRoom = hearingVM.courtRooms[0] as any;
+      expect(courtRoom.id).toBe('room1');
+      expect(courtRoom.courtroomId).toBe(1);
+      expect(courtRoom.venueName).toBe('Central Court');
+      expect(courtRoom.welshVenueName).toBe('Llys Canolog');
+      expect(courtRoom.courtroomName).toBe('Court Room 1');
+      expect(courtRoom.welshCourtroomName).toBe('Ystafell Llys 1');
+    });
 
-      component.ngOnInit();
+    it('should handle hearing days with optional properties missing', () => {
+      const minimalHearingDay: HearingDayVM = {
+        hearingDate: '2024-02-01',
+        startTime: '10:00',
+        endTime: '16:00',
+        durationMinutes: 360,
+        sequence: 1,
+        position: 1
+      };
 
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options).toEqual(newOptions);
-        done();
-      });
-
-      courtRoomOptionsSubject.next(newOptions);
+      expect(minimalHearingDay.courtRoomId).toBeUndefined();
+      expect(minimalHearingDay.matchedWithQuery).toBeUndefined();
+      expect(minimalHearingDay.courtCentreId).toBeUndefined();
+      expect(minimalHearingDay.courtScheduleId).toBeUndefined();
     });
   });
 
-  describe('Error Handling', () => {
-    it('should handle null hearing VM', (done) => {
-      mockChangeCourtroomStateService.hearingVM$ = of(null);
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM).toBeNull();
-        done();
-      });
-    });
-
-    it('should handle empty court room options', (done) => {
-      mockChangeCourtroomStateService.getCourtRooms = of([]);
-      component.ngOnInit();
-
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options).toEqual([]);
-        done();
-      });
-    });
-
-    it('should handle submit with invalid form data', () => {
-      component.ngOnInit();
-      const invalidFormValue = { courtRoomId: '' };
-
-      component.handleSubmit(invalidFormValue);
-
-      expect(mockChangeCourtroomStateService.updateSelectedHearingDays).toHaveBeenCalledWith({
-        hearingDays: mockHearingVM.upComingHearingDays,
-        courtRoomId: ''
-      });
-    });
-
-    it('should handle hearing VM with Welsh court room names', (done) => {
-      const welshCourtRooms: CourtRoom[] = [
-        {
-          id: 'room3',
-          courtroomId: 3,
-          venueName: 'Cardiff Court',
-          welshVenueName: 'Llys Caerdydd',
-          courtroomName: 'Court Room 3',
-          welshCourtroomName: 'Ystafell Llys 3'
-        }
-      ];
-
-      const hearingVMWithWelsh: ChangeCourtroomVM = {
-        ...mockHearingVM,
-        courtRooms: welshCourtRooms
-      };
-
-      mockChangeCourtroomStateService.hearingVM$ = of(hearingVMWithWelsh);
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM.courtRooms[0].welshCourtroomName).toBe('Ystafell Llys 3');
-        expect(hearingVM.courtRooms[0].welshVenueName).toBe('Llys Caerdydd');
-        done();
-      });
+  describe('Store Data Access', () => {
+    it('should access hearing VM cases from store', () => {
+      const hearingVM = component.store.hearingVM();
+      expect(hearingVM.cases).toEqual(mockCases);
+      expect(hearingVM.cases[0].caseId).toBe('1');
+      expect(hearingVM.cases[0].caseUrn).toBe('CASE001');
+      expect(hearingVM.cases[1].caseId).toBe('2');
+      expect(hearingVM.cases[1].caseUrn).toBe('CASE002');
     });
 
     it('should handle hearing days with all optional properties', () => {
@@ -424,61 +342,41 @@ describe('AllFutureHearingDaysSelectedContainer', () => {
       expect(completeHearingDay.position).toBe(1);
     });
 
-    it('should handle case references correctly', (done) => {
-      component.ngOnInit();
+    it('should handle hearing VM with Welsh court room names', () => {
+      const welshCourtRooms: CourtRoom[] = [
+        {
+          id: 'room3',
+          courtroomId: 3,
+          venueName: 'Cardiff Court',
+          welshVenueName: 'Llys Caerdydd',
+          courtroomName: 'Court Room 3',
+          welshCourtroomName: 'Ystafell Llys 3'
+        }
+      ];
 
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM.cases).toEqual(mockCases);
-        expect(hearingVM.cases[0].caseId).toBe('1');
-        expect(hearingVM.cases[0].caseUrn).toBe('CASE001');
-        expect(hearingVM.cases[1].caseId).toBe('2');
-        expect(hearingVM.cases[1].caseUrn).toBe('CASE002');
-        done();
-      });
+      const hearingVMWithWelsh: ChangeCourtroomVM = {
+        ...mockHearingVM,
+        courtRooms: welshCourtRooms
+      };
+
+      mockChangeCourtroomStore.hearingVM = signal(hearingVMWithWelsh);
+
+      const hearingVM = mockChangeCourtroomStore.hearingVM();
+      expect(hearingVM.courtRooms[0].welshCourtroomName).toBe('Ystafell Llys 3');
+      expect(hearingVM.courtRooms[0].welshVenueName).toBe('Llys Caerdydd');
     });
   });
 
-  describe('Component State Management', () => {
-    it('should update selectedCourtRoomId when changed', () => {
-      component.selectedCourtRoomId = 'room2';
-      expect(component.selectedCourtRoomId).toBe('room2');
-    });
+  describe('Error Handling', () => {
+    it('should handle submit with empty courtRoomId', () => {
+      const invalidFormValue = { courtRoomId: '' };
 
-    it('should reset selectedCourtRoomId to null', () => {
-      component.selectedCourtRoomId = 'room1';
-      component.selectedCourtRoomId = null;
-      expect(component.selectedCourtRoomId).toBeNull();
-    });
+      component.handleSubmit(invalidFormValue);
 
-    it('should handle court room data structure correctly', (done) => {
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        const courtRoom = hearingVM.courtRooms[0];
-        expect(courtRoom.id).toBe('room1');
-        expect(courtRoom.courtroomId).toBe(1);
-        expect(courtRoom.venueName).toBe('Central Court');
-        expect(courtRoom.welshVenueName).toBe('Llys Canolog');
-        expect(courtRoom.courtroomName).toBe('Court Room 1');
-        expect(courtRoom.welshCourtroomName).toBe('Ystafell Llys 1');
-        done();
+      expect(mockChangeCourtroomStore.updateSelectedHearingDays).toHaveBeenCalledWith({
+        hearingDays: mockHearingVM.upComingHearingDays,
+        courtRoomId: ''
       });
-    });
-
-    it('should handle hearing days with optional properties missing', () => {
-      const minimalHearingDay: HearingDayVM = {
-        hearingDate: '2024-02-01',
-        startTime: '10:00',
-        endTime: '16:00',
-        durationMinutes: 360,
-        sequence: 1,
-        position: 1
-      };
-
-      expect(minimalHearingDay.courtRoomId).toBeUndefined();
-      expect(minimalHearingDay.matchedWithQuery).toBeUndefined();
-      expect(minimalHearingDay.courtCentreId).toBeUndefined();
-      expect(minimalHearingDay.courtScheduleId).toBeUndefined();
     });
   });
 });

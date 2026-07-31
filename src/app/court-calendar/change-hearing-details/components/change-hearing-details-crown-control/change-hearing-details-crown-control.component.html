@@ -22,6 +22,7 @@
           [id]="'hearing-endDate'"
           [formControl]="endDateControl"
           [minDate]="minDate"
+          weekDate
           required
           picker
         >
@@ -31,6 +32,7 @@
         <non-sitting-days
           name="nonSittingDays"
           [dateRange]="dateRange"
+          [jurisdictionType]="jurisdictionType()"
           [ngModel]="nonSittingDays()"
           (onValidationError)="onValidationError.emit($event)"
         >
@@ -44,6 +46,7 @@
             [hearingDays]="hearingDays()"
             [ngModel]="nonDefaultDays()"
             [defaultStartTime]="selectedCourtCentre().defaultStartTime"
+            [jurisdictionType]="jurisdictionType()"
             (onValidationError)="onValidationError.emit($event)"
           >
           </non-default-days>

@@ -27,17 +27,18 @@ export const getSessionsForSeelectedHearingGuard: CanActivateFn = (
         return of(true);
       }
       const courtCentre = courtCentres.find(({ id }) => selectedHearing.courtCentreId === id);
-      const isMultiday = !!selectedHearing.hearingDayCount
-        ? selectedHearing.hearingDayCount > 1
-        : selectedHearing.hearingDays.length > 1;
+      const { jurisdictionType, hearingDayCount, hearingDays, startDate, endDate } =
+        selectedHearing;
+      const isMultiday = !!hearingDayCount ? hearingDayCount > 1 : hearingDays.length > 1;
       const slotsParams: SearchHearingSlotsParams & { isMultiday?: boolean } = {
-        sessionStartDate: selectedHearing.startDate,
-        sessionEndDate: selectedHearing.endDate,
+        sessionStartDate: startDate,
+        sessionEndDate: endDate,
         panel: 'ADULT,YOUTH',
         ouCode: courtCentre.oucode,
-        pageSize: 4000,
+        pageSize: 500,
         pageNumber: 1,
         showOverbookedSlots: true,
+        jurisdiction: jurisdictionType,
         isMultiday
       };
       return scheduleService.searchHearingSlots(slotsParams).pipe(

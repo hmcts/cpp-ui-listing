@@ -37,9 +37,9 @@ export const searchAllocatedHearingsByFilterGuard: CanActivateFn = () => {
   );
 };
 
-// This is quite similar to the guard above, however we do not want to update the global filter
-// with its filter options , we want to update the widget filter only as it is designed
-// to be standalone - However it needs data from the global filter options
+// This is quite similar to the guard above, but we do not want to update the global filter
+// with the returned values , we want to update the widget filter only as it is designed
+// to be standalone - However it needs data from the global filter
 export const searchAllocatedWidgetHearingsGuard: CanActivateFn = () => {
   const store = inject(Store<CourtCalendarFeatureState>);
   const router = inject(Router);
@@ -49,7 +49,7 @@ export const searchAllocatedWidgetHearingsGuard: CanActivateFn = () => {
   return store.pipe(
     select(getCourtCalendarFilters),
     take(1),
-    switchMap((filters) => {
+    switchMap(filters => {
       const startDateObj = new Date(filters.startDate);
       startDateObj.setHours(0, 0, 0, 0);
       // If the startdate for the unallocated hearings are in the past , we ensure the user allocates only to the current day and the future.

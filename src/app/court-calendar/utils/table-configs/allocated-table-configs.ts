@@ -1,7 +1,11 @@
-import { CourtRoomCalendarVM, HearingRowVM, MagsWidgetCourtroomCalendarVm } from '../../model';
-import { ColumnConfig, HearingTableSectionConfig } from '../../model/hearing-table-renderer.vm';
+import { AllocatedWidgetCourtroomCalendarVm, CourtRoomCalendarVM, HearingRowVM } from '../../model';
+import {
+  HearingsColumnConfig,
+  HearingsTableSectionConfig
+} from '../../model/hearing-table-renderer.interfaces';
+import { defineHearingsGroupLevels } from '../hearing-table-renderer.utils';
 
-export const AllocatedTableColumnConfig: ColumnConfig<HearingRowVM> = [
+export const AllocatedTableColumnConfig: HearingsColumnConfig<HearingRowVM> = [
   {
     label: 'Select all hearings',
     key: 'id',
@@ -38,29 +42,19 @@ export const AllocatedTableColumnConfig: ColumnConfig<HearingRowVM> = [
   }
 ];
 
-export const allocatedTableSectionConfig: HearingTableSectionConfig<
-  CourtRoomCalendarVM,
-  'judiciaryCalendar',
-  'hearingTimeCalendar'
-> = {
+export const allocatedTableSectionConfig: HearingsTableSectionConfig = {
   actionable: true,
   rowsAreExpandable: true,
   rowsExpandHeaderDescription: 'Use this column to expand the current hearing you are viewing',
   headerCellsVisuallyHidden: false,
   hasTableSectionHeader: true,
-  rowGroups: {
-    rowGroupsPath: 'judiciaryCalendar',
-    headerConfig: {
-      rowGroupHeaderPath: 'judiciary'
-    },
-    dataConfig: {
-      rowGroupDataPath: 'hearingTimeCalendar',
-      rowsDataPath: 'hearings'
-    }
-  }
+  groupLevels: defineHearingsGroupLevels<CourtRoomCalendarVM>()
+    .group('judiciaryCalendar', { dataPath: 'judiciary' })
+    .group('hearingTimeCalendar')
+    .rows('hearings')
 };
 
-export const allocatedHearingWidgetColumnConfig: ColumnConfig<HearingRowVM> = [
+export const allocatedHearingWidgetColumnConfig: HearingsColumnConfig<HearingRowVM> = [
   {
     label: 'Time',
     isDictionaryCell: true,
@@ -76,7 +70,6 @@ export const allocatedHearingWidgetColumnConfig: ColumnConfig<HearingRowVM> = [
     label: 'Hearing type',
     key: 'hearingType'
   },
-
   {
     label: 'Defendants',
     key: 'defendants',
@@ -84,34 +77,16 @@ export const allocatedHearingWidgetColumnConfig: ColumnConfig<HearingRowVM> = [
   }
 ];
 
-export const allocatedCrownHearingWidgetSectionConfig: HearingTableSectionConfig<
-  CourtRoomCalendarVM,
-  'judiciaryCalendar',
-  'hearingTimeCalendar'
-> = {
-  ...allocatedTableSectionConfig,
-  headerCellsVisuallyHidden: true,
-  hasTableSectionHeader: false
-};
-
-export const allocatedMagHearingWidgetSectionConfig: HearingTableSectionConfig<
-  MagsWidgetCourtroomCalendarVm,
-  'businessTypeCalendar',
-  'hearingTimeCalendar'
-> = {
+export const allocatedWidgetSectionConfig: HearingsTableSectionConfig = {
   actionable: true,
   rowsAreExpandable: true,
   rowsExpandHeaderDescription: 'Use this column to expand the current hearing you are viewing',
-  rowGroups: {
-    rowGroupsPath: 'businessTypeCalendar',
-    headerConfig: {
-      rowGroupHeaderPath: 'businessTypeAndSlot'
-    },
-    dataConfig: {
-      rowGroupDataPath: 'hearingTimeCalendar',
-      rowsDataPath: 'hearings'
-    }
-  },
   headerCellsVisuallyHidden: true,
-  hasTableSectionHeader: false
+  hasTableSectionHeader: false,
+  groupLevels: defineHearingsGroupLevels<AllocatedWidgetCourtroomCalendarVm>()
+    .group('businessTypeCalendar', { dataPath: 'businessType', bgColor: 'light-grey' })
+    .group('sessions', { dataPath: 'slot' })
+    .group('judiciaryCalendar', { dataPath: 'judiciary' })
+    .group('hearingTimeCalendar')
+    .rows('hearings')
 };

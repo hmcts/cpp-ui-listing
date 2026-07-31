@@ -9,7 +9,7 @@
     (continue)="onCourtSelected($event)"
     (errors)="showValidationError($event)"
   ></court-selection>
-  } @else { @if (!selectedCourtCentre) {
+  } @else { @if (selectedOrganisationUnit) {
   <div>
     <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
   </div>
@@ -49,49 +49,14 @@
         </find-available-hearing>
       </pdk-tab>
       }
-      <pdk-tab
-        heading="{{selectedOrganisationUnit.jurisdictionType==='CROWN'? 'Enter hearing details': 'Find a hearing'}}"
-      >
+      <pdk-tab heading="Find a hearing">
         <pdk-grid container pdk-margin-bottom="3">
-          @if (selectedOrganisationUnit.jurisdictionType === 'CROWN' ||
-          (isHearingStandaloneApplication$ | async) || (isHearingOnlyWithLinkedApplication$ |
-          async)) {
-          <pdk-grid three-quarters>
-            @if (courtCentres.length) {
-            <courtrooms-filter
-              (onSelectCourtCentre)="onSelectCourtCentre($event)"
-              [courtCentres]="courtCentres"
-              (formErrors)="showValidationError($event)"
-              [courtRooms]="selectedCourtCentre?.courtRooms || []"
-              (onSubmit)="filterSubmit($event)"
-            >
-            </courtrooms-filter>
-            }
-            <daily-court-room-calendar
-              [filterOptions]="filterOptions"
-              (errors)="showValidationError($event)"
-            >
-            </daily-court-room-calendar>
-          </pdk-grid>
-          <pdk-grid one-quarter>
-            @if ((hearingTypes$ | async)?.length && courtCentres?.length) {
-            <hearing-details-form
-              [hearing]="selectedHearing"
-              [selectedCourt]="selectedOrganisationUnit"
-              [courtCentres]="filteredCourtCentres"
-              [hearingTypes]="hearingTypes$ | async"
-              [hearingHasBeenAllocated]="false"
-              [minDate]="minDate"
-              (onSubmit)="allocateHearing($event)"
-              (onCancel)="cancelAllocation()"
-              (onValidationError)="showValidationError($event)"
-            >
-            </hearing-details-form>
-            }
-          </pdk-grid>
+          @if (selectedOrganisationUnit.jurisdictionType === 'CROWN') {
+          <crown-scheduling-container [courtId]="route.snapshot.queryParams.courtId">
+          </crown-scheduling-container>
           } @if (selectedOrganisationUnit.jurisdictionType === 'MAGISTRATES' &&
           (isHearingStandaloneApplication$ | async) === false &&
-          (isHearingOnlyWithLinkedApplication$ | async) ===false) {
+          (isHearingOnlyWithLinkedApplication$ | async) === false) {
           <magistrates-scheduling-container [courtId]="route.snapshot.queryParams.courtId">
           </magistrates-scheduling-container>
           }

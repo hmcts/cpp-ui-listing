@@ -8,7 +8,7 @@ import {
   HearingTableActionsState,
   MoveEvent
 } from '../../../../court-calendar-hearing-tables/component-store/hearing-table-actions.store';
-import { BaseHearingRowDataVM } from '../../../../../court-calendar/model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../../../../court-calendar/model/hearing-table-renderer.interfaces';
 import { HearingRowActionItem } from '../../../shared/hearing-row-actions-dropdown/hearing-row-actions-dropdown.component';
 import * as courtCalendarHelper from '../../../../../court-calendar/utils/court-calendar-hearings-helper';
 

@@ -1,12 +1,13 @@
 import {
   ExtendedJudicialRole,
-  HearingDay,
+  HearingType,
   HearingWithSelectedCourtCentre
 } from './../../../core/model/hearing';
 import { createAction, props } from '@ngrx/store';
 import { CaseNote } from '../../../allocate-hearing/allocate-hearing.interfaces';
-import { Hearing, SequenceHearing } from '../../../core';
+import { Hearing } from '../../../core';
 import {
+  AllocateWidgetFilters,
   BulkAllocatePayload,
   CourtCalendarFilters,
   PaginatedHearingMap,
@@ -18,7 +19,6 @@ export const searchCourtCalendar = createAction(
   'SEARCH_FILTERS',
   props<{
     filterOptions: CourtCalendarFilters;
-    onSequenceOnly?: boolean;
   }>()
 );
 
@@ -26,18 +26,7 @@ export const searchCourtCalendarSuccess = createAction(
   'SEARCH_COURT_CALENDAR_SUCCESS',
   props<{
     payload: PaginatedHearingMap;
-    onSequenceOnly?: boolean;
   }>()
-);
-
-export const sequenceGroupHearings = createAction(
-  'SEQUENCE_GROUP_HEARINGS',
-  props<{ sequencedHearings: SequenceHearing[]; onSectionAllocate?: boolean }>()
-);
-
-export const sequenceGroupHearingsSuccess = createAction(
-  'SEQUENCE_GROUP_HEARINGS_SUCCESS',
-  props<{ onSectionAllocate?: boolean }>()
 );
 
 export const setCaseNotesForCase = createAction(
@@ -91,8 +80,6 @@ export const getAllocatedHearingsForWidget = createAction(
   'GET_ALLOCATED_HEARINGS_FOR_WIDGET',
   props<{
     filterOptions: CourtCalendarFilters;
-    onSectionAllocate?: boolean;
-    onSequenceOnly?: boolean;
   }>()
 );
 
@@ -100,8 +87,14 @@ export const getAllocatedHearingsForWidgetSuccess = createAction(
   'GET_ALLOCATED_HEARINGS_FOR_WIDGET_SUCCESS',
   props<{
     payload: PaginatedHearingMap;
-    onSectionAllocate?: boolean;
-    onSequenceOnly?: boolean;
+  }>()
+);
+
+export const reloadWidgetSchedules = createAction(
+  'RELOAD_WIDGET_SCHEDULES',
+  props<{
+    filterOptions: AllocateWidgetFilters;
+    courtType: CourtCalendarFilters['courtType'];
   }>()
 );
 
@@ -117,23 +110,9 @@ export const getUnallocatedHearingsSuccess = createAction(
   }>()
 );
 
-export const bulkUpdateHearings = createAction(
-  'BULK_UPDATE_HEARINGS',
-  props<{ payload: BulkAllocatePayload }>()
-);
-
-export const bulkUpdateHearingsSuccess = createAction(
-  'BULK_UPDATE_HEARINGS_SUCCESS',
+export const hearingBulkOperationComplete = createAction(
+  'HEARING_BULK_OPERATION_COMPLETE',
   props<{ payload: BulkAllocatePayload; failedAllocationIds: string[] }>()
-);
-
-export const triggerComponentOnSectionAllocated = createAction(
-  'TRIGGER_COMPONENT_ON_SECTION_ALLOCATED',
-  props<{ failedHearingIds: string[] }>()
-);
-
-export const triggerComponentOnSequenceOnly = createAction(
-  'TRIGGER_COMPONENT_ON_SEQUENCE_FINISHED'
 );
 
 export const updateHearingPublicListNote = createAction(
@@ -151,32 +130,23 @@ export const setHearingsToReallocate = createAction(
   props<{ hearings: Hearing[] }>()
 );
 
-export const unallocateHearings = createAction(
-  'UNALLOCATE_HEARINGS',
-  props<{ payload: BulkAllocatePayload }>()
-);
-
-export const unallocateHearingsSuccess = createAction(
-  'UNALLOCATE_HEARINGS_SUCCESS',
-  props<{ failedAllocationIds: string[] }>()
-);
-
 export const splitHearings = createAction(
   'SPLIT_HEARINGS',
   props<{ originHearing: Hearing; updatedHearing: HearingWithSelectedCourtCentre }>()
 );
 
-export const magistratesSplitHearings = createAction(
-  'MAGISTRATES_SPLIT_HEARINGS',
-  props<{ hearingSlotAllocations: HearingSlotAllocation[]; sendNotificationToParties: boolean }>()
+export const allocateSelectedHearingSlots = createAction(
+  'ALLOCATE_SELECTED_HEARING_SLOTS',
+  props<{
+    hearingSlotAllocations: HearingSlotAllocation[];
+    sendNotificationToParties: boolean;
+    hearingType?: HearingType;
+  }>()
 );
 
 export const updateSplitHearingDataSuccess = createAction('UPDATE_SPLIT_HEARING_DATA_SUCCESS');
 
-export const updateSelectedHearingDays = createAction(
-  'UPDATE_SELECTED_HEARING_DAYS',
-  props<{ updatedHearingDays: HearingDay[] }>()
-);
+export const clearAllocationType = createAction('CLEAR_ALLOCATION_TYPE');
 
 export const clearUnallocatedWidgetFilter = createAction('CLEAR_UNALLOCATED_WIDGET_FILTER');
 

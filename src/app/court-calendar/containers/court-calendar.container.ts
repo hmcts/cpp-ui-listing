@@ -1,25 +1,27 @@
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { OrganisationUnit, getOrganisationUnits } from '@cpp/reference-data';
 import {
-  ModalService,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  OnInit,
+  untracked,
+  ViewChild
+} from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { getOrganisationUnits } from '@cpp/reference-data';
+import {
   PdkErrorSummaryComponent,
   PdkButton,
   PdkCore,
   PdkGrid,
-  provideModalServices,
-  ValidationError
+  ValidationError,
+  ModalService,
+  provideModalServices
 } from '@cpp/pdk';
-import { AsyncPipe } from '@angular/common';
 import { CourtCalendarFiltersComponent, CourtResultSummaryComponent } from '../components';
-import {
-  CourtCalendarFeature,
-  CourtCalendarFilters,
-  CourtCalendarVM,
-  HearingAllocationPayload
-} from '../model';
+import { CourtCalendarFilters } from '../model';
 import {
   CourtCalendarActions,
   CourtCalendarFeatureState,
@@ -34,9 +36,7 @@ import {
   HearingBulkActions,
   HearingDropdownActions
 } from '../court-calendar-hearing-tables/shared/hearing-row-actions-dropdown/hearing-row-actions-dropdown.component';
-import { map, take, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
-import { ClearAllocatedHearingsAction, Hearing, SequenceHearing } from '../../core';
-import { CaseNote } from '../../allocate-hearing/allocate-hearing.interfaces';
+import { ClearAllocatedHearingsAction } from '../../core';
 import {
   resetAllocatedHearings,
   setSelectedHearingData,
@@ -50,9 +50,8 @@ import {
   SequenceEvent
 } from '../court-calendar-hearing-tables/component-store/hearing-table-actions.store';
 import { HearingActionsEvent } from '../court-calendar-hearing-tables/renderers/cell-renderers/action-cell.component';
-import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.vm';
 import { CourtCalendarAlertComponent } from '../components/court-calendar-alert.component';
-import { AllocateHearingFactory } from '../utils/allocate-hearing.factory';
+import { COURT_CALENDAR_ALERTS } from '../utils/court-calendar-alert-messages';
 import { BulkActionsComponent } from '../components/bulk-actions/bulk-actions.component';
 import { uniq } from 'lodash-es';
 import { SubMenuComponent } from '../../shared/components/sub-menu/sub-menu.component';
@@ -61,12 +60,12 @@ import {
   ChangeEndDateModalComponent,
   ChangeEndDateModalData
 } from '../court-calendar-hearing-tables/shared/modals/change-end-date-modal.component';
+import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.interfaces';
 
 @Component({
   selector: 'court-calendar-container',
   templateUrl: './court-calendar.container.html',
   imports: [
-    AsyncPipe,
     PdkGrid,
     PdkCore,
     PdkButton,
@@ -80,46 +79,40 @@ import {
     SubMenuComponent,
     PageSizeSelectorComponent
   ],
-  providers: [HearingTableActionsStore, AllocateHearingFactory, provideModalServices()]
+  providers: [HearingTableActionsStore, provideModalServices()]
 })
-export class CourtCalendarContainer implements OnDestroy {
-  organisationUnits$: Observable<OrganisationUnit[]>;
-  filterOptions$: Observable<CourtCalendarFilters>;
-  courtCalendarHearingsVM$: Observable<CourtCalendarVM>;
+export class CourtCalendarContainer implements OnInit {
+  private readonly store = inject(Store<CourtCalendarFeatureState>);
+  private readonly route = inject(Router);
+  private readonly modalService = inject(ModalService);
+  readonly allocatedHearingActionsStore = inject(HearingTableActionsStore);
+
+  private readonly _rawFilterOptions = this.store.selectSignal(getCourtCalendarFilters);
+  private readonly allocatedHearings = this.store.selectSignal(getAllocatedHearings);
+
+  readonly organisationUnits = this.store.selectSignal(getOrganisationUnits);
+  readonly filterOptions = computed<CourtCalendarFilters>(() => {
+    const options = this._rawFilterOptions();
+    return { ...options, startDate: options?.startDate || new Date().toISOString() };
+  });
+  readonly courtCalendarHearingsVM = this.store.selectSignal(getCourtCalendarVM);
+  readonly caseNotesMap = this.store.selectSignal(getCaseNotesMap);
+  readonly alertState = this.store.selectSignal(getCourtCalendarAlert);
+
   @ViewChild('allocatedTableSummary', { read: ElementRef<HTMLElement> })
   allocatedTableElement: ElementRef<HTMLElement>;
   errors: ValidationError[] = [];
-  caseNotesMap$: Observable<Record<string, CaseNote[]>>;
-  alert$: Observable<{ successAlert?: string; failureAlert?: string }>;
-  readonly destroy$: Subject<boolean> = new Subject<boolean>();
-  readonly hearingMovestate$ = this.allocatedHearingActionsStore.moveState$;
-  readonly selectedHearings$ = this.allocatedHearingActionsStore.selectedHearings$;
-  readonly positionedHearingsState$ = this.allocatedHearingActionsStore.positionedHearingsState$;
 
-  constructor(
-    private store: Store<CourtCalendarFeatureState>,
-    private route: Router,
-    private allocatedHearingActionsStore: HearingTableActionsStore,
-    private allocateHearingFactory: AllocateHearingFactory,
-    private modalService: ModalService
-  ) {
-    this.organisationUnits$ = this.store.select(getOrganisationUnits);
-    this.filterOptions$ = this.store.pipe(
-      select(getCourtCalendarFilters),
-      map(options => ({
-        ...options,
-        startDate: options?.startDate || new Date().toISOString()
-      }))
-    );
-    this.courtCalendarHearingsVM$ = this.store.pipe(select(getCourtCalendarVM));
-    this.caseNotesMap$ = this.store.pipe(select(getCaseNotesMap));
-    this.alert$ = this.store.pipe(select(getCourtCalendarAlert));
-    this.allocatedHearingActionsStore.onNavigateHearingActions$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(event => this.onNavigate(event));
-    this.allocatedHearingActionsStore.onSequenceHearings$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(seqencedHearings => this.onSequenceHearings(seqencedHearings));
+  constructor() {
+    effect(() => {
+      const navAction = this.allocatedHearingActionsStore.onNavigateHearingActions();
+      if (navAction) {
+        untracked(() => this.onNavigate(navAction));
+      }
+    });
+  }
+
+  ngOnInit() {
     this.store.dispatch(new ClearAllocatedHearingsAction());
     this.store.dispatch(CourtCalendarActions.setSelectedHearingData({ selectedHearing: null }));
   }
@@ -135,30 +128,21 @@ export class CourtCalendarContainer implements OnDestroy {
   }
 
   pageChanged(event: { pageNumber: number; pageSize?: number }): void {
-    this.filterOptions$.pipe(take(1)).subscribe(filterOptions => {
-      this.onSubmitFormFilters({
-        ...filterOptions,
-        pageNumber: event.pageNumber,
-        pageSize: event.pageSize ?? filterOptions.pageSize
-      });
-      if (this.allocatedTableElement?.nativeElement?.scrollIntoView) {
-        this.allocatedTableElement.nativeElement.scrollIntoView({ block: 'start' });
-      }
+    const filterOptions = this.filterOptions();
+    this.onSubmitFormFilters({
+      ...filterOptions,
+      pageNumber: event.pageNumber,
+      pageSize: event.pageSize ?? filterOptions.pageSize
     });
+    if (this.allocatedTableElement?.nativeElement?.scrollIntoView) {
+      this.allocatedTableElement.nativeElement.scrollIntoView({ block: 'start' });
+    }
   }
 
   onGetCaseNotesForId(caseId: string) {
-    this.store
-      .pipe(
-        select(getCaseNotesMap),
-        take(1),
-        tap(caseNotesMap => {
-          if (caseNotesMap[caseId] === undefined) {
-            this.store.dispatch(CourtCalendarActions.setCaseNotesForCase({ caseId }));
-          }
-        })
-      )
-      .subscribe();
+    if (this.caseNotesMap()[caseId] === undefined) {
+      this.store.dispatch(CourtCalendarActions.setCaseNotesForCase({ caseId }));
+    }
   }
 
   onUndoHearingMove() {
@@ -166,12 +150,16 @@ export class CourtCalendarContainer implements OnDestroy {
   }
 
   onHearingSequence(sequenceEvent: SequenceEvent) {
-    this.filterOptions$.pipe(take(1)).subscribe(({ courtType }) =>
-      this.allocatedHearingActionsStore.sequenceHearings({
-        ...sequenceEvent,
-        courtType
-      })
-    );
+    const { courtType } = this.filterOptions();
+    this.allocatedHearingActionsStore.sequenceHearings({
+      ...sequenceEvent,
+      courtType,
+      onSequenceSuccess: () => {
+        this.store.dispatch(
+          CourtCalendarActions.searchCourtCalendar({ filterOptions: this.filterOptions() })
+        );
+      }
+    });
   }
 
   onHearingAction({
@@ -183,7 +171,6 @@ export class CourtCalendarContainer implements OnDestroy {
     hearingDateTime
   }: Partial<HearingActionsEvent>) {
     this.clearAlert();
-    this.allocatedHearingActionsStore.setAction(action);
     this.allocatedHearingActionsStore.selectAllHearings([]);
     switch (action) {
       case 'move': {
@@ -193,10 +180,11 @@ export class CourtCalendarContainer implements OnDestroy {
           hearingDate,
           rows
         });
+        this.allocatedHearingActionsStore.clearAllocationResult();
         break;
       }
       case 'unallocate': {
-        this.allocatedHearingActionsStore.selectHearing({ hearingId, hearingDateTime });
+        this.selectHearing({ hearingId, hearingDateTime });
         this.bulkUnallocate();
         break;
       }
@@ -204,12 +192,12 @@ export class CourtCalendarContainer implements OnDestroy {
         this.openChangeEndDateModal(hearingId, rows);
         break;
       }
-
       default: {
-        this.allocatedHearingActionsStore.selectHearing({ hearingId, hearingDateTime });
+        this.selectHearing({ hearingId, hearingDateTime });
         break;
       }
     }
+    this.allocatedHearingActionsStore.setAction(action);
   }
 
   private openChangeEndDateModal(hearingId: string, rows: BaseHearingRowDataVM[]) {
@@ -241,11 +229,15 @@ export class CourtCalendarContainer implements OnDestroy {
   selectHearing(selectedHearing: SelectedHearingState) {
     this.allocatedHearingActionsStore.selectHearing(selectedHearing);
     this.allocatedHearingActionsStore.resetMoveState();
+    this.allocatedHearingActionsStore.clearPositionedHearings();
+    this.allocatedHearingActionsStore.clearAllocationResult();
   }
 
   selectAllHearings(selectedHearings: SelectedHearingState[]) {
     this.allocatedHearingActionsStore.selectAllHearings(selectedHearings);
     this.allocatedHearingActionsStore.resetMoveState();
+    this.allocatedHearingActionsStore.clearPositionedHearings();
+    this.allocatedHearingActionsStore.clearAllocationResult();
   }
 
   onJurisdictionTypeChange() {
@@ -254,127 +246,115 @@ export class CourtCalendarContainer implements OnDestroy {
 
   onNavigateChangeJudiciary(queryParams) {
     this.clearAlert();
-    this.route.navigate(['court-calendar', 'edit-judiciary'], {
-      queryParams
-    });
+    this.route.navigate(['court-calendar', 'edit-judiciary'], { queryParams });
   }
 
   onBulkAction(selectedAction: HearingBulkActions) {
     this.clearAlert();
     if (selectedAction === 'unallocate') {
+      this.allocatedHearingActionsStore.clearPositionedHearings();
+      this.allocatedHearingActionsStore.clearAllocationResult();
       this.bulkUnallocate();
       return;
     }
-    this.selectedHearings$
-      .pipe(
-        map(selectedHearings => uniq(selectedHearings.map(({ hearingId }) => hearingId))),
-        take(1)
+    const hearings = uniq<string>(
+      (this.allocatedHearingActionsStore.selectedHearings() ?? []).map(
+        (h: SelectedHearingState) => h.hearingId
       )
-      .subscribe(hearings => this.onNavigate({ action: 'reallocate', hearings }));
+    );
+    this.onNavigate({ action: 'reallocate', hearings });
   }
 
-  onAddUnallocateHearing(filterOptions: CourtCalendarFilters) {
+  onAddUnallocateHearing() {
     this.clearAlert();
-    let {
-      courtCentre: { id },
-      startDate,
-      endDate,
-      courtType,
-      courtSession,
-      businessType
+    const filterOptions = this.filterOptions();
+    const {
+      courtCentre: { id }
     } = filterOptions;
-    let courtName: string = courtType.toLowerCase();
-    this.route.navigate([`court-calendar/allocate-hearings/${courtName}/${id}/unallocated`], {
-      queryParams: { startDate, endDate, courtSession, businessType }
+    this.route.navigate([`court-calendar/allocate-hearings/${id}/unallocated`], {
+      queryParams: this.buildAllocateQueryParams(filterOptions)
     });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+  private buildAllocateQueryParams(filterOptions: CourtCalendarFilters): Record<string, string> {
+    const { courtType, businessType, courtRoomId, startDate, endDate, courtSession, hearingType } =
+      filterOptions;
+    return {
+      startDate,
+      endDate,
+      jurisdiction: courtType,
+      businessType,
+      courtRoomId,
+      courtSession,
+      hearingType: hearingType?.id
+    };
   }
 
   private clearAlert() {
     this.store.dispatch(setAlertMessage({ successAlert: undefined, failureAlert: undefined }));
   }
 
-  private onSequenceHearings(sequencedHearings: SequenceHearing[]) {
-    if (sequencedHearings?.length > 0) {
-      this.store.dispatch(CourtCalendarActions.sequenceGroupHearings({ sequencedHearings }));
+  private onNavigate(event: { action: HearingDropdownActions; hearings: string[] }) {
+    const { hearings } = this.allocatedHearings();
+    const selectedHearings = event.hearings.map(hearingId =>
+      hearings.find(({ id }) => id === hearingId)
+    );
+    const filterOptions = this.filterOptions();
+    const { courtCentre } = filterOptions;
+
+    switch (event.action) {
+      case 'edit':
+        this.route.navigate([`court-calendar/change-hearing-details/${selectedHearings[0].id}`]);
+        break;
+      case 'change':
+        this.route.navigate([`court-calendar/change-courtroom/${selectedHearings[0].id}`]);
+        break;
+      case 'remove':
+        this.store.dispatch(setSelectedHearingData({ selectedHearing: selectedHearings[0] }));
+        this.route.navigate([`court-calendar/remove-hearing/${selectedHearings[0].id}`]);
+        break;
+      case 'reallocate':
+        this.store.dispatch(setHearingsToReallocate({ hearings: selectedHearings }));
+        this.route.navigate([`court-calendar/allocate-hearings/${courtCentre.id}/reallocate`], {
+          queryParams: this.buildAllocateQueryParams(filterOptions)
+        });
+
+        break;
+      case 'split':
+        this.route.navigate([`split/${selectedHearings[0].id}`], {
+          queryParams: { referrer: 'CALENDAR' }
+        });
+        break;
+      default:
+        break;
     }
   }
 
-  private onNavigate(event: { action: HearingDropdownActions; hearings: string[] }) {
-    this.store
-      .pipe(
-        select(getAllocatedHearings),
-        map(({ hearings }) =>
-          event.hearings.map(hearingId => hearings.find(({ id }) => id === hearingId))
-        ),
-        withLatestFrom(this.filterOptions$),
-        take(1)
-      )
-      .subscribe(([selectedHearings, { courtCentre, startDate, endDate, courtType }]) => {
-        const courtName = courtType.toLowerCase();
-        switch (event.action) {
-          case 'edit':
-            this.route.navigate([
-              `court-calendar/change-hearing-details/${selectedHearings[0].id}`
-            ]);
-            break;
-          case 'change':
-            this.route.navigate([`court-calendar/change-courtroom/${selectedHearings[0].id}`]);
-            break;
-          case 'remove':
-            this.store.dispatch(setSelectedHearingData({ selectedHearing: selectedHearings[0] }));
-            this.route.navigate([`court-calendar/remove-hearing/${selectedHearings[0].id}`]);
-            break;
-          case 'reallocate':
-            this.route.navigate(
-              [`court-calendar/allocate-hearings/${courtName}/${courtCentre.id}/reallocate`],
-              { queryParams: { startDate, endDate } }
-            );
-            this.store.dispatch(setHearingsToReallocate({ hearings: selectedHearings }));
-            break;
-          case 'split':
-            this.route.navigate([`split/${selectedHearings[0].id}`], {
-              queryParams: {
-                referrer: CourtCalendarFeature.calendar
-              }
-            });
-            break;
-          default:
-            break;
-        }
-      });
-  }
-
   private bulkUnallocate() {
-    this.selectedHearings$
-      .pipe(
-        withLatestFrom(this.store.pipe(select(getAllocatedHearings))),
-        map(([selectedHearings, { hearings }]) =>
-          this.getHearingsToUnallocate(selectedHearings, hearings)
-        ),
-        map(hearingsToUnallocate => {
-          return CourtCalendarActions.unallocateHearings({
-            payload: {
-              hearings: hearingsToUnallocate
-            }
-          });
-        }),
-        take(1)
-      )
-      .subscribe(this.store);
-    this.allocatedHearingActionsStore.selectAllHearings([]);
-  }
+    const selectedHearings = this.allocatedHearingActionsStore.selectedHearings() ?? [];
+    const { hearings } = this.allocatedHearings();
+    const hearingsToUnallocate = hearings.filter(h =>
+      selectedHearings.some(s => s.hearingId === h.id)
+    );
+    const filterOptions = this.filterOptions();
 
-  private getHearingsToUnallocate(selectedHearings: SelectedHearingState[], hearings: Hearing[]) {
-    return hearings.reduce((hearingsToUnallocate: HearingAllocationPayload[], hearing) => {
-      if (selectedHearings.some(({ hearingId }) => hearingId === hearing.id)) {
-        return [...hearingsToUnallocate, this.allocateHearingFactory.unallocateHearing(hearing)];
+    this.allocatedHearingActionsStore.unallocate({
+      hearings: hearingsToUnallocate,
+      jurisdiction: filterOptions.courtType,
+      ouCode: filterOptions.courtCentre.oucode,
+      onSuccess: ({ processedHearings, failedAllocationIds }) => {
+        if (processedHearings.length > 0) {
+          this.store.dispatch(
+            CourtCalendarActions.searchCourtCalendar({ filterOptions: this.filterOptions() })
+          );
+        }
+        this.store.dispatch(
+          setAlertMessage(
+            COURT_CALENDAR_ALERTS.resolveUnallocate(processedHearings.length, failedAllocationIds)
+          )
+        );
       }
-      return hearingsToUnallocate;
-    }, []);
+    });
+    this.allocatedHearingActionsStore.selectAllHearings([]);
   }
 }
