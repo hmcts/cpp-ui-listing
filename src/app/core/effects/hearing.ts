@@ -308,7 +308,8 @@ export class HearingEffects {
             ouCode: updatedHearing.selectedCourtCentre.ouCode,
             pageNumber: 1,
             pageSize: 10,
-            showOverbookedSlots: true
+            showOverbookedSlots: true,
+            jurisdiction: 'MAGISTRATES'
           };
 
           return this.scheduling.searchHearingSlots(searchParams).pipe(

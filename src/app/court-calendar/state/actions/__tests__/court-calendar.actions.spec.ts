@@ -4,10 +4,8 @@ import {
   mockCaseNotes,
   MockHearing,
   mockRemoveHearingPayload,
-  mockSearchFormValues,
-  mockSequenceHearing
+  mockSearchFormValues
 } from '../../../utils/mocks';
-import { SequenceHearing } from '../../../../core';
 import { CaseNote } from '../../../../allocate-hearing/allocate-hearing.interfaces';
 
 describe('CourtCalendar Actions', () => {
@@ -18,20 +16,6 @@ describe('CourtCalendar Actions', () => {
 
     expect(action.type).toBe('SEARCH_FILTERS');
     expect(action.filterOptions).toEqual(filters);
-  });
-
-  it('should create sequenceGroupHearings action with correct sequencedHearings', () => {
-    const sequencedHearings: SequenceHearing[] = [mockSequenceHearing];
-    const action = CourtCalendarActions.sequenceGroupHearings({ sequencedHearings });
-
-    expect(action.type).toBe('SEQUENCE_GROUP_HEARINGS');
-    expect(action.sequencedHearings).toBe(sequencedHearings);
-  });
-
-  it('should create sequenceGroupHearingsSuccess action', () => {
-    const action = CourtCalendarActions.sequenceGroupHearingsSuccess({});
-
-    expect(action.type).toBe('SEQUENCE_GROUP_HEARINGS_SUCCESS');
   });
 
   it('should create setCaseNotesForCase action with correct caseId', () => {

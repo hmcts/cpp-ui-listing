@@ -17,23 +17,20 @@
       </app-notification>
     </pdk-grid>
   </pdk-grid>
-  } @if (hearingSchedule$ | async; as schedule) {
+  } @if (hearingSchedule$ | async; as schedule) { @if
+  (getEarliestAllocation(schedule.hearingSlotAllocations); as allocation) {
   <pdk-grid container pdk-padding-top="3">
     <pdk-grid two-thirds>
-      @for (allocation of schedule.hearingSlotAllocations; track allocation.hearingSlotTime) {
-      <div pdk-margin-bottom="2">
-        <app-notification
-          [allocation]="allocation"
-          [courtCentres]="courtCentres$ | async"
-          [lastAllocatedHearing]="lastAllocatedMagsHearingsSlots$ | async"
-          (onDestroy)="clearNotification()"
-        >
-        </app-notification>
-      </div>
-      }
+      <app-notification
+        [allocation]="allocation"
+        [courtCentres]="courtCentres$ | async"
+        [lastAllocatedHearing]="lastAllocatedMagsHearingsSlots$ | async"
+        (onDestroy)="clearNotification()"
+      >
+      </app-notification>
     </pdk-grid>
   </pdk-grid>
-  }
+  } }
 
   <div class="hearing-listings">
     <h1 pdk-typography="heading-large" pdk-margin-bottom="1" pdk-margin-top="2">

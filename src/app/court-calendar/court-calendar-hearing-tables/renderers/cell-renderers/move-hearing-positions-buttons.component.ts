@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener } from '@angular/core';
 import { HearingTableActionsState } from '../../component-store/hearing-table-actions.store';
 
-import { BaseHearingRowDataVM } from '../../../model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../../model/hearing-table-renderer.interfaces';
 
 import { PdkButton, PdkCore } from '@cpp/pdk';
 
@@ -49,7 +49,7 @@ export class MoveHearingsButtonsComponent {
   insertBefore = new EventEmitter<void>();
   insertAfter = new EventEmitter<void>();
   get masterRows(): BaseHearingRowDataVM[] {
-    return this.group.filter((row) => row.isMaster);
+    return this.group.filter(row => row.isMaster);
   }
 
   get shouldInsertBefore() {

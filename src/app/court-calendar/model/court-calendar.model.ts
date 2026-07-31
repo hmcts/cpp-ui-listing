@@ -16,7 +16,7 @@ import {
   PaginatedHearings,
   Pagination
 } from '../../core/model/hearing';
-import { BaseHearingRowDataVM, BaseHearingSection } from './hearing-table-renderer.vm';
+import { BaseHearingRowDataVM, BaseHearingSection } from './hearing-table-renderer.interfaces';
 
 export { PaginatedHearings };
 
@@ -53,7 +53,6 @@ export interface CourtCalendarState {
   allocated: PaginatedHearingMap;
   hearingsToReallocate?: Hearing[];
   allocationType?: AllocationType;
-  failedAllocationIds?: string[];
   unallocated?: {
     allocateWidgetFilter?: AllocateWidgetFilters;
     hearingMap: PaginatedHearingMap;
@@ -70,9 +69,12 @@ export interface CourtRoomCalendarVM extends BaseHearingSection {
   judiciaryCalendar: CourtRoomJudicialCalendar[];
 }
 
-export type MagsWidgetCourtroomCalendarVm = Omit<CourtRoomCalendarVM, 'judiciaryCalendar'> & {
+export interface AllocatedWidgetCourtroomCalendarVm extends BaseHearingSection {
+  date: string;
+  courtRoomName: string;
+  courtRoomId: string;
   businessTypeCalendar: CourtRoomBusinessTypeCalendar[];
-};
+}
 
 export interface CourtRoomJudicialCalendar {
   judiciary: ExtendedJudicialRole[];
@@ -80,12 +82,16 @@ export interface CourtRoomJudicialCalendar {
 }
 
 export interface CourtRoomBusinessTypeCalendar {
-  businessTypeAndSlot: {
-    businessTypeCode: RotaBusinessTypeCode;
+  businessType: RotaBusinessTypeCode;
+  sessions: CourtRoomSessionCalendar[];
+}
+
+export interface CourtRoomSessionCalendar {
+  slot: {
     courtScheduleId: string;
     session: { startTime: string; endTime: string; type: CourtSession };
   };
-  hearingTimeCalendar: CourtRoomHearingTimeCalendar[];
+  judiciaryCalendar: CourtRoomJudicialCalendar[];
 }
 
 export interface CourtRoomHearingTimeCalendar {
@@ -168,6 +174,8 @@ export interface ChangeCourtroomVM {
   courtRooms: CourtRoom[];
   startDate: string;
   endDate: string;
+  ouCode: string;
+  jurisdictionType: JurisdictionType;
 }
 
 export interface ConfirmCourtRoomChangeEvent {
@@ -201,12 +209,6 @@ export enum AllocationType {
   allocate = 'ALLOCATE'
 }
 
-export enum CourtCalendarFeature {
-  calendar = 'CALENDAR',
-  allocateCrown = 'ALLOCATE_CROWN',
-  allocateMag = 'ALLOCATE_MAGISTRATE'
-}
-
 export interface AllocateHearingCase {
   caseId: string;
   defendants: {
@@ -235,19 +237,11 @@ export interface HearingAllocationPayload extends Pick<
   courtRoomId: string;
   nonDefaultDays: NonDefaultDay[];
   hearingId: string;
-  businessTypeAndSlot?: {
-    businessTypeCode: string;
-    courtScheduleId: string;
-    session: { startTime: string; endTime: string };
-  };
   prosecutionCases?: AllocateHearingCase[];
 }
 
 export interface BulkAllocatePayload {
   hearings: HearingAllocationPayload[];
-  insertBeforeId?: string;
-  insertAfterId?: string;
-  group?: CourtRoomHearingTimeCalendar;
 }
 
 export interface ChangeJudiciaryEvent {

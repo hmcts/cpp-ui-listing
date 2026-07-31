@@ -1,13 +1,12 @@
-import { Component, EventEmitter, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, input, output } from '@angular/core';
 import { ToArrayPipe } from '../../../../shared/pipes/to-array.pipe';
 import {
-  ColumnConfig,
-  HearingTableSectionConfig,
-  PickPropertyKeys,
-  BaseHearingRowDataVM,
-  TableContext,
-  BaseHearingSection
-} from '../../../model/hearing-table-renderer.vm';
+  BaseHearingSection,
+  HearingsColumnConfig,
+  HearingsTableContext,
+  HearingsTableSectionConfig,
+  BaseHearingRowDataVM
+} from '../../../model/hearing-table-renderer.interfaces';
 import { HearingTableActionsState } from '../../component-store/hearing-table-actions.store';
 import { SectionTitleResolverPipe } from '../../../pipes/section-title-resolver.pipe';
 import { SectionTableRendererComponent } from '../section-table-renderer/section-table-renderer.component';
@@ -17,6 +16,7 @@ import { NgTemplateOutlet } from '@angular/common';
 @Component({
   selector: '[section-accordion-renderer], section-accordion-renderer',
   templateUrl: './section-accordion-renderer.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     SectionTitleResolverPipe,
     SectionTableRendererComponent,
@@ -24,58 +24,27 @@ import { NgTemplateOutlet } from '@angular/common';
     PdkAccordion,
     PdkCore,
     NgTemplateOutlet
-  ],
-  inputs: [
-    'sectionHeaderRenderer',
-    'rowGroupHeaderCellRenderer',
-    'actionCellRenderer',
-    'customCellHeaderRenderers',
-    'expandedDetailsRenderer',
-    'moveAlertRenderer',
-    'cellRenderers',
-    'sections',
-    'columnConfig',
-    'sectionConfig',
-    'hearingMovestate',
-    'positionedHearingsState',
-    'titleResolver',
-    'sectionOpenState',
-    'accordionSectionActionRenderer',
-    'sectionAlertRenderer'
-  ],
-  outputs: ['accordionOpenChange']
+  ]
 })
-export class SectionAccordionRendererComponent<
-  S extends BaseHearingSection,
-  T extends BaseHearingRowDataVM
-> implements OnInit
-{
-  sectionHeaderRenderer?: TemplateRef<TableContext<S, T>>;
-  rowGroupHeaderCellRenderer?: TemplateRef<TableContext<S, T>>;
-  actionCellRenderer?: TemplateRef<TableContext<S, T>>;
-  expandedDetailsRenderer?: TemplateRef<TableContext<S, T>>;
-  moveAlertRenderer: TemplateRef<TableContext<S, T>>;
-  sectionAlertRenderer: TemplateRef<TableContext<S, T>>;
-  customCellHeaderRenderers?: Record<keyof T, TemplateRef<TableContext<S, T>>>;
-  accordionSectionActionRenderer: TemplateRef<TableContext<S, T>>;
-  cellRenderers?: Record<keyof T, TemplateRef<TableContext<S, T>>>;
-  sections: S[];
-  columnConfig: ColumnConfig<T>;
-  sectionConfig: HearingTableSectionConfig<S, keyof S, PickPropertyKeys<S, keyof S>>;
-  sectionHeaderSpan: number;
-  hearingMovestate: HearingTableActionsState['moveState'];
-  positionedHearingsState: HearingTableActionsState['positionedHearingsState'];
-  sectionOpenState: number[] = [];
-  accordionOpenChange = new EventEmitter<number[]>();
-  titleResolver: (section: S) => string;
+export class SectionAccordionRendererComponent {
+  readonly sectionHeaderRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly hearingsGroupHeaderRenderers =
+    input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly actionCellRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly expandedDetailsRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly moveAlertRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly sectionAlertRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly customCellHeaderRenderers = input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly accordionSectionActionRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly cellRenderers = input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly sections = input<BaseHearingSection[]>();
+  readonly columnConfig = input<HearingsColumnConfig<BaseHearingRowDataVM>>();
+  readonly sectionConfig = input<HearingsTableSectionConfig>();
+  readonly hearingMovestate = input<HearingTableActionsState['moveState']>();
+  readonly positionedHearingsState = input<HearingTableActionsState['positionedHearingsState']>();
+  readonly failedAllocationIds = input<string[]>();
+  readonly sectionOpenState = input<number[]>([]);
+  readonly titleResolver = input<(section: BaseHearingSection) => string>();
 
-  ngOnInit(): void {
-    this.sectionHeaderSpan = this.columnConfig.length;
-    if (this.sectionConfig.actionable && this.actionCellRenderer) {
-      this.sectionHeaderSpan += 1;
-    }
-    if (this.sectionConfig.rowsAreExpandable) {
-      this.sectionHeaderSpan += 1;
-    }
-  }
+  readonly accordionOpenChange = output<number[]>();
 }

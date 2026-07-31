@@ -1,9 +1,44 @@
+@if (showCourtSelection()) {
+<ng-container>
+  <pdk-grid container pdk-margin-top="2">
+    <pdk-grid full>
+      <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+      @if (errors().length > 0) {
+      <pdk-error-summary [errors]="errors()" pdk-margin-top="4" focusOnChange></pdk-error-summary>
+      }
+    </pdk-grid>
+  </pdk-grid>
+  <pdk-grid container pdk-margin-top="2">
+    <pdk-grid one-half>
+      <h1 pdk-typography="heading-large" pdk-margin-bottom="4" pdk-margin-top="2">
+        Find available sessions
+      </h1>
+
+      <select-jurisdiction
+        (continue)="onCourtSelected($event)"
+        (errors)="showValidationError($event)"
+      ></select-jurisdiction>
+    </pdk-grid>
+  </pdk-grid>
+</ng-container>
+} @else {
 <pdk-grid container pdk-margin-top="2">
   <pdk-grid full>
     <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
 
-    @if (errors?.length > 0) {
-    <pdk-error-summary [errors]="errors" pdk-margin-top="4" focusOnChange></pdk-error-summary>
+    <div pdk-margin-top="2" pdk-margin-bottom="1">
+      <a
+        pdk-back-link
+        href="javascript:void(0)"
+        data-role="find-sessions-search-back"
+        (click)="backToJurisdictionSelection()"
+        >Back</a
+      >
+    </div>
+
+    @if (errors().length > 0) {
+    <pdk-error-summary [errors]="errors()" pdk-margin-top="4" focusOnChange></pdk-error-summary>
     }
 
     <h1 pdk-typography="heading-large" pdk-margin-bottom="4" pdk-margin-top="2">
@@ -11,35 +46,74 @@
     </h1>
 
     <div class="scheduling-filters-wrapper" pdk-padding-top="6">
-      <scheduling-filters
-        [organisationUnits]="organisationUnits$ | async"
-        [rotaBusinessTypes]="rotaBusinessTypes$ | async"
-        [defaultValues]="filters$ | async"
-        (filtersSubmit)="handleFiltersSubmit($event)"
+      @if (jurisdictionType() === 'CROWN') {
+      <crown-scheduling-filters
+        [defaultSessionStatus]="CrownSessionStatus.ALL"
+        [organisationUnits]="organisationUnits()"
+        [rotaBusinessTypes]="rotaBusinessTypes()"
+        [defaultValues]="filters()"
+        [allowPastDates]="true"
+        (filtersSubmit)="handleCrownFiltersSubmit($event)"
         (errors)="showValidationError($event)"
       >
-      </scheduling-filters>
+      </crown-scheduling-filters>
 
-      @if ((totalResults$ | async) > -1) {
-      <pdk-inset-text>
-        <b
-          >{{ (totalResults$ | async) }} session{{ (totalResults$ | async) === 1 ? '' : 's' }}
-          found. Only sessions with available time or slots are returned</b
-        >
-      </pdk-inset-text>
-      }
+      <ng-container
+        [ngTemplateOutlet]="sessionResultsSummary"
+        [ngTemplateOutletContext]="{ $implicit: totalResults() }"
+      />
 
-      <scheduling-slots
+      <crown-scheduling-slots
         [selectionMode]="'readonly'"
-        [totalResults]="totalResults$ | async"
-        [hearingSlots]="searchResult$ | async"
-        [rotaBusinessTypes]="rotaBusinessTypes$ | async"
-        [pageSize]="pageSize$ | async"
-        [currentPage]="currentPage$ | async"
-        (errors)="errors = $event"
+        [totalResults]="totalResults()"
+        [hearingSlots]="searchResult()"
+        [rotaBusinessTypes]="rotaBusinessTypes()"
+        [pageSize]="pageSize()"
+        [currentPage]="currentPage()"
+        (errors)="showValidationError($event)"
         (pageChange)="handlePageChange($event)"
       >
-      </scheduling-slots>
+      </crown-scheduling-slots>
+      } @else {
+      <magistrates-scheduling-filters
+        [organisationUnits]="organisationUnits()"
+        [rotaBusinessTypes]="rotaBusinessTypes()"
+        [defaultValues]="filters()"
+        [allowPastDates]="true"
+        (filtersSubmit)="handleMagistratesFiltersSubmit($event)"
+        (errors)="showValidationError($event)"
+      >
+      </magistrates-scheduling-filters>
+
+      <ng-container
+        [ngTemplateOutlet]="sessionResultsSummary"
+        [ngTemplateOutletContext]="{ $implicit: totalResults() }"
+      />
+
+      <magistrates-scheduling-slots
+        [selectionMode]="'readonly'"
+        [totalResults]="totalResults()"
+        [hearingSlots]="searchResult()"
+        [rotaBusinessTypes]="rotaBusinessTypes()"
+        [pageSize]="pageSize()"
+        [currentPage]="currentPage()"
+        (errors)="showValidationError($event)"
+        (pageChange)="handlePageChange($event)"
+      >
+      </magistrates-scheduling-slots>
+      }
     </div>
   </pdk-grid>
 </pdk-grid>
+}
+
+<ng-template #sessionResultsSummary let-total>
+  @if (total > -1) {
+  <pdk-inset-text>
+    <b
+      >{{ total }} session{{ total === 1 ? '' : 's' }} found. Only sessions with available time or
+      slots are returned</b
+    >
+  </pdk-inset-text>
+  }
+</ng-template>

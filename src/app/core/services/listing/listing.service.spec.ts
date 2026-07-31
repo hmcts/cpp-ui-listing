@@ -447,7 +447,8 @@ describe('ListingService', () => {
         ...hearing,
         weekCommencingStartDate: '2018-05-30',
         weekCommencingEndDate: '2018-05-30',
-        weekCommencingDurationInWeeks: 1
+        weekCommencingDurationInWeeks: 1,
+        courtRoomId: undefined
       };
       const prosecutionCases = [];
       const splitHearingUnallocated = true;

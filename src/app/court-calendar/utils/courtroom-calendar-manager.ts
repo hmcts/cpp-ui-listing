@@ -1,13 +1,14 @@
 import { CourtRoom, OrganisationUnit, RotaBusinessTypeCode } from '@cpp/reference-data';
 import { Hearing } from '../../core';
 import {
+  AllocatedWidgetCourtroomCalendarVm,
   AllocationHearingsSectionVm,
   CourtRoomBusinessTypeCalendar,
   CourtRoomCalendarVM,
   CourtRoomHearingTimeCalendar,
   CourtRoomJudicialCalendar,
-  HearingRowVM,
-  MagsWidgetCourtroomCalendarVm
+  CourtRoomSessionCalendar,
+  HearingRowVM
 } from '../model';
 import { getHearingsViewModel, normaliseCourtCalendarVariant } from './view-model-getters';
 import { judiciaryIsEqual } from './court-calendar-hearings-helper';
@@ -32,7 +33,7 @@ export interface CourtCalendarManager<T> {
 
 export const getCourtCalendarManager = <
   T extends Partial<
-    CourtRoomCalendarVM & AllocationHearingsSectionVm & MagsWidgetCourtroomCalendarVm
+    CourtRoomCalendarVM & AllocationHearingsSectionVm & AllocatedWidgetCourtroomCalendarVm
   >
 >(): CourtCalendarManager<T> => {
   let courtCalendarVariant: T;
@@ -140,60 +141,53 @@ export const getCourtCalendarManager = <
         };
         return this;
       }
-      const slotsRecord = Object.groupBy(courtRoomSlots, (slot) =>
-        slot.totalBooked > 0 ? 'withHearings' : 'withNoHearings'
-      );
 
-      if (slotsRecord.withHearings?.length > 0) {
-        courtCalendarVariant = {
-          ...courtCalendarVariant,
-          businessTypeCalendar: slotsRecord.withHearings.reduce((calendars, slot) => {
-            const slotHearings = (this.hearingViewModels ?? []).filter(
-              ({ details }) => details.hearingDays[0].courtScheduleId === slot.courtScheduleId
+      const slotsByBusinessType = Object.groupBy(courtRoomSlots, slot => slot.businessType);
+
+      const businessTypeCalendar: CourtRoomBusinessTypeCalendar[] = Object.entries(
+        slotsByBusinessType
+      ).map(([businessType, slots]) => ({
+        businessType: businessType as RotaBusinessTypeCode,
+        sessions: slots.map((slot): CourtRoomSessionCalendar => {
+          const slotHearings = (this.hearingViewModels ?? []).filter(
+            ({ details }) => details.hearingDays[0].courtScheduleId === slot.courtScheduleId
+          );
+          const judiciaryCalendar = slotHearings.reduce((judicialCalendars, hearing) => {
+            const existing = judicialCalendars.find(({ judiciary }) =>
+              judiciaryIsEqual(hearing.judiciary, judiciary)
             );
-            if (slotHearings.length <= 0) {
-              return calendars;
+            if (existing) {
+              existing.hearingTimeCalendar = mapToHearingTimeCalendar(
+                hearing,
+                existing.hearingTimeCalendar
+              );
+            } else {
+              judicialCalendars.push({
+                judiciary: hearing.judiciary,
+                hearingTimeCalendar: mapToHearingTimeCalendar(hearing)
+              });
             }
-            calendars.push({
-              businessTypeAndSlot: {
-                businessTypeCode: slot.businessType as RotaBusinessTypeCode,
-                courtScheduleId: slot.courtScheduleId,
-                session: {
-                  startTime: slot.sessionStartTime,
-                  endTime: slot.sessionEndTime,
-                  type: slot.courtSession
-                }
-              },
-              hearingTimeCalendar: slotHearings.reduce((hearingCalendars, hearingVm) => {
-                hearingCalendars = mapToHearingTimeCalendar(hearingVm, hearingCalendars);
-                return hearingCalendars;
-              }, [] as CourtRoomHearingTimeCalendar[])
-            });
-            return calendars;
-          }, [] as CourtRoomBusinessTypeCalendar[])
-        };
-      }
+            return judicialCalendars;
+          }, [] as CourtRoomJudicialCalendar[]);
 
-      if (slotsRecord.withNoHearings?.length > 0) {
-        courtCalendarVariant = {
-          ...courtCalendarVariant,
-          businessTypeCalendar: [
-            ...(courtCalendarVariant.businessTypeCalendar ?? []),
-            ...slotsRecord.withNoHearings.map((hearingSlot) => ({
-              businessTypeAndSlot: {
-                businessTypeCode: hearingSlot.businessType,
-                courtScheduleId: hearingSlot.courtScheduleId,
-                session: {
-                  startTime: hearingSlot.sessionStartTime,
-                  endTime: hearingSlot.sessionEndTime,
-                  type: hearingSlot.courtSession
-                }
-              },
-              hearingTimeCalendar: []
-            }))
-          ]
-        };
-      }
+          return {
+            slot: {
+              courtScheduleId: slot.courtScheduleId,
+              session: {
+                startTime: slot.sessionStartTime,
+                endTime: slot.sessionEndTime,
+                type: slot.courtSession
+              }
+            },
+            judiciaryCalendar
+          };
+        })
+      }));
+
+      courtCalendarVariant = {
+        ...courtCalendarVariant,
+        businessTypeCalendar
+      };
       return this;
     },
     hearingViewModels

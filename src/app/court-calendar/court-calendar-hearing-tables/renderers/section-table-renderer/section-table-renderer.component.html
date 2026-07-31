@@ -1,28 +1,31 @@
+@let config = sectionConfig();
+@let colConfig = columnConfig();
+@let span = sectionHeaderSpan();
 <table data-test-id="hearing-tree-grid" pdk-table role="treegrid">
   <thead data-test-id="hearing-table-head" pdk-table-head>
     <tr role="row" pdk-table-row>
-      @if (sectionConfig.rowsAreExpandable) {
+      @if (config.rowsAreExpandable) {
         <th
           id="expandable-header"
-          [pdk-visually-hidden]="!!sectionConfig.headerCellsVisuallyHidden"
+          [pdk-visually-hidden]="!!config.headerCellsVisuallyHidden"
           pdk-table-header
           pdk-padding-right="0"
         >
-          <span pdk-visually-hidden>{{ sectionConfig.rowsExpandHeaderDescription }}</span>
+          <span pdk-visually-hidden>{{ config.rowsExpandHeaderDescription }}</span>
         </th>
       }
-      @for (column of columnConfig | toArray; let index = $index; track index) {
+      @for (column of colConfig | toArray; let index = $index; track index) {
         <th
           [attr.id]="'header-' + (index + 1)"
           pdk-table-header
           pdk-padding-left="2"
-          [pdk-visually-hidden]="!!sectionConfig.headerCellsVisuallyHidden"
+          [pdk-visually-hidden]="!!config.headerCellsVisuallyHidden"
           [ngStyle]="column.maxWidth && { width: column.maxWidth + 'px' }"
         >
           <ng-container
             [ngTemplateOutlet]="
-              customCellHeaderRenderers && customCellHeaderRenderers[column.key]
-                ? customCellHeaderRenderers[column.key]
+              customCellHeaderRenderers() && customCellHeaderRenderers()[column.key]
+                ? customCellHeaderRenderers()[column.key]
                 : defaultCell
             "
             [ngTemplateOutletContext]="{
@@ -34,11 +37,11 @@
         </th>
       }
 
-      @if (sectionConfig.actionable && actionCellRenderer) {
+      @if (config.actionable && actionCellRenderer()) {
         <th
           id="action-header"
           pdk-table-header
-          [pdk-visually-hidden]="!!sectionConfig.headerCellsVisuallyHidden"
+          [pdk-visually-hidden]="!!config.headerCellsVisuallyHidden"
           pdk-padding-left="2"
           pdk-padding-right="2"
         >
@@ -47,103 +50,88 @@
       }
     </tr>
   </thead>
-  @for (
-    section of sections | toArray;
-    let sectionIndex = $index;
-    track section.sectionIdentifier || sectionIndex
-  ) {
-    @if (sectionConfig.hasTableSectionHeader) {
-      <tr data-test-id="hearing-table-section-header" role="row" pdk-table-row>
+
+  @for (sectionRender of renderItems(); track sectionRender.section.sectionIdentifier) {
+    @if (config.hasTableSectionHeader) {
+      <tr data-test-id="hearing-table-section-header" role="row" aria-level="1" pdk-table-row>
         <th
           scope="colgroup"
           role="gridcell"
-          [attr.id]="section.sectionIdentifier"
+          [attr.id]="sectionRender.section.sectionIdentifier"
           pdk-table-header
-          [colSpan]="sectionHeaderSpan"
+          [colSpan]="span"
           pdk-fill-colour="light-grey"
           pdk-padding-left="2"
         >
           <ng-container
-            [ngTemplateOutlet]="sectionHeaderRenderer ? sectionHeaderRenderer : defaultCell"
+            [ngTemplateOutlet]="sectionHeaderRenderer() ? sectionHeaderRenderer() : defaultCell"
             [ngTemplateOutletContext]="{
-              sectionData: section,
+              sectionData: sectionRender.section,
               cellData:
-                sectionConfig.sectionHeader?.label || section[sectionConfig.sectionHeader?.key]
+                config.sectionHeader?.label || sectionRender.section[config.sectionHeader?.key]
             }"
           >
           </ng-container>
         </th>
       </tr>
     }
-    @if (sectionConfig?.rowGroups) {
-      @for (
-        rowGroups of section[sectionConfig.rowGroups.rowGroupsPath] | toArray;
-        let rowGroupsIndex = $index;
-        track rowGroupsIndex
-      ) {
-        @if (sectionConfig.rowGroups.headerConfig) {
-          <tr data-test-id="hearing-table-row-groups-header" role="row" pdk-table-row>
-            <th
-              scope="rowgroup"
-              role="gridcell"
-              [attr.id]="'row-groups-header-' + (rowGroupsIndex + 1)"
-              [attr.headers]="
-                sectionConfig.hasTableSectionHeader ? section.sectionIdentifier : undefined
+
+    @for (item of sectionRender.items; track $index) {
+      @if (item.type === 'levelHeader') {
+        <tr
+          data-test-id="hearing-table-row-groups-header"
+          role="row"
+          [attr.aria-level]="(config.hasTableSectionHeader ? 1 : 0) + item.depth"
+          pdk-table-row
+        >
+          <th
+            scope="rowgroup"
+            role="gridcell"
+            [attr.id]="item.levelHeaderId"
+            [attr.headers]="item.ancestorHeaderIds || undefined"
+            pdk-table-header
+            [colSpan]="span"
+            pdk-padding-left="2"
+            [pdk-fill-colour]="config.groupLevels?.levels?.[item.levelIndex]?.bgColor || undefined"
+          >
+            <ng-container
+              [ngTemplateOutlet]="
+                hearingsGroupHeaderRenderers() && hearingsGroupHeaderRenderers()[item.levelPath]
+                  ? hearingsGroupHeaderRenderers()[item.levelPath]
+                  : defaultCell
               "
-              pdk-table-header
-              [colSpan]="sectionHeaderSpan"
-              pdk-padding-left="2"
+              [ngTemplateOutletContext]="{
+                cellData: item.cellData,
+                levelData: item.data,
+                sectionData: sectionRender.section
+              }"
             >
-              <ng-container
-                [ngTemplateOutlet]="
-                  rowGroupHeaderCellRenderer ? rowGroupHeaderCellRenderer : defaultCell
-                "
-                [ngTemplateOutletContext]="{
-                  rowGroups: rowGroups,
-                  sectionData: section,
-                  cellData:
-                    sectionConfig.rowGroups.headerConfig?.label ||
-                    rowGroups[sectionConfig.rowGroups.headerConfig?.rowGroupHeaderPath]
-                }"
-              >
-              </ng-container>
-            </th>
-          </tr>
-        }
-        @for (
-          rowGroup of rowGroups[sectionConfig.rowGroups.dataConfig?.rowGroupDataPath] | toArray;
-          let index = $index;
-          track index
-        ) {
-          <tbody
-            data-test-id="hearing-table-row-group"
-            row-group-body
-            pdk-table-body
-            [rowGroup]="rowGroup"
-            [actionCellRenderer]="actionCellRenderer"
-            [expandedDetailsRenderer]="expandedDetailsRenderer"
-            [rowIsActionable]="sectionConfig.actionable"
-            [cellRenderers]="cellRenderers"
-            [columnConfig]="columnConfig"
-            [rowGroupsConfig]="sectionConfig.rowGroups"
-            [rowGroupHeaderCellRenderer]="rowGroupHeaderCellRenderer"
-            [defaultCell]="defaultCell"
-            [sectionHeaderSpan]="sectionHeaderSpan"
-            [rowIsexpandable]="sectionConfig.rowsAreExpandable"
-            [hearingMovestate]="hearingMovestate"
-            [positionedHearingsState]="positionedHearingsState"
-            [moveAlertRenderer]="moveAlertRenderer"
-            [section]="section"
-            [sectionHeaderIdentifier]="
-              sectionConfig.hasTableSectionHeader ? section.sectionIdentifier : ''
-            "
-            [rowGroupsHeaderIdentifier]="
-              sectionConfig?.rowGroups?.headerConfig
-                ? 'row-groups-header-' + (rowGroupsIndex + 1)
-                : ''
-            "
-          ></tbody>
-        }
+            </ng-container>
+          </th>
+        </tr>
+      } @else {
+        <tbody
+          data-test-id="hearing-table-row-group"
+          row-group-body
+          pdk-table-body
+          [rowGroup]="item.rowGroupData"
+          [rowsPath]="item.rowsPath"
+          [ariaLevel]="(config.hasTableSectionHeader ? 1 : 0) + item.depth"
+          [levelHeaderIds]="item.headerIds"
+          [actionCellRenderer]="actionCellRenderer()"
+          [expandedDetailsRenderer]="expandedDetailsRenderer()"
+          [rowIsActionable]="config.actionable"
+          [cellRenderers]="cellRenderers()"
+          [columnConfig]="colConfig"
+          [defaultCell]="defaultCell"
+          [sectionHeaderSpan]="span"
+          [rowIsexpandable]="config.rowsAreExpandable"
+          [hearingMovestate]="hearingMovestate()"
+          [positionedHearingsState]="positionedHearingsState()"
+          [failedAllocationIds]="failedAllocationIds()"
+          [moveAlertRenderer]="moveAlertRenderer()"
+          [section]="sectionRender.section"
+        ></tbody>
       }
     }
   }

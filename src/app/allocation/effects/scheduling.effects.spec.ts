@@ -46,7 +46,7 @@ describe('Scheduling effects', () => {
         {
           provide: ListingService,
           useValue: {
-            allocateMagistratesHearing: jest.fn(),
+            allocateHearing: jest.fn(),
             extractProsecutionCasesIdsFromHearing: jest.fn(() => [
               { caseId: 'caseId', defendants: [] }
             ])
@@ -142,7 +142,7 @@ describe('Scheduling effects', () => {
     );
   });
 
-  describe('allocateMagistratesHearing$', () => {
+  describe('allocateHearing$', () => {
     const judiciary = {
       judiciaryId: 'mock-judiciary-id-1',
       courtScheduleId: 'mock-court-schedule-id-1',
@@ -157,7 +157,7 @@ describe('Scheduling effects', () => {
       weekCommencingEndDate: '22-02-2022',
       weekCommencingDurationInWeeks: 1
     };
-    const allocateMagistratesHearing = AllocationActions.allocateMagistratesHearing({
+    const allocateHearing = AllocationActions.allocateHearing({
       hearingId: 'hearingId',
       redirectTo: ['/redirecto'],
       filters,
@@ -316,20 +316,20 @@ describe('Scheduling effects', () => {
     });
 
     it('should allocate a magistrates hearing', () => {
-      allocateMagistratesHearing.sendNotificationToParties = true;
-      const allocateMagistratesHearingAction = new AllocateHearingMagsAction({
-        hearingSlotAllocations: allocateMagistratesHearing.hearingSlotAllocations
+      allocateHearing.sendNotificationToParties = true;
+      const allocateHearingAction = new AllocateHearingMagsAction({
+        hearingSlotAllocations: allocateHearing.hearingSlotAllocations
       });
 
-      actions$ = hot(' -a-----', { a: allocateMagistratesHearing });
+      actions$ = hot(' -a-----', { a: allocateHearing });
       const allocate$ = cold(' -(b|)');
       const expected$ = cold('--(x)', {
-        x: allocateMagistratesHearingAction
+        x: allocateHearingAction
       });
 
       listingService.allocateHearing = jest.fn().mockReturnValueOnce(allocate$);
 
-      expect(effects.allocateMagistratesHearing$).toBeObservable(expected$);
+      expect(effects.allocateHearing$).toBeObservable(expected$);
       expect(listingService.allocateHearing).toHaveBeenCalledWith(
         {
           courtCentreId: 'courtCentreId',
@@ -361,7 +361,8 @@ describe('Scheduling effects', () => {
               oucode: 'WESTMINSTER',
               roomId: 'courtRoomId',
               session: 'AM',
-              startTime: '2020-01-01T12:00:00.000Z'
+              startTime: '2020-01-01T12:00:00.000Z',
+              virtual: true
             },
             {
               courtCentreId: 'courtCentreId2',
@@ -371,7 +372,8 @@ describe('Scheduling effects', () => {
               oucode: 'WEMBLEY',
               roomId: 'courtRoomId2',
               session: 'AM',
-              startTime: '2020-01-05T10:00:00.000Z'
+              startTime: '2020-01-05T10:00:00.000Z',
+              virtual: true
             },
             {
               courtCentreId: 'courtCentreId',
@@ -381,7 +383,8 @@ describe('Scheduling effects', () => {
               oucode: 'WESTMINSTER',
               roomId: 'courtRoomId',
               session: 'AM',
-              startTime: '2020-01-06T10:00:00.000Z'
+              startTime: '2020-01-06T10:00:00.000Z',
+              virtual: true
             },
             {
               courtCentreId: 'courtCentreId',
@@ -391,7 +394,8 @@ describe('Scheduling effects', () => {
               oucode: 'WESTMINSTER',
               roomId: 'courtRoomId',
               session: 'AD',
-              startTime: '2020-01-07T10:00:00.000Z'
+              startTime: '2020-01-07T10:00:00.000Z',
+              virtual: true
             }
           ],
           nonSittingDays: ['2020-01-02', '2020-01-03', '2020-01-04'],
@@ -411,19 +415,19 @@ describe('Scheduling effects', () => {
 
     it('should allocate a magistrates hearing with WESTMINSTER allocation set to a duration of 1 when there are no matching hearing types', () => {
       store.dispatch(ReferenceDataActions.loadHearingTypesSuccess({ hearingTypes: [] }));
-      const allocateMagistratesHearingAction = new AllocateHearingMagsAction({
-        hearingSlotAllocations: allocateMagistratesHearing.hearingSlotAllocations
+      const allocateHearingAction = new AllocateHearingMagsAction({
+        hearingSlotAllocations: allocateHearing.hearingSlotAllocations
       });
 
-      actions$ = hot(' -a-----', { a: allocateMagistratesHearing });
+      actions$ = hot(' -a-----', { a: allocateHearing });
       const allocate$ = cold(' -(b|)');
       const expected$ = cold('--(x)', {
-        x: allocateMagistratesHearingAction
+        x: allocateHearingAction
       });
 
       listingService.allocateHearing = jest.fn().mockReturnValueOnce(allocate$);
 
-      expect(effects.allocateMagistratesHearing$).toBeObservable(expected$);
+      expect(effects.allocateHearing$).toBeObservable(expected$);
       expect(listingService.allocateHearing).toHaveBeenCalledWith(
         {
           courtCentreId: 'courtCentreId',
@@ -456,7 +460,8 @@ describe('Scheduling effects', () => {
               oucode: 'WESTMINSTER',
               roomId: 'courtRoomId',
               session: 'AM',
-              startTime: '2020-01-01T12:00:00.000Z'
+              startTime: '2020-01-01T12:00:00.000Z',
+              virtual: true
             },
             {
               courtCentreId: 'courtCentreId2',
@@ -466,7 +471,8 @@ describe('Scheduling effects', () => {
               oucode: 'WEMBLEY',
               roomId: 'courtRoomId2',
               session: 'AM',
-              startTime: '2020-01-05T10:00:00.000Z'
+              startTime: '2020-01-05T10:00:00.000Z',
+              virtual: true
             },
             {
               courtCentreId: 'courtCentreId',
@@ -476,7 +482,8 @@ describe('Scheduling effects', () => {
               oucode: 'WESTMINSTER',
               roomId: 'courtRoomId',
               session: 'AM',
-              startTime: '2020-01-06T10:00:00.000Z'
+              startTime: '2020-01-06T10:00:00.000Z',
+              virtual: true
             },
             {
               courtCentreId: 'courtCentreId',
@@ -486,7 +493,8 @@ describe('Scheduling effects', () => {
               oucode: 'WESTMINSTER',
               roomId: 'courtRoomId',
               session: 'AD',
-              startTime: '2020-01-07T10:00:00.000Z'
+              startTime: '2020-01-07T10:00:00.000Z',
+              virtual: true
             }
           ],
           nonSittingDays: ['2020-01-02', '2020-01-03', '2020-01-04'],
@@ -507,7 +515,7 @@ describe('Scheduling effects', () => {
       const error = { status: 500 };
       const apiError = new ApiError(error);
 
-      actions$ = hot(' -a-----', { a: allocateMagistratesHearing });
+      actions$ = hot(' -a-----', { a: allocateHearing });
       const allocate$ = cold(' -#   ', undefined, error);
       const expected$ = cold('--(x)', {
         x: apiError
@@ -515,7 +523,7 @@ describe('Scheduling effects', () => {
 
       listingService.allocateHearing = jest.fn().mockReturnValueOnce(allocate$);
 
-      expect(effects.allocateMagistratesHearing$).toBeObservable(expected$);
+      expect(effects.allocateHearing$).toBeObservable(expected$);
     });
   });
 });

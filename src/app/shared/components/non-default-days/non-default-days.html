@@ -25,6 +25,7 @@
         class="details-date-input"
         formControlName="date"
         picker
+        [weekDate]="jurisdictionType() === 'CROWN'"
       ></pdk-date-input>
     </pdk-form-field>
     <pdk-form-field

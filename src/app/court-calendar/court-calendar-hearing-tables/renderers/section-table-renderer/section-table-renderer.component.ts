@@ -1,13 +1,21 @@
-import { Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  TemplateRef,
+  ViewEncapsulation,
+  computed,
+  input
+} from '@angular/core';
 import { ToArrayPipe } from '../../../../shared/pipes/to-array.pipe';
 import {
-  ColumnConfig,
-  HearingTableSectionConfig,
-  PickPropertyKeys,
   BaseHearingRowDataVM,
-  TableContext,
-  BaseHearingSection
-} from '../../../model/hearing-table-renderer.vm';
+  BaseHearingSection,
+  HearingsColumnConfig,
+  HearingsTableContext,
+  HearingsTableSectionConfig,
+  HearingsSectionRenderData
+} from '../../../model/hearing-table-renderer.interfaces';
+import { buildRenderItems } from '../../../utils/hearing-table-renderer.utils';
 import { HearingTableActionsState } from '../../component-store/hearing-table-actions.store';
 import { RowGroupBodyRendererComponent } from '../row-groups-body-renderer/row-groups-body-renderer.component';
 import { PdkCore, PdkTable } from '@cpp/pdk';
@@ -16,6 +24,7 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
 @Component({
   selector: '[section-table-renderer], section-table-renderer',
   templateUrl: './section-table-renderer.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RowGroupBodyRendererComponent,
     ToArrayPipe,
@@ -23,20 +32,6 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
     PdkCore,
     NgStyle,
     NgTemplateOutlet
-  ],
-  inputs: [
-    'sectionHeaderRenderer',
-    'rowGroupHeaderCellRenderer',
-    'actionCellRenderer',
-    'customCellHeaderRenderers',
-    'expandedDetailsRenderer',
-    'moveAlertRenderer',
-    'cellRenderers',
-    'sections',
-    'columnConfig',
-    'sectionConfig',
-    'hearingMovestate',
-    'positionedHearingsState'
   ],
   encapsulation: ViewEncapsulation.None,
   styles: [
@@ -48,32 +43,46 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
     `
   ]
 })
-export class SectionTableRendererComponent<
-  S extends BaseHearingSection,
-  T extends BaseHearingRowDataVM
-> implements OnInit
-{
-  sectionHeaderRenderer?: TemplateRef<TableContext<S, T>>;
-  rowGroupHeaderCellRenderer?: TemplateRef<TableContext<S, T>>;
-  actionCellRenderer?: TemplateRef<TableContext<S, T>>;
-  expandedDetailsRenderer?: TemplateRef<TableContext<S, T>>;
-  moveAlertRenderer: TemplateRef<TableContext<S, T>>;
-  customCellHeaderRenderers?: Record<keyof T, TemplateRef<TableContext<S, T>>>;
-  cellRenderers?: Record<keyof T, TemplateRef<TableContext<S, T>>>;
-  sections: S[];
-  columnConfig: ColumnConfig<T>;
-  sectionConfig: HearingTableSectionConfig<S, keyof S, PickPropertyKeys<S, keyof S>>;
-  sectionHeaderSpan: number;
-  hearingMovestate: HearingTableActionsState['moveState'];
-  positionedHearingsState: HearingTableActionsState['positionedHearingsState'];
+export class SectionTableRendererComponent {
+  readonly sectionHeaderRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly hearingsGroupHeaderRenderers =
+    input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly actionCellRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly expandedDetailsRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly moveAlertRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly customCellHeaderRenderers = input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly cellRenderers = input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly sections = input<BaseHearingSection[]>();
+  readonly columnConfig = input<HearingsColumnConfig<BaseHearingRowDataVM>>();
+  readonly sectionConfig = input<HearingsTableSectionConfig>();
+  readonly hearingMovestate = input<HearingTableActionsState['moveState']>();
+  readonly positionedHearingsState = input<HearingTableActionsState['positionedHearingsState']>();
+  readonly failedAllocationIds = input<string[]>();
 
-  ngOnInit(): void {
-    this.sectionHeaderSpan = this.columnConfig.length;
-    if (this.sectionConfig.actionable && this.actionCellRenderer) {
-      this.sectionHeaderSpan += 1;
+  readonly sectionHeaderSpan = computed(() => {
+    const config = this.sectionConfig();
+    let span = this.columnConfig()?.length ?? 0;
+    if (config?.actionable && this.actionCellRenderer()) {
+      span += 1;
     }
-    if (this.sectionConfig.rowsAreExpandable) {
-      this.sectionHeaderSpan += 1;
+    if (config?.rowsAreExpandable) {
+      span += 1;
     }
-  }
+    return span;
+  });
+
+  readonly renderItems = computed((): HearingsSectionRenderData[] => {
+    const config = this.sectionConfig();
+    if (!config) {
+      return [];
+    }
+    return (this.sections() ?? []).map(section => ({
+      section,
+      items: buildRenderItems(
+        section as unknown as Record<string, unknown>,
+        config.groupLevels,
+        config.hasTableSectionHeader ? section.sectionIdentifier : ''
+      )
+    }));
+  });
 }

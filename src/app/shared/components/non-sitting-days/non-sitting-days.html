@@ -26,6 +26,7 @@
         picker
         class="details-date-input"
         formControlName="nonSittingDay"
+        [weekDate]="jurisdictionType() === 'CROWN'"
       >
       </pdk-date-input>
     </pdk-form-field>

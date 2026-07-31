@@ -15,7 +15,7 @@ import {
   CourtRoomJudicialCalendar,
   HearingRowVM
 } from '../../model';
-import { BaseHearingTable } from '../../model/hearing-table-renderer.vm';
+import { BaseHearingTable } from '../../model/hearing-table-renderer.interfaces';
 import { getAllHearingCalendars } from '../../utils/court-calendar-hearings-helper';
 import { HearingActionsEvent } from '../renderers/cell-renderers/action-cell.component';
 import { DefendantCellComponent } from '../renderers/cell-renderers/defendant-cell.component';
@@ -93,11 +93,7 @@ import { IsEligibleForEndDateChangePipe } from '../../pipes/is-eligible-for-end-
     `
   ]
 })
-export class AllocatedHearingTableContainer
-  implements
-    BaseHearingTable<CourtRoomCalendarVM, 'judiciaryCalendar', 'hearingTimeCalendar'>,
-    OnChanges
-{
+export class AllocatedHearingTableContainer implements BaseHearingTable, OnChanges {
   readonly sections = input<CourtRoomCalendarVM[]>(undefined);
   readonly totalNumber = input<number>(undefined);
   readonly resultsDisplayed = input<number>(undefined);
@@ -107,6 +103,7 @@ export class AllocatedHearingTableContainer
   readonly hearingMovestate = input<MoveState>(undefined);
   readonly selectedHearings = input<SelectedHearingState[]>(undefined);
   readonly positionedHearingsState = input<PositionedHearingsState[]>(undefined);
+  readonly failedAllocationIds = input<string[]>();
   readonly onNavigateChangeJudiciary = output<ChangeJudiciaryEvent>();
   readonly pageChange = output<number>();
   readonly onGetCaseNote = output<string>();

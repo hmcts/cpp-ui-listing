@@ -2,6 +2,7 @@ import { unitOfTime } from 'moment';
 import moment from 'moment';
 import { getMomentValue } from './utils-helper';
 import { Injectable } from '@angular/core';
+import { isWeekend } from '@cpp/pdk';
 
 @Injectable({ providedIn: 'root' })
 export class CPPDate {
@@ -130,6 +131,19 @@ export class CPPDate {
 
   diff(dateA: Date | string, dateB: Date | string, unitOfTimeValue = this.DAY): number {
     return getMomentValue(dateA).diff(dateB, unitOfTimeValue as unitOfTime.DurationConstructor);
+  }
+
+  countWorkingDays(startDate: Date | string, endDate: Date | string): number {
+    let count = 0;
+    const current = new Date(startDate);
+    const end = new Date(endDate);
+    while (current <= end) {
+      if (!isWeekend(current)) {
+        count++;
+      }
+      current.setDate(current.getDate() + 1);
+    }
+    return count;
   }
 
   startOf(date: Date | string, unitOfTimeValue = this.DAY): Date {

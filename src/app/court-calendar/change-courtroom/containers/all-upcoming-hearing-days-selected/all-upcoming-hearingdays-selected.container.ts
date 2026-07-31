@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import {
-  SelectOption,
   ValidationError,
   PdkErrorSummaryComponent,
   PdkCore,
@@ -8,17 +7,14 @@ import {
   PdkButton,
   PdkSelectComponent
 } from '@cpp/pdk';
-import { ChangeCourtroomStateService } from '../../component-store/change-courtroom-state.service';
-import { ChangeCourtroomVM } from '../../../model';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { ChangeCourtroomStore } from '../../component-store/change-courtroom.store';
+import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HearingDetailsSectionComponent } from '../../components/hearing-details-section/hearing-details-section.component';
-import { take } from 'rxjs/operators';
 import { TotalNoOfSelectedHearingDays } from '../../components/no-of-selected-hearingdays/no-of-selected-hearingdays.component';
 import { AppConfigService } from '../../../../config';
-import { FormsModule } from '@angular/forms';
 import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
+import { CourtRoomAvailabilityDirective } from '../../directives/court-room-availability.validator.directive';
 
 @Component({
   selector: 'all-upcoming-hearingdays-selected',
@@ -32,7 +28,6 @@ import { BackButtonComponent } from '../../../../shared/components/back-button/b
   ],
   imports: [
     FormsModule,
-    AsyncPipe,
     HearingDetailsSectionComponent,
     TotalNoOfSelectedHearingDays,
     BackButtonComponent,
@@ -40,43 +35,44 @@ import { BackButtonComponent } from '../../../../shared/components/back-button/b
     PdkCore,
     PdkForm,
     PdkButton,
-    PdkSelectComponent
+    PdkSelectComponent,
+    CourtRoomAvailabilityDirective
   ]
 })
-export class AllFutureHearingDaysSelectedContainer implements OnInit {
-  errors: ValidationError[] = null;
-  hearingVM$: Observable<ChangeCourtroomVM>;
-  courtRoomOptions$: Observable<SelectOption<string>[]>;
-  selectedCourtRoomId: string | null = null;
+export class AllFutureHearingDaysSelectedContainer {
+  errors: ValidationError[] | null = null;
+  readonly selectedCourtRoomId = signal<string | null>(null);
 
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-  changeCourtroomStateService = inject(ChangeCourtroomStateService);
-  appConfig = inject(AppConfigService);
-
-  ngOnInit(): void {
-    this.hearingVM$ = this.changeCourtroomStateService.hearingVM$;
-    this.courtRoomOptions$ = this.changeCourtroomStateService.getCourtRooms;
-  }
+  readonly router = inject(Router);
+  readonly route = inject(ActivatedRoute);
+  readonly store = inject(ChangeCourtroomStore);
+  readonly appConfig = inject(AppConfigService);
+  readonly upcomingHearingDates = computed(() =>
+    this.store.upcomingHearingDays().map(day => day.hearingDate)
+  );
+  readonly courtRoomAvailabilityError = computed(() => {
+    const label =
+      this.store.courtRooms().find(o => o.value === this.selectedCourtRoomId())?.label ?? '';
+    return `No sessions are available for ${label}`;
+  });
 
   showValidationError(errors: ValidationError[]) {
     this.errors = errors;
   }
 
   handleSubmit({ courtRoomId }: { courtRoomId: string }): void {
-    this.hearingVM$.pipe(take(1)).subscribe(({ upComingHearingDays }) =>
-      this.changeCourtroomStateService.updateSelectedHearingDays({
-        hearingDays: upComingHearingDays,
-        courtRoomId: courtRoomId
-      })
-    );
+    const { upComingHearingDays } = this.store.hearingVM();
+    this.store.updateSelectedHearingDays({
+      hearingDays: upComingHearingDays,
+      courtRoomId
+    });
 
     this.router.navigate(['../all-future-hearingdays-selected-confirm'], {
       relativeTo: this.route
     });
   }
 
-  getBaseUrl() {
+  getBaseUrl(): string {
     return this.appConfig.getBaseUrl();
   }
 }

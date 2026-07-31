@@ -6,48 +6,35 @@ import { getOrganisationUnits, OrganisationUnit, TrialType } from '@cpp/referenc
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { filter, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { MagistratesSchedulingContainerComponent } from '../allocation/containers/magistrates.container';
+import { CrownSchedulingContainer } from '../allocation/containers/crown-scheduling.container';
+import { MagistratesSchedulingContainer } from '../allocation/containers/magistrates-scheduling.container';
 import { AppConfigService } from '../config';
 import {
   AggregatedCaseNotes,
-  AllocateHearingAction,
-  AllocatingHearingDetails,
   AppState,
   CourtCentre,
-  CourtroomsFilter,
-  FilterOption,
   getAvailableHearings,
   getCourtCentres,
   getHearingById,
-  getHearingTypes,
   getPinnedCaseNotesForHearing,
   getScheduledHearingForAllocation,
   getTrialTypesFilteredByType,
   Hearing,
-  HearingType,
-  HearingWithSelectedCourtCentre,
   isScheduledAllocatedHearingOnlyWithLinkedApplication,
   isScheduledAllocatedHearingStandaloneApplication,
   ScheduledAllocateHearingAction,
-  SearchAllocatedHearingsAction,
   SearchAvailableHearingsFormOptions
 } from '../core/';
 import { ExtendHearingForHearingAction, SearchAvailableHearingsAction } from '../core/actions';
 import { Breadcrumb } from '../core/model/shared/breadcrumb';
 import { getHasApiActivity } from '../core/selectors/api';
-import { CPPDate, getCPPDate } from '../core/util';
-import { CourtCalendarFeature } from '../court-calendar/model';
 import { getSelectedHearing } from '../court-calendar/state';
-import { splitHearings } from '../court-calendar/state/actions/court-calendar.actions';
-import { DailyCourtRoomCalendarContainer } from '../daily-court-room-calendar/daily-court-room-calendar.container';
 import { HearingListComponent } from '../shared/components/hearing-list/hearing-list.component';
 import { BreadcrumbsComponent } from '../shared/components/breadcrumbs/breadcrumbs.component';
-import { HearingDetailsFormComponent } from '../shared/components/hearing-details-form/hearing-details-form.component';
 import { HearingSummaryComponent } from '../shared/components/hearing-summary/hearing-summary.component';
 import { PdkComponents } from '../shared/pdk-shared-components';
 import { AvailableHearingsComponent } from './available-hearings/available-hearings.component';
 import { CourtSelectionComponent } from './court-selection/court-selection.component';
-import { CourtroomsFilterComponent } from './courtrooms-filter/courtrooms-filter.component';
 import { FindAvailableHearingComponent } from './find-available-hearing/find-available-hearing.component';
 import { PinnedNotesComponent } from './pinned-notes/pinned-notes.component';
 import { AsyncPipe } from '@angular/common';
@@ -63,8 +50,8 @@ interface OrganisationUnitWithJurisdication extends OrganisationUnit {
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    MagistratesSchedulingContainerComponent,
-    DailyCourtRoomCalendarContainer,
+    CrownSchedulingContainer,
+    MagistratesSchedulingContainer,
     HearingListComponent,
     PdkTabs,
     PdkComponents,
@@ -74,8 +61,6 @@ interface OrganisationUnitWithJurisdication extends OrganisationUnit {
     CourtSelectionComponent,
     BreadcrumbsComponent,
     HearingSummaryComponent,
-    CourtroomsFilterComponent,
-    HearingDetailsFormComponent,
     AsyncPipe
   ]
 })
@@ -85,12 +70,8 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   isHearingStandaloneApplication$: Observable<boolean>;
   isHearingOnlyWithLinkedApplication$: Observable<boolean>;
-  selectedCourtCentre: CourtCentre;
-  hearingTypes$: Observable<HearingType[]>;
   trialTypes$: Observable<TrialType[]>;
   courtCentres: CourtCentre[];
-  filteredCourtCentres: CourtCentre[];
-  filterOptions: CourtroomsFilter;
   pinnedCaseNotes$: Observable<AggregatedCaseNotes[]>;
   organisationUnits: OrganisationUnit[];
   errors: ValidationError[] = null;
@@ -112,8 +93,6 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
     { title: 'Allocate hearing' }
   ];
 
-  private dateUtil: CPPDate;
-
   constructor(
     private store: Store<AppState>,
     public route: ActivatedRoute,
@@ -121,7 +100,6 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
     private router: Router,
     @Inject('Window') private window: Window
   ) {
-    this.hearingTypes$ = this.store.select(getHearingTypes);
     this.store
       .select(getCourtCentres)
       .pipe(takeUntil(this.destroy$))
@@ -144,8 +122,6 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dateUtil = getCPPDate();
-    this.minDate = this.dateUtil.format(this.dateUtil.getCurrentDate());
     this.trialTypes$ = this.store.select(getTrialTypesFilteredByType);
     this.isHearingStandaloneApplication$ = this.store.select(
       isScheduledAllocatedHearingStandaloneApplication
@@ -160,48 +136,22 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
     this.initialTabIndex = this.route.snapshot.queryParams.mf ? 1 : 0;
     this.queryParams = this.route.snapshot.queryParams;
 
-    const courtId = this.route.snapshot.queryParams.courtId;
-    if (courtId) {
-      this.selectedOrganisationUnit = this.organisationUnits?.find(({ id }) => id === courtId);
-      if (this.selectedOrganisationUnit) {
-        this.selectedOrganisationUnit = {
-          ...this.selectedOrganisationUnit,
-          jurisdictionType:
-            this.selectedOrganisationUnit.oucodeL1Code === 'C' ? 'CROWN' : 'MAGISTRATES'
-        };
-        this.filteredCourtCentres = (this.courtCentres ?? []).filter(
-          item => item.courtCode === this.selectedOrganisationUnit.oucodeL1Code
-        );
-        this.hasCourtSelectionStep = true;
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(({ courtId }) => {
+      if (courtId) {
+        this.selectedOrganisationUnit = this.organisationUnits?.find(({ id }) => id === courtId);
+        if (this.selectedOrganisationUnit) {
+          this.selectedOrganisationUnit = {
+            ...this.selectedOrganisationUnit,
+            jurisdictionType:
+              this.selectedOrganisationUnit.oucodeL1Code === 'C' ? 'CROWN' : 'MAGISTRATES'
+          };
+          this.hasCourtSelectionStep = true;
+        }
+      } else {
+        this.selectedOrganisationUnit = undefined;
+        this.hasCourtSelectionStep = false;
       }
-    }
-    if (courtId) {
-      this.selectedOrganisationUnit = this.organisationUnits?.find(({ id }) => id === courtId);
-      if (this.selectedOrganisationUnit) {
-        this.selectedOrganisationUnit = {
-          ...this.selectedOrganisationUnit,
-          jurisdictionType:
-            this.selectedOrganisationUnit.oucodeL1Code === 'C' ? 'CROWN' : 'MAGISTRATES'
-        };
-        this.filteredCourtCentres = (this.courtCentres ?? []).filter(
-          item => item.courtCode === this.selectedOrganisationUnit.oucodeL1Code
-        );
-        this.hasCourtSelectionStep = true;
-      }
-    }
-  }
-
-  allocateHearing({ originHearing, updatedHearing }: AllocatingHearingDetails) {
-    if (this.route.snapshot?.queryParams?.referrer === CourtCalendarFeature.calendar) {
-      this.store.dispatch(
-        splitHearings({
-          originHearing,
-          updatedHearing: updatedHearing as HearingWithSelectedCourtCentre
-        })
-      );
-    } else {
-      this.store.dispatch(new AllocateHearingAction({ originHearing, updatedHearing }));
-    }
+    });
   }
 
   showValidationError(errors: ValidationError[]) {
@@ -214,40 +164,12 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
     });
   }
 
-  onSelectCourtCentre(event: { type: 'change' } | FilterOption): void {
-    if ('value' in event && this.eventIsCourtCentreSelection(event)) {
-      this.selectedCourtCentre = this.courtCentres.find(
-        courtCentre => courtCentre.id === event.value
-      );
-    } else if ('type' in event && event.type && event.type === 'change') {
-      this.selectedCourtCentre = undefined;
-    }
-  }
-
   onSelectedTabChange(value: PdkTabComponent): void {
     this.selectedTab = value.heading;
   }
 
   get isRelatedHearingsTabSelected(): boolean {
     return this.selectedTab === 'Related hearings';
-  }
-
-  filterSubmit(options: CourtroomsFilter): void {
-    this.filterOptions = options;
-
-    this.store.dispatch(
-      new SearchAllocatedHearingsAction({
-        options: {
-          ...options,
-          startTime: options.startTime
-            ? this.convertToUTC(options.searchDate, options.startTime)
-            : undefined,
-          endTime: options.endTime
-            ? this.convertToUTC(options.searchDate, options.endTime)
-            : undefined
-        }
-      })
-    );
   }
 
   findAvailableHearings(formOptions: SearchAvailableHearingsFormOptions): void {
@@ -270,17 +192,9 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
     );
   }
 
-  cancelAllocation(): void {
-    this.isUnscheduledHearing ? this.navigate('/unscheduled') : this.navigate('/unallocated');
-  }
-
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
-  }
-
-  eventIsCourtCentreSelection(event: any): boolean {
-    return event.value && event.value.length === 36;
   }
 
   private initialiseSelectedHearing(): void {
@@ -316,7 +230,7 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
 
           this.backUrl = `/split/${this.selectedHearingId}`;
 
-          if (this.route.snapshot?.queryParams?.referrer === CourtCalendarFeature.calendar) {
+          if (this.route.snapshot?.queryParams?.referrer === 'CALENDAR') {
             return this.store.select(getSelectedHearing).pipe(
               tap(hearingselected => {
                 this.selectedHearing = hearingselected;
@@ -338,10 +252,6 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe();
-  }
-
-  private convertToUTC(date: string, time: string): string {
-    return this.dateUtil.toUtcISO(`${date} ${time}`, this.dateUtil.HOURS_MINUTES_24H);
   }
 
   viewHearingDetails(hearing: Hearing): void {
@@ -367,6 +277,7 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
+        courtId: undefined,
         mf: undefined
       },
       queryParamsHandling: 'merge'
@@ -383,9 +294,6 @@ export class AllocateHearingContainer implements OnInit, OnDestroy {
         jurisdictionType:
           this.selectedOrganisationUnit.oucodeL1Code === 'C' ? 'CROWN' : 'MAGISTRATES'
       };
-      this.filteredCourtCentres = this.courtCentres.filter(
-        item => item.courtCode === this.selectedOrganisationUnit.oucodeL1Code
-      );
       this.router.navigate([], {
         relativeTo: this.route,
         queryParams: {

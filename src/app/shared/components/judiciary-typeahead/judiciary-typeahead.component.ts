@@ -20,7 +20,12 @@ import {
 } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { auditTime, filter, map, switchMap } from 'rxjs/operators';
-import { FormFieldControl, PdkAutosuggestLiteComponent, generateId } from '@cpp/pdk';
+import {
+  FormFieldControl,
+  PdkAutosuggestLiteComponent,
+  coerceBooleanProperty,
+  generateId
+} from '@cpp/pdk';
 import {
   JudicialMember,
   ReferenceDataService,
@@ -32,10 +37,6 @@ import { AsyncPipe } from '@angular/common';
 export interface JudiciaryAutoSuggestOption extends JudicialMember {
   judicialMemberName: string;
 }
-
-const coerceBooleanProperty = (value: any): boolean => {
-  return value != null && `${value}` !== 'false';
-};
 
 @Component({
   selector: 'judiciary-typeahead',
@@ -91,18 +92,18 @@ export class JudiciaryTypeaheadComponent
   ) {
     this.input$
       .pipe(
-        filter((text) => text.length > 1),
+        filter(text => text.length > 1),
         auditTime(250),
-        switchMap((text) =>
+        switchMap(text =>
           refDataService.fetchJudicialMembers({
             search: text,
             limit: 50,
             judiciaryGroup: judiciaryTypeGroupToJudiciaryTypePayload(this.judiciaryType())
           })
         ),
-        map((judicialMembers) =>
+        map(judicialMembers =>
           judicialMembers.map(
-            (judicialMember) =>
+            judicialMember =>
               ({
                 ...judicialMember,
                 judicialMemberName: `${judicialMember.forenames} ${judicialMember.surname}`
