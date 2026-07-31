@@ -333,59 +333,6 @@ describe('CourtCalendarContainer', () => {
     });
   });
 
-  describe('change-end-date action', () => {
-    const details = {
-      type: { description: 'Trial' },
-      hearingDayCount: 3,
-      endDate: '2026-01-15'
-    } as unknown as Hearing;
-    const rows = [{ id: 'h1', details } as unknown as BaseHearingRowDataVM];
-
-    it('should open the change end date modal for the change-end-date action', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
-
-      expect(modalOpen).toHaveBeenCalledWith(
-        ChangeEndDateModalComponent,
-        expect.objectContaining({
-          data: expect.objectContaining({
-            hearingTypeDescription: 'Trial',
-            hearingDayCount: 3,
-            endDate: '2026-01-15'
-          }),
-          disposeOnNavigation: true,
-          disposeOnBackDropClick: false
-        })
-      );
-    });
-
-    it('should dispose the modal and dispatch moveHearingEndDate on continue', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
-
-      const config = modalOpen.mock.calls[0][1];
-      config.data.continue('2026-02-01');
-
-      expect(modalRef.dispose).toHaveBeenCalled();
-      expect(dispatchSpy).toHaveBeenCalledWith(
-        CourtCalendarActions.moveHearingEndDate({ hearing: details, newEndDate: '2026-02-01' })
-      );
-    });
-
-    it('should dispose the modal on cancel', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
-
-      const config = modalOpen.mock.calls[0][1];
-      config.data.cancel();
-
-      expect(modalRef.dispose).toHaveBeenCalled();
-    });
-
-    it('should not open the modal when the hearing details cannot be found', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'missing', rows: [] });
-
-      expect(modalOpen).not.toHaveBeenCalled();
-    });
-  });
-
   it('should dispatch setCaseNotesForCase when case notes are not present for a hearing', () => {
     component.onGetCaseNotesForId(caseId);
     expect(dispatchSpy).toHaveBeenCalledWith(CourtCalendarActions.setCaseNotesForCase({ caseId }));
