@@ -1,0 +1,15 @@
+@for (note of caseNotes(); track note.id) {
+<div
+  class="flex-display flex-display-column"
+  pdk-margin-bottom="3"
+  [pdk-margin-left]="hasPinnedNotes() ? 5 : 0"
+  [ngClass]="{ 'pinned': note.isPinned}"
+>
+  <div class="flex-display flex-display-column">
+    <span>{{ note.note }}</span>
+    <span pdk-text-colour="dark-grey">
+      {{ note.createdDateTime | date : 'dd/MM' }} at {{ note.createdDateTime | date : 'HH:mm' }}
+    </span>
+  </div>
+</div>
+}

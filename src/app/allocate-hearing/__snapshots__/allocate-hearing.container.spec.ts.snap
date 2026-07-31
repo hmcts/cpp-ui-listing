@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AllocateHearingContainer should match Jest snapshot 1`] = `
+<ng-component>
+  <allocate-hearing>
+    <section
+      class="govuk-!-margin-top-2"
+      pdk-margin-top="2"
+    >
+      <div>
+        <breadcrumbs>
+          <ol
+            class="govuk-breadcrumbs govuk-breadcrumbs__list"
+            pdk-breadcrumb-list=""
+          >
+            <li
+              class="govuk-breadcrumbs__list-item"
+              pdk-breadcrumb-list-item=""
+            >
+              <a
+                class="govuk-breadcrumbs__link"
+                href="http://url.com"
+                pdk-breadcrumb=""
+                title="Home"
+              >
+                 Home 
+              </a>
+            </li>
+            <li
+              class="govuk-breadcrumbs__list-item"
+              pdk-breadcrumb-list-item=""
+            >
+              <span>
+                Allocate hearing
+              </span>
+            </li>
+          </ol>
+        </breadcrumbs>
+      </div>
+    </section>
+  </allocate-hearing>
+</ng-component>
+`;

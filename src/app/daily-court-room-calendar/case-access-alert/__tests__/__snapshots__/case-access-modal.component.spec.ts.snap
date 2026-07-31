@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CaseAccessModalComponent should render the component 1`] = `
+<test-case-access-alert
+  onCancel={[Function Function]}
+  onSubmit={[Function Function]}
+  urns={[Function Array]}
+  userId={[Function String]}
+>
+  <case-access-modal>
+    <div
+      bsmodal=""
+      class="modal fade in"
+      role="alertdialog"
+    >
+      <div
+        class="modal-dialog"
+      >
+        <div
+          class="modal-content"
+        >
+          <div
+            class="govuk-!-padding-4"
+            pdk-padding="4"
+          >
+            <pdk-alert
+              class="govuk-body-m"
+              icon="true"
+              pdk-typography="body-medium"
+              type="warning"
+            >
+              <div
+                class="pdk-alert pdk-alert--warning"
+                role="alert"
+              >
+                <div
+                  class="pdk-alert__container"
+                >
+                  <i
+                    aria-hidden="true"
+                    class="pdk-alert__icon pdk-alert__icon--alert"
+                    role="presentation"
+                  />
+                  <div
+                    class="pdk-alert__message"
+                  >
+                    <div>
+                       Cases listed for hearing today 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </pdk-alert>
+            <p
+              class="govuk-!-margin-top-4 govuk-body-m"
+              pdk-margin-top="4"
+              pdk-typography="body-medium"
+            >
+               Changing anything could affect the judicial decision for the following cases: 
+            </p>
+            <ul
+              class="urn-list govuk-list govuk-list--bullet"
+              data-test-id="alertUrnList"
+              pdk-list="bullet"
+            >
+              <li
+                class="bold"
+              >
+                 URN1 
+              </li>
+              <li
+                class="bold"
+              >
+                 URN2 
+              </li>
+            </ul>
+            <form
+              class="ng-untouched ng-pristine ng-valid"
+              data-test-id="caseAlertForm"
+              novalidate=""
+              pdk-form=""
+            >
+              <pdk-form-field
+                label="Select why you need access"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <fieldset
+                    class="govuk-fieldset"
+                    pdk-fieldset=""
+                  >
+                    <legend
+                      class="govuk-fieldset__legend"
+                    >
+                       Select why you need access 
+                    </legend>
+                    <pdk-radio-group
+                      class="ng-untouched ng-pristine ng-valid"
+                      data-role="access-decision"
+                      name="hasTodayHearing"
+                      ngmodel=""
+                    >
+                      <div
+                        class="govuk-radios"
+                      >
+                        <pdk-radio-button>
+                          <div
+                            class="govuk-radios__item"
+                          >
+                            <input
+                              class="govuk-radios__input"
+                              id="pdk-radio-GENERATED_ID"
+                              name="pdk-radio-group-GENERATED_ID"
+                              type="radio"
+                              value="true"
+                            />
+                            <label
+                              class="govuk-radios__label govuk-label"
+                              for="pdk-radio-GENERATED_ID"
+                              pdk-label=""
+                            >
+                               I'm administering the hearing today 
+                            </label>
+                          </div>
+                        </pdk-radio-button>
+                        <pdk-radio-button>
+                          <div
+                            class="govuk-radios__item"
+                          >
+                            <input
+                              class="govuk-radios__input"
+                              id="pdk-radio-GENERATED_ID"
+                              name="pdk-radio-group-GENERATED_ID"
+                              type="radio"
+                              value="false"
+                            />
+                            <label
+                              class="govuk-radios__label govuk-label"
+                              for="pdk-radio-GENERATED_ID"
+                              pdk-label=""
+                            >
+                               I need access but I'm not running today's hearing 
+                            </label>
+                          </div>
+                        </pdk-radio-button>
+                      </div>
+                    </pdk-radio-group>
+                  </fieldset>
+                </pdk-form-group>
+              </pdk-form-field>
+              <div
+                class="button-holder"
+              >
+                <button
+                  class="govuk-!-margin-bottom-0 govuk-button"
+                  disabled="disabled"
+                  pdk-button=""
+                  pdk-margin-bottom="0"
+                  type="submit"
+                >
+                   Continue 
+                </button>
+                <a
+                  class="govuk-!-margin-left-4 govuk-link"
+                  href="javascript:void(0);"
+                  pdk-link=""
+                  pdk-margin-left="4"
+                >
+                   Cancel 
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </case-access-modal>
+</test-case-access-alert>
+`;

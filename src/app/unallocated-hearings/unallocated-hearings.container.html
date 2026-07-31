@@ -1,0 +1,97 @@
+@if (errors) {
+<pdk-error-summary focusOnChange="true" [errors]="errors"> </pdk-error-summary>
+}
+<div pdk-margin-top="2">
+  @if (showSubmenu) {
+  <sub-menu></sub-menu>
+  } @if (breadcrumbs.length && !showSubmenu) {
+  <ol pdk-breadcrumb-list>
+    @for (crumb of breadcrumbs; track crumb.title; let last = $last) {
+    <li pdk-breadcrumb-list-item>
+      @if (!last && crumb.routerLink) {
+      <a [title]="crumb.title" [routerLink]="crumb.routerLink" pdk-breadcrumb>
+        {{ crumb.title }}
+      </a>
+      } @if (!last && crumb.href) {
+      <a [title]="crumb.title" [href]="crumb.href" pdk-breadcrumb> {{ crumb.title }} </a>
+      } @if (last) {
+      <span>{{ crumb.title }}</span>
+      }
+    </li>
+    }
+  </ol>
+  } @if (lastAllocatedHearing$ | async) {
+  <pdk-grid container pdk-padding-top="3">
+    <pdk-grid two-thirds>
+      <app-notification
+        [lastAllocatedHearing]="lastAllocatedHearing$ | async"
+        [courtCentres]="courtCentres$ | async"
+        (onDestroy)="clearNotification()"
+      >
+      </app-notification>
+    </pdk-grid>
+  </pdk-grid>
+  } @if (hearingSchedule$ | async; as schedule) {
+  <pdk-grid container pdk-padding-top="3">
+    <pdk-grid two-thirds>
+      @for (allocation of schedule.hearingSlotAllocations; track allocation.hearingSlotTime) {
+      <div pdk-margin-bottom="2">
+        <app-notification
+          [allocation]="allocation"
+          [courtCentres]="courtCentres$ | async"
+          [lastAllocatedHearing]="lastAllocatedMagsHearingsSlots$ | async"
+          (onDestroy)="clearNotification()"
+        >
+        </app-notification>
+      </div>
+      }
+    </pdk-grid>
+  </pdk-grid>
+  }
+
+  <div class="hearing-listings">
+    <h1 pdk-typography="heading-large" pdk-margin-bottom="1" pdk-margin-top="2">
+      Unallocated hearings
+    </h1>
+    <div>
+      <hearing-filters
+        [selectedOptions]="selectedHearingFilters$ | async"
+        [courts]="courtSummaries$ | async"
+        [prosecutors]="prosecutors$ | async"
+        [hearingTypes]="hearingTypes$ | async"
+        [jurisdictions]="jurisdictions$ | async"
+        (onApplyFilters)="listHearings($event)"
+        (onClearFilters)="resetHearingFilters()"
+        (onValidationError)="errors = $event"
+      >
+      </hearing-filters>
+    </div>
+    @if ((unallocatedHearings$ | async); as unallocatedHearings) {
+    <div>
+      @if (unallocatedHearings.hearings.length > 0) {
+      <div>
+        <hearing-list
+          [hearings]="unallocatedHearings.hearings"
+          [pageNumber]="unallocatedHearings.pagination.currentPage"
+          [pageSize]="pageSize"
+          [totalResults]="unallocatedHearings.pagination.totalNumber"
+          [baseUrl]="getBaseUrl()"
+          (pageNumberChange)="updatePageNumber($event)"
+          (onAllocate)="allocateHearing($event)"
+          (onSplitHearing)="splitHearing($event)"
+        >
+        </hearing-list>
+      </div>
+      }
+    </div>
+    }
+  </div>
+
+  @if (showNoHearingsMessage$ | async) {
+  <div pdk-margin-top="5">
+    <pdk-warning-text>
+      <div>There are no unallocated hearings</div>
+    </pdk-warning-text>
+  </div>
+  }
+</div>

@@ -1,0 +1,193 @@
+@if (errors) {
+<pdk-error-summary focusOnChange="true" tabindex="0" [errors]="errors"></pdk-error-summary>
+}
+
+<div pdk-margin-top="2">
+  @if (showSubmenu) {
+  <sub-menu></sub-menu>
+  } @if (breadcrumbs.length && !showSubmenu) {
+  <ol pdk-breadcrumb-list>
+    @for (crumb of breadcrumbs; track crumb.title; let last = $last) {
+    <li pdk-breadcrumb-list-item>
+      @if (!last && crumb.routerLink) {
+      <a [title]="crumb.title" [routerLink]="crumb.routerLink" pdk-breadcrumb>
+        {{ crumb.title }}
+      </a>
+      } @if (!last && crumb.href) {
+      <a [title]="crumb.title" [href]="crumb.href" pdk-breadcrumb> {{ crumb.title }} </a>
+      } @if (last) {
+      <span pdk-breadcrumb="active">{{ crumb.title }}</span>
+      }
+    </li>
+    }
+  </ol>
+  }
+</div>
+@if (publishCourtListMessage) {
+<pdk-alert pdk-margin-top="1" pdk-margin-bottom="1" icon="true" type="success">
+  {{publishCourtListMessage}}
+</pdk-alert>
+} @if (magsPublishStatusesWithAlert()?.length > 0 && !crownCourtSelected) {
+<pdk-grid container>
+  <pdk-grid two-thirds>
+    <mags-publish-statuses [statuses]="magsPublishStatusesWithAlert()" />
+  </pdk-grid>
+</pdk-grid>
+}
+<h1 pdk-padding-top="1" pdk-typography="heading-large">{{ pageTitle }}</h1>
+<create-list-filter
+  [hasCpsAccessOnly]="hasCpsAccessOnly"
+  [publicHolidays]="publicHolidays$ | async"
+  (formErrors)="formErrors($event)"
+  (onSubmit)="filterSubmit($event)"
+  (selectCourtCentre)="onSelectCourtCentre($event)"
+>
+</create-list-filter>
+<pdk-grid container class="hearings-schedule">
+  <pdk-grid two-thirds>
+    @if (weekCommencingSelected && crownCourtSelected) {
+    <h2 pdk-typography="heading-medium">{{courtCentreDetails}}</h2>
+    } @if (weekCommencingSelected && crownCourtSelected) {
+    <h3 data-role="fixed-week-commencing-range-text" pdk-typography="heading-medium">
+      {{searchRangeText}}
+    </h3>
+    } @for (hearingsInDate of hearingsByDateAndRoom; track hearingsInDate.date) {
+    <div pdk-padding-vertical="2">
+      @if (hearingsByDateAndRoom.length > 1 || (hearingsByDateAndRoom.length > 0 &&
+      crownCourtSelected)) {
+      <h2
+        class="list-date-divider"
+        pdk-fill-colour="light-grey"
+        pdk-border-colour="mid-grey"
+        pdk-padding="1"
+        pdk-typography="heading-small"
+      >
+        {{hearingsInDate.date | date: 'dd MMMM yyyy'}}
+      </h2>
+      } @for (hearingsInRoom of hearingsInDate.hearingsGroupedByJudiciaryAndRoom; track
+      hearingsInRoom.courtRoom.id) {
+      <div data-test-id="courtroom" class="courtroom">
+        @if (hearingsInRoom.courtRoom.name !== NO_COURTROOM) {
+        <h3 data-test-id="courtroomName" pdk-typography="heading-medium" class="hearing-room">
+          {{hearingsInRoom.courtRoom.name}}
+        </h3>
+        } @if (hearingsInRoom.courtRoom.name === NO_COURTROOM) {
+        <div pdk-text-colour="red" pdk-typography="heading-medium" pdk-margin-top="1">
+          No courtroom assigned
+        </div>
+        } @for (hearingsGroupedByJudiciary of hearingsInRoom.hearingsGroupedByJudiciary; let
+        index=$index; track index) {
+        <div>
+          <div data-test-id="sequencedHearings" class="hearings-box">
+            <sequence-hearings
+              (save)="saveSequence($event)"
+              (courtRestrictionCheckEvent)="updateCourtRestrictions($event)"
+              [hearingTypes]="hearingTypes$ | async"
+              [restrictedCourtHearingSelected]="(restrictedCourtHearingSelected$ | async)"
+              [restrictLists]="hasRestrictDetailsPermission$ | async"
+              [reorderLists]="hasReorderPermission$ | async"
+              [hearings]="hearingsGroupedByJudiciary.hearings"
+              [judiciary]="convertJudiciaryStringToJson(hearingsGroupedByJudiciary.judiciary)"
+              [selectedDate]="hearingsInDate.date"
+              [timeFormat]="'hh:mm a'"
+            >
+            </sequence-hearings>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    } @if (weekCommencingSelected && crownCourtSelected) { @for (hearingsInDate of
+    weekHearingsByDateAndRoom; track hearingsInDate.date) {
+    <div pdk-padding-vertical="2">
+      @if ((weekHearingsByDateAndRoom.length > 0 && weekCommencingSelected)) {
+      <h3
+        data-role="week-commencing-range-text"
+        class="list-date-divider"
+        pdk-fill-colour="light-grey"
+        pdk-border-colour="mid-grey"
+        pdk-padding="1"
+        pdk-typography="heading-small"
+      >
+        {{weekCommencingRangeText}}
+      </h3>
+      } @for (hearingsInRoom of hearingsInDate.hearingsGroupedByJudiciaryAndRoom; track
+      hearingsInRoom.courtRoom.id) {
+      <div data-test-id="courtroom" class="courtroom">
+        @if (hearingsInRoom.courtRoom.name !== NO_COURTROOM) {
+        <h3 data-test-id="courtroomName" pdk-typography="heading-medium" class="hearing-room">
+          {{hearingsInRoom.courtRoom.name}}
+        </h3>
+        } @if (hearingsInRoom.courtRoom.name ===NO_COURTROOM) {
+        <div pdk-text-colour="red" pdk-typography="heading-medium" pdk-margin-top="1">
+          No courtroom assigned
+        </div>
+        } @for (hearingsGroupedByJudiciary of hearingsInRoom.hearingsGroupedByJudiciary; let
+        index1=$index; track index1) {
+        <div>
+          <div class="hearings-box">
+            <sequence-hearings
+              (save)="saveSequence($event)"
+              (courtRestrictionCheckEvent)="updateCourtRestrictions($event)"
+              [hearingTypes]="hearingTypes$ | async"
+              [restrictedCourtHearingSelected]="(restrictedCourtHearingSelected$ | async)"
+              [restrictLists]="hasRestrictDetailsPermission$ | async"
+              [reorderLists]="hasReorderPermission$ | async"
+              [hearings]="hearingsGroupedByJudiciary.hearings"
+              [judiciary]="convertJudiciaryStringToJson(hearingsGroupedByJudiciary.judiciary)"
+              [selectedDate]="hearingsInDate.date"
+              [timeFormat]="'hh:mm a'"
+              [weekCommencingSelected]="weekCommencingSelected"
+            >
+            </sequence-hearings>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    } } @if (isSubmitted && !hearingsByDateAndRoom.length && !weekHearingsByDateAndRoom.length) {
+    <div class="no-hearings-messsage">
+      <pdk-warning-text>
+        <div>No hearings listed</div>
+      </pdk-warning-text>
+    </div>
+    } @if (!!pagingInfo && pagingInfo.totalNumber > pagingInfo.itemsPerPage) {
+    <pdk-pagination
+      [totalResults]="pagingInfo.totalNumber"
+      [pageSize]="pagingInfo.itemsPerPage"
+      [currentPage]="pagingInfo.currentPage"
+      (pageChange)="pageChanged($event)"
+    >
+    </pdk-pagination>
+    }
+  </pdk-grid>
+
+  @if (selectedHearings?.length > 0) {
+  <span role="status" pdk-visually-hidden>
+    Total hearings listed: {{ selectedHearings?.length }}
+  </span>
+  } @else {
+  <span role="status" pdk-visually-hidden>No hearings listed</span>
+  } @if (isSubmitted) {
+  <pdk-grid one-third>
+    <download-list
+      [selectedOptions]="selectedOptions"
+      [selectedCourtCentre]="selectedCourtCentre"
+      [restrictionsExist]="restrictionsExist"
+      [crownSelected]="crownSelected"
+      [publishCourtListsStatuses]="publishCourtListsStatuses$ | async "
+      [magsPublishStatuses]="magsCourtListPublishStore.statuses() ?? []"
+      [hearingsByDateAndRoom]="hearingsByDateAndRoom"
+      [weekHearingsByDateAndRoom]="weekHearingsByDateAndRoom"
+      [isHmctsUser]="isHmctsUser$ | async"
+      [magPublishListPermissions]="expectedPermissions.publicCourtList"
+      (onListPublished)="onListPublished($event)"
+      (onMagsPublishList)="publishMagsCourtList($event.listType)"
+      (onDownloadMagsPublishedList)="downloadMagsPublishedList($event)"
+    >
+    </download-list>
+  </pdk-grid>
+  }
+</pdk-grid>

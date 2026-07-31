@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
+<find-available-sessions-container
+  appConfig={[Function Object]}
+  breadcrumbs={[Function Array]}
+  currentPage$={[Function _Store]}
+  filters$={[Function _Store]}
+  hearingTypePlaceholder={[Function Object]}
+  organisationUnits$={[Function _Store]}
+  pageSize$={[Function _Store]}
+  rotaBusinessTypes$={[Function _Store]}
+  route={[Function Object]}
+  router={[Function Object]}
+  searchResult$={[Function _Store]}
+  store={[Function _Store]}
+  totalResults$={[Function _Store]}
+>
+  <pdk-grid
+    class="govuk-!-margin-top-2 govuk-grid-row"
+    container=""
+    pdk-margin-top="2"
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <breadcrumbs>
+        <ol
+          class="govuk-breadcrumbs govuk-breadcrumbs__list"
+          pdk-breadcrumb-list=""
+        >
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+          </li>
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <span>
+              Find available sessions
+            </span>
+          </li>
+        </ol>
+      </breadcrumbs>
+      <h1
+        class="govuk-!-margin-bottom-4 govuk-!-margin-top-2 govuk-heading-l"
+        pdk-margin-bottom="4"
+        pdk-margin-top="2"
+        pdk-typography="heading-large"
+      >
+         Search for available sessions 
+      </h1>
+      <div
+        class="scheduling-filters-wrapper govuk-!-padding-top-6"
+        pdk-padding-top="6"
+      >
+        <scheduling-filters>
+          <form>
+            <div>
+              [object Object]
+            </div>
+            <button
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </scheduling-filters>
+        <pdk-inset-text>
+          <div
+            class="govuk-inset-text"
+          >
+            <b>
+              25 sessions found. Only sessions with available time or slots are returned
+            </b>
+          </div>
+        </pdk-inset-text>
+        <scheduling-slots>
+          <div>
+            [object Object]
+          </div>
+          <pdk-pagination
+            data-current-page="2"
+            data-page-size="10"
+            data-total-results="25"
+          >
+            <div
+              class="pdk-pagination"
+            >
+              <nav
+                aria-label="Pagination"
+                class="govuk-pagination"
+              >
+                <div
+                  class="govuk-pagination__prev"
+                >
+                  <a
+                    aria-label="Go to previous page of results"
+                    class="govuk-link govuk-pagination__link"
+                    href="javascript:void(0)"
+                    rel="Previous"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="govuk-pagination__icon govuk-pagination__icon--prev"
+                      focusable="false"
+                      height="13"
+                      viewBox="0 0 15 13"
+                      width="15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"
+                      />
+                    </svg>
+                    <span
+                      class="govuk-pagination__link-title"
+                    >
+                       Prev 
+                    </span>
+                  </a>
+                </div>
+                <div
+                  class="govuk-pagination__list govuk-!-margin-left-1 govuk-!-margin-right-1"
+                  pdk-margin-horizontal="1"
+                >
+                  <div
+                    class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1"
+                    pdk-margin-horizontal="1"
+                  >
+                    <a
+                      aria-label="Go to page 1"
+                      class="govuk-pagination__link govuk-link"
+                      href="javascript:void(0)"
+                      pdk-link=""
+                    >
+                       1 
+                    </a>
+                  </div>
+                  <div
+                    class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1 govuk-pagination__item--current"
+                    pdk-margin-horizontal="1"
+                  >
+                    <span
+                      aria-label="Current page, page 2"
+                      class="pdk-pagination__item__active"
+                      role="link"
+                      tabindex="0"
+                    >
+                      2
+                    </span>
+                  </div>
+                  <div
+                    class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1"
+                    pdk-margin-horizontal="1"
+                  >
+                    <a
+                      aria-label="Go to page 3"
+                      class="govuk-pagination__link govuk-link"
+                      href="javascript:void(0)"
+                      pdk-link=""
+                    >
+                       3 
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="govuk-pagination__next"
+                >
+                  <a
+                    aria-label="Go to next page of results"
+                    class="govuk-link govuk-pagination__link"
+                    href="javascript:void(0)"
+                    rel="Next"
+                  >
+                    <span
+                      class="govuk-pagination__link-title"
+                    >
+                       Next 
+                    </span>
+                    <svg
+                      aria-hidden="true"
+                      class="govuk-pagination__icon govuk-pagination__icon--next"
+                      focusable="false"
+                      height="13"
+                      viewBox="0 0 15 13"
+                      width="15"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </nav>
+            </div>
+          </pdk-pagination>
+        </scheduling-slots>
+      </div>
+    </pdk-grid>
+  </pdk-grid>
+</find-available-sessions-container>
+`;

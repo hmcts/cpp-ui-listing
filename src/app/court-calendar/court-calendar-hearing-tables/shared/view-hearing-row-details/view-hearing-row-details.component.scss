@@ -1,0 +1,11 @@
+dl > div:not(:last-child) {
+  border-bottom: 1px solid;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: flex-end;
+}
+.public-list-note {
+  border-bottom: 1px solid;
+}

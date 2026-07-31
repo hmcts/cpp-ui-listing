@@ -1,0 +1,53 @@
+@if (filterOptions()?.searchDate) {
+<div
+  data-test-id="courtRoomCalendar"
+  class="daily-court-room-calendar"
+  pdk-border-colour="mid-grey"
+>
+  <div class="hearings-panel">
+    @if (selectedHearings) {
+    <total-listing-hours [hearings]="selectedHearings" [filterOptions]="filterOptions()">
+    </total-listing-hours>
+    }
+    <div pdk-margin-bottom="3" pdk-padding-right="2">
+      <listing-note-container
+        [courtRoomId]="filterOptions()?.courtRoomId"
+        [listingNoteDate]="filterOptions()?.searchDate"
+        (onErrors)="errors.emit($event)"
+      >
+      </listing-note-container>
+    </div>
+    @if (showModal$ | async) {
+    <case-access-alert
+      [searchDate]="filterOptions().searchDate"
+      [selectedHearingId]="selectedHearingId()"
+      [hearingIds]="todaysHearingIds$ | async"
+      [urns]="todaysHearingUrns$ | async"
+      [userId]="userId$ | async"
+      (onCancel)="onAlertCancel()"
+    >
+    </case-access-alert>
+    } @for (hearing of hearings; let index=$index; track index) {
+    <div>
+      @if (hearing.hearings) {
+      <hearings-per-judiciary
+        [hearingTypes]="hearingTypes$ | async"
+        [judiciary]="convertJudiciaryStringToJson(hearing.judiciary)"
+        [filterOptions]="filterOptions()"
+        [hearings]="hearing.hearings"
+        [enableAction]="enableAction()"
+        [latestSelection]="selectedHearing"
+        [selectedDate]="filterOptions().searchDate"
+        [preSelectedHearing]="selectedHearing"
+        [baseUrl]="getBaseUrl()"
+        (onHearingSelected)="hearingSelected($event)"
+        (onSelectChangeJudiciary)="onChangeJudiciary($event)"
+        (onApplicationLinkClick)="handleApplicationLinkClick($event)"
+      >
+      </hearings-per-judiciary>
+      }
+    </div>
+    }
+  </div>
+</div>
+}

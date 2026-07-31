@@ -1,0 +1,16 @@
+@if (isHearingWithAvailableHearings) {
+  <available-hearings-table
+    [hearings]="filteredHearings"
+    [courtCentres]="courtCentres()"
+    (onViewHearingDetails)="viewHearingDetails($event)"
+    (onExtendHearingForHearing)="extendHearingForHearing($event)"
+    (errors)="errors.emit($event)"
+  >
+  </available-hearings-table>
+}
+
+@if (isHearingWithoutAvailableHearings) {
+  <pdk-inset-text>
+    <strong>No related hearings found</strong>
+  </pdk-inset-text>
+}

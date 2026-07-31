@@ -1,0 +1,414 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewHearingRowDetailsComponent should create the component 1`] = `
+<view-hearing-row-details
+  application={[Function Object]}
+  applicationId={[Function Function]}
+  caseId={[Function Function]}
+  caseNotes={[Function Function]}
+  custodyDefendants={[Function Array]}
+  getCaseNotes={[Function OutputEmitterRef]}
+  hearing={[Function Function]}
+  listedCase={[Function Object]}
+  offences={[Function Function]}
+  publicListNote={[Function Function]}
+  updateHearingPublicListNote={[Function OutputEmitterRef]}
+>
+  <h2
+    class="govuk-heading-s govuk-visually-hidden"
+    pdk-typography="heading-small"
+    pdk-visually-hidden=""
+  >
+    Hearing details
+  </h2><div
+    class="govuk-!-padding-left-8 govuk-!-padding-right-8"
+    pdk-padding-horizontal="8"
+  >
+    <form
+      class="ng-untouched ng-pristine ng-valid"
+      novalidate=""
+      pdk-form=""
+    >
+      <div
+        class="d-flex"
+      >
+        <button
+          class="save-button govuk-button"
+          pdk-button=""
+          type="submit"
+        >
+          Save changes
+        </button>
+      </div>
+      <div
+        class="public-list-note govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="3"
+        pdk-margin-horizontal="0"
+        pdk-padding-bottom="2"
+      >
+        <dt
+          class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+          pdk-padding-left="0"
+        >
+          <b>
+            Public list note (optional)
+          </b>
+        </dt>
+        <dd
+          class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+          pdk-grid=""
+          pdk-margin-left="0"
+          pdk-padding-left="0"
+          two-thirds=""
+        >
+          <input
+            class="ng-untouched ng-pristine ng-valid govuk-input"
+            maxlength="150"
+            name="publicListNote"
+            pdk-input=""
+            type="text"
+          />
+          <pdk-character-count
+            limit="150"
+          >
+            <span
+              aria-live="polite"
+              class="govuk-hint govuk-character-count__message"
+            >
+               You have 150 characters remaining 
+            </span>
+          </pdk-character-count>
+        </dd>
+      </div>
+    </form>
+    <div
+      class="govuk-grid-row"
+      container=""
+      pdk-grid=""
+    >
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <dl
+          class="govuk-!-margin-top-0"
+          pdk-margin-top="0"
+        >
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Defendants
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                 John DEE (Y, C),  
+              </span>
+              <span>
+                 Scott SMITH (Y, C) 
+              </span>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Applicant
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                 Grant BOEHM 
+              </span>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Respondents
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                 John SMITH 
+              </span>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Custody status
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <custody-status>
+                <div>
+                  <span>
+                    John DEE: In Custody , CTL 20/01/2024
+                  </span>
+                </div>
+                <div>
+                  <span>
+                    Scott SMITH: In Custody , CTL 18/01/2024
+                  </span>
+                </div>
+              </custody-status>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Offences
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <offence-wording-cell>
+                <div
+                  class="offences"
+                  data-test-id="offences"
+                >
+                  <span
+                    class="govuk-!-margin-bottom-1"
+                  >
+                     [object Object]
+                  </span>
+                  <span>
+                     + 1 more 
+                  </span>
+                </div>
+              </offence-wording-cell>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Case notes
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <case-notes>
+                <div
+                  class="flex-display flex-display-column govuk-!-margin-bottom-3 govuk-!-margin-left-5 pinned"
+                  pdk-margin-bottom="3"
+                >
+                  <div
+                    class="flex-display flex-display-column"
+                  >
+                    <span>
+                      Case note 1
+                    </span>
+                    <span
+                      class="pdk-!-text-color-dark-grey"
+                      pdk-text-colour="dark-grey"
+                    >
+                        at  
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="flex-display flex-display-column govuk-!-margin-bottom-3 govuk-!-margin-left-5"
+                  pdk-margin-bottom="3"
+                >
+                  <div
+                    class="flex-display flex-display-column"
+                  >
+                    <span>
+                      Case note 2
+                    </span>
+                    <span
+                      class="pdk-!-text-color-dark-grey"
+                      pdk-text-colour="dark-grey"
+                    >
+                        at  
+                    </span>
+                  </div>
+                </div>
+              </case-notes>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Hearing language
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                 English
+              </span>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Video hearing
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                Yes
+              </span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</view-hearing-row-details>
+`;

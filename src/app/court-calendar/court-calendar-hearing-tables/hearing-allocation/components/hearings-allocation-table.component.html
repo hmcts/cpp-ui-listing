@@ -1,0 +1,173 @@
+@if (isUnallocatedType) {
+  <h2 pdk-typography="heading-large">
+    {{ sections()?.length > 0 ? totalNumber() : 0 }} Unallocated hearings
+  </h2>
+}
+@if (!isUnallocatedType) {
+  <h2 pdk-typography="heading-large">
+    Selected hearings
+    <span pdk-visually-hidden> to reallocate</span>
+  </h2>
+}
+@if (sections()?.length > 0) {
+  @if (isUnallocatedType) {
+    <page-size-selector
+      [pageSize]="pageSize()"
+      (pageSizeChange)="onPageSizeChange($event)"
+    ></page-size-selector>
+  }
+  <div
+    section-table-renderer
+    [columnConfig]="columnConfig"
+    [sectionConfig]="sectionConfig"
+    [sections]="sections()"
+    [sectionHeaderRenderer]="sectionHeader"
+    [expandedDetailsRenderer]="hearingDetails"
+    [customCellHeaderRenderers]="{
+      id: selectAllCustomheader
+    }"
+    [cellRenderers]="{
+      dateTime: timeCell,
+      duration: durationCell,
+      hearingType: hearingTypeCell,
+      defendants: defendantCell,
+      id: selectHearingCell
+    }"
+  ></div>
+} @else {
+  @if (isUnallocatedType) {
+    <p>No unallocated hearings found.</p>
+  }
+  @if (!isUnallocatedType) {
+    <p>No more hearings to reallocate.</p>
+  }
+}
+@if (totalNumber() > pageSize()) {
+  <pdk-pagination
+    [currentPage]="currentPage()"
+    [totalResults]="totalNumber()"
+    [pageSize]="pageSize()"
+    [maxPages]="7"
+    (pageChange)="pageChange.emit({ pageNumber: $event, pageSize: pageSize() })"
+  >
+  </pdk-pagination>
+}
+
+<!------------------------------------------------------CELL TEMPLATE RENDERERS------------------------------------------------------------------------------------------>
+
+<!-------Section header------------>
+<ng-template #sectionHeader let-startDate="cellData" let-sectionData="sectionData">
+  @if (sectionData) {
+    <ng-container
+      [ngTemplateOutlet]="isUnallocatedType ? unallocatedSectionHeader : reallocateSectionHeader"
+      [ngTemplateOutletContext]="{
+        sectionData: sectionData,
+        startDate: startDate
+      }"
+    >
+    </ng-container>
+  }
+
+  <!--Unallocated Section header -->
+  <ng-template #unallocatedSectionHeader let-startDate="startDate" let-sectionData="sectionData">
+    <h3 pdk-typography="heading-small" pdk-margin-bottom="0" data-test-id="section-header">
+      @if (sectionData?.isWeekCommencing) {
+        <span> Week commencing from {{ startDate | date: 'dd MMMM yyyy' }}</span>
+      }
+      @if (!sectionData?.isWeekCommencing) {
+        <span pdk-margin-left="2">{{ startDate | date: 'dd MMMM yyyy' }}</span>
+      }
+    </h3>
+  </ng-template>
+
+  <!--Reallocate Section header -->
+  <ng-template #reallocateSectionHeader let-startDate="startDate" let-sectionData="sectionData">
+    <h3 pdk-typography="heading-small" pdk-margin-bottom="0" data-test-id="section-header">
+      @if (sectionData?.forMultiReallocate) {
+        <span> Multi-day hearings starting from {{ startDate | date: 'dd MMMM yyyy' }}</span>
+      }
+      @if (!sectionData?.forMultiReallocate) {
+        <span pdk-margin-left="2">{{ startDate | date: 'dd MMMM yyyy' }}</span>
+      }
+    </h3>
+  </ng-template>
+</ng-template>
+
+<!--Time-->
+<ng-template #timeCell let-dateTime="cellData">
+  <time-cell [dateTime]="dateTime"></time-cell>
+</ng-template>
+
+<!--Duration-->
+<ng-template
+  #durationCell
+  let-duration="cellData"
+  let-hearing="rowData"
+  let-sectionData="sectionData"
+>
+  <duration-cell
+    [duration]="duration"
+    [dayOfHearing]="hearing.details?.hearingDayPosition"
+    [totalDays]="hearing.details?.hearingDayCount"
+    [displayMultiHearingDay]="!sectionData?.forMultiReallocate"
+  ></duration-cell>
+</ng-template>
+
+<!--Hearing type-->
+<ng-template #hearingTypeCell let-hearingType="cellData" let-hearing="rowData">
+  <hearing-type-cell [hearingType]="hearingType" [isMaster]="hearing.isMaster"></hearing-type-cell>
+</ng-template>
+
+<!--Defendants-->
+<ng-template #defendantCell let-defendants="cellData">
+  <defendant-cell [defendantData]="defendants" [baseUrl]="baseUrl"></defendant-cell>
+</ng-template>
+
+<!--Select all hearings Header-->
+<ng-template #selectAllCustomheader let-label="cellData" let-columnConfig="columnConfig">
+  <div (click)="preventDefault($event)">
+    <pdk-checkbox
+      [checkboxType]="'small'"
+      [id]="'select-all-checkbox'"
+      [ngModel]="allMasterHearingRows | allMasterHearingsInSelectedState: selectedHearings()"
+      name="selectAll"
+      (ngModelChange)="selectAllHearings($event)"
+    >
+      <span [pdk-visually-hidden]="columnConfig.columnLabelVisuallyHidden">{{ label }}</span>
+    </pdk-checkbox>
+  </div>
+</ng-template>
+
+<!--Select hearing cell-->
+<ng-template
+  #selectHearingCell
+  let-hearingId="cellData"
+  let-columnConfig="columnConfig"
+  let-hearing="rowData"
+>
+  <div (click)="preventDefault($event)">
+    <pdk-checkbox
+      [checkboxType]="'small'"
+      [id]="hearingId + '-' + hearing.hearingDate"
+      [ngModel]="isSelected(hearing)"
+      name="select-hearing"
+      (ngModelChange)="select(hearing)"
+    >
+      <span pdk-visually-hidden>Select this hearing</span>
+    </pdk-checkbox>
+  </div>
+</ng-template>
+
+<!--Unallocated hearing row details-->
+<ng-template #hearingDetails let-hearingRow="rowData">
+  <view-hearing-row-details
+    [hearing]="hearingRow.details"
+    [offences]="hearingRow.offences"
+    [caseId]="hearingRow.defendants?.caseId"
+    [applicationId]="hearingRow.defendants?.applicationId"
+    [caseNotes]="caseNotesMap()[hearingRow.defendants.caseId]"
+    [publicListNote]="hearingRow?.publicListNote"
+    (getCaseNotes)="onGetCaseNote.emit($event)"
+    (updateHearingPublicListNote)="onUpdateHearingPublicListNote.emit($event)"
+  ></view-hearing-row-details>
+</ng-template>

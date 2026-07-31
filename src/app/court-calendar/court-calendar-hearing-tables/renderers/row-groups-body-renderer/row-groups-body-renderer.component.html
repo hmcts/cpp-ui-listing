@@ -1,0 +1,215 @@
+@for (
+  row of rowGroup[rowGroupsConfig?.dataConfig?.rowsDataPath];
+  let isFirstRow = $first;
+  let rowIndex = $index;
+  track row.rowIdentifier
+) {
+  @if (
+    row.isMaster &&
+    (row | hearingRowPositionedSuccess: positionedHearingsState) &&
+    positionedHearingsState.showAlert
+  ) {
+    <ng-container
+      [ngTemplateOutlet]="positionChangedAlertRow"
+      [ngTemplateOutletContext]="{
+        rowData: row
+      }"
+    >
+    </ng-container>
+  }
+  <tr
+    data-test-id="hearing-table-row"
+    role="row"
+    [attr.aria-posinset]="rowIndex + 1"
+    [attr.aria-setsize]="!!row.details && rowIsexpandable ? 1 : 0"
+    aria-level="1"
+    pdk-table-row
+    highlightOnHover
+    interactive
+    [id]="row.rowIdentifier"
+    (click)="toggleRow(row.rowIdentifier, $event)"
+    [attr.aria-expanded]="!!row.details && rowIsexpandable && toggleRecord[row.rowIdentifier]"
+    [class.selected-hearing-to-move]="
+      (row | hearingRowToBeMoved: hearingMovestate) ||
+      (row | hearingRowPositionedSuccess: positionedHearingsState)
+    "
+  >
+    @if (!!row.details && rowIsexpandable) {
+      <ng-container
+        [ngTemplateOutlet]="expandLinkButtonCell"
+        [ngTemplateOutletContext]="{
+          rowData: row
+        }"
+      >
+      </ng-container>
+    }
+    @for (column of columnConfig; let columnIndex = $index; track columnIndex) {
+      @if (row.isMaster || !column.renderOnlyForMasterRow) {
+        <td
+          pdk-table-cell
+          pdk-padding-left="2"
+          attr.headers="{{ sectionHeaderIdentifier }} {{ rowGroupsHeaderIdentifier }} {{
+            'header-' + (columnIndex + 1)
+          }}"
+          [ngStyle]="column.maxWidth && { width: column.maxWidth + 'px' }"
+          [class.cell-border-bottom-none]="
+            row.isMaster && row.instances > 1 && column.renderOnlyForMasterRow
+          "
+          [class.cell-border-bottom-dotted]="
+            (row.isMaster && row.instances > 1 && !column.renderOnlyForMasterRow) ||
+            (!row.isMaster && !row.isLastChild)
+          "
+        >
+          <div [pdk-visually-hidden]="column.isDictionaryCell && !isFirstRow ? true : false">
+            <ng-container
+              [ngTemplateOutlet]="
+                cellRenderers && cellRenderers[column.key] ? cellRenderers[column.key] : defaultCell
+              "
+              [ngTemplateOutletContext]="{
+                cellData: row[column.key],
+                rowData: row,
+                rowGroupData: rowGroup,
+                rowGroupsConfig: rowGroupsConfig,
+                sectionData: section
+              }"
+            >
+            </ng-container>
+          </div>
+        </td>
+      } @else {
+        <td pdk-table-cell [class.cell-border-bottom-none]="!row.isLastChild"></td>
+      }
+    }
+    @if (rowIsActionable && actionCellRenderer) {
+      @if (row?.isMaster) {
+        <ng-container
+          [ngTemplateOutlet]="actionsButtonsCell"
+          [ngTemplateOutletContext]="{
+            rowData: row
+          }"
+        >
+        </ng-container>
+      } @else {
+        <td pdk-table-cell [class.cell-border-bottom-none]="!row.isLastChild"></td>
+      }
+    }
+  </tr>
+  @if (!!row.details && rowIsexpandable && toggleRecord[row.rowIdentifier]) {
+    <ng-container
+      [ngTemplateOutlet]="hearingDetailsRow"
+      [ngTemplateOutletContext]="{
+        rowData: row
+      }"
+    >
+    </ng-container>
+  }
+}
+
+<!---------------------------------------------------------------------ROW AND CELL TEMPLATES------------------------------------------------------------------------------------------------------------->
+
+<!--Position alert-->
+<ng-template #positionChangedAlertRow let-rowData="rowData">
+  <tr pdk-table-row role="alert" aria-hidden="true" [class.selected-hearing-to-move]="true">
+    @if (moveAlertRenderer) {
+      <td pdk-table-cell [colSpan]="sectionHeaderSpan" pdk-padding-vertical="0">
+        <ng-container
+          [ngTemplateOutlet]="moveAlertRenderer"
+          [ngTemplateOutletContext]="{
+            rowData: rowData
+          }"
+        >
+        </ng-container>
+      </td>
+    }
+  </tr>
+</ng-template>
+
+<!--Expandable link button cell-->
+<ng-template #expandLinkButtonCell let-rowData="rowData">
+  <td
+    pdk-table-cell
+    attr.headers="{{ sectionHeaderIdentifier }} {{ rowGroupsHeaderIdentifier }} expandable-header"
+    pdk-padding-top="3"
+    pdk-padding-right="0"
+    pdk-padding-horizontal="2"
+    style="vertical-align: top"
+    [class.cell-border-bottom-none]="
+      (rowData.isMaster && rowData.instances > 1) || (!rowData.isMaster && !rowData.isLastChild)
+    "
+  >
+    <a
+      data-test-id="table-row-expander"
+      pdk-link
+      unvisited
+      href="javascript:void(0)"
+      role="button"
+      (click)="toggleRow(rowData.rowIdentifier, $event)"
+      [class.details-expanded]="toggleRecord[rowData.rowIdentifier]"
+      [attr.aria-expanded]="toggleRecord[rowData.rowIdentifier]"
+    >
+      @if (!toggleRecord[rowData.rowIdentifier]) {
+        <span pdk-visually-hidden>Expand this hearing details</span>
+      }
+      @if (toggleRecord[rowData.rowIdentifier]) {
+        <span pdk-visually-hidden>Collapse this hearing details</span>
+      }
+      <i
+        class="listing-vector-icon"
+        aria-hidden="true"
+        [class.details-expanded]="toggleRecord[rowData.rowIdentifier]"
+      >
+        <svg width="100%" height="100%">
+          <use [attr.xlink:href]="'assets\\svg-icons-definitions.svg#arrow-right-action'"></use>
+        </svg>
+      </i>
+    </a>
+  </td>
+</ng-template>
+
+<!--Cell for actions-->
+<ng-template #actionsButtonsCell let-rowData="rowData">
+  <td
+    class="action-cell"
+    pdk-table-cell
+    headers="{{ sectionHeaderIdentifier }} {{ rowGroupsHeaderIdentifier }} action-header"
+    pdk-padding-right="2"
+    [class.cell-border-bottom-none]="rowData.isMaster && rowData.instances > 1"
+  >
+    <ng-container
+      [ngTemplateOutlet]="actionCellRenderer"
+      [ngTemplateOutletContext]="{
+        rowData: rowData,
+        rowGroupData: rowGroup,
+        rowGroupsConfig: rowGroupsConfig,
+        sectionData: section
+      }"
+    >
+    </ng-container>
+  </td>
+</ng-template>
+
+<!-- Hearing details row-->
+<ng-template #hearingDetailsRow let-rowData="rowData">
+  <tr
+    role="row"
+    aria-level="2"
+    aria-posinset="1"
+    pdk-table-row
+    [id]="rowData.rowIdentifier + '-details'"
+    [class.selected-hearing-to-move]="
+      (rowData | hearingRowToBeMoved: hearingMovestate) ||
+      (rowData | hearingRowPositionedSuccess: positionedHearingsState)
+    "
+  >
+    <td pdk-table-cell [colSpan]="sectionHeaderSpan" pdk-fill-colour="light-grey">
+      <ng-container
+        [ngTemplateOutlet]="expandedDetailsRenderer"
+        [ngTemplateOutletContext]="{
+          rowData: rowData,
+          sectionData: section
+        }"
+      >
+      </ng-container>
+    </td>
+  </tr>
+</ng-template>

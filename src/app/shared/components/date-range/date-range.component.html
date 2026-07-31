@@ -1,0 +1,58 @@
+<div [formGroup]="dateInputs" [attr.aria-describedby]="ariaDescribedBy">
+  @if (showStartDate()) {
+    <pdk-form-field
+      [label]="isWeekCommencing() ? 'Week commencing start date' : 'Hearing date'"
+      labelType="none"
+    >
+      <date-picker
+        #startDate
+        [id]="id + '-startDate'"
+        name="startDate"
+        formControlName="startDate"
+        [minDate]="minStartDate()"
+      >
+      </date-picker>
+    </pdk-form-field>
+  }
+
+  @if (custodyTimeLimit) {
+    <pdk-inset-text>
+      <div pdk-typography="heading-small" id="custodyTimeLimit">
+        CTL: {{ custodyTimeLimit | cppDate }}
+      </div>
+    </pdk-inset-text>
+  }
+  @if (!isWeekCommencing()) {
+    <pdk-form-field>
+      <pdk-checkbox
+        [id]="'multiDay'"
+        name="multiDay"
+        [ngModel]="isMultiday"
+        (change)="invertMultiDay()"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        This is a multi-day hearing
+      </pdk-checkbox>
+    </pdk-form-field>
+  }
+  @if (isMultiday && !isWeekCommencing()) {
+    <pdk-checkbox-conditional pdk-margin-bottom="0">
+      <pdk-form-field
+        label="End date"
+        labelType="small"
+        [errorMessages]="errorMessages"
+        [errors]="noSessionError()"
+      >
+        <pdk-date-input
+          [id]="id + '-endDate'"
+          name="endDate"
+          formControlName="endDate"
+          [minDate]="minEndDate"
+          required
+          picker
+        >
+        </pdk-date-input>
+      </pdk-form-field>
+    </pdk-checkbox-conditional>
+  }
+</div>

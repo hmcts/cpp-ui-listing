@@ -1,0 +1,78 @@
+<div pdk-margin-bottom="8">
+  <form
+    #form="ngForm"
+    data-test-id="allocated-crown-filter"
+    pdk-form
+    (errors)="errors.emit($event)"
+    (validSubmit)="submit(form.value)"
+  >
+    <fieldset pdk-fieldset class="filter-container">
+      <legend pdk-legend pdk-padding-top="4" pdk-visually-hidden>
+        <h2 pdk-typography="heading-medium">Filter allocated crown hearings by date</h2>
+      </legend>
+      <div pdk-border-colour="mid-grey" pdk-padding="2" class="border">
+        <div class="flex">
+          <pdk-form-field
+            label="Court"
+            labelType="small"
+            [errorMessages]="[
+              {
+                rule: 'required',
+                message: 'Enter a court name'
+              }
+            ]"
+          >
+            <cpp-organisation-unit-autosuggest
+              [id]="'courtCentreFilter'"
+              name="courtCentre"
+              [ngModel]="filterOptions()?.courtCentre"
+              [jurisdictionCode]="'C'"
+              required
+              data-role="allocate-court-centre-input"
+            >
+            </cpp-organisation-unit-autosuggest>
+          </pdk-form-field>
+        </div>
+        <div class="flex">
+          <pdk-form-field
+            label="Date"
+            labelType="small"
+            [errorMessages]="[{ rule: 'required', message: 'Please select a date' }]"
+          >
+            <pdk-date-input
+              [ngModel]="filterOptions()?.startDate | date: 'yyyy-MM-dd'"
+              [minDate]="currentDate | date: 'yyyy-MM-dd'"
+              name="startDate"
+              required
+              picker
+            >
+            </pdk-date-input>
+          </pdk-form-field>
+          <pdk-form-field
+            label="Hearing type (Optional)"
+            labelType="small"
+            [errorMessages]="[
+              {
+                rule: 'required',
+                message: 'Enter a hearing type'
+              }
+            ]"
+          >
+            <cpp-hearing-type-autosuggest
+              jurisdictionType="initialValues.jurisdictionType"
+              name="hearingType"
+              [ngModel]="filterOptions()?.hearingType"
+              placeholder="All hearing types"
+            >
+            </cpp-hearing-type-autosuggest>
+          </pdk-form-field>
+          <pdk-form-group>
+            <button type="submit" aria-label="apply filters " pdk-button>
+              Apply <span pdk-visually-hidden>filters</span>
+            </button>
+          </pdk-form-group>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

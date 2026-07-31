@@ -1,0 +1,85 @@
+<pdk-grid full pdk-margin-bottom="4">
+  <h1 pdk-typography="heading-large" pdk-margin-top="2">Remove hearing</h1>
+</pdk-grid>
+<pdk-grid full pdk-margin-bottom="3">
+  <h2 pdk-typography="heading-medium" pdk-margin-bottom="6">Hearing details</h2>
+  <dl pdk-margin-top="4" pdk-margin-bottom="3">
+    @for (key of hearingDetailsKeys; track key) {
+      @if (hearingDetailsLabels[key] !== hearingDetailsLabels.multiDayHearing) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="3"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third>
+            <b>{{ hearingDetailsLabels[key] }}</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0">
+            <span>{{ hearingToRemove[key] ?? '-' }}</span>
+          </dd>
+        </div>
+      } @else {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="3"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third>
+            <b>{{ hearingDetailsLabels.multiDayHearing }}</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0">
+            <span>{{ hearingToRemove?.multiDayHearing?.isMultiDay }}</span>
+            <div class="flex-display flex-display-column">
+              <div>
+                <span> Start date:&nbsp; </span>
+                <span> {{ hearingToRemove?.multiDayHearing?.startDate | date: 'dd/MM/yyyy' }}</span>
+              </div>
+              <div>
+                <span> End date:&nbsp; </span>
+                <span> {{ hearingToRemove?.multiDayHearing?.endDate | date: 'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+          </dd>
+        </div>
+      }
+    }
+  </dl>
+</pdk-grid>
+<pdk-grid two-thirds>
+  <form
+    data-test-id="removeHearingForm"
+    #form="ngForm"
+    extended
+    pdk-form
+    (validSubmit)="removeHearing(form.value)"
+    (errors)="onValidateError.emit($event)"
+  >
+    <pdk-form-field
+      label="Why do you want to remove this hearing?"
+      labelType="small"
+      [errorMessages]="[
+        {
+          rule: 'required',
+          message: 'Enter a reason why you want to remove this hearing'
+        }
+      ]"
+    >
+      <textarea pdk-text-input pdk-resize required name="reason" ngModel></textarea>
+    </pdk-form-field>
+    <div class="flex-display" [ngStyle]="{ 'align-items': 'baseline' }">
+      <button pdk-button="warning" type="submit" pdk-margin-right="5">Yes, remove hearing</button>
+      <a
+        data-test-id="cancel-remove-hearing"
+        pdk-link
+        unvisited
+        href="javascript:void(0)"
+        (click)="cancel.emit()"
+        >Cancel</a
+      >
+    </div>
+  </form>
+</pdk-grid>

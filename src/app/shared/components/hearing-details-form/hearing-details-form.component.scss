@@ -1,0 +1,17 @@
+form {
+  ::ng-deep .multiple-choice label {
+    padding-right: 4px;
+  }
+}
+
+.hearing-details-form {
+  pdk-checkbox-conditional {
+    & > div {
+      padding-left: 15px !important;
+    }
+  }
+}
+
+.pdk-autosuggest__input {
+  padding-right: 0;
+}

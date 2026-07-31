@@ -1,0 +1,1209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sequence Group When drag Start drag End 1`] = `
+<test-sequence-group
+  hearings={[Function Array]}
+  updated={[Function Function]}
+>
+  <sequence-group
+    name="test-group"
+  >
+    <div
+      class="sequence-group"
+    >
+      <div
+        class="group-name"
+      >
+        <span
+          class="group-label"
+        >
+          test-group
+        </span>
+      </div>
+      <div
+        class="group-content"
+      >
+        <tree-root>
+          <tree-viewport>
+            <div
+              style="height: auto;"
+            >
+              <div
+                class="angular-tree-component"
+              >
+                <tree-node-collection>
+                  <div
+                    style="margin-top: 0px;"
+                  >
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-drop-slot
+                          class="top-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                          <div>
+                                            + 1 other
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a46"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                          <div>
+                                            + 2 others
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                  </div>
+                </tree-node-collection>
+              </div>
+            </div>
+          </tree-viewport>
+        </tree-root>
+      </div>
+    </div>
+  </sequence-group>
+</test-sequence-group>
+`;
+
+exports[`Sequence Group When drag Start drag Start 1`] = `
+<test-sequence-group
+  hearings={[Function Array]}
+  updated={[Function Function]}
+>
+  <sequence-group
+    name="test-group"
+  >
+    <div
+      class="sequence-group active-drop-zones"
+    >
+      <div
+        class="group-name"
+      >
+        <span
+          class="group-label"
+        >
+          test-group
+        </span>
+      </div>
+      <div
+        class="group-content"
+      >
+        <tree-root>
+          <tree-viewport>
+            <div
+              style="height: auto;"
+            >
+              <div
+                class="angular-tree-component"
+              >
+                <tree-node-collection>
+                  <div
+                    style="margin-top: 0px;"
+                  >
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf hide-drop-zones dragging"
+                      >
+                        <tree-node-drop-slot
+                          class="top-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                          <div>
+                                            + 1 other
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                    <tree-node
+                      class="next-tree-node"
+                    >
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a46"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                          <div>
+                                            + 2 others
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                  </div>
+                </tree-node-collection>
+              </div>
+            </div>
+          </tree-viewport>
+        </tree-root>
+      </div>
+    </div>
+  </sequence-group>
+</test-sequence-group>
+`;
+
+exports[`Sequence Group should render correctly 1`] = `
+<test-sequence-group
+  hearings={[Function Array]}
+  updated={[Function Function]}
+>
+  <sequence-group
+    name="test-group"
+  >
+    <div
+      class="sequence-group"
+    >
+      <div
+        class="group-name"
+      >
+        <span
+          class="group-label"
+        >
+          test-group
+        </span>
+      </div>
+      <div
+        class="group-content"
+      >
+        <tree-root>
+          <tree-viewport>
+            <div
+              style="height: auto;"
+            >
+              <div
+                class="angular-tree-component"
+              >
+                <tree-node-collection>
+                  <div
+                    style="margin-top: 0px;"
+                  >
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-drop-slot
+                          class="top-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                          <div>
+                                            + 1 other
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                    <tree-node>
+                      <div
+                        class="tree-node-level-1 tree-node tree-node-leaf"
+                      >
+                        <tree-node-wrapper>
+                          <div
+                            class="node-wrapper"
+                            style="padding-left: 0px;"
+                          >
+                            <tree-node-expander>
+                              <span
+                                class="toggle-children-placeholder"
+                              />
+                            </tree-node-expander>
+                            <div
+                              class="node-content-wrapper"
+                              draggable="true"
+                            >
+                              <tree-node-content>
+                                <div
+                                  class="drag_item"
+                                  id="b1bfe644-15d3-46aa-bdeb-fe8d18c16a46"
+                                >
+                                  <sequence-item>
+                                    <div
+                                      class="sequence-item-wrapper"
+                                    >
+                                      <div
+                                        class="sequence-item"
+                                      >
+                                        <span
+                                          class="govuk-visually-hidden"
+                                          data-test-id="hearingStartTime"
+                                          pdk-visually-hidden=""
+                                        >
+                                          test-group
+                                        </span>
+                                        <div
+                                          class="seq-col defendants"
+                                        >
+                                          <span
+                                            data-test-id="firstDefendantName"
+                                          >
+                                            Harry KANE JUNIOR
+                                          </span>
+                                          <div>
+                                            + 2 others
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="seq-col estimate"
+                                        >
+                                          <hearing-estimate>
+                                            <div>
+                                              5 hours
+                                            </div>
+                                          </hearing-estimate>
+                                        </div>
+                                        <div
+                                          class="seq-col description"
+                                        >
+                                          Further plea & trial preparation
+                                        </div>
+                                        <div
+                                          class="seq-col offence"
+                                        >
+                                          Wound / inflict grievous bodily harm without intent
+                                        </div>
+                                        <div
+                                          class="seq-col drag-handle"
+                                        >
+                                          <i
+                                            class="listing-vector-icon drag_icon"
+                                          >
+                                            <svg
+                                              class="pdk-!-text-color-black"
+                                              height="100%"
+                                              pdk-text-colour="black"
+                                              width="100%"
+                                            >
+                                              <use
+                                                xlink:href="assets\\svg-icons-definitions.svg#list"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </sequence-item>
+                                </div>
+                              </tree-node-content>
+                            </div>
+                          </div>
+                        </tree-node-wrapper>
+                        <tree-node-children>
+                          <div
+                            class="tree-children"
+                          >
+                            <tree-loading-component
+                              class="tree-node-loading"
+                              style="padding-left: 0px;"
+                            >
+                              <span>
+                                loading...
+                              </span>
+                            </tree-loading-component>
+                          </div>
+                        </tree-node-children>
+                        <tree-node-drop-slot
+                          class="bottom-slot"
+                        >
+                          <div
+                            class="node-drop-slot"
+                          />
+                        </tree-node-drop-slot>
+                      </div>
+                    </tree-node>
+                  </div>
+                </tree-node-collection>
+              </div>
+            </div>
+          </tree-viewport>
+        </tree-root>
+      </div>
+    </div>
+  </sequence-group>
+</test-sequence-group>
+`;

@@ -1,0 +1,21 @@
+<div class="datepicker">
+  <div class="flex-column">
+    <pdk-date-input
+      #datePicker
+      name="datePicker"
+      (blur)="blur.emit($event)"
+      required
+      [id]="id"
+      [ariaDescribedBy]="ariaDescribedBy"
+      [minDate]="minDate()"
+      (ngModelChange)="onValueChange($event)"
+      [ngModel]="dateValue"
+      picker
+    ></pdk-date-input>
+    @if (isValidDate()) {
+    <pdk-inset-text pdk-margin-top="5" pdk-margin-bottom="1" role="status">
+      Selected day: {{ getWeekDay() }}
+    </pdk-inset-text>
+    }
+  </div>
+</div>

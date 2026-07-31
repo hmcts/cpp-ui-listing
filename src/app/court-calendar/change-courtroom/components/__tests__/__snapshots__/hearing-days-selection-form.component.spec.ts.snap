@@ -1,0 +1,536 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingDaysSelectionFormComponent should create the component 1`] = `
+<hearing-days-selection-form
+  allUpcomingHearingDays={[Function Function]}
+  courtCentreName={[Function Function]}
+  courtRoomOptions={[Function Function]}
+  dateUtil={[Function CPPDate]}
+  endDate={[Function Function]}
+  hasOnlyTodayHearingDay="false"
+  onChangeForAllNavigate={[Function OutputEmitterRef]}
+  onSelectionNavigate={[Function OutputEmitterRef]}
+  onValidationError={[Function OutputEmitterRef]}
+  selectedCourtRoomId="null"
+  selectedHearingDateValues={[Function Function]}
+  selectedHearingDays={[Function Function]}
+  startDate={[Function Function]}
+  totalHearingDaysCount={[Function Function]}
+>
+  <div
+    class="result-summary"
+  >
+    <p
+      class="summary-text govuk-!-margin-top-1 govuk-body-m"
+      pdk-margin-top="1"
+      pdk-typography="body"
+    >
+       Showing 
+      <span>
+         3 
+         hearing days
+      </span>
+       of 10 hearing days 
+      <strong>
+         between  and  
+      </strong>
+       at 
+      <strong>
+        Croydon Crown Court
+      </strong>
+    </p>
+    <div>
+      <button
+        class="govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+        pdk-button="secondary"
+        pdk-margin-bottom="3"
+      >
+         Change courtroom for upcoming hearing days 
+      </button>
+    </div>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <form
+        class="ng-untouched ng-pristine ng-valid"
+        data-test-id="hearingDetailsForm"
+        novalidate=""
+        pdk-form=""
+      >
+        <pdk-form-field
+          class="govuk-!-margin-top-3"
+          label="Hearing days"
+          labeltype="small"
+          pdk-margin-top="3"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-fieldset__legend--s"
+              >
+                 Hearing days 
+              </legend>
+              <pdk-checkbox-group
+                checkboxtype="small"
+                class="ng-untouched ng-pristine ng-valid"
+                name="hearingDaysSelection"
+              >
+                <div
+                  class="govuk-checkboxes"
+                >
+                  <hearing-days-table>
+                    <table
+                      class="govuk-table"
+                      data-test-id="hearingDayList"
+                      pdk-table=""
+                    >
+                      <thead
+                        class="govuk-table__head"
+                        pdk-table-head=""
+                      >
+                        <tr
+                          class="govuk-table__row"
+                          pdk-table-row=""
+                        >
+                          <th
+                            class="govuk-table__cell"
+                            pdk-table-header=""
+                            scope="col"
+                          >
+                            <pdk-checkbox
+                              checkboxtype="small"
+                              class="govuk-!-margin-bottom-4 govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                              name="selectAllHearingDays"
+                              pdk-margin-bottom="4"
+                            >
+                              <div
+                                class="govuk-checkboxes__item"
+                              >
+                                <input
+                                  class="govuk-checkboxes__input"
+                                  id="pdk-checkbox-GENERATED_ID"
+                                  name="selectAllHearingDays"
+                                  type="checkbox"
+                                  value="true"
+                                />
+                                <label
+                                  class="govuk-label govuk-checkboxes__label"
+                                  for="pdk-checkbox-GENERATED_ID"
+                                >
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                  >
+                                     Select all hearing days 
+                                  </span>
+                                </label>
+                              </div>
+                            </pdk-checkbox>
+                          </th>
+                          <th
+                            class="govuk-table__cell"
+                            pdk-table-header=""
+                            scope="col"
+                          >
+                            Date
+                          </th>
+                          <th
+                            class="govuk-table__cell"
+                            pdk-table-header=""
+                            scope="col"
+                          >
+                            Court Details
+                          </th>
+                          <th
+                            class="govuk-table__cell"
+                            pdk-table-header=""
+                            scope="col"
+                          >
+                            Duration
+                          </th>
+                          <th
+                            class="govuk-table__cell"
+                            pdk-table-header=""
+                            scope="col"
+                          >
+                            Allocated Courtroom
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        class="govuk-table__body"
+                        pdk-table-body=""
+                      >
+                        <tr
+                          class="govuk-table__row"
+                          data-test-id="sessionListItem"
+                          pdk-table-row=""
+                        >
+                          <td
+                            class="govuk-table__cell"
+                            pdk-table-cell=""
+                          >
+                            <pdk-checkbox
+                              checkboxtype="small"
+                              class="govuk-checkboxes govuk-checkboxes--small"
+                            >
+                              <div
+                                class="govuk-checkboxes__item"
+                              >
+                                <input
+                                  class="govuk-checkboxes__input"
+                                  id="pdk-checkbox-GENERATED_ID"
+                                  name="pdk-checkbox-group-GENERATED_ID"
+                                  type="checkbox"
+                                  value="2025-06-17"
+                                />
+                                <label
+                                  class="govuk-label govuk-checkboxes__label"
+                                  for="pdk-checkbox-GENERATED_ID"
+                                >
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                  >
+                                     select this hearing date 
+                                    <span
+                                      aria-hidden="true"
+                                    >
+                                      17-06-2025
+                                    </span>
+                                  </span>
+                                </label>
+                              </div>
+                            </pdk-checkbox>
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="date"
+                            pdk-table-cell=""
+                          >
+                             17-06-2025 
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="courtDetails"
+                            pdk-table-cell=""
+                          >
+                            Croydon Crown Court
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="duration"
+                            pdk-table-cell=""
+                          >
+                            <duration-cell>
+                              <div
+                                class="offences"
+                                data-test-id="duartion"
+                              >
+                                <div>
+                                  2 hours
+                                </div>
+                                <pdk-tag
+                                  class="govuk-!-margin-top-2"
+                                  condensed=""
+                                  pdk-margin-top="2"
+                                >
+                                  <div
+                                    class="govuk-tag govuk-tag--turquoise pdk-tag--condensed"
+                                  >
+                                    <span>
+                                       Day 3 of 10
+                                    </span>
+                                  </div>
+                                </pdk-tag>
+                              </div>
+                            </duration-cell>
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="courtRoomDetails"
+                            pdk-table-cell=""
+                          >
+                             Room 1 
+                          </td>
+                        </tr>
+                        <tr
+                          class="govuk-table__row"
+                          data-test-id="sessionListItem"
+                          pdk-table-row=""
+                        >
+                          <td
+                            class="govuk-table__cell"
+                            pdk-table-cell=""
+                          >
+                            <pdk-checkbox
+                              checkboxtype="small"
+                              class="govuk-checkboxes govuk-checkboxes--small"
+                            >
+                              <div
+                                class="govuk-checkboxes__item"
+                              >
+                                <input
+                                  class="govuk-checkboxes__input"
+                                  id="pdk-checkbox-GENERATED_ID"
+                                  name="pdk-checkbox-group-GENERATED_ID"
+                                  type="checkbox"
+                                  value="2025-06-18"
+                                />
+                                <label
+                                  class="govuk-label govuk-checkboxes__label"
+                                  for="pdk-checkbox-GENERATED_ID"
+                                >
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                  >
+                                     select this hearing date 
+                                    <span
+                                      aria-hidden="true"
+                                    >
+                                      18-06-2025
+                                    </span>
+                                  </span>
+                                </label>
+                              </div>
+                            </pdk-checkbox>
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="date"
+                            pdk-table-cell=""
+                          >
+                             18-06-2025 
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="courtDetails"
+                            pdk-table-cell=""
+                          >
+                            Croydon Crown Court
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="duration"
+                            pdk-table-cell=""
+                          >
+                            <duration-cell>
+                              <div
+                                class="offences"
+                                data-test-id="duartion"
+                              >
+                                <div>
+                                  2 hours
+                                </div>
+                                <pdk-tag
+                                  class="govuk-!-margin-top-2"
+                                  condensed=""
+                                  pdk-margin-top="2"
+                                >
+                                  <div
+                                    class="govuk-tag govuk-tag--turquoise pdk-tag--condensed"
+                                  >
+                                    <span>
+                                       Day 4 of 10
+                                    </span>
+                                  </div>
+                                </pdk-tag>
+                              </div>
+                            </duration-cell>
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="courtRoomDetails"
+                            pdk-table-cell=""
+                          >
+                             Room 1 
+                          </td>
+                        </tr>
+                        <tr
+                          class="govuk-table__row"
+                          data-test-id="sessionListItem"
+                          pdk-table-row=""
+                        >
+                          <td
+                            class="govuk-table__cell"
+                            pdk-table-cell=""
+                          >
+                            <pdk-checkbox
+                              checkboxtype="small"
+                              class="govuk-checkboxes govuk-checkboxes--small"
+                            >
+                              <div
+                                class="govuk-checkboxes__item"
+                              >
+                                <input
+                                  class="govuk-checkboxes__input"
+                                  id="pdk-checkbox-GENERATED_ID"
+                                  name="pdk-checkbox-group-GENERATED_ID"
+                                  type="checkbox"
+                                  value="2025-06-19"
+                                />
+                                <label
+                                  class="govuk-label govuk-checkboxes__label"
+                                  for="pdk-checkbox-GENERATED_ID"
+                                >
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                  >
+                                     select this hearing date 
+                                    <span
+                                      aria-hidden="true"
+                                    >
+                                      19-06-2025
+                                    </span>
+                                  </span>
+                                </label>
+                              </div>
+                            </pdk-checkbox>
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="date"
+                            pdk-table-cell=""
+                          >
+                             19-06-2025 
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="courtDetails"
+                            pdk-table-cell=""
+                          >
+                            Croydon Crown Court
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="duration"
+                            pdk-table-cell=""
+                          >
+                            <duration-cell>
+                              <div
+                                class="offences"
+                                data-test-id="duartion"
+                              >
+                                <div>
+                                  2 hours
+                                </div>
+                                <pdk-tag
+                                  class="govuk-!-margin-top-2"
+                                  condensed=""
+                                  pdk-margin-top="2"
+                                >
+                                  <div
+                                    class="govuk-tag govuk-tag--turquoise pdk-tag--condensed"
+                                  >
+                                    <span>
+                                       Day 5 of 10
+                                    </span>
+                                  </div>
+                                </pdk-tag>
+                              </div>
+                            </duration-cell>
+                          </td>
+                          <td
+                            class="govuk-table__cell"
+                            data-test-id="courtRoomDetails"
+                            pdk-table-cell=""
+                          >
+                             Room 1 
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </hearing-days-table>
+                </div>
+              </pdk-checkbox-group>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <div
+          class="filter-item"
+        >
+          <pdk-form-field
+            hinttext="Select new courtroom for the hearing(s)"
+            label="Select courtroom"
+            labeltype="small"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <label
+                class="govuk-label govuk-label--s"
+                for="pdk-select-GENERATED_ID"
+              >
+                 Select courtroom 
+              </label>
+              <pdk-hint
+                class="govuk-hint"
+              >
+                <div>
+                   Select new courtroom for the hearing(s) 
+                </div>
+              </pdk-hint>
+              <pdk-select
+                class="ng-untouched ng-pristine ng-valid"
+                placeholder="Select a courtroom"
+                required=""
+              >
+                <select
+                  class="govuk-select"
+                  id="pdk-select-GENERATED_ID"
+                  name="courtRoomId"
+                  required=""
+                >
+                  <option
+                    value=""
+                  >
+                    Select a courtroom
+                  </option>
+                  <option
+                    value="room-1"
+                  >
+                     Room 1 
+                  </option>
+                  <option
+                    value="room-2"
+                  >
+                     Room 2 
+                  </option>
+                  <option
+                    value="room-3"
+                  >
+                     Room 3 
+                  </option>
+                </select>
+              </pdk-select>
+            </pdk-form-group>
+          </pdk-form-field>
+        </div>
+        <div>
+          <button
+            aria-label="continue"
+            class="govuk-!-margin-bottom-0 govuk-button"
+            pdk-button=""
+            pdk-margin-bottom="0"
+            type="submit"
+          >
+             Continue 
+          </button>
+        </div>
+      </form>
+    </pdk-grid>
+  </pdk-grid>
+</hearing-days-selection-form>
+`;

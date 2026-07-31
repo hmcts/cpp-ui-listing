@@ -1,0 +1,1351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadListComponent judge list should NOT show when a magistrates court is selected 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file alpha govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Alphabetical list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent judge list should NOT show when week commencing is selected 1`] = `
+<ng-component
+  crownSelected={[Function Boolean]}
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <ul
+            class="govuk-list"
+            pdk-list=""
+          >
+            <li>
+              <h2
+                class="govuk-heading-m"
+                pdk-typography="heading-medium"
+              >
+                Publish list
+              </h2>
+            </li>
+            <li>
+              <button
+                class="download-file warn auto-width govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                data-role="sharewarnlists-button"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span
+                  class="govuk-body-m"
+                  pdk-typography="body"
+                >
+                  Share warn list
+                </span>
+              </button>
+              <span
+                class="pdk-!-text-color-dark-grey govuk-body-s"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+                style="display: block;"
+              >
+              </span>
+            </li>
+            <li>
+              <button
+                class="download-file firm auto-width govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                data-role="sharedfirmlists-button"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span
+                  class="govuk-body-m"
+                  pdk-typography="body"
+                >
+                  Share firm list
+                </span>
+              </button>
+              <span
+                class="pdk-!-text-color-dark-grey govuk-body-s"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+                style="display: block;"
+              >
+              </span>
+            </li>
+          </ul>
+        </div>
+      </pdk-related>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+        </div>
+      </pdk-related>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent judge list should show when a crown court is selected and is not week commencing 1`] = `
+<ng-component
+  crownSelected={[Function Boolean]}
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <div
+            class="govuk-!-margin-bottom-4"
+            pdk-margin-bottom="4"
+          >
+            <h2
+              class="govuk-heading-m"
+              pdk-typography="heading-medium"
+            >
+              Upcoming hearings
+            </h2>
+            <a
+              class="link-btn govuk-link"
+              data-role="upcoming-hearings-download"
+              href="javascript:void(0)"
+              pdk-link=""
+            >
+               Download upcoming hearings report 
+            </a>
+          </div>
+        </div>
+      </pdk-related>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <ul
+            class="govuk-list"
+            pdk-list=""
+          >
+            <li>
+              <h2
+                class="govuk-heading-m"
+                pdk-typography="heading-medium"
+              >
+                Publish list
+              </h2>
+            </li>
+            <li>
+              <button
+                class="download-file draft auto-width govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                data-role="sharedraftlists-button"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span
+                  class="govuk-body-m"
+                  pdk-typography="body"
+                >
+                  Share draft list
+                </span>
+              </button>
+              <span
+                class="govuk-!-margin-bottom-5 pdk-!-text-color-dark-grey govuk-body-s"
+                pdk-margin-bottom="5"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+                style="display: block;"
+              >
+              </span>
+            </li>
+            <li>
+              <button
+                class="download-file final auto-width govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                data-role="sharedfinallists-button"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span
+                  class="govuk-body-m"
+                  pdk-typography="body"
+                >
+                  Share final list
+                </span>
+              </button>
+              <span
+                class="pdk-!-text-color-dark-grey govuk-body-s"
+                data-role="publish-status-message-final"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+                style="display: block;"
+              >
+              </span>
+            </li>
+          </ul>
+        </div>
+      </pdk-related>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <ul
+            class="download-file judge govuk-list"
+            pdk-list=""
+          >
+            <li>
+              <h2
+                class="govuk-heading-m"
+                pdk-typography="heading-medium"
+              >
+                Judge's list
+              </h2>
+            </li>
+            <li>
+              <a
+                class="judgelist-0 govuk-link"
+                href="javascript:void(0)"
+                pdk-link=""
+              >
+                Courtroom 01
+              </a>
+            </li>
+            <li>
+              <a
+                class="judgelist-1 govuk-link"
+                href="javascript:void(0)"
+                pdk-link=""
+              >
+                Courtroom 02
+              </a>
+            </li>
+          </ul>
+        </div>
+      </pdk-related>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <ul
+            class="govuk-list"
+            pdk-list=""
+          >
+            <li>
+              <h2
+                class="govuk-heading-m"
+                pdk-typography="heading-medium"
+              >
+                Ushers' list
+              </h2>
+            </li>
+            <li>
+              <button
+                class="download-file usher auto-width govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                data-role="usherslist-button"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span
+                  class="govuk-body-m"
+                  pdk-typography="body"
+                >
+                  All courtrooms
+                </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should create 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file alpha govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Alphabetical list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should hide alphabetical court list btn if selected courtRoom is not All courtrooms OR date is not week commencing 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           Courtroom 05 
+        </div>
+      </pdk-inset-text>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+          <button
+            class="download-file standard restrict govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+            x-auto-restrict-download=""
+          >
+            <span>
+              Standard court list
+            </span>
+          </button>
+          <button
+            class="download-file bench govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Bench list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should hide restrict court list btn if selected courtRoom is All courtrooms AND date is week commencing 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           Week commencing 18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should hide standard court list btn when All Courtrooms is selected 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           Week commencing 18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should show Public & Alphabetical & Standard & Usher & Online Public list buttons if -> courtRoom=All && date!=weekCommencing && restricted=false 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="false"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file alpha govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Alphabetical list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should show Public & Alphabetical & Standard & Usher & Restricted list buttons if -> courtRoom=All && date!=weekCommencing && restricted=true 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist={[Function Boolean]}
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file alpha govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Alphabetical list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should show Public & Alphabetical & Standard & Usher list buttons if -> courtRoom=All && date!=weekCommencing 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           All Courtrooms 
+        </div>
+      </pdk-inset-text>
+      <mags-publish-list>
+        <h2
+          class="govuk-heading-m"
+          pdk-typography="heading-medium"
+        >
+          Publish a list
+        </h2>
+        <ul
+          class="govuk-list"
+          pdk-list=""
+        >
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Online public court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+          <li
+            mags-publish-list-item=""
+          >
+            <div
+              class="govuk-!-margin-bottom-3"
+              pdk-margin-bottom="3"
+            >
+              <button
+                class="download-file govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span>
+                  Standard court list
+                </span>
+              </button>
+              <div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </mags-publish-list>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file alpha govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Alphabetical list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should show bench list btn if selected courtRoom is not All courtrooms AND date is not week commencing 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist="null"
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           Courtroom 05 
+        </div>
+      </pdk-inset-text>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+          <button
+            class="download-file standard restrict govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+            x-auto-restrict-download=""
+          >
+            <span>
+              Standard court list
+            </span>
+          </button>
+          <button
+            class="download-file bench govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Bench list
+            </span>
+          </button>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;
+
+exports[`DownloadListComponent should show bench restrict btn if courtRoom is selected, date is not week commencing, AND restricted is true 1`] = `
+<ng-component
+  crownSelected="false"
+  hearingsByDateAndRoom={[Function Array]}
+  isHmctsUser={[Function Boolean]}
+  magPublishListPermissions={[Function Object]}
+  restrictionsExist={[Function Boolean]}
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+  weekHearingsByDateAndRoom={[Function Array]}
+>
+  <download-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+           Courtroom 05 
+        </div>
+      </pdk-inset-text>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <h2
+            class="govuk-heading-m"
+            pdk-typography="heading-medium"
+          >
+            Downloads
+          </h2>
+          <button
+            class="button download-file public govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Public court list
+            </span>
+          </button>
+          <button
+            class="download-file usher govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Ushers' list
+            </span>
+          </button>
+          <button
+            class="download-file standard restrict govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+            x-auto-restrict-download=""
+          >
+            <span>
+              Standard court list
+            </span>
+          </button>
+          <button
+            class="download-file bench govuk-button govuk-button--secondary"
+            pdk-button="secondary"
+            type="button"
+          >
+            <span>
+              Bench list
+            </span>
+          </button>
+          <pdk-inset-text>
+            <div
+              class="govuk-inset-text"
+            >
+              <button
+                class="download-file bench-restrict govuk-button govuk-button--secondary"
+                pdk-button="secondary"
+                type="button"
+                x-auto-restrict-download=""
+              >
+                <span>
+                  Bench list Restricted
+                </span>
+              </button>
+            </div>
+          </pdk-inset-text>
+        </div>
+      </pdk-related>
+    </div>
+  </download-list>
+</ng-component>
+`;

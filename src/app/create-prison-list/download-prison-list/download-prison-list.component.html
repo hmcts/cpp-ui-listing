@@ -1,0 +1,20 @@
+@if (isPrisonAdminOrHmctsUser() && hasAllocatedHearingsByDateRange()) {
+  <div>
+    @if (!crownSelected()) {
+      <pdk-inset-text> {{ selectedDate }} <br /> </pdk-inset-text>
+    }
+    <button
+      pdk-button="secondary"
+      type="button"
+      class="download-file prison-list"
+      (click)="downloadPrisonList(false)"
+    >
+      <span>Prison list</span>
+      <i class="listing-vector-icon" pdk-text-colour="black">
+        <svg width="100%" height="100%">
+          <use [attr.xlink:href]="'assets\\svg-icons-definitions.svg#arrow-right-action'"></use>
+        </svg>
+      </i>
+    </button>
+  </div>
+}

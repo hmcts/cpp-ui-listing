@@ -1,0 +1,2125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnscheduledListingsContainer should dispatch ListUnscheduledHearingsAction if page is visited 1`] = `
+<ng-component>
+  <unscheduled-listings-container>
+    <div
+      class="govuk-!-margin-top-2"
+      pdk-margin-top="2"
+    >
+      <breadcrumbs>
+        <ol
+          class="govuk-breadcrumbs govuk-breadcrumbs__list"
+          pdk-breadcrumb-list=""
+        >
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <a
+              class="govuk-breadcrumbs__link"
+              href="http://url.com"
+              pdk-breadcrumb=""
+              title="Home"
+            >
+               Home 
+            </a>
+          </li>
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <span>
+              Unscheduled list
+            </span>
+          </li>
+        </ol>
+      </breadcrumbs>
+      <div
+        class="hearing-listings"
+      >
+        <h1
+          class="govuk-!-margin-bottom-1 govuk-!-margin-top-2 govuk-heading-l"
+          pdk-margin-bottom="1"
+          pdk-margin-top="2"
+          pdk-typography="heading-large"
+        >
+           Unscheduled list 
+        </h1>
+        <div>
+          <unscheduled-listings-filters>
+            <div
+              class="hearing-filters-form pdk-!-fill-color-light-grey govuk-!-padding-4 govuk-!-margin-top-3"
+              pdk-fill-colour="light-grey"
+              pdk-margin-top="3"
+              pdk-padding="4"
+            >
+              <form
+                class="ng-untouched ng-pristine ng-valid"
+                novalidate=""
+                pdk-form=""
+              >
+                <h1
+                  class="govuk-!-margin-bottom-1 govuk-heading-s"
+                  pdk-margin-bottom="1"
+                  pdk-typography="heading-small"
+                >
+                  Filter by:
+                </h1>
+                <pdk-grid
+                  class="govuk-grid-row"
+                  container=""
+                >
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Operational unit"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="oucodeL2Code"
+                        >
+                           Operational unit 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="oucodeL2Code"
+                            name="oucodeL2Code"
+                            required=""
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose organisation unit 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Court"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="pdk-form-control-undefined-GENERATED_ID"
+                        >
+                           Court 
+                        </label>
+                        <pdk-autosuggest-lite
+                          class="unscheduled-listing-court ng-untouched ng-pristine ng-valid"
+                          name="courtCentreId"
+                          required=""
+                          suggestionkey="value"
+                          suggestiontitle="label"
+                        >
+                          <pdk-autosuggest
+                            highlightcolor="blue"
+                          >
+                            <pdk-interaction-container>
+                              <div>
+                                <div
+                                  class="pdk-autosuggest"
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                                    aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                                    aria-expanded="false"
+                                    autocomplete="off"
+                                    class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                                    id="pdk-form-control-undefined-GENERATED_ID"
+                                    role="combobox"
+                                    type="text"
+                                  />
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    id="pdk-autosuggest__instructions-GENERATED_ID"
+                                    pdk-visually-hidden=""
+                                  >
+                                     When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                                  </span>
+                                  <span
+                                    aria-live="polite"
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                    role="status"
+                                  >
+                                  </span>
+                                  <div
+                                    class="pdk-autosuggest__suggestions-container"
+                                    id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                                  >
+                                    <ul
+                                      aria-label="Auto suggest options"
+                                      class="pdk-autosuggest__options"
+                                      id="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox-0"
+                                      role="listbox"
+                                    >
+                                      <li
+                                        aria-posinset="1"
+                                        aria-selected="false"
+                                        aria-setsize="1"
+                                        id="ALL"
+                                        role="option"
+                                        tabindex="-1"
+                                      >
+                                        <pdk-autosuggest-option>
+                                          <div
+                                            class="pdk-autosuggest__suggestion"
+                                          >
+                                            <span
+                                              class="pdk-!-text-color-black govuk-body-s"
+                                              pdk-typography="body-small"
+                                            >
+                                              All courts
+                                            </span>
+                                            <br />
+                                          </div>
+                                        </pdk-autosuggest-option>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </pdk-interaction-container>
+                          </pdk-autosuggest>
+                        </pdk-autosuggest-lite>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Type"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="typeOfList"
+                        >
+                           Type 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="typeOfList"
+                            name="typeOfList"
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose type 
+                            </option>
+                            <option
+                              value="c98cb51f-8639-49c1-91f0-a7e820c34355"
+                            >
+                               Warrant for arrest without bail 
+                            </option>
+                            <option
+                              value="ed34136f-2a13-45a4-8d4f-27075ae3a8a9"
+                            >
+                               Warrant for arrest for community penalty without bail 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="URN"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="urn-field"
+                        >
+                           URN 
+                        </label>
+                        <input
+                          class="ng-untouched ng-pristine ng-valid govuk-input"
+                          id="urn-field"
+                          name="caseUrn"
+                          pdk-input=""
+                          pdk-text-input=""
+                          type="text"
+                        />
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                </pdk-grid>
+                <div
+                  class="controls govuk-!-margin-bottom-1 govuk-!-margin-right-1"
+                  pdk-margin-bottom="1"
+                  pdk-margin-right="1"
+                >
+                  <button
+                    class="govuk-!-margin-bottom-1 govuk-button"
+                    data-role="apply-filters-btn"
+                    pdk-button=""
+                    pdk-margin-bottom="1"
+                    type="submit"
+                  >
+                     Apply filters 
+                  </button>
+                  <a
+                    class="govuk-!-margin-2 govuk-link"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin="2"
+                  >
+                     Clear filters 
+                  </a>
+                </div>
+              </form>
+            </div>
+          </unscheduled-listings-filters>
+        </div>
+        <pdk-inset-text>
+          <div
+            class="govuk-inset-text"
+          >
+            <b>
+              2 items returned
+            </b>
+          </div>
+        </pdk-inset-text>
+        <div>
+          <unscheduled-listings-table>
+            <div
+              class="govuk-grid-row"
+              container=""
+              pdk-grid=""
+            >
+              <div
+                class="govuk-grid-column-full"
+                full=""
+                pdk-grid=""
+              >
+                <table
+                  class="govuk-table"
+                  data-test-id="unscheduledHearingList"
+                  pdk-table=""
+                >
+                  <thead
+                    class="govuk-table__head"
+                    pdk-table-head=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      pdk-table-row=""
+                    >
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Name
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        DOB
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Case Reference
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Type of list
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-defendantId"
+                      name="defendantId"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-defendantId"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         firstName lastName 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         28 September 1983 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View case details of firstName lastName – caseReference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/case-at-a-glance/listedCaseId"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          caseReference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for case caseReference"
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         ApplicantFirstName1 ApplicantLastName1 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        -
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          Test-application-reference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div />
+              </div>
+            </div>
+          </unscheduled-listings-table>
+        </div>
+      </div>
+    </div>
+  </unscheduled-listings-container>
+</ng-component>
+`;
+
+exports[`UnscheduledListingsContainer should match snapshot with hearings 1`] = `
+<ng-component>
+  <unscheduled-listings-container>
+    <div
+      class="govuk-!-margin-top-2"
+      pdk-margin-top="2"
+    >
+      <breadcrumbs>
+        <ol
+          class="govuk-breadcrumbs govuk-breadcrumbs__list"
+          pdk-breadcrumb-list=""
+        >
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <a
+              class="govuk-breadcrumbs__link"
+              href="http://url.com"
+              pdk-breadcrumb=""
+              title="Home"
+            >
+               Home 
+            </a>
+          </li>
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <span>
+              Unscheduled list
+            </span>
+          </li>
+        </ol>
+      </breadcrumbs>
+      <div
+        class="hearing-listings"
+      >
+        <h1
+          class="govuk-!-margin-bottom-1 govuk-!-margin-top-2 govuk-heading-l"
+          pdk-margin-bottom="1"
+          pdk-margin-top="2"
+          pdk-typography="heading-large"
+        >
+           Unscheduled list 
+        </h1>
+        <div>
+          <unscheduled-listings-filters>
+            <div
+              class="hearing-filters-form pdk-!-fill-color-light-grey govuk-!-padding-4 govuk-!-margin-top-3"
+              pdk-fill-colour="light-grey"
+              pdk-margin-top="3"
+              pdk-padding="4"
+            >
+              <form
+                class="ng-untouched ng-pristine ng-valid"
+                novalidate=""
+                pdk-form=""
+              >
+                <h1
+                  class="govuk-!-margin-bottom-1 govuk-heading-s"
+                  pdk-margin-bottom="1"
+                  pdk-typography="heading-small"
+                >
+                  Filter by:
+                </h1>
+                <pdk-grid
+                  class="govuk-grid-row"
+                  container=""
+                >
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Operational unit"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="oucodeL2Code"
+                        >
+                           Operational unit 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="oucodeL2Code"
+                            name="oucodeL2Code"
+                            required=""
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose organisation unit 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Court"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="pdk-form-control-undefined-GENERATED_ID"
+                        >
+                           Court 
+                        </label>
+                        <pdk-autosuggest-lite
+                          class="unscheduled-listing-court ng-untouched ng-pristine ng-valid"
+                          name="courtCentreId"
+                          required=""
+                          suggestionkey="value"
+                          suggestiontitle="label"
+                        >
+                          <pdk-autosuggest
+                            highlightcolor="blue"
+                          >
+                            <pdk-interaction-container>
+                              <div>
+                                <div
+                                  class="pdk-autosuggest"
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                                    aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                                    aria-expanded="false"
+                                    autocomplete="off"
+                                    class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                                    id="pdk-form-control-undefined-GENERATED_ID"
+                                    role="combobox"
+                                    type="text"
+                                  />
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    id="pdk-autosuggest__instructions-GENERATED_ID"
+                                    pdk-visually-hidden=""
+                                  >
+                                     When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                                  </span>
+                                  <span
+                                    aria-live="polite"
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                    role="status"
+                                  >
+                                  </span>
+                                  <div
+                                    class="pdk-autosuggest__suggestions-container"
+                                    id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                                  >
+                                    <ul
+                                      aria-label="Auto suggest options"
+                                      class="pdk-autosuggest__options"
+                                      id="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox-0"
+                                      role="listbox"
+                                    >
+                                      <li
+                                        aria-posinset="1"
+                                        aria-selected="false"
+                                        aria-setsize="1"
+                                        id="ALL"
+                                        role="option"
+                                        tabindex="-1"
+                                      >
+                                        <pdk-autosuggest-option>
+                                          <div
+                                            class="pdk-autosuggest__suggestion"
+                                          >
+                                            <span
+                                              class="pdk-!-text-color-black govuk-body-s"
+                                              pdk-typography="body-small"
+                                            >
+                                              All courts
+                                            </span>
+                                            <br />
+                                          </div>
+                                        </pdk-autosuggest-option>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </pdk-interaction-container>
+                          </pdk-autosuggest>
+                        </pdk-autosuggest-lite>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Type"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="typeOfList"
+                        >
+                           Type 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="typeOfList"
+                            name="typeOfList"
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose type 
+                            </option>
+                            <option
+                              value="c98cb51f-8639-49c1-91f0-a7e820c34355"
+                            >
+                               Warrant for arrest without bail 
+                            </option>
+                            <option
+                              value="ed34136f-2a13-45a4-8d4f-27075ae3a8a9"
+                            >
+                               Warrant for arrest for community penalty without bail 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="URN"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="urn-field"
+                        >
+                           URN 
+                        </label>
+                        <input
+                          class="ng-untouched ng-pristine ng-valid govuk-input"
+                          id="urn-field"
+                          name="caseUrn"
+                          pdk-input=""
+                          pdk-text-input=""
+                          type="text"
+                        />
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                </pdk-grid>
+                <div
+                  class="controls govuk-!-margin-bottom-1 govuk-!-margin-right-1"
+                  pdk-margin-bottom="1"
+                  pdk-margin-right="1"
+                >
+                  <button
+                    class="govuk-!-margin-bottom-1 govuk-button"
+                    data-role="apply-filters-btn"
+                    pdk-button=""
+                    pdk-margin-bottom="1"
+                    type="submit"
+                  >
+                     Apply filters 
+                  </button>
+                  <a
+                    class="govuk-!-margin-2 govuk-link"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin="2"
+                  >
+                     Clear filters 
+                  </a>
+                </div>
+              </form>
+            </div>
+          </unscheduled-listings-filters>
+        </div>
+        <pdk-inset-text>
+          <div
+            class="govuk-inset-text"
+          >
+            <b>
+              2 items returned
+            </b>
+          </div>
+        </pdk-inset-text>
+        <div>
+          <unscheduled-listings-table>
+            <div
+              class="govuk-grid-row"
+              container=""
+              pdk-grid=""
+            >
+              <div
+                class="govuk-grid-column-full"
+                full=""
+                pdk-grid=""
+              >
+                <table
+                  class="govuk-table"
+                  data-test-id="unscheduledHearingList"
+                  pdk-table=""
+                >
+                  <thead
+                    class="govuk-table__head"
+                    pdk-table-head=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      pdk-table-row=""
+                    >
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Name
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        DOB
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Case Reference
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Type of list
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-defendantId"
+                      name="defendantId"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-defendantId"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         firstName lastName 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         28 September 1983 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View case details of firstName lastName – caseReference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/case-at-a-glance/listedCaseId"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          caseReference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for case caseReference"
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         ApplicantFirstName1 ApplicantLastName1 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        -
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          Test-application-reference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div />
+              </div>
+            </div>
+          </unscheduled-listings-table>
+        </div>
+      </div>
+    </div>
+  </unscheduled-listings-container>
+</ng-component>
+`;
+
+exports[`UnscheduledListingsContainer should match snapshot with hearings 2`] = `
+<ng-component>
+  <unscheduled-listings-container>
+    <div
+      class="govuk-!-margin-top-2"
+      pdk-margin-top="2"
+    >
+      <breadcrumbs>
+        <ol
+          class="govuk-breadcrumbs govuk-breadcrumbs__list"
+          pdk-breadcrumb-list=""
+        >
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <a
+              class="govuk-breadcrumbs__link"
+              href="http://url.com"
+              pdk-breadcrumb=""
+              title="Home"
+            >
+               Home 
+            </a>
+          </li>
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <span>
+              Unscheduled list
+            </span>
+          </li>
+        </ol>
+      </breadcrumbs>
+      <div
+        class="hearing-listings"
+      >
+        <h1
+          class="govuk-!-margin-bottom-1 govuk-!-margin-top-2 govuk-heading-l"
+          pdk-margin-bottom="1"
+          pdk-margin-top="2"
+          pdk-typography="heading-large"
+        >
+           Unscheduled list 
+        </h1>
+        <div>
+          <unscheduled-listings-filters>
+            <div
+              class="hearing-filters-form pdk-!-fill-color-light-grey govuk-!-padding-4 govuk-!-margin-top-3"
+              pdk-fill-colour="light-grey"
+              pdk-margin-top="3"
+              pdk-padding="4"
+            >
+              <form
+                class="ng-untouched ng-pristine ng-valid"
+                novalidate=""
+                pdk-form=""
+              >
+                <h1
+                  class="govuk-!-margin-bottom-1 govuk-heading-s"
+                  pdk-margin-bottom="1"
+                  pdk-typography="heading-small"
+                >
+                  Filter by:
+                </h1>
+                <pdk-grid
+                  class="govuk-grid-row"
+                  container=""
+                >
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Operational unit"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="oucodeL2Code"
+                        >
+                           Operational unit 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="oucodeL2Code"
+                            name="oucodeL2Code"
+                            required=""
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose organisation unit 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Court"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="pdk-form-control-undefined-GENERATED_ID"
+                        >
+                           Court 
+                        </label>
+                        <pdk-autosuggest-lite
+                          class="unscheduled-listing-court ng-untouched ng-pristine ng-valid"
+                          name="courtCentreId"
+                          required=""
+                          suggestionkey="value"
+                          suggestiontitle="label"
+                        >
+                          <pdk-autosuggest
+                            highlightcolor="blue"
+                          >
+                            <pdk-interaction-container>
+                              <div>
+                                <div
+                                  class="pdk-autosuggest"
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                                    aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                                    aria-expanded="false"
+                                    autocomplete="off"
+                                    class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                                    id="pdk-form-control-undefined-GENERATED_ID"
+                                    role="combobox"
+                                    type="text"
+                                  />
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    id="pdk-autosuggest__instructions-GENERATED_ID"
+                                    pdk-visually-hidden=""
+                                  >
+                                     When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                                  </span>
+                                  <span
+                                    aria-live="polite"
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                    role="status"
+                                  >
+                                  </span>
+                                  <div
+                                    class="pdk-autosuggest__suggestions-container"
+                                    id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                                  >
+                                    <ul
+                                      aria-label="Auto suggest options"
+                                      class="pdk-autosuggest__options"
+                                      id="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox-0"
+                                      role="listbox"
+                                    >
+                                      <li
+                                        aria-posinset="1"
+                                        aria-selected="false"
+                                        aria-setsize="1"
+                                        id="ALL"
+                                        role="option"
+                                        tabindex="-1"
+                                      >
+                                        <pdk-autosuggest-option>
+                                          <div
+                                            class="pdk-autosuggest__suggestion"
+                                          >
+                                            <span
+                                              class="pdk-!-text-color-black govuk-body-s"
+                                              pdk-typography="body-small"
+                                            >
+                                              All courts
+                                            </span>
+                                            <br />
+                                          </div>
+                                        </pdk-autosuggest-option>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </pdk-interaction-container>
+                          </pdk-autosuggest>
+                        </pdk-autosuggest-lite>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Type"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="typeOfList"
+                        >
+                           Type 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="typeOfList"
+                            name="typeOfList"
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose type 
+                            </option>
+                            <option
+                              value="c98cb51f-8639-49c1-91f0-a7e820c34355"
+                            >
+                               Warrant for arrest without bail 
+                            </option>
+                            <option
+                              value="ed34136f-2a13-45a4-8d4f-27075ae3a8a9"
+                            >
+                               Warrant for arrest for community penalty without bail 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="URN"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="urn-field"
+                        >
+                           URN 
+                        </label>
+                        <input
+                          class="ng-untouched ng-pristine ng-valid govuk-input"
+                          id="urn-field"
+                          name="caseUrn"
+                          pdk-input=""
+                          pdk-text-input=""
+                          type="text"
+                        />
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                </pdk-grid>
+                <div
+                  class="controls govuk-!-margin-bottom-1 govuk-!-margin-right-1"
+                  pdk-margin-bottom="1"
+                  pdk-margin-right="1"
+                >
+                  <button
+                    class="govuk-!-margin-bottom-1 govuk-button"
+                    data-role="apply-filters-btn"
+                    pdk-button=""
+                    pdk-margin-bottom="1"
+                    type="submit"
+                  >
+                     Apply filters 
+                  </button>
+                  <a
+                    class="govuk-!-margin-2 govuk-link"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin="2"
+                  >
+                     Clear filters 
+                  </a>
+                </div>
+              </form>
+            </div>
+          </unscheduled-listings-filters>
+        </div>
+        <pdk-inset-text>
+          <div
+            class="govuk-inset-text"
+          >
+            <b>
+              2 items returned
+            </b>
+          </div>
+        </pdk-inset-text>
+        <div>
+          <unscheduled-listings-table>
+            <div
+              class="govuk-grid-row"
+              container=""
+              pdk-grid=""
+            >
+              <div
+                class="govuk-grid-column-full"
+                full=""
+                pdk-grid=""
+              >
+                <table
+                  class="govuk-table"
+                  data-test-id="unscheduledHearingList"
+                  pdk-table=""
+                >
+                  <thead
+                    class="govuk-table__head"
+                    pdk-table-head=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      pdk-table-row=""
+                    >
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Name
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        DOB
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Case Reference
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Type of list
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-defendantId"
+                      name="defendantId"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-defendantId"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         firstName lastName 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         28 September 1983 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View case details of firstName lastName – caseReference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/case-at-a-glance/listedCaseId"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          caseReference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for case caseReference"
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         ApplicantFirstName1 ApplicantLastName1 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        -
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          Test-application-reference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div />
+              </div>
+            </div>
+          </unscheduled-listings-table>
+        </div>
+      </div>
+    </div>
+  </unscheduled-listings-container>
+</ng-component>
+`;
+
+exports[`UnscheduledListingsContainer should match snapshot without hearings 1`] = `
+<ng-component>
+  <unscheduled-listings-container>
+    <div
+      class="govuk-!-margin-top-2"
+      pdk-margin-top="2"
+    >
+      <breadcrumbs>
+        <ol
+          class="govuk-breadcrumbs govuk-breadcrumbs__list"
+          pdk-breadcrumb-list=""
+        >
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <a
+              class="govuk-breadcrumbs__link"
+              href="http://url.com"
+              pdk-breadcrumb=""
+              title="Home"
+            >
+               Home 
+            </a>
+          </li>
+          <li
+            class="govuk-breadcrumbs__list-item"
+            pdk-breadcrumb-list-item=""
+          >
+            <span>
+              Unscheduled list
+            </span>
+          </li>
+        </ol>
+      </breadcrumbs>
+      <div
+        class="hearing-listings"
+      >
+        <h1
+          class="govuk-!-margin-bottom-1 govuk-!-margin-top-2 govuk-heading-l"
+          pdk-margin-bottom="1"
+          pdk-margin-top="2"
+          pdk-typography="heading-large"
+        >
+           Unscheduled list 
+        </h1>
+        <div>
+          <unscheduled-listings-filters>
+            <div
+              class="hearing-filters-form pdk-!-fill-color-light-grey govuk-!-padding-4 govuk-!-margin-top-3"
+              pdk-fill-colour="light-grey"
+              pdk-margin-top="3"
+              pdk-padding="4"
+            >
+              <form
+                class="ng-untouched ng-pristine ng-valid"
+                novalidate=""
+                pdk-form=""
+              >
+                <h1
+                  class="govuk-!-margin-bottom-1 govuk-heading-s"
+                  pdk-margin-bottom="1"
+                  pdk-typography="heading-small"
+                >
+                  Filter by:
+                </h1>
+                <pdk-grid
+                  class="govuk-grid-row"
+                  container=""
+                >
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Operational unit"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="oucodeL2Code"
+                        >
+                           Operational unit 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="oucodeL2Code"
+                            name="oucodeL2Code"
+                            required=""
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose organisation unit 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Court"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="pdk-form-control-undefined-GENERATED_ID"
+                        >
+                           Court 
+                        </label>
+                        <pdk-autosuggest-lite
+                          class="unscheduled-listing-court ng-untouched ng-pristine ng-valid"
+                          name="courtCentreId"
+                          required=""
+                          suggestionkey="value"
+                          suggestiontitle="label"
+                        >
+                          <pdk-autosuggest
+                            highlightcolor="blue"
+                          >
+                            <pdk-interaction-container>
+                              <div>
+                                <div
+                                  class="pdk-autosuggest"
+                                >
+                                  <input
+                                    aria-autocomplete="list"
+                                    aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                                    aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                                    aria-expanded="false"
+                                    autocomplete="off"
+                                    class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                                    id="pdk-form-control-undefined-GENERATED_ID"
+                                    role="combobox"
+                                    type="text"
+                                  />
+                                  <span
+                                    class="govuk-visually-hidden"
+                                    id="pdk-autosuggest__instructions-GENERATED_ID"
+                                    pdk-visually-hidden=""
+                                  >
+                                     When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                                  </span>
+                                  <span
+                                    aria-live="polite"
+                                    class="govuk-visually-hidden"
+                                    pdk-visually-hidden=""
+                                    role="status"
+                                  >
+                                  </span>
+                                  <div
+                                    class="pdk-autosuggest__suggestions-container"
+                                    id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                                  >
+                                    <ul
+                                      aria-label="Auto suggest options"
+                                      class="pdk-autosuggest__options"
+                                      id="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox-0"
+                                      role="listbox"
+                                    >
+                                      <li
+                                        aria-posinset="1"
+                                        aria-selected="false"
+                                        aria-setsize="1"
+                                        id="ALL"
+                                        role="option"
+                                        tabindex="-1"
+                                      >
+                                        <pdk-autosuggest-option>
+                                          <div
+                                            class="pdk-autosuggest__suggestion"
+                                          >
+                                            <span
+                                              class="pdk-!-text-color-black govuk-body-s"
+                                              pdk-typography="body-small"
+                                            >
+                                              All courts
+                                            </span>
+                                            <br />
+                                          </div>
+                                        </pdk-autosuggest-option>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </pdk-interaction-container>
+                          </pdk-autosuggest>
+                        </pdk-autosuggest-lite>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="Type"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="typeOfList"
+                        >
+                           Type 
+                        </label>
+                        <pdk-select
+                          class="ng-untouched ng-pristine ng-valid"
+                        >
+                          <select
+                            class="govuk-select"
+                            id="typeOfList"
+                            name="typeOfList"
+                          >
+                            <option
+                              value="ALL"
+                            >
+                               Choose type 
+                            </option>
+                            <option
+                              value="c98cb51f-8639-49c1-91f0-a7e820c34355"
+                            >
+                               Warrant for arrest without bail 
+                            </option>
+                            <option
+                              value="ed34136f-2a13-45a4-8d4f-27075ae3a8a9"
+                            >
+                               Warrant for arrest for community penalty without bail 
+                            </option>
+                          </select>
+                        </pdk-select>
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                  <pdk-grid
+                    class="govuk-grid-column-one-quarter"
+                    one-quarter=""
+                  >
+                    <pdk-form-field
+                      label="URN"
+                    >
+                      <pdk-form-group
+                        class="pdk-form-group"
+                      >
+                        <label
+                          class="govuk-label"
+                          for="urn-field"
+                        >
+                           URN 
+                        </label>
+                        <input
+                          class="ng-untouched ng-pristine ng-valid govuk-input"
+                          id="urn-field"
+                          name="caseUrn"
+                          pdk-input=""
+                          pdk-text-input=""
+                          type="text"
+                        />
+                      </pdk-form-group>
+                    </pdk-form-field>
+                  </pdk-grid>
+                </pdk-grid>
+                <div
+                  class="controls govuk-!-margin-bottom-1 govuk-!-margin-right-1"
+                  pdk-margin-bottom="1"
+                  pdk-margin-right="1"
+                >
+                  <button
+                    class="govuk-!-margin-bottom-1 govuk-button"
+                    data-role="apply-filters-btn"
+                    pdk-button=""
+                    pdk-margin-bottom="1"
+                    type="submit"
+                  >
+                     Apply filters 
+                  </button>
+                  <a
+                    class="govuk-!-margin-2 govuk-link"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin="2"
+                  >
+                     Clear filters 
+                  </a>
+                </div>
+              </form>
+            </div>
+          </unscheduled-listings-filters>
+        </div>
+        <pdk-inset-text>
+          <div
+            class="govuk-inset-text"
+          >
+            <b>
+              2 items returned
+            </b>
+          </div>
+        </pdk-inset-text>
+        <div>
+          <unscheduled-listings-table>
+            <div
+              class="govuk-grid-row"
+              container=""
+              pdk-grid=""
+            >
+              <div
+                class="govuk-grid-column-full"
+                full=""
+                pdk-grid=""
+              >
+                <table
+                  class="govuk-table"
+                  data-test-id="unscheduledHearingList"
+                  pdk-table=""
+                >
+                  <thead
+                    class="govuk-table__head"
+                    pdk-table-head=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      pdk-table-row=""
+                    >
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Name
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        DOB
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Case Reference
+                      </th>
+                      <th
+                        class="govuk-table__cell"
+                        pdk-table-header="col"
+                        scope="col"
+                      >
+                        Type of list
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-defendantId"
+                      name="defendantId"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-defendantId"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         firstName lastName 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         28 September 1983 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View case details of firstName lastName – caseReference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/case-at-a-glance/listedCaseId"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          caseReference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for case caseReference"
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody
+                    class="hearing-body govuk-table__body"
+                    pdk-table-body=""
+                  >
+                    <tr
+                      class="govuk-table__row"
+                      id="defendant-"
+                      pdk-table-row=""
+                      style="vertical-align: top;"
+                    >
+                      <td
+                        class="govuk-table__cell"
+                        data-defendant-id="defendant-"
+                        data-test-id="partyName"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                         ApplicantFirstName1 ApplicantLastName1 
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        -
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        data-test-id="hearingReference"
+                        pdk-table-cell=""
+                        width="20%"
+                      >
+                        <a
+                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          class="hearing-reference govuk-link govuk-caption-m"
+                          data-test-id="hearingReference"
+                          href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                          pdk-link=""
+                          pdk-typography="caption-medium"
+                          target="_blank"
+                        >
+                          Test-application-reference
+                        </a>
+                      </td>
+                      <td
+                        class="govuk-table__cell"
+                        pdk-table-cell=""
+                        width="40%"
+                      >
+                        <dl
+                          class="govuk-!-margin-bottom-2"
+                          pdk-margin-bottom="2"
+                        >
+                          <div
+                            class="typeOfList-allocate-columns"
+                          >
+                            <dt
+                              data-test-id="typeOfList"
+                            >
+                            </dt>
+                            <dd>
+                              <a
+                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                class="allocate-link govuk-!-margin-left-2 govuk-link"
+                                href="javascript:void(0);"
+                                pdk-link=""
+                                pdk-margin-left="2"
+                              >
+                                 Allocate 
+                              </a>
+                            </dd>
+                          </div>
+                        </dl>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div />
+              </div>
+            </div>
+          </unscheduled-listings-table>
+        </div>
+      </div>
+    </div>
+  </unscheduled-listings-container>
+</ng-component>
+`;

@@ -1,0 +1,161 @@
+<div pdk-grid container>
+  <div pdk-grid full>
+    <table data-test-id="unscheduledHearingList" pdk-table>
+      <thead pdk-table-head>
+        <tr pdk-table-row>
+          <th pdk-table-header="col">Name</th>
+          <th pdk-table-header="col">DOB</th>
+          <th pdk-table-header="col">Case Reference</th>
+          <th pdk-table-header="col">Type of list</th>
+        </tr>
+      </thead>
+
+      @for (hearing of unscheduledHearings(); track hearing.defendantDetails.id) {
+        <tbody pdk-table-body class="hearing-body">
+          <ng-container>
+            <tr
+              pdk-table-row
+              id="defendant-{{ hearing.defendantDetails.id }}"
+              attr.name="{{ hearing.defendantDetails.id }}"
+              style="vertical-align: top"
+            >
+              <td
+                data-test-id="partyName"
+                pdk-table-cell
+                width="20%"
+                attr.data-defendant-id="defendant-{{ hearing.defendantDetails.id }}"
+              >
+                {{ hearing.defendantDetails.firstName }} {{ hearing.defendantDetails.lastName }}
+              </td>
+              <td pdk-table-cell width="20%">
+                {{ hearing.defendantDetails.dateOfBirth | cppDate }}
+              </td>
+              <td data-test-id="hearingReference" pdk-table-cell width="20%">
+                <a
+                  pdk-link
+                  class="hearing-reference"
+                  pdk-typography="caption-medium"
+                  data-test-id="hearingReference"
+                  target="_blank"
+                  attr.aria-label="View case details of {{ hearing.defendantDetails.firstName }} {{
+                    hearing.defendantDetails.lastName
+                  }} – {{ hearing.urn }}"
+                  href="{{ baseUrl() }}/prosecution-casefile/case-at-a-glance/{{ hearing.caseId }}"
+                  >{{ hearing.urn }}</a
+                >
+              </td>
+              <td pdk-table-cell width="40%">
+                @for (hearingDetails of hearing.hearings; track hearingDetails.id) {
+                  <dl pdk-margin-bottom="2">
+                    <div class="typeOfList-allocate-columns">
+                      <dt data-test-id="typeOfList">
+                        {{ hearingDetails?.typeOfList?.description }}
+                      </dt>
+                      <dd>
+                        <a
+                          (click)="allocate(hearingDetails)"
+                          class="allocate-link"
+                          pdk-link
+                          href="javascript:void(0);"
+                          pdk-margin-left="2"
+                          attr.aria-label="Allocate hearing for case {{ hearing.urn }}"
+                        >
+                          Allocate
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                }
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      }
+
+      @for (
+        application of unscheduledHearingsForApplications();
+        track application.applicationDetails.applicant.id
+      ) {
+        <tbody pdk-table-body class="hearing-body">
+          <ng-container>
+            <tr
+              pdk-table-row
+              id="defendant-{{ application.applicationDetails.applicant.id }}"
+              attr.name="{{ application.applicationDetails.applicant.id }}"
+              style="vertical-align: top"
+            >
+              <td
+                data-test-id="partyName"
+                pdk-table-cell
+                width="20%"
+                attr.data-defendant-id="defendant-{{ application.applicationDetails.applicant.id }}"
+              >
+                {{ application.applicationDetails.applicant?.firstName }}
+                {{ application.applicationDetails.applicant?.lastName }}
+              </td>
+              <td pdk-table-cell width="20%">-</td>
+              <td data-test-id="hearingReference" pdk-table-cell width="20%">
+                <a
+                  pdk-link
+                  class="hearing-reference"
+                  pdk-typography="caption-medium"
+                  data-test-id="hearingReference"
+                  target="_blank"
+                  attr.aria-label="View application details  of {{
+                    application.applicationDetails.applicant?.firstName
+                  }} {{ application.applicationDetails.applicant?.lastName }} – {{
+                    application.urn
+                  }}"
+                  href="{{ baseUrl() }}/prosecution-casefile/application-at-a-glance/{{
+                    application.applicationDetails.id
+                  }}"
+                  >{{ application.urn }}</a
+                >
+              </td>
+              <td pdk-table-cell width="40%">
+                @for (hearingDetails of application.hearings; track hearingDetails.id) {
+                  <dl pdk-margin-bottom="2">
+                    <div class="typeOfList-allocate-columns">
+                      <dt data-test-id="typeOfList">
+                        {{ hearingDetails?.typeOfList?.description }}
+                      </dt>
+                      <dd>
+                        <a
+                          (click)="allocate(hearingDetails)"
+                          class="allocate-link"
+                          pdk-link
+                          href="javascript:void(0);"
+                          pdk-margin-left="2"
+                          attr.aria-label="Allocate hearing for {{
+                            application.applicationDetails.applicant?.firstName
+                          }} {{ application.applicationDetails.applicant?.lastName }} – {{
+                            hearingDetails?.typeOfList?.description
+                          }}"
+                        >
+                          Allocate
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                }
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      }
+    </table>
+
+    @if (totalResults() > pageSize()) {
+      <div pdk-grid full>
+        <pdk-pagination
+          data-test-id="pagination"
+          [totalResults]="totalResults()"
+          [pageSize]="pageSize()"
+          [currentPage]="pageNumber()"
+          (pageChange)="pageChanged($event)"
+        ></pdk-pagination>
+      </div>
+    }
+    <div></div>
+  </div>
+</div>

@@ -1,0 +1,177 @@
+@if (sections()?.length > 0) {
+  <div
+    section-table-renderer
+    [columnConfig]="columnConfig"
+    [sectionConfig]="sectionConfig"
+    [sections]="sections()"
+    [sectionHeaderRenderer]="sectionHeader"
+    [rowGroupHeaderCellRenderer]="judiciaryHeader"
+    [actionCellRenderer]="actionsCell"
+    [expandedDetailsRenderer]="hearingDetails"
+    [moveAlertRenderer]="moveAlert"
+    [hearingMovestate]="hearingMovestate()"
+    [positionedHearingsState]="positionedHearingsState()"
+    [customCellHeaderRenderers]="{
+      id: selectAllCustomheader
+    }"
+    [cellRenderers]="{
+      dateTime: timeCell,
+      duration: durationCell,
+      hearingType: hearingTypeCell,
+      defendants: defendantCell,
+      offences: offencesCell,
+      id: selectHearingCell
+    }"
+  ></div>
+}
+@if (totalNumber() > pageSize() && resultsDisplayed() > 0) {
+  <pdk-pagination
+    [currentPage]="currentPage()"
+    [totalResults]="totalNumber()"
+    [pageSize]="pageSize()"
+    [maxPages]="7"
+    (pageChange)="pageChange.emit($event)"
+  >
+  </pdk-pagination>
+}
+
+<!------------------------------------------------------CELL TEMPLATE RENDERERS------------------------------------------------------------------------------------------>
+
+<!--Section header-->
+<ng-template #sectionHeader let-cellData="cellData" let-sectionData="sectionData">
+  @if (sectionData | allocatedHearingTableSectionHeader; as sectionHeader) {
+    <h3 pdk-typography="heading-medium" pdk-margin-bottom="0" data-test-id="section-header">
+      <span data-test-id="courtroom-and-date"> {{ sectionHeader.sectionName }}</span>
+      <span pdk-margin-left="2" pdk-typography="body" data-test-id="total-hearings-duration">{{
+        sectionHeader.totalDurationText
+      }}</span>
+    </h3>
+  }
+</ng-template>
+
+<!--Judiciary Header-->
+<ng-template
+  #judiciaryHeader
+  let-judiciary="cellData"
+  let-section="sectionData"
+  let-rowGroups="rowGroups"
+>
+  <judiciary-header-cell
+    [judiciary]="judiciary"
+    [courtRoomId]="section?.courtRoomId"
+    [hearing]="rowGroups?.hearingTimeCalendar[0]?.hearings[0]"
+    [searchDate]="section?.date"
+    [editable]="true"
+    (changeJudiciary)="onNavigateChangeJudiciary.emit($event)"
+  >
+  </judiciary-header-cell>
+</ng-template>
+
+<!--Time-->
+<ng-template #timeCell let-dateTime="cellData">
+  <time-cell [dateTime]="dateTime"></time-cell>
+</ng-template>
+
+<!--Duration-->
+<ng-template #durationCell let-duration="cellData" let-hearing="rowData">
+  <duration-cell
+    [duration]="duration"
+    [dayOfHearing]="hearing.details?.hearingDayPosition"
+    [totalDays]="hearing.details?.hearingDayCount"
+  ></duration-cell>
+</ng-template>
+
+<!--Hearing type-->
+<ng-template #hearingTypeCell let-hearingType="cellData" let-hearing="rowData">
+  <hearing-type-cell [hearingType]="hearingType" [isMaster]="hearing.isMaster"></hearing-type-cell>
+</ng-template>
+
+<!--Defendants-->
+<ng-template #defendantCell let-defendants="cellData">
+  <defendant-cell [defendantData]="defendants" [baseUrl]="baseUrl"></defendant-cell>
+</ng-template>
+
+<!--Offences-->
+<ng-template #offencesCell let-offences="cellData">
+  <offence-wording-cell [offenceWordings]="offences"></offence-wording-cell>
+</ng-template>
+
+<!--Select all hearings Header-->
+<ng-template #selectAllCustomheader let-label="cellData" let-columnConfig="columnConfig">
+  <div (click)="preventDefault($event)">
+    @if (hearingMovestate() === undefined) {
+      <pdk-checkbox
+        [checkboxType]="'small'"
+        [id]="'select-all-checkbox'"
+        [ngModel]="allMasterHearingRows | allMasterHearingsInSelectedState: selectedHearings()"
+        [disabled]="allMasterHearingRows | hearingsAreInEligibleToSelect"
+        name="selectAll"
+        (ngModelChange)="selectAllHearings($event)"
+      >
+        <span [pdk-visually-hidden]="columnConfig.columnLabelVisuallyHidden">{{ label }}</span>
+      </pdk-checkbox>
+    }
+  </div>
+</ng-template>
+
+<!--Select hearing cell-->
+<ng-template
+  #selectHearingCell
+  let-hearingId="cellData"
+  let-columnConfig="columnConfig"
+  let-hearing="rowData"
+>
+  <div (click)="preventDefault($event)">
+    @if (hearingMovestate() === undefined) {
+      <pdk-checkbox
+        [checkboxType]="'small'"
+        [id]="hearingId + '-' + hearing.hearingDate"
+        [ngModel]="isSelected(hearing)"
+        [disabled]="hearing?.isDisabled"
+        name="select-hearing"
+        (ngModelChange)="select(hearing)"
+      >
+        <span pdk-visually-hidden>Select this hearing</span>
+      </pdk-checkbox>
+    }
+  </div>
+</ng-template>
+
+<!----actions-->
+<ng-template
+  #actionsCell
+  let-hearing="rowData"
+  let-group="rowGroupData"
+  let-sectionData="sectionData"
+>
+  @if (
+    (hearing.hearingDate | IsCurrentOrGreaterThanDate) || (hearing | isEligibleForEndDateChange)
+  ) {
+    <div
+      allocated-hearings-actions-cell
+      [group]="group.hearings"
+      [hearing]="hearing"
+      [hearingMoveState]="hearingMovestate()"
+      (actionClicked)="onHearingAction($event, group?.time)"
+      (undoHearingMoveClicked)="undoHearingMoveClicked.emit()"
+      (onMove)="onHearingMove($event, sectionData, group?.time)"
+    ></div>
+  }
+</ng-template>
+
+<!--Allocated hearing row details-->
+<ng-template #hearingDetails let-hearingRow="rowData" let-sectionData="sectionData">
+  <allocated-hearing-row-details
+    [hearing]="hearingRow.details"
+    [caseId]="hearingRow.defendants?.caseId"
+    [applicationId]="hearingRow.defendants?.applicationId"
+    [courtName]="sectionData.courtRoomName"
+    (getCaseNotes)="onGetCaseNote.emit($event)"
+    [caseNotes]="caseNotesMap()[hearingRow.defendants.caseId]"
+  ></allocated-hearing-row-details>
+</ng-template>
+
+<!--Move success alert-->
+<ng-template #moveAlert let-hearingRow="rowData">
+  <hearing-row-moved-alert [hearingRow]="hearingRow"></hearing-row-moved-alert>
+</ng-template>

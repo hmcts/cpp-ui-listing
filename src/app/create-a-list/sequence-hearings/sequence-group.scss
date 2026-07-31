@@ -1,0 +1,200 @@
+$itemHeight: 110px;
+$borderColor: #bfc1c3;
+$borderWidth: 1px;
+
+.sequence-group {
+  display: table-row;
+
+  .group-name {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  .group-content {
+    display: table-cell;
+  }
+
+}
+
+:host ::ng-deep .angular-tree-component {
+    &.node-dragging {
+      .tree-node-level-1 > tree-node-drop-slot {
+        .node-drop-slot {
+          &:before {
+            z-index: 99;
+          }
+        }
+      }
+    }
+}
+
+:host ::ng-deep tree-viewport {
+  overflow: visible;
+}
+
+:host ::ng-deep tree-loading-component {
+  display: none;
+}
+
+:host ::ng-deep .active-drop-zones {
+  tree-node-drop-slot {
+    pointer-events: auto !important;
+  }
+}
+
+:host ::ng-deep .hide-drop-zones {
+  transform: translate(0, 0); // chrome fix.
+  .node-drop-slot {
+    &:before {
+      height: 1px !important;
+      width: 1px !important;
+      top: 0 !important;
+    }
+  }
+}
+
+:host ::ng-deep .ie-drag-container,
+:host ::ng-deep .angular-tree-component {
+  overflow: visible;
+
+  tree-node-expander{
+    display: none;
+  }
+
+  .tree-children {
+    overflow: visible;
+  }
+
+  .tree-node {
+    position: relative;
+    pointer-events: none;
+
+    &.dragging {
+      opacity: 0.2;
+
+      .drag_item {
+        background-color: #e5e5e5;
+      }
+    }
+  }
+
+  .node-content-wrapper {
+    padding: 0;
+    width: 100%;
+    position: relative;
+    pointer-events: auto;
+
+    &.is-dragging-over { background: #FFF; }
+    &.is-dragging-over-disabled { opacity: 1; }
+  }
+
+  &.node-dragging {
+    .node-drop-slot {
+      display: block;
+    }
+  }
+
+  .tree-node-level-2 {
+    .node-drop-slot {
+      &:before {
+        background-color: blue; // never visible just for debugging.
+      }
+    }
+  }
+
+  tree-node-drop-slot {
+    pointer-events: none;
+
+    .node-drop-slot {
+      height: 0;
+      overflow: visible;
+
+      // the drop slot area not seen (covers a larger area)
+      &:before {
+        opacity: 0; // change this to 0.5 to debug the drop slots
+        content: '';
+        display: block;
+        position: absolute;
+        left: -110px; // added tolerance for usability
+        right: -150px; // added tolerance for usability
+        background-color: orange; // never visible just for debugging.
+        top: 50px;
+        bottom: 0;
+      }
+
+      &.is-dragging-over {
+        border: none;
+        height: $itemHeight;
+
+        // the visible drop slot that appears as grey
+        &:after {
+          content: '';
+          display: block;
+          height: $itemHeight;
+          position: relative;
+          background-color: #e5e5e5;
+          border: $borderWidth solid $borderColor;
+        }
+      }
+    }
+
+    // there are 2 drop slots per node. This the the top/first one
+    &.top-slot > .node-drop-slot {
+      &:before {
+        background-color: green; // never visible just for debugging.
+        top: 0;
+        height: 50px;
+      }
+    }
+
+  }
+
+  tree-node:last-child > .tree-node > .bottom-slot > .node-drop-slot {
+    &:before {
+      bottom: -10px; //was -50px
+    }
+  }
+
+  tree-node.previous-tree-node > .tree-node {
+    // works
+    .top-slot > .node-drop-slot {
+      &:before {
+        top: 0;
+        bottom: 0;
+        height: auto;
+      }
+    }
+
+    // not working....
+    .bottom-slot > .node-drop-slot {
+      &:before {
+        top: inherit;
+        bottom: inherit;
+        height: 0;
+        background-color: red !important;
+      }
+    }
+  }
+
+  tree-node.next-tree-node > .tree-node {
+    // not working.....
+    .bottom-slot > .node-drop-slot {
+      &:before {
+        top: 0;
+        bottom: 0;
+        height: auto;
+        background-color: red !important;
+      }
+    }
+
+    //works.......
+    .top-slot > .node-drop-slot {
+      &:before {
+        top: inherit;
+        bottom: inherit;
+        height: 0;
+      }
+    }
+  }
+
+}

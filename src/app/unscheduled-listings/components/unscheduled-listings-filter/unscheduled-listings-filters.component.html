@@ -1,0 +1,89 @@
+<div class="hearing-filters-form" pdk-fill-colour="light-grey" pdk-padding="4" pdk-margin-top="3">
+  @if (!resetForm) {
+    <form
+      #form="ngForm"
+      pdk-form
+      (validSubmit)="applyFilters(form)"
+      (errors)="validationErrors($event)"
+      novalidate
+    >
+      <h1 pdk-typography="heading-small" pdk-margin-bottom="1">Filter by:</h1>
+      <pdk-grid container>
+        <pdk-grid one-quarter>
+          <pdk-form-field label="Operational unit">
+            <pdk-select
+              [id]="'oucodeL2Code'"
+              [name]="'oucodeL2Code'"
+              [options]="orgUnitOptions"
+              [ngModel]="localSelectedOptions.oucodeL2Code"
+              (ngModelChange)="handleOrgUnitOptionChange($event)"
+              [required]="courtInputValue"
+            >
+            </pdk-select>
+          </pdk-form-field>
+        </pdk-grid>
+        <pdk-grid one-quarter>
+          <pdk-form-field
+            [errorMessages]="[
+              {
+                rule: 'invalidEntry',
+                message: 'Select valid court'
+              },
+              {
+                rule: 'required',
+                message: 'Enter a court'
+              }
+            ]"
+            label="Court"
+          >
+            <pdk-autosuggest-lite
+              [ngModel]="currentCourtCentreOption"
+              (ngModelChange)="handleCourtOptionChange($event); courtInputValue = null"
+              (inputText)="courtOptions = getSuggestions($event); courtInputValue = $event"
+              name="courtCentreId"
+              class="unscheduled-listing-court"
+              [suggestions]="courtOptions"
+              suggestionKey="value"
+              suggestionTitle="label"
+              [invalidEntry]="getOptionLabels(courtOptions)"
+              [inputValue]="courtInputValue"
+              required
+            >
+            </pdk-autosuggest-lite>
+          </pdk-form-field>
+        </pdk-grid>
+        <pdk-grid one-quarter>
+          <pdk-form-field label="Type">
+            <pdk-select
+              [id]="'typeOfList'"
+              [name]="'typeOfList'"
+              [options]="typeOfListOptions"
+              [(ngModel)]="localSelectedOptions.typeOfList"
+            >
+            </pdk-select>
+          </pdk-form-field>
+        </pdk-grid>
+        <pdk-grid one-quarter>
+          <pdk-form-field label="URN">
+            <input
+              [ngModel]="localSelectedOptions.caseUrn"
+              type="text"
+              id="urn-field"
+              name="caseUrn"
+              pdk-input
+              pdk-text-input
+            />
+          </pdk-form-field>
+        </pdk-grid>
+      </pdk-grid>
+      <div class="controls" pdk-margin-bottom="1" pdk-margin-right="1">
+        <button pdk-button data-role="apply-filters-btn" pdk-margin-bottom="1" type="submit">
+          Apply filters
+        </button>
+        <a pdk-link (click)="clearFilters()" pdk-margin="2" href="javascript:void(0);">
+          Clear filters
+        </a>
+      </div>
+    </form>
+  }
+</div>

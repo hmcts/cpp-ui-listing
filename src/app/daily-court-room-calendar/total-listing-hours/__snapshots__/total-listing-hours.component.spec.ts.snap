@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TotalListingHoursComponent should display the expected template when filter options are passed 1`] = `
+<ng-component
+  filterOptions={[Function Object]}
+  selectedHearings={[Function Array]}
+>
+  <total-listing-hours>
+    <div
+      class="total-listing-hours"
+    >
+      <div>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          4 
+          <span>
+            hours
+          </span>
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          and
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          30 
+          <span>
+            minutes
+          </span>
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          listed between
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          10:00
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          to
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          17:00
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          on
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          05 Nov 2018
+        </span>
+      </div>
+    </div>
+  </total-listing-hours>
+</ng-component>
+`;
+
+exports[`TotalListingHoursComponent should display the expected template when no startTime or endtime is passed 1`] = `
+<ng-component
+  filterOptions={[Function Object]}
+  selectedHearings={[Function Array]}
+>
+  <total-listing-hours>
+    <div
+      class="total-listing-hours"
+    >
+      <div>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          2 
+          <span>
+            hours
+          </span>
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          listed between
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          00:00
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          to
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          23:59
+        </span>
+        <span
+          class="govuk-!-margin-right-1"
+          pdk-margin-right="1"
+        >
+          on
+        </span>
+        <span
+          class="govuk-!-margin-right-1 govuk-!-margin-bottom-1 govuk-heading-s"
+          pdk-margin-bottom="1"
+          pdk-margin-right="1"
+          pdk-typography="heading-small"
+        >
+          05 Nov 2018
+        </span>
+      </div>
+    </div>
+  </total-listing-hours>
+</ng-component>
+`;

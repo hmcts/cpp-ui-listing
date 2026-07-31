@@ -1,0 +1,61 @@
+@if (lastAllocatedHearing().availableHearing) {
+<pdk-context-panel class="app-notification" icon="tick" type="confirmation">
+  @if (!lastAllocatedHearing().availableHearing) {
+  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">has been allocated </span>
+  } @if (lastAllocatedHearing().availableHearing) {
+  <span [ngPlural]="listedCases.length">
+    <ng-template ngPluralCase="=1">Case {{listedCases[0]}} has been allocated</ng-template>
+    <ng-template ngPluralCase="other"
+      >Cases {{listedCases.join(', ')}} have been allocated</ng-template
+    >
+  </span>
+  }
+  <span class="font-medium"> to {{ courtCentre.name }}, {{ courtRoom?.name }} </span>
+  <span class="font-medium">on </span>{{ lastAllocatedHearing().hearing.startDate | date: 'd MMMM
+  yyyy'}} <span class="font-medium">at </span>{{ startTime }} @if
+  (lastAllocatedHearing().hearing.estimatedMinutes && lastAllocatedHearing().availableHearing) {
+  <span class="font-medium">for </span>{{ lastAllocatedHearing().hearing.estimatedMinutes }} minutes
+  }
+</pdk-context-panel>
+} @if (lastAllocatedHearing().hearing.weekCommencingStartDate === null && !allocation() &&
+!lastAllocatedHearing().availableHearing) {
+<pdk-context-panel class="app-notification" icon="tick" type="confirmation">
+  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">has been allocated </span>
+  <span class="font-medium">to {{ courtCentre.name }}, {{ courtRoom.name }} </span>
+  <span class="font-medium">on </span>{{ lastAllocatedHearing().hearing.startDate | date: 'd MMMM
+  yyyy'}} <span class="font-medium">at </span>{{ startTime }}
+</pdk-context-panel>
+} @if (lastAllocatedHearing().hearing.weekCommencingStartDate !== null && !allocation() &&
+!lastAllocatedHearing().availableHearing) {
+<pdk-context-panel class="app-notification" icon="tick" type="confirmation">
+  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">has been allocated </span>
+  <span class="font-medium">to {{ courtCentre.name }}, {{ courtRoom?.name }} </span>
+  @if (lastAllocatedHearing().hearing.weekCommencingStartDate) {
+  <span>
+    <span class="font-medium">on week commencing </span>{{ lastAllocatedHearing().hearing.startDate
+    | date: 'd MMMM yyyy'}} <span class="font-medium">at </span>{{ startTime }}
+  </span>
+  } @if (!lastAllocatedHearing().hearing.weekCommencingStartDate) {
+  <span>
+    <span class="font-medium">on </span>{{ lastAllocatedHearing().hearing.startDate | date: 'd MMMM
+    yyyy'}} <span class="font-medium">at </span>{{ startTime }}
+  </span>
+  }
+</pdk-context-panel>
+} @if (allocation() && !lastAllocatedHearing().availableHearing) {
+<pdk-context-panel pdk-margin-bottom="2" class="app-notification" icon="tick" type="confirmation">
+  @if (split()) {
+  <span> <span>Split has been successful</span> <br /></span>
+  }
+  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">has been allocated </span>
+  <span class="font-medium"
+    >to {{ allocation().hearingSlot.courtHouseName }}, {{ allocation().hearingSlot.courtRoomName }}
+  </span>
+  <span class="font-medium">on </span>{{ allocation().hearingSlotTime | date: 'd MMMM yyyy'}}
+  <span class="font-medium">at {{ allocation().hearingSlotTime | date: 'HH:mm' }}</span>
+</pdk-context-panel>
+}

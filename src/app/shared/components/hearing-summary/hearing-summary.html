@@ -1,0 +1,47 @@
+<dl>
+  @if (estimatedMinutes) {
+  <div pdk-grid container pdk-margin-bottom="2">
+    <dt pdk-grid one-third>Estimate</dt>
+    <dd pdk-grid two-thirds>{{estimatedMinutes}} minutes</dd>
+  </div>
+  }
+
+  <div pdk-grid container pdk-margin-bottom="2">
+    <dt pdk-grid one-third>Language</dt>
+    <dd pdk-grid two-thirds>{{language}}</dd>
+  </div>
+
+  @if (hearing().prosecutorDatesToAvoid) {
+  <div pdk-grid container pdk-margin-bottom="2">
+    <dt pdk-grid one-third>Dates to avoid (prosecutor)</dt>
+    <dd pdk-grid two-thirds>{{hearing().prosecutorDatesToAvoid}}</dd>
+  </div>
+  } @if (defendantsHaveDatesToAvoid) {
+  <div pdk-grid container pdk-margin-bottom="2">
+    <dt pdk-grid one-third>Dates to avoid (defendant)</dt>
+    <dd pdk-grid two-thirds>
+      <ul pdk-list>
+        @for (defendant of defendants; track defendant.id; let i = $index) {
+        <li>{{defendant | fullName}} - {{defendant.datesToAvoid}}</li>
+        }
+      </ul>
+    </dd>
+  </div>
+  } @if (defendantsHaveSpecificRequirements) {
+  <div pdk-grid container pdk-margin-bottom="2">
+    <dt pdk-grid one-third>Special requirements</dt>
+    <dd pdk-grid two-thirds>
+      <ul pdk-list>
+        @for (defendant of defendants; track defendant.id; let i = $index) {
+        <li>{{defendant | fullName}} - {{defendant.specificRequirements}}</li>
+        }
+      </ul>
+    </dd>
+  </div>
+  } @if (hearing().listingDirections) {
+  <div pdk-grid container>
+    <dt pdk-grid one-third>Notes</dt>
+    <dd pdk-grid two-thirds>{{hearing().listingDirections}}</dd>
+  </div>
+  }
+</dl>

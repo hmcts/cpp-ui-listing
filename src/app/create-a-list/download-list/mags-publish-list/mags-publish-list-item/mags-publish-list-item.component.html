@@ -1,0 +1,33 @@
+@let status = statusRecord();
+<div pdk-margin-bottom="3">
+  <button
+    pdk-button="secondary"
+    type="button"
+    pdk-margin-bottom="3"
+    class="download-file"
+    (click)="publish.emit()"
+  >
+    <span>{{ label() }}</span>
+  </button>
+
+  <div>
+    @if (status.publishTag) {
+      <pdk-tag condensed [color]="status.publishTag.color" pdk-margin-right="1">{{
+        status.publishTag.label
+      }}</pdk-tag>
+    }
+    @if (status.downloadTag) {
+      <pdk-tag condensed [color]="status.downloadTag.color" pdk-margin-right="1">{{
+        status.downloadTag.label
+      }}</pdk-tag>
+    }
+  </div>
+  @if (status.fileId || status.timestampText) {
+    <mags-publish-download-link
+      [fileId]="status.fileId"
+      [timestamp]="status.timestampText"
+      [label]="label()"
+      (download)="download.emit($event)"
+    ></mags-publish-download-link>
+  }
+</div>

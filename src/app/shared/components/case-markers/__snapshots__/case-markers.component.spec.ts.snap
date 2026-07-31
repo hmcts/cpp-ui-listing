@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CaseMarkersComponent should match snapshot 1`] = `
+<case-markers
+  allListedCases={[Function Function]}
+  casemarkers={[Function Array]}
+  hearing={[Function Function]}
+  indexListedCase={[Function Function]}
+>
+  <div
+    class="case-markers"
+  >
+    <div
+      class="case-marker-title pdk-!-text-color-red"
+      pdk-text-colour="red"
+    >
+    </div>
+  </div>
+</case-markers>
+`;

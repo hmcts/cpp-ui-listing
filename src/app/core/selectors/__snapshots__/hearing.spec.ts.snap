@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hearing selectors getPinnedCaseNotesForHearing should select case ids from hearing 1`] = `
+[
+  {
+    "caseDetails": {
+      "id": "caseId2",
+    },
+    "caseNotes": [
+      {
+        "createdDateTime": "2020-11-06",
+        "id": "caseNoteId2",
+        "isPinned": true,
+      },
+    ],
+  },
+  {
+    "caseDetails": {
+      "id": "caseId3",
+    },
+    "caseNotes": [
+      {
+        "createdDateTime": "2020-11-02",
+        "id": "caseNoteId4",
+        "isPinned": true,
+      },
+      {
+        "createdDateTime": "2020-11-01",
+        "id": "caseNoteId3",
+        "isPinned": true,
+      },
+    ],
+  },
+]
+`;

@@ -1,0 +1,10 @@
+{
+  "apiRoot": "http://localhost:8080",
+  "appUrl": "/",
+  "notificationEmailTemplateId": "23a4d5ae-9162-4112-9f3c-5de0c0159074",
+  "notificationEmailTemplateIdRecorder": "ce57677e-b732-4b3f-be9b-cfbf167a074e",
+  "googleAnalyticsCode": "UA-74319648-1",
+  "idamProfilePage": "http://localhost:81/idam/manageaccount",
+  "idamLogoutPage": "/gateway/SPInitiatedSLO",
+  "proxy": false
+}

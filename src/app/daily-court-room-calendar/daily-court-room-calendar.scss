@@ -1,0 +1,19 @@
+// daily-court-room-calendar
+// ==========================================================================
+
+$module: 'daily-court-room-calendar';
+
+.#{$module} {
+  border: 2px solid;
+  border-top: 0px;
+
+  .navigation {
+    padding: 10px;
+    border-bottom: 2px solid;
+  }
+
+  .hearings-panel {
+    padding: 10px;
+    padding-right: 0;
+  }
+}

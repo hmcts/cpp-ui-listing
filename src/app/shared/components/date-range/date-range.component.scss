@@ -1,0 +1,11 @@
+pdk-checkbox[name='multiDay'] {
+  label {
+    white-space: nowrap;
+  }
+}
+pdk-date-input > pdk-interaction-container > div > div > div:first-child {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}

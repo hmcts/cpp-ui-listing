@@ -1,0 +1,45 @@
+<div class="sequence-group" #dragContainer>
+  <div class="group-name">
+    <span class="group-label">{{ name() }}</span>
+  </div>
+
+  <div class="group-content">
+    <tree-root
+      #tree
+      (updateData)="treeUpdated($event)"
+      [nodes]="editedHearings"
+      [options]="options"
+    >
+      <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
+        <div
+          [class]="node.getClass()"
+          [class.tree-node]="true"
+          [class.tree-node-expanded]="node.isExpanded && node.hasChildren"
+          [class.tree-node-collapsed]="node.isCollapsed && node.hasChildren"
+          [class.tree-node-leaf]="node.isLeaf"
+          [class.tree-node-active]="node.isActive"
+          [class.tree-node-focused]="node.isFocused"
+        >
+          @if (index === 0) {
+          <tree-node-drop-slot class="top-slot" [dropIndex]="node.index" [node]="node.parent">
+          </tree-node-drop-slot>
+          }
+          <tree-node-wrapper [node]="node" [index]="index" [templates]="templates">
+          </tree-node-wrapper>
+          <tree-node-children [node]="node" [templates]="templates"> </tree-node-children>
+          <tree-node-drop-slot
+            class="bottom-slot"
+            [dropIndex]="node.index + 1"
+            [node]="node.parent"
+          >
+          </tree-node-drop-slot>
+        </div>
+      </ng-template>
+      <ng-template #treeNodeTemplate let-node let-index="index">
+        <div class="drag_item" [id]="node.data.id">
+          <sequence-item [hearing]="node.data" [startTime]="name()"> </sequence-item>
+        </div>
+      </ng-template>
+    </tree-root>
+  </div>
+</div>

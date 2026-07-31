@@ -1,0 +1,1738 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CourtRestrictionsComponent Wrapped Mocked should display Youth component when defendant is youth 1`] = `
+<ng-component
+  caseIsChecked="false"
+  defendant={[Function Object]}
+  estimatedMinutes={[Function String]}
+  firstCase="false"
+  hearing={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTime={[Function String]}
+  hearingType={[Function String]}
+  isApplication="false"
+  isCase={[Function Boolean]}
+>
+  <court-restrictions>
+    <td
+      class="govuk-table__cell"
+      colspan="100%"
+      pdk-table-cell=""
+    >
+      <div
+        class="hearing-row"
+        data-test-id="hearingListItem"
+      >
+        <pdk-divider
+          style="display: none;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+            <details
+              class="govuk-details"
+              open=""
+              pdk-details=""
+            >
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Restrict details
+                </span>
+              </summary>
+            </details>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             Harry KANE JUNIOR 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-red pdk-!-text-color-red"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                data-role="hide-case-checkbox"
+                x-auto-hide-case-checkbox=""
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    name="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                  >
+                    <span>
+                      Hide Case
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223966"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+        <pdk-divider
+          style="display: block; margin-left: 215px;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="govuk-visually-hidden"
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             John SMITH 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+              </reporting-restrictions>
+              <youth-flag>
+                <div
+                  class="pdk-!-text-color-green govuk-body-xs"
+                  pdk-text-colour="green"
+                  pdk-typography="body-xsmall"
+                >
+                  Youth
+                </div>
+              </youth-flag>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223967"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+      </div>
+    </td>
+  </court-restrictions>
+</ng-component>
+`;
+
+exports[`CourtRestrictionsComponent Wrapped Mocked should display defendant checked 1`] = `
+<ng-component
+  caseIsChecked="false"
+  defendant={[Function Object]}
+  estimatedMinutes={[Function String]}
+  firstCase="false"
+  hearing={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTime={[Function String]}
+  hearingType={[Function String]}
+  isApplication="false"
+  isCase={[Function Boolean]}
+>
+  <court-restrictions>
+    <td
+      class="govuk-table__cell"
+      colspan="100%"
+      pdk-table-cell=""
+    >
+      <div
+        class="hearing-row"
+        data-test-id="hearingListItem"
+      >
+        <pdk-divider
+          style="display: none;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+            <details
+              class="govuk-details"
+              open=""
+              pdk-details=""
+            >
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Restrict details
+                </span>
+              </summary>
+            </details>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             Harry KANE JUNIOR 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-red pdk-!-text-color-red"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                data-role="hide-case-checkbox"
+                x-auto-hide-case-checkbox=""
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    name="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                  >
+                    <span>
+                      Hide Case
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223966"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+        <pdk-divider
+          style="display: block; margin-left: 215px;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="govuk-visually-hidden"
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             John SMITH 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+              </reporting-restrictions>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223967"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+      </div>
+    </td>
+  </court-restrictions>
+</ng-component>
+`;
+
+exports[`CourtRestrictionsComponent Wrapped Mocked should display defendant first offence checked 1`] = `
+<ng-component
+  caseIsChecked="false"
+  defendant={[Function Object]}
+  estimatedMinutes={[Function String]}
+  firstCase="false"
+  hearing={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTime={[Function String]}
+  hearingType={[Function String]}
+  isApplication="false"
+  isCase={[Function Boolean]}
+>
+  <court-restrictions>
+    <td
+      class="govuk-table__cell"
+      colspan="100%"
+      pdk-table-cell=""
+    >
+      <div
+        class="hearing-row"
+        data-test-id="hearingListItem"
+      >
+        <pdk-divider
+          style="display: none;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+            <details
+              class="govuk-details"
+              open=""
+              pdk-details=""
+            >
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Restrict details
+                </span>
+              </summary>
+            </details>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             Harry KANE JUNIOR 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-red pdk-!-text-color-red"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                data-role="hide-case-checkbox"
+                x-auto-hide-case-checkbox=""
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    name="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                  >
+                    <span>
+                      Hide Case
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223966"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+        <pdk-divider
+          style="display: block; margin-left: 215px;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="govuk-visually-hidden"
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             John SMITH 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+              </reporting-restrictions>
+              <youth-flag>
+                <div
+                  class="pdk-!-text-color-green govuk-body-xs"
+                  pdk-text-colour="green"
+                  pdk-typography="body-xsmall"
+                >
+                  Youth
+                </div>
+              </youth-flag>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223967"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+      </div>
+    </td>
+  </court-restrictions>
+</ng-component>
+`;
+
+exports[`CourtRestrictionsComponent Wrapped Mocked should display number of defendants in bulk hearing 1`] = `
+<ng-component
+  caseIsChecked="false"
+  defendant={[Function Object]}
+  estimatedMinutes={[Function String]}
+  firstCase="false"
+  hearing={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTime={[Function String]}
+  hearingType={[Function String]}
+  isApplication="false"
+  isCase={[Function Boolean]}
+>
+  <court-restrictions>
+    <td
+      class="govuk-table__cell"
+      colspan="100%"
+      pdk-table-cell=""
+    >
+      <div
+        class="hearing-row"
+        data-test-id="hearingListItem"
+      >
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+            <details
+              class="govuk-details"
+              pdk-details=""
+            >
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Restrict details
+                </span>
+              </summary>
+            </details>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            id="defendant_b1bfe644-15d3-46aa-bdeb-fe8d18c16a42_TFL12345_0"
+          >
+            <span
+              data-test-id="firstDefendantName"
+            >
+              1000 DEFENDANTS
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column pdk-!-border-color-false"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column pdk-!-border-color-false"
+          >
+            <div
+              data-test-id="firstOffenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </court-restrictions>
+</ng-component>
+`;
+
+exports[`CourtRestrictionsComponent Wrapped Mocked should match Jest snapshot for hearing 1`] = `
+<ng-component
+  caseIsChecked="false"
+  defendant={[Function Object]}
+  estimatedMinutes={[Function String]}
+  firstCase="false"
+  hearing={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTime={[Function String]}
+  hearingType={[Function String]}
+  isApplication="false"
+  isCase={[Function Boolean]}
+>
+  <court-restrictions>
+    <td
+      class="govuk-table__cell"
+      colspan="100%"
+      pdk-table-cell=""
+    >
+      <div
+        class="hearing-row"
+        data-test-id="hearingListItem"
+      >
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+            <details
+              class="govuk-details"
+              pdk-details=""
+            >
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Restrict details
+                </span>
+              </summary>
+            </details>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            id="defendant_b1bfe644-15d3-46aa-bdeb-fe8d18c16a42_TFL12345_0"
+          >
+            <span
+              data-test-id="firstDefendantName"
+            >
+              Harry KANE JUNIOR
+            </span>
+            <div>
+               + 1 other 
+            </div>
+            <div
+              class="govuk-caption-m"
+              pdk-typography="caption-medium"
+            >
+               TFL12345 
+            </div>
+            <reporting-restrictions
+              iswarning="true"
+            >
+              <span
+                class="reporting-restrictions-component"
+              >
+                <a
+                  class="govuk-link govuk-body-m"
+                  href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                  pdk-link=""
+                  pdk-typography="body"
+                  target="_blank"
+                >
+                  <abbr
+                    class="pdk-!-border-color-red pdk-!-text-color-red"
+                    title="Reporting restrictions"
+                  >
+                     RR 
+                  </abbr>
+                </a>
+              </span>
+            </reporting-restrictions>
+            <youth-flag>
+            </youth-flag>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column pdk-!-border-color-false"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column pdk-!-border-color-false"
+          >
+            <div
+              data-test-id="firstOffenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </court-restrictions>
+</ng-component>
+`;
+
+exports[`CourtRestrictionsComponent Wrapped Mocked sould display shadow listed labels on case and offence level 1`] = `
+<ng-component
+  caseIsChecked="false"
+  defendant={[Function Object]}
+  estimatedMinutes={[Function String]}
+  firstCase="false"
+  hearing={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTime={[Function String]}
+  hearingType={[Function String]}
+  isApplication="false"
+  isCase={[Function Boolean]}
+>
+  <court-restrictions>
+    <td
+      class="govuk-table__cell"
+      colspan="100%"
+      pdk-table-cell=""
+    >
+      <div
+        class="hearing-row"
+        data-test-id="hearingListItem"
+      >
+        <pdk-divider
+          style="display: none;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+            <details
+              class="govuk-details"
+              open=""
+              pdk-details=""
+            >
+              <summary
+                class="govuk-details__summary"
+              >
+                <span
+                  class="govuk-details__summary-text"
+                >
+                  Restrict details
+                </span>
+              </summary>
+            </details>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+              <div
+                class="pdk-!-text-color-dark-grey govuk-body-s"
+                data-test-id="caseShadowListed"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+              >
+                 Case shadow listed 
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             Harry KANE JUNIOR 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-red pdk-!-text-color-red"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                data-role="hide-case-checkbox"
+                x-auto-hide-case-checkbox=""
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    name="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                  >
+                    <span>
+                      Hide Case
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223966"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223966"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+        <pdk-divider
+          style="display: block; margin-left: 215px;"
+        >
+          <hr
+            class="pdk-divider"
+          />
+        </pdk-divider>
+        <div
+          class="flex-row govuk-!-margin-bottom-4"
+          pdk-margin-bottom="4"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="govuk-visually-hidden"
+              data-test-id="hearingStartTime"
+            >
+              <div>
+                13.00
+              </div>
+              <div
+                class="pdk-!-text-color-dark-grey govuk-body-s"
+                data-test-id="caseShadowListed"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+              >
+                 Case shadow listed 
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex-column break-word"
+            data-test-id="defendantName"
+          >
+             John SMITH 
+            <div>
+              <div
+                class="govuk-caption-m"
+                pdk-typography="caption-medium"
+              >
+                 TFL12345 
+              </div>
+              <reporting-restrictions
+                iswarning="true"
+              >
+              </reporting-restrictions>
+            </div>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <hearing-estimate>
+              <div>
+                20 minutes
+              </div>
+            </hearing-estimate>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <span>
+               Further plea & trial preparation 
+            </span>
+          </div>
+          <div
+            class="flex-column"
+          >
+            <div
+              class="break-word"
+              data-test-id="offenceTitle"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+              <div
+                class="pdk-!-text-color-dark-grey govuk-body-s"
+                data-test-id="offenceShadowListed"
+                pdk-text-colour="dark-grey"
+                pdk-typography="body-small"
+              >
+                 Offence shadow listed 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex-row"
+        >
+          <div
+            class="flex-column"
+          >
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <pdk-checkbox
+                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="govuk-checkboxes__item"
+                >
+                  <input
+                    class="govuk-checkboxes__input"
+                    id="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    name="e1d32d9d-29ec-4934-a932-22a50f223967"
+                    type="checkbox"
+                    value="true"
+                  />
+                  <label
+                    class="govuk-label govuk-checkboxes__label"
+                    for="e1d32d9d-29ec-4934-a932-22a50f223967"
+                  >
+                    <span>
+                      Hide
+                    </span>
+                  </label>
+                </div>
+              </pdk-checkbox>
+            </pdk-form-group>
+          </div>
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          />
+          <div
+            class="flex-column"
+          >
+            <div
+              class="margin-non-base"
+            />
+            <div
+              class="break-word govuk-!-padding-bottom-2"
+              pdk-padding-bottom="2"
+            >
+              <div>
+                Wound / inflict grievous bodily harm without intent
+              </div>
+            </div>
+            <div />
+          </div>
+        </div>
+      </div>
+    </td>
+  </court-restrictions>
+</ng-component>
+`;

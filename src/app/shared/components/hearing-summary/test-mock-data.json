@@ -1,0 +1,161 @@
+{
+  "id": "008871e2-ea16-487b-8544-1d154b765d96",
+  "type": {
+    "id": "696f2f32-06b0-478b-bb61-4bff67c1d27e",
+    "description": "Sentence"
+  },
+  "endDate": "2018-09-23",
+  "allocated": false,
+  "judiciary": [
+    {
+      "isDeputy": true,
+      "judicialId": "2057473f-9e40-4b79-8b75-36629f4bca88",
+      "isBenchChairman": true,
+      "judicialRoleType": "MAGISTRATE"
+    }
+  ],
+  "startDate": "2018-09-21",
+  "courtRoomId": "5ffbeb28-da1a-4e42-b79a-9021e3a43f5d",
+  "listedCases": [
+    {
+      "id": "e9ef001d-1a78-479c-b51c-6a6a2ade9d05",
+      "defendants": [
+        {
+          "id": "11111111-dadc-4c63-9c67-02973e2b177d",
+          "offences": [
+            {
+              "id": "8a5f9ccb-68f4-486a-a113-8f910284acd6",
+              "startDate": "2018-09-21",
+              "offenceCode": "vliBcmCPXf",
+              "statementOfOffence": {
+                "title": "57yhU1Wm8S",
+                "legislation": "0nymllI9ar"
+              }
+            }
+          ],
+          "bailStatus": "conditional",
+          "datesToAvoid": "Monday, Tuesday, Wednesday, Thursday, Friday plus the weekend",
+          "organisationName": "BOrganisation abc",
+          "hearingLanguageNeeds": "WELSH",
+          "specificRequirements": "dfsdsf sdfsdfsdf  sdfsdfsdfs sdfsdfsdf sdfsdfsdfsdf  sdfsdfsdfsdfsd sdfsdfsdfsdf"
+        },
+        {
+          "id": "22222222-dadc-4c63-9c67-02973e2b177d",
+          "lastName": "West",
+          "offences": [
+            {
+              "id": "8a5f9ccb-68f4-486a-a113-8f910284acd6",
+              "startDate": "2018-09-21",
+              "offenceCode": "vliBcmCPXf",
+              "statementOfOffence": {
+                "title": "57yhU1Wm8S",
+                "legislation": "0nymllI9ar"
+              }
+            }
+          ],
+          "firstName": "Adam",
+          "bailStatus": "conditional",
+          "datesToAvoid": "He can spare 20 minutes on a Monday at 7 am",
+          "hearingLanguageNeeds": "WELSH",
+          "specificRequirements": "Personal assistance"
+        },
+        {
+          "id": "33333333-dadc-4c63-9c67-02973e2b177d",
+          "lastName": "Keynes",
+          "offences": [
+            {
+              "id": "8a5f9ccb-68f4-486a-a113-8f910284acd6",
+              "startDate": "2018-09-21",
+              "offenceCode": "vliBcmCPXf",
+              "statementOfOffence": {
+                "title": "57yhU1Wm8S",
+                "legislation": "0nymllI9ar"
+              }
+            }
+          ],
+          "firstName": "Adam",
+          "bailStatus": "conditional",
+          "datesToAvoid": "Can't really think of a good day to attend",
+          "hearingLanguageNeeds": "WELSH",
+          "specificRequirements": "a hover board"
+        },
+        {
+          "id": "44444444-dadc-4c63-9c67-02973e2b177d",
+          "offences": [
+            {
+              "id": "8a5f9ccb-68f4-486a-a113-8f910284acd6",
+              "startDate": "2018-09-21",
+              "offenceCode": "vliBcmCPXf",
+              "statementOfOffence": {
+                "title": "57yhU1Wm8S",
+                "legislation": "0nymllI9ar"
+              }
+            }
+          ],
+          "bailStatus": "conditional",
+          "datesToAvoid": "Busy busy busy",
+          "organisationName": "AOrganisation xyz",
+          "hearingLanguageNeeds": "WELSH",
+          "specificRequirements": "dfsdsf sdfsdfsdf  sdfsdfsdfs sdfsdfsdf sdfsdfsdfsdf  sdfsdfsdfsdfsd sdfsdfsdfsdf"
+        },
+        {
+          "id": "55555555-dadc-4c63-9c67-02973e2b177d",
+          "lastName": "Jackson",
+          "offences": [
+            {
+              "id": "8a5f9ccb-68f4-486a-a113-8f910284acd6",
+              "startDate": "2018-09-21",
+              "offenceCode": "vliBcmCPXf",
+              "statementOfOffence": {
+                "title": "57yhU1Wm8S",
+                "legislation": "0nymllI9ar"
+              }
+            }
+          ],
+          "firstName": "Boris",
+          "bailStatus": "conditional",
+          "datesToAvoid": "Monday to Friday",
+          "hearingLanguageNeeds": "WELSH",
+          "specificRequirements": "Some chill-out music"
+        },
+        {
+          "id": "66666666-dadc-4c63-9c67-02973e2b177d",
+          "lastName": "Bulmer",
+          "offences": [
+            {
+              "id": "8a5f9ccb-68f4-486a-a113-8f910284acd6",
+              "startDate": "2018-09-21",
+              "offenceCode": "vliBcmCPXf",
+              "statementOfOffence": {
+                "title": "57yhU1Wm8S",
+                "legislation": "0nymllI9ar"
+              }
+            }
+          ],
+          "firstName": "Sedric",
+          "bailStatus": "conditional",
+          "datesToAvoid": "Any day that Eastenders is on",
+          "hearingLanguageNeeds": "WELSH",
+          "specificRequirements": "a not guilty plea"
+        }
+      ],
+      "caseIdentifier": {
+        "authorityId": "3d9be15a-8d6d-4746-bd51-3923c9fe7b86",
+        "authorityCode": "f8MdfmaPqh",
+        "caseReference": "ParN0bhHTw"
+      }
+    }
+  ],
+  "courtCentreId": "1c9f9bd2-435c-43f3-b9a5-a000a08c9ab9",
+  "nonDefaultDays": [
+    {
+      "startTime": "2018-09-21T08:45:00.000Z"
+    }
+  ],
+  "nonSittingDays": ["2018-09-22"],
+  "hearingLanguage": "WELSH",
+  "estimatedMinutes": 15,
+  "jurisdictionType": "MAGISTRATES",
+  "listingDirections": "Hearing should be arranged for after normal working hours",
+  "prosecutorDatesToAvoid": "Any day with a y in it"
+}

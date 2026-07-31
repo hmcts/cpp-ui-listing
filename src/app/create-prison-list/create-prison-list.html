@@ -1,0 +1,39 @@
+@if (errors) {
+<pdk-error-summary focusOnChange="true" tabindex="0" [errors]="errors"></pdk-error-summary>
+}
+
+<h1 pdk-margin-top="2" pdk-padding-top="1" pdk-typography="heading-large">{{ pageTitle }}</h1>
+
+<create-prison-list-filter
+  [publicHolidays]="publicHolidays$ | async"
+  (formErrors)="formErrors($event)"
+  (onSubmit)="filterSubmit($event)"
+  (selectCourtCentre)="onSelectCourtCentre($event)"
+>
+</create-prison-list-filter>
+<pdk-grid container class="hearings-schedule">
+  <pdk-grid two-thirds>
+    @if (isSubmitted && ((hasAllocatedHearingsByDateRange$ | async) === false)) {
+    <div class="no-hearings-messsage">
+      <pdk-warning-text>
+        <div>No hearings listed</div>
+      </pdk-warning-text>
+    </div>
+    }
+  </pdk-grid>
+
+  @if (selectedHearings?.length === 0) {
+  <span role="status" pdk-visually-hidden> No hearings listed </span>
+  } @if (isSubmitted) {
+  <pdk-grid one-third>
+    <download-prison-list
+      [selectedOptions]="selectedOptions"
+      [selectedCourtCentre]="selectedCourtCentre"
+      [crownSelected]="crownSelected"
+      [isPrisonAdminOrHmctsUser]="isPrisonAdminOrHmctsUser$ | async"
+      [hasAllocatedHearingsByDateRange]="hasAllocatedHearingsByDateRange$ | async"
+    >
+    </download-prison-list>
+  </pdk-grid>
+  }
+</pdk-grid>

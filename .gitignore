@@ -1,0 +1,84 @@
+# Claude Code
+CLAUDE.md
+.claude/settings.local.json
+
+# Java
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.rar
+*.puml
+
+# Thumbnails
+Thumbs.db
+
+# Object files (no binaries in git repos!)
+*.obj
+*.exe
+*.so
+*.zip
+*.tar
+*.gz
+
+# Mac
+.fseventsd/
+.Spotlight-V100/
+.Trashes/
+._.Trashes
+
+# IDEs and editors
+.agent/
+
+# Eclipse
+.classpath
+.compatibility
+.project
+.pydevproject
+.factorypath
+.checkstyle
+.metadata/
+.settings/
+.pmd
+.springBeans
+.tern-project
+
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Subversion
+.svn/
+
+# Misc
+*~
+*.log
+*.orig
+*.sonar
+deployWars.sh
+buildContexts.sh
+
+
+lightning-jenkins.properties
+**/.DS_Store
+
+.angular/
+build/
+dist/
+node_modules/
+src/app/config/app.override.config.json
+
+.npmrc
+settings.json
+coverage/*
+
+#Cursor
+/.cursor/*
+/.cursor
+.cursor/*
+

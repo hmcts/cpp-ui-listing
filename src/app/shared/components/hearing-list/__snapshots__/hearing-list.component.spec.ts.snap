@@ -1,0 +1,3488 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingListComponent Pagination should display pagination if total results are more than page size 1`] = `
+<ng-component
+  hearings={[Function Array]}
+  hideActionColumn="false"
+  pageNumber={[Function Number]}
+  pageSize={[Function Number]}
+  totalResults={[Function Number]}
+>
+  <hearing-list>
+    <div
+      class="govuk-grid-row"
+      container=""
+      pdk-grid=""
+    >
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <div
+          style="overflow-x: auto;"
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearingList"
+            pdk-table=""
+            style="table-layout: fixed;"
+          >
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Hearing date
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Type
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Name
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Remand Status
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Possible Disqual
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="100px"
+                >
+                  Prosecutor / Respondent(s)
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="150px"
+                >
+                  Offences / Application
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="70px"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Actions
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <span
+              class="govuk-visually-hidden"
+              pdk-visually-hidden=""
+              role="status"
+            >
+              Total results: 3
+            </span>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-11AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell dotted-border pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    ZARA
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for ZARA"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      11AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                  <div>
+                    CTL: 20 April 2019
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Prosecutor populated
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <details
+                      class="font-small govuk-details"
+                      pdk-details=""
+                    >
+                      <summary
+                        class="govuk-details__summary"
+                      >
+                        <span
+                          class="govuk-details__summary-text"
+                        >
+                          <span
+                            class="summary"
+                          >
+                            3 Offences
+                          </span>
+                        </span>
+                      </summary>
+                      <pdk-details-text
+                        class="govuk-details__text"
+                      >
+                        <ul>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 1
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 2
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Whatever
+                            </span>
+                          </li>
+                        </ul>
+                      </pdk-details-text>
+                    </details>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button vertical-align-middle govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                  <a
+                    aria-label="Allocate Hearing for ZARA"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for ZARA
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                    <a
+                      aria-label="Split Hearing for ZARA"
+                      class="govuk-!-margin-left-2 govuk-link"
+                      data-role="split-hearing-btn"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                      Split 
+                      <span
+                        class="govuk-visually-hidden"
+                        pdk-visually-hidden=""
+                      >
+                         hearing for ZARA
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-124"
+                name="124"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    MICROSOFT
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for MICROSOFT"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/124"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      22AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-33AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    Lloyd LANE
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for Lloyd LANE"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      33AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for Lloyd LANE"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for Lloyd LANE
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="application-b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   21 May 2019 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                  Xxx
+                </td>
+                <td
+                  class="govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                    TEST FIRST TEST LAST
+                  </div>
+                  <div>
+                    <a
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/application-at-a-glance/b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                    </a>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    <div>
+                      PARTY FIRST NAME PARTY LAST NAME
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                    </div>
+                    <div>
+                      <ul>
+                        <li
+                          class="application"
+                        >
+                          <span
+                            class="font-small"
+                          >
+                            9vBchM49Go
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    class="govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for TEST FIRST TEST LAST
+                    </span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <pdk-pagination
+          data-current-page="1"
+          data-page-size="1"
+          data-test-id="pagination"
+          data-total-results="2"
+        >
+          <div
+            class="pdk-pagination"
+          >
+            <nav
+              aria-label="Pagination"
+              class="govuk-pagination"
+            >
+              <div
+                class="pdk-pagination__arrow-placeholder"
+              />
+              <div
+                class="govuk-pagination__list govuk-!-margin-left-1 govuk-!-margin-right-1"
+                pdk-margin-horizontal="1"
+              >
+                <div
+                  class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1 govuk-pagination__item--current"
+                  pdk-margin-horizontal="1"
+                >
+                  <span
+                    aria-label="Current page, page 1"
+                    class="pdk-pagination__item__active"
+                    role="link"
+                    tabindex="0"
+                  >
+                    1
+                  </span>
+                </div>
+                <div
+                  class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1"
+                  pdk-margin-horizontal="1"
+                >
+                  <a
+                    aria-label="Go to page 2"
+                    class="govuk-pagination__link govuk-link"
+                    href="javascript:void(0)"
+                    pdk-link=""
+                  >
+                     2 
+                  </a>
+                </div>
+              </div>
+              <div
+                class="govuk-pagination__next"
+              >
+                <a
+                  aria-label="Go to next page of results"
+                  class="govuk-link govuk-pagination__link"
+                  href="javascript:void(0)"
+                  rel="Next"
+                >
+                  <span
+                    class="govuk-pagination__link-title"
+                  >
+                     Next 
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="govuk-pagination__icon govuk-pagination__icon--next"
+                    focusable="false"
+                    height="13"
+                    viewBox="0 0 15 13"
+                    width="15"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </pdk-pagination>
+      </div>
+    </div>
+  </hearing-list>
+</ng-component>
+`;
+
+exports[`HearingListComponent Pagination should display the current page with expected cases  1`] = `
+<ng-component
+  hearings={[Function Array]}
+  hideActionColumn="false"
+  pageNumber={[Function Number]}
+  pageSize={[Function Number]}
+  totalResults={[Function Number]}
+>
+  <hearing-list>
+    <div
+      class="govuk-grid-row"
+      container=""
+      pdk-grid=""
+    >
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <div
+          style="overflow-x: auto;"
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearingList"
+            pdk-table=""
+            style="table-layout: fixed;"
+          >
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Hearing date
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Type
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Name
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Remand Status
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Possible Disqual
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="100px"
+                >
+                  Prosecutor / Respondent(s)
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="150px"
+                >
+                  Offences / Application
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="70px"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Actions
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <span
+              class="govuk-visually-hidden"
+              pdk-visually-hidden=""
+              role="status"
+            >
+              Total results: 3
+            </span>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-11AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell dotted-border pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    ZARA
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for ZARA"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      11AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                  <div>
+                    CTL: 20 April 2019
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Prosecutor populated
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <details
+                      class="font-small govuk-details"
+                      pdk-details=""
+                    >
+                      <summary
+                        class="govuk-details__summary"
+                      >
+                        <span
+                          class="govuk-details__summary-text"
+                        >
+                          <span
+                            class="summary"
+                          >
+                            3 Offences
+                          </span>
+                        </span>
+                      </summary>
+                      <pdk-details-text
+                        class="govuk-details__text"
+                      >
+                        <ul>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 1
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 2
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Whatever
+                            </span>
+                          </li>
+                        </ul>
+                      </pdk-details-text>
+                    </details>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button vertical-align-middle govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                  <a
+                    aria-label="Allocate Hearing for ZARA"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for ZARA
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                    <a
+                      aria-label="Split Hearing for ZARA"
+                      class="govuk-!-margin-left-2 govuk-link"
+                      data-role="split-hearing-btn"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                      Split 
+                      <span
+                        class="govuk-visually-hidden"
+                        pdk-visually-hidden=""
+                      >
+                         hearing for ZARA
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-124"
+                name="124"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    MICROSOFT
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for MICROSOFT"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/124"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      22AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-33AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    Lloyd LANE
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for Lloyd LANE"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      33AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for Lloyd LANE"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for Lloyd LANE
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="application-b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   21 May 2019 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                  Xxx
+                </td>
+                <td
+                  class="govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                    TEST FIRST TEST LAST
+                  </div>
+                  <div>
+                    <a
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/application-at-a-glance/b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                    </a>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    <div>
+                      PARTY FIRST NAME PARTY LAST NAME
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                    </div>
+                    <div>
+                      <ul>
+                        <li
+                          class="application"
+                        >
+                          <span
+                            class="font-small"
+                          >
+                            9vBchM49Go
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    class="govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for TEST FIRST TEST LAST
+                    </span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <pdk-pagination
+          data-current-page="1"
+          data-page-size="1"
+          data-test-id="pagination"
+          data-total-results="2"
+        >
+          <div
+            class="pdk-pagination"
+          >
+            <nav
+              aria-label="Pagination"
+              class="govuk-pagination"
+            >
+              <div
+                class="pdk-pagination__arrow-placeholder"
+              />
+              <div
+                class="govuk-pagination__list govuk-!-margin-left-1 govuk-!-margin-right-1"
+                pdk-margin-horizontal="1"
+              >
+                <div
+                  class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1 govuk-pagination__item--current"
+                  pdk-margin-horizontal="1"
+                >
+                  <span
+                    aria-label="Current page, page 1"
+                    class="pdk-pagination__item__active"
+                    role="link"
+                    tabindex="0"
+                  >
+                    1
+                  </span>
+                </div>
+                <div
+                  class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1"
+                  pdk-margin-horizontal="1"
+                >
+                  <a
+                    aria-label="Go to page 2"
+                    class="govuk-pagination__link govuk-link"
+                    href="javascript:void(0)"
+                    pdk-link=""
+                  >
+                     2 
+                  </a>
+                </div>
+              </div>
+              <div
+                class="govuk-pagination__next"
+              >
+                <a
+                  aria-label="Go to next page of results"
+                  class="govuk-link govuk-pagination__link"
+                  href="javascript:void(0)"
+                  rel="Next"
+                >
+                  <span
+                    class="govuk-pagination__link-title"
+                  >
+                     Next 
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="govuk-pagination__icon govuk-pagination__icon--next"
+                    focusable="false"
+                    height="13"
+                    viewBox="0 0 15 13"
+                    width="15"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </pdk-pagination>
+      </div>
+    </div>
+  </hearing-list>
+</ng-component>
+`;
+
+exports[`HearingListComponent Pagination should not display pagination if total results are equal to page size 1`] = `
+<ng-component
+  hearings={[Function Array]}
+  hideActionColumn="false"
+  pageNumber={[Function Number]}
+  pageSize={[Function Number]}
+  totalResults={[Function Number]}
+>
+  <hearing-list>
+    <div
+      class="govuk-grid-row"
+      container=""
+      pdk-grid=""
+    >
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <div
+          style="overflow-x: auto;"
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearingList"
+            pdk-table=""
+            style="table-layout: fixed;"
+          >
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Hearing date
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Type
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Name
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Remand Status
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Possible Disqual
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="100px"
+                >
+                  Prosecutor / Respondent(s)
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="150px"
+                >
+                  Offences / Application
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="70px"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Actions
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <span
+              class="govuk-visually-hidden"
+              pdk-visually-hidden=""
+              role="status"
+            >
+              Total results: 3
+            </span>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-11AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell dotted-border pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    ZARA
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for ZARA"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      11AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                  <div>
+                    CTL: 20 April 2019
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Prosecutor populated
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <details
+                      class="font-small govuk-details"
+                      pdk-details=""
+                    >
+                      <summary
+                        class="govuk-details__summary"
+                      >
+                        <span
+                          class="govuk-details__summary-text"
+                        >
+                          <span
+                            class="summary"
+                          >
+                            3 Offences
+                          </span>
+                        </span>
+                      </summary>
+                      <pdk-details-text
+                        class="govuk-details__text"
+                      >
+                        <ul>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 1
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 2
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Whatever
+                            </span>
+                          </li>
+                        </ul>
+                      </pdk-details-text>
+                    </details>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button vertical-align-middle govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                  <a
+                    aria-label="Allocate Hearing for ZARA"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for ZARA
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                    <a
+                      aria-label="Split Hearing for ZARA"
+                      class="govuk-!-margin-left-2 govuk-link"
+                      data-role="split-hearing-btn"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                      Split 
+                      <span
+                        class="govuk-visually-hidden"
+                        pdk-visually-hidden=""
+                      >
+                         hearing for ZARA
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-124"
+                name="124"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    MICROSOFT
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for MICROSOFT"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/124"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      22AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-33AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    Lloyd LANE
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for Lloyd LANE"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      33AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for Lloyd LANE"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for Lloyd LANE
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="application-b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   21 May 2019 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                  Xxx
+                </td>
+                <td
+                  class="govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                    TEST FIRST TEST LAST
+                  </div>
+                  <div>
+                    <a
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/application-at-a-glance/b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                    </a>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    <div>
+                      PARTY FIRST NAME PARTY LAST NAME
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                    </div>
+                    <div>
+                      <ul>
+                        <li
+                          class="application"
+                        >
+                          <span
+                            class="font-small"
+                          >
+                            9vBchM49Go
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    class="govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for TEST FIRST TEST LAST
+                    </span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </hearing-list>
+</ng-component>
+`;
+
+exports[`HearingListComponent should create the right templates with actions 1`] = `
+<ng-component
+  hearings={[Function Array]}
+  hideActionColumn="false"
+>
+  <hearing-list>
+    <div
+      class="govuk-grid-row"
+      container=""
+      pdk-grid=""
+    >
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <div
+          style="overflow-x: auto;"
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearingList"
+            pdk-table=""
+            style="table-layout: fixed;"
+          >
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Hearing date
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Type
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Name
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Remand Status
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Possible Disqual
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="100px"
+                >
+                  Prosecutor / Respondent(s)
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="150px"
+                >
+                  Offences / Application
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="70px"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Actions
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <span
+              class="govuk-visually-hidden"
+              pdk-visually-hidden=""
+              role="status"
+            >
+              Total results: 3
+            </span>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-11AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell dotted-border pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    ZARA
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for ZARA"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      11AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                  <div>
+                    CTL: 20 April 2019
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <details
+                      class="font-small govuk-details"
+                      pdk-details=""
+                    >
+                      <summary
+                        class="govuk-details__summary"
+                      >
+                        <span
+                          class="govuk-details__summary-text"
+                        >
+                          <span
+                            class="summary"
+                          >
+                            3 Offences
+                          </span>
+                        </span>
+                      </summary>
+                      <pdk-details-text
+                        class="govuk-details__text"
+                      >
+                        <ul>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 1
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 2
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Whatever
+                            </span>
+                          </li>
+                        </ul>
+                      </pdk-details-text>
+                    </details>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button vertical-align-middle govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                  <a
+                    aria-label="Allocate Hearing for ZARA"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for ZARA
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                    <a
+                      aria-label="Split Hearing for ZARA"
+                      class="govuk-!-margin-left-2 govuk-link"
+                      data-role="split-hearing-btn"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                      Split 
+                      <span
+                        class="govuk-visually-hidden"
+                        pdk-visually-hidden=""
+                      >
+                         hearing for ZARA
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-124"
+                name="124"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    MICROSOFT
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for MICROSOFT"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/124"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      22AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-33AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    Lloyd LANE
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for Lloyd LANE"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      33AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   In custody 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="allocate-button govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for Lloyd LANE"
+                    class="govuk-!-margin-left-2 govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                    pdk-margin-left="2"
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for Lloyd LANE
+                    </span>
+                  </a>
+                  <div
+                    class="govuk-!-margin-top-2"
+                    pdk-margin-top="2"
+                  >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="application-b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   21 May 2019 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                  Xxx
+                </td>
+                <td
+                  class="govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                    TEST FIRST TEST LAST
+                  </div>
+                  <div>
+                    <a
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/application-at-a-glance/b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                    </a>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    <div>
+                      PARTY FIRST NAME PARTY LAST NAME
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                    </div>
+                    <div>
+                      <ul>
+                        <li
+                          class="application"
+                        >
+                          <span
+                            class="font-small"
+                          >
+                            9vBchM49Go
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </hearing-offences>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    class="govuk-link"
+                    data-test-id="allocateHearing"
+                    href="javascript:void(0);"
+                    pdk-link=""
+                  >
+                    Allocate 
+                    <span
+                      class="govuk-visually-hidden"
+                      pdk-visually-hidden=""
+                    >
+                       hearing for TEST FIRST TEST LAST
+                    </span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </hearing-list>
+</ng-component>
+`;
+
+exports[`HearingListComponent should create the right templates without actions 1`] = `
+<ng-component
+  hearings={[Function Array]}
+  hideActionColumn={[Function Boolean]}
+>
+  <hearing-list>
+    <div
+      class="govuk-grid-row"
+      container=""
+      pdk-grid=""
+    >
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <div
+          style="overflow-x: auto;"
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearingList"
+            pdk-table=""
+            style="table-layout: fixed;"
+          >
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Hearing date
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Type
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Name
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="110px"
+                >
+                  Remand Status
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="80px"
+                >
+                  Possible Disqual
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="100px"
+                >
+                  Prosecutor / Respondent(s)
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                  width="150px"
+                >
+                  Offences / Application
+                </th>
+              </tr>
+            </thead>
+            <span
+              class="govuk-visually-hidden"
+              pdk-visually-hidden=""
+              role="status"
+            >
+              Total results: 3
+            </span>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-11AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="2"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell dotted-border pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    ZARA
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for ZARA"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      11AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                  <div>
+                    CTL: 20 April 2019
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="dotted-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <details
+                      class="font-small govuk-details"
+                      pdk-details=""
+                    >
+                      <summary
+                        class="govuk-details__summary"
+                      >
+                        <span
+                          class="govuk-details__summary-text"
+                        >
+                          <span
+                            class="summary"
+                          >
+                            3 Offences
+                          </span>
+                        </span>
+                      </summary>
+                      <pdk-details-text
+                        class="govuk-details__text"
+                      >
+                        <ul>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 1
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Test 2
+                            </span>
+                          </li>
+                          <li
+                            class="offence govuk-!-margin-top-2"
+                            pdk-margin-top="2"
+                          >
+                            <span
+                              data-test-id="hearingOffence"
+                            >
+                              Whatever
+                            </span>
+                          </li>
+                        </ul>
+                      </pdk-details-text>
+                    </details>
+                  </hearing-offences>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-124"
+                name="124"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    MICROSOFT
+                  </div>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for MICROSOFT"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/124"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      22AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   Conditional Bail 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="case-123"
+                name="123"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-case-urn="urn-33AA22334455"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   23 May 2018 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="hearingType"
+                  >
+                    Precharge trial preparation
+                  </span>
+                  <case-markers
+                    class="case-markers govuk-!-padding-top-1"
+                    pdk-padding-top="1"
+                  >
+                    <div
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-marker-title pdk-!-text-color-red"
+                        pdk-text-colour="red"
+                      >
+                      </div>
+                    </div>
+                  </case-markers>
+                </td>
+                <td
+                  class="defendant-details-cell pdk-!-border-color-mid-grey govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="firstDefendantName"
+                  >
+                    Lloyd LANE
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details for Lloyd LANE"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/123"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      style="inline-size: 158px;"
+                      target="_blank"
+                    >
+                      33AA22334455
+                    </a>
+                  </div>
+                  <reporting-restrictions
+                    iswarning="true"
+                  >
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                   In custody 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    Not Applicable
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    CPS
+                  </div>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                      <div
+                        class="offence"
+                        data-test-id="hearingOffence"
+                      >
+                        Whatever
+                      </div>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="hearing-body govuk-table__body"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row"
+                data-test-id="hearingRow"
+                id="application-b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                pdk-table-row=""
+                style="vertical-align: top;"
+              >
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingStartDate"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                   21 May 2019 
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                  Xxx
+                </td>
+                <td
+                  class="govuk-heading-s govuk-table__cell"
+                  pdk-table-cell=""
+                  pdk-typography="heading-small"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                    TEST FIRST TEST LAST
+                  </div>
+                  <div>
+                    <a
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/application-at-a-glance/b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                    </a>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div>
+                    <div>
+                      PARTY FIRST NAME PARTY LAST NAME
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <hearing-offences>
+                    <div>
+                    </div>
+                    <div>
+                      <ul>
+                        <li
+                          class="application"
+                        >
+                          <span
+                            class="font-small"
+                          >
+                            9vBchM49Go
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </hearing-offences>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </hearing-list>
+</ng-component>
+`;

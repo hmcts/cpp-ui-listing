@@ -1,0 +1,20 @@
+@if (casemarkers) {
+  <div class="case-markers">
+    @if (casemarkers.length < 2) {
+      <div class="case-marker-title" pdk-text-colour="red">{{ casemarkers[0] }}</div>
+    } @else {
+      <details pdk-details class="case-marker-list-title" class="no-margin-bottom">
+        <summary pdk-text-colour="red">
+          {{ title }}
+        </summary>
+        <pdk-details-text pdk-text-colour="red">
+          @for (casemarker of casemarkers; track casemarker) {
+            <div class="case-marker">
+              {{ casemarker }}
+            </div>
+          }
+        </pdk-details-text>
+      </details>
+    }
+  </div>
+}

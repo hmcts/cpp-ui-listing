@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubMenuComponent should not render when the user does not have Court Calendar access 1`] = `
+<sub-menu
+  menuItems$={[Function Observable]}
+  store={[Function _Store]}
+  userPermissions={[Function Object]}
+>
+  <nav
+    aria-label="Menu"
+    class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+    clear=""
+    pdk-margin-bottom="6"
+    pdk-margin-top="-1"
+    pdk-service-nav=""
+  >
+    <div
+      class="govuk-service-navigation pdk-service-nav-clear"
+    >
+      <div
+        class="govuk-service-navigation__container"
+      >
+        <div
+          class="govuk-service-navigation__wrapper"
+        >
+          <ul
+            class="govuk-service-navigation__list"
+            pdk-service-nav-list=""
+            role="presentation"
+          >
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unallocated"
+              >
+                Unallocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/allocated"
+              >
+                Allocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/create-a-list"
+              >
+                Publish and download hearing lists
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unscheduled"
+              >
+                Unscheduled list
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</sub-menu>
+`;
+
+exports[`SubMenuComponent should render 1`] = `
+<sub-menu
+  menuItems$={[Function Observable]}
+  store={[Function _Store]}
+  userPermissions={[Function Object]}
+>
+  <nav
+    aria-label="Menu"
+    class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+    clear=""
+    pdk-margin-bottom="6"
+    pdk-margin-top="-1"
+    pdk-service-nav=""
+  >
+    <div
+      class="govuk-service-navigation pdk-service-nav-clear"
+    >
+      <div
+        class="govuk-service-navigation__container"
+      >
+        <div
+          class="govuk-service-navigation__wrapper"
+        >
+          <ul
+            class="govuk-service-navigation__list"
+            pdk-service-nav-list=""
+            role="presentation"
+          >
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unallocated"
+              >
+                Unallocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/allocated"
+              >
+                Allocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/create-a-list"
+              >
+                Publish and download hearing lists
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unscheduled"
+              >
+                Unscheduled list
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</sub-menu>
+`;
+
+exports[`SubMenuComponent should render when the user has CPS access only 1`] = `
+<sub-menu
+  menuItems$={[Function Observable]}
+  store={[Function _Store]}
+  userPermissions={[Function Object]}
+>
+  <nav
+    aria-label="Menu"
+    class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+    clear=""
+    pdk-margin-bottom="6"
+    pdk-margin-top="-1"
+    pdk-service-nav=""
+  >
+    <div
+      class="govuk-service-navigation pdk-service-nav-clear"
+    >
+      <div
+        class="govuk-service-navigation__container"
+      >
+        <div
+          class="govuk-service-navigation__wrapper"
+        >
+          <ul
+            class="govuk-service-navigation__list"
+            pdk-service-nav-list=""
+            role="presentation"
+          >
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unallocated"
+              >
+                Unallocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/allocated"
+              >
+                Allocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/create-a-list"
+              >
+                Download Magistrates' hearing lists
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unscheduled"
+              >
+                Unscheduled list
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</sub-menu>
+`;
+
+exports[`SubMenuComponent should render when the user has Court Calendar access 1`] = `
+<sub-menu
+  menuItems$={[Function Observable]}
+  store={[Function _Store]}
+  userPermissions={[Function Object]}
+>
+  <nav
+    aria-label="Menu"
+    class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+    clear=""
+    pdk-margin-bottom="6"
+    pdk-margin-top="-1"
+    pdk-service-nav=""
+  >
+    <div
+      class="govuk-service-navigation pdk-service-nav-clear"
+    >
+      <div
+        class="govuk-service-navigation__container"
+      >
+        <div
+          class="govuk-service-navigation__wrapper"
+        >
+          <ul
+            class="govuk-service-navigation__list"
+            pdk-service-nav-list=""
+            role="presentation"
+          >
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unallocated"
+              >
+                Unallocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/allocated"
+              >
+                Allocated Hearings
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/create-a-list"
+              >
+                Publish and download hearing lists
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/unscheduled"
+              >
+                Unscheduled list
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
+                href="/court-calendar"
+              >
+                Court calendar
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</sub-menu>
+`;

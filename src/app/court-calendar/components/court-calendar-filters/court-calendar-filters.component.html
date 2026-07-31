@@ -1,0 +1,321 @@
+@let values = initialValues();
+
+<div pdk-margin-bottom="8">
+  <form
+    #form="ngForm"
+    data-test-id="searchForm"
+    pdk-form
+    (errors)="errors.emit($event)"
+    (validSubmit)="handleSubmitForm(form.value)"
+  >
+    <fieldset class="filter-container">
+      <legend pdk-padding-top="4" pdk-typography="heading-small">
+        <h2 pdk-typography="heading-medium">Filter hearings</h2>
+      </legend>
+      <pdk-form-field
+        class="govuk-grid-column-full"
+        label="jurisdiction"
+        labelType="none"
+        [errorMessages]="[{ rule: 'required', message: 'Select court' }]"
+      >
+        <pdk-radio-group
+          name="courtType"
+          [(ngModel)]="courtType"
+          (ngModelChange)="this.onJurisdictionChange()"
+          required
+        >
+          <pdk-radio-button value="MAGISTRATES">Magistrates' Court </pdk-radio-button>
+          <pdk-grid>
+            @if (courtType === 'MAGISTRATES') {
+              <pdk-radio-conditional pdk-padding-top="4">
+                @if (courtType) {
+                  <div class="filter-group">
+                    <div class="filter-item">
+                      <pdk-form-field
+                        label="Court"
+                        labelType="small"
+                        [errorMessages]="[
+                          {
+                            rule: 'required',
+                            message: 'Enter a court name'
+                          }
+                        ]"
+                      >
+                        <cpp-organisation-unit-autosuggest
+                          [id]="'courtCentreFilter'"
+                          name="courtCentre"
+                          [ngModel]="values?.courtCentre"
+                          (ngModelChange)="handleCourtCentreChange($event)"
+                          [jurisdictionCode]="'B'"
+                          required
+                          data-role="allocate-court-centre-input"
+                        >
+                        </cpp-organisation-unit-autosuggest>
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field label="Courtroom (optional)" labelType="small">
+                        <pdk-select
+                          [ngModel]="values?.courtRoomId"
+                          [name]="'courtRoomId'"
+                          [options]="courtroomOptions"
+                          justified
+                          placeholder="Any"
+                        >
+                        </pdk-select>
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item date-filter">
+                      <pdk-form-field
+                        labelType="small"
+                        label="Start date"
+                        [errorMessages]="[
+                          {
+                            rule: 'required',
+                            message: 'Enter a start date'
+                          }
+                        ]"
+                      >
+                        <pdk-date-picker-input
+                          #sessionStartDate="ngModel"
+                          [ngModel]="values?.startDate | date: 'yyyy-MM-dd'"
+                          (ngModelChange)="sessionEndDate.reset()"
+                          name="startDate"
+                          required
+                        >
+                        </pdk-date-picker-input>
+                        @if (sessionStartDate.valid && sessionStartDate.value) {
+                          <pdk-inset-text
+                            pdk-margin-bottom="0"
+                            pdk-margin-top="3"
+                            role="status"
+                            required
+                          >
+                            Selected day:&nbsp;
+                            <span>{{ sessionStartDate.value | date: 'EEEE' }}</span>
+                          </pdk-inset-text>
+                        }
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item date-filter">
+                      <pdk-form-field
+                        [errorMessages]="[
+                          {
+                            rule: 'sessionEndDate',
+                            message: 'End date must be later than start date'
+                          }
+                        ]"
+                        labelType="small"
+                        label="End date"
+                      >
+                        <pdk-date-picker-input
+                          #sessionEndDate="ngModel"
+                          [isDateDisabled]="isDateDisabled(sessionStartDate.value)"
+                          [ngModel]="values?.endDate"
+                          name="endDate"
+                          [minDate]="sessionStartDate.value"
+                          data-test-id="sessionEndDate"
+                        >
+                        </pdk-date-picker-input>
+                        @if (
+                          sessionEndDate.value &&
+                          !sessionEndDate.errors?.dateExists &&
+                          !sessionEndDate.errors?.dateFormat
+                        ) {
+                          <pdk-inset-text
+                            pdk-margin-bottom="0"
+                            pdk-margin-top="3"
+                            role="status"
+                            required
+                          >
+                            Selected day:&nbsp;
+                            <span>{{ sessionEndDate.value | date: 'EEEE' }}</span>
+                          </pdk-inset-text>
+                        }
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field label="Business type (optional)" labelType="small">
+                        <cpp-rota-business-type-select
+                          [ngModel]="values?.businessType"
+                          [name]="'businessType'"
+                          placeholder="All business types"
+                          [required]="false"
+                          justified
+                        ></cpp-rota-business-type-select>
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field label="Session" labelType="small">
+                        <pdk-radio-group
+                          name="courtSession"
+                          ariaDescribedBy="'courtSession'"
+                          ariaDescription="'Session'"
+                          [ngModel]="values?.courtSession || 'Any'"
+                          [options]="courtSessionOptions"
+                        >
+                        </pdk-radio-group>
+                      </pdk-form-field>
+                    </div>
+                  </div>
+                }
+              </pdk-radio-conditional>
+            }
+          </pdk-grid>
+          <pdk-radio-button value="CROWN">Crown Court </pdk-radio-button>
+          <pdk-grid>
+            @if (courtType === 'CROWN') {
+              <pdk-radio-conditional pdk-padding-top="4">
+                @if (courtType) {
+                  <div class="filter-group filter-group-extended">
+                    <div class="filter-item">
+                      <pdk-form-field
+                        label="Court"
+                        labelType="small"
+                        [errorMessages]="[
+                          {
+                            rule: 'required',
+                            message: 'Enter a court name'
+                          }
+                        ]"
+                      >
+                        <cpp-organisation-unit-autosuggest
+                          [id]="'courtCentreFilter'"
+                          name="courtCentre"
+                          [ngModel]="values?.courtCentre"
+                          (ngModelChange)="handleCourtCentreChange($event)"
+                          [jurisdictionCode]="'C'"
+                          required
+                          data-role="allocate-court-centre-input"
+                        >
+                        </cpp-organisation-unit-autosuggest>
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field label="Courtroom (optional)" labelType="small">
+                        <pdk-select
+                          [ngModel]="values?.courtRoomId"
+                          [name]="'courtRoomId'"
+                          [options]="courtroomOptions"
+                          justified
+                          placeholder="Any"
+                        >
+                        </pdk-select>
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field
+                        labelType="small"
+                        label="Start date"
+                        [errorMessages]="[
+                          {
+                            rule: 'required',
+                            message: 'Enter a start date'
+                          }
+                        ]"
+                      >
+                        <pdk-date-picker-input
+                          #sessionStartDate="ngModel"
+                          [ngModel]="values?.startDate | date: 'yyyy-MM-dd'"
+                          (ngModelChange)="sessionEndDate.reset()"
+                          name="startDate"
+                          required
+                        >
+                        </pdk-date-picker-input>
+                        @if (sessionStartDate.valid && sessionStartDate.value) {
+                          <pdk-inset-text
+                            pdk-margin-bottom="0"
+                            pdk-margin-top="3"
+                            role="status"
+                            required
+                          >
+                            Selected day:&nbsp;
+                            <span>{{ sessionStartDate.value | date: 'EEEE' }}</span>
+                          </pdk-inset-text>
+                        }
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field
+                        [errorMessages]="[
+                          {
+                            rule: 'sessionEndDate',
+                            message: 'End date must be later than start date'
+                          }
+                        ]"
+                        labelType="small"
+                        label="End date"
+                      >
+                        <pdk-date-picker-input
+                          #sessionEndDate="ngModel"
+                          [isDateDisabled]="isDateDisabled(sessionStartDate.value)"
+                          [ngModel]="values?.endDate"
+                          name="endDate"
+                          [minDate]="sessionStartDate.value"
+                          data-test-id="sessionEndDate"
+                        >
+                        </pdk-date-picker-input>
+                        @if (
+                          sessionEndDate.value &&
+                          !sessionEndDate.errors?.dateExists &&
+                          !sessionEndDate.errors?.dateFormat
+                        ) {
+                          <pdk-inset-text
+                            pdk-margin-bottom="0"
+                            pdk-margin-top="3"
+                            role="status"
+                            required
+                          >
+                            Selected day:&nbsp;
+                            <span>{{ sessionEndDate.value | date: 'EEEE' }}</span>
+                          </pdk-inset-text>
+                        }
+                      </pdk-form-field>
+                    </div>
+                    <div class="filter-item">
+                      <pdk-form-field
+                        label="Hearing type (optional)"
+                        labelType="small"
+                        [errorMessages]="[
+                          {
+                            rule: 'required',
+                            message: 'Enter a hearing type'
+                          }
+                        ]"
+                      >
+                        <cpp-hearing-type-autosuggest
+                          jurisdictionType="values.jurisdictionType"
+                          name="hearingType"
+                          [ngModel]="values?.hearingType"
+                          placeholder="All hearing types"
+                        >
+                        </cpp-hearing-type-autosuggest>
+                      </pdk-form-field>
+                    </div>
+                  </div>
+                }
+              </pdk-radio-conditional>
+            }
+          </pdk-grid>
+        </pdk-radio-group>
+      </pdk-form-field>
+      <div class="actions" pdk-padding-top="2" pdk-margin-bottom="2">
+        <pdk-form-group>
+          <button type="submit" aria-label="apply filters " pdk-button pdk-margin-bottom="0">
+            Apply filters
+          </button>
+        </pdk-form-group>
+        <div pdk-margin-left="4">
+          <a
+            data-test-id="reset-form"
+            aria-label="Reset the filters"
+            href="javascript:void(0)"
+            pdk-link
+            (click)="form.reset()"
+            >Reset filters</a
+          >
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

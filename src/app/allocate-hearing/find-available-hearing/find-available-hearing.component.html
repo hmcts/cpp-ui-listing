@@ -1,0 +1,66 @@
+<div class="find-available-hearing">
+  <h2 pdk-typography="heading-medium">Find an available hearing</h2>
+  @if (relatedHearingsForm) {
+    <form
+      pdk-form
+      data-test-id="relatedHearingsFiltersForm"
+      [formGroup]="relatedHearingsForm"
+      (validSubmit)="onSubmit()"
+    >
+      <pdk-form-field label="Related hearings" labelType="small">
+        <pdk-checkbox-group
+          formControlName="caseTypes"
+          (change)="checkSpecificCases($event, specificOption)"
+        >
+          <pdk-checkbox [value]="relatedCaseTypes.sameCase">
+            <span>Same as {{ listedCasesUrns }}</span>
+          </pdk-checkbox>
+          <pdk-checkbox [value]="relatedCaseTypes.linkedCase">
+            <span>Matched defendants and linked cases</span>
+          </pdk-checkbox>
+          <pdk-checkbox [value]="relatedCaseTypes.specific" #specificOption="pdkCheckbox">
+            <span>Specific case</span>
+          </pdk-checkbox>
+          @if (caseTypesValue?.includes(relatedCaseTypes.specific)) {
+            <pdk-checkbox-conditional pdk-margin-top="2">
+              @for (
+                specificUrnControl of specificCaseUrns.controls;
+                let controlIndex = $index;
+                track controlIndex
+              ) {
+                <pdk-form-field label="Reference" pdk-margin-bottom="3">
+                  <input
+                    type="text"
+                    [formControl]="specificUrnControl"
+                    name="reference-specific-case"
+                    pdk-text-input
+                    [pdk-input]="10"
+                  />
+                </pdk-form-field>
+              }
+              <a
+                pdk-link
+                pdk-margin-bottom="4"
+                href="javascript:void(0)"
+                (click)="addAnotherSpecificCase()"
+                >Add another case</a
+              >
+            </pdk-checkbox-conditional>
+          }
+        </pdk-checkbox-group>
+      </pdk-form-field>
+      <pdk-form-group class="find-available-hearing-action-buttons" pdk-margin-top="5">
+        <button type="submit" pdk-button pdk-margin="0" [disabled]="isSearchButtonDisabled">
+          Search
+        </button>
+        <a
+          pdk-link
+          pdk-margin-horizontal="3"
+          href="javascript:void(0)"
+          (click)="handleResetFilters()"
+          >Reset filters</a
+        >
+      </pdk-form-group>
+    </form>
+  }
+</div>

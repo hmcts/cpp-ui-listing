@@ -1,0 +1,85 @@
+@if (errors) {
+<pdk-error-summary focusOnChange="true" [errors]="errors"> </pdk-error-summary>
+}
+<div pdk-margin-top="2">
+  @if (showSubmenu) {
+  <sub-menu></sub-menu>
+  } @if (breadcrumbs.length && !showSubmenu) {
+  <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+  } @if (lastAllocatedHearing$ | async) {
+  <pdk-grid container pdk-padding-top="3">
+    <pdk-grid two-thirds>
+      <app-notification
+        [lastAllocatedHearing]="lastAllocatedHearing$ | async"
+        [courtCentres]="courtCentres$ | async"
+        (onDestroy)="clearNotification()"
+      >
+      </app-notification>
+    </pdk-grid>
+  </pdk-grid>
+  } @if (hearingSchedule$ | async; as schedule) {
+  <pdk-grid container pdk-padding-top="3">
+    <pdk-grid two-thirds>
+      @for (allocation of schedule.hearingSlotAllocations; track allocation.hearingSlotTime) {
+      <div pdk-margin-bottom="2">
+        <app-notification
+          [allocation]="allocation"
+          [courtCentres]="courtCentres$ | async"
+          [lastAllocatedHearing]="lastAllocatedMagsHearingsSlots$ | async"
+          (onDestroy)="clearNotification()"
+        >
+        </app-notification>
+      </div>
+      }
+    </pdk-grid>
+  </pdk-grid>
+  }
+
+  <div class="hearing-listings">
+    <h1 pdk-typography="heading-large" pdk-margin-bottom="1" pdk-margin-top="2">
+      Unscheduled list
+    </h1>
+    <div>
+      <unscheduled-listings-filters
+        [selectedOptions]="selectedHearingFilters$ | async"
+        [organisationUnits]="operationalUnitOptions$ | async"
+        [typeOfListCodeOptions]="typeOfListCodeOptions$ | async"
+        (onApplyFilters)="listHearings($event)"
+        (onClearFilters)="resetUnscheduledHearingFilters()"
+        (onValidationError)="errors = $event"
+      ></unscheduled-listings-filters>
+    </div>
+    @if (unscheduledHearingsCount$ | async) {
+    <pdk-inset-text>
+      <b
+        >{{ unscheduledHearingsCount$ | async }} item{{ (unscheduledHearingsCount$ | async) === 1 ?
+        '' : 's' }} returned</b
+      >
+    </pdk-inset-text>
+    }
+
+    <div>
+      @if ((unscheduledHearings$ | async).length > 0 || (unscheduledHearingsForApplications$ |
+      async).length > 0) {
+      <unscheduled-listings-table
+        [unscheduledHearings]="unscheduledHearings$ | async"
+        [unscheduledHearingsForApplications]="unscheduledHearingsForApplications$ | async"
+        [baseUrl]="getBaseUrl()"
+        [pageNumber]="(unscheduledHearingsWithPagination$ | async).pagination.currentPage"
+        [pageSize]="pageSize"
+        [totalResults]="(unscheduledHearingsWithPagination$ | async).pagination.totalNumber"
+        (onAllocate)="allocateUnscheduledHearing($event)"
+        (pageNumberChange)="updatePageNumber($event)"
+      ></unscheduled-listings-table>
+      }
+    </div>
+  </div>
+
+  @if (showNoHearingsMessage$ | async) {
+  <div pdk-margin-top="5">
+    <pdk-warning-text>
+      <div>There are no unscheduled hearings</div>
+    </pdk-warning-text>
+  </div>
+  }
+</div>

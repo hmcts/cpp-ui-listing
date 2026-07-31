@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingFiltersComponent should render correctly 1`] = `
+<ng-component
+  courtSummaries={[Function Array]}
+  hearingTypes={[Function Array]}
+  jurisdictions={[Function Array]}
+  listHearings={[Function Function]}
+  prosecutors={[Function Array]}
+  resetHearingFilters={[Function Function]}
+  selectedOptions={[Function Object]}
+  validationErrors={[Function Function]}
+>
+  <hearing-filters>
+    <div
+      class="hearing-filters-form pdk-!-fill-color-light-grey"
+      pdk-fill-colour="light-grey"
+    >
+      <form
+        class="ng-untouched ng-pristine ng-valid"
+        data-test-id="hearingFiltersForm"
+        novalidate=""
+        pdk-form=""
+      >
+        <fieldset
+          class="govuk-!-padding-bottom-0 govuk-!-margin-bottom-0 govuk-fieldset"
+          pdk-fieldset=""
+          pdk-margin-bottom="0"
+          pdk-padding-bottom="0"
+        >
+          <legend
+            class="govuk-fieldset__legend govuk-fieldset__legend--s"
+            pdk-legend="small"
+          >
+            Filter by:
+          </legend>
+          <div
+            class="table-container"
+          >
+            <div
+              class="table-item"
+            >
+              <pdk-form-field
+                label="Court"
+                labeltype="small"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="pdk-form-control-undefined-GENERATED_ID"
+                  >
+                     Court 
+                  </label>
+                  <pdk-autosuggest-lite
+                    class="ng-untouched ng-pristine ng-valid"
+                    name="courtCentreId"
+                    required=""
+                  >
+                    <pdk-autosuggest
+                      highlightcolor="blue"
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-autosuggest"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                              aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                              aria-expanded="false"
+                              autocomplete="off"
+                              class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                              id="pdk-form-control-undefined-GENERATED_ID"
+                              role="combobox"
+                              type="text"
+                            />
+                            <span
+                              class="govuk-visually-hidden"
+                              id="pdk-autosuggest__instructions-GENERATED_ID"
+                              pdk-visually-hidden=""
+                            >
+                               When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                            </span>
+                            <span
+                              aria-live="polite"
+                              class="govuk-visually-hidden"
+                              pdk-visually-hidden=""
+                              role="status"
+                            >
+                            </span>
+                            <div
+                              class="pdk-autosuggest__suggestions-container"
+                              id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                            >
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-autosuggest>
+                  </pdk-autosuggest-lite>
+                </pdk-form-group>
+              </pdk-form-field>
+            </div>
+            <div
+              class="table-item"
+            >
+              <pdk-form-field
+                label="Prosecutor"
+                labeltype="small"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="pdk-form-control-undefined-GENERATED_ID"
+                  >
+                     Prosecutor 
+                  </label>
+                  <pdk-autosuggest-lite
+                    class="ng-untouched ng-pristine ng-valid"
+                    name="authorityId"
+                    required=""
+                  >
+                    <pdk-autosuggest
+                      highlightcolor="blue"
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-autosuggest"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                              aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                              aria-expanded="false"
+                              autocomplete="off"
+                              class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                              id="pdk-form-control-undefined-GENERATED_ID"
+                              role="combobox"
+                              type="text"
+                            />
+                            <span
+                              class="govuk-visually-hidden"
+                              id="pdk-autosuggest__instructions-GENERATED_ID"
+                              pdk-visually-hidden=""
+                            >
+                               When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                            </span>
+                            <span
+                              aria-live="polite"
+                              class="govuk-visually-hidden"
+                              pdk-visually-hidden=""
+                              role="status"
+                            >
+                            </span>
+                            <div
+                              class="pdk-autosuggest__suggestions-container"
+                              id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                            >
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-autosuggest>
+                  </pdk-autosuggest-lite>
+                </pdk-form-group>
+              </pdk-form-field>
+            </div>
+            <div
+              class="table-item"
+            >
+              <pdk-form-field
+                label="Hearing type"
+                labeltype="small"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="pdk-form-control-undefined-GENERATED_ID"
+                  >
+                     Hearing type 
+                  </label>
+                  <pdk-autosuggest-lite
+                    class="ng-untouched ng-pristine ng-valid"
+                    name="hearingTypeId"
+                    required=""
+                  >
+                    <pdk-autosuggest
+                      highlightcolor="blue"
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-autosuggest"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                              aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                              aria-expanded="false"
+                              autocomplete="off"
+                              class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                              id="pdk-form-control-undefined-GENERATED_ID"
+                              role="combobox"
+                              type="text"
+                            />
+                            <span
+                              class="govuk-visually-hidden"
+                              id="pdk-autosuggest__instructions-GENERATED_ID"
+                              pdk-visually-hidden=""
+                            >
+                               When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                            </span>
+                            <span
+                              aria-live="polite"
+                              class="govuk-visually-hidden"
+                              pdk-visually-hidden=""
+                              role="status"
+                            >
+                            </span>
+                            <div
+                              class="pdk-autosuggest__suggestions-container"
+                              id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                            >
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-autosuggest>
+                  </pdk-autosuggest-lite>
+                </pdk-form-group>
+              </pdk-form-field>
+            </div>
+            <div
+              class="table-item"
+            >
+              <pdk-form-field
+                label="Jurisdiction"
+                labeltype="small"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="jurisdictionType"
+                  >
+                     Jurisdiction 
+                  </label>
+                  <pdk-select
+                    class="ng-untouched ng-pristine ng-valid"
+                  >
+                    <select
+                      class="govuk-select"
+                      id="jurisdictionType"
+                      name="jurisdictionType"
+                    >
+                      <option
+                        value="ALL"
+                      >
+                         All jurisdictions 
+                      </option>
+                      <option
+                        value="CROWN"
+                      >
+                         Crown 
+                      </option>
+                      <option
+                        value="MAGISTRATES"
+                      >
+                         Magistrates 
+                      </option>
+                    </select>
+                  </pdk-select>
+                </pdk-form-group>
+              </pdk-form-field>
+            </div>
+            <div
+              class="table-item disqualification"
+            >
+              <pdk-form-field
+                label="Possible disqual"
+                labeltype="small"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="possibleDisqualification"
+                  >
+                     Possible disqual 
+                  </label>
+                  <pdk-select
+                    class="ng-untouched ng-pristine ng-valid"
+                  >
+                    <select
+                      class="govuk-select"
+                      id="possibleDisqualification"
+                      name="possibleDisqualification"
+                    >
+                      <option
+                        value="ALL"
+                      >
+                         All 
+                      </option>
+                      <option
+                        value="true"
+                      >
+                         Yes 
+                      </option>
+                    </select>
+                  </pdk-select>
+                </pdk-form-group>
+              </pdk-form-field>
+            </div>
+          </div>
+          <div
+            class="controls govuk-!-margin-right-1 govuk-!-margin-bottom-2"
+            pdk-margin-bottom="2"
+            pdk-margin-right="1"
+          >
+            <button
+              class="govuk-!-margin-bottom-0 govuk-button"
+              data-role="apply-filters-btn"
+              pdk-button=""
+              pdk-margin-bottom="0"
+              type="submit"
+            >
+               Apply filters 
+            </button>
+            <a
+              class="govuk-link"
+              href="javascript:;"
+              pdk-link=""
+            >
+               Clear filters 
+            </a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </hearing-filters>
+</ng-component>
+`;

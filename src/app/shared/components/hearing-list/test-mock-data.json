@@ -1,0 +1,235 @@
+[
+  {
+    "id": "4f901e1c-bcee-40c1-b400-60f14d92d2f1",
+    "type": {
+      "id": "123",
+      "description": "precharge trial preparation"
+    },
+    "allocated": false,
+    "startDate": "2018-05-23",
+    "endDate": "2018-05-30",
+    "nonSittingDays": [],
+    "estimatedMinutes": 30,
+    "courtCentreId": "123",
+    "courtRoomId": "4f901e1c-bcee-40c1-b400-60f14d92d2f0",
+    "jurisdictionType": "CROWN",
+    "hearingLanguage": "English",
+    "judicialRoles": [],
+    "listedCases": [
+      {
+        "id": "123",
+        "caseIdentifier": {
+          "authorityId": "123",
+          "authorityCode": "CPS",
+          "caseReference": "11AA22334455"
+        },
+        "defendants": [
+          {
+            "id": "1234",
+            "firstName": "John",
+            "lastName": "Smith",
+            "offences": [
+              {
+                "id": "4561",
+                "offenceCode": "CJS24234",
+                "startDate": "2018-10-01",
+                "statementOfOffence": {
+                  "title": "Whatever",
+                  "legislation": "Whatever"
+                }
+              }
+            ],
+            "bailStatus": {
+              "code": "B",
+              "description": "Conditional Bail",
+              "custodyTimeLimit": "2019-08-20"
+            },
+            "custodyTimeLimit": "2019-08-20"
+          },
+          {
+            "id": "12345",
+            "organisationId": "542",
+            "organisationName": "Zara",
+            "offences": [
+              {
+                "id": "4562",
+                "offenceCode": "CJS24234",
+                "startDate": "2018-10-01",
+                "statementOfOffence": {
+                  "title": "Test 2",
+                  "legislation": "Whatever"
+                }
+              },
+              {
+                "id": "4563",
+                "offenceCode": "CJS24234",
+                "startDate": "2018-10-01",
+                "statementOfOffence": {
+                  "title": "Test 1",
+                  "legislation": "Whatever"
+                }
+              }
+            ],
+            "bailStatus": {
+              "code": "B",
+              "description": "Conditional Bail",
+              "custodyTimeLimit": "2019-04-20"
+            },
+            "custodyTimeLimit": "2019-04-20"
+          }
+        ]
+      },
+      {
+        "id": "124",
+        "caseIdentifier": {
+          "authorityId": "1234",
+          "authorityCode": "CPS",
+          "caseReference": "22AA22334455"
+        },
+        "defendants": [
+          {
+            "id": "1234",
+            "firstName": "Peter",
+            "lastName": "Rabbit",
+            "offences": [
+              {
+                "id": "4564",
+                "offenceCode": "CJS24234",
+                "startDate": "2018-10-01",
+                "statementOfOffence": {
+                  "title": "Whatever",
+                  "legislation": "Whatever"
+                }
+              }
+            ],
+            "bailStatus": {
+              "code": "B",
+              "description": "Conditional Bail"
+            }
+          },
+          {
+            "id": "12345",
+            "organisationId": "542",
+            "organisationName": "Microsoft",
+            "offences": [
+              {
+                "id": "4565",
+                "offenceCode": "CJS24234",
+                "startDate": "2018-10-01",
+                "statementOfOffence": {
+                  "title": "Whatever",
+                  "legislation": "Whatever"
+                }
+              }
+            ],
+            "bailStatus": {
+              "code": "B",
+              "description": "Conditional Bail"
+            }
+          }
+        ]
+      }
+    ],
+    "nonDefaultDays": [],
+    "hearingDays": []
+  },
+  {
+    "id": "5a012e2d-ccff-41d2-b511-71e25e3e3f82",
+    "type": {
+      "id": "123",
+      "description": "precharge trial preparation"
+    },
+    "allocated": false,
+    "startDate": "2018-05-23",
+    "endDate": "2018-05-30",
+    "nonSittingDays": [],
+    "estimatedMinutes": 30,
+    "courtCentreId": "123",
+    "courtRoomId": "4f901e1c-bcee-40c1-b400-60f14d92d2f0",
+    "jurisdictionType": "CROWN",
+    "hearingLanguage": "English",
+    "judicialRoles": [],
+    "listedCases": [
+      {
+        "id": "123",
+        "caseIdentifier": {
+          "authorityId": "123",
+          "authorityCode": "CPS",
+          "caseReference": "33AA22334455"
+        },
+        "defendants": [
+          {
+            "id": "1234",
+            "firstName": "Lloyd",
+            "lastName": "Lane",
+            "offences": [
+              {
+                "id": "4566",
+                "offenceCode": "CJS24234",
+                "startDate": "2018-10-01",
+                "statementOfOffence": {
+                  "title": "Whatever",
+                  "legislation": "Whatever"
+                }
+              }
+            ],
+            "bailStatus": {
+              "code": "C",
+              "description": "In custody"
+            }
+          }
+        ]
+      }
+    ],
+    "nonDefaultDays": [],
+    "hearingDays": []
+  },
+  {
+    "id": "94d51a60-ab07-460d-9b60-1bc4d8c99f87",
+    "type": {
+      "id": "3e39187d-c40e-4703-9907-c3eeb83fd3da",
+      "description": "xxx"
+    },
+    "endDate": "2019-03-31",
+    "allocated": false,
+    "judiciary": [
+      {
+        "isDeputy": false,
+        "judicialId": "54da17d2-d00d-43c6-8e38-c089ca391d3d",
+        "judicialRoleType": {
+          "judiciaryType": "MAGISTRATE"
+        }
+      }
+    ],
+    "startDate": "2019-05-21",
+    "courtRoomId": "9e4932f7-97b2-3010-b942-ddd2624e4dd8",
+    "hearingDays": [],
+    "listedCases": [],
+    "courtCentreId": "f8254db1-1683-483e-afb3-b87fde5a0a26",
+    "nonDefaultDays": [],
+    "nonSittingDays": [],
+    "hearingLanguage": "ENGLISH",
+    "estimatedMinutes": 0,
+    "jurisdictionType": "CROWN",
+    "courtApplications": [
+      {
+        "id": "b11ecf5c-ccaa-4db7-8d80-0e07a6b5da70",
+        "applicant": {
+          "lastName": "TEST LAST",
+          "firstName": "TEST FIRST",
+          "isRespondent": false
+        },
+        "respondents": [
+          {
+            "lastName": "PARTY LAST NAME",
+            "firstName": "PARTY FIRST NAME",
+            "isRespondent": true
+          }
+        ],
+        "linkedCaseIds": ["08085721-cb00-4b05-8e11-8fa22e150690"],
+        "applicationType": "9vBchM49Go"
+      }
+    ],
+    "reportingRestrictionReason": "RR"
+  }
+]

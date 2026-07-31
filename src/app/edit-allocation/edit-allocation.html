@@ -1,0 +1,126 @@
+@if (errors) {
+<pdk-error-summary focusOnChange="true" tabindex="0" [errors]="errors"> </pdk-error-summary>
+}
+<div pdk-margin-top="2">
+  @if (showSubmenu) {
+  <sub-menu></sub-menu>
+  } @if (breadcrumbs?.length && !showSubmenu) {
+  <ol pdk-breadcrumb-list>
+    @for (crumb of breadcrumbs; track crumb.title; let last = $last) {
+    <li pdk-breadcrumb-list-item>
+      @if (!last && crumb.routerLink) {
+      <a [title]="crumb.title" [routerLink]="crumb.routerLink" pdk-breadcrumb>
+        {{ crumb.title }}
+      </a>
+      } @if (!last && crumb.href) {
+      <a [title]="crumb.title" [href]="crumb.href" pdk-breadcrumb> {{ crumb.title }} </a>
+      } @if (last) {
+      <span>{{ crumb.title }}</span>
+      }
+    </li>
+    }
+  </ol>
+  }
+</div>
+
+@if (lastAllocatedHearing$ | async) {
+<pdk-grid container pdk-padding-top="3">
+  <pdk-grid two-thirds>
+    <app-notification
+      [lastAllocatedHearing]="lastAllocatedHearing$ | async"
+      [courtCentres]="courtCentres$ | async"
+      (onDestroy)="clearNotification()"
+    >
+    </app-notification>
+  </pdk-grid>
+</pdk-grid>
+} @if (hearingSchedule$ | async; as schedule) {
+<pdk-grid container pdk-padding-top="3">
+  <pdk-grid two-thirds>
+    @for (allocation of schedule.hearingSlotAllocations; track allocation.hearingSlotTime) {
+    <div pdk-margin-bottom="2">
+      <app-notification
+        [allocation]="allocation"
+        [split]="true"
+        [courtCentres]="courtCentres$ | async"
+        [lastAllocatedHearing]="lastAllocatedMagsHearingsSlots$ | async"
+        (onDestroy)="clearNotification()"
+      >
+      </app-notification>
+    </div>
+    }
+  </pdk-grid>
+</pdk-grid>
+}
+
+<h1 pdk-typography="heading-large" pdk-margin-bottom="1" pdk-margin-top="2">Allocated hearings</h1>
+<p pdk-typography="body-medium" pdk-margin-bottom="2">
+  Select a calendar slot to view allocated hearings
+</p>
+<div>
+  <pdk-grid container>
+    <pdk-grid three-quarters>
+      @if (courtCentres?.length) {
+      <courtrooms-filter
+        (onSelectCourtCentre)="onSelectCourtCentre($event)"
+        [courtCentres]="courtCentres"
+        [preselectedOptions]="filterOptions"
+        (formErrors)="formErrors($event)"
+        [courtRooms]="selectedCourtCentre?.courtRooms || []"
+        (onSubmit)="filterSubmit($event)"
+      >
+      </courtrooms-filter>
+      }
+      <daily-court-room-calendar
+        #dailyCourtRoomCalendarContainer
+        [enableAction]="true"
+        (onHearingSelected)="onHearingSelected($event)"
+        (onSelectChangeJudiciary)="
+          selectedJudiciaryHearings = $event;
+          showJudiciaryForm = true;
+        "
+        (clearSidebar)="clearSidebar()"
+        [selectedHearingId]="selectedHearingId"
+        [filterOptions]="filterOptions"
+        (errors)="formErrors($event)"
+      >
+      </daily-court-room-calendar>
+    </pdk-grid>
+    <pdk-grid one-quarter>
+      @if (selectedHearing && (hearingTypes$ | async)?.length && !showJudiciaryForm) { @if
+      (canActivateSplit(selectedHearing)) {
+      <div pdk-margin-bottom="3">
+        <h1 pdk-margin-bottom="0" pdk-typography="heading-small">Split hearing</h1>
+        <a
+          pdk-link
+          (click)="splitHearing(selectedHearing)"
+          href="javascript:void(0);"
+          pdk-margin-left="0"
+          data-role="split-hearing-btn"
+          >Split
+        </a>
+      </div>
+      }
+      <hearing-details-form
+        [hearing]="selectedHearing"
+        [courtCentres]="courtCentres"
+        [hearingTypes]="(hearingTypes$ | async)"
+        [hearingHasBeenAllocated]="true"
+        (onSubmit)="updateHearing($event)"
+        (onCancel)="clearSelectedHearing()"
+        (onValidationError)="formErrors($event)"
+      >
+      </hearing-details-form>
+      } @if (showJudiciaryForm) {
+      <change-judiciary-for-hearings-form
+        [courtCentres]="courtCentres"
+        [hearings]="selectedJudiciaryHearings"
+        (onSubmit)="changeJudiciary($event)"
+        (onCancel)="showJudiciaryForm = false"
+        (onValidationError)="formErrors($event)"
+      >
+      </change-judiciary-for-hearings-form>
+      }
+    </pdk-grid>
+  </pdk-grid>
+</div>

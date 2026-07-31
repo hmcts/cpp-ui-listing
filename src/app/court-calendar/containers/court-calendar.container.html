@@ -1,0 +1,94 @@
+<pdk-grid container>
+  @if (alert$ | async; as alert) {
+  <pdk-grid full>
+    <court-calendar-alert-panel
+      [alertEntity]="alert"
+      shouldFocus="true"
+    ></court-calendar-alert-panel>
+  </pdk-grid>
+  }
+</pdk-grid>
+@if (errors?.length > 0) {
+<pdk-error-summary [errors]="errors" focusOnChange pdk-margin-top="4"></pdk-error-summary>
+}
+<div pdk-margin-top="2">
+  <sub-menu></sub-menu>
+</div>
+<pdk-grid container>
+  <pdk-grid full>
+    <h1 pdk-typography="heading-large">Court Calendar</h1>
+    <court-calendar-filters
+      [organisationUnits]="organisationUnits$ | async"
+      [initialValues]="filterOptions$ | async"
+      (errors)="errors = $event"
+      (submitForm)="onSubmitFormFilters($event)"
+      (jurisdictionTypeChange)="onJurisdictionTypeChange()"
+    >
+    </court-calendar-filters>
+  </pdk-grid>
+  <pdk-grid full>
+    @if (filterOptions$ | async; as filterOptions) { @if ((courtCalendarHearingsVM$ |
+    async)?.pagination?.totalNumber !== null) {
+    <div class="flex-display flex-align-center flex-jutify-between">
+      <court-result-summary
+        #allocatedTableSummary
+        [filterOptions]="filterOptions$ | async"
+        [resultsDisplayed]="(courtCalendarHearingsVM$ | async)?.totalHearingsDisplayed"
+        [totalNumber]="(courtCalendarHearingsVM$ | async)?.pagination?.totalNumber"
+      >
+      </court-result-summary>
+      <button
+        aria-label="Add unallocated hearings"
+        pdk-button="secondary"
+        (click)="onAddUnallocateHearing(filterOptions)"
+      >
+        Add unallocated hearings
+      </button>
+    </div>
+    }
+    <div pdk-margin-bottom="2">
+      @if ((filterOptions$ | async)?.courtRoomId) {
+      <listing-note-container
+        [courtRoomId]="(filterOptions$ | async)?.courtRoomId"
+        [listingNoteDate]="(filterOptions$ | async)?.startDate"
+        (onErrors)="errors = $event"
+      >
+      </listing-note-container>
+      }
+    </div>
+    @if ((courtCalendarHearingsVM$ | async)?.courtRoomCalendars?.length > 0) {
+    <div class="flex-display flex-align-center flex-jutify-between">
+      <bulk-actions
+        [selectedHearings]="selectedHearings$ | async"
+        [courtType]="filterOptions?.courtType"
+        (selectedBulkAction)="onBulkAction($event)"
+      ></bulk-actions>
+      <page-size-selector
+        [pageSize]="filterOptions?.pageSize"
+        (pageSizeChange)="pageChanged({ pageNumber: 1, pageSize: $event })"
+      ></page-size-selector>
+    </div>
+    }
+    <allocated-hearing-table-container
+      [sections]="(courtCalendarHearingsVM$ | async)?.courtRoomCalendars"
+      [totalNumber]="(courtCalendarHearingsVM$ | async)?.pagination?.totalNumber"
+      [currentPage]="(courtCalendarHearingsVM$ | async)?.pagination?.currentPage"
+      [pageSize]="filterOptions?.pageSize"
+      [resultsDisplayed]="(courtCalendarHearingsVM$ | async)?.totalHearingsDisplayed"
+      [hearingMovestate]="hearingMovestate$ | async"
+      [positionedHearingsState]="positionedHearingsState$ | async"
+      [selectedHearings]="selectedHearings$ | async"
+      [caseNotesMap]="caseNotesMap$ | async"
+      (pageChange)="pageChanged({ pageNumber: $event, pageSize: filterOptions?.pageSize })"
+      (onGetCaseNote)="onGetCaseNotesForId($event)"
+      (onNavigateChangeJudiciary)="onNavigateChangeJudiciary($event)"
+      (onSelectHearing)="selectHearing($event)"
+      (onSelectAllHearings)="selectAllHearings($event)"
+      (onSequence)="onHearingSequence($event)"
+      (actionClicked)="onHearingAction($event)"
+      (undoHearingMoveClicked)="onUndoHearingMove()"
+    >
+    </allocated-hearing-table-container>
+    }
+  </pdk-grid>
+</pdk-grid>

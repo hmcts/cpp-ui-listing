@@ -1,0 +1,48 @@
+<pdk-accordion
+  [open]="sectionOpenState"
+  (openChange)="accordionOpenChange.emit($event)"
+  style="display: flex"
+>
+  @for (section of sections; track section.sectionIdentifier) {
+    <pdk-accordion-item
+      [attr.id]="section.sectionIdentifier"
+      [title]="
+        titleResolver
+          ? (section | sectionTitleResolver: titleResolver)
+          : sectionConfig.sectionHeader?.label || section[sectionConfig.sectionHeader?.key]
+      "
+    >
+      @if (accordionSectionActionRenderer) {
+        <ng-container
+          [ngTemplateOutlet]="accordionSectionActionRenderer"
+          [ngTemplateOutletContext]="{
+            sectionData: section
+          }"
+        ></ng-container>
+      }
+      @if (sectionAlertRenderer) {
+        <ng-container
+          [ngTemplateOutlet]="sectionAlertRenderer"
+          [ngTemplateOutletContext]="{
+            sectionData: section
+          }"
+        ></ng-container>
+      }
+      <div
+        section-table-renderer
+        [columnConfig]="columnConfig"
+        [sectionConfig]="sectionConfig"
+        [sections]="section | toArray"
+        [actionCellRenderer]="actionCellRenderer"
+        [sectionHeaderRenderer]="sectionHeaderRenderer"
+        [rowGroupHeaderCellRenderer]="rowGroupHeaderCellRenderer"
+        [expandedDetailsRenderer]="expandedDetailsRenderer"
+        [moveAlertRenderer]="moveAlertRenderer"
+        [customCellHeaderRenderers]="customCellHeaderRenderers"
+        [cellRenderers]="cellRenderers"
+        [hearingMovestate]="hearingMovestate"
+        [positionedHearingsState]="positionedHearingsState"
+      ></div>
+    </pdk-accordion-item>
+  }
+</pdk-accordion>

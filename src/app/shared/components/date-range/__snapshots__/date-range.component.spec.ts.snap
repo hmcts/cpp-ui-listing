@@ -1,0 +1,2556 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateRangeComponent End date control not initially visible when end date is same as start date 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-valid ng-dirty"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-valid ng-dirty"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-valid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-dirty ng-valid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-pristine ng-valid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched ng-pristine govuk-input govuk-input--width-2 ng-valid"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched ng-pristine govuk-input govuk-input--width-2 ng-valid"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched ng-pristine govuk-input govuk-input--width-4 ng-valid"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Sunday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-date-input
+                    class="ng-untouched ng-dirty ng-valid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-pristine ng-valid"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-2"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-2"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-4"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;
+
+exports[`DateRangeComponent End date control visible when end date is after start date 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-dirty ng-valid"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-dirty ng-valid"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-valid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-dirty ng-valid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-dirty ng-valid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-4 ng-valid ng-dirty"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Sunday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-date-input
+                    class="ng-untouched ng-dirty ng-valid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-valid ng-dirty"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-4 ng-dirty"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;
+
+exports[`DateRangeComponent Validates that the start date cannot be the same as the end date. 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-dirty ng-valid"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-dirty ng-valid"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-valid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-dirty ng-valid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-dirty ng-valid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-4 ng-valid ng-dirty"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Sunday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-date-input
+                    class="ng-untouched ng-dirty ng-valid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-valid ng-dirty"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-4 ng-dirty"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;
+
+exports[`DateRangeComponent raises a \`dateRangeExceeded\` when the difference between the start date and end date exceeds 2 years 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-dirty ng-invalid"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-dirty ng-invalid"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-invalid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-dirty ng-valid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-dirty ng-valid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-4 ng-valid ng-dirty"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Sunday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group govuk-form-group--error"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-error-message
+                    class="govuk-error-message"
+                    id="pdk-form-error-undefined-GENERATED_ID"
+                  >
+                     End date can’t be more than 2 years after start date 
+                  </pdk-error-message>
+                  <pdk-date-input
+                    class="ng-untouched ng-dirty ng-invalid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-valid ng-dirty"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                aria-describedby="pdk-form-error-undefined-GENERATED_ID"
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty govuk-input--error"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty govuk-input--error"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-4 ng-dirty govuk-input--error"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;
+
+exports[`DateRangeComponent raises a \`endDateBeforeStartDate\` when the start date is after the end date 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-dirty ng-invalid"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-dirty ng-invalid"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-invalid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-dirty ng-valid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-dirty ng-valid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-4 ng-valid ng-dirty"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Sunday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group govuk-form-group--error"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-error-message
+                    class="govuk-error-message"
+                    id="pdk-form-error-undefined-GENERATED_ID"
+                  >
+                     End date can’t be before start date - enter valid date 
+                  </pdk-error-message>
+                  <pdk-date-input
+                    class="ng-untouched ng-dirty ng-invalid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-valid ng-dirty"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                aria-describedby="pdk-form-error-undefined-GENERATED_ID"
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty govuk-input--error"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty govuk-input--error"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-4 ng-dirty govuk-input--error"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;
+
+exports[`DateRangeComponent should show component fields for date range component 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-pristine ng-valid"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-pristine ng-valid"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-valid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-pristine ng-invalid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-pristine ng-invalid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-2"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-2"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-4"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Thursday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-date-input
+                    class="ng-untouched ng-pristine ng-valid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-pristine ng-valid"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-2"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-2"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-4"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;
+
+exports[`DateRangeComponent validates that the start date can be before the end date 1`] = `
+<test-date-range-input
+  dateRange={[Function DateRange]}
+>
+  <form
+    class="ng-untouched ng-dirty ng-valid"
+    novalidate=""
+    pdk-form=""
+  >
+    <listing-date-range
+      aria-describedby="identifier"
+      class="ng-untouched ng-dirty ng-valid"
+      hearing="hearing"
+      id="dateRange"
+      name="dateRange"
+    >
+      <div
+        aria-describedby="identifier"
+        class="ng-untouched ng-dirty ng-valid"
+      >
+        <pdk-form-field
+          labeltype="none"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-visually-hidden"
+              >
+                 Hearing date 
+              </legend>
+              <date-picker
+                class="ng-untouched ng-dirty ng-valid"
+                formcontrolname="startDate"
+                name="startDate"
+              >
+                <div
+                  class="datepicker"
+                >
+                  <div
+                    class="flex-column"
+                  >
+                    <pdk-date-input
+                      class="ng-untouched ng-dirty ng-valid"
+                      name="datePicker"
+                      picker=""
+                      required=""
+                    >
+                      <pdk-interaction-container>
+                        <div>
+                          <div
+                            class="pdk-date-input"
+                          >
+                            <div
+                              class="govuk-date-input ng-untouched ng-dirty ng-valid"
+                            >
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-day"
+                                  pdk-label=""
+                                >
+                                   Day 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="day"
+                                  id="dateRange-startDate-day"
+                                  name="dateDay"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-month"
+                                  pdk-label=""
+                                >
+                                   Month 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-2 ng-dirty ng-valid"
+                                  formcontrolname="month"
+                                  id="dateRange-startDate-month"
+                                  name="dateMonth"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                              <div
+                                class="govuk-date-input__item"
+                              >
+                                <label
+                                  class="govuk-date-input__label govuk-label"
+                                  for="dateRange-startDate-year"
+                                  pdk-label=""
+                                >
+                                   Year 
+                                </label>
+                                <input
+                                  autocomplete="off"
+                                  class="govuk-date-input__input ng-untouched govuk-input govuk-input--width-4 ng-valid ng-dirty"
+                                  formcontrolname="year"
+                                  id="dateRange-startDate-year"
+                                  name="dateYear"
+                                  required=""
+                                  type="number"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pdk-!-negative-margin-left-2"
+                              pdk-margin-left="-2"
+                            >
+                              <pdk-date-picker-toggle>
+                                <pdk-interaction-container>
+                                  <div>
+                                    <div
+                                      aria-expanded="false"
+                                      aria-label="Toggle date picker"
+                                      class="pdk-date-picker__toggle"
+                                      role="button"
+                                      tabindex="0"
+                                    >
+                                      <pdk-date-picker-icon
+                                        style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                      >
+                                        <div
+                                          style="display: flex; align-items: center; justify-content: center;"
+                                        >
+                                          <i
+                                            style="height: 28px; width: 28px; fill: #333;"
+                                          >
+                                            <svg
+                                              viewBox="0 0 448 512"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                              />
+                                            </svg>
+                                          </i>
+                                        </div>
+                                      </pdk-date-picker-icon>
+                                    </div>
+                                  </div>
+                                </pdk-interaction-container>
+                              </pdk-date-picker-toggle>
+                            </div>
+                          </div>
+                        </div>
+                      </pdk-interaction-container>
+                    </pdk-date-input>
+                    <pdk-inset-text
+                      class="govuk-!-margin-top-5 govuk-!-margin-bottom-1"
+                      pdk-margin-bottom="1"
+                      pdk-margin-top="5"
+                      role="status"
+                    >
+                      <div
+                        class="govuk-inset-text"
+                      >
+                         Selected day: Tuesday 
+                      </div>
+                    </pdk-inset-text>
+                  </div>
+                </div>
+              </date-picker>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field>
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <pdk-checkbox
+              class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+              name="multiDay"
+            >
+              <div
+                class="govuk-checkboxes__item"
+              >
+                <input
+                  class="govuk-checkboxes__input"
+                  id="multiDay"
+                  name="multiDay"
+                  type="checkbox"
+                  value="true"
+                />
+                <label
+                  class="govuk-label govuk-checkboxes__label"
+                  for="multiDay"
+                >
+                   This is a multi-day hearing 
+                </label>
+              </div>
+            </pdk-checkbox>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-checkbox-conditional
+          class="govuk-!-margin-bottom-0"
+          pdk-margin-bottom="0"
+        >
+          <div
+            class="govuk-checkboxes__conditional"
+          >
+            <pdk-form-field
+              label="End date"
+              labeltype="small"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                  >
+                     End date 
+                  </legend>
+                  <pdk-date-input
+                    class="ng-untouched ng-dirty ng-valid"
+                    formcontrolname="endDate"
+                    name="endDate"
+                    picker=""
+                    required=""
+                  >
+                    <pdk-interaction-container>
+                      <div>
+                        <div
+                          class="pdk-date-input"
+                        >
+                          <div
+                            class="govuk-date-input ng-untouched ng-valid ng-dirty"
+                          >
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-day"
+                                pdk-label=""
+                              >
+                                 Day 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty"
+                                formcontrolname="day"
+                                id="dateRange-endDate-day"
+                                name="dateDay"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-month"
+                                pdk-label=""
+                              >
+                                 Month 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-2 ng-dirty"
+                                formcontrolname="month"
+                                id="dateRange-endDate-month"
+                                name="dateMonth"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                            <div
+                              class="govuk-date-input__item"
+                            >
+                              <label
+                                class="govuk-date-input__label govuk-label"
+                                for="dateRange-endDate-year"
+                                pdk-label=""
+                              >
+                                 Year 
+                              </label>
+                              <input
+                                autocomplete="off"
+                                class="govuk-date-input__input ng-untouched ng-valid govuk-input govuk-input--width-4 ng-dirty"
+                                formcontrolname="year"
+                                id="dateRange-endDate-year"
+                                name="dateYear"
+                                required=""
+                                type="number"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            class="pdk-!-negative-margin-left-2"
+                            pdk-margin-left="-2"
+                          >
+                            <pdk-date-picker-toggle>
+                              <pdk-interaction-container>
+                                <div>
+                                  <div
+                                    aria-expanded="false"
+                                    aria-label="Toggle date picker"
+                                    class="pdk-date-picker__toggle"
+                                    role="button"
+                                    tabindex="0"
+                                  >
+                                    <pdk-date-picker-icon
+                                      style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                                    >
+                                      <div
+                                        style="display: flex; align-items: center; justify-content: center;"
+                                      >
+                                        <i
+                                          style="height: 28px; width: 28px; fill: #333;"
+                                        >
+                                          <svg
+                                            viewBox="0 0 448 512"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                            />
+                                          </svg>
+                                        </i>
+                                      </div>
+                                    </pdk-date-picker-icon>
+                                  </div>
+                                </div>
+                              </pdk-interaction-container>
+                            </pdk-date-picker-toggle>
+                          </div>
+                        </div>
+                      </div>
+                    </pdk-interaction-container>
+                  </pdk-date-input>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </div>
+        </pdk-checkbox-conditional>
+      </div>
+    </listing-date-range>
+  </form>
+</test-date-range-input>
+`;

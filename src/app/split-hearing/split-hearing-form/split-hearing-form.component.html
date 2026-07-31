@@ -1,0 +1,73 @@
+<h1 pdk-typography="heading-large" pdk-margin-bottom="2" pdk-margin-top="1">Allocate hearing</h1>
+<h2 pdk-typography="body-medium" pdk-margin-bottom="5">
+  Select only the defendants and offences you want to allocate to the new hearing
+</h2>
+
+<form pdk-form novalidate>
+  <pdk-form-field label="Defendants and offences to allocate" labelType="none">
+    <pdk-checkbox-group>
+      <hr />
+
+      @for (defendant of defendantByCases; track defendant.id) {
+        <div data-test-id="defendant">
+          <pdk-checkbox
+            pdk-margin-bottom="3"
+            [name]="'defendant-' + defendant.id"
+            [(ngModel)]="defendant.checked"
+            (change)="toggleDefendant(defendant, $event.checked)"
+          >
+            <span
+              data-test-id="defendantName"
+              class="defendant-name"
+              pdk-typography="body-lead"
+              pdk-text-colour="dark-grey"
+              class="bold"
+            >
+              {{ defendant.firstName }} {{ defendant.lastName }}</span
+            >
+          </pdk-checkbox>
+          @for (case of defendant.prosecutionCases; track case.id) {
+            <div data-test-id="case" pdk-margin-left="9" pdk-margin-bottom="3">
+              <div pdk-typography="heading-small" data-test-id="caseReference">
+                {{ case.caseIdentifier.caseReference }}
+              </div>
+              <pdk-form-field label="Offences" labelType="none">
+                <pdk-checkbox-group>
+                  @for (offence of case.offences; track offence.id) {
+                    <div pdk-margin-bottom="3">
+                      <pdk-checkbox
+                        data-test-id="offence"
+                        name="offence-{{ offence.id }}-checked"
+                        [(ngModel)]="offence.checked"
+                        (change)="toggleOffence(defendant)"
+                      >
+                        <b data-test-id="offenceTitle">{{ offence.statementOfOffence.title }}</b>
+                        <pdk-foldable-text>
+                          {{ offence.offenceWording }}
+                        </pdk-foldable-text>
+                      </pdk-checkbox>
+                    </div>
+                  }
+                </pdk-checkbox-group>
+              </pdk-form-field>
+            </div>
+          }
+        </div>
+      }
+
+      <hr />
+    </pdk-checkbox-group>
+  </pdk-form-field>
+
+  <pdk-form-group>
+    <button
+      type="button"
+      pdk-button
+      [disabled]="!isAllocateHearingButtonEnabled || this.wholeHearing"
+      data-role="allocate-hearing-btn"
+      (click)="allocateHearing()"
+    >
+      Allocate hearing
+    </button>
+  </pdk-form-group>
+</form>

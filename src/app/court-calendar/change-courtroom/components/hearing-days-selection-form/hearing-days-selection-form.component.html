@@ -1,0 +1,99 @@
+@if (allUpcomingHearingDays().length > 0) {
+  <div class="result-summary">
+    <p pdk-typography="body" class="summary-text" pdk-margin-top="1">
+      Showing
+      <span [ngPlural]="allUpcomingHearingDays().length">
+        {{ allUpcomingHearingDays().length }}
+        <ng-template ngPluralCase="=1"> hearing day</ng-template>
+        <ng-template ngPluralCase="other"> hearing days</ng-template>
+      </span>
+      of
+      {{ totalHearingDaysCount() }} hearing days
+      <strong>
+        between {{ startDate() | date: 'dd/MM/yyyy' }} and {{ endDate() | date: 'dd/MM/yyyy' }}
+      </strong>
+      at <strong>{{ courtCentreName() }}</strong>
+    </p>
+    <div>
+      @if (!hasOnlyTodayHearingDay) {
+        <button
+          pdk-button="secondary"
+          pdk-margin-bottom="3"
+          (click)="onChangeForAllNavigate.emit()"
+        >
+          Change courtroom for upcoming hearing days
+        </button>
+      }
+    </div>
+  </div>
+}
+
+<!-- Form Section -->
+<pdk-grid container>
+  <pdk-grid full>
+    <form
+      #form="ngForm"
+      pdk-form
+      data-test-id="hearingDetailsForm"
+      (validSubmit)="handleReallocationSubmit(form.value)"
+      (errors)="onValidationError.emit($event)"
+      novalidate
+    >
+      <pdk-form-field
+        pdk-margin-top="3"
+        label="Hearing days"
+        labelType="small"
+        [errorMessages]="[{ rule: 'minCount', message: 'Select at least one hearing day' }]"
+      >
+        <pdk-checkbox-group
+          name="hearingDaysSelection"
+          [ngModel]="selectedHearingDateValues()"
+          #hearingDates="ngModel"
+          checkboxType="small"
+          [minCount]="1"
+        >
+          <hearing-days-table
+            [isPreview]="false"
+            [allUpcomingHearingDays]="allUpcomingHearingDays()"
+            [allSelectedHearingDates]="hearingDates.value"
+            [courtCentreName]="courtCentreName()"
+            [courtRoomOptions]="courtRoomOptions()"
+            [totalNumberofHearingDays]="totalHearingDaysCount()"
+            (onSelectAllPaginatedHearing)="
+              selectAllPaginatedHearingDays($event, hearingDates.value)
+            "
+          >
+          </hearing-days-table>
+        </pdk-checkbox-group>
+      </pdk-form-field>
+      <div class="filter-item">
+        <pdk-form-field
+          label="Select courtroom"
+          labelType="small"
+          hintText="Select new courtroom for the hearing(s)"
+          [errorMessages]="[
+            {
+              rule: 'required',
+              message: 'Enter a court room'
+            }
+          ]"
+        >
+          <pdk-select
+            [ngModel]="selectedCourtRoomId"
+            (ngModelChange)="selectedCourtRoomId = $event"
+            [name]="'courtRoomId'"
+            [options]="courtRoomOptions()"
+            placeholder="Select a courtroom"
+            required="true"
+          >
+          </pdk-select>
+        </pdk-form-field>
+      </div>
+      <div>
+        <button type="submit" aria-label="continue" pdk-button pdk-margin-bottom="0">
+          Continue
+        </button>
+      </div>
+    </form>
+  </pdk-grid>
+</pdk-grid>

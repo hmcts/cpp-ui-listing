@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingEstimateComponent The template should be generated 1`] = `
+<hearing-estimate
+  convertToWeeksDaysHoursMinutes={[Function ConvertToWeekDaysHoursMinutesPipe]}
+  estimate={[Function Function]}
+  hearingEstimate={[Function Object]}
+>
+  <div>
+    1 week
+  </div><div>
+    1 day
+  </div><div>
+    1 hour
+  </div><div>
+    2 minutes
+  </div>
+</hearing-estimate>
+`;

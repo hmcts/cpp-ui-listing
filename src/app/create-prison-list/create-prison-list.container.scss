@@ -1,0 +1,27 @@
+$module: 'hearings-schedule';
+
+.#{$module} {
+  margin-top: 10px;
+
+  .no-hearings-messsage {
+    margin-top: 20px;
+  }
+
+  .hearings-box {
+    border: 1px solid #bfc1c3;
+    padding: 10px;
+  }
+
+  .hearing-room {
+    margin-top: 0.6em;
+  }
+  .list-date-divider {
+    border-bottom: 1px solid;
+  }
+
+  hearings-per-judiciary {
+    ::ng-deep .defendants {
+      font-weight: bold;
+    }
+  }
+}

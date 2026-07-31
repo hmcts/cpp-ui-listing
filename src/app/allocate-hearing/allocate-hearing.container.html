@@ -1,0 +1,115 @@
+<section pdk-margin-top="2">
+  @if (errors) {
+  <pdk-error-summary focusOnChange="true" [errors]="errors"> </pdk-error-summary>
+  } @if ((!this.selectedOrganisationUnit && !hasCourtSelectionStep)) {
+  <court-selection
+    [courts]="courtCentres"
+    [backUrl]="backUrl"
+    [queryParams]="queryParams"
+    (continue)="onCourtSelected($event)"
+    (errors)="showValidationError($event)"
+  ></court-selection>
+  } @else { @if (!selectedCourtCentre) {
+  <div>
+    <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+  </div>
+  } @if (selectedHearing) {
+  <div class="allocate-hearing">
+    <div pdk-margin-top="2" pdk-margin-bottom="1">
+      <a pdk-back-link (click)="backUrlNavigate()" href="javascript:void(0);">Back </a>
+    </div>
+    <h1 pdk-typography="heading-large" pdk-margin-bottom="1" pdk-margin-top="2">
+      Allocate a hearing
+    </h1>
+    <p pdk-typography="body-medium" pdk-margin-bottom="2">
+      Select a calendar slot to allocate a hearing
+    </p>
+    <hearing-list
+      [hideActionColumn]="true"
+      [hearings]="[selectedHearing]"
+      [baseUrl]="getBaseUrl()"
+      [trialTypes]="trialTypes$ | async"
+    >
+    </hearing-list>
+    <hearing-summary [hearing]="selectedHearing"> </hearing-summary>
+    @if ((pinnedCaseNotes$ | async)?.length) {
+    <pinned-notes [pinnedCaseNotes]="pinnedCaseNotes$ | async"></pinned-notes>
+    }
+    <pdk-tabs
+      [selectedTabIndex]="initialTabIndex"
+      (selectedTabChange)="onSelectedTabChange($event)"
+    >
+      @if ((isHearingStandaloneApplication$ | async) === false &&
+      (isHearingOnlyWithLinkedApplication$ | async) ===false) {
+      <pdk-tab heading="Related hearings">
+        <find-available-hearing
+          [hearing]="selectedHearing"
+          (onFindAvailableHearings)="findAvailableHearings($event)"
+        >
+        </find-available-hearing>
+      </pdk-tab>
+      }
+      <pdk-tab
+        heading="{{selectedOrganisationUnit.jurisdictionType==='CROWN'? 'Enter hearing details': 'Find a hearing'}}"
+      >
+        <pdk-grid container pdk-margin-bottom="3">
+          @if (selectedOrganisationUnit.jurisdictionType === 'CROWN' ||
+          (isHearingStandaloneApplication$ | async) || (isHearingOnlyWithLinkedApplication$ |
+          async)) {
+          <pdk-grid three-quarters>
+            @if (courtCentres.length) {
+            <courtrooms-filter
+              (onSelectCourtCentre)="onSelectCourtCentre($event)"
+              [courtCentres]="courtCentres"
+              (formErrors)="showValidationError($event)"
+              [courtRooms]="selectedCourtCentre?.courtRooms || []"
+              (onSubmit)="filterSubmit($event)"
+            >
+            </courtrooms-filter>
+            }
+            <daily-court-room-calendar
+              [filterOptions]="filterOptions"
+              (errors)="showValidationError($event)"
+            >
+            </daily-court-room-calendar>
+          </pdk-grid>
+          <pdk-grid one-quarter>
+            @if ((hearingTypes$ | async)?.length && courtCentres?.length) {
+            <hearing-details-form
+              [hearing]="selectedHearing"
+              [selectedCourt]="selectedOrganisationUnit"
+              [courtCentres]="filteredCourtCentres"
+              [hearingTypes]="hearingTypes$ | async"
+              [hearingHasBeenAllocated]="false"
+              [minDate]="minDate"
+              (onSubmit)="allocateHearing($event)"
+              (onCancel)="cancelAllocation()"
+              (onValidationError)="showValidationError($event)"
+            >
+            </hearing-details-form>
+            }
+          </pdk-grid>
+          } @if (selectedOrganisationUnit.jurisdictionType === 'MAGISTRATES' &&
+          (isHearingStandaloneApplication$ | async) === false &&
+          (isHearingOnlyWithLinkedApplication$ | async) ===false) {
+          <magistrates-scheduling-container [courtId]="route.snapshot.queryParams.courtId">
+          </magistrates-scheduling-container>
+          }
+        </pdk-grid>
+      </pdk-tab>
+    </pdk-tabs>
+    @if ((isLoading$ | async) === false && (availableHearings$ | async) &&
+    isRelatedHearingsTabSelected) {
+    <available-hearings
+      [hearings]="availableHearings$ | async"
+      [courtCentres]="courtCentres"
+      [isCivil]="isCivil"
+      (onViewHearingDetails)="viewHearingDetails($event)"
+      (onExtendHearingForHearing)="extendHearingForHearing($event)"
+      (errors)="showValidationError($event)"
+    >
+    </available-hearings>
+    }
+  </div>
+  } }
+</section>

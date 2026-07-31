@@ -1,0 +1,1814 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons when no checkboxes are selected 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function Observable]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function Observable]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <bulk-actions>
+          <button
+            class="govuk-!-margin-right-2 govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+            pdk-margin-right="2"
+          >
+             Reallocate 
+          </button>
+          <button
+            class="govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+          >
+             Unallocate 
+          </button>
+        </bulk-actions>
+        <page-size-selector>
+          <pdk-form-field
+            label="Page size"
+            labeltype="small"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <label
+                class="govuk-label govuk-label--s"
+                for="pdk-select-GENERATED_ID"
+              >
+                 Page size 
+              </label>
+              <pdk-select
+                class="ng-untouched ng-pristine ng-valid"
+              >
+                <select
+                  class="govuk-select pdk-select--width-4"
+                  id="pdk-select-GENERATED_ID"
+                >
+                  <option
+                    value="40"
+                  >
+                     40 
+                  </option>
+                  <option
+                    value="60"
+                  >
+                     60 
+                  </option>
+                  <option
+                    value="80"
+                  >
+                     80 
+                  </option>
+                  <option
+                    value="100"
+                  >
+                     100 
+                  </option>
+                  <option
+                    value="150"
+                  >
+                     150 
+                  </option>
+                  <option
+                    value="200"
+                  >
+                     200 
+                  </option>
+                </select>
+              </pdk-select>
+            </pdk-form-group>
+          </pdk-form-field>
+        </page-size-selector>
+      </div>
+      <allocated-hearing-table-container>
+        <div
+          section-table-renderer=""
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearing-tree-grid"
+            pdk-table=""
+            role="treegrid"
+          >
+            <thead
+              class="govuk-table__head"
+              data-test-id="hearing-table-head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+                role="row"
+              >
+                <th
+                  class="govuk-!-padding-right-0 govuk-table__cell"
+                  id="expandable-header"
+                  pdk-padding-right="0"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Use this column to expand the current hearing you are viewing
+                  </span>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-1"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <pdk-checkbox
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      name="selectAll"
+                    >
+                      <div
+                        class="govuk-checkboxes__item"
+                      >
+                        <input
+                          class="govuk-checkboxes__input"
+                          id="select-all-checkbox"
+                          name="selectAll"
+                          type="checkbox"
+                          value="true"
+                        />
+                        <label
+                          class="govuk-label govuk-checkboxes__label"
+                          for="select-all-checkbox"
+                        >
+                          <span
+                            class="govuk-visually-hidden"
+                          >
+                            Select all hearings
+                          </span>
+                        </label>
+                      </div>
+                    </pdk-checkbox>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-2"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Time
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-3"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Duration
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-4"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Hearing type
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-5"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Defendants
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-6"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Offences (by severity)
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-7"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Public list notes
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-!-padding-right-2 govuk-table__cell"
+                  id="action-header"
+                  pdk-padding-left="2"
+                  pdk-padding-right="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                   Actions 
+                </th>
+              </tr>
+            </thead>
+            <tr
+              class="govuk-table__row"
+              data-test-id="hearing-table-section-header"
+              pdk-table-row=""
+              role="row"
+            >
+              <th
+                class="pdk-!-fill-color-light-grey govuk-!-padding-left-2 govuk-table__cell"
+                colspan="9"
+                pdk-fill-colour="light-grey"
+                pdk-padding-left="2"
+                pdk-table-header=""
+                role="gridcell"
+                scope="col"
+              >
+                <h3
+                  class="govuk-!-margin-bottom-0 govuk-heading-m"
+                  data-test-id="section-header"
+                  pdk-margin-bottom="0"
+                  pdk-typography="heading-medium"
+                >
+                  <span
+                    data-test-id="courtroom-and-date"
+                  >
+                     null: undefined
+                  </span>
+                  <span
+                    class="govuk-!-margin-left-2 govuk-body-m"
+                    data-test-id="total-hearings-duration"
+                    pdk-margin-left="2"
+                    pdk-typography="body"
+                  >
+                    (0 hearings, 0 minutes listed)
+                  </span>
+                </h3>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should display Add Unallocated Hearings button when the courtType is CROWN and there are no results. 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function _Store]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function _Store]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <allocated-hearing-table-container>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should display Add Unallocated Hearings button when the courtType is MAGISTRATES and there are no results. 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function _Store]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function _Store]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <allocated-hearing-table-container>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons only when courtType is CROWN 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function Observable]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function Observable]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <bulk-actions>
+          <button
+            class="govuk-!-margin-right-2 govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+            pdk-margin-right="2"
+          >
+             Reallocate 
+          </button>
+          <button
+            class="govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+          >
+             Unallocate 
+          </button>
+        </bulk-actions>
+        <page-size-selector>
+          <pdk-form-field
+            label="Page size"
+            labeltype="small"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <label
+                class="govuk-label govuk-label--s"
+                for="pdk-select-GENERATED_ID"
+              >
+                 Page size 
+              </label>
+              <pdk-select
+                class="ng-untouched ng-pristine ng-valid"
+              >
+                <select
+                  class="govuk-select pdk-select--width-4"
+                  id="pdk-select-GENERATED_ID"
+                >
+                  <option
+                    value="40"
+                  >
+                     40 
+                  </option>
+                  <option
+                    value="60"
+                  >
+                     60 
+                  </option>
+                  <option
+                    value="80"
+                  >
+                     80 
+                  </option>
+                  <option
+                    value="100"
+                  >
+                     100 
+                  </option>
+                  <option
+                    value="150"
+                  >
+                     150 
+                  </option>
+                  <option
+                    value="200"
+                  >
+                     200 
+                  </option>
+                </select>
+              </pdk-select>
+            </pdk-form-group>
+          </pdk-form-field>
+        </page-size-selector>
+      </div>
+      <allocated-hearing-table-container>
+        <div
+          section-table-renderer=""
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearing-tree-grid"
+            pdk-table=""
+            role="treegrid"
+          >
+            <thead
+              class="govuk-table__head"
+              data-test-id="hearing-table-head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+                role="row"
+              >
+                <th
+                  class="govuk-!-padding-right-0 govuk-table__cell"
+                  id="expandable-header"
+                  pdk-padding-right="0"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Use this column to expand the current hearing you are viewing
+                  </span>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-1"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <pdk-checkbox
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      name="selectAll"
+                    >
+                      <div
+                        class="govuk-checkboxes__item"
+                      >
+                        <input
+                          class="govuk-checkboxes__input"
+                          id="select-all-checkbox"
+                          name="selectAll"
+                          type="checkbox"
+                          value="true"
+                        />
+                        <label
+                          class="govuk-label govuk-checkboxes__label"
+                          for="select-all-checkbox"
+                        >
+                          <span
+                            class="govuk-visually-hidden"
+                          >
+                            Select all hearings
+                          </span>
+                        </label>
+                      </div>
+                    </pdk-checkbox>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-2"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Time
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-3"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Duration
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-4"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Hearing type
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-5"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Defendants
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-6"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Offences (by severity)
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-7"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Public list notes
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-!-padding-right-2 govuk-table__cell"
+                  id="action-header"
+                  pdk-padding-left="2"
+                  pdk-padding-right="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                   Actions 
+                </th>
+              </tr>
+            </thead>
+            <tr
+              class="govuk-table__row"
+              data-test-id="hearing-table-section-header"
+              pdk-table-row=""
+              role="row"
+            >
+              <th
+                class="pdk-!-fill-color-light-grey govuk-!-padding-left-2 govuk-table__cell"
+                colspan="9"
+                pdk-fill-colour="light-grey"
+                pdk-padding-left="2"
+                pdk-table-header=""
+                role="gridcell"
+                scope="col"
+              >
+                <h3
+                  class="govuk-!-margin-bottom-0 govuk-heading-m"
+                  data-test-id="section-header"
+                  pdk-margin-bottom="0"
+                  pdk-typography="heading-medium"
+                >
+                  <span
+                    data-test-id="courtroom-and-date"
+                  >
+                     null: undefined
+                  </span>
+                  <span
+                    class="govuk-!-margin-left-2 govuk-body-m"
+                    data-test-id="total-hearings-duration"
+                    pdk-margin-left="2"
+                    pdk-typography="body"
+                  >
+                    (0 hearings, 0 minutes listed)
+                  </span>
+                </h3>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should display Reallocate button  when courtType is  MAGISTRATES 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function Observable]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function Observable]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <bulk-actions>
+          <button
+            class="govuk-!-margin-right-2 govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+            pdk-margin-right="2"
+          >
+             Reallocate 
+          </button>
+        </bulk-actions>
+        <page-size-selector>
+          <pdk-form-field
+            label="Page size"
+            labeltype="small"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <label
+                class="govuk-label govuk-label--s"
+                for="pdk-select-GENERATED_ID"
+              >
+                 Page size 
+              </label>
+              <pdk-select
+                class="ng-untouched ng-pristine ng-valid"
+              >
+                <select
+                  class="govuk-select pdk-select--width-4"
+                  id="pdk-select-GENERATED_ID"
+                >
+                  <option
+                    value="40"
+                  >
+                     40 
+                  </option>
+                  <option
+                    value="60"
+                  >
+                     60 
+                  </option>
+                  <option
+                    value="80"
+                  >
+                     80 
+                  </option>
+                  <option
+                    value="100"
+                  >
+                     100 
+                  </option>
+                  <option
+                    value="150"
+                  >
+                     150 
+                  </option>
+                  <option
+                    value="200"
+                  >
+                     200 
+                  </option>
+                </select>
+              </pdk-select>
+            </pdk-form-group>
+          </pdk-form-field>
+        </page-size-selector>
+      </div>
+      <allocated-hearing-table-container>
+        <div
+          section-table-renderer=""
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearing-tree-grid"
+            pdk-table=""
+            role="treegrid"
+          >
+            <thead
+              class="govuk-table__head"
+              data-test-id="hearing-table-head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+                role="row"
+              >
+                <th
+                  class="govuk-!-padding-right-0 govuk-table__cell"
+                  id="expandable-header"
+                  pdk-padding-right="0"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Use this column to expand the current hearing you are viewing
+                  </span>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-1"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <pdk-checkbox
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      name="selectAll"
+                    >
+                      <div
+                        class="govuk-checkboxes__item"
+                      >
+                        <input
+                          class="govuk-checkboxes__input"
+                          id="select-all-checkbox"
+                          name="selectAll"
+                          type="checkbox"
+                          value="true"
+                        />
+                        <label
+                          class="govuk-label govuk-checkboxes__label"
+                          for="select-all-checkbox"
+                        >
+                          <span
+                            class="govuk-visually-hidden"
+                          >
+                            Select all hearings
+                          </span>
+                        </label>
+                      </div>
+                    </pdk-checkbox>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-2"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Time
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-3"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Duration
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-4"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Hearing type
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-5"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Defendants
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-6"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Offences (by severity)
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-7"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Public list notes
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-!-padding-right-2 govuk-table__cell"
+                  id="action-header"
+                  pdk-padding-left="2"
+                  pdk-padding-right="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                   Actions 
+                </th>
+              </tr>
+            </thead>
+            <tr
+              class="govuk-table__row"
+              data-test-id="hearing-table-section-header"
+              pdk-table-row=""
+              role="row"
+            >
+              <th
+                class="pdk-!-fill-color-light-grey govuk-!-padding-left-2 govuk-table__cell"
+                colspan="9"
+                pdk-fill-colour="light-grey"
+                pdk-padding-left="2"
+                pdk-table-header=""
+                role="gridcell"
+                scope="col"
+              >
+                <h3
+                  class="govuk-!-margin-bottom-0 govuk-heading-m"
+                  data-test-id="section-header"
+                  pdk-margin-bottom="0"
+                  pdk-typography="heading-medium"
+                >
+                  <span
+                    data-test-id="courtroom-and-date"
+                  >
+                     null: undefined
+                  </span>
+                  <span
+                    class="govuk-!-margin-left-2 govuk-body-m"
+                    data-test-id="total-hearings-duration"
+                    pdk-margin-left="2"
+                    pdk-typography="body"
+                  >
+                    (0 hearings, 0 minutes listed)
+                  </span>
+                </h3>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should display the Add Unallocated Hearings button when courtType is CROWN 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function _Store]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function Observable]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <allocated-hearing-table-container>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should display the Add Unallocated Hearings button when courtType is MAGISTRATES 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function _Store]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function Observable]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <allocated-hearing-table-container>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;
+
+exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons when checkboxes are selected 1`] = `
+<court-calendar-container
+  alert$={[Function _Store]}
+  allocateHearingFactory={[Function Object]}
+  allocatedHearingActionsStore={[Function MockAllocatedHearingActionsStore]}
+  allocatedTableElement="undefined"
+  caseNotesMap$={[Function _Store]}
+  courtCalendarHearingsVM$={[Function Observable]}
+  destroy$={[Function Subject]}
+  errors={[Function Array]}
+  filterOptions$={[Function Observable]}
+  hearingMovestate$={[Function Observable]}
+  modalService={[Function _ModalService]}
+  organisationUnits$={[Function _Store]}
+  positionedHearingsState$={[Function Observable]}
+  route={[Function Object]}
+  selectedHearings$={[Function ReplaySubject]}
+  store={[Function _MockStore]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+  </pdk-grid><div
+    class="govuk-!-margin-top-2"
+    pdk-margin-top="2"
+  >
+    <sub-menu>
+      <nav
+        aria-label="Menu"
+        class="pdk-!-negative-margin-top-1 govuk-!-margin-bottom-6 govuk-template--rebranded"
+        clear=""
+        pdk-margin-bottom="6"
+        pdk-margin-top="-1"
+        pdk-service-nav=""
+      >
+        <div
+          class="govuk-service-navigation pdk-service-nav-clear"
+        >
+          <div
+            class="govuk-service-navigation__container"
+          >
+            <div
+              class="govuk-service-navigation__wrapper"
+            >
+              <ul
+                class="govuk-service-navigation__list"
+                pdk-service-nav-list=""
+                role="presentation"
+              >
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </sub-menu>
+  </div><pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <h1
+        class="govuk-heading-l"
+        pdk-typography="heading-large"
+      >
+        Court Calendar
+      </h1>
+      <court-calendar-filters>
+         rotaBusinessTypes:  courtCentres:  initialValues: [object Object] 
+      </court-calendar-filters>
+    </pdk-grid>
+    <pdk-grid
+      class="govuk-grid-column-full"
+      full=""
+    >
+      <div
+        class="govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+      >
+      </div>
+      <div
+        class="flex-display flex-align-center flex-jutify-between"
+      >
+        <bulk-actions>
+          <button
+            class="govuk-!-margin-right-2 govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+            pdk-margin-right="2"
+          >
+             Reallocate 
+          </button>
+          <button
+            class="govuk-button"
+            disabled="disabled"
+            pdk-button="primary"
+          >
+             Unallocate 
+          </button>
+        </bulk-actions>
+        <page-size-selector>
+          <pdk-form-field
+            label="Page size"
+            labeltype="small"
+          >
+            <pdk-form-group
+              class="pdk-form-group"
+            >
+              <label
+                class="govuk-label govuk-label--s"
+                for="pdk-select-GENERATED_ID"
+              >
+                 Page size 
+              </label>
+              <pdk-select
+                class="ng-untouched ng-pristine ng-valid"
+              >
+                <select
+                  class="govuk-select pdk-select--width-4"
+                  id="pdk-select-GENERATED_ID"
+                >
+                  <option
+                    value="40"
+                  >
+                     40 
+                  </option>
+                  <option
+                    value="60"
+                  >
+                     60 
+                  </option>
+                  <option
+                    value="80"
+                  >
+                     80 
+                  </option>
+                  <option
+                    value="100"
+                  >
+                     100 
+                  </option>
+                  <option
+                    value="150"
+                  >
+                     150 
+                  </option>
+                  <option
+                    value="200"
+                  >
+                     200 
+                  </option>
+                </select>
+              </pdk-select>
+            </pdk-form-group>
+          </pdk-form-field>
+        </page-size-selector>
+      </div>
+      <allocated-hearing-table-container>
+        <div
+          section-table-renderer=""
+        >
+          <table
+            class="govuk-table"
+            data-test-id="hearing-tree-grid"
+            pdk-table=""
+            role="treegrid"
+          >
+            <thead
+              class="govuk-table__head"
+              data-test-id="hearing-table-head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+                role="row"
+              >
+                <th
+                  class="govuk-!-padding-right-0 govuk-table__cell"
+                  id="expandable-header"
+                  pdk-padding-right="0"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Use this column to expand the current hearing you are viewing
+                  </span>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-1"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <pdk-checkbox
+                      class="govuk-checkboxes govuk-checkboxes--small ng-untouched ng-pristine ng-valid"
+                      name="selectAll"
+                    >
+                      <div
+                        class="govuk-checkboxes__item"
+                      >
+                        <input
+                          class="govuk-checkboxes__input"
+                          id="select-all-checkbox"
+                          name="selectAll"
+                          type="checkbox"
+                          value="true"
+                        />
+                        <label
+                          class="govuk-label govuk-checkboxes__label"
+                          for="select-all-checkbox"
+                        >
+                          <span
+                            class="govuk-visually-hidden"
+                          >
+                            Select all hearings
+                          </span>
+                        </label>
+                      </div>
+                    </pdk-checkbox>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-2"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Time
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-3"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Duration
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-4"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Hearing type
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-5"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Defendants
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-6"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Offences (by severity)
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-table__cell"
+                  id="header-7"
+                  pdk-padding-left="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                  <div>
+                    <span>
+                       Public list notes
+                    </span>
+                  </div>
+                </th>
+                <th
+                  class="govuk-!-padding-left-2 govuk-!-padding-right-2 govuk-table__cell"
+                  id="action-header"
+                  pdk-padding-left="2"
+                  pdk-padding-right="2"
+                  pdk-table-header=""
+                  scope="col"
+                >
+                   Actions 
+                </th>
+              </tr>
+            </thead>
+            <tr
+              class="govuk-table__row"
+              data-test-id="hearing-table-section-header"
+              pdk-table-row=""
+              role="row"
+            >
+              <th
+                class="pdk-!-fill-color-light-grey govuk-!-padding-left-2 govuk-table__cell"
+                colspan="9"
+                pdk-fill-colour="light-grey"
+                pdk-padding-left="2"
+                pdk-table-header=""
+                role="gridcell"
+                scope="col"
+              >
+                <h3
+                  class="govuk-!-margin-bottom-0 govuk-heading-m"
+                  data-test-id="section-header"
+                  pdk-margin-bottom="0"
+                  pdk-typography="heading-medium"
+                >
+                  <span
+                    data-test-id="courtroom-and-date"
+                  >
+                     null: undefined
+                  </span>
+                  <span
+                    class="govuk-!-margin-left-2 govuk-body-m"
+                    data-test-id="total-hearings-duration"
+                    pdk-margin-left="2"
+                    pdk-typography="body"
+                  >
+                    (0 hearings, 0 minutes listed)
+                  </span>
+                </h3>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </allocated-hearing-table-container>
+    </pdk-grid>
+  </pdk-grid>
+</court-calendar-container>
+`;

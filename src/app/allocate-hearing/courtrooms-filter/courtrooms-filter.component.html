@@ -1,0 +1,124 @@
+<div class="courtrooms-filter" pdk-padding="3">
+  <pdk-grid full>
+    <h2 pdk-typography="heading-medium" pdk-margin-bottom="1">Court calendar</h2>
+  </pdk-grid>
+  <form
+    #form="ngForm"
+    pdk-form
+    (errors)="emitErrors($event)"
+    (validSubmit)="onFormSubmit(form)"
+    novalidate
+    pdk-margin-top="1"
+    data-test-id="courtCalendarFilters"
+  >
+    <pdk-grid container>
+      <pdk-grid one-half>
+        <pdk-grid three-quarters>
+          <pdk-form-field
+            [errorMessages]="[
+              {
+                rule: 'invalidEntry',
+                message: 'Select valid court'
+              },
+              {
+                rule: 'required',
+                message: 'Enter a court'
+              }
+            ]"
+            label="Court"
+            labelType="small"
+          >
+            <pdk-autosuggest-lite
+              [ngModel]="currentCourtCentreOption"
+              (ngModelChange)="selectCourtCentre($event)"
+              (inputText)="courtCentreInputChanged($event)"
+              name="courtCentreId"
+              [suggestions]="courtCentreSuggestions"
+              [suggestionKey]="'value'"
+              [suggestionTitle]="'label'"
+              [invalidEntry]="courtOptionsLabels"
+              [inputValue]="courtCenterSearchValue"
+              required
+            >
+            </pdk-autosuggest-lite>
+          </pdk-form-field>
+          <pdk-form-field
+            label="Date"
+            labelType="small"
+            [errorMessages]="[
+              {
+                rule: 'required',
+                message: 'Enter a date'
+              }
+            ]"
+            hint
+          >
+            <date-picker
+              [preselectedValue]="selectedOptions.searchDate"
+              name="searchDate"
+              [id]="'searchDate'"
+              [ngModel]="selectedOptions.searchDate"
+              required
+            ></date-picker>
+          </pdk-form-field>
+        </pdk-grid>
+      </pdk-grid>
+
+      <pdk-grid one-half>
+        <pdk-grid three-quarters>
+          @if (!resetCourtRooms) {
+            <pdk-form-field
+              [errorMessages]="[
+                {
+                  rule: 'invalidEntry',
+                  message: 'Select valid courtroom'
+                }
+              ]"
+              label="Courtroom"
+              labelType="small"
+            >
+              <pdk-autosuggest-lite
+                fullWidth
+                [ngModel]="currentRoomOption"
+                (ngModelChange)="selectCourtRoom($event)"
+                name="courtRoomId"
+                (inputText)="courtRoomInputChanged($event)"
+                [suggestions]="courtRoomsSuggestions"
+                [suggestionKey]="'value'"
+                [suggestionTitle]="'label'"
+                [invalidEntry]="courtRoomsOptionsLabels"
+                [inputValue]="courtRoomSearchValue"
+              >
+              </pdk-autosuggest-lite>
+            </pdk-form-field>
+          }
+        </pdk-grid>
+        <pdk-grid one-half>
+          <pdk-form-field hint label="Start time (optional)" labelType="small">
+            <pdk-time-input
+              name="startTime"
+              [ngModel]="selectedOptions.startTime"
+              data-role="courtroom-startTime"
+              labelHidden="false"
+            >
+            </pdk-time-input>
+          </pdk-form-field>
+        </pdk-grid>
+
+        <pdk-grid one-half>
+          <pdk-form-field hint label="End time (optional)" labelType="small">
+            <pdk-time-input
+              name="endTime"
+              [ngModel]="selectedOptions.endTime"
+              data-role="courtroom-endTime"
+              labelHidden="false"
+            >
+            </pdk-time-input>
+          </pdk-form-field>
+        </pdk-grid>
+      </pdk-grid>
+    </pdk-grid>
+    <button pdk-button data-role="apply-filters-btn" type="submit">Apply filters</button>
+    <a pdk-link (click)="clearFilters()" href="javascript:void(0);"> Reset filters </a>
+  </form>
+</div>

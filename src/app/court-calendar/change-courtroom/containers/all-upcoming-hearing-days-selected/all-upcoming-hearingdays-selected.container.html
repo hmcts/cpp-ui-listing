@@ -1,0 +1,48 @@
+<back-button [linkUrl]="'../'"></back-button>
+@if (errors) {
+<pdk-error-summary focusOnChange="true" [errors]="errors"></pdk-error-summary>
+}
+
+<h1 pdk-typography="heading-large" pdk-margin-bottom="3" pdk-margin-top="2">
+  Change courtroom for upcoming hearing days
+</h1>
+@if (hearingVM$ | async; as hearingVm) {
+<hearing-details-section [hearingVM]="hearingVm" [baseUrl]="getBaseUrl()"></hearing-details-section>
+<no-of-selected-hearing-days [selectedHearingDays]="hearingVm.upComingHearingDays">
+</no-of-selected-hearing-days>
+}
+
+<form
+  #form="ngForm"
+  data-test-id="hearingDetailsForm"
+  pdk-form
+  (errors)="showValidationError($event)"
+  (validSubmit)="handleSubmit(form.value)"
+>
+  <div pdk-margin-top="3">
+    <pdk-form-field
+      label="Select courtroom"
+      labelType="small"
+      hintText="Select new courtroom for the hearing(s)"
+      [errorMessages]="[
+        {
+          rule: 'required',
+          message: 'Enter a court room'
+        }
+      ]"
+    >
+      <pdk-select
+        [ngModel]="selectedCourtRoomId"
+        (ngModelChange)="selectedCourtRoomId = $event"
+        [name]="'courtRoomId'"
+        [options]="courtRoomOptions$ | async"
+        placeholder="Select a courtroom"
+        required="true"
+      >
+      </pdk-select>
+    </pdk-form-field>
+  </div>
+  <div>
+    <button type="submit" aria-label="continue" pdk-button pdk-margin-bottom="0">Continue</button>
+  </div>
+</form>

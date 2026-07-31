@@ -1,0 +1,15 @@
+$module: 'courtrooms-filter';
+
+.#{$module} {
+  border: 2px solid #dee0e2;
+
+  a {
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 10px;
+  }
+
+  .pdk-autosuggest__input {
+    padding-right: 0;
+  }
+}

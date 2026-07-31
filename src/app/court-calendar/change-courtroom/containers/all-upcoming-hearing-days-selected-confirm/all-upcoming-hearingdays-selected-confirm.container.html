@@ -1,0 +1,55 @@
+<back-button
+  [linkUrl]="'../all-future-hearingdays-selected'"
+  (onBack)="clearSelection()"
+></back-button>
+
+@if (errors) {
+<pdk-error-summary focusOnChange="true" [errors]="errors"></pdk-error-summary>
+}
+
+<h1 pdk-typography="heading-large" pdk-margin-bottom="3" pdk-margin-top="2">
+  Check courtroom change for upcoming hearing days
+</h1>
+
+<div pdk-margin-bottom="5">
+  <dl pdk-margin-top="0">
+    <div
+      pdk-grid
+      container
+      pdk-border-colour="mid-grey"
+      pdk-padding-bottom="2"
+      pdk-padding-top="2"
+      pdk-margin-horizontal="0"
+    >
+      <dt pdk-grid one-third pdk-padding-left="0">
+        <b>Number of hearing days selected</b>
+      </dt>
+      <dd pdk-grid two-thirds pdk-margin-left="0">
+        <span>{{ (selectedHearingDays$ | async)?.length || 0 }} days</span>
+      </dd>
+    </div>
+
+    <div
+      pdk-grid
+      container
+      pdk-border-colour="mid-grey"
+      pdk-padding-bottom="2"
+      pdk-padding-top="2"
+      pdk-margin-horizontal="0"
+    >
+      <dt pdk-grid one-third pdk-padding-left="0">
+        <b>Reallocated courtroom</b>
+      </dt>
+      <dd pdk-grid two-thirds pdk-margin-left="0">
+        <span>{{ selectedCourtroom$ | async | courtRoomName: (courtRoomOptions$ | async) }}</span>
+      </dd>
+    </div>
+  </dl>
+</div>
+
+<courtroom-change-confirmation-form
+  confirmationLabel="Are you sure you want to change courtroom for upcoming hearing days?"
+  (onValidationError)="onValidationError($event)"
+  (onFormSubmit)="handleFormSubmission($event)"
+>
+</courtroom-change-confirmation-form>

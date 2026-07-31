@@ -1,0 +1,96 @@
+$module: 'hearings-per-judge';
+
+.relative-item {
+  position: relative;
+}
+
+.hearings-per-judge {
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.#{$module} {
+  tbody:last-child > ::ng-deep court-restrictions:last-child {
+    td {
+      border-bottom: 0px;
+    }
+  }
+
+  tbody tr {
+    &.enableAction:hover:not(.selected) {
+      :not([rowspan]) {
+        position: relative;
+      }
+    }
+    td {
+      &:nth-child(6) {
+        padding-right: 30px;
+      }
+      &:last-child {
+        vertical-align: middle;
+        padding: 0;
+        width: 7px;
+        i {
+          background-position-y: center;
+          margin-left: -12px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .selected {
+    & ::ng-deep * {
+      background-color: #005ea5;
+      position: relative;
+      color: #fff !important;
+    }
+
+    & ::ng-deep a {
+      &:visited {
+        background-color: #005ea5 !important;
+        color: #fff !important;
+        outline: 3px solid #fff;
+        outline-offset: 0;
+      }
+
+      &:focus,
+      &:focus-visible {
+        background-color: #ffbd4a !important;
+        color: #0b0c0c !important;
+        outline: 3px solid #0b0c0c !important;
+        outline-offset: 0;
+      }
+    }
+  }
+
+  tbody:last-child tr:last-child td,
+  tbody:last-of-type td[rowspan] {
+    border-bottom: 0px;
+  }
+}
+
+.break-long-words {
+  word-break: break-all;
+}
+
+.flex-caption {
+  display: flex;
+  justify-content: space-between;
+}
+
+.marker-width {
+  width: 145px;
+}
+
+::ng-deep {
+  .dotted-border {
+    border-bottom: 1px dashed !important;
+  }
+}
+
+::ng-deep {
+  .bottomless-border {
+    border-bottom: none !important;
+  }
+}

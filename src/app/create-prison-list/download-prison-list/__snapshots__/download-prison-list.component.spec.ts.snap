@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadPrisonListComponent download Prison List should not show Prison list button if no hearings found 1`] = `
+<ng-component
+  crownSelected="false"
+  hasAllocatedHearingsByDateRange="false"
+  isPrisonAdminOrHmctsUser={[Function Boolean]}
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+>
+  <download-prison-list>
+  </download-prison-list>
+</ng-component>
+`;
+
+exports[`DownloadPrisonListComponent prison list button should show Prison List button for Crown court 1`] = `
+<ng-component
+  crownSelected="false"
+  hasAllocatedHearingsByDateRange={[Function Boolean]}
+  isPrisonAdminOrHmctsUser={[Function Boolean]}
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+>
+  <download-prison-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+        </div>
+      </pdk-inset-text>
+      <button
+        class="download-file prison-list govuk-button govuk-button--secondary"
+        pdk-button="secondary"
+        type="button"
+      >
+        <span>
+          Prison list
+        </span>
+        <i
+          class="listing-vector-icon pdk-!-text-color-black"
+          pdk-text-colour="black"
+        >
+          <svg
+            height="100%"
+            width="100%"
+          >
+            <use
+              xlink:href="assets\\svg-icons-definitions.svg#arrow-right-action"
+            />
+          </svg>
+        </i>
+      </button>
+    </div>
+  </download-prison-list>
+</ng-component>
+`;
+
+exports[`DownloadPrisonListComponent prison list button should show Prison List button for Magistrate court 1`] = `
+<ng-component
+  crownSelected="false"
+  hasAllocatedHearingsByDateRange={[Function Boolean]}
+  isPrisonAdminOrHmctsUser={[Function Boolean]}
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+>
+  <download-prison-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+        </div>
+      </pdk-inset-text>
+      <button
+        class="download-file prison-list govuk-button govuk-button--secondary"
+        pdk-button="secondary"
+        type="button"
+      >
+        <span>
+          Prison list
+        </span>
+        <i
+          class="listing-vector-icon pdk-!-text-color-black"
+          pdk-text-colour="black"
+        >
+          <svg
+            height="100%"
+            width="100%"
+          >
+            <use
+              xlink:href="assets\\svg-icons-definitions.svg#arrow-right-action"
+            />
+          </svg>
+        </i>
+      </button>
+    </div>
+  </download-prison-list>
+</ng-component>
+`;
+
+exports[`DownloadPrisonListComponent should create 1`] = `
+<ng-component
+  crownSelected="false"
+  hasAllocatedHearingsByDateRange={[Function Boolean]}
+  isPrisonAdminOrHmctsUser={[Function Boolean]}
+  selectedCourtCentre={[Function Object]}
+  selectedOptions={[Function Object]}
+>
+  <download-prison-list>
+    <div>
+      <pdk-inset-text>
+        <div
+          class="govuk-inset-text"
+        >
+           18 December 2018 
+          <br />
+        </div>
+      </pdk-inset-text>
+      <button
+        class="download-file prison-list govuk-button govuk-button--secondary"
+        pdk-button="secondary"
+        type="button"
+      >
+        <span>
+          Prison list
+        </span>
+        <i
+          class="listing-vector-icon pdk-!-text-color-black"
+          pdk-text-colour="black"
+        >
+          <svg
+            height="100%"
+            width="100%"
+          >
+            <use
+              xlink:href="assets\\svg-icons-definitions.svg#arrow-right-action"
+            />
+          </svg>
+        </i>
+      </button>
+    </div>
+  </download-prison-list>
+</ng-component>
+`;
