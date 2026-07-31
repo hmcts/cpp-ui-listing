@@ -1,0 +1,27 @@
+<tr data-test-id="hearing-table-row" pdk-table-row *ngFor="let row of rows" pdk-padding-left="2">
+  <td pdk-table-cell *ngFor="let column of columnConfig; let first = first">
+    <ng-container
+      [ngTemplateOutlet]="
+        column.isDictionaryCell && first
+          ? emptyCell
+          : cellRenderers && cellRenderers[column.key]
+          ? cellRenderers[column.key]
+          : defaultCell
+      "
+      [ngTemplateOutletContext]="{
+        cellData: row[column.key],
+        rowData: row
+      }"
+    >
+    </ng-container>
+  </td>
+  <td *ngIf="rowIsActionable && actionCellRenderer">
+    <ng-container
+      [ngTemplateOutlet]="actionCellRenderer"
+      [ngTemplateOutletContext]="{
+        rowData: row
+      }"
+    >
+    </ng-container>
+  </td>
+</tr>

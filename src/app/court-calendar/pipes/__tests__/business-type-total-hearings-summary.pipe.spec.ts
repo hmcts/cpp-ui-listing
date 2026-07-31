@@ -82,7 +82,7 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
       sequence: 1,
       isDisabled: false,
       checkSplit: false
-    } as HearingRowVM);
+    }) as HearingRowVM;
 
   const createMockHearingTimeCalendar = (
     time: string = '09:00-10:00',

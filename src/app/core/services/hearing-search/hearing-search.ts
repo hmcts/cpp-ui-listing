@@ -46,7 +46,10 @@ export class HearingSearchService {
       }[];
     }[]
   >;
-  constructor(private listing: ListingService, private store: Store<AppState>) {
+  constructor(
+    private listing: ListingService,
+    private store: Store<AppState>
+  ) {
     this.courtCentre$ = this.store.select(getCourtCentres);
   }
 

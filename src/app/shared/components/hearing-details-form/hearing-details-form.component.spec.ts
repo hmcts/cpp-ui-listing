@@ -386,7 +386,7 @@ describe('HearingDetailsFormComponent', () => {
     // pdk-autosuggest input element uses a randomly generated name attribute.
     // Need to make this a fixed name so Jest tests pass between test runs.
     const judgesTypeaheadEl = fixture.debugElement.queryAll(By.css('pdk-autosuggest input'));
-    judgesTypeaheadEl.forEach((element) => (element.nativeElement.name = 'stubbed-name'));
+    judgesTypeaheadEl.forEach(element => (element.nativeElement.name = 'stubbed-name'));
     getJudicialMembersByNamePattern.and.returnValue([[...judicialmembers]]);
   });
 

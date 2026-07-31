@@ -44,6 +44,6 @@ export class CourtListPublishService {
         requestType: 'application/vnd.courtlistpublishing-service.files.download+json',
         responseType: 'blob'
       })
-      .pipe(map((response) => new Blob([response], { type: response.type })));
+      .pipe(map(response => new Blob([response], { type: response.type })));
   }
 }

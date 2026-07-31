@@ -165,10 +165,8 @@ export class AllocateMagistratesHearingsContainer implements OnDestroy {
     this.rotaBusinessTypes$ = this.store.select(getRotaBusinessTypes);
     this.hearingTableActionStore.onSequenceHearings$
       .pipe(
-        filter((sequencedHearings) => !!sequencedHearings),
-        map((sequencedHearings) =>
-          CourtCalendarActions.sequenceGroupHearings({ sequencedHearings })
-        ),
+        filter(sequencedHearings => !!sequencedHearings),
+        map(sequencedHearings => CourtCalendarActions.sequenceGroupHearings({ sequencedHearings })),
         takeUntil(this.destroy$)
       )
       .subscribe(this.store);
@@ -190,7 +188,7 @@ export class AllocateMagistratesHearingsContainer implements OnDestroy {
   }
 
   pageChanged(event: { pageNumber: number; pageSize?: number }): void {
-    this.filterOptions$.pipe(take(1)).subscribe((filterOptions) => {
+    this.filterOptions$.pipe(take(1)).subscribe(filterOptions => {
       this.clearAlert();
       this.store.dispatch(
         CourtCalendarActions.getUnallocatedHearings({
@@ -213,7 +211,7 @@ export class AllocateMagistratesHearingsContainer implements OnDestroy {
       .pipe(
         select(getCaseNotesMap),
         take(1),
-        tap((caseNotesMap) => {
+        tap(caseNotesMap => {
           if (caseNotesMap[caseId] === undefined) {
             this.store.dispatch(CourtCalendarActions.setCaseNotesForCase({ caseId }));
           }
@@ -290,7 +288,7 @@ export class AllocateMagistratesHearingsContainer implements OnDestroy {
         switchMap(([allocationMap, allocationType]) =>
           this.mapNotificationToParties(allocationMap, allocationType)
         ),
-        switchMap((hearingsToAllocate) => {
+        switchMap(hearingsToAllocate => {
           // if hearingsToAllocate is empty that means the user
           // has cancelled the action through the modal
           // We return an empty observable that immediately dispatches a complete notification without a next action
@@ -375,7 +373,7 @@ export class AllocateMagistratesHearingsContainer implements OnDestroy {
       return Promise.resolve([...hearingsWithSameDate, ...hearingsWithNewDate]);
     }
 
-    return new Promise<HearingAllocationPayload[]>((resolve) => {
+    return new Promise<HearingAllocationPayload[]>(resolve => {
       const confirmationRef = this.modalService.open<SendNotificationModalData>(
         SendNotificationModalComponent,
         {
@@ -384,7 +382,7 @@ export class AllocateMagistratesHearingsContainer implements OnDestroy {
               confirmationRef.dispose();
               resolve([
                 ...hearingsWithSameDate,
-                ...hearingsWithNewDate.map((allocation) => ({
+                ...hearingsWithNewDate.map(allocation => ({
                   ...allocation,
                   sendNotificationToParties: sendNotification
                 }))

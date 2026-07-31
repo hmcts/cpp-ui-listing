@@ -49,7 +49,7 @@ const initialState: MagsCourtListPublishState = {
 
 const upsertPublishStatus = (state: MagsCourtListPublishState, newStatus: MagsPublishListVM) => ({
   statuses: [
-    ...state.statuses.filter((s) => s.publishRequestId !== newStatus.publishRequestId),
+    ...state.statuses.filter(s => s.publishRequestId !== newStatus.publishRequestId),
     newStatus
   ]
 });
@@ -67,7 +67,7 @@ const pollPredicate = (
   }
   // Still need to update the store with the latest status to ensure the UI reflects any status changes without displaying any alerts until the timeout period has been reached
   const viewModel = magsPublishListStatusVmAdapter(dto);
-  patchState(store, (state) => upsertPublishStatus(state, { ...viewModel, alert: false }));
+  patchState(store, state => upsertPublishStatus(state, { ...viewModel, alert: false }));
   return false;
 };
 
@@ -87,21 +87,21 @@ export const MagsCourtListPublishSignalStore = signalStore(
       _parentStore: globalStore
     })
   ),
-  withMethods((store) => ({
+  withMethods(store => ({
     _removeStatusByListType: (listType: CourtListType) => {
-      const status = store.statuses().find((s) => s.listType === listType);
+      const status = store.statuses().find(s => s.listType === listType);
       if (status) {
-        patchState(store, (state) => ({
-          statuses: state.statuses.filter((s) => s.publishRequestId !== status.publishRequestId),
+        patchState(store, state => ({
+          statuses: state.statuses.filter(s => s.publishRequestId !== status.publishRequestId),
           _publishRequestIds: (state._publishRequestIds ?? []).filter(
-            (id) => id !== status.publishRequestId
+            id => id !== status.publishRequestId
           )
         }));
       }
     },
     _hideTerminalStatusAlerts: () =>
-      patchState(store, (state) => ({
-        statuses: state.statuses.map((status) =>
+      patchState(store, state => ({
+        statuses: state.statuses.map(status =>
           status.alert && statusIsTerminal(status) ? { ...status, alert: false } : status
         )
       })),
@@ -109,40 +109,40 @@ export const MagsCourtListPublishSignalStore = signalStore(
       patchState(store, { statuses: [], _publishRequestIds: undefined });
     }
   })),
-  withMethods((store) => ({
+  withMethods(store => ({
     pollPublishStatuses: rxMethod<string[]>(
       pipe(
-        switchMap((requestIds) => {
+        switchMap(requestIds => {
           if (!requestIds || requestIds.length === 0) {
             return EMPTY;
           }
           return from(requestIds).pipe(
             delay(10000),
-            tap((requestId) => {
+            tap(requestId => {
               const initialStatus = store
                 .statuses()
-                .find((status) => status.publishRequestId === requestId);
+                .find(status => status.publishRequestId === requestId);
               if (initialStatus) {
-                patchState(store, (state) =>
+                patchState(store, state =>
                   upsertPublishStatus(state, { ...initialStatus, alert: false })
                 );
               }
             }),
-            mergeMap((courtListId) => {
+            mergeMap(courtListId => {
               return store._getPublishStatus({ courtListId }).pipe(
-                repeatUntil((data) => pollPredicate(data, store), { period: 10000, due: 30000 }),
+                repeatUntil(data => pollPredicate(data, store), { period: 10000, due: 30000 }),
                 tap(([data]) => {
                   const viewModel = magsPublishListStatusVmAdapter(data);
-                  patchState(store, (state) =>
+                  patchState(store, state =>
                     upsertPublishStatus(state, { ...viewModel, alert: true, finalised: true })
                   );
                 }),
-                catchError((err) => {
+                catchError(err => {
                   if (err instanceof TimeoutError) {
                     const currentStatus = store
                       .statuses()
-                      .find((status) => status.publishRequestId === courtListId);
-                    patchState(store, (state) =>
+                      .find(status => status.publishRequestId === courtListId);
+                    patchState(store, state =>
                       upsertPublishStatus(state, {
                         ...currentStatus,
                         alert: true,
@@ -162,11 +162,11 @@ export const MagsCourtListPublishSignalStore = signalStore(
     ),
     retrieveCourtListPublishStatus: rxMethod<MagsPublishListStatusRequestParams>(
       pipe(
-        switchMap((request) =>
+        switchMap(request =>
           store._getPublishStatus(request).pipe(
-            map((data) => data.map((dto) => magsPublishListStatusVmAdapter(dto))),
+            map(data => data.map(dto => magsPublishListStatusVmAdapter(dto))),
             tapResponse({
-              next: (statuses) => {
+              next: statuses => {
                 const statusesToPoll = statuses.filter(statusNeedsToBePolled);
                 patchState(store, { statuses });
                 if (statusesToPoll.length > 0) {
@@ -177,7 +177,7 @@ export const MagsCourtListPublishSignalStore = signalStore(
                   });
                 }
               },
-              error: (error) => {
+              error: error => {
                 store._parentStore.dispatch(new ApiError(error));
               }
             }),
@@ -188,20 +188,20 @@ export const MagsCourtListPublishSignalStore = signalStore(
     ),
     publishCourtList: rxMethod<MagsPublishListRequest>(
       pipe(
-        switchMap((request) => {
+        switchMap(request => {
           store._removeStatusByListType(request.courtListType);
           store._hideTerminalStatusAlerts();
           return store._publishCourtList(request).pipe(
             tapResponse({
-              next: (data) => {
+              next: data => {
                 const viewModel = magsPublishListStatusVmAdapter(data);
-                patchState(store, (state) => ({
+                patchState(store, state => ({
                   statuses: [...state.statuses, { ...viewModel, alert: true }],
                   _publishRequestIds: (state._publishRequestIds ?? []).reduce(
                     (acc, id) => {
                       if (
                         !state.statuses.some(
-                          (status) => status.publishRequestId === id && statusIsTerminal(status)
+                          status => status.publishRequestId === id && statusIsTerminal(status)
                         )
                       ) {
                         acc.push(id);
@@ -212,7 +212,7 @@ export const MagsCourtListPublishSignalStore = signalStore(
                   )
                 }));
               },
-              error: (error) => {
+              error: error => {
                 store._parentStore.dispatch(new ApiError(error));
               }
             })
@@ -225,21 +225,21 @@ export const MagsCourtListPublishSignalStore = signalStore(
         switchMap(({ fileId, listType }) =>
           store._downloadCourtListPdf(fileId).pipe(
             tapResponse({
-              next: (data) =>
+              next: data =>
                 FileSaver.saveAs(
                   data,
                   listType === CourtListType.ONLINE_PUBLIC
                     ? 'online_public_court_list.pdf'
                     : 'standard_court_list.pdf'
                 ),
-              error: (error) => store._parentStore.dispatch(new ApiError(error))
+              error: error => store._parentStore.dispatch(new ApiError(error))
             })
           )
         )
       )
     )
   })),
-  withHooks((store) => ({
+  withHooks(store => ({
     onInit: () => {
       store.pollPublishStatuses(store._publishRequestIds);
     }

@@ -225,7 +225,8 @@ export class ListingService {
       bookingType: hearing.bookingType,
       priority: hearing.priority,
       specialRequirements: hearing.specialRequirements,
-      sendNotificationToParties: hearing.sendNotificationToParties
+      sendNotificationToParties: hearing.sendNotificationToParties,
+      courtRoomId: hearing?.courtRoomId
     };
     if (splitHearingUnallocated) {
       body.splitHearing = 'unallocated';

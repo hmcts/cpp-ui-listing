@@ -35,7 +35,7 @@ export const courtCalendarReducer = createReducer(
     }
   ),
 
-  on(CourtCalendarActions.resetAllocatedHearings, (state) => {
+  on(CourtCalendarActions.resetAllocatedHearings, state => {
     return {
       ...state,
       allocated: initialState.allocated,
@@ -59,7 +59,7 @@ export const courtCalendarReducer = createReducer(
           hearings: payload.paginatedHearings.hearings.filter(
             ({ id }) =>
               !(state.hearingsToReallocate ?? []).some(
-                (reallocateHearing) => reallocateHearing.id === id
+                reallocateHearing => reallocateHearing.id === id
               )
           )
         }
@@ -121,7 +121,7 @@ export const courtCalendarReducer = createReducer(
     };
   }),
 
-  on(CourtCalendarActions.bulkUpdateHearings, (state) => {
+  on(CourtCalendarActions.bulkUpdateHearings, state => {
     return {
       ...state,
       failedAllocationIds: undefined,
@@ -138,7 +138,7 @@ export const courtCalendarReducer = createReducer(
         state.hearingsToReallocate &&
         (state.hearingsToReallocate ?? []).filter(({ id }) => {
           if (
-            hearings.some((hearing) => hearing.hearingId === id) &&
+            hearings.some(hearing => hearing.hearingId === id) &&
             !failedAllocationIds.includes(id)
           ) {
             return false;
@@ -155,7 +155,7 @@ export const courtCalendarReducer = createReducer(
       const existingHearings = state.unallocated.hearingMap?.paginatedHearings?.hearings ?? [];
       const updatedHearings = [...existingHearings];
       const index = updatedHearings.findIndex(
-        (hearing) => hearing.id === updatedUnallocatedHearing.id
+        hearing => hearing.id === updatedUnallocatedHearing.id
       );
       if (index > -1) {
         updatedHearings.splice(index, 1, updatedUnallocatedHearing);
@@ -182,7 +182,7 @@ export const courtCalendarReducer = createReducer(
       allocationType: AllocationType.reallocate
     };
   }),
-  on(CourtCalendarActions.clearUnallocatedWidgetFilter, (state) => {
+  on(CourtCalendarActions.clearUnallocatedWidgetFilter, state => {
     return {
       ...state,
       unallocated: {

@@ -26,6 +26,7 @@ import { Breadcrumb } from '../core/model/shared/breadcrumb';
 import { AllocateHearingContainer } from './allocate-hearing.container';
 import { hearingTypeMockOne, hearingTypeMockTwo, OrganisationUnit } from '@cpp/reference-data';
 import { provideCppCoreHttpServices } from '@cpp/core';
+import { CPPDate } from '../core/util';
 
 @Component({
   template: ` <allocate-hearing></allocate-hearing> `,
@@ -42,7 +43,7 @@ describe('AllocateHearingContainer', () => {
   let getBaseUrlSpy;
 
   const store: Store<AppState> = null;
-  const paramMap = of({ get: (param) => 'mockHearingId' });
+  const paramMap = of({ get: param => 'mockHearingId' });
   const testHearing: Hearing = validHearingMock1;
   const hearings: Hearing[] = [testHearing];
   const hearingState: HearingState = {
@@ -95,7 +96,7 @@ describe('AllocateHearingContainer', () => {
 
   const mockHearingId = 'test-hearing-id';
   let router: Router;
-  const queryParamMap = of({ get: (param) => false });
+  const queryParamMap = of({ get: param => false });
 
   beforeEach(fakeAsync(() => {
     state = {
@@ -104,7 +105,7 @@ describe('AllocateHearingContainer', () => {
       listingReferenceData: listingReferenceDataState,
       display: { loading: false }
     };
-    selectSpy = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    selectSpy = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
     dispatchSpy = jasmine.createSpy('dispatch');
@@ -197,6 +198,49 @@ describe('AllocateHearingContainer', () => {
     expect(dispatchSpy.calls.count()).toEqual(1);
     expect(dispatchSpy.calls.mostRecent().args[0]).toEqual(expectedAllocateHearingAction);
   }));
+
+  it('#allocateHearing should convert first nonDefaultDays startTime to UTC before dispatch', () => {
+    const updatedHearing = {
+      ...testHearing,
+      nonDefaultDays: [{ startTime: '2026-02-10T09:00:00' }]
+    };
+    const toUtcISOSpy = spyOn(CPPDate.prototype, 'toUtcISO').and.returnValue(
+      '2026-02-10T09:00:00.000Z'
+    );
+    const expectedAllocateHearingAction = new AllocateHearingAction({
+      originHearing: testHearing,
+      updatedHearing
+    });
+
+    dispatchSpy.calls.reset();
+    component.allocateHearing({ originHearing: testHearing, updatedHearing });
+
+    expect(toUtcISOSpy).toHaveBeenCalledWith('2026-02-10T09:00:00');
+    expect(updatedHearing.nonDefaultDays[0].startTime).toEqual('2026-02-10T09:00:00.000Z');
+    expect(dispatchSpy.calls.count()).toEqual(1);
+    expect(dispatchSpy.calls.mostRecent().args[0]).toEqual(expectedAllocateHearingAction);
+  });
+
+  it('#allocateHearing should not convert nonDefaultDays when empty', () => {
+    const updatedHearing = {
+      ...testHearing,
+      nonDefaultDays: []
+    };
+    const toUtcISOSpy = spyOn(CPPDate.prototype, 'toUtcISO').and.returnValue(
+      '2026-02-10T09:00:00.000Z'
+    );
+    const expectedAllocateHearingAction = new AllocateHearingAction({
+      originHearing: testHearing,
+      updatedHearing
+    });
+
+    dispatchSpy.calls.reset();
+    component.allocateHearing({ originHearing: testHearing, updatedHearing });
+
+    expect(toUtcISOSpy).not.toHaveBeenCalled();
+    expect(dispatchSpy.calls.count()).toEqual(1);
+    expect(dispatchSpy.calls.mostRecent().args[0]).toEqual(expectedAllocateHearingAction);
+  });
 
   it('#onSelectCourtCentre', fakeAsync(() => {
     component.courtCentres = [courtCentre];

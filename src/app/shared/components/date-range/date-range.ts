@@ -30,5 +30,8 @@ export function dateRangeWithinLimitsValidator(
 }
 
 export class DateRange {
-  constructor(public startDate: string, public endDate: string) {}
+  constructor(
+    public startDate: string,
+    public endDate: string
+  ) {}
 }

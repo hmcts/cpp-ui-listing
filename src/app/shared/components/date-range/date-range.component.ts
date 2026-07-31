@@ -183,7 +183,7 @@ export class DateRangeComponent implements ControlValueAccessor, FormFieldContro
           return null;
         })
       )
-      .subscribe((val) => {
+      .subscribe(val => {
         if (val) {
           this.startDateStr = val.startDate;
           this.endDateStr = val.endDate;
@@ -198,7 +198,7 @@ export class DateRangeComponent implements ControlValueAccessor, FormFieldContro
   }
 
   validate(c: FormControl): ValidationErrors | null {
-    ['startDate', 'endDate'].forEach((controlName) => {
+    ['startDate', 'endDate'].forEach(controlName => {
       this.dateInputs.controls[controlName].updateValueAndValidity({ onlySelf: true });
     });
 
@@ -267,7 +267,7 @@ export class DateRangeComponent implements ControlValueAccessor, FormFieldContro
     const allDefendants = [];
     const hearing = this.hearing();
     if (hearing.listedCases) {
-      hearing.listedCases.forEach((lCase) => {
+      hearing.listedCases.forEach(lCase => {
         allDefendants.push(...lCase.defendants);
       });
     }
@@ -286,7 +286,7 @@ export class DateRangeComponent implements ControlValueAccessor, FormFieldContro
 
   defendantEarliestCustodyTimeLimit(defendants: Defendant[]): string {
     const custodyTimeLimits = [];
-    defendants.forEach((defendant) =>
+    defendants.forEach(defendant =>
       defendant.custodyTimeLimit ? custodyTimeLimits.push(new Date(defendant.custodyTimeLimit)) : ''
     );
 

@@ -42,7 +42,7 @@ describe('TotalHearingAndDurationTextPipe', () => {
       rowIdentifier: `row-${id}`,
       sequence: 1,
       isMaster
-    } as HearingRowVM);
+    }) as HearingRowVM;
 
   const createMockHearingTimeCalendar = (
     hearings: HearingRowVM[]
