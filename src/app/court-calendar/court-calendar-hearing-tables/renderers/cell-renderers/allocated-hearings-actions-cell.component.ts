@@ -11,7 +11,7 @@ import {
 } from '../../component-store/hearing-table-actions.store';
 import { HearingRowActionItem } from '../../shared/hearing-row-actions-dropdown/hearing-row-actions-dropdown.component';
 
-import { BaseHearingRowDataVM } from '../../../model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../../model/hearing-table-renderer.interfaces';
 import { ActionsCellComponent, HearingActionsEvent } from './action-cell.component';
 import {
   dateIsCurrentOrGreaterThan,
@@ -62,6 +62,8 @@ export class AllocatedHearingsActionsCellComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    // A multi-day Crown hearing that ended in the last seven days can only have its end
+    // date changed - none of the other row actions apply to a hearing already in the past.
     if (isEligibleForEndDateChange(this.hearing.details)) {
       this.actionOptions = [{ label: 'Change end date', value: 'change-end-date' }];
       return;
@@ -71,6 +73,7 @@ export class AllocatedHearingsActionsCellComponent implements OnInit {
     const { jurisdictionType } = this.hearing.details;
     const hasPastHearing = hearingDayCount > 1 && !dateIsCurrentOrGreaterThan(startDate);
     const isMultidayMag = jurisdictionType !== 'CROWN' && hearingDayCount > 1;
+
     if (!hasPastHearing) {
       const baseOptions =
         jurisdictionType === 'CROWN' ? CROWN_EXTRA_OPTIONS : MAGISTRATE_EXTRA_OPTIONS;

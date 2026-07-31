@@ -15,8 +15,7 @@ export const courtCalendarReducer = createReducer(
       ...state,
       filterOptions,
       allocationType: undefined,
-      hearingsToReallocate: undefined,
-      failedAllocationIds: undefined
+      hearingsToReallocate: undefined
     };
   }),
 
@@ -35,7 +34,7 @@ export const courtCalendarReducer = createReducer(
     }
   ),
 
-  on(CourtCalendarActions.resetAllocatedHearings, (state) => {
+  on(CourtCalendarActions.resetAllocatedHearings, state => {
     return {
       ...state,
       allocated: initialState.allocated,
@@ -59,7 +58,7 @@ export const courtCalendarReducer = createReducer(
           hearings: payload.paginatedHearings.hearings.filter(
             ({ id }) =>
               !(state.hearingsToReallocate ?? []).some(
-                (reallocateHearing) => reallocateHearing.id === id
+                reallocateHearing => reallocateHearing.id === id
               )
           )
         }
@@ -121,33 +120,27 @@ export const courtCalendarReducer = createReducer(
     };
   }),
 
-  on(CourtCalendarActions.bulkUpdateHearings, (state) => {
-    return {
-      ...state,
-      failedAllocationIds: undefined,
-      caseNotesMap: {}
-    };
-  }),
-
-  on(CourtCalendarActions.bulkUpdateHearingsSuccess, (state, { payload, failedAllocationIds }) => {
-    const { hearings } = payload;
-    return {
-      ...state,
-      failedAllocationIds,
-      hearingsToReallocate:
-        state.hearingsToReallocate &&
-        (state.hearingsToReallocate ?? []).filter(({ id }) => {
-          if (
-            hearings.some((hearing) => hearing.hearingId === id) &&
-            !failedAllocationIds.includes(id)
-          ) {
-            return false;
-          }
-          return true;
-        }),
-      caseNotesMap: {}
-    };
-  }),
+  on(
+    CourtCalendarActions.hearingBulkOperationComplete,
+    (state, { payload, failedAllocationIds }) => {
+      const { hearings } = payload;
+      return {
+        ...state,
+        hearingsToReallocate:
+          state.hearingsToReallocate &&
+          (state.hearingsToReallocate ?? []).filter(({ id }) => {
+            if (
+              hearings.some(hearing => hearing.hearingId === id) &&
+              !failedAllocationIds.includes(id)
+            ) {
+              return false;
+            }
+            return true;
+          }),
+        caseNotesMap: {}
+      };
+    }
+  ),
 
   on(
     CourtCalendarActions.updateHearingPublicListNoteSuccess,
@@ -155,7 +148,7 @@ export const courtCalendarReducer = createReducer(
       const existingHearings = state.unallocated.hearingMap?.paginatedHearings?.hearings ?? [];
       const updatedHearings = [...existingHearings];
       const index = updatedHearings.findIndex(
-        (hearing) => hearing.id === updatedUnallocatedHearing.id
+        hearing => hearing.id === updatedUnallocatedHearing.id
       );
       if (index > -1) {
         updatedHearings.splice(index, 1, updatedUnallocatedHearing);
@@ -182,7 +175,7 @@ export const courtCalendarReducer = createReducer(
       allocationType: AllocationType.reallocate
     };
   }),
-  on(CourtCalendarActions.clearUnallocatedWidgetFilter, (state) => {
+  on(CourtCalendarActions.clearUnallocatedWidgetFilter, state => {
     return {
       ...state,
       unallocated: {
@@ -190,5 +183,9 @@ export const courtCalendarReducer = createReducer(
         allocateWidgetFilter: initialState.unallocated.allocateWidgetFilter
       }
     };
-  })
+  }),
+  on(CourtCalendarActions.clearAllocationType, state => ({
+    ...state,
+    allocationType: undefined
+  }))
 );

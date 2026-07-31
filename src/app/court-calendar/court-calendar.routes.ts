@@ -5,8 +5,7 @@ import { provideState } from '@ngrx/store';
 import {
   courtCalendarFeatureReducer,
   COURT_CALENDAR_FEATURE_KEY,
-  courtCalendarEffects,
-  CourtCalendarFeature
+  courtCalendarEffects
 } from './state';
 import { changeJudiciaryResolver } from './resolver/change-judiciary-resolver';
 import { selectedHearingGuard } from './guards/selected-hearing.guard';
@@ -15,6 +14,7 @@ import {
   searchAllocatedHearingsByFilterGuard
 } from './guards/search-allocated-hearings.guards';
 import { getUnallocatedHearingsGuard } from './guards/get-unallocated-hearings.guard';
+import { loadHearingScheduleGuard } from './guards/load-hearing-schedule.guard';
 import { reallocateHearingsNavGuard } from './guards/reallocate-hearings-nav-guard';
 import { getSessionsForSeelectedHearingGuard } from './guards/get-sessions-for-selected-hearings.guard';
 
@@ -32,7 +32,7 @@ export const courtCalendarRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./containers/court-calendar.container').then((c) => c.CourtCalendarContainer),
+      import('./containers/court-calendar.container').then(c => c.CourtCalendarContainer),
     canActivate: [
       OrganisationUnitsGuard,
       RotaBusinessTypesGuard,
@@ -43,19 +43,17 @@ export const courtCalendarRoutes: Routes = [
       provideEffects(courtCalendarEffects)
     ],
     data: {
-      title: 'Court Calendar | Common Platform',
-      feature: CourtCalendarFeature.calendar
+      title: 'Court Calendar | Common Platform'
     }
   },
   {
     path: `${CourtCalendarRoutes.EDIT_JUDICIRAY}`,
     loadComponent: () =>
-      import('./edit-judiciary/edit-judiciary.container').then((c) => c.EditJudiciaryContainer),
+      import('./edit-judiciary/edit-judiciary.container').then(c => c.EditJudiciaryContainer),
     canActivate: [OrganisationUnitsGuard, RotaBusinessTypesGuard],
     resolve: { allocatedHearings: changeJudiciaryResolver },
     data: {
-      title: 'Edit Judiciary | Common Platform',
-      feature: CourtCalendarFeature.calendar
+      title: 'Edit Judiciary | Common Platform'
     }
   },
   {
@@ -67,13 +65,12 @@ export const courtCalendarRoutes: Routes = [
         canActivate: [getSessionsForSeelectedHearingGuard],
         loadComponent: () =>
           import('./change-hearing-details/containers/change-hearing-details.container').then(
-            (c) => c.ChangehearingDetailsContainer
+            c => c.ChangehearingDetailsContainer
           )
       }
     ],
     data: {
-      title: 'Change Hearing Details | Common Platform',
-      feature: CourtCalendarFeature.calendar
+      title: 'Change Hearing Details | Common Platform'
     }
   },
   {
@@ -81,7 +78,7 @@ export const courtCalendarRoutes: Routes = [
     canActivate: [OrganisationUnitsGuard, selectedHearingGuard],
     loadComponent: () =>
       import('./change-courtroom/containers/change-courtroom.container').then(
-        (c) => c.ChangeCourtroomContainer
+        c => c.ChangeCourtroomContainer
       ),
     children: [
       {
@@ -93,41 +90,40 @@ export const courtCalendarRoutes: Routes = [
         path: 'all-hearing-days',
         loadComponent: () =>
           import('./change-courtroom/containers/hearing-days-selection.container').then(
-            (c) => c.HearingDaysSelectionContainer
+            c => c.HearingDaysSelectionContainer
           )
       },
       {
         path: 'selected-hearing-days',
         loadComponent: () =>
           import('./change-courtroom/containers/selected-hearing-days.container').then(
-            (c) => c.selectedhearingDaysContainer
+            c => c.SelectedHearingDaysContainer
           )
       },
       {
         path: 'all-future-hearingdays-selected',
         loadComponent: () =>
-          import(
-            './change-courtroom/containers/all-upcoming-hearing-days-selected/all-upcoming-hearingdays-selected.container'
-          ).then((c) => c.AllFutureHearingDaysSelectedContainer)
+          import('./change-courtroom/containers/all-upcoming-hearing-days-selected/all-upcoming-hearingdays-selected.container').then(
+            c => c.AllFutureHearingDaysSelectedContainer
+          )
       },
       {
         path: 'all-future-hearingdays-selected-confirm',
         loadComponent: () =>
-          import(
-            './change-courtroom/containers/all-upcoming-hearing-days-selected-confirm/all-upcoming-hearingdays-selected-confirm.container'
-          ).then((c) => c.AllFutureHearingDaysSelectedConfirmContainer)
+          import('./change-courtroom/containers/all-upcoming-hearing-days-selected-confirm/all-upcoming-hearingdays-selected-confirm.container').then(
+            c => c.AllFutureHearingDaysSelectedConfirmContainer
+          )
       },
       {
         path: 'success-banner',
         loadComponent: () =>
           import('./change-courtroom/containers/success-banner.container').then(
-            (c) => c.SuccessBannerContainer
+            c => c.SuccessBannerContainer
           )
       }
     ],
     data: {
-      title: 'Change Courtroom | Common Platform',
-      feature: CourtCalendarFeature.calendar
+      title: 'Change Courtroom | Common Platform'
     }
   },
   {
@@ -135,11 +131,10 @@ export const courtCalendarRoutes: Routes = [
     canActivate: [OrganisationUnitsGuard, RotaBusinessTypesGuard, selectedHearingGuard],
     loadComponent: () =>
       import('./remove-hearing/containers/remove-hearing.container').then(
-        (c) => c.RemoveHearingContainer
+        c => c.RemoveHearingContainer
       ),
     data: {
-      title: 'Remove Hearing | Common Platform',
-      feature: CourtCalendarFeature.calendar
+      title: 'Remove Hearing | Common Platform'
     }
   },
   {
@@ -147,10 +142,8 @@ export const courtCalendarRoutes: Routes = [
     canActivate: [OrganisationUnitsGuard, RotaBusinessTypesGuard],
     children: [
       {
-        path: 'crown/:courtCentreId',
-        data: {
-          feature: CourtCalendarFeature.allocateCrown
-        },
+        path: ':courtCentreId',
+        canActivate: [loadHearingScheduleGuard],
         children: [
           {
             path: 'unallocated',
@@ -160,9 +153,9 @@ export const courtCalendarRoutes: Routes = [
                 path: '',
                 canActivate: [searchAllocatedWidgetHearingsGuard],
                 loadComponent: () =>
-                  import(
-                    './court-calendar-hearing-tables/hearing-allocation/containers/allocate-crown-hearings.container'
-                  ).then((c) => c.AllocateCrownHearingsContainer)
+                  import('./court-calendar-hearing-tables/hearing-allocation/containers/allocate-hearings.container').then(
+                    c => c.AllocateHearingsContainer
+                  )
               }
             ],
             data: {
@@ -177,51 +170,9 @@ export const courtCalendarRoutes: Routes = [
                 path: '',
                 canActivate: [searchAllocatedWidgetHearingsGuard],
                 loadComponent: () =>
-                  import(
-                    './court-calendar-hearing-tables/hearing-allocation/containers/allocate-crown-hearings.container'
-                  ).then((c) => c.AllocateCrownHearingsContainer)
-              }
-            ],
-            data: {
-              title: 'Reallocate Hearings | Common Platform'
-            }
-          }
-        ]
-      },
-      {
-        path: 'magistrates/:courtCentreId',
-        data: {
-          feature: CourtCalendarFeature.allocateMag
-        },
-        children: [
-          {
-            path: 'unallocated',
-            canActivate: [getUnallocatedHearingsGuard],
-            children: [
-              {
-                path: '',
-                canActivate: [searchAllocatedWidgetHearingsGuard],
-                loadComponent: () =>
-                  import(
-                    './court-calendar-hearing-tables/hearing-allocation/containers/allocate-magistrates-hearings.container'
-                  ).then((c) => c.AllocateMagistratesHearingsContainer)
-              }
-            ],
-            data: {
-              title: 'Add Unallocated Hearings | Common Platform'
-            }
-          },
-          {
-            path: 'reallocate',
-            canActivate: [reallocateHearingsNavGuard],
-            children: [
-              {
-                path: '',
-                canActivate: [searchAllocatedWidgetHearingsGuard],
-                loadComponent: () =>
-                  import(
-                    './court-calendar-hearing-tables/hearing-allocation/containers/allocate-magistrates-hearings.container'
-                  ).then((c) => c.AllocateMagistratesHearingsContainer)
+                  import('./court-calendar-hearing-tables/hearing-allocation/containers/allocate-hearings.container').then(
+                    c => c.AllocateHearingsContainer
+                  )
               }
             ],
             data: {

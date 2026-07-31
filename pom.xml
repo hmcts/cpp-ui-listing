@@ -8,7 +8,7 @@
     </parent>
     <groupId>uk.gov.moj.cpp.ui</groupId>
     <artifactId>ui-listing</artifactId>
-    <version>19.0.18-SNAPSHOT</version>
+    <version>19.0.45-CCSPH2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <protractor.baseUrl>http://localhost:4200</protractor.baseUrl>

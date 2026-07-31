@@ -52,4 +52,11 @@ describe('IsEligibleForEndDateChangePipe', () => {
     expect(pipe.transform({ id: 'row-2' } as HearingRowVM)).toBe(false);
     expect(mockIsEligibleForEndDateChange).toHaveBeenCalledWith(undefined);
   });
+
+  it('should return false without a hearing row', () => {
+    mockIsEligibleForEndDateChange.mockReturnValue(false);
+
+    expect(pipe.transform(undefined)).toBe(false);
+    expect(mockIsEligibleForEndDateChange).toHaveBeenCalledWith(undefined);
+  });
 });

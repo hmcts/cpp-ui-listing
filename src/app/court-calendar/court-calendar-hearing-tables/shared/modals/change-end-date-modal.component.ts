@@ -86,6 +86,8 @@ export interface ChangeEndDateModalData extends Record<string, unknown> {
 })
 export class ChangeEndDateModalComponent {
   private readonly cppDate = inject(CPPDate);
+  // pdk-form-field merges these with pdk-date-input's built-in messages
+  // (dateFormat / dateExists / futureDate), so only `required` needs supplying.
   errorMessages = [{ rule: 'required', message: 'Enter a new hearing end date' }];
   todayDate = this.cppDate.format(new Date());
   modalData = inject<ChangeEndDateModalData>(PDK_MODAL_DATA_TOKEN);

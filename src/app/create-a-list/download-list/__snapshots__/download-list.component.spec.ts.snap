@@ -573,7 +573,6 @@ exports[`DownloadListComponent should hide alphabetical court list btn if select
             class="download-file standard restrict govuk-button govuk-button--secondary"
             pdk-button="secondary"
             type="button"
-            x-auto-restrict-download=""
           >
             <span>
               Standard court list
@@ -1236,7 +1235,6 @@ exports[`DownloadListComponent should show bench list btn if selected courtRoom 
             class="download-file standard restrict govuk-button govuk-button--secondary"
             pdk-button="secondary"
             type="button"
-            x-auto-restrict-download=""
           >
             <span>
               Standard court list
@@ -1312,7 +1310,6 @@ exports[`DownloadListComponent should show bench restrict btn if courtRoom is se
             class="download-file standard restrict govuk-button govuk-button--secondary"
             pdk-button="secondary"
             type="button"
-            x-auto-restrict-download=""
           >
             <span>
               Standard court list

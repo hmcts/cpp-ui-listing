@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { PDK_MODAL_DATA_TOKEN } from '@cpp/pdk';
 import { CPPDate } from '../../../../../core/util';
@@ -19,7 +20,15 @@ describe('ChangeEndDateModalComponent', () => {
     cancel: jest.fn()
   };
 
-  const mockCppDate = { format: jest.fn().mockReturnValue('2026-07-16') } as unknown as CPPDate;
+  // The date input carries a futureDate validator, so the seeded value has to be a real
+  // "today" rather than a fixed date, otherwise the form is legitimately invalid.
+  const now = new Date();
+  const todayIso = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
+  const mockCppDate = { format: jest.fn().mockReturnValue(todayIso) } as unknown as CPPDate;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -47,7 +56,7 @@ describe('ChangeEndDateModalComponent', () => {
   });
 
   it('should default todayDate to the formatted current date', () => {
-    expect(component.todayDate).toBe('2026-07-16');
+    expect(component.todayDate).toBe(todayIso);
   });
 
   it('should provide the required error message', () => {
@@ -79,6 +88,52 @@ describe('ChangeEndDateModalComponent', () => {
       form.triggerEventHandler('validSubmit', {});
 
       expect(modalData.continue).toHaveBeenCalled();
+    });
+  });
+
+  describe('date input binding', () => {
+    it('should seed the date input with today and pass it to continue on submit', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const formElement = fixture.debugElement.query(
+        By.css('[data-test-id="change-end-date-form"]')
+      );
+      const ngForm = formElement.injector.get(NgForm);
+
+      const [year, month, day] = todayIso.split('-');
+      expect(ngForm.value).toEqual({ newEndDate: todayIso });
+      expect(ngForm.valid).toBe(true);
+      expect(
+        Array.from(fixture.nativeElement.querySelectorAll('input')).map(
+          (input: HTMLInputElement) => input.value
+        )
+      ).toEqual([day, month, year]);
+
+      formElement.nativeElement.dispatchEvent(new Event('submit'));
+      fixture.detectChanges();
+
+      expect(modalData.continue).toHaveBeenCalledWith(todayIso);
+    });
+
+    it('should not submit when the date has been cleared', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const formElement = fixture.debugElement.query(
+        By.css('[data-test-id="change-end-date-form"]')
+      );
+      const ngForm = formElement.injector.get(NgForm);
+      ngForm.controls.newEndDate.setValue(null);
+      fixture.detectChanges();
+
+      formElement.nativeElement.dispatchEvent(new Event('submit'));
+      fixture.detectChanges();
+
+      expect(ngForm.valid).toBe(false);
+      expect(modalData.continue).not.toHaveBeenCalled();
     });
   });
 });

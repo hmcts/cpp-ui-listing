@@ -7,15 +7,15 @@ import { PdkCore } from '@cpp/pdk';
 @Component({
   selector: 'judiciary-header-cell',
   template: `
-    <div style="display: flex">
-      <h4 pdk-typography="heading-small" pdk-margin-bottom="0" data-test-id="judiciaryName">
+    <span style="display: flex; align-items: baseline;">
+      <span pdk-margin-bottom="0" data-test-id="judiciaryName">
         @if (judiciary().length > 0) {
           <span>{{ judiciary() | judiciaryMemberNames }}</span>
         }
         @if (judiciary().length <= 0) {
           <span>No judiciary allocated</span>
         }
-      </h4>
+      </span>
       @if (editable()) {
         <a
           href="javascript:void(0)"
@@ -29,7 +29,7 @@ import { PdkCore } from '@cpp/pdk';
           >{{ judiciary().length > 0 ? 'Edit' : 'Add' }}</a
         >
       }
-    </div>
+    </span>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [JudiciaryMemberNamesPipe, PdkCore]
@@ -43,9 +43,7 @@ export class JudiciaryHeaderCellComponent {
   readonly changeJudiciary = output<ChangeJudiciaryEvent>();
 
   onChangeJudiciary() {
-    const judiciaryIds = (this.judiciary() ?? [])
-      .map((judiciary) => judiciary.judicialId)
-      .join(',');
+    const judiciaryIds = (this.judiciary() ?? []).map(judiciary => judiciary.judicialId).join(',');
     const courtCentreId = this.hearing().courtCentreId;
     this.changeJudiciary.emit({
       judiciaryIds,

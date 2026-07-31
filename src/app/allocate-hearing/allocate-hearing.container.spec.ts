@@ -1,26 +1,18 @@
 import { PdkTabComponent } from '@cpp/pdk/tabs/tab.component';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { SearchAvailableHearingsAction } from '../core/actions';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { AppConfigService } from '../config';
 import { validHearingMock1 } from '../../mock-data/test-fixtures';
-import {
-  AllocateHearingAction,
-  AppState,
-  HearingState,
-  ListingService,
-  SearchAllocatedHearingsAction
-} from '../core/';
+import { AppState, HearingState, ListingService } from '../core/';
 import {
   Hearing,
   SearchAvailableHearingsFormOptions,
   CourtCentre,
-  CourtroomsFilter,
-  PaginatedHearings,
-  FilterOption
+  PaginatedHearings
 } from '../core/model';
 import { Breadcrumb } from '../core/model/shared/breadcrumb';
 import { AllocateHearingContainer } from './allocate-hearing.container';
@@ -42,7 +34,8 @@ describe('AllocateHearingContainer', () => {
   let getBaseUrlSpy;
 
   const store: Store<AppState> = null;
-  const paramMap = of({ get: (param) => 'mockHearingId' });
+  const paramMap = of({ get: param => 'mockHearingId' });
+  const queryParams = of({ courtId: 'courtCentreId' });
   const testHearing: Hearing = validHearingMock1;
   const hearings: Hearing[] = [testHearing];
   const hearingState: HearingState = {
@@ -59,11 +52,6 @@ describe('AllocateHearingContainer', () => {
     weekcommencingHearing: null,
     publishCourtListStatuses: null
   } as HearingState;
-  const filterOptions: CourtroomsFilter = {
-    courtCentreId: 'courtCentreId',
-    courtRoomId: 'courtRoomId',
-    searchDate: '2018-11-10'
-  };
   const courtCentreName = 'Court centre name';
   const courtCentre: CourtCentre = {
     courtRooms: [
@@ -95,7 +83,7 @@ describe('AllocateHearingContainer', () => {
 
   const mockHearingId = 'test-hearing-id';
   let router: Router;
-  const queryParamMap = of({ get: (param) => false });
+  const queryParamMap = of({ get: param => false });
 
   beforeEach(fakeAsync(() => {
     state = {
@@ -104,7 +92,7 @@ describe('AllocateHearingContainer', () => {
       listingReferenceData: listingReferenceDataState,
       display: { loading: false }
     };
-    selectSpy = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    selectSpy = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
     dispatchSpy = jasmine.createSpy('dispatch');
@@ -125,6 +113,7 @@ describe('AllocateHearingContainer', () => {
           useValue: {
             paramMap,
             queryParamMap,
+            queryParams,
             snapshot: {
               params: { id: mockHearingId },
               queryParams: {
@@ -159,63 +148,6 @@ describe('AllocateHearingContainer', () => {
     ];
 
     expect(component.breadcrumbs).toEqual(breadcrumbs);
-  }));
-
-  it('#allocateHearing and navigate to /unallocated', fakeAsync(() => {
-    const expectedAllocateHearingAction = new AllocateHearingAction({
-      originHearing: testHearing,
-      updatedHearing: testHearing
-    });
-    component.navigate = jasmine.createSpy('navigate').and.returnValue(
-      new Promise<void>((resolve, reject) => {
-        resolve();
-      })
-    );
-    dispatchSpy.calls.reset();
-    component.allocateHearing({ originHearing: testHearing, updatedHearing: testHearing });
-    tick();
-
-    expect(dispatchSpy.calls.count()).toEqual(1);
-    expect(dispatchSpy.calls.mostRecent().args[0]).toEqual(expectedAllocateHearingAction);
-  }));
-
-  it('#allocateHearing and navigate to /unscheduled', fakeAsync(() => {
-    const expectedAllocateHearingAction = new AllocateHearingAction({
-      originHearing: testHearing,
-      updatedHearing: testHearing
-    });
-    component.isUnscheduledHearing = true;
-    component.navigate = jasmine.createSpy('navigate').and.returnValue(
-      new Promise<void>((resolve, reject) => {
-        resolve();
-      })
-    );
-    dispatchSpy.calls.reset();
-    component.allocateHearing({ originHearing: testHearing, updatedHearing: testHearing });
-    tick();
-
-    expect(dispatchSpy.calls.count()).toEqual(1);
-    expect(dispatchSpy.calls.mostRecent().args[0]).toEqual(expectedAllocateHearingAction);
-  }));
-
-  it('#onSelectCourtCentre', fakeAsync(() => {
-    component.courtCentres = [courtCentre];
-    component.onSelectCourtCentre({
-      value: '23b33e9c-92cb-40e5-9b7b-75f0d98522b0'
-    } as FilterOption);
-    tick();
-    expect(component.selectedCourtCentre).toEqual(courtCentre);
-  }));
-
-  it('#filterSubmit', fakeAsync(() => {
-    const expectedAction = new SearchAllocatedHearingsAction({
-      options: filterOptions
-    });
-
-    component.filterSubmit(filterOptions);
-
-    expect(component.filterOptions).toEqual(filterOptions);
-    expect(dispatchSpy.calls.mostRecent().args[0]).toEqual(expectedAction);
   }));
 
   it('should match Jest snapshot', () => {
@@ -255,7 +187,7 @@ describe('AllocateHearingContainer', () => {
     );
   });
 
-  it('#onCourtSelected with non hmi', () => {
+  it('#onCourtSelected', () => {
     const court = { id: 'courtCentreId', oucode: 'oucode' } as OrganisationUnit;
 
     component.onCourtSelected(court);
@@ -264,6 +196,7 @@ describe('AllocateHearingContainer', () => {
       relativeTo: {
         paramMap: paramMap,
         queryParamMap,
+        queryParams,
         snapshot: {
           params: { id: mockHearingId },
           queryParams: {

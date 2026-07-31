@@ -87,6 +87,32 @@ describe('ChangeHearingDetailsComponent', () => {
     });
   });
 
+  describe('Jurisdiction type control routing', () => {
+    it('should render change-hearing-crown-control for CROWN jurisdiction', async () => {
+      mockFixtureInputs(fixture, {
+        selectedHearing: { ...selectedHearing, jurisdictionType: 'CROWN' }
+      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('change-hearing-crown-control')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('change-hearing-mags-control')).toBeFalsy();
+    });
+
+    it('should render change-hearing-mags-control for MAGISTRATES jurisdiction', async () => {
+      mockFixtureInputs(fixture, {
+        selectedHearing: { ...selectedHearing, jurisdictionType: 'MAGISTRATES' }
+      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('change-hearing-mags-control')).toBeTruthy();
+      expect(fixture.nativeElement.querySelector('change-hearing-crown-control')).toBeFalsy();
+    });
+  });
+
   describe('Form Submission', () => {
     beforeEach(() => {
       jest.spyOn(component.onSubmit, 'emit');
@@ -136,6 +162,13 @@ describe('ChangeHearingDetailsComponent', () => {
             startTime: '2025-02-03T10:00:00.000Z',
             courtCentreId: 'f8254db1-1683-483e-afb3-b87fde5a0a26',
             roomId: '9e4932f7-97b2-3010-b942-ddd2624e4dd8',
+            duration: 1080,
+            virtual: true
+          },
+          {
+            startTime: '2025-02-03T10:00:00.000Z',
+            courtCentreId: 'f8254db1-1683-483e-afb3-b87fde5a0a26',
+            roomId: '9e4932f7-97b2-3010-b942-ddd2624e4dd8',
             duration: 360
           }
         ]
@@ -148,9 +181,12 @@ describe('ChangeHearingDetailsComponent', () => {
         expect.objectContaining({
           originHearing: selectedHearing,
           updatedHearing: expect.objectContaining({
-            nonDefaultDays: multiDayValues.nonDefaultDays,
             startDate: multiDayValues.dateRange.startDate,
-            endDate: multiDayValues.dateRange.endDate
+            endDate: multiDayValues.dateRange.endDate,
+            nonDefaultDays: [
+              expect.objectContaining({ duration: 1080, virtual: true }),
+              expect.objectContaining({ duration: 360 })
+            ]
           })
         })
       );

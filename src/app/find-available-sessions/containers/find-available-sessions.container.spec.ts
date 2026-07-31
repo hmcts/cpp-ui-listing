@@ -1,14 +1,15 @@
+import { JsonPipe } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FindAvailableSessionsContainer } from './find-available-sessions.container';
 import { provideStore, Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { AppState, reducers } from '../../core';
 import {
   HearingSlot,
   loadHearingSlotsSuccess,
-  SchedulingFilters,
-  SchedulingFiltersComponent,
-  SchedulingSlotsComponent,
+  MagistratesSchedulingFilters,
+  MagistratesSchedulingFiltersComponent,
+  MagistratesSchedulingSlotsComponent,
   SearchHearingSlotsParams
 } from '@cpp/scheduling';
 import {
@@ -31,23 +32,32 @@ describe('FindAvailableSessionsContainer', () => {
   let store: Store<AppState>;
 
   const searchParams: SearchHearingSlotsParams = {
-    oucodeL2Code: '1',
-    oucodeL3Code: 'OUCODEL32',
+    ouCode: 'OUCODEL34',
+    oucodeL2Code: '2',
+    oucodeL3Code: 'OUCODEL34',
     courtSession: 'AM',
     sessionStartDate: '2019-01-01',
     sessionEndDate: '2019-01-31',
     panel: 'ADULT',
-    businessType: 'HEARINGTYPE002'
+    businessType: 'HEARINGTYPE002',
+    jurisdiction: 'MAGISTRATES'
   };
 
   beforeEach(() => {
     activatedRoute = new ActivatedRoute();
     activatedRoute = {
       params: of({ id: 'HEARING1' }),
+      queryParamMap: of(
+        convertToParamMap({
+          courtId: 'COURT004',
+          jurisdictionType: 'MAGISTRATES'
+        })
+      ),
       snapshot: {
         params: { id: 'HEARING1' },
         queryParams: {
-          isUnscheduled: false
+          courtId: 'COURT004',
+          jurisdictionType: 'MAGISTRATES'
         }
       }
     };
@@ -70,14 +80,16 @@ describe('FindAvailableSessionsContainer', () => {
       teardown: { destroyAfterEach: false }
     }).overrideComponent(FindAvailableSessionsContainer, {
       remove: {
-        imports: [SchedulingFiltersComponent, SchedulingSlotsComponent]
+        imports: [MagistratesSchedulingFiltersComponent, MagistratesSchedulingSlotsComponent]
       },
       add: {
-        imports: [SchedulingFiltersComponentMock, SchedulingSlotsComponentMock]
+        imports: [
+          MagistratesSchedulingFiltersComponentMock,
+          MagistratesSchedulingSlotsComponentMock
+        ]
       }
     });
 
-    fixture = TestBed.createComponent(FindAvailableSessionsContainer);
     router = TestBed.inject<Router>(Router);
     store = TestBed.inject<Store<AppState>>(Store);
 
@@ -85,28 +97,9 @@ describe('FindAvailableSessionsContainer', () => {
       ReferenceDataActions.loadOrganisationUnitsSuccess({
         organisationUnits: [
           {
-            id: 'COURT001',
-            oucodeL2Code: '3',
-            oucodeL2Name: 'OUL2 Z',
-            oucodeL3Code: 'OUCODEL31',
-            oucodeL3Name: 'A'
-          },
-          {
-            id: 'COURT002',
-            oucodeL2Code: '1',
-            oucodeL2Name: 'OUL2 X',
-            oucodeL3Code: 'OUCODEL32',
-            oucodeL3Name: 'B'
-          },
-          {
-            id: 'COURT003',
-            oucodeL2Code: '1',
-            oucodeL2Name: 'OUL2 X',
-            oucodeL3Code: 'OUCODEL33',
-            oucodeL3Name: 'C'
-          },
-          {
             id: 'COURT004',
+            oucode: 'OUCODEL34',
+            oucodeL1Code: 'B',
             oucodeL2Code: '2',
             oucodeL2Name: 'ouL2 Y',
             oucodeL3Code: 'OUCODEL34',
@@ -149,6 +142,7 @@ describe('FindAvailableSessionsContainer', () => {
     router.navigate = jest.fn();
     jest.spyOn(store, 'dispatch');
 
+    fixture = TestBed.createComponent(FindAvailableSessionsContainer);
     fixture.detectChanges();
   });
 
@@ -157,18 +151,27 @@ describe('FindAvailableSessionsContainer', () => {
   });
 
   it('should handle submitting the form filters', () => {
-    const filters = { courtRoomId: '*', sessionStartDate: '2019-01-01' } as SchedulingFilters;
+    const filters = {
+      courtRoomId: '*',
+      sessionStartDate: '2019-01-01'
+    } as MagistratesSchedulingFilters;
     fixture.debugElement
-      .query(By.directive(SchedulingFiltersComponentMock))
+      .query(By.directive(MagistratesSchedulingFiltersComponentMock))
       .componentInstance.filtersSubmit.emit(filters);
 
     expect(router.navigate).toHaveBeenCalledWith(['.'], {
       relativeTo: activatedRoute,
       fragment: '_',
       queryParams: {
-        mf: JSON.stringify({ ...filters, sessionEndDate: '2019-02-11', pageNumber: 1 })
+        mf: JSON.stringify({
+          ...filters,
+          sessionEndDate: '2019-02-11',
+          pageNumber: 1,
+          jurisdiction: 'MAGISTRATES'
+        })
       },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   });
 
@@ -181,29 +184,32 @@ describe('FindAvailableSessionsContainer', () => {
       queryParams: {
         mf: JSON.stringify({ ...searchParams, pageNumber: 2 })
       } as FindAvailableSessionsQueryParams,
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   });
 
   @Component({
-    selector: 'scheduling-filters',
+    selector: 'magistrates-scheduling-filters',
     template: `
       <form (ngSubmit)="filtersSubmit.emit(filters)">
-        <div>{{ defaultValues() }}</div>
+        <div>{{ defaultValues() | json }}</div>
         <button type="submit">Submit</button>
       </form>
-    `
+    `,
+    imports: [JsonPipe]
   })
-  class SchedulingFiltersComponentMock {
-    readonly defaultValues = input<SchedulingFilters>(undefined);
+  class MagistratesSchedulingFiltersComponentMock {
+    readonly defaultValues = input<MagistratesSchedulingFilters | null>(null);
     readonly organisationUnits = input<OrganisationUnit[]>([]);
     readonly rotaBusinessTypes = input<RotaBusinessType[]>([]);
     readonly errors = output<ValidationError[] | null>();
-    readonly filtersSubmit = output<SchedulingFilters>();
+    readonly filtersSubmit = output<MagistratesSchedulingFilters>();
+    readonly filters = {} as MagistratesSchedulingFilters;
   }
 
   @Component({
-    selector: 'scheduling-slots',
+    selector: 'magistrates-scheduling-slots',
     imports: [PdkPaginationComponent],
     template: `
       <div>{{ hearingSlots() }}</div>
@@ -211,17 +217,15 @@ describe('FindAvailableSessionsContainer', () => {
         [currentPage]="currentPage()"
         [totalResults]="totalResults()"
         [pageSize]="pageSize()"
-        [maxPages]="maxPages()"
         (pageChange)="pageChange.emit($event)"
       />
     `
   })
-  class SchedulingSlotsComponentMock {
+  class MagistratesSchedulingSlotsComponentMock {
     readonly selectionMode = input('readonly');
     readonly currentPage = input(1);
     readonly totalResults = input(-1);
     readonly pageSize = input(10);
-    readonly maxPages = input(9);
     readonly hearingSlots = input<HearingSlot[]>([]);
     readonly rotaBusinessTypes = input<RotaBusinessType[]>([]);
     readonly pageChange = output<number>();

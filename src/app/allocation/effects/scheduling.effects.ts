@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import {
   getJudiciaryGroupTypes,
   getOrganisationUnits,
-  getRotaBusinessTypes,
+  getRotaBusinessTypesByJurisdiction,
   JudiciaryGroupType,
   JudiciaryTypeGroup,
   OrganisationUnit
 } from '@cpp/reference-data';
+import { isCrownCourt, isMagistratesCourt } from '@cpp/scheduling';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { last } from 'lodash-es';
@@ -37,18 +38,24 @@ export class SchedulingEffects {
     private store: Store<AppState>
   ) {}
 
-  allocateMagistratesHearing$: Observable<Action> = createEffect(() =>
+  allocateHearing$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(AllocationActions.allocateMagistratesHearing),
+      ofType(AllocationActions.allocateHearing),
       withLatestFrom(this.store, this.store.select(hasSplitHearingFromUnallocated)),
       switchMap(
         ([
-          { hearingSlotAllocations, filters, redirectTo, sendNotificationToParties },
+          {
+            hearingSlotAllocations,
+            hearingType: selectedHearingType,
+            filters = {},
+            redirectTo,
+            sendNotificationToParties
+          },
           state,
           splitHearingUnallocated
         ]) => {
           function getCourtCentreIdByOuCode(ouCode: string, units: OrganisationUnit[]): string {
-            const matchedUnit = units.find((unit) => unit.oucode === ouCode);
+            const matchedUnit = units.find(unit => unit.oucode === ouCode);
             return (matchedUnit && matchedUnit.id) || null;
           }
 
@@ -56,7 +63,6 @@ export class SchedulingEffects {
           const hearing = getScheduledHearingForAllocation(state);
           const { hasVideoLink = false, publicListNote = '' } = hearing;
           const organisationUnits = getOrganisationUnits(state);
-          const rotaBusinessTypes = getRotaBusinessTypes(state);
           const judiciaryGroups = getJudiciaryGroupTypes(state);
           const startDate = firstSlot.hearingSlot.sessionDate;
           const endDate = last(hearingSlotAllocations).hearingSlot.sessionDate;
@@ -67,19 +73,13 @@ export class SchedulingEffects {
           const defaultCourtRoomId = firstSlot.hearingSlot.courtRoomId;
 
           const selectedCourt = organisationUnits.find(
-            (unit) => unit.oucode === firstSlot.hearingSlot.ouCode
+            unit => unit.oucode === firstSlot.hearingSlot.ouCode
           );
+          const { weekCommencingStartDate } = filters;
 
-          const dates =
-            selectedCourt.oucodeL1Code !== 'C' && !filters.weekCommencingStartDate
-              ? {
-                  startDate,
-                  endDate
-                }
-              : {};
+          const jurisdictionType = isMagistratesCourt(selectedCourt) ? 'MAGISTRATES' : 'CROWN';
 
-          const defaultJurisdictionType =
-            selectedCourt && selectedCourt.oucodeL1Code === 'B' ? 'MAGISTRATES' : 'CROWN';
+          const rotaBusinessTypes = getRotaBusinessTypesByJurisdiction(jurisdictionType)(state);
           // Compute non-default days
 
           const nonDefaultDays = hearingSlotAllocations.map(
@@ -92,15 +92,16 @@ export class SchedulingEffects {
               // session. For any other businessType, it does not apply so we default
               // to 1.
               const defaultDuration = hearingSlot.courtSession === 'AD' ? 360 : 180;
-              const defaultHearingType = getReferenceDataHearingTypes(state).find(
-                ({ id }) => hearing.type.id === id
+              const hearingType = selectedHearingType ?? hearing.type;
+              const refDataHearingType = getReferenceDataHearingTypes(state).find(
+                ({ id }) => hearingType.id === id
               );
               const finalDuration =
                 rotaBusinessType && rotaBusinessType.duration
                   ? duration || defaultDuration
-                  : defaultHearingType
-                  ? defaultHearingType.defaultDurationMin
-                  : 1;
+                  : refDataHearingType
+                    ? refDataHearingType.defaultDurationMin
+                    : 1;
               return {
                 startTime: hearingSlotTime,
                 duration: finalDuration,
@@ -109,7 +110,8 @@ export class SchedulingEffects {
                 session: hearingSlot.courtSession,
                 oucode: hearingSlot.ouCode,
                 courtRoomId: hearingSlot.courtRoomNumber,
-                roomId: hearingSlot.courtRoomId
+                roomId: hearingSlot.courtRoomId,
+                virtual: true
               };
             }
           );
@@ -144,7 +146,7 @@ export class SchedulingEffects {
               (judiciaries: HearingSlotJudiciary[], slot) => [
                 ...judiciaries,
                 ...(slot.judiciaries || []).filter(
-                  ({ judiciaryId }) => !judiciaries.find((judi) => judiciaryId === judi.judiciaryId)
+                  ({ judiciaryId }) => !judiciaries.find(judi => judiciaryId === judi.judiciaryId)
                 )
               ],
               []
@@ -162,6 +164,11 @@ export class SchedulingEffects {
                 isDeputy: deputy
               })
             );
+          const allocationEndDate = isCrownCourt(selectedCourt)
+            ? (filters.endDate ?? endDate)
+            : endDate;
+
+          const dates = weekCommencingStartDate ? {} : { startDate, endDate: allocationEndDate };
 
           return this.listingService
             .allocateHearing(
@@ -169,7 +176,7 @@ export class SchedulingEffects {
                 courtCentreId: defaultCourtCentreId,
                 courtRoomId: defaultCourtRoomId,
                 judiciary,
-                jurisdictionType: defaultJurisdictionType,
+                jurisdictionType,
                 hearingId: hearing.id,
                 hearingLanguage: hearing.hearingLanguage,
                 nonDefaultDays,
@@ -177,7 +184,7 @@ export class SchedulingEffects {
                 prosecutionCases,
                 publicListNote,
                 hasVideoLink,
-                type: hearing.type,
+                type: selectedHearingType ?? hearing.type,
                 panel: firstSlot.hearingSlot.panel,
                 sendNotificationToParties,
                 ...dates,
@@ -188,7 +195,7 @@ export class SchedulingEffects {
             .pipe(
               mapTo(new AllocateHearingMagsAction({ hearingSlotAllocations })),
               tap(() => this.router.navigate(redirectTo)),
-              catchError((err) => of(new ApiError(err)))
+              catchError(err => of(new ApiError(err)))
             );
         }
       )
@@ -197,7 +204,7 @@ export class SchedulingEffects {
 
   private getJudiciaryGroup(judiciaryType: string, judiciaryGroups: JudiciaryGroupType[]) {
     const judiciary = judiciaryGroups.find(
-      (judi) =>
+      judi =>
         judi.judiciaryTypeDescription.toLowerCase().replace(/[\s_]/g, '') ===
         judiciaryType.toLowerCase().replace(/[\s_]/g, '')
     );

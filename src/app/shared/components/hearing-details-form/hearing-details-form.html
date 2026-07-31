@@ -148,6 +148,7 @@
                   [parentCourtRoomId]="data.courtRoomId"
                   [hearingDays]="hearingDays"
                   [(ngModel)]="data.nonDefaultDays"
+                  [jurisdictionType]="data.jurisdictionType"
                   [defaultStartTime]="selectedCourtCentre.defaultStartTime"
                   (onValidationError)="onValidationError.emit($event)"
                 >
@@ -238,6 +239,7 @@
           [dateRange]="data.dateRange"
           [courtCentreId]="data.courtCentreId"
           [parentCourtRoomId]="data.courtRoomId"
+          [jurisdictionType]="data.jurisdictionType"
           [(ngModel)]="data.nonDefaultDays"
           [defaultStartTime]="selectedCourtCentre.defaultStartTime"
           (onValidationError)="onValidationError.emit($event)"
