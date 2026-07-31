@@ -1,0 +1,143 @@
+<h2 pdk-typography="heading-small" pdk-visually-hidden>Hearing details</h2>
+@if (hearing()) {
+  <div pdk-grid container pdk-padding-top="4">
+    <div pdk-grid one-third>
+      <dl pdk-margin-top="0">
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-left="2"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-half>
+            <b>Hearing language (English/ Welsh)</b>
+          </dt>
+          <dd pdk-grid one-half pdk-margin-left="0">
+            <span>{{ hearing().hearingLanguage | titlecase }}</span>
+          </dd>
+        </div>
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-left="2"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-half>
+            <b>Video hearing</b>
+          </dt>
+          <dd pdk-grid one-half pdk-margin-left="0">
+            <span>{{ hearing().hasVideoLink ? 'Yes' : 'No' }}</span>
+          </dd>
+        </div>
+        @if (hearing()?.hearingDayCount > 1) {
+          <div
+            pdk-grid
+            container
+            pdk-margin-bottom="3"
+            pdk-padding-left="2"
+            pdk-padding-bottom="2"
+            pdk-margin-horizontal="0"
+          >
+            <dt pdk-grid one-half>
+              <b>Courtroom(s)</b>
+            </dt>
+            <dd pdk-grid one-half pdk-margin-left="0">
+              <span> {{ courtName() }}</span>
+            </dd>
+          </div>
+        }
+        @if (custodyDefendants?.length > 0) {
+          <div
+            pdk-grid
+            container
+            pdk-margin-bottom="3"
+            pdk-padding-left="2"
+            pdk-padding-bottom="2"
+            pdk-margin-horizontal="0"
+            pdk-border-colour="dark-grey"
+          >
+            <dt pdk-grid one-half>
+              <b>Custody status</b>
+            </dt>
+            <dd pdk-grid one-half pdk-margin-left="0">
+              <custody-status [custodyDefendants]="custodyDefendants"></custody-status>
+            </dd>
+          </div>
+        }
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-left="2"
+          pdk-margin-horizontal="0"
+        >
+          <dt pdk-grid one-half>
+            <b>Multi-day hearing</b>
+          </dt>
+          <dd pdk-grid one-half pdk-margin-left="0">
+            @if (hearing()?.hearingDayCount <= 1) {
+              <span>No</span>
+            } @else {
+              <div class="flex-display flex-display-column">
+                <div>
+                  <span> Start date:&nbsp; </span>
+                  <span> {{ hearing()?.startDate | date: 'dd/MM/yyyy' }}</span>
+                </div>
+                <div>
+                  <span> End date:&nbsp; </span>
+                  <span> {{ hearing()?.endDate | date: 'dd/MM/yyyy' }}</span>
+                </div>
+              </div>
+            }
+          </dd>
+        </div>
+      </dl>
+    </div>
+    @if (!!listedCase) {
+      <div pdk-grid two-thirds pdk-padding-left="6">
+        <section pdk-margin-bottom="4">
+          <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Defendants</h4>
+          <div class="flex-display">
+            @for (defendant of listedCase?.defendants; track defendant.id; let last = $last) {
+              <span> {{ defendant | fullName }}{{ !last ? ',&nbsp;' : '' }} </span>
+            }
+          </div>
+        </section>
+        @if (caseNotes()?.length > 0) {
+          <section>
+            <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Case notes</h4>
+            <case-notes [caseNotes]="caseNotes()"></case-notes>
+          </section>
+        }
+      </div>
+    }
+    @if (!!application) {
+      <div pdk-grid two-thirds pdk-padding-left="6">
+        <section pdk-margin-bottom="4">
+          <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Applicant</h4>
+          <div class="flex-display">
+            <span>
+              {{ application.applicant | applicantRespondentFullName }}
+            </span>
+          </div>
+        </section>
+        @if (application?.respondents?.length > 0) {
+          <section>
+            <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Respondents</h4>
+            <div class="flex-display">
+              @for (respondent of application?.respondents; track respondent.id; let last = $last) {
+                <span> {{ respondent | applicantRespondentFullName }}{{ !last ? ' ,' : '' }} </span>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    }
+  </div>
+}

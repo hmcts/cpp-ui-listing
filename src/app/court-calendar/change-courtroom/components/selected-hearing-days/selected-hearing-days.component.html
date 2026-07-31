@@ -1,0 +1,23 @@
+<no-of-selected-hearing-days
+  [selectedHearingDays]="selectedHearingDays()"
+></no-of-selected-hearing-days>
+
+<pdk-grid container>
+  <pdk-grid full>
+    <hearing-days-table
+      [isPreview]="true"
+      [courtCentreName]="hearingVM()?.courtCentre"
+      [courtRoomOptions]="courtRoomOptions()"
+      [totalNumberofHearingDays]="hearingVM()?.totalHearingDaysCount"
+      [selectedHearingDays]="selectedHearingDays()"
+    >
+    </hearing-days-table>
+
+    <courtroom-change-confirmation-form
+      confirmationLabel="Are you sure you want to change courtroom for selected hearing days?"
+      (onValidationError)="onValidationError.emit($event)"
+      (onFormSubmit)="handleConfirmationSubmit($event)"
+    >
+    </courtroom-change-confirmation-form>
+  </pdk-grid>
+</pdk-grid>

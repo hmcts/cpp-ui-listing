@@ -1,0 +1,374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangeJudiciaryForHearingsFormComponent Normal behaviour should match Jest snapshot 1`] = `
+<ng-component
+  courtCentres={[Function Function]}
+  hearings={[Function Function]}
+>
+  <change-judiciary-for-hearings-form>
+    <div
+      class="change-judiciary-for-hearings-form"
+    >
+      <form
+        class="ng-untouched ng-pristine ng-valid"
+        data-test-id="hearingDetailsForm"
+        novalidate=""
+        pdk-form=""
+      >
+        <h2
+          class="govuk-!-margin-bottom-2"
+          pdk-margin-bottom="2"
+          pdk-typography="hearing-small"
+        >
+          Enter judiciary details
+        </h2>
+        <judiciary-input>
+          <fieldset
+            style="margin-bottom: 0;"
+          >
+            <legend
+              class="govuk-!-margin-bottom-0 govuk-heading-s"
+              pdk-margin-bottom="0"
+              pdk-typography="heading-small"
+            >
+               Judiciary (Optional) 
+            </legend>
+            <pdk-form-field
+              class="govuk-!-margin-bottom-1"
+              label="Judiciary"
+              labeltype="none"
+              pdk-margin-bottom="1"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-visually-hidden"
+                  >
+                     Judiciary 
+                  </legend>
+                  <pdk-checkbox-group
+                    class="ng-untouched ng-pristine ng-valid"
+                    name="judicialRoleType"
+                  >
+                    <div
+                      class="govuk-checkboxes"
+                    >
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="CIRCUIT_JUDGE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Judge 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox-conditional>
+                        <div
+                          class="govuk-checkboxes__conditional"
+                        >
+                          <div
+                            aria-hidden="true"
+                            class="govuk-!-margin-bottom-1 govuk-body-m"
+                            pdk-margin-bottom="1"
+                            pdk-typography="body-medium"
+                          >
+                             Name 
+                          </div>
+                          <pdk-form-field
+                            labeltype="none"
+                          >
+                            <pdk-form-group
+                              class="pdk-form-group"
+                            >
+                              <label
+                                class="govuk-visually-hidden govuk-label"
+                                for="judicial-typeahead-GENERATED_ID"
+                              >
+                                 Circuit judge 
+                              </label>
+                              <judiciary-typeahead
+                                class="ng-untouched ng-pristine ng-valid"
+                                data-test-id="CIRCUIT_JUDGE"
+                              >
+                                <div
+                                  class="judiciary-typeahead"
+                                >
+                                  <pdk-autosuggest-lite
+                                    inputtype="search"
+                                    suggestionkey="id"
+                                    suggestionsubtitle="ljaShortName"
+                                    suggestiontitle="judicialMemberName"
+                                  >
+                                    <pdk-autosuggest
+                                      highlightcolor="blue"
+                                    >
+                                      <pdk-interaction-container>
+                                        <div>
+                                          <div
+                                            class="pdk-autosuggest"
+                                          >
+                                            <input
+                                              aria-autocomplete="list"
+                                              aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                                              aria-describedby="pdk-autosuggest__instructions-GENERATED_ID judge-label"
+                                              aria-expanded="false"
+                                              autocomplete="off"
+                                              class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                                              id="judicial-typeahead-GENERATED_ID"
+                                              role="combobox"
+                                              type="search"
+                                            />
+                                            <span
+                                              class="govuk-visually-hidden"
+                                              id="pdk-autosuggest__instructions-GENERATED_ID"
+                                              pdk-visually-hidden=""
+                                            >
+                                               When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                                            </span>
+                                            <span
+                                              aria-live="polite"
+                                              class="govuk-visually-hidden"
+                                              pdk-visually-hidden=""
+                                              role="status"
+                                            >
+                                            </span>
+                                            <div
+                                              class="pdk-autosuggest__suggestions-container"
+                                              id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                                            >
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </pdk-interaction-container>
+                                    </pdk-autosuggest>
+                                  </pdk-autosuggest-lite>
+                                </div>
+                              </judiciary-typeahead>
+                            </pdk-form-group>
+                          </pdk-form-field>
+                        </div>
+                      </pdk-checkbox-conditional>
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="DISTRICT_JUDGE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             District Judge 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="DEPUTY_DISTRICT_JUDGE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Deputy District Judge 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="RECORDER"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Recorder 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox-conditional>
+                        <div
+                          class="govuk-checkboxes__conditional"
+                        >
+                          <div
+                            aria-hidden="true"
+                            class="govuk-!-margin-bottom-1 govuk-body-m"
+                            pdk-margin-bottom="1"
+                            pdk-typography="body-medium"
+                          >
+                             Name 
+                          </div>
+                          <pdk-form-field
+                            labeltype="none"
+                          >
+                            <pdk-form-group
+                              class="pdk-form-group"
+                            >
+                              <label
+                                class="govuk-visually-hidden govuk-label"
+                                for="judicial-typeahead-GENERATED_ID"
+                              >
+                                 Recorder 
+                              </label>
+                              <judiciary-typeahead
+                                class="ng-untouched ng-pristine ng-valid"
+                                data-test-id="RECORDER"
+                              >
+                                <div
+                                  class="judiciary-typeahead"
+                                >
+                                  <pdk-autosuggest-lite
+                                    inputtype="search"
+                                    suggestionkey="id"
+                                    suggestionsubtitle="ljaShortName"
+                                    suggestiontitle="judicialMemberName"
+                                  >
+                                    <pdk-autosuggest
+                                      highlightcolor="blue"
+                                    >
+                                      <pdk-interaction-container>
+                                        <div>
+                                          <div
+                                            class="pdk-autosuggest"
+                                          >
+                                            <input
+                                              aria-autocomplete="list"
+                                              aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                                              aria-describedby="pdk-autosuggest__instructions-GENERATED_ID judge-label"
+                                              aria-expanded="false"
+                                              autocomplete="off"
+                                              class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                                              id="judicial-typeahead-GENERATED_ID"
+                                              role="combobox"
+                                              type="search"
+                                            />
+                                            <span
+                                              class="govuk-visually-hidden"
+                                              id="pdk-autosuggest__instructions-GENERATED_ID"
+                                              pdk-visually-hidden=""
+                                            >
+                                               When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                                            </span>
+                                            <span
+                                              aria-live="polite"
+                                              class="govuk-visually-hidden"
+                                              pdk-visually-hidden=""
+                                              role="status"
+                                            >
+                                            </span>
+                                            <div
+                                              class="pdk-autosuggest__suggestions-container"
+                                              id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                                            >
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </pdk-interaction-container>
+                                    </pdk-autosuggest>
+                                  </pdk-autosuggest-lite>
+                                </div>
+                              </judiciary-typeahead>
+                            </pdk-form-group>
+                          </pdk-form-field>
+                        </div>
+                      </pdk-checkbox-conditional>
+                      <pdk-checkbox
+                        class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                        style="margin-bottom: 10px;"
+                        value="MAGISTRATE"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="MAGISTRATE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Magistrates 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                    </div>
+                  </pdk-checkbox-group>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </fieldset>
+        </judiciary-input>
+        <button
+          class="button govuk-!-margin-bottom-2 govuk-!-margin-top-2 govuk-button"
+          pdk-button=""
+          pdk-margin-bottom="2"
+          pdk-margin-top="2"
+          type="submit"
+        >
+           Save and continue 
+        </button>
+        <div
+          class="govuk-!-margin-top-2 govuk-!-margin-bottom-1"
+          pdk-margin-bottom="1"
+          pdk-margin-top="2"
+        >
+          <a
+            class="govuk-link"
+            href="javascript:void(0)"
+            id="cancelJudiciaryForm"
+            pdk-link=""
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </change-judiciary-for-hearings-form>
+</ng-component>
+`;

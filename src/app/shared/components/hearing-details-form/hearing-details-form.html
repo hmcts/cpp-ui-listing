@@ -1,0 +1,289 @@
+<div class="hearing-details-form">
+  <form
+    #form="ngForm"
+    pdk-form
+    data-test-id="hearingDetailsForm"
+    (validSubmit)="submit(form)"
+    (errors)="onValidationError.emit($event)"
+    novalidate
+  >
+    <h2 pdk-typography="heading-medium" pdk-margin-bottom="3">Enter hearing details</h2>
+
+    <judiciary-input
+      [judiciary]="data.judiciary"
+      (judiciaryChange)="selectedJudiary = $event"
+    ></judiciary-input>
+
+    <pdk-form-field
+      pdk-margin-top="5"
+      [errorMessages]="[{ rule: 'invalidEntry', message: 'Select valid court' }]"
+      label="Court"
+      labelType="small"
+    >
+      <pdk-autosuggest-lite
+        [ngModel]="currentCourtCentreOption"
+        (ngModelChange)="
+          data.courtCentreId = $event?.value;
+          setCourtCentreAndRoomOptions($event?.value);
+        "
+        name="courtCentreId"
+        (inputText)="
+          data.courtCentreId = null;
+          data.courtRoomId = null;
+          courtCentreSuggestions = getSuggestions($event, courtCentreOptions);
+        "
+        [suggestions]="courtCentreSuggestions"
+        [suggestionKey]="'value'"
+        [suggestionTitle]="'label'"
+        [hasError]="false"
+        required
+      >
+      </pdk-autosuggest-lite>
+    </pdk-form-field>
+
+    <pdk-form-field
+      [errorMessages]="
+      [
+        {
+          rule: 'invalidEntry',
+          message: 'Select valid courtroom'
+        },
+        {
+          rule: 'required',
+          message: 'Enter a courtroom'
+        }
+      ]"
+      label="Courtroom"
+      labelType="small"
+    >
+      <pdk-autosuggest-lite
+        [ngModel]="currentCourtRoomOption"
+        (ngModelChange)="data.courtRoomId = $event?.value"
+        name="courtRoomId"
+        (inputText)="
+    data.courtRoomId = null;
+    courtRoomSuggestions = getSuggestions($event, courtRoomOptions);
+    "
+        [suggestions]="courtRoomSuggestions"
+        [suggestionKey]="'value'"
+        [suggestionTitle]="'label'"
+        [hasError]="false"
+        [required]="!isWeekCommencing"
+      >
+      </pdk-autosuggest-lite>
+    </pdk-form-field>
+
+    <pdk-form-field label="Hearing type">
+      <pdk-autosuggest-lite
+        [ngModel]=" currentHearingTypeOption"
+        (ngModelChange)="hearingTypeChange($event)"
+        name="hearingType"
+        (inputText)="hearingTypeSuggestions = getSuggestions($event, hearingTypeOptions)"
+        [suggestions]="hearingTypeSuggestions"
+        [suggestionKey]="'value'"
+        [suggestionTitle]="'label'"
+        required
+      >
+      </pdk-autosuggest-lite>
+    </pdk-form-field>
+
+    @if (this.hearing.allocated===false) {
+    <div>
+      <pdk-form-field label="Hearing date type" labelType="none">
+        <pdk-radio-group name="dateValue" [(ngModel)]="dateValues.value">
+          <pdk-radio-button name="fixedDate" value="fixedDate" (click)="enableFixedDate();">
+            Fixed date
+          </pdk-radio-button>
+          @if (isFixedDate) {
+          <pdk-checkbox-conditional data-test-id="fixedDateGroup" pdk-margin-left="-3">
+            @if (isFixedDate) {
+            <listing-date-range
+              name="dateRange"
+              [(ngModel)]="data.dateRange"
+              (onIsMultiDay)="enableDisableMultiDay($event)"
+              [hearing]="hearing"
+              [minStartDate]="minStartDate"
+            >
+            </listing-date-range>
+            }
+            <br />
+            @if (!isMultiDay&&isFixedDate) {
+            <pdk-form-field label="Hearing start time" labelType="small">
+              <pdk-time-input name="startTime" labelHidden="false" [(ngModel)]="data.startTime">
+              </pdk-time-input>
+            </pdk-form-field>
+            } @if (!isMultiDay) {
+            <pdk-form-field label="Hearing duration" labelType="small">
+              <pdk-time-input name="duration" labelHidden="false" [(ngModel)]="data.duration">
+              </pdk-time-input>
+            </pdk-form-field>
+            } @if (isMultiDay) {
+            <pdk-checkbox-conditional>
+              <non-sitting-days
+                name="nonSittingDays"
+                [dateRange]="data.dateRange"
+                [(ngModel)]="data.nonSittingDays"
+                (onValidationError)="onValidationError.emit($event)"
+              >
+              </non-sitting-days>
+            </pdk-checkbox-conditional>
+            } @if (isMultiDay&&isFixedDate) {
+            <details pdk-details class="font-small" [open]="nonDefaultDaysOpen">
+              <summary>
+                <a
+                  pdk-link
+                  href="javascript:void(0)"
+                  (click)="toggleNonDefaultDays()"
+                  data-role="startTimes"
+                  class="summary"
+                  >Non default days</a
+                >
+              </summary>
+              <pdk-details-text>
+                @if (selectedCourtCentre) {
+                <non-default-days
+                  name="nonDefaultDays"
+                  [dateRange]="data.dateRange"
+                  [courtCentreId]="data.courtCentreId"
+                  [parentCourtRoomId]="data.courtRoomId"
+                  [hearingDays]="hearingDays"
+                  [(ngModel)]="data.nonDefaultDays"
+                  [defaultStartTime]="selectedCourtCentre.defaultStartTime"
+                  (onValidationError)="onValidationError.emit($event)"
+                >
+                </non-default-days>
+                }
+              </pdk-details-text>
+            </details>
+            }
+          </pdk-checkbox-conditional>
+          }
+          <pdk-radio-button
+            name="weekCommencing"
+            type="radio"
+            value="weekCommencing"
+            (click)="enableWeekCommencing();"
+          >
+            Week commencing
+          </pdk-radio-button>
+          @if (isWeekCommencing) {
+          <pdk-checkbox-conditional data-test-id="weekCommencingGroup" pdk-margin-left="-3">
+            <listing-date-range
+              [isWeekCommencing]="isWeekCommencing"
+              name="dateRange"
+              #dateRangeModel="ngModel"
+              [(ngModel)]="data.dateRange"
+              (ngModelChange)="calculatePeriodCommencing()"
+              [hearing]="hearing"
+              [minStartDate]="minStartDate"
+            >
+            </listing-date-range>
+            <pdk-form-field pdk-padding-top="2" label="For a period of" labelType="small">
+              <pdk-radio-group
+                name="weekCommencingDurationInWeeks"
+                [(ngModel)]="data.weekCommencingDurationInWeeks"
+                (ngModelChange)="calculatePeriodCommencing()"
+                [disabled]="!(dateRangeModel.value)"
+                required
+              >
+                <pdk-radio-button name="oneWeek" type="radio" [value]="1"
+                  >One week
+                </pdk-radio-button>
+                <pdk-radio-button name="twoWeeks" type="radio" [value]="2"
+                  >Two weeks
+                </pdk-radio-button>
+              </pdk-radio-group>
+            </pdk-form-field>
+            <pdk-form-field label="Hearing duration" labelType="small">
+              <pdk-time-input name="duration" labelHidden="false" [(ngModel)]="data.duration">
+              </pdk-time-input>
+            </pdk-form-field>
+          </pdk-checkbox-conditional>
+          }
+        </pdk-radio-group>
+      </pdk-form-field>
+    </div>
+    } @if (this.hearing.allocated===true) {
+    <div>
+      <listing-date-range
+        name="dateRange"
+        [(ngModel)]="data.dateRange"
+        (onIsMultiDay)="enableDisableMultiDay($event)"
+        [hearing]="hearing"
+        [minStartDate]="minStartDate"
+      >
+      </listing-date-range>
+      @if (!isMultiDay) {
+      <pdk-form-field label="Hearing start time" labelType="small">
+        <pdk-time-input name="startTime" labelHidden="false" [(ngModel)]="data.startTime">
+        </pdk-time-input>
+      </pdk-form-field>
+      } @if (!isMultiDay) {
+      <pdk-form-field label="Hearing duration" labelType="small">
+        <pdk-time-input name="duration" labelHidden="false" [(ngModel)]="data.duration">
+        </pdk-time-input>
+      </pdk-form-field>
+      } @if (isMultiDay) {
+      <pdk-checkbox-conditional>
+        <non-sitting-days
+          name="nonSittingDays"
+          [dateRange]="data.dateRange"
+          [(ngModel)]="data.nonSittingDays"
+          (onValidationError)="onValidationError.emit($event)"
+        >
+        </non-sitting-days>
+        @if (selectedCourtCentre) {
+        <non-default-days
+          name="nonDefaultDays"
+          [dateRange]="data.dateRange"
+          [courtCentreId]="data.courtCentreId"
+          [parentCourtRoomId]="data.courtRoomId"
+          [(ngModel)]="data.nonDefaultDays"
+          [defaultStartTime]="selectedCourtCentre.defaultStartTime"
+          (onValidationError)="onValidationError.emit($event)"
+        >
+        </non-default-days>
+        }
+      </pdk-checkbox-conditional>
+      }
+    </div>
+    }
+
+    <pdk-form-field label="Hearing language" labelType="small">
+      <pdk-radio-group name="hearingLanguage" [(ngModel)]="data.hearingLanguage" required>
+        <pdk-radio-button value="ENGLISH">English</pdk-radio-button>
+        <pdk-radio-button value="WELSH">Welsh</pdk-radio-button>
+      </pdk-radio-group>
+    </pdk-form-field>
+
+    <pdk-form-field
+      [errorMessages]="[{ rule: 'required', message: 'You must select if you want to notify all relevant parties' }]"
+      label="Do you want to notify to all relevant parties?"
+      labelType="small"
+    >
+      <pdk-radio-group
+        name="sendNotificationToParties"
+        [(ngModel)]="data.sendNotificationToParties"
+        required
+      >
+        <pdk-radio-button [value]="true" [disabled]="isSendNotificationDisabled"
+          >Yes</pdk-radio-button
+        >
+        <pdk-radio-button [value]="false">No</pdk-radio-button>
+      </pdk-radio-group>
+    </pdk-form-field>
+
+    <video-hearing
+      [publicListNote]="hearing.publicListNote"
+      [hasVideoLink]="hearing.hasVideoLink"
+      [jurisdictionType]="hearing.jurisdictionType"
+    ></video-hearing>
+
+    <pdk-form-group>
+      <button id="hearing-details-form-submit" pdk-button type="submit" data-role="submitBtn">
+        Save and continue
+      </button>
+    </pdk-form-group>
+    <a pdk-link id="cancelHearingForm" (click)="cancel()" href="javascript:void(0)"> Cancel </a>
+  </form>
+</div>

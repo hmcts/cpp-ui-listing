@@ -1,0 +1,1585 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sequence Hearings should display the reorder component (reorder) 1`] = `
+<test-sequence-hearings
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  reorderLists={[Function Boolean]}
+  save={[Function Function]}
+  selectedDate={[Function String]}
+>
+  <sequence-hearings
+    timeformat="hh:mm a"
+  >
+    <div
+      class="sequence-wrapper"
+    >
+      <div
+        class="sequence-controls"
+      >
+        <a
+          class="link-btn cancel-btn govuk-link"
+          href="javascript:void(0)"
+          pdk-link=""
+        >
+          Cancel
+        </a>
+        <button
+          class="save-btn govuk-button"
+          disabled="disabled"
+          pdk-button=""
+        >
+          Save
+        </button>
+      </div>
+      <div
+        class="sequence-content"
+      >
+        <div
+          class="govuk-!-margin-top-1 govuk-heading-m"
+          data-test-id="judiciary"
+          pdk-margin-top="1"
+          pdk-typography="heading-medium"
+        >
+           RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq 
+        </div>
+        <div
+          class="group-hearings"
+        >
+          <div>
+          </div>
+          <div>
+            <sequence-group>
+              <pre>
+                 "12:00"
+              </pre>
+              <pre>
+                 [
+    {
+      "id": "b1bfe644-15d3-46aa-bdeb-fe8d18c16a45",
+      "publicListNote": "Public list note",
+      "type": {
+        "id": "5591d709-4397-452c-8533-998165d58d9c",
+        "description": "Further Plea & Trial Preparation"
+      },
+      "weekCommencingDurationInWeeks": 2,
+      "courtApplications": [],
+      "endDate": "2018-11-10",
+      "allocated": true,
+      "judiciary": [
+        {
+          "isDeputy": true,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+          "isBenchChairman": false,
+          "judicialRoleType": {
+            "judiciaryType": "RECORDER"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "surname": "Tisci",
+            "judiciaryType": "Recorder",
+            "requestedName": "RECORDER Lord Fabio TISCI",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        }
+      ],
+      "startDate": "2018-11-05",
+      "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+      "listedCases": [
+        {
+          "id": "926fc76b-7ec9-4bee-bb7d-b8e63d61fc34",
+          "defendants": [
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223966",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "xyz",
+              "lastName": "Kane Junior",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  },
+                  "reportingRestrictions": [
+                    {
+                      "id": ":id",
+                      "judicialResultId": ":judicialResultId",
+                      "label": ":label",
+                      "orderedDate": ":orderedDate"
+                    }
+                  ]
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "Harry",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            }
+          ],
+          "markers": [
+            {
+              "id": "6b5a9194-186e-4d96-99d6-8fb62d8efa9d",
+              "markerTypeid": "e7eff972-189c-4957-8b1e-cb45213aa64e",
+              "markerTypeCode": "HT",
+              "markerTypeDescription": "Human Trafficking"
+            }
+          ],
+          "caseIdentifier": {
+            "authorityId": "cf73207f-3ced-488a-82a0-3fba79c2ce85",
+            "authorityCode": "TFL",
+            "caseReference": "TFL12345"
+          }
+        }
+      ],
+      "hearingDays": [
+        {
+          "hearingDate": "2018-11-05",
+          "endTime": "2018-11-05T12:00:00.000Z",
+          "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+          "sequence": 1,
+          "startTime": "2018-11-05T12:00:00.000Z",
+          "durationMinutes": 120
+        },
+        {
+          "hearingDate": "2018-11-06",
+          "endTime": "2018-11-06T14:00:00.000Z",
+          "sequence": 2,
+          "courtRoomId": ":id1",
+          "startTime": "2018-11-06T12:00:00.000Z",
+          "durationMinutes": 180
+        }
+      ],
+      "courtCentreId": "9b583616-049b-30f9-a14f-028a53b7cfe8",
+      "nonDefaultDays": [
+        {
+          "duration": 180,
+          "startTime": "2018-11-05T11:00:00.000Z"
+        }
+      ],
+      "nonSittingDays": [
+        "2018-11-06",
+        "2018-11-07"
+      ],
+      "hearingLanguage": "WELSH",
+      "estimatedMinutes": 300,
+      "jurisdictionType": "MAGISTRATES",
+      "listingDirections": "Wheelchair & special emergency arrangements required",
+      "prosecutorDatesToAvoid": [
+        "Monday"
+      ],
+      "reportingRestrictionReason": "Automatic anonymity under the Sexual Offences (Amendment) Act 1992"
+    },
+    {
+      "id": "b1bfe644-15d3-46aa-bdeb-fe8d18c16a46",
+      "type": {
+        "id": "5591d709-4397-452c-8533-998165d58d9c",
+        "description": "Further Plea & Trial Preparation"
+      },
+      "weekCommencingDurationInWeeks": 1,
+      "courtApplications": [],
+      "endDate": "2018-11-10",
+      "allocated": true,
+      "judiciary": [
+        {
+          "isDeputy": false,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+          "isBenchChairman": true,
+          "judicialRoleType": {
+            "judiciaryType": "MAGISTRATE"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "surname": "Tisci",
+            "judiciaryType": "Magistrate",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        },
+        {
+          "isDeputy": true,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b5",
+          "isBenchChairman": false,
+          "judicialRoleType": {
+            "judiciaryType": "MAGISTRATE"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "surname": "Tisci",
+            "judiciaryType": "Magistrate",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        }
+      ],
+      "startDate": "2018-11-05",
+      "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+      "listedCases": [
+        {
+          "id": "926fc76b-7ec9-4bee-bb7d-b8e63d61fc34",
+          "defendants": [
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223966",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "xyz",
+              "lastName": "Kane Junior",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  },
+                  "reportingRestrictions": [
+                    {
+                      "id": ":id",
+                      "judicialResultId": ":judicialResultId",
+                      "label": ":label",
+                      "orderedDate": ":orderedDate"
+                    }
+                  ]
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "Harry",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            },
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "abc",
+              "lastName": "Smith",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "John",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            },
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223968",
+              "lastName": "Albert",
+              "offences": [],
+              "firstName": "Michael",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "isYouth": false,
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            }
+          ],
+          "markers": [
+            {
+              "id": "6b5a9194-186e-4d96-99d6-8fb62d8efa9d",
+              "markerTypeid": "e7eff972-189c-4957-8b1e-cb45213aa64e",
+              "markerTypeCode": "HT",
+              "markerTypeDescription": "Human Trafficking"
+            }
+          ],
+          "caseIdentifier": {
+            "authorityId": "cf73207f-3ced-488a-82a0-3fba79c2ce85",
+            "authorityCode": "TFL",
+            "caseReference": "TFL12345"
+          }
+        }
+      ],
+      "hearingDays": [
+        {
+          "hearingDate": "2018-11-05",
+          "endTime": "2018-11-05T12:00:00.000Z",
+          "sequence": 1,
+          "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+          "startTime": "2018-11-05T12:00:00.000Z",
+          "durationMinutes": 30
+        },
+        {
+          "hearingDate": "2018-11-06",
+          "endTime": "2018-11-06T14:00:00.000Z",
+          "sequence": 2,
+          "startTime": "2018-11-06T12:00:00.000Z",
+          "durationMinutes": 180
+        }
+      ],
+      "courtCentreId": "9b583616-049b-30f9-a14f-028a53b7cfe8",
+      "nonDefaultDays": [
+        {
+          "duration": 180,
+          "startTime": "2018-11-05T11:00:00.000Z"
+        }
+      ],
+      "nonSittingDays": [
+        "2018-11-06",
+        "2018-11-07"
+      ],
+      "hearingLanguage": "WELSH",
+      "estimatedMinutes": 300,
+      "jurisdictionType": "MAGISTRATES",
+      "listingDirections": "Wheelchair & special emergency arrangements required",
+      "prosecutorDatesToAvoid": [
+        "Monday"
+      ],
+      "reportingRestrictionReason": "Automatic anonymity under the Sexual Offences (Amendment) Act 1992"
+    }
+  ]
+              </pre>
+            </sequence-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sequence-hearings>
+</test-sequence-hearings>
+`;
+
+exports[`Sequence Hearings should not display the reorder component (reorder then cancel) 1`] = `
+<test-sequence-hearings
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  reorderLists={[Function Boolean]}
+  save={[Function Function]}
+  selectedDate={[Function String]}
+>
+  <sequence-hearings
+    timeformat="hh:mm a"
+  >
+    <div
+      class="sequence-wrapper"
+    >
+      <div
+        class="sequence-controls"
+      >
+        <a
+          class="link-btn reorder-btn govuk-link"
+          href="javascript:void(0)"
+          pdk-link=""
+        >
+          Reorder
+        </a>
+      </div>
+      <hearings-per-judiciary>
+        <div
+          class="relative-item"
+        >
+          <table
+            class="hearings-per-judge govuk-table"
+            pdk-table=""
+          >
+            <caption
+              class="govuk-table__caption"
+              data-test-id="judiciary"
+              pdk-table-caption=""
+            >
+              <div
+                class="flex-caption"
+              >
+                <span
+                  data-test-id="judiciaryName"
+                >
+                  RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+                </span>
+              </div>
+            </caption>
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                     Hearing Time
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Case markers
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Defendant/Respondant
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Estimate
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Type
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Offence
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Actions
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="govuk-!-margin-bottom-1 govuk-table__body"
+              pdk-margin-bottom="1"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row pdk-table__row--hover-highlight"
+                data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+                data-test-id="hearingListItem"
+                highlightonhover=""
+                pdk-table-row=""
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  style="width: 10%;"
+                >
+                  <span
+                    data-test-id="hearingStartTime"
+                  >
+                    10:00
+                  </span>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div
+                    class="marker-width"
+                  >
+                    <case-markers
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-markers"
+                      >
+                        <div
+                          class="case-marker-title pdk-!-text-color-red"
+                          pdk-text-colour="red"
+                        >
+                          Human Trafficking
+                        </div>
+                      </div>
+                    </case-markers>
+                  </div>
+                </td>
+                <td
+                  class="defendants pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="firstDefendantName"
+                  >
+                    Harry KANE JUNIOR
+                  </span>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details –  TFL12345"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                      TFL12345
+                    </a>
+                  </div>
+                  <reporting-restrictions>
+                    <span
+                      class="reporting-restrictions-component"
+                    >
+                      <a
+                        class="govuk-link govuk-body-m"
+                        href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                        pdk-link=""
+                        pdk-typography="body"
+                        target="_blank"
+                      >
+                        <abbr
+                          class="pdk-!-border-color-red pdk-!-text-color-red"
+                          title="Reporting restrictions"
+                        >
+                           RR 
+                        </abbr>
+                      </a>
+                    </span>
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingDuration"
+                  pdk-table-cell=""
+                >
+                  <hearing-estimate>
+                    <div>
+                      2 hours
+                    </div>
+                  </hearing-estimate>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                   Further plea & trial preparation 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="firstOffenceTitle"
+                  pdk-table-cell=""
+                  style="padding-right: 0px;"
+                >
+                   Wound / inflict grievous bodily harm without intent 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Edit Hearing for Harry KANE JUNIOR + 1 other"
+                    class="govuk-!-margin-left-4"
+                    href="javascript:void(0)"
+                    pdk-margin-left="4"
+                  >
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="govuk-!-margin-bottom-1 govuk-table__body"
+              pdk-margin-bottom="1"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row pdk-table__row--hover-highlight"
+                data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+                data-test-id="hearingListItem"
+                highlightonhover=""
+                pdk-table-row=""
+              >
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                  style="width: 10%;"
+                >
+                  <span
+                    data-test-id="hearingStartTime"
+                  >
+                    12:00
+                  </span>
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div
+                    class="marker-width"
+                  >
+                    <case-markers
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-markers"
+                      >
+                        <div
+                          class="case-marker-title pdk-!-text-color-red"
+                          pdk-text-colour="red"
+                        >
+                          Human Trafficking
+                        </div>
+                      </div>
+                    </case-markers>
+                  </div>
+                </td>
+                <td
+                  class="defendants bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="firstDefendantName"
+                  >
+                    Harry KANE JUNIOR
+                  </span>
+                  <div>
+                    <a
+                      aria-label="View case details –  TFL12345"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                      TFL12345
+                    </a>
+                  </div>
+                  <reporting-restrictions>
+                    <span
+                      class="reporting-restrictions-component"
+                    >
+                      <a
+                        class="govuk-link govuk-body-m"
+                        href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34#hearings-and-decisions"
+                        pdk-link=""
+                        pdk-typography="body"
+                        target="_blank"
+                      >
+                        <abbr
+                          class="pdk-!-border-color-red pdk-!-text-color-red"
+                          title="Reporting restrictions"
+                        >
+                           RR 
+                        </abbr>
+                      </a>
+                    </span>
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingDuration"
+                  pdk-table-cell=""
+                >
+                  <hearing-estimate>
+                    <div>
+                      2 hours
+                    </div>
+                  </hearing-estimate>
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                   Further plea & trial preparation 
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="firstOffenceTitle"
+                  pdk-table-cell=""
+                  style="padding-right: 0px;"
+                >
+                   Wound / inflict grievous bodily harm without intent 
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Edit Hearing for Harry KANE JUNIOR "
+                    class="govuk-!-margin-left-4"
+                    href="javascript:void(0)"
+                    pdk-margin-left="4"
+                  >
+                  </a>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  colspan="6"
+                  pdk-table-cell=""
+                >
+                  <b>
+                    Public list note: 
+                  </b>
+                  <span>
+                    Public list note
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="govuk-!-margin-bottom-1 govuk-table__body"
+              pdk-margin-bottom="1"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row pdk-table__row--hover-highlight"
+                data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a46"
+                data-test-id="hearingListItem"
+                highlightonhover=""
+                pdk-table-row=""
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  style="width: 10%;"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingStartTime"
+                  >
+                    12:00
+                  </span>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div
+                    class="marker-width"
+                  >
+                    <case-markers
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-markers"
+                      >
+                        <div
+                          class="case-marker-title pdk-!-text-color-red"
+                          pdk-text-colour="red"
+                        >
+                          Human Trafficking
+                        </div>
+                      </div>
+                    </case-markers>
+                  </div>
+                </td>
+                <td
+                  class="defendants pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="firstDefendantName"
+                  >
+                    Harry KANE JUNIOR
+                  </span>
+                  <div>
+                    + 2 others
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details –  TFL12345"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                      TFL12345
+                    </a>
+                  </div>
+                  <reporting-restrictions>
+                    <span
+                      class="reporting-restrictions-component"
+                    >
+                      <a
+                        class="govuk-link govuk-body-m"
+                        href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34#hearings-and-decisions"
+                        pdk-link=""
+                        pdk-typography="body"
+                        target="_blank"
+                      >
+                        <abbr
+                          class="pdk-!-border-color-red pdk-!-text-color-red"
+                          title="Reporting restrictions"
+                        >
+                           RR 
+                        </abbr>
+                      </a>
+                    </span>
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingDuration"
+                  pdk-table-cell=""
+                >
+                  <hearing-estimate>
+                    <div>
+                      30 minutes
+                    </div>
+                  </hearing-estimate>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                   Further plea & trial preparation 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="firstOffenceTitle"
+                  pdk-table-cell=""
+                  style="padding-right: 0px;"
+                >
+                   Wound / inflict grievous bodily harm without intent 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Edit Hearing for Harry KANE JUNIOR + 2 others"
+                    class="govuk-!-margin-left-4"
+                    href="javascript:void(0)"
+                    pdk-margin-left="4"
+                  >
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </hearings-per-judiciary>
+    </div>
+  </sequence-hearings>
+</test-sequence-hearings>
+`;
+
+exports[`Sequence Hearings should render correctly 1`] = `
+<test-sequence-hearings
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  reorderLists={[Function Boolean]}
+  save={[Function Function]}
+  selectedDate={[Function String]}
+>
+  <sequence-hearings
+    timeformat="hh:mm a"
+  >
+    <div
+      class="sequence-wrapper"
+    >
+      <div
+        class="sequence-controls"
+      >
+        <a
+          class="link-btn reorder-btn govuk-link"
+          href="javascript:void(0)"
+          pdk-link=""
+        >
+          Reorder
+        </a>
+      </div>
+      <hearings-per-judiciary>
+        <div
+          class="relative-item"
+        >
+          <table
+            class="hearings-per-judge govuk-table"
+            pdk-table=""
+          >
+            <caption
+              class="govuk-table__caption"
+              data-test-id="judiciary"
+              pdk-table-caption=""
+            >
+              <div
+                class="flex-caption"
+              >
+                <span
+                  data-test-id="judiciaryName"
+                >
+                  RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+                </span>
+              </div>
+            </caption>
+            <thead
+              class="govuk-table__head"
+              pdk-table-head=""
+            >
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                     Hearing Time
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Case markers
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Defendant/Respondant
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Estimate
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Type
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Offence
+                  </span>
+                </th>
+                <th
+                  class="govuk-table__cell"
+                  pdk-table-header="col"
+                  scope="col"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    pdk-visually-hidden=""
+                  >
+                    Actions
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="govuk-!-margin-bottom-1 govuk-table__body"
+              pdk-margin-bottom="1"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row pdk-table__row--hover-highlight"
+                data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+                data-test-id="hearingListItem"
+                highlightonhover=""
+                pdk-table-row=""
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  style="width: 10%;"
+                >
+                  <span
+                    data-test-id="hearingStartTime"
+                  >
+                    10:00
+                  </span>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div
+                    class="marker-width"
+                  >
+                    <case-markers
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-markers"
+                      >
+                        <div
+                          class="case-marker-title pdk-!-text-color-red"
+                          pdk-text-colour="red"
+                        >
+                          Human Trafficking
+                        </div>
+                      </div>
+                    </case-markers>
+                  </div>
+                </td>
+                <td
+                  class="defendants pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="firstDefendantName"
+                  >
+                    Harry KANE JUNIOR
+                  </span>
+                  <div>
+                    + 1 other
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details –  TFL12345"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                      TFL12345
+                    </a>
+                  </div>
+                  <reporting-restrictions>
+                    <span
+                      class="reporting-restrictions-component"
+                    >
+                      <a
+                        class="govuk-link govuk-body-m"
+                        href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                        pdk-link=""
+                        pdk-typography="body"
+                        target="_blank"
+                      >
+                        <abbr
+                          class="pdk-!-border-color-red pdk-!-text-color-red"
+                          title="Reporting restrictions"
+                        >
+                           RR 
+                        </abbr>
+                      </a>
+                    </span>
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingDuration"
+                  pdk-table-cell=""
+                >
+                  <hearing-estimate>
+                    <div>
+                      2 hours
+                    </div>
+                  </hearing-estimate>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                   Further plea & trial preparation 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="firstOffenceTitle"
+                  pdk-table-cell=""
+                  style="padding-right: 0px;"
+                >
+                   Wound / inflict grievous bodily harm without intent 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Edit Hearing for Harry KANE JUNIOR + 1 other"
+                    class="govuk-!-margin-left-4"
+                    href="javascript:void(0)"
+                    pdk-margin-left="4"
+                  >
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="govuk-!-margin-bottom-1 govuk-table__body"
+              pdk-margin-bottom="1"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row pdk-table__row--hover-highlight"
+                data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+                data-test-id="hearingListItem"
+                highlightonhover=""
+                pdk-table-row=""
+              >
+                <td
+                  class="bottomless-border govuk-table__cell"
+                  pdk-table-cell=""
+                  style="width: 10%;"
+                >
+                  <span
+                    data-test-id="hearingStartTime"
+                  >
+                    12:00
+                  </span>
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div
+                    class="marker-width"
+                  >
+                    <case-markers
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-markers"
+                      >
+                        <div
+                          class="case-marker-title pdk-!-text-color-red"
+                          pdk-text-colour="red"
+                        >
+                          Human Trafficking
+                        </div>
+                      </div>
+                    </case-markers>
+                  </div>
+                </td>
+                <td
+                  class="defendants bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="firstDefendantName"
+                  >
+                    Harry KANE JUNIOR
+                  </span>
+                  <div>
+                    <a
+                      aria-label="View case details –  TFL12345"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                      TFL12345
+                    </a>
+                  </div>
+                  <reporting-restrictions>
+                    <span
+                      class="reporting-restrictions-component"
+                    >
+                      <a
+                        class="govuk-link govuk-body-m"
+                        href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34#hearings-and-decisions"
+                        pdk-link=""
+                        pdk-typography="body"
+                        target="_blank"
+                      >
+                        <abbr
+                          class="pdk-!-border-color-red pdk-!-text-color-red"
+                          title="Reporting restrictions"
+                        >
+                           RR 
+                        </abbr>
+                      </a>
+                    </span>
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingDuration"
+                  pdk-table-cell=""
+                >
+                  <hearing-estimate>
+                    <div>
+                      2 hours
+                    </div>
+                  </hearing-estimate>
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                   Further plea & trial preparation 
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="firstOffenceTitle"
+                  pdk-table-cell=""
+                  style="padding-right: 0px;"
+                >
+                   Wound / inflict grievous bodily harm without intent 
+                </td>
+                <td
+                  class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Edit Hearing for Harry KANE JUNIOR "
+                    class="govuk-!-margin-left-4"
+                    href="javascript:void(0)"
+                    pdk-margin-left="4"
+                  >
+                  </a>
+                </td>
+              </tr>
+              <tr
+                class="govuk-table__row"
+                pdk-table-row=""
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                />
+                <td
+                  class="govuk-table__cell"
+                  colspan="6"
+                  pdk-table-cell=""
+                >
+                  <b>
+                    Public list note: 
+                  </b>
+                  <span>
+                    Public list note
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              class="govuk-!-margin-bottom-1 govuk-table__body"
+              pdk-margin-bottom="1"
+              pdk-table-body=""
+            >
+              <tr
+                class="govuk-table__row pdk-table__row--hover-highlight"
+                data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a46"
+                data-test-id="hearingListItem"
+                highlightonhover=""
+                pdk-table-row=""
+              >
+                <td
+                  class="govuk-table__cell"
+                  pdk-table-cell=""
+                  style="width: 10%;"
+                >
+                  <span
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingStartTime"
+                  >
+                    12:00
+                  </span>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <div
+                    class="marker-width"
+                  >
+                    <case-markers
+                      class="case-markers"
+                    >
+                      <div
+                        class="case-markers"
+                      >
+                        <div
+                          class="case-marker-title pdk-!-text-color-red"
+                          pdk-text-colour="red"
+                        >
+                          Human Trafficking
+                        </div>
+                      </div>
+                    </case-markers>
+                  </div>
+                </td>
+                <td
+                  class="defendants pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                >
+                  <span
+                    data-test-id="firstDefendantName"
+                  >
+                    Harry KANE JUNIOR
+                  </span>
+                  <div>
+                    + 2 others
+                  </div>
+                  <div>
+                    <a
+                      aria-label="View case details –  TFL12345"
+                      class="hearing-reference govuk-link govuk-caption-m"
+                      data-test-id="hearingReference"
+                      href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34"
+                      pdk-link=""
+                      pdk-typography="caption-medium"
+                      target="_blank"
+                    >
+                      TFL12345
+                    </a>
+                  </div>
+                  <reporting-restrictions>
+                    <span
+                      class="reporting-restrictions-component"
+                    >
+                      <a
+                        class="govuk-link govuk-body-m"
+                        href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34#hearings-and-decisions"
+                        pdk-link=""
+                        pdk-typography="body"
+                        target="_blank"
+                      >
+                        <abbr
+                          class="pdk-!-border-color-red pdk-!-text-color-red"
+                          title="Reporting restrictions"
+                        >
+                           RR 
+                        </abbr>
+                      </a>
+                    </span>
+                  </reporting-restrictions>
+                  <youth-flag>
+                  </youth-flag>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingDuration"
+                  pdk-table-cell=""
+                >
+                  <hearing-estimate>
+                    <div>
+                      30 minutes
+                    </div>
+                  </hearing-estimate>
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="hearingType"
+                  pdk-table-cell=""
+                >
+                   Further plea & trial preparation 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  data-test-id="firstOffenceTitle"
+                  pdk-table-cell=""
+                  style="padding-right: 0px;"
+                >
+                   Wound / inflict grievous bodily harm without intent 
+                </td>
+                <td
+                  class="pdk-!-border-color-mid-grey govuk-table__cell"
+                  pdk-table-cell=""
+                  rowspan="1"
+                >
+                  <a
+                    aria-label="Edit Hearing for Harry KANE JUNIOR + 2 others"
+                    class="govuk-!-margin-left-4"
+                    href="javascript:void(0)"
+                    pdk-margin-left="4"
+                  >
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </hearings-per-judiciary>
+    </div>
+  </sequence-hearings>
+</test-sequence-hearings>
+`;

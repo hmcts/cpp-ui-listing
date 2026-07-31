@@ -1,0 +1,32 @@
+<form
+  #form="ngForm"
+  pdk-form
+  [attr.data-test-id]="testId()"
+  (validSubmit)="onFormSubmit.emit(form.value)"
+  (errors)="onValidationError.emit($event)"
+  novalidate
+>
+  <div>
+    <pdk-form-field
+      [label]="confirmationLabel()"
+      [labelType]="labelType()"
+      [errorMessages]="errorMessages()"
+    >
+      <pdk-radio-group inline ngModel [name]="fieldName()" required>
+        <pdk-radio-button [value]="true">{{ yesText() }}</pdk-radio-button>
+        <pdk-radio-button [value]="false">{{ noText() }}</pdk-radio-button>
+      </pdk-radio-group>
+    </pdk-form-field>
+  </div>
+  <div>
+    <button
+      type="submit"
+      [attr.aria-label]="submitAriaLabel()"
+      pdk-button
+      pdk-margin-bottom="0"
+      [disabled]="submitDisabled()"
+    >
+      {{ submitButtonText() }}
+    </button>
+  </div>
+</form>

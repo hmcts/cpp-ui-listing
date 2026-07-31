@@ -1,0 +1,198 @@
+[
+  {
+    "defendantDetails": {
+      "id": "1234",
+      "firstName": "John",
+      "lastName": "Smith",
+      "dateOfBirth": "1980-10-01"
+    },
+    "urn": "11AA22334455",
+    "caseId": "6f20ac2c-3b3b-4d75-9bbf-4319323da78c",
+    "hearings": [
+      {
+        "id": "4f901e1c-bcee-40c1-b400-60f14d92d2f1",
+        "type": {
+          "id": "123",
+          "description": "precharge trial preparation"
+        },
+        "typeOfList": {
+          "id": "123",
+          "description": "precharge trial preparation"
+        },
+        "allocated": false,
+        "startDate": "2018-05-23",
+        "endDate": "2018-05-30",
+        "nonSittingDays": [],
+        "estimatedMinutes": 30,
+        "courtCentreId": "123",
+        "courtRoomId": "4f901e1c-bcee-40c1-b400-60f14d92d2f0",
+        "jurisdictionType": "CROWN",
+        "hearingLanguage": "English",
+        "judicialRoles": [],
+        "listedCases": [
+          {
+            "id": "123",
+            "caseIdentifier": {
+              "authorityId": "123",
+              "authorityCode": "CPS",
+              "caseReference": "11AA22334455"
+            },
+            "defendants": [
+              {},
+              {
+                "id": "12345",
+                "organisationId": "542",
+                "organisationName": "Zara",
+                "offences": [
+                  {
+                    "id": "456",
+                    "offenceCode": "CJS24234",
+                    "startDate": "2018-10-01",
+                    "statementOfOffence": {
+                      "title": "Test 2",
+                      "legislation": "Whatever"
+                    }
+                  },
+                  {
+                    "id": "456",
+                    "offenceCode": "CJS24234",
+                    "startDate": "2018-10-01",
+                    "statementOfOffence": {
+                      "title": "Test 1",
+                      "legislation": "Whatever"
+                    }
+                  }
+                ],
+                "bailStatus": {
+                  "code": "B",
+                  "description": "Conditional Bail",
+                  "custodyTimeLimit": "2019-04-20"
+                },
+                "custodyTimeLimit": "2019-04-20"
+              }
+            ]
+          },
+          {
+            "id": "123",
+            "caseIdentifier": {
+              "authorityId": "1234",
+              "authorityCode": "CPS",
+              "caseReference": "22AA22334455"
+            },
+            "defendants": [
+              {
+                "id": "1234",
+                "firstName": "Peter",
+                "lastName": "Rabbit",
+                "offences": [
+                  {
+                    "id": "456",
+                    "offenceCode": "CJS24234",
+                    "startDate": "2018-10-01",
+                    "statementOfOffence": {
+                      "title": "Whatever",
+                      "legislation": "Whatever"
+                    }
+                  }
+                ],
+                "bailStatus": {
+                  "code": "B",
+                  "description": "Conditional Bail"
+                }
+              },
+              {
+                "id": "12345",
+                "organisationId": "542",
+                "organisationName": "Microsoft",
+                "offences": [
+                  {
+                    "id": "456",
+                    "offenceCode": "CJS24234",
+                    "startDate": "2018-10-01",
+                    "statementOfOffence": {
+                      "title": "Whatever",
+                      "legislation": "Whatever"
+                    }
+                  }
+                ],
+                "bailStatus": {
+                  "code": "B",
+                  "description": "Conditional Bail"
+                }
+              }
+            ]
+          }
+        ],
+        "nonDefaultDays": [],
+        "hearingDays": []
+      }
+    ]
+  },
+  {
+    "defendantDetails": {
+      "id": "1234",
+      "firstName": "Lloyd",
+      "lastName": "Lane",
+      "dateOfBirth": "1990-02-11"
+    },
+    "urn": "33AA22334455",
+    "caseId": "abc0ac2c-3b3b-4d75-9bbf-4319323da78c",
+    "hearings": [
+      {
+        "id": "4f901e1c-bcee-40c1-b400-60f14d92d2f1",
+        "type": {
+          "id": "123",
+          "description": "precharge trial preparation"
+        },
+        "typeOfList": {
+          "id": "123",
+          "description": "precharge trial preparation"
+        },
+        "allocated": false,
+        "startDate": "2018-05-23",
+        "endDate": "2018-05-30",
+        "nonSittingDays": [],
+        "estimatedMinutes": 30,
+        "courtCentreId": "123",
+        "courtRoomId": "4f901e1c-bcee-40c1-b400-60f14d92d2f0",
+        "jurisdictionType": "CROWN",
+        "hearingLanguage": "English",
+        "judicialRoles": [],
+        "listedCases": [
+          {
+            "id": "123",
+            "caseIdentifier": {
+              "authorityId": "123",
+              "authorityCode": "CPS",
+              "caseReference": "33AA22334455"
+            },
+            "defendants": [
+              {
+                "id": "1234",
+                "firstName": "Lloyd",
+                "lastName": "Lane",
+                "offences": [
+                  {
+                    "id": "456",
+                    "offenceCode": "CJS24234",
+                    "startDate": "2018-10-01",
+                    "statementOfOffence": {
+                      "title": "Whatever",
+                      "legislation": "Whatever"
+                    }
+                  }
+                ],
+                "bailStatus": {
+                  "code": "C",
+                  "description": "In custody"
+                }
+              }
+            ]
+          }
+        ],
+        "nonDefaultDays": [],
+        "hearingDays": []
+      }
+    ]
+  }
+]

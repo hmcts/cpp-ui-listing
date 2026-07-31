@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sequence Item should render correctly 1`] = `
+<test-sequence-item
+  hearing={[Function Object]}
+>
+  <sequence-item>
+    <div
+      class="sequence-item-wrapper"
+    >
+      <div
+        class="sequence-item"
+      >
+        <span
+          class="govuk-visually-hidden"
+          data-test-id="hearingStartTime"
+          pdk-visually-hidden=""
+        >
+        </span>
+        <div
+          class="seq-col defendants"
+        >
+          <span
+            data-test-id="firstDefendantName"
+          >
+            Harry KANE JUNIOR
+          </span>
+          <div>
+            + 1 other
+          </div>
+        </div>
+        <div
+          class="seq-col estimate"
+        >
+          <hearing-estimate>
+            <div>
+              5 hours
+            </div>
+          </hearing-estimate>
+        </div>
+        <div
+          class="seq-col description"
+        >
+          Further plea & trial preparation
+        </div>
+        <div
+          class="seq-col offence"
+        >
+          Wound / inflict grievous bodily harm without intent
+        </div>
+        <div
+          class="seq-col drag-handle"
+        >
+          <i
+            class="listing-vector-icon drag_icon"
+          >
+            <svg
+              class="pdk-!-text-color-black"
+              height="100%"
+              pdk-text-colour="black"
+              width="100%"
+            >
+              <use
+                xlink:href="assets\\svg-icons-definitions.svg#list"
+              />
+            </svg>
+          </i>
+        </div>
+      </div>
+    </div>
+  </sequence-item>
+</test-sequence-item>
+`;

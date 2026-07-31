@@ -1,0 +1,37 @@
+td {
+  display: table-cell !important;
+  overflow-wrap: break-word;
+}
+
+.no-border {
+  border-bottom: none;
+}
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+::ng-deep {
+  .dotted-border {
+    border-bottom: 1px dashed !important;
+  }
+}
+
+.bottom-border {
+  border-bottom: 1px solid #bfc1c3;
+}
+
+::ng-deep {
+  .bottomless-border {
+    border-bottom: none !important;
+  }
+}
+
+.defendant-details-cell {
+  padding-right: 5px;
+}
+
+.hearing-reference {
+  float: left;
+  padding-right: 8px;
+}

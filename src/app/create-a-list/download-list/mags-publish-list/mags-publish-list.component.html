@@ -1,0 +1,64 @@
+<h2 pdk-typography="heading-medium">Publish a list</h2>
+@let hmctsUser = isHmctsUser();
+@let publishListPermission = magPublishListPermissions();
+@let onlinePublic = onlinePublicStatus();
+@let standard = standardStatus();
+<ng-container *cppUserHasPermission="publishListPermission; required: false">
+  @if (!hasDownload()) {
+    <p>No lists have been published for this date yet</p>
+  } @else {
+    <ul pdk-list>
+      @if (onlinePublic?.fileId && hmctsUser) {
+        <li
+          mags-publish-download-link
+          [fileId]="onlinePublic?.fileId"
+          [timestamp]="statusTimeStampMap().online"
+          [label]="'Online public court list'"
+          (download)="
+            onDownloadMagsPublishedList.emit({
+              listType: CourtListType.ONLINE_PUBLIC,
+              fileId: $event
+            })
+          "
+        ></li>
+      }
+      @if (standard?.fileId) {
+        <li
+          mags-publish-download-link
+          [fileId]="standard?.fileId"
+          [timestamp]="statusTimeStampMap().standard"
+          [label]="'Standard court list'"
+          (download)="
+            onDownloadMagsPublishedList.emit({ listType: CourtListType.STANDARD, fileId: $event })
+          "
+        ></li>
+      }
+    </ul>
+  }
+</ng-container>
+
+<ul pdk-list *cppUserHasPermission="publishListPermission">
+  @if (hmctsUser) {
+    <li
+      mags-publish-list-item
+      [label]="'Online public court list'"
+      [status]="onlinePublic"
+      (publish)="onMagsPublishList.emit({ listType: CourtListType.ONLINE_PUBLIC })"
+      (download)="
+        onDownloadMagsPublishedList.emit({
+          listType: CourtListType.ONLINE_PUBLIC,
+          fileId: $event
+        })
+      "
+    ></li>
+  }
+  <li
+    mags-publish-list-item
+    [label]="'Standard court list'"
+    [status]="standard"
+    (publish)="onMagsPublishList.emit({ listType: CourtListType.STANDARD })"
+    (download)="
+      onDownloadMagsPublishedList.emit({ listType: CourtListType.STANDARD, fileId: $event })
+    "
+  ></li>
+</ul>

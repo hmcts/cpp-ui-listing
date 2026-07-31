@@ -1,0 +1,8 @@
+@for (defendant of custodyDefendants(); track defendant.id; let last = $last) {
+<div>
+  <span
+    >{{ defendant | fullName }}: In Custody {{ defendant?.custodyTimeLimit ? ', CTL ' + (
+    defendant.custodyTimeLimit | date : 'dd/MM/yyyy') : '' }}</span
+  >
+</div>
+}

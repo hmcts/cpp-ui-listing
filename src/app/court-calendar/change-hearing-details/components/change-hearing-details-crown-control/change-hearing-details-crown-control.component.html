@@ -1,0 +1,60 @@
+<div>
+  <h4 pdk-margin-bottom="1">Start date</h4>
+  <p pdk-margin-top="1">
+    {{ startDate() | date: 'dd MMMM yyyy' }}
+  </p>
+  <pdk-form-field>
+    <pdk-checkbox
+      [id]="'multiDay'"
+      name="multiDay"
+      [ngModel]="isMultiDay"
+      #multiDay="ngModel"
+      (ngModelChange)="invertMultiDay($event)"
+      [ngModelOptions]="{ standalone: true }"
+    >
+      This is a multi-day hearing
+    </pdk-checkbox>
+  </pdk-form-field>
+  @if (multiDay.value) {
+    <pdk-checkbox-conditional>
+      <pdk-form-field label="End date" labelType="small" [errorMessages]="errorMessages">
+        <pdk-date-input
+          [id]="'hearing-endDate'"
+          [formControl]="endDateControl"
+          [minDate]="minDate"
+          required
+          picker
+        >
+        </pdk-date-input>
+      </pdk-form-field>
+      <div class="multidayHearing">
+        <non-sitting-days
+          name="nonSittingDays"
+          [dateRange]="dateRange"
+          [ngModel]="nonSittingDays()"
+          (onValidationError)="onValidationError.emit($event)"
+        >
+        </non-sitting-days>
+        @if (selectedCourtCentre()) {
+          <non-default-days
+            name="nonDefaultDays"
+            [dateRange]="dateRange"
+            [courtCentreId]="selectedCourtCentre().id"
+            [parentCourtRoomId]="parentCourtRoomId()"
+            [hearingDays]="hearingDays()"
+            [ngModel]="nonDefaultDays()"
+            [defaultStartTime]="selectedCourtCentre().defaultStartTime"
+            (onValidationError)="onValidationError.emit($event)"
+          >
+          </non-default-days>
+        }
+      </div>
+    </pdk-checkbox-conditional>
+  }
+  @if (!multiDay.value) {
+    <change-hearing-start-time-controls
+      [startTime]="startTime()"
+      [duration]="duration()"
+    ></change-hearing-start-time-controls>
+  }
+</div>

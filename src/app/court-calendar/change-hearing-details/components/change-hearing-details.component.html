@@ -1,0 +1,137 @@
+<pdk-grid container>
+  <pdk-grid one-third>
+    <form
+      #form="ngForm"
+      pdk-form
+      data-test-id="hearingDetailsForm"
+      (validSubmit)="submit(form)"
+      (errors)="onValidationError.emit($event)"
+      novalidate
+    >
+      <pdk-form-field
+        label="Hearing type"
+        labelType="small"
+        [errorMessages]="[
+          {
+            rule: 'required',
+            message: 'Enter a hearing type'
+          }
+        ]"
+      >
+        <cpp-hearing-type-autosuggest
+          jurisdictionType="initialValues.jurisdictionType"
+          name="selectedHearingType"
+          [ngModel]="initialValues()?.selectedHearingType"
+          required
+          placeholder="All hearing types"
+        >
+        </cpp-hearing-type-autosuggest>
+      </pdk-form-field>
+      @if (selectedHearing()?.jurisdictionType === 'CROWN') {
+        <change-hearing-crown-control
+          name="dateRange"
+          [ngModel]="initialValues().dateRange"
+          [nonSittingDays]="initialValues().nonSittingDays"
+          [nonDefaultDays]="initialValues().nonDefaultDays"
+          [parentCourtRoomId]="selectedHearing()?.courtRoomId"
+          [hearingDays]="selectedHearing()?.hearingDays"
+          [startDate]="selectedHearing()?.startDate"
+          [selectedCourtCentre]="selectedCourtCentre()"
+          [startTime]="initialValues()?.startTime"
+          [duration]="initialValues()?.duration"
+          (onValidationError)="onValidationError.emit($event)"
+        >
+        </change-hearing-crown-control>
+      }
+      @if (selectedHearing()?.jurisdictionType === 'MAGISTRATES') {
+        <change-hearing-mags-control
+          [startTime]="initialValues()?.startTime"
+          [duration]="initialValues()?.duration"
+          [startDate]="selectedHearing()?.startDate"
+          [endDate]="selectedHearing()?.endDate"
+          [hearingSlots]="hearingSlots()"
+          [nonSittingDays]="initialValues().nonSittingDays"
+          [hearingCourtScheduleId]="selectedHearing()?.hearingDays[0]?.courtScheduleId"
+        >
+        </change-hearing-mags-control>
+      }
+
+      <judiciary-input
+        [judiciary]="selectedHearing()?.judiciary"
+        (judiciaryChange)="selectedJudiary = $event"
+        [removeBorder]="true"
+      ></judiciary-input>
+
+      @if (selectedHearing()?.jurisdictionType === 'CROWN') {
+        <pdk-form-field label="Public list note (optional)" labelType="small">
+          <input
+            pdk-text-input
+            [ngModel]="initialValues()?.publicListNote"
+            maxlength="100"
+            type="text"
+            [id]="'public-list-details'"
+            name="publicListNote"
+            pdk-input
+          />
+        </pdk-form-field>
+      }
+
+      <pdk-form-field label="Hearing language" labelType="small">
+        <pdk-radio-group
+          name="hearingLanguage"
+          [ngModel]="initialValues()?.hearingLanguage"
+          required
+        >
+          <pdk-radio-button value="ENGLISH">English</pdk-radio-button>
+          <pdk-radio-button value="WELSH">Welsh</pdk-radio-button>
+        </pdk-radio-group>
+      </pdk-form-field>
+
+      @if (selectedHearing()?.jurisdictionType === 'CROWN') {
+        <pdk-form-field
+          [errorMessages]="[
+            {
+              rule: 'required',
+              message: 'You must select if you want to notify all relevant parties'
+            }
+          ]"
+          label="Video hearing"
+          labelType="small"
+        >
+          <pdk-radio-group
+            name="hasVideoLink"
+            [ngModel]="initialValues().hasVideoLink === true ? true : false"
+            required
+          >
+            <pdk-radio-button [value]="true">Yes</pdk-radio-button>
+            <pdk-radio-button [value]="false">No</pdk-radio-button>
+          </pdk-radio-group>
+        </pdk-form-field>
+      }
+
+      <pdk-form-field
+        [errorMessages]="[
+          {
+            rule: 'required',
+            message: 'You must select if you want to notify all relevant parties'
+          }
+        ]"
+        label="Do you want to notify all relevant parties?"
+        labelType="small"
+      >
+        <pdk-radio-group
+          name="sendNotificationToParties"
+          [ngModel]="!!initialValues()?.sendNotificationToParties"
+          required
+        >
+          <pdk-radio-button [value]="true">Yes</pdk-radio-button>
+          <pdk-radio-button [value]="false">No</pdk-radio-button>
+        </pdk-radio-group>
+      </pdk-form-field>
+      <div class="action-btn">
+        <button pdk-button data-role="apply-filters-btn" type="submit">Save changes</button>
+        <a pdk-link (click)="cancel()" href="javascript:void(0);">Cancel</a>
+      </div>
+    </form>
+  </pdk-grid>
+</pdk-grid>

@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FindAvailableHearingComponent should match the snapshot 1`] = `
+<find-available-hearing
+  fb={[Function _FormBuilder]}
+  hearing={[Function Function]}
+  onFindAvailableHearings={[Function OutputEmitterRef]}
+  relatedCaseTypes={[Function Object]}
+  relatedHearingsForm={[Function FormGroup]}
+>
+  <div
+    class="find-available-hearing"
+  >
+    <h2
+      class="govuk-heading-m"
+      pdk-typography="heading-medium"
+    >
+      Find an available hearing
+    </h2>
+    <form
+      class="ng-untouched ng-pristine ng-invalid"
+      data-test-id="relatedHearingsFiltersForm"
+      novalidate=""
+      pdk-form=""
+    >
+      <pdk-form-field
+        label="Related hearings"
+        labeltype="small"
+      >
+        <pdk-form-group
+          class="pdk-form-group"
+        >
+          <fieldset
+            class="govuk-fieldset"
+            pdk-fieldset=""
+          >
+            <legend
+              class="govuk-fieldset__legend govuk-fieldset__legend--s"
+            >
+               Related hearings 
+            </legend>
+            <pdk-checkbox-group
+              class="ng-untouched ng-pristine ng-invalid"
+              formcontrolname="caseTypes"
+            >
+              <div
+                class="govuk-checkboxes"
+              >
+                <pdk-checkbox
+                  class="govuk-checkboxes"
+                >
+                  <div
+                    class="govuk-checkboxes__item"
+                  >
+                    <input
+                      class="govuk-checkboxes__input"
+                      id="pdk-checkbox-GENERATED_ID"
+                      name="pdk-checkbox-group-GENERATED_ID"
+                      type="checkbox"
+                      value="SAME_CASE"
+                    />
+                    <label
+                      class="govuk-label govuk-checkboxes__label"
+                      for="pdk-checkbox-GENERATED_ID"
+                    >
+                      <span>
+                        Same as TFL12345
+                      </span>
+                    </label>
+                  </div>
+                </pdk-checkbox>
+                <pdk-checkbox
+                  class="govuk-checkboxes"
+                >
+                  <div
+                    class="govuk-checkboxes__item"
+                  >
+                    <input
+                      class="govuk-checkboxes__input"
+                      id="pdk-checkbox-GENERATED_ID"
+                      name="pdk-checkbox-group-GENERATED_ID"
+                      type="checkbox"
+                      value="LINKED_CASE"
+                    />
+                    <label
+                      class="govuk-label govuk-checkboxes__label"
+                      for="pdk-checkbox-GENERATED_ID"
+                    >
+                      <span>
+                        Matched defendants and linked cases
+                      </span>
+                    </label>
+                  </div>
+                </pdk-checkbox>
+                <pdk-checkbox
+                  class="govuk-checkboxes"
+                >
+                  <div
+                    class="govuk-checkboxes__item"
+                  >
+                    <input
+                      class="govuk-checkboxes__input"
+                      id="pdk-checkbox-GENERATED_ID"
+                      name="pdk-checkbox-group-GENERATED_ID"
+                      type="checkbox"
+                      value="SPECIFIC_CASE"
+                    />
+                    <label
+                      class="govuk-label govuk-checkboxes__label"
+                      for="pdk-checkbox-GENERATED_ID"
+                    >
+                      <span>
+                        Specific case
+                      </span>
+                    </label>
+                  </div>
+                </pdk-checkbox>
+              </div>
+            </pdk-checkbox-group>
+          </fieldset>
+        </pdk-form-group>
+      </pdk-form-field>
+      <pdk-form-group
+        class="find-available-hearing-action-buttons govuk-!-margin-top-5 pdk-form-group"
+        pdk-margin-top="5"
+      >
+        <button
+          class="govuk-!-margin-0 govuk-button"
+          disabled="disabled"
+          pdk-button=""
+          pdk-margin="0"
+          type="submit"
+        >
+           Search 
+        </button>
+        <a
+          class="govuk-!-margin-left-3 govuk-!-margin-right-3 govuk-link"
+          href="javascript:void(0)"
+          pdk-link=""
+          pdk-margin-horizontal="3"
+        >
+          Reset filters
+        </a>
+      </pdk-form-group>
+    </form>
+  </div>
+</find-available-hearing>
+`;

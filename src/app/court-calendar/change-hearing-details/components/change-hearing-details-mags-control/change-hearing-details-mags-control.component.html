@@ -1,0 +1,50 @@
+<div>
+  <h4 pdk-margin-bottom="1">Start date</h4>
+  <p pdk-margin-top="1">
+    {{ startDate() | date: 'dd MMMM yyyy' }}
+  </p>
+  @if (isMultiDay) {
+    <h4 pdk-margin-bottom="1">End date</h4>
+    <p pdk-margin-top="1" pdk-margin-bottom="0">
+      {{ endDate() | date: 'dd MMMM yyyy' }}
+    </p>
+    <non-sitting-days name="nonSittingDays" [readOnly]="true" [ngModel]="nonSittingDays()">
+    </non-sitting-days>
+  }
+  @if (!isMultiDay) {
+    @if (sessionTimesOptions?.length > 0) {
+      <div>
+        <pdk-form-field
+          label="Session"
+          labelType="small"
+          [errorMessages]="[
+            {
+              rule: 'required',
+              message: 'Select a session'
+            },
+            {
+              rule: 'startTimeInvalid',
+              message: 'The start time must be between valid session timings'
+            }
+          ]"
+        >
+          <pdk-select
+            justified
+            required
+            name="courtScheduleId"
+            [options]="sessionTimesOptions"
+            [ngModel]="hearingCourtScheduleId()"
+            [startTimeBetweenSession]="timeToCompare"
+            [hearingSlots]="hearingSlots()"
+          >
+          </pdk-select>
+        </pdk-form-field>
+      </div>
+    }
+    <change-hearing-start-time-controls
+      [startTime]="originalStartTime()"
+      (startTimeChange)="timeToCompare = $event"
+      [duration]="duration()"
+    ></change-hearing-start-time-controls>
+  }
+</div>

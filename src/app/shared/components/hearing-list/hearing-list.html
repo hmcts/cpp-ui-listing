@@ -1,0 +1,267 @@
+<div pdk-grid container>
+  <div pdk-grid full>
+    <div style="overflow-x: auto">
+      <table pdk-table data-test-id="hearingList" style="table-layout: fixed">
+        <thead pdk-table-head>
+          <tr pdk-table-row>
+            <th width="80px" pdk-table-header="col">Hearing date</th>
+            <th width="80px" pdk-table-header="col">Type</th>
+            <th width="110px" pdk-table-header="col">Name</th>
+            <th width="110px" pdk-table-header="col">Remand Status</th>
+            <th width="80px" pdk-table-header="col">Possible Disqual</th>
+            <th width="100px" pdk-table-header="col">Prosecutor / Respondent(s)</th>
+            <th width="150px" pdk-table-header="col">Offences / Application</th>
+            @if (!hideActionColumn()) {
+            <th width="70px" pdk-table-header="col">
+              <span pdk-visually-hidden>Actions</span>
+            </th>
+            }
+          </tr>
+        </thead>
+
+        <span pdk-visually-hidden role="status">Total results: {{ hearings().length }}</span>
+
+        @for (hearing of hearings(); track hearing.id) {
+        <tbody pdk-table-body class="hearing-body">
+          @if (!isStandaloneApplication(hearing)) { @for (kase of hearing.listedCases; track
+          kase.id; let i = $index) {
+          <tr
+            data-test-id="hearingRow"
+            pdk-table-row
+            id="case-{{kase.id}}"
+            [attr.name]="kase.id"
+            style="vertical-align: top"
+          >
+            @if (i === 0) {
+            <td
+              [class.no-border]="!!trialTypes().length"
+              data-test-id="hearingStartDate"
+              pdk-table-cell
+              [attr.rowspan]="hearing.listedCases.length"
+              attr.data-case-urn="urn-{{kase.caseIdentifier.caseReference}}"
+            >
+              {{ hearing.startDate | cppDate }} @if (hearing.weekCommencingStartDate) {
+              <span class="weekCommencingHearing"
+                >W/C {{hearing.weekCommencingStartDate|cppDate}}</span
+              >
+              }
+            </td>
+            }
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              [class.bottomless-border]="isCellWithDottedBorderBottom(hearing, i)"
+            >
+              <span data-test-id="hearingType" [pdk-visually-hidden]="i > 0"
+                >{{ formatHearingType(hearing.type) }}</span
+              >
+              <case-markers
+                pdk-padding-top="1"
+                class="case-markers"
+                [hearing]="hearing"
+                [indexListedCase]="i"
+              >
+              </case-markers>
+            </td>
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              class="defendant-details-cell"
+              pdk-typography="heading-small"
+              [pdk-border-colour]="'mid-grey'"
+              [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
+            >
+              <div data-test-id="firstDefendantName">{{ firstDefendantName(kase.defendants) }}</div>
+              @if (plusOtherDefendants(kase.defendants)) {
+              <div>{{ plusOtherDefendants(kase.defendants) }}</div>
+              }
+              <div>
+                <a
+                  pdk-link
+                  class="hearing-reference"
+                  pdk-typography="caption-medium"
+                  data-test-id="hearingReference"
+                  target="_blank"
+                  style="inline-size: 158px"
+                  [attr.aria-label]="'View case details for ' + firstDefendantName(kase.defendants)"
+                  href="{{ baseUrl() }}/prosecution-casefile/case-at-a-glance/{{ kase.id }}"
+                  >{{ kase.caseIdentifier.caseReference }}</a
+                >
+              </div>
+              <reporting-restrictions
+                isWarning="true"
+                [caseId]="kase.id"
+                [defendants]="kase?.defendants"
+              >
+              </reporting-restrictions>
+              <youth-flag [defendants]="kase.defendants"></youth-flag>
+            </td>
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              [pdk-border-colour]="'mid-grey'"
+              [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
+            >
+              {{ firstDefendantBailStatus(kase.defendants) }} @if
+              (defendantEarliestCustodyTimeLimit(kase.defendants)) {
+              <div>CTL: {{ defendantEarliestCustodyTimeLimit(kase.defendants) | cppDate }}</div>
+              }
+            </td>
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              [pdk-border-colour]="'mid-grey'"
+              [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
+            >
+              <div>{{ hearing.isPossibleDisqualification ? 'Yes' : 'Not Applicable' }}</div>
+            </td>
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              [pdk-border-colour]="'mid-grey'"
+              [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
+            >
+              <div>{{ getProsecutor(kase) }}</div>
+            </td>
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              [pdk-border-colour]="'mid-grey'"
+              [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
+            >
+              <hearing-offences
+                [offences]="allOffencesFor(kase.defendants)"
+                [applications]="hearing.courtApplications"
+                [hearingType]="hearing.type.description"
+              >
+              </hearing-offences>
+            </td>
+            @if (!hideActionColumn() && i === 0) {
+            <td
+              [class.no-border]="!!trialTypes().length"
+              pdk-table-cell
+              [attr.rowspan]="hearing.listedCases.length"
+              class="allocate-button"
+              [class.vertical-align-middle]="isHearingWithMultipleCases(hearing)"
+            >
+              <a
+                data-test-id="allocateHearing"
+                pdk-link
+                (click)="allocate(hearing)"
+                href="javascript:void(0);"
+                pdk-margin-left="2"
+                attr.aria-label="Allocate Hearing for {{ firstDefendantName(kase.defendants) }}"
+                >Allocate
+                <span pdk-visually-hidden>
+                  hearing for {{ firstDefendantName(kase.defendants) }}</span
+                ></a
+              >
+              <div pdk-margin-top="2">
+                @if (canActivateSplit(hearing)) {
+                <a
+                  pdk-link
+                  (click)="splitHearing(hearing)"
+                  href="javascript:void(0);"
+                  pdk-margin-left="2"
+                  data-role="split-hearing-btn"
+                  attr.aria-label="Split Hearing for {{ firstDefendantName(kase.defendants) }}"
+                  >Split
+                  <span pdk-visually-hidden>
+                    hearing for {{ firstDefendantName(kase.defendants) }}</span
+                  ></a
+                >
+                }
+              </div>
+            </td>
+            }
+          </tr>
+          } @if (trialTypes().length) {
+          <tr pdk-table-row>
+            <td class="bottom-border" colspan="2" pdk-table-cell></td>
+            <td class="bottom-border" colspan="4" pdk-table-cell></td>
+          </tr>
+          } } @if (isStandaloneApplication(hearing)) { @for (application of
+          hearing.courtApplications; track application.id; let i = $index) {
+          <tr
+            data-test-id="hearingRow"
+            pdk-table-row
+            id="application-{{application.id}}"
+            style="vertical-align: top"
+          >
+            @if (i === 0) {
+            <td
+              data-test-id="hearingStartDate"
+              pdk-table-cell
+              [attr.rowspan]="hearing.courtApplications.length"
+            >
+              {{ hearing.startDate | cppDate }}
+            </td>
+            }
+            <td pdk-table-cell data-test-id="hearingType">{{ formatHearingType(hearing.type) }}</td>
+            <td pdk-table-cell pdk-typography="heading-small">
+              <div data-test-id="applicantName">{{ getStandaloneApplicantName(application) }}</div>
+              <div>
+                <a
+                  pdk-link
+                  class="hearing-reference"
+                  pdk-typography="caption-medium"
+                  data-test-id="hearingReference"
+                  target="_blank"
+                  href="{{ baseUrl() }}/prosecution-casefile/application-at-a-glance/{{ application.id }}"
+                  (click)="onApplicationClick($event, application)"
+                >
+                  {{ application.applicationReference }}</a
+                >
+              </div>
+            </td>
+            <td pdk-table-cell></td>
+            <td pdk-table-cell>
+              <div>
+                @for (respondent of getStandaloneRespondentNames(application); track respondent) {
+                <div>{{ respondent }}</div>
+                }
+              </div>
+            </td>
+            <td pdk-table-cell>
+              <hearing-offences
+                [offences]="[]"
+                [applications]="[application]"
+                [hearingType]="hearing.type.description"
+              >
+              </hearing-offences>
+            </td>
+            @if (!hideActionColumn() && i === 0) {
+            <td pdk-table-cell [attr.rowspan]="hearing.courtApplications.length">
+              <a
+                data-test-id="allocateHearing"
+                pdk-link
+                (click)="allocate(hearing)"
+                href="javascript:void(0);"
+                attr.aria-label="Allocate Hearing for {{ getStandaloneApplicantName(application) }}"
+                >Allocate
+                <span pdk-visually-hidden>
+                  hearing for {{ getStandaloneApplicantName(application) }}</span
+                ></a
+              >
+            </td>
+            }
+          </tr>
+          } }
+        </tbody>
+        }
+      </table>
+    </div>
+  </div>
+
+  @if (totalResults() > pageSize()) {
+  <div pdk-grid full>
+    <pdk-pagination
+      data-test-id="pagination"
+      [totalResults]="totalResults()"
+      [pageSize]="pageSize()"
+      [currentPage]="pageNumber()"
+      (pageChange)="pageChanged($event)"
+    ></pdk-pagination>
+  </div>
+  }
+</div>

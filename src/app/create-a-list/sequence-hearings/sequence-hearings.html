@@ -1,0 +1,64 @@
+@if (!sequenceHearings) {
+<div class="sequence-wrapper">
+  <div class="sequence-controls">
+    @if (showReorderLink) {
+    <a pdk-link (click)="startClicked()" class="link-btn reorder-btn" href="javascript:void(0)"
+      >Reorder</a
+    >
+    }
+  </div>
+  <hearings-per-judiciary
+    (onRestrictionChanged)="restrictionChanged($event)"
+    [hearingTypes]="hearingTypes()"
+    [restrictLists]="restrictLists()"
+    [restrictedCourtHearingSelected]="restrictedCourtHearingSelected()"
+    [judiciary]="judiciary()"
+    [hearings]="hearings()"
+    [selectedDate]="selectedDate()"
+    [timeFormat]="timeFormat()"
+    [defaultStartTime]="defaultStartTime()"
+    [enableReorder]="true"
+    [weekCommencingSelected]="weekCommencingSelected()"
+  >
+  </hearings-per-judiciary>
+</div>
+} @if (sequenceHearings) {
+<div class="sequence-wrapper">
+  <div class="sequence-controls">
+    <a pdk-link (click)="cancelClicked()" class="link-btn cancel-btn" href="javascript:void(0)"
+      >Cancel</a
+    >
+    <button (click)="saveClicked()" class="save-btn" [disabled]="!updated" pdk-button>Save</button>
+  </div>
+  <div class="sequence-content">
+    @if (judiciary().length) {
+    <div pdk-margin-top="1" pdk-typography="heading-medium" data-test-id="judiciary">
+      {{ judiciary() | judiciaryMemberNames }}
+    </div>
+    } @if (!judiciary().length) {
+    <div
+      pdk-text-colour="red"
+      pdk-typography="heading-medium"
+      pdk-margin-top="1"
+      data-test-id="judiciary"
+    >
+      No judiciary allocated
+    </div>
+    }
+    <div class="group-hearings">
+      @for (key of getKeysSortedByStartTime(hearingsGroupedByStartTime); track key) {
+      <div>
+        @if (hearingsGroupedByStartTime[key].length > 1) {
+        <sequence-group
+          [name]="key"
+          (updated)="sequenceUpdated($event)"
+          [hearings]="hearingsGroupedByStartTime[key]"
+        >
+        </sequence-group>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}

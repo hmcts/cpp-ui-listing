@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingSummaryComponent should match Jest spapshot 1`] = `
+<ng-component
+  hearing={[Function Object]}
+>
+  <hearing-summary>
+    <dl>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          Estimate
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          15 minutes
+        </dd>
+      </div>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          Language
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          Welsh
+        </dd>
+      </div>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          Dates to avoid (prosecutor)
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          Any day with a y in it
+        </dd>
+      </div>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          Dates to avoid (defendant)
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          <ul
+            class="govuk-list"
+            pdk-list=""
+          >
+            <li>
+              AORGANISATION XYZ - Busy busy busy
+            </li>
+            <li>
+              BORGANISATION ABC - Monday, Tuesday, Wednesday, Thursday, Friday plus the weekend
+            </li>
+            <li>
+              Adam KEYNES - Can't really think of a good day to attend
+            </li>
+            <li>
+              Adam WEST - He can spare 20 minutes on a Monday at 7 am
+            </li>
+            <li>
+              Boris JACKSON - Monday to Friday
+            </li>
+            <li>
+              Sedric BULMER - Any day that Eastenders is on
+            </li>
+          </ul>
+        </dd>
+      </div>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          Special requirements
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          <ul
+            class="govuk-list"
+            pdk-list=""
+          >
+            <li>
+              AORGANISATION XYZ - dfsdsf sdfsdfsdf  sdfsdfsdfs sdfsdfsdf sdfsdfsdfsdf  sdfsdfsdfsdfsd sdfsdfsdfsdf
+            </li>
+            <li>
+              BORGANISATION ABC - dfsdsf sdfsdfsdf  sdfsdfsdfs sdfsdfsdf sdfsdfsdfsdf  sdfsdfsdfsdfsd sdfsdfsdfsdf
+            </li>
+            <li>
+              Adam KEYNES - a hover board
+            </li>
+            <li>
+              Adam WEST - Personal assistance
+            </li>
+            <li>
+              Boris JACKSON - Some chill-out music
+            </li>
+            <li>
+              Sedric BULMER - a not guilty plea
+            </li>
+          </ul>
+        </dd>
+      </div>
+      <div
+        class="govuk-grid-row"
+        container=""
+        pdk-grid=""
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          Notes
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          Hearing should be arranged for after normal working hours
+        </dd>
+      </div>
+    </dl>
+  </hearing-summary>
+</ng-component>
+`;

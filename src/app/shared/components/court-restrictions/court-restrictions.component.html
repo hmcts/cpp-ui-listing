@@ -1,0 +1,397 @@
+<td pdk-table-cell colSpan="100%">
+  @if (isCase()) {
+    @for (case of hearing().listedCases; track case.id; let firstCase = $first; let i = $index) {
+      <div data-test-id="hearingListItem" class="hearing-row">
+        @if ((getExpandStatus(hearing().id) | async) === false) {
+          <div class="flex-row">
+            <div class="flex-column">
+              @if (firstCase) {
+                <details pdk-details (click)="toggleRestrict(hearing().id)">
+                  <summary>Restrict details</summary>
+                </details>
+              }
+            </div>
+            <div class="flex-column">
+              <div
+                data-test-id="hearingStartTime"
+                [pdk-visually-hidden]="
+                  weekCommencingSelected() || (!hearing().allocated && i !== 0)
+                "
+              >
+                <div>{{ hearingTime() }}</div>
+                @if (case.shadowListed) {
+                  <div
+                    data-test-id="caseShadowListed"
+                    pdk-text-colour="dark-grey"
+                    pdk-typography="body-small"
+                  >
+                    Case shadow listed
+                  </div>
+                }
+              </div>
+            </div>
+            <div
+              id="defendant_{{ hearing().id }}_{{ case.caseIdentifier.caseReference }}_{{ i }}"
+              class="flex-column break-word"
+              [class.dotted-border-bottom]="hasDottedBorder(hearing().listedCases.length, i)"
+            >
+              @if (!hearing().totalCases || hearing().totalCases === 1) {
+                <span data-test-id="firstDefendantName">{{
+                  getDefendantName(firstDefendant(i))
+                }}</span>
+                @if (
+                  plusOtherDefendants(hearing(), i) &&
+                  (getExpandStatus(hearing().id) | async) === false
+                ) {
+                  <div>
+                    {{ plusOtherDefendants(hearing(), i) }}
+                  </div>
+                }
+                <div pdk-typography="caption-medium">
+                  {{ case.caseIdentifier.caseReference }}
+                </div>
+                <reporting-restrictions
+                  isWarning="true"
+                  [caseId]="case.id"
+                  [defendants]="case?.defendants"
+                >
+                </reporting-restrictions>
+                <youth-flag [defendants]="case.defendants"></youth-flag>
+              } @else {
+                <span data-test-id="firstDefendantName">{{ bulkCaseDefendantName(case) }}</span>
+              }
+            </div>
+            <div
+              class="flex-column"
+              [class.dotted-border-bottom]="hasDottedBorder(hearing().listedCases.length, i)"
+            >
+              @if (showEstimateTime(hearing(), i)) {
+                <hearing-estimate [estimate]="estimatedMinutes().toString()"></hearing-estimate>
+              } @else {
+                -
+              }
+            </div>
+            @if (hearingType()) {
+              <div
+                class="flex-column"
+                [pdk-border-colour]="hasDottedBorder(hearing().listedCases.length, i) && 'mid-grey'"
+                [class.dotted-border-bottom]="hasDottedBorder(hearing().listedCases.length, i)"
+              >
+                <span>
+                  {{ hearingType() | capitalizeFirstLetter }}
+                </span>
+              </div>
+            }
+            <div
+              class="flex-column"
+              [pdk-border-colour]="hasDottedBorder(hearing().listedCases.length, i) && 'mid-grey'"
+              [class.dotted-border-bottom]="hasDottedBorder(hearing().listedCases.length, i)"
+            >
+              @for (
+                offence of firstDefendant(i)?.offences;
+                track offence.id;
+                let in = $index;
+                let first = $first;
+                let last = $last
+              ) {
+                @if (first) {
+                  <div data-test-id="firstOffenceTitle">
+                    <div>{{ offence.statementOfOffence.title }}</div>
+                    @if (offence.shadowListed) {
+                      <div
+                        data-test-id="offenceShadowListed"
+                        pdk-text-colour="dark-grey"
+                        pdk-typography="body-small"
+                      >
+                        Offence shadow listed
+                      </div>
+                    }
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+        <!----now expanded --------------->
+        @if (getExpandStatus(hearing().id) | async) {
+          @for (
+            defendant of sortCaseDefendants(case);
+            track defendant.id;
+            let isFirstDefendant = $first;
+            let indexDefendant = $index
+          ) {
+            <pdk-divider
+              [class.dotted-divider]="hearing().listedCases.length > 1"
+              [ngStyle]="{
+                display: firstCase && isFirstDefendant ? 'none' : 'block',
+                'margin-left': !isFirstDefendant && '215px'
+              }"
+            >
+            </pdk-divider>
+            <!--Other Case defendant captions-->
+            <div class="flex-row" pdk-margin-bottom="4">
+              <div class="flex-column">
+                @if (firstCase && isFirstDefendant) {
+                  <details open pdk-details (click)="toggleRestrict(hearing().id)">
+                    <summary>Restrict details</summary>
+                  </details>
+                }
+              </div>
+              <div class="flex-column">
+                <div
+                  data-test-id="hearingStartTime"
+                  [pdk-visually-hidden]="
+                    !(
+                      firstCase &&
+                      isFirstDefendant &&
+                      !weekCommencingSelected() &&
+                      hearing().allocated &&
+                      i === 0
+                    )
+                  "
+                >
+                  <div>{{ hearingTime() }}</div>
+                  @if (case.shadowListed) {
+                    <div
+                      data-test-id="caseShadowListed"
+                      pdk-text-colour="dark-grey"
+                      pdk-typography="body-small"
+                    >
+                      Case shadow listed
+                    </div>
+                  }
+                </div>
+              </div>
+              <div data-test-id="defendantName" class="flex-column break-word">
+                @if (!hearing().totalCases || hearing().totalCases === 1) {
+                  {{ getDefendantName(defendant) }}
+                  <div>
+                    <div pdk-typography="caption-medium">
+                      {{ case.caseIdentifier.caseReference }}
+                    </div>
+                    <reporting-restrictions
+                      isWarning="true"
+                      [caseId]="case.id"
+                      [defendants]="[defendant]"
+                    >
+                    </reporting-restrictions>
+                    @if (defendant.isYouth) {
+                      <youth-flag [defendants]="[defendant]"></youth-flag>
+                    }
+                  </div>
+                } @else {
+                  <span data-test-id="firstDefendantName">{{ bulkCaseDefendantName(case) }}</span>
+                }
+              </div>
+              <div class="flex-column">
+                @if (showEstimateTime(hearing(), i)) {
+                  <hearing-estimate [estimate]="estimatedMinutes().toString()"></hearing-estimate>
+                } @else {
+                  -
+                }
+              </div>
+              @if (hearingType()) {
+                <div class="flex-column">
+                  <span>
+                    {{ hearingType() | capitalizeFirstLetter }}
+                  </span>
+                </div>
+              }
+              <div class="flex-column">
+                @for (
+                  offence of defendant?.offences;
+                  track offence.id;
+                  let in = $index;
+                  let first = $first;
+                  let last = $last
+                ) {
+                  @if (first) {
+                    <div data-test-id="offenceTitle" class="break-word">
+                      <div>{{ offence.statementOfOffence.title }}</div>
+                      @if (offence.shadowListed) {
+                        <div
+                          data-test-id="offenceShadowListed"
+                          pdk-text-colour="dark-grey"
+                          pdk-typography="body-small"
+                        >
+                          Offence shadow listed
+                        </div>
+                      }
+                    </div>
+                  }
+                }
+              </div>
+            </div>
+            <!--Other Case defendant checkboxes-->
+            <div class="flex-row">
+              <div
+                class="flex-column"
+                [class.hide-case]="
+                  hearing().listedCases.length > 1 && sortCaseDefendants(case).length > 1 && i !== 0
+                "
+                [class.m-t-10]="
+                  hearing().listedCases.length > 1 && sortCaseDefendants(case).length > 1 && i === 0
+                "
+              >
+                @if (isFirstDefendant && indexDefendant === 0) {
+                  <pdk-form-group>
+                    <pdk-checkbox
+                      x-auto-hide-case-checkbox
+                      data-role="hide-case-checkbox"
+                      [id]="case.id"
+                      [name]="case.id"
+                      [ngModel]="case.restrictFromCourtList"
+                      (ngModelChange)="
+                        this.onRestrictCase.emit({ id: case.id, restrictValue: $event })
+                      "
+                    >
+                      <span>Hide Case</span>
+                    </pdk-checkbox>
+                  </pdk-form-group>
+                }
+              </div>
+              <div class="flex-column"></div>
+              <div class="flex-column">
+                <pdk-form-group>
+                  <pdk-checkbox
+                    [id]="defendant.id"
+                    [name]="defendant.id"
+                    [ngModel]="defendant.restrictFromCourtList"
+                    [disabled]="setCheckBoxDisabledState(case)"
+                    (ngModelChange)="
+                      onRestrictParty(restrictionEventType.Defendant, defendant.id, $event)
+                    "
+                  >
+                    <span>Hide</span>
+                  </pdk-checkbox>
+                </pdk-form-group>
+              </div>
+              <div class="flex-column"></div>
+              @if (hearingType()) {
+                <div class="flex-column"></div>
+              }
+              <div class="flex-column">
+                @for (
+                  offence of defendant?.offences;
+                  track offence.id;
+                  let in = $index;
+                  let first = $first;
+                  let last = $last
+                ) {
+                  @if (!first) {
+                    <div class="break-word" pdk-padding-bottom="2">
+                      <div>{{ offence.statementOfOffence.title }}</div>
+                      @if (offence.shadowListed) {
+                        <div
+                          data-test-id="offenceShadowListed"
+                          pdk-text-colour="dark-grey"
+                          pdk-typography="body-small"
+                        >
+                          Offence shadow listed
+                        </div>
+                      }
+                    </div>
+                  }
+                  <div [ngClass]="{ 'margin-non-base': !last }"></div>
+                }
+              </div>
+            </div>
+          }
+        }
+      </div>
+    }
+  } @else {
+    @if (isApplication()) {
+      @for (
+        application of hearing().courtApplications;
+        track application.id;
+        let firstApplication = $first
+      ) {
+        @let subject = application.subject;
+        <div data-test-id="hearingListItem">
+          <ng-container>
+            <div class="flex-row">
+              <div class="flex-column">
+                @if ((getExpandStatus(application.id) | async) === false) {
+                  <details pdk-details (click)="toggleRestrict(application.id)">
+                    <summary>Restrict details</summary>
+                  </details>
+                }
+                @if (getExpandStatus(application.id) | async) {
+                  <details open pdk-details (click)="toggleRestrict(application.id)">
+                    <summary>Restrict details</summary>
+                  </details>
+                }
+              </div>
+              <div class="flex-column">
+                <div data-test-id="hearingStartTime" [pdk-visually-hidden]="firstApplication">
+                  {{ hearingTime() }}
+                </div>
+              </div>
+              <div class="flex-column break-word">
+                <div data-test-id="applicantName">
+                  {{ subject | applicantRespondentFullName }}
+                </div>
+              </div>
+              <div class="flex-column">
+                <hearing-estimate [estimate]="estimatedMinutes().toString()"></hearing-estimate>
+              </div>
+              @if (hearingType()) {
+                <div class="flex-column">
+                  <span>
+                    {{ hearingType() | capitalizeFirstLetter }}
+                  </span>
+                </div>
+              }
+              <div class="flex-column">
+                {{ application?.applicationType }}
+              </div>
+            </div>
+          </ng-container>
+          <!----now expanded --------------->
+          @if (getExpandStatus(application.id) | async) {
+            <div class="flex-row">
+              <div class="flex-column">
+                <pdk-form-group>
+                  <pdk-checkbox
+                    x-auto-hide-case-checkbox
+                    data-role="hide-case-checkbox"
+                    [id]="application.id"
+                    name="application.id"
+                    [ngModel]="application.restrictFromCourtList"
+                    (ngModelChange)="
+                      onRestrictApplication.emit({ id: application.id, restrictValue: $event })
+                    "
+                  >
+                    <span>Hide Case</span>
+                  </pdk-checkbox>
+                </pdk-form-group>
+              </div>
+              <div class="flex-column"></div>
+              <div class="flex-column">
+                <pdk-form-group>
+                  <pdk-checkbox
+                    [id]="subject.id"
+                    [name]="subject.id"
+                    [ngModel]="subject.restrictFromCourtList"
+                    [disabled]="setCheckBoxDisabledState(application)"
+                    (ngModelChange)="
+                      onRestrictParty(restrictionEventType.SUBJECT, subject.id, $event)
+                    "
+                  >
+                    <span>Hide</span>
+                  </pdk-checkbox>
+                </pdk-form-group>
+              </div>
+              <div class="flex-column"></div>
+              @if (hearingType()) {
+                <div class="flex-column"></div>
+              }
+              <div class="flex-column"></div>
+            </div>
+          }
+        </div>
+      }
+    }
+  }
+</td>

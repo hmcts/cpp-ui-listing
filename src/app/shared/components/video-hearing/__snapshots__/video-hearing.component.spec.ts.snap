@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoHearingComponent should display video hearing form for crown jurisdiction type if \`hasVideoLink\` is false 1`] = `
+<ng-component
+  hasVideoLink="false"
+  jurisdictionType={[Function String]}
+  publicListNote={[Function String]}
+>
+  <video-hearing>
+    <pdk-form-field>
+      <pdk-form-group
+        class="pdk-form-group"
+      >
+        <pdk-checkbox
+          class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+          name="hasVideoLink"
+        >
+          <div
+            class="govuk-checkboxes__item"
+          >
+            <input
+              class="govuk-checkboxes__input"
+              id="pdk-checkbox-GENERATED_ID"
+              name="hasVideoLink"
+              type="checkbox"
+              value="true"
+            />
+            <label
+              class="govuk-label govuk-checkboxes__label"
+              for="pdk-checkbox-GENERATED_ID"
+            >
+               Video hearing 
+            </label>
+          </div>
+        </pdk-checkbox>
+      </pdk-form-group>
+    </pdk-form-field>
+    <div
+      class="govuk-!-margin-bottom-7"
+      pdk-margin-bottom="7"
+    >
+      <pdk-form-field
+        label="Public list note"
+        labeltype="small"
+      >
+        <pdk-form-group
+          class="pdk-form-group"
+        >
+          <label
+            class="govuk-label govuk-label--s"
+            for="public-list-details"
+          >
+             Public list note 
+          </label>
+          <input
+            class="ng-untouched ng-pristine ng-valid govuk-input"
+            id="public-list-details"
+            maxlength="80"
+            name="publicListNote"
+            pdk-input=""
+            pdk-text-input=""
+            type="text"
+          />
+        </pdk-form-group>
+      </pdk-form-field>
+    </div>
+  </video-hearing>
+</ng-component>
+`;
+
+exports[`VideoHearingComponent should display video hearing form for crown jurisdiction type if \`hasVideoLink\` is true 1`] = `
+<ng-component
+  hasVideoLink={[Function Boolean]}
+  jurisdictionType={[Function String]}
+  publicListNote={[Function String]}
+>
+  <video-hearing>
+    <pdk-form-field>
+      <pdk-form-group
+        class="pdk-form-group"
+      >
+        <pdk-checkbox
+          class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+          name="hasVideoLink"
+        >
+          <div
+            class="govuk-checkboxes__item"
+          >
+            <input
+              class="govuk-checkboxes__input"
+              id="pdk-checkbox-GENERATED_ID"
+              name="hasVideoLink"
+              type="checkbox"
+              value="true"
+            />
+            <label
+              class="govuk-label govuk-checkboxes__label"
+              for="pdk-checkbox-GENERATED_ID"
+            >
+               Video hearing 
+            </label>
+          </div>
+        </pdk-checkbox>
+      </pdk-form-group>
+    </pdk-form-field>
+    <div
+      class="govuk-!-margin-bottom-7"
+      pdk-margin-bottom="7"
+    >
+      <pdk-form-field
+        label="Public list note"
+        labeltype="small"
+      >
+        <pdk-form-group
+          class="pdk-form-group"
+        >
+          <label
+            class="govuk-label govuk-label--s"
+            for="public-list-details"
+          >
+             Public list note 
+          </label>
+          <input
+            class="ng-untouched ng-pristine ng-valid govuk-input"
+            id="public-list-details"
+            maxlength="80"
+            name="publicListNote"
+            pdk-input=""
+            pdk-text-input=""
+            type="text"
+          />
+        </pdk-form-group>
+      </pdk-form-field>
+    </div>
+  </video-hearing>
+</ng-component>
+`;
+
+exports[`VideoHearingComponent should not display video hearing form for magistrates jurisdiction type 1`] = `
+<ng-component
+  hasVideoLink={[Function Boolean]}
+  jurisdictionType={[Function String]}
+  publicListNote={[Function String]}
+>
+  <video-hearing>
+  </video-hearing>
+</ng-component>
+`;

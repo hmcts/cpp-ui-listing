@@ -1,0 +1,27 @@
+<div class="change-judiciary-for-hearings-form">
+  <form
+    data-test-id="hearingDetailsForm"
+    #form="ngForm"
+    pdk-form
+    (validSubmit)="submit()"
+    (errors)="this.onValidationError.emit($event)"
+    novalidate
+  >
+    <h2 pdk-typography="hearing-small" pdk-margin-bottom="2">Enter judiciary details</h2>
+
+    <judiciary-input
+      [judiciary]="data?.judiciary"
+      [required]="false"
+      [maxInputWidth]="maxInputWidth()"
+      (judiciaryChange)="selectedJudiary = $event"
+    >
+    </judiciary-input>
+
+    <button pdk-button pdk-margin-bottom="2" pdk-margin-top="2" class="button" type="submit">
+      Save and continue
+    </button>
+    <div pdk-margin-top="2" pdk-margin-bottom="1">
+      <a pdk-link id="cancelJudiciaryForm" (click)="cancel()" href="javascript:void(0)">Cancel</a>
+    </div>
+  </form>
+</div>

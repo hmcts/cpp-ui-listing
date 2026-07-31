@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Youth Flag Component should not show youth marker when there are no youth defendants 1`] = `
+<test-youth-flag
+  defendants={[Function Array]}
+>
+  <youth-flag>
+  </youth-flag>
+</test-youth-flag>
+`;
+
+exports[`Youth Flag Component should show youth marker when all defendants are youths 1`] = `
+<test-youth-flag
+  defendants={[Function Array]}
+>
+  <youth-flag>
+    <div
+      class="pdk-!-text-color-green govuk-body-xs"
+      pdk-text-colour="green"
+      pdk-typography="body-xsmall"
+    >
+      Youth
+    </div>
+  </youth-flag>
+</test-youth-flag>
+`;
+
+exports[`Youth Flag Component should show youth marker when any defendant is a youth 1`] = `
+<test-youth-flag
+  defendants={[Function Array]}
+>
+  <youth-flag>
+    <div
+      class="pdk-!-text-color-green govuk-body-xs"
+      pdk-text-colour="green"
+      pdk-typography="body-xsmall"
+    >
+      Youth
+    </div>
+  </youth-flag>
+</test-youth-flag>
+`;

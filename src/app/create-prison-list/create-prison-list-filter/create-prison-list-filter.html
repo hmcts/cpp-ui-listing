@@ -1,0 +1,58 @@
+<pdk-grid container class="create-list-filter">
+  <pdk-grid two-thirds>
+    <div pdk-fill-colour="light-grey" pdk-margin-top="3" class="create-list-filter-background">
+      <form
+        #form="ngForm"
+        pdk-form
+        (errors)="formErrors.emit($event)"
+        (validSubmit)="handleFormSubmit(form.value)"
+        novalidate
+        data-test-id="createListFiltersForm"
+        pdk-margin-top="1"
+      >
+        <pdk-grid container>
+          <pdk-grid one-half>
+            <pdk-form-field
+              label="Courthouse"
+              labelType="small"
+              [errorMessages]="[{
+                rule: 'required',
+                message: 'Enter a courthouse'
+              }]"
+            >
+              <cpp-organisation-unit-autosuggest
+                #organisationUnit="ngModel"
+                name="organisationUnit"
+                ngModel
+                (ngModelChange)="handleOrganisationUnitChange($event);"
+                required
+              >
+              </cpp-organisation-unit-autosuggest>
+            </pdk-form-field>
+          </pdk-grid>
+        </pdk-grid>
+
+        @if (organisationUnit.value?.oucodeL1Code === 'C' || organisationUnit.value?.oucodeL1Code
+        === 'B') {
+        <pdk-grid container>
+          <pdk-grid one-half>
+            <pdk-inset-text pdk-margin-top="0" pdk-padding-right="0" pdk-padding-bottom="0">
+              <pdk-form-field label="Filter list by date" labelType="small">
+                <pdk-date-picker-input
+                  ngModel
+                  align="left"
+                  name="date"
+                  futureDate
+                  required
+                ></pdk-date-picker-input>
+              </pdk-form-field>
+            </pdk-inset-text>
+          </pdk-grid>
+        </pdk-grid>
+        }
+
+        <button pdk-button data-role="apply-filters-btn" type="submit">Apply filters</button>
+      </form>
+    </div>
+  </pdk-grid>
+</pdk-grid>

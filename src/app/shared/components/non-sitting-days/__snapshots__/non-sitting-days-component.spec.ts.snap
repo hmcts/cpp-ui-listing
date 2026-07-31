@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Non sitting day component should create the component 1`] = `
+<non-sitting-days
+  copyNonSittingDays={[Function Array]}
+  datePipe={[Function _DatePipe]}
+  dateRange={[Function Function]}
+  formGroup={[Function FormGroup]}
+  formGroupDirective={[Function _FormGroupDirective]}
+  onCancel={[Function OutputEmitterRef]}
+  onValidationError={[Function OutputEmitterRef]}
+  propagateChange={[Function Function]}
+  readOnly={[Function Function]}
+>
+  <div
+    class="non-sitting-days govuk-!-padding-top-5"
+    pdk-padding-top="5"
+  >
+    <p
+      class="bold govuk-!-margin-bottom-3 govuk-body-m"
+      pdk-margin-bottom="3"
+      pdk-typography="body-medium"
+    >
+      Non sitting days
+    </p>
+    <span
+      class="govuk-!-margin-bottom-5"
+      pdk-margin-bottom="5"
+    >
+       No days added
+    </span>
+    <pdk-grid
+      class="govuk-grid-row"
+      container=""
+    >
+      <ul
+        class="govuk-!-margin-top-0"
+        pdk-margin-top="0"
+      >
+      </ul>
+    </pdk-grid>
+    <p
+      class="bold govuk-!-margin-bottom-3 govuk-body-m"
+      pdk-margin-bottom="3"
+      pdk-typography="body-medium"
+    >
+      Add non sitting day
+    </p>
+    <div
+      class="ng-untouched ng-pristine ng-invalid"
+      novalidate=""
+      pdk-form=""
+    >
+      <pdk-form-field
+        class="govuk-!-margin-bottom-2"
+        label="Non sitting day"
+        labeltype="none"
+        pdk-margin-bottom="2"
+      >
+        <pdk-form-group
+          class="pdk-form-group"
+        >
+          <fieldset
+            class="govuk-fieldset"
+            pdk-fieldset=""
+          >
+            <legend
+              class="govuk-fieldset__legend govuk-visually-hidden"
+            >
+               Non sitting day 
+            </legend>
+            <pdk-date-input
+              class="details-date-input ng-untouched ng-pristine ng-invalid"
+              formcontrolname="nonSittingDay"
+              picker=""
+            >
+              <pdk-interaction-container>
+                <div>
+                  <div
+                    class="pdk-date-input"
+                  >
+                    <div
+                      class="govuk-date-input ng-untouched ng-pristine ng-invalid"
+                    >
+                      <div
+                        class="govuk-date-input__item"
+                      >
+                        <label
+                          class="govuk-date-input__label govuk-label"
+                          for="pdk-date-input-GENERATED_ID-day"
+                          pdk-label=""
+                        >
+                           Day 
+                        </label>
+                        <input
+                          autocomplete="off"
+                          class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-2"
+                          formcontrolname="day"
+                          id="pdk-date-input-GENERATED_ID-day"
+                          name="dateDay"
+                          required=""
+                          type="number"
+                        />
+                      </div>
+                      <div
+                        class="govuk-date-input__item"
+                      >
+                        <label
+                          class="govuk-date-input__label govuk-label"
+                          for="pdk-date-input-GENERATED_ID-month"
+                          pdk-label=""
+                        >
+                           Month 
+                        </label>
+                        <input
+                          autocomplete="off"
+                          class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-2"
+                          formcontrolname="month"
+                          id="pdk-date-input-GENERATED_ID-month"
+                          name="dateMonth"
+                          required=""
+                          type="number"
+                        />
+                      </div>
+                      <div
+                        class="govuk-date-input__item"
+                      >
+                        <label
+                          class="govuk-date-input__label govuk-label"
+                          for="pdk-date-input-GENERATED_ID-year"
+                          pdk-label=""
+                        >
+                           Year 
+                        </label>
+                        <input
+                          autocomplete="off"
+                          class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-4"
+                          formcontrolname="year"
+                          id="pdk-date-input-GENERATED_ID-year"
+                          name="dateYear"
+                          required=""
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pdk-!-negative-margin-left-2"
+                      pdk-margin-left="-2"
+                    >
+                      <pdk-date-picker-toggle>
+                        <pdk-interaction-container>
+                          <div>
+                            <div
+                              aria-expanded="false"
+                              aria-label="Toggle date picker"
+                              class="pdk-date-picker__toggle"
+                              role="button"
+                              tabindex="0"
+                            >
+                              <pdk-date-picker-icon
+                                style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                              >
+                                <div
+                                  style="display: flex; align-items: center; justify-content: center;"
+                                >
+                                  <i
+                                    style="height: 28px; width: 28px; fill: #333;"
+                                  >
+                                    <svg
+                                      viewBox="0 0 448 512"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                      />
+                                    </svg>
+                                  </i>
+                                </div>
+                              </pdk-date-picker-icon>
+                            </div>
+                          </div>
+                        </pdk-interaction-container>
+                      </pdk-date-picker-toggle>
+                    </div>
+                  </div>
+                </div>
+              </pdk-interaction-container>
+            </pdk-date-input>
+          </fieldset>
+        </pdk-form-group>
+      </pdk-form-field>
+      <pdk-grid
+        class="non-sitting-days-button-group govuk-!-margin-top-0 govuk-grid-row"
+        container=""
+        pdk-margin-top="0"
+      >
+        <pdk-grid
+          class="govuk-grid-column-one-third"
+          one-third=""
+        >
+          <div>
+            <a
+              class="govuk-link"
+              href="javascript:;"
+              id="addNonSittingDaysForm"
+              pdk-link=""
+            >
+              Add
+            </a>
+          </div>
+        </pdk-grid>
+      </pdk-grid>
+    </div>
+  </div>
+</non-sitting-days>
+`;
+
+exports[`Non sitting day component should render in readonly mode 1`] = `
+<non-sitting-days
+  __ngSimpleChanges__={[Function Object]}
+  copyNonSittingDays={[Function Array]}
+  datePipe={[Function _DatePipe]}
+  dateRange={[Function Function]}
+  formGroup={[Function FormGroup]}
+  formGroupDirective="undefined"
+  onCancel={[Function OutputEmitterRef]}
+  onValidationError={[Function OutputEmitterRef]}
+  propagateChange={[Function Function]}
+  readOnly={[Function Function]}
+>
+  <div
+    class="non-sitting-days govuk-!-padding-top-5"
+    pdk-padding-top="5"
+  >
+    <p
+      class="bold govuk-!-margin-bottom-3 govuk-body-m"
+      pdk-margin-bottom="3"
+      pdk-typography="body-medium"
+    >
+      Non sitting days
+    </p>
+    <pdk-grid
+      class="govuk-grid-row"
+      container=""
+    >
+      <ul
+        class="govuk-!-margin-top-0"
+        pdk-margin-top="0"
+      >
+        <li
+          class="govuk-!-margin-bottom-1"
+          pdk-margin-bottom="1"
+        >
+          <pdk-grid
+            class="date"
+          >
+            <span>
+              2 March 2025
+            </span>
+          </pdk-grid>
+        </li>
+        <li
+          class="govuk-!-margin-bottom-1"
+          pdk-margin-bottom="1"
+        >
+          <pdk-grid
+            class="date"
+          >
+            <span>
+              1 March 2025
+            </span>
+          </pdk-grid>
+        </li>
+      </ul>
+    </pdk-grid>
+  </div>
+</non-sitting-days>
+`;

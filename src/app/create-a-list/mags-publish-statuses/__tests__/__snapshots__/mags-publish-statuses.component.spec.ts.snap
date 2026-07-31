@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MagsPublishStatusesComponent should render correctly with empty statuses 1`] = `
+<app-test-host
+  statuses={[Function Function]}
+>
+  <mags-publish-statuses>
+    <div
+      class="panel-list"
+    >
+    </div>
+  </mags-publish-statuses>
+</app-test-host>
+`;
+
+exports[`MagsPublishStatusesComponent should render correctly with multiple statuses 1`] = `
+<app-test-host
+  statuses={[Function Function]}
+>
+  <mags-publish-statuses>
+    <div
+      class="panel-list"
+    >
+      <pdk-context-panel
+        class="panel"
+      >
+        <div
+          class="pdk-context-panel pdk-context-panel--success"
+          role="alert"
+        >
+          <i
+            aria-hidden="true"
+            class="pdk-context-panel__icon pdk-context-panel__icon--tick"
+            role="presentation"
+          />
+          <div
+            class="pdk-context-panel__message"
+          >
+            <div>
+              <h3
+                class="govuk-heading-m"
+              >
+                Publish successful
+              </h3>
+              <p
+                class="govuk-body-l"
+              >
+                <div
+                  class="govuk-!-margin-bottom-2"
+                  data-test-id="alert-message"
+                  pdk-margin-bottom="2"
+                >
+                   Standard list has been published and ready for download. 
+                </div>
+                <span
+                  data-test-id="alert-message-suggestion"
+                >
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </pdk-context-panel>
+      <pdk-context-panel
+        class="panel"
+      >
+        <div
+          class="pdk-context-panel pdk-context-panel--invalid"
+          role="alert"
+        >
+          <i
+            aria-hidden="true"
+            class="pdk-context-panel__icon pdk-context-panel__icon--warn"
+            role="presentation"
+          />
+          <div
+            class="pdk-context-panel__message"
+          >
+            <div>
+              <h3
+                class="govuk-heading-m"
+              >
+                Publish successful and PDF not generated
+              </h3>
+              <p
+                class="govuk-body-l"
+              >
+                <div
+                  class="govuk-!-margin-bottom-2"
+                  data-test-id="alert-message"
+                  pdk-margin-bottom="2"
+                >
+                   Online public list has been published. PDF has not been generated. 
+                </div>
+                <span
+                  data-test-id="alert-message-suggestion"
+                >
+                   Publish again to publish & generate PDF.  
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </pdk-context-panel>
+    </div>
+  </mags-publish-statuses>
+</app-test-host>
+`;
+
+exports[`MagsPublishStatusesComponent should render correctly with one status 1`] = `
+<app-test-host
+  statuses={[Function Function]}
+>
+  <mags-publish-statuses>
+    <div
+      class="panel-list"
+    >
+      <pdk-context-panel
+        class="panel"
+      >
+        <div
+          class="pdk-context-panel pdk-context-panel--success"
+          role="alert"
+        >
+          <i
+            aria-hidden="true"
+            class="pdk-context-panel__icon pdk-context-panel__icon--tick"
+            role="presentation"
+          />
+          <div
+            class="pdk-context-panel__message"
+          >
+            <div>
+              <h3
+                class="govuk-heading-m"
+              >
+                Publish successful
+              </h3>
+              <p
+                class="govuk-body-l"
+              >
+                <div
+                  class="govuk-!-margin-bottom-2"
+                  data-test-id="alert-message"
+                  pdk-margin-bottom="2"
+                >
+                   Standard list has been published and ready for download. 
+                </div>
+                <span
+                  data-test-id="alert-message-suggestion"
+                >
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </pdk-context-panel>
+    </div>
+  </mags-publish-statuses>
+</app-test-host>
+`;

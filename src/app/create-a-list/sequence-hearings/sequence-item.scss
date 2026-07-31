@@ -1,0 +1,26 @@
+.sequence-item-wrapper {
+  display: table;
+  width: 100%;
+  border: 1px solid #bfc1c3;
+  background-color: white;
+
+  .sequence-item {
+    cursor: move;
+    display: table-row;
+    padding-top: 10px;
+
+    .seq-col {
+      display: table-cell;
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-bottom: 10px;
+    }
+
+    .drag-handle {
+      vertical-align: middle;
+      padding-right: 10px;
+    }
+  }
+
+
+}

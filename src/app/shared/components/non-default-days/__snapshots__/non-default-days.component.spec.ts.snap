@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NonDefaultDaysComponent should create the component 1`] = `
+<non-default-days
+  copyNonDefaultDays={[Function Array]}
+  courtCentreId={[Function Function]}
+  datePipe={[Function _DatePipe]}
+  dateRange={[Function Function]}
+  dateUtil={[Function CPPDate]}
+  defaultStartTime={[Function Function]}
+  formGroup={[Function FormGroup]}
+  formGroupDirective={[Function _FormGroupDirective]}
+  hearingDays={[Function Function]}
+  onValidationError={[Function OutputEmitterRef]}
+  parentCourtRoomId={[Function Function]}
+  propagateChange={[Function Function]}
+>
+  <div
+    class="non-default-days govuk-!-padding-top-5"
+    pdk-padding-top="5"
+  >
+    <p
+      class="bold govuk-!-margin-bottom-3 govuk-body-m"
+      pdk-margin-bottom="3"
+      pdk-typography="body-medium"
+    >
+      Non default days
+    </p>
+    <span
+      class="govuk-!-margin-bottom-5"
+      pdk-margin-bottom="5"
+    >
+       No days added
+    </span>
+    <pdk-grid
+      class="govuk-grid-row"
+      container=""
+    >
+      <ul>
+      </ul>
+    </pdk-grid>
+    <div
+      class="ng-untouched ng-pristine ng-invalid"
+      pdk-form=""
+    >
+      <pdk-form-field
+        label="Add non default day"
+        labeltype="small"
+      >
+        <pdk-form-group
+          class="pdk-form-group"
+        >
+          <fieldset
+            class="govuk-fieldset"
+            pdk-fieldset=""
+          >
+            <legend
+              class="govuk-fieldset__legend govuk-fieldset__legend--s"
+            >
+               Add non default day 
+            </legend>
+            <pdk-date-input
+              class="details-date-input ng-untouched ng-pristine ng-invalid"
+              formcontrolname="date"
+              picker=""
+            >
+              <pdk-interaction-container>
+                <div>
+                  <div
+                    class="pdk-date-input"
+                  >
+                    <div
+                      class="govuk-date-input ng-untouched ng-pristine ng-invalid"
+                    >
+                      <div
+                        class="govuk-date-input__item"
+                      >
+                        <label
+                          class="govuk-date-input__label govuk-label"
+                          for="pdk-date-input-GENERATED_ID-day"
+                          pdk-label=""
+                        >
+                           Day 
+                        </label>
+                        <input
+                          autocomplete="off"
+                          class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-2"
+                          formcontrolname="day"
+                          id="pdk-date-input-GENERATED_ID-day"
+                          name="dateDay"
+                          required=""
+                          type="number"
+                        />
+                      </div>
+                      <div
+                        class="govuk-date-input__item"
+                      >
+                        <label
+                          class="govuk-date-input__label govuk-label"
+                          for="pdk-date-input-GENERATED_ID-month"
+                          pdk-label=""
+                        >
+                           Month 
+                        </label>
+                        <input
+                          autocomplete="off"
+                          class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-2"
+                          formcontrolname="month"
+                          id="pdk-date-input-GENERATED_ID-month"
+                          name="dateMonth"
+                          required=""
+                          type="number"
+                        />
+                      </div>
+                      <div
+                        class="govuk-date-input__item"
+                      >
+                        <label
+                          class="govuk-date-input__label govuk-label"
+                          for="pdk-date-input-GENERATED_ID-year"
+                          pdk-label=""
+                        >
+                           Year 
+                        </label>
+                        <input
+                          autocomplete="off"
+                          class="govuk-date-input__input ng-untouched ng-pristine ng-invalid govuk-input govuk-input--width-4"
+                          formcontrolname="year"
+                          id="pdk-date-input-GENERATED_ID-year"
+                          name="dateYear"
+                          required=""
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pdk-!-negative-margin-left-2"
+                      pdk-margin-left="-2"
+                    >
+                      <pdk-date-picker-toggle>
+                        <pdk-interaction-container>
+                          <div>
+                            <div
+                              aria-expanded="false"
+                              aria-label="Toggle date picker"
+                              class="pdk-date-picker__toggle"
+                              role="button"
+                              tabindex="0"
+                            >
+                              <pdk-date-picker-icon
+                                style="margin-top: -4px; display: inline-block; vertical-align: middle;"
+                              >
+                                <div
+                                  style="display: flex; align-items: center; justify-content: center;"
+                                >
+                                  <i
+                                    style="height: 28px; width: 28px; fill: #333;"
+                                  >
+                                    <svg
+                                      viewBox="0 0 448 512"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"
+                                      />
+                                    </svg>
+                                  </i>
+                                </div>
+                              </pdk-date-picker-icon>
+                            </div>
+                          </div>
+                        </pdk-interaction-container>
+                      </pdk-date-picker-toggle>
+                    </div>
+                  </div>
+                </div>
+              </pdk-interaction-container>
+            </pdk-date-input>
+          </fieldset>
+        </pdk-form-group>
+      </pdk-form-field>
+      <pdk-form-field
+        class="govuk-!-margin-bottom-2"
+        label="Start time"
+        labeltype="small"
+        pdk-margin-bottom="2"
+      >
+        <pdk-form-group
+          class="pdk-form-group"
+        >
+          <fieldset
+            class="govuk-fieldset"
+            pdk-fieldset=""
+          >
+            <legend
+              class="govuk-fieldset__legend govuk-fieldset__legend--s"
+            >
+               Start time 
+            </legend>
+            <pdk-time-input
+              class="ng-untouched ng-pristine ng-invalid"
+              formcontrolname="startTime"
+              labelhidden="false"
+            >
+              <div
+                class="pdk-time-input ng-untouched ng-pristine ng-valid"
+              >
+                <div
+                  class="pdk-time-input__item pdk-time-input__item--hour"
+                >
+                  <label
+                    class="govuk-label"
+                    for="pdk-time-input-GENERATED_ID-hours"
+                    pdk-label=""
+                  >
+                     Hours 
+                  </label>
+                  <input
+                    autocomplete="off"
+                    class="ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-2"
+                    formcontrolname="hours"
+                    id="pdk-time-input-GENERATED_ID-hours"
+                    maxlength="2"
+                    name="timeHours"
+                    pattern="[0-9]*"
+                    type="text"
+                  />
+                </div>
+                <div
+                  class="pdk-time-input__item"
+                >
+                  <label
+                    class="govuk-label"
+                    for="pdk-time-input-GENERATED_ID-minutes"
+                    pdk-label=""
+                  >
+                     Minutes 
+                  </label>
+                  <input
+                    autocomplete="off"
+                    class="ng-untouched ng-pristine ng-valid govuk-input govuk-input--width-2"
+                    formcontrolname="minutes"
+                    id="pdk-time-input-GENERATED_ID-minutes"
+                    maxlength="2"
+                    minlength="2"
+                    name="timeMinutes"
+                    pattern="[0-9]*"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </pdk-time-input>
+          </fieldset>
+        </pdk-form-group>
+      </pdk-form-field>
+      <pdk-grid
+        class="non-default-days-button-group govuk-grid-row"
+        container=""
+      >
+        <pdk-grid
+          class="govuk-grid-column-one-third"
+          one-third=""
+        >
+          <div>
+            <a
+              class="govuk-link"
+              data-test-id="non-default-submit"
+              href="javascript:void(0);"
+              pdk-link=""
+              role="button"
+            >
+              Add
+            </a>
+          </div>
+        </pdk-grid>
+      </pdk-grid>
+    </div>
+  </div>
+</non-default-days>
+`;

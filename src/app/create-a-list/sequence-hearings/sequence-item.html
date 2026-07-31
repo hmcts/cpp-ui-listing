@@ -1,0 +1,38 @@
+<div class="sequence-item-wrapper">
+  <div class="sequence-item">
+    <span data-test-id="hearingStartTime" pdk-visually-hidden>{{ startTime() }}</span>
+    @if (!isStandaloneApplicationHearing(hearing())) {
+    <div class="seq-col defendants">
+      <span data-test-id="firstDefendantName"
+        >{{ getAllDefendants(hearing()) | findFirstDefendantAlphabetically | fullName }}</span
+      >
+      @if (plusOtherDefendants(hearing())) {
+      <div>{{ plusOtherDefendants(hearing()) }}</div>
+      }
+    </div>
+    } @if (isStandaloneApplicationHearing(hearing())) {
+    <div class="seq-col defendants">
+      {{ getAllApplicants(hearing()) | findFirstApplicantRespondantAlphabetically |
+      applicantRespondentFullName }} @if (plusOtherApplicants(hearing())) {
+      <div>{{ plusOtherApplicants(hearing()) }}</div>
+      }
+    </div>
+    }
+    <div class="seq-col estimate">
+      <hearing-estimate [estimate]="hearing().estimatedMinutes"></hearing-estimate>
+    </div>
+    <div class="seq-col description">{{ hearing().type.description | capitalizeFirstLetter }}</div>
+    @if (!isStandaloneApplicationHearing(hearing())) {
+    <div class="seq-col offence">{{ firstDefendantOffence(hearing()) }}</div>
+    } @if (isStandaloneApplicationHearing(hearing())) {
+    <div class="seq-col offence">{{ firstApplicationType(hearing()) }}</div>
+    }
+    <div class="seq-col drag-handle">
+      <i class="listing-vector-icon drag_icon">
+        <svg width="100%" height="100%" pdk-text-colour="black">
+          <use [attr.xlink:href]="'assets\\svg-icons-definitions.svg#list'"></use>
+        </svg>
+      </i>
+    </div>
+  </div>
+</div>

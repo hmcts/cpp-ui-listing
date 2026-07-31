@@ -1,0 +1,319 @@
+<div class="relative-item">
+  <table class="hearings-per-judge" pdk-table>
+    @if (judiciary().length) {
+    <caption data-test-id="judiciary" pdk-table-caption>
+      <div class="flex-caption">
+        <span data-test-id="judiciaryName">{{ judiciary() | judiciaryMemberNames }}</span>
+        <ng-container *ngTemplateOutlet="actions"></ng-container>
+      </div>
+    </caption>
+    } @if (!judiciary().length) {
+    <caption data-test-id="judiciary" pdk-table-caption pdk-text-colour="red">
+      <div class="flex-caption">
+        <span data-test-id="judiciaryName">No judiciary allocated</span>
+        <ng-container *ngTemplateOutlet="actions"></ng-container>
+      </div>
+    </caption>
+    }
+    <thead pdk-table-head>
+      <tr pdk-table-row>
+        @if (restrictLists()) {
+        <th pdk-table-header="col">
+          <span pdk-visually-hidden>Restrict</span>
+        </th>
+        }
+        <th pdk-table-header="col">
+          <span pdk-visually-hidden> Hearing Time</span>
+        </th>
+        <th pdk-table-header="col"><span pdk-visually-hidden>Case markers</span></th>
+        <th pdk-table-header="col">
+          <span pdk-visually-hidden>Defendant/Respondant</span>
+        </th>
+        <th pdk-table-header="col">
+          <span pdk-visually-hidden>Estimate</span>
+        </th>
+        <th pdk-table-header="col"><span pdk-visually-hidden>Type</span></th>
+        <th pdk-table-header="col"><span pdk-visually-hidden>Offence</span></th>
+        <th pdk-table-header="col"><span pdk-visually-hidden>Actions</span></th>
+      </tr>
+    </thead>
+    @for (key of getKeysSortedByStartTime(hearingsGroupedByStartTime); track key) { @for (hearing of
+    hearingsGroupedByStartTime[key]; track trackModelBy(count, hearing); let count = $index) { @if
+    (!restrictLists()) {
+    <tbody pdk-table-body pdk-margin-bottom="1">
+      @if (!isStandaloneApplication(hearing)) { @for (listedCase of hearing.listedCases; track
+      trackModelBy(indexListedCase, listedCase); let indexListedCase = $index) {
+      <tr
+        data-test-id="hearingListItem"
+        pdk-table-row
+        highlightOnHover
+        [attr.data-role]="hearing.id"
+        [class.enableAction]="enableAction()"
+        [class.selected]="selectedHearing && selectedHearing.id === hearing.id"
+        (click)="hearingSelected(hearing)"
+        (mouseover)="onMouseOver(hearing)"
+        (mouseout)="onMouseOut()"
+      >
+        <td
+          pdk-table-cell
+          style="width: 10%"
+          [class.bottomless-border]="isCellWithDottedBorderBottom(hearing, indexListedCase) || hearing.publicListNote"
+        >
+          <span
+            data-test-id="hearingStartTime"
+            [pdk-visually-hidden]="count > 0 || indexListedCase > 0"
+            >{{ hearing | startTimeByMatchedHearingDay }}</span
+          >
+        </td>
+        <td
+          pdk-table-cell
+          [pdk-border-colour]="'mid-grey'"
+          [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
+          [class.bottomless-border]="hearing.publicListNote"
+        >
+          <div class="marker-width">
+            <case-markers
+              class="case-markers"
+              [hearing]="hearing"
+              [indexListedCase]="indexListedCase"
+            ></case-markers>
+          </div>
+        </td>
+        <td
+          pdk-table-cell
+          class="defendants"
+          [pdk-border-colour]="'mid-grey'"
+          [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
+          [class.bottomless-border]="hearing.publicListNote"
+        >
+          @if (!hearing.totalCases || hearing.totalCases === 1) {
+          <span data-test-id="firstDefendantName"
+            >{{ getAllDefendantsByIndexListedCase(hearing, indexListedCase) |
+            findFirstDefendantAlphabetically | fullName }}</span
+          >
+          @if (plusOtherDefendantsByIndexListedCase(hearing, indexListedCase)) {
+          <div>{{ plusOtherDefendantsByIndexListedCase(hearing, indexListedCase) }}</div>
+          }
+          <div>
+            <a
+              pdk-link
+              class="hearing-reference"
+              pdk-typography="caption-medium"
+              data-test-id="hearingReference"
+              attr.aria-label="View case details –  {{listedCase.caseIdentifier.caseReference}}"
+              target="_blank"
+              href="{{ baseUrl() }}/prosecution-casefile/case-at-a-glance/{{ listedCase.id }}"
+              >{{listedCase.caseIdentifier.caseReference}}</a
+            >
+          </div>
+          <reporting-restrictions
+            [caseId]="listedCase.id"
+            [defendants]="listedCase?.defendants"
+            [isWarning]="selectedHearing?.id !== hearing.id"
+            [isActive]="selectedHearing?.id === hearing.id"
+          >
+          </reporting-restrictions>
+          <youth-flag [defendants]="listedCase.defendants"></youth-flag>
+          } @else {
+          <div data-test-id="numberOfDefendants">{{ hearing.totalCases + " " + 'DEFENDANTS'}}</div>
+          <div data-test-id="numberOfCases">{{ hearing.totalCases + " " + 'CASES'}}</div>
+          }
+        </td>
+        <td
+          data-test-id="hearingDuration"
+          pdk-table-cell
+          [pdk-border-colour]="'mid-grey'"
+          [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
+          [class.bottomless-border]="hearing.publicListNote"
+        >
+          @if (showEstimateTime(hearing, indexListedCase)) {
+          <hearing-estimate [estimate]="getHearingEstimate(hearing)"></hearing-estimate>
+          } @else { - }
+        </td>
+        <td
+          pdk-table-cell
+          data-test-id="hearingType"
+          [pdk-border-colour]="'mid-grey'"
+          [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
+          [class.bottomless-border]="hearing.publicListNote"
+        >
+          {{ hearing.type.description | capitalizeFirstLetter }}
+        </td>
+        <td
+          data-test-id="firstOffenceTitle"
+          pdk-table-cell
+          [pdk-border-colour]="'mid-grey'"
+          [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
+          [class.bottomless-border]="hearing.publicListNote"
+          [style.padding-right.px]="enableAction() ? '30' : '0'"
+        >
+          {{ firstDefendantOffence(hearing, indexListedCase) }}
+        </td>
+        @if (indexListedCase === 0) {
+        <td
+          pdk-table-cell
+          [attr.rowspan]="hearing.listedCases.length"
+          [pdk-border-colour]="'mid-grey'"
+          [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
+          [class.bottomless-border]="hearing.publicListNote"
+        >
+          <a
+            href="javascript:void(0)"
+            (click)="hearingSelected(hearing)"
+            pdk-margin-left="4"
+            [attr.aria-label]="'Edit Hearing for '
+                                                        + (getAllDefendantsByIndexListedCase(hearing, indexListedCase) | findFirstDefendantAlphabetically | fullName) + ' '
+                                                        + plusOtherDefendantsByIndexListedCase(hearing, indexListedCase)"
+          >
+            @if (enableAction() && (!selectedHearing || selectedHearing.id !== hearing.id)) {
+            <i class="listing-vector-icon">
+              <svg width="100%" height="100%">
+                <use
+                  [attr.xlink:href]="(selectedHearing && selectedHearing.id === hearing.id) ||
+                                                            (focussedHearing && focussedHearing.id === hearing.id) ?
+                                                            'assets\\svg-icons-definitions.svg#start-action-alt' :  'assets\\svg-icons-definitions.svg#start-action'"
+                ></use>
+              </svg>
+            </i>
+            }
+          </a>
+        </td>
+        }
+      </tr>
+      } @if (hearing.publicListNote) {
+      <tr pdk-table-row>
+        <td pdk-table-cell></td>
+        <td pdk-table-cell colspan="6">
+          <b>Public list note: </b>
+          <span>{{ hearing.publicListNote }}</span>
+        </td>
+      </tr>
+      } } @if (isStandaloneApplication(hearing)) {
+      <tr
+        data-test-id="hearingListItem"
+        pdk-table-row
+        highlightOnHover
+        [attr.data-role]="hearing.id"
+        [class.enableAction]="enableAction()"
+        [class.selected]="selectedHearing && selectedHearing.id === hearing.id"
+        (click)="hearingSelected(hearing)"
+        (mouseover)="onMouseOver(hearing)"
+        (mouseout)="onMouseOut()"
+      >
+        <td pdk-table-cell style="width: 10%" data-test-id="hearingStartTime">
+          <span [pdk-visually-hidden]="count > 0">{{ key }}</span>
+        </td>
+        <td pdk-table-cell>
+          <div class="marker-width">
+            <case-markers class="case-markers" [hearing]="hearing"></case-markers>
+          </div>
+        </td>
+        <td
+          pdk-table-cell
+          style="width: 30%; word-break: break-all"
+          class="break-long-words"
+          class="defendants"
+        >
+          <div>
+            @if (getAllPersonRespondents(hearing).length > 0) { {{ getAllPersonRespondents(hearing)
+            | findFirstApplicantRespondantAlphabetically | applicantRespondentFullName }} } @if
+            (getAllPersonRespondents(hearing).length === 0) {
+            <div data-test-id="applicantName">
+              {{ getAllApplicants(hearing) | findFirstApplicantRespondantAlphabetically |
+              applicantRespondentFullName }}
+            </div>
+            }
+          </div>
+          <div>
+            <a
+              pdk-link
+              class="hearing-reference"
+              pdk-typography="caption-medium"
+              data-test-id="hearingReference"
+              target="_blank"
+              attr.aria-label="View application details – {{ getStandAloneApplicationRef(hearing) }}"
+              href="{{ baseUrl() }}/prosecution-casefile/application-at-a-glance/{{ getStandAloneApplicationId(hearing) }}"
+              (click)="onApplicationClick($event, hearing)"
+              >{{getStandAloneApplicationRef(hearing)}}</a
+            >
+          </div>
+          @if (plusOtherRespondants(hearing)) {
+          <div>{{ plusOtherRespondants(hearing) }}</div>
+          }
+        </td>
+        <td pdk-table-cell data-test-id="hearingDuration">
+          <hearing-estimate [estimate]="hearing.estimatedMinutes"></hearing-estimate>
+        </td>
+        <td pdk-table-cell data-test-id="hearingType">
+          {{ hearing.type.description | capitalizeFirstLetter }}
+        </td>
+        <td pdk-table-cell [style.padding-right.px]="enableAction() ? '30' : '0'">
+          {{ firstApplicationType(hearing) }}
+        </td>
+        <td pdk-table-cell>
+          <a
+            href="javascript:void(0)"
+            (click)="hearingSelected(hearing)"
+            [attr.aria-label]="'Edit Hearing for '
+                                + (getAllDefendants(hearing) | findFirstDefendantAlphabetically | fullName) + ' '
+                                + plusOtherDefendants(hearing)"
+          >
+            @if (enableAction() && (!selectedHearing || selectedHearing.id !== hearing.id)) {
+            <i class="listing-vector-icon">
+              <svg width="100%" height="100%">
+                <use
+                  [attr.xlink:href]="(selectedHearing && selectedHearing.id === hearing.id) ||
+                                    (focussedHearing && focussedHearing.id === hearing.id) ?
+                                    'assets\\svg-icons-definitions.svg#start-action-alt' :  'assets\\svg-icons-definitions.svg#start-action'"
+                ></use>
+              </svg>
+            </i>
+            }
+          </a>
+        </td>
+      </tr>
+      }
+    </tbody>
+    } @else {
+    <court-restrictions
+      (restrictPartyChanged)="onRestrictPartyChanged($event)"
+      style="vertical-align: top"
+      [hearing]="hearing"
+      [isCase]="!isStandaloneApplication(hearing)"
+      [isApplication]="isStandaloneApplication(hearing)"
+      [hearingType]="hearing.type.description"
+      [estimatedMinutes]="getHearingEstimate(hearing)"
+      [hearingTime]="key"
+      [weekCommencingSelected]="!isStandaloneApplication(hearing) ? weekCommencingSelected() : undefined"
+      (onRestrictCase)="onRestrictCaseChanged($event.id, hearing.id, $event.restrictValue)"
+      (onRestrictApplication)="onRestrictApplicationChanged($event.id, hearing.id, $event.restrictValue)"
+    >
+    </court-restrictions>
+    } } }
+  </table>
+  <ng-template #actions>
+    @if (!enableReorder()) {
+    <div>
+      @if (judiciary().length) {
+      <a
+        (click)="onSelectChangeJudiciary.emit(hearings())"
+        href="javascript:void(0)"
+        pdk-typography="body-medium"
+        pdk-link
+        pdk-margin-right="1"
+        >Change</a
+      >
+      } @if (!judiciary().length) {
+      <a
+        (click)="onSelectChangeJudiciary.emit(hearings())"
+        href="javascript:void(0)"
+        pdk-typography="body-medium"
+        pdk-link
+        pdk-margin-right="1"
+        >Add judiciary</a
+      >
+      }
+    </div>
+    }
+  </ng-template>
+</div>

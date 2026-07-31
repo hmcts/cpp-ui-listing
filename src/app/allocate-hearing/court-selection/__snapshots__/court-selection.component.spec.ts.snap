@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CourtSelectionComponent should render component 1`] = `
+<court-selection
+  backUrl={[Function Function]}
+  continue={[Function OutputEmitterRef]}
+  courts={[Function Function]}
+  errors={[Function OutputEmitterRef]}
+  organisationUnits={[Function Function]}
+  queryParams={[Function Function]}
+>
+  <div
+    class="court-center-selection"
+  >
+    <pdk-grid
+      class="govuk-grid-row"
+      container=""
+    >
+      <h1
+        class="govuk-!-margin-bottom-1 govuk-!-margin-top-2 govuk-heading-l govuk-visually-hidden"
+        pdk-margin-bottom="1"
+        pdk-margin-top="2"
+        pdk-typography="heading-large"
+        pdk-visually-hidden=""
+      >
+         Allocate to court 
+      </h1>
+      <form
+        class="govuk-!-margin-top-1 ng-untouched ng-pristine ng-valid"
+        data-test-id="courtCalendarFilters"
+        novalidate=""
+        pdk-form=""
+        pdk-margin-top="1"
+      >
+        <pdk-form-field
+          label="Where do you want to allocate to?"
+          labeltype="large"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-fieldset__legend--l"
+              >
+                 Where do you want to allocate to? 
+              </legend>
+              <pdk-radio-group
+                class="ng-untouched ng-pristine ng-valid"
+                name="hearingType"
+                required=""
+              >
+                <div
+                  class="govuk-radios"
+                >
+                  <pdk-radio-button
+                    value="CROWN"
+                  >
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="CROWN"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        Crown Court 
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                  <pdk-grid
+                    class="govuk-grid-column-two-thirds"
+                    two-thirds=""
+                  >
+                  </pdk-grid>
+                  <pdk-radio-button
+                    class="clear-both"
+                    value="MAGISTRATES"
+                  >
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="MAGISTRATES"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        Magistrates' Court 
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                  <pdk-grid
+                    class="govuk-grid-column-two-thirds"
+                    two-thirds=""
+                  >
+                  </pdk-grid>
+                </div>
+              </pdk-radio-group>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <button
+          class="govuk-!-margin-bottom-1 govuk-button"
+          data-role="continue-btn"
+          pdk-button=""
+          pdk-margin-bottom="1"
+          type="submit"
+        >
+           Continue 
+        </button>
+        <div
+          class="govuk-!-margin-top-2"
+          pdk-margin-top="2"
+        >
+          <a
+            class="govuk-link govuk-link--no-visited-state"
+            data-role="cancel-btn"
+            pdk-link=""
+            unvisited=""
+          >
+            Back
+          </a>
+        </div>
+      </form>
+    </pdk-grid>
+  </div>
+</court-selection>
+`;

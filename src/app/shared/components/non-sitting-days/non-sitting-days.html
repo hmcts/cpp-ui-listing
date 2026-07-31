@@ -1,0 +1,72 @@
+<div class="non-sitting-days" pdk-padding-top="5">
+  <p class="bold" pdk-margin-bottom="3" pdk-typography="body-medium">Non sitting days</p>
+  @if (copyNonSittingDays.length === 0) {
+  <span pdk-margin-bottom="5"> No days added</span>
+  }
+
+  <ng-container *ngTemplateOutlet="nonSittingDaysTemplate"> </ng-container>
+  @if (!readOnly()) {
+  <p class="bold" pdk-margin-bottom="3" pdk-typography="body-medium">Add non sitting day</p>
+  <div
+    pdk-form
+    [formGroup]="formGroup"
+    (errors)="onValidationError.emit($event)"
+    (validSubmit)="onFormSubmit()"
+    novalidate
+  >
+    <pdk-form-field
+      label="Non sitting day"
+      labelType="none"
+      pdk-margin-bottom="2"
+      [errorMessages]="errorMessages"
+    >
+      <pdk-date-input
+        [minDate]="dateRange()?.startDate"
+        [maxDate]="dateRange()?.endDate"
+        picker
+        class="details-date-input"
+        formControlName="nonSittingDay"
+      >
+      </pdk-date-input>
+    </pdk-form-field>
+    <pdk-grid container class="non-sitting-days-button-group" pdk-margin-top="0">
+      <pdk-grid one-third>
+        <div>
+          <a
+            pdk-link
+            id="addNonSittingDaysForm"
+            (click)="formGroupDirective.onSubmit($event)"
+            href="javascript:;"
+            >Add</a
+          >
+        </div>
+      </pdk-grid>
+    </pdk-grid>
+  </div>
+  }
+</div>
+
+<ng-template #nonSittingDaysTemplate>
+  <pdk-grid container>
+    <ul pdk-margin-top="0">
+      @for (nonSittingDay of copyNonSittingDays; track nonSittingDay; let i = $index) {
+      <li pdk-margin-bottom="1">
+        <pdk-grid class="date">
+          <span>{{ nonSittingDay | date:'d MMMM y' }}</span>
+          @if (!readOnly()) {
+          <a
+            pdk-link
+            (click)="cancelNonSittingDay(i)"
+            href="javascript:;"
+            role="button"
+            pdk-text-colour="red"
+            [pdk-padding-left]="2"
+            >Delete</a
+          >
+          }
+        </pdk-grid>
+      </li>
+      }
+    </ul>
+  </pdk-grid>
+</ng-template>

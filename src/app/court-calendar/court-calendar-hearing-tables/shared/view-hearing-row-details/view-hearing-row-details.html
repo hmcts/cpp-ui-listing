@@ -1,0 +1,222 @@
+<h2 pdk-typography="heading-small" pdk-visually-hidden>Hearing details</h2>
+
+<div pdk-padding-horizontal="8">
+  @if (hearing().allocated === false && hearing().jurisdictionType === 'CROWN') {
+  <form
+    #publicListNoteForm="ngForm"
+    pdk-form
+    (validSubmit)="onSubmitPublicListNote(publicListNoteForm.value)"
+  >
+    <div class="d-flex">
+      <button type="submit" pdk-button class="save-button">Save changes</button>
+    </div>
+    <div
+      pdk-grid
+      container
+      pdk-margin-bottom="3"
+      pdk-padding-bottom="2"
+      pdk-margin-horizontal="0"
+      class="public-list-note"
+    >
+      <dt pdk-grid one-third pdk-padding-left="0">
+        <b>Public list note (optional)</b>
+      </dt>
+      <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+        <input
+          type="text"
+          name="publicListNote"
+          #model="ngModel"
+          [ngModel]="publicListNote()"
+          pdk-input
+          maxlength="150"
+        />
+        <pdk-character-count [value]="model.value" limit="150"> </pdk-character-count>
+      </dd>
+    </div>
+  </form>
+  }
+  <div pdk-grid container>
+    <div pdk-grid full>
+      <dl pdk-margin-top="0">
+        @if (!!listedCase) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Defendants</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            @for (defendant of listedCase?.defendants; track defendant.id; let last = $last) {
+            <span>
+              {{ defendant | fullName }}{{ defendant.isYouth && defendant.bailStatus?.code === 'C' ?
+              ' (Y, C)' : defendant.isYouth ? ' (Y)' : defendant.bailStatus?.code === 'C' ? ' (C)' :
+              '' }}{{ !last ? ',&nbsp;' : '' }}
+            </span>
+            }
+          </dd>
+        </div>
+        } @if (!!application) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Applicant</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <span> {{ application.applicant | applicantRespondentFullName }} </span>
+          </dd>
+        </div>
+        } @if (application?.respondents?.length > 0) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Respondents</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            @for (respondent of application?.respondents; track respondent.id; let last = $last) {
+            <span> {{ respondent | applicantRespondentFullName }}{{ !last ? ' ,' : '' }} </span>
+            }
+          </dd>
+        </div>
+        } @if (custodyDefendants?.length > 0) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Custody status</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <custody-status [custodyDefendants]="custodyDefendants"></custody-status>
+          </dd>
+        </div>
+        }
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Offences</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <offence-wording-cell [offenceWordings]="offences()"></offence-wording-cell>
+          </dd>
+        </div>
+        @if (caseNotes()?.length > 0) {
+        <div
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+          pdk-grid
+          container
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Case notes</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <case-notes [caseNotes]="caseNotes()"></case-notes>
+          </dd>
+        </div>
+        }
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Hearing language</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <span> {{hearing()?.hearingLanguage | titlecase}}</span>
+          </dd>
+        </div>
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Video hearing</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <span>{{ hearing().hasVideoLink ? 'Yes' : 'No' }}</span>
+          </dd>
+        </div>
+        @if (hearing().allocated === true && hearing().jurisdictionType === 'CROWN' &&
+        hearing().publicListNote) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Public list note</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <span>{{ hearing().publicListNote}}</span>
+          </dd>
+        </div>
+        } @if (hearing()?.hearingDayCount > 1) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Multi-day hearing</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <div class="flex-display flex-display-column">
+              <div>
+                <span> Start date:&nbsp; </span>
+                <span> {{ hearing()?.startDate | date : 'dd/MM/yyyy' }}</span>
+              </div>
+              <div>
+                <span> End date:&nbsp; </span>
+                <span> {{ hearing()?.endDate | date : 'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+          </dd>
+        </div>
+        }
+      </dl>
+    </div>
+  </div>
+</div>

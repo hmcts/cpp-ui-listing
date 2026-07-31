@@ -1,0 +1,23 @@
+@if (fileId()) {
+  <div pdk-margin-top="2">
+    <a
+      pdk-link
+      data-role="download-publish-list"
+      href="javascript:void(0)"
+      class="link-btn"
+      (click)="download.emit(fileId()!)"
+    >
+      Download {{ label() | lowercase }}
+    </a>
+  </div>
+}
+@if (timestamp()) {
+  <span
+    pdk-typography="body-small"
+    pdk-text-colour="dark-grey"
+    style="display: block"
+    pdk-margin-top="2"
+  >
+    {{ timestamp() }}
+  </span>
+}

@@ -1,0 +1,24 @@
+$module: 'datepicker';
+
+.#{$module} {
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: nowrap;
+  // flex-shrink: 0;
+
+  // & .flex-column {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+
+  // & .flex-row {
+  //   display: flex;
+  //   flex-direction: row;
+  // }
+
+  & pdk-date-input > pdk-interaction-container > div > div > div:first-child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}

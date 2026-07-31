@@ -1,0 +1,22 @@
+.cell-border-bottom-none {
+  border-bottom-width: 0px;
+}
+
+.cell-border-bottom-dotted {
+  border-bottom-style: dashed;
+  border-bottom-width: 2.25px;
+}
+
+.selected-hearing-to-move {
+  border-left-width: 6px;
+  border-left-color: #1d70b8;
+  border-left-style: solid;
+}
+
+.details-expanded {
+  transform: rotate(0.25turn);
+}
+
+.action-cell {
+  text-align: right;
+}

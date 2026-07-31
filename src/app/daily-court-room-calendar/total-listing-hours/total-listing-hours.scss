@@ -1,0 +1,10 @@
+
+
+$module: 'total-listing-hours';
+
+.#{$module} {
+    margin-top: 10px;
+    > div{
+        display: flex;
+    }
+}

@@ -1,0 +1,33 @@
+$module: 'non-sitting-days';
+
+.#{$module} {
+  ul {
+    padding-left: 0;
+
+    li {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  &-button-group {
+    margin-top: 30px;
+
+    #cancelNonSittingDaysForm {
+      position: relative;
+      transform: translate(0, 50%);
+    }
+  }
+
+  .details-date-input {
+    display: block;
+    width: 16em;
+  }
+
+  .non-sitting-days-button-group {
+    height: 2em;
+  }
+  .date {
+    margin-left: 0.75em;
+  }
+}

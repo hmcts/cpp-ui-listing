@@ -1,0 +1,296 @@
+@if (crownSelected()) {
+  <div>
+    @if (!isWeekCommencing) {
+      <pdk-related>
+        <div pdk-margin-bottom="4">
+          <h2 pdk-typography="heading-medium">Upcoming hearings</h2>
+          <a
+            pdk-link
+            data-role="upcoming-hearings-download"
+            href="javascript:void(0)"
+            class="link-btn"
+            (click)="downloadUpcomingHearings()"
+          >
+            Download upcoming hearings report
+          </a>
+        </div>
+      </pdk-related>
+    }
+    <pdk-related>
+      <ul pdk-list>
+        <li>
+          <h2 pdk-typography="heading-medium">Publish list</h2>
+        </li>
+        @if (!isWeekCommencing && !checkForPublishStatus('FINAL')) {
+          <li>
+            <button
+              pdk-margin-bottom="3"
+              data-role="sharedraftlists-button"
+              pdk-button="secondary"
+              type="button"
+              class="download-file draft auto-width"
+              (click)="openModal(template, 'draft')"
+            >
+              <span pdk-typography="body">Share draft list</span>
+            </button>
+            <span
+              pdk-margin-bottom="5"
+              pdk-typography="body-small"
+              style="display: block"
+              pdk-text-colour="dark-grey"
+              >{{ mapPublishStatuses('DRAFT') }}</span
+            >
+          </li>
+        }
+        @if (!isWeekCommencing) {
+          <li>
+            @if (!isWeekCommencing) {
+              <button
+                pdk-margin-bottom="3"
+                data-role="sharedfinallists-button"
+                pdk-button="secondary"
+                type="button"
+                class="download-file final auto-width"
+                (click)="openModal(template, 'final')"
+              >
+                <span pdk-typography="body">Share final list</span>
+              </button>
+            }
+            <span
+              data-role="publish-status-message-final"
+              pdk-typography="body-small"
+              style="display: block"
+              pdk-text-colour="dark-grey"
+              >{{ mapPublishStatuses('FINAL') }}</span
+            >
+          </li>
+        }
+        @if (isWeekCommencing) {
+          <li>
+            <button
+              pdk-margin-bottom="3"
+              data-role="sharewarnlists-button"
+              pdk-button="secondary"
+              type="button"
+              class="download-file warn auto-width"
+              (click)="openModal(template, 'warn')"
+            >
+              <span pdk-typography="body">Share warn list</span>
+            </button>
+            <span pdk-typography="body-small" style="display: block" pdk-text-colour="dark-grey">{{
+              mapPublishStatuses('WARN')
+            }}</span>
+          </li>
+        }
+        @if (isWeekCommencing) {
+          <li>
+            @if (crownSelected() && isWeekCommencing) {
+              <button
+                pdk-margin-bottom="3"
+                data-role="sharedfirmlists-button"
+                pdk-button="secondary"
+                type="button"
+                class="download-file firm auto-width"
+                (click)="openModal(template, 'firm')"
+              >
+                <span pdk-typography="body">Share firm list</span>
+              </button>
+            }
+            <span pdk-typography="body-small" style="display: block" pdk-text-colour="dark-grey">{{
+              mapPublishStatuses('FIRM')
+            }}</span>
+          </li>
+        }
+      </ul>
+    </pdk-related>
+    @if (hearingsByDateAndRoom().length > 0 || weekHearingsByDateAndRoom().length > 0) {
+      <pdk-related>
+        @if (!isWeekCommencing) {
+          <ul pdk-list class="download-file judge">
+            <li>
+              <h2 pdk-typography="heading-medium">Judge's list</h2>
+            </li>
+            @for (courtroom of courtRoomsForJudgeList; track courtroom.id; let i = $index) {
+              <li>
+                <a
+                  pdk-link
+                  href="javascript:void(0)"
+                  class="judgelist-{{ i }}"
+                  (click)="downloadList(CourtListType.JUDGE, false, courtroom)"
+                  >{{ courtroom.name }}</a
+                >
+              </li>
+            }
+          </ul>
+        }
+      </pdk-related>
+    }
+    @if (hearingsByDateAndRoom().length > 0 || weekHearingsByDateAndRoom().length > 0) {
+      <pdk-related>
+        @if (!isWeekCommencing) {
+          <ul pdk-list>
+            <li>
+              <h2 pdk-typography="heading-medium">Ushers' list</h2>
+            </li>
+            <li>
+              <button
+                pdk-margin-bottom="3"
+                data-role="usherslist-button"
+                pdk-button="secondary"
+                type="button"
+                class="download-file usher auto-width"
+                (click)="downloadList(CourtListType.USHERS_CROWN, false)"
+              >
+                <span pdk-typography="body">All courtrooms</span>
+              </button>
+            </li>
+          </ul>
+        }
+      </pdk-related>
+    }
+  </div>
+}
+
+@if (
+  !crownSelected() && (hearingsByDateAndRoom().length > 0 || weekHearingsByDateAndRoom().length > 0)
+) {
+  <div>
+    <pdk-inset-text>
+      {{ selectedDate }} <br />
+      {{ selectedCourtRoom }}
+    </pdk-inset-text>
+    @if (selectedCourtRoom === ALL_COURTROOMS) {
+      <mags-publish-list
+        [isHmctsUser]="isHmctsUser()"
+        [magPublishListPermissions]="magPublishListPermissions()"
+        [statuses]="magsPublishStatuses() ?? []"
+        (onMagsPublishList)="magsPublishList($event)"
+        (onDownloadMagsPublishedList)="downloadMagsPublishedList($event)"
+      />
+    }
+    <pdk-related>
+      <h2 pdk-typography="heading-medium">Downloads</h2>
+      <button
+        pdk-button="secondary"
+        type="button"
+        class="button download-file public"
+        (click)="downloadList(CourtListType.PUBLIC, false)"
+      >
+        <span>Public court list</span>
+      </button>
+      @if (selectedCourtRoom === ALL_COURTROOMS && !isWeekCommencing) {
+        <button
+          pdk-button="secondary"
+          type="button"
+          class="download-file alpha"
+          (click)="downloadList(CourtListType.ALPHABETICAL, false)"
+        >
+          <span>Alphabetical list</span>
+        </button>
+      }
+
+      <button
+        pdk-button="secondary"
+        type="button"
+        class="download-file usher"
+        (click)="downloadList(CourtListType.USHERS_MAGISTRATE, false)"
+      >
+        <span>Ushers' list</span>
+      </button>
+      @if (selectedCourtRoom !== ALL_COURTROOMS) {
+        <button
+          x-auto-restrict-download
+          pdk-button="secondary"
+          type="button"
+          class="download-file standard restrict"
+          (click)="downloadList(CourtListType.STANDARD, false)"
+        >
+          <span>Standard court list</span>
+        </button>
+      }
+      @if (selectedCourtRoom !== ALL_COURTROOMS && !isWeekCommencing) {
+        <button
+          pdk-button="secondary"
+          type="button"
+          class="download-file bench"
+          (click)="downloadList(CourtListType.BENCH, false)"
+        >
+          <span>Bench list</span>
+        </button>
+      }
+      @if (selectedCourtRoom !== ALL_COURTROOMS && !isWeekCommencing && restrictionsExist()) {
+        <pdk-inset-text>
+          <button
+            x-auto-restrict-download
+            pdk-button="secondary"
+            type="button"
+            class="download-file bench-restrict"
+            (click)="downloadList(CourtListType.BENCH, true)"
+          >
+            <span>Bench list Restricted</span>
+          </button>
+        </pdk-inset-text>
+      }
+    </pdk-related>
+  </div>
+}
+
+<ng-template #template>
+  <div class="modal-body">
+    <h1 pdk-typography="heading-large">{{ listText }}</h1>
+    <span pdk-typography="body-medium" style="display: block">{{ modalConfirmMessage }}</span>
+    <ul pdk-padding-left="4">
+      <li>
+        <span
+          pdk-typography="body-medium"
+          pdk-margin-bottom="1"
+          style="display: block; font-weight: bold"
+          >{{ selectedCourtCentre().name }}</span
+        >
+      </li>
+      <li>
+        <span
+          pdk-typography="body-medium"
+          pdk-margin-bottom="1"
+          style="display: block; font-weight: bold"
+          >{{ selectedCourtRoom }}</span
+        >
+      </li>
+      <li>
+        <span
+          pdk-typography="body-medium"
+          pdk-margin-bottom="1"
+          style="display: block; font-weight: bold"
+          >{{ selectedDate }}</span
+        >
+      </li>
+    </ul>
+
+    <pdk-grid container pdk-margin-bottom="2">
+      <pdk-grid full>
+        <pdk-checkbox name="isNotificationOptIn" (change)="setNotificationsOptIn($event.checked)">
+          Check to send listing notifications
+        </pdk-checkbox>
+      </pdk-grid>
+    </pdk-grid>
+
+    <pdk-grid container pdk-padding-top="1">
+      <pdk-grid one-third>
+        <button
+          pdk-padding-horizontal="1"
+          (click)="confirmListSubmission()"
+          pdk-button
+          data-role="publish-modal-submit-btn"
+          type="submit"
+        >
+          {{ listText }}
+        </button>
+      </pdk-grid>
+      <pdk-grid pdk-padding-top="2" two-thirds>
+        <a pdk-link (click)="cancelModal()" class="link-btn cancel-btn" href="javascript:void(0)"
+          >Cancel</a
+        >
+      </pdk-grid>
+    </pdk-grid>
+  </div>
+</ng-template>

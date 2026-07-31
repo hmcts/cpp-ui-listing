@@ -1,0 +1,14 @@
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table {
+  tbody {
+    td,
+    th {
+      border-bottom: none;
+    }
+    border-bottom: 1px solid;
+  }
+}

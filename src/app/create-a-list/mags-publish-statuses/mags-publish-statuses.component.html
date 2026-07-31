@@ -1,0 +1,30 @@
+<div class="panel-list">
+  @for (status of statuses(); track status.publishRequestId) {
+    @let panelConfig = status | publishStatusPanelConfig;
+    <pdk-context-panel
+      class="panel"
+      #panel
+      [title]="status | publishStatusTitle"
+      [icon]="panelConfig.icon"
+      [type]="panelConfig.type"
+    >
+      <div data-test-id="alert-message" pdk-margin-bottom="2">
+        {{ status | publishStatusMessage }}
+      </div>
+      <span data-test-id="alert-message-suggestion">
+        @if (
+          status.publishStatus === magsPublishStatus.SUCCESSFUL &&
+          status.downloadStatus === magsPublishStatus.FAILED
+        ) {
+          Publish again to publish & generate PDF. 
+        }
+        @if (
+          status.publishStatus === magsPublishStatus.FAILED &&
+          status.downloadStatus === magsPublishStatus.FAILED
+        ) {
+          Publish again. 
+        }
+      </span>
+    </pdk-context-panel>
+  }
+</div>

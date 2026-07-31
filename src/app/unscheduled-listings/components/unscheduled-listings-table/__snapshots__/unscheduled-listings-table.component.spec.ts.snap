@@ -1,0 +1,1137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnscheduledListingsTableComponent should allocate hearing 1`] = `
+<unscheduled-listings-table
+  baseUrl={[Function Function]}
+  onAllocate={[Function OutputEmitterRef]}
+  pageNumber={[Function Function]}
+  pageSize={[Function Function]}
+  totalResults={[Function Function]}
+  unscheduledHearings={[Function Function]}
+  unscheduledHearingsForApplications={[Function Function]}
+>
+  <div
+    class="govuk-grid-row"
+    container=""
+    pdk-grid=""
+  >
+    <div
+      class="govuk-grid-column-full"
+      full=""
+      pdk-grid=""
+    >
+      <table
+        class="govuk-table"
+        data-test-id="unscheduledHearingList"
+        pdk-table=""
+      >
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              DOB
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Case Reference
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Type of list
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               John Smith 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               1 October 1980 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of John Smith – 11AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/6f20ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                11AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 11AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               Lloyd Lane 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               11 February 1990 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of Lloyd Lane – 33AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/abc0ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                33AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 33AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div />
+    </div>
+  </div>
+</unscheduled-listings-table>
+`;
+
+exports[`UnscheduledListingsTableComponent should create the right templates with actions 1`] = `
+<unscheduled-listings-table
+  baseUrl={[Function Function]}
+  onAllocate={[Function OutputEmitterRef]}
+  pageNumber={[Function Function]}
+  pageSize={[Function Function]}
+  totalResults={[Function Function]}
+  unscheduledHearings={[Function Function]}
+  unscheduledHearingsForApplications={[Function Function]}
+>
+  <div
+    class="govuk-grid-row"
+    container=""
+    pdk-grid=""
+  >
+    <div
+      class="govuk-grid-column-full"
+      full=""
+      pdk-grid=""
+    >
+      <table
+        class="govuk-table"
+        data-test-id="unscheduledHearingList"
+        pdk-table=""
+      >
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              DOB
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Case Reference
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Type of list
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               John Smith 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               1 October 1980 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of John Smith – 11AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/6f20ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                11AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 11AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               Lloyd Lane 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               11 February 1990 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of Lloyd Lane – 33AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/abc0ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                33AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 33AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div />
+    </div>
+  </div>
+</unscheduled-listings-table>
+`;
+
+exports[`UnscheduledListingsTableComponent should create the right templates with pagination 1`] = `
+<unscheduled-listings-table
+  baseUrl={[Function Function]}
+  onAllocate={[Function OutputEmitterRef]}
+  pageNumber={[Function Function]}
+  pageSize={[Function Function]}
+  totalResults={[Function Function]}
+  unscheduledHearings={[Function Function]}
+  unscheduledHearingsForApplications={[Function Function]}
+>
+  <div
+    class="govuk-grid-row"
+    container=""
+    pdk-grid=""
+  >
+    <div
+      class="govuk-grid-column-full"
+      full=""
+      pdk-grid=""
+    >
+      <table
+        class="govuk-table"
+        data-test-id="unscheduledHearingList"
+        pdk-table=""
+      >
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              DOB
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Case Reference
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Type of list
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               John Smith 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               1 October 1980 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of John Smith – 11AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/6f20ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                11AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 11AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               Lloyd Lane 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               11 February 1990 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of Lloyd Lane – 33AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/abc0ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                33AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 33AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        class="govuk-grid-column-full"
+        full=""
+        pdk-grid=""
+      >
+        <pdk-pagination
+          data-current-page="1"
+          data-page-size="5"
+          data-test-id="pagination"
+          data-total-results="10"
+        >
+          <div
+            class="pdk-pagination"
+          >
+            <nav
+              aria-label="Pagination"
+              class="govuk-pagination"
+            >
+              <div
+                class="pdk-pagination__arrow-placeholder"
+              />
+              <div
+                class="govuk-pagination__list govuk-!-margin-left-1 govuk-!-margin-right-1"
+                pdk-margin-horizontal="1"
+              >
+                <div
+                  class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1 govuk-pagination__item--current"
+                  pdk-margin-horizontal="1"
+                >
+                  <span
+                    aria-label="Current page, page 1"
+                    class="pdk-pagination__item__active"
+                    role="link"
+                    tabindex="0"
+                  >
+                    1
+                  </span>
+                </div>
+                <div
+                  class="govuk-pagination__item govuk-!-margin-left-1 govuk-!-margin-right-1"
+                  pdk-margin-horizontal="1"
+                >
+                  <a
+                    aria-label="Go to page 2"
+                    class="govuk-pagination__link govuk-link"
+                    href="javascript:void(0)"
+                    pdk-link=""
+                  >
+                     2 
+                  </a>
+                </div>
+              </div>
+              <div
+                class="govuk-pagination__next"
+              >
+                <a
+                  aria-label="Go to next page of results"
+                  class="govuk-link govuk-pagination__link"
+                  href="javascript:void(0)"
+                  rel="Next"
+                >
+                  <span
+                    class="govuk-pagination__link-title"
+                  >
+                     Next 
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="govuk-pagination__icon govuk-pagination__icon--next"
+                    focusable="false"
+                    height="13"
+                    viewBox="0 0 15 13"
+                    width="15"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </pdk-pagination>
+      </div>
+      <div />
+    </div>
+  </div>
+</unscheduled-listings-table>
+`;
+
+exports[`UnscheduledListingsTableComponent should create the right templates without actions 1`] = `
+<unscheduled-listings-table
+  baseUrl={[Function Function]}
+  onAllocate={[Function OutputEmitterRef]}
+  pageNumber={[Function Function]}
+  pageSize={[Function Function]}
+  totalResults={[Function Function]}
+  unscheduledHearings={[Function Function]}
+  unscheduledHearingsForApplications={[Function Function]}
+>
+  <div
+    class="govuk-grid-row"
+    container=""
+    pdk-grid=""
+  >
+    <div
+      class="govuk-grid-column-full"
+      full=""
+      pdk-grid=""
+    >
+      <table
+        class="govuk-table"
+        data-test-id="unscheduledHearingList"
+        pdk-table=""
+      >
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              DOB
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Case Reference
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Type of list
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               John Smith 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               1 October 1980 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of John Smith – 11AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/6f20ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                11AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 11AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-1234"
+            name="1234"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-1234"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               Lloyd Lane 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+               11 February 1990 
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View case details of Lloyd Lane – 33AA22334455"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/case-at-a-glance/abc0ac2c-3b3b-4d75-9bbf-4319323da78c"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                33AA22334455
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     precharge trial preparation 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for case 33AA22334455"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div />
+    </div>
+  </div>
+</unscheduled-listings-table>
+`;
+
+exports[`UnscheduledListingsTableComponent should show unscheduled hearings for applications 1`] = `
+<unscheduled-listings-table
+  baseUrl={[Function Function]}
+  onAllocate={[Function OutputEmitterRef]}
+  pageNumber={[Function Function]}
+  pageSize={[Function Function]}
+  totalResults={[Function Function]}
+  unscheduledHearings={[Function Function]}
+  unscheduledHearingsForApplications={[Function Function]}
+>
+  <div
+    class="govuk-grid-row"
+    container=""
+    pdk-grid=""
+  >
+    <div
+      class="govuk-grid-column-full"
+      full=""
+      pdk-grid=""
+    >
+      <table
+        class="govuk-table"
+        data-test-id="unscheduledHearingList"
+        pdk-table=""
+      >
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              DOB
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Case Reference
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              Type of list
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="hearing-body govuk-table__body"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row"
+            id="defendant-"
+            pdk-table-row=""
+            style="vertical-align: top;"
+          >
+            <td
+              class="govuk-table__cell"
+              data-defendant-id="defendant-"
+              data-test-id="partyName"
+              pdk-table-cell=""
+              width="20%"
+            >
+               ApplicantFirstName1 ApplicantLastName1 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="20%"
+            >
+              -
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingReference"
+              pdk-table-cell=""
+              width="20%"
+            >
+              <a
+                aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                class="hearing-reference govuk-link govuk-caption-m"
+                data-test-id="hearingReference"
+                href="/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                pdk-link=""
+                pdk-typography="caption-medium"
+                target="_blank"
+              >
+                Test-application-reference
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              width="40%"
+            >
+              <dl
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <div
+                  class="typeOfList-allocate-columns"
+                >
+                  <dt
+                    data-test-id="typeOfList"
+                  >
+                     mock-type-of-list-description 
+                  </dt>
+                  <dd>
+                    <a
+                      aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – mock-type-of-list-description"
+                      class="allocate-link govuk-!-margin-left-2 govuk-link"
+                      href="javascript:void(0);"
+                      pdk-link=""
+                      pdk-margin-left="2"
+                    >
+                       Allocate 
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div />
+    </div>
+  </div>
+</unscheduled-listings-table>
+`;

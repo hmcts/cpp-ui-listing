@@ -1,0 +1,82 @@
+<div pdk-margin-bottom="4">
+  <form
+    #form="ngForm"
+    data-test-id="allocated-magistrates-filter"
+    pdk-form
+    (errors)="errors.emit($event)"
+    (validSubmit)="submit(form.value)"
+  >
+    <fieldset pdk-fieldset class="filter-container">
+      <legend pdk-legend pdk-padding-top="4" pdk-visually-hidden>
+        <h2 pdk-typography="heading-medium">Filter allocated magistrates hearings by date</h2>
+      </legend>
+      <div class="border" pdk-border-colour="mid-grey">
+        <div class="grid-row" pdk-border-colour="mid-grey" pdk-padding="2">
+          <pdk-form-field
+            label="Court"
+            labelType="small"
+            [errorMessages]="[
+              {
+                rule: 'required',
+                message: 'Enter a court name'
+              }
+            ]"
+          >
+            <cpp-organisation-unit-autosuggest
+              [id]="'courtCentreFilter'"
+              name="courtCentre"
+              [ngModel]="filterOptions()?.courtCentre"
+              [jurisdictionCode]="'B'"
+              required
+              data-role="allocate-court-centre-input"
+            >
+            </cpp-organisation-unit-autosuggest>
+          </pdk-form-field>
+        </div>
+        <div class="grid-row" pdk-border-colour="mid-grey" pdk-padding="2">
+          <pdk-form-field
+            label="Date"
+            labelType="small"
+            [errorMessages]="[{ rule: 'required', message: 'Please select a date' }]"
+          >
+            <pdk-date-input
+              [ngModel]="filterOptions()?.startDate | date: 'yyyy-MM-dd'"
+              [minDate]="currentDate | date: 'yyyy-MM-dd'"
+              name="startDate"
+              required
+              picker
+            >
+            </pdk-date-input>
+          </pdk-form-field>
+          <pdk-form-field label="Business type (optional)" labelType="small">
+            <cpp-rota-business-type-select
+              [ngModel]="filterOptions()?.businessType"
+              [name]="'businessType'"
+              placeholder="All business types"
+              [required]="false"
+              justified
+            ></cpp-rota-business-type-select>
+          </pdk-form-field>
+        </div>
+        <div class="grid-two-row" pdk-border-colour="mid-grey" pdk-padding="2">
+          <pdk-form-field label="Session" labelType="small">
+            <pdk-radio-group
+              name="courtSession"
+              inline
+              ariaDescribedBy="'courtSession'"
+              ariaDescription="'Session'"
+              [ngModel]="filterOptions()?.courtSession || 'Any'"
+              [options]="courtSessionOptions"
+            >
+            </pdk-radio-group>
+          </pdk-form-field>
+          <pdk-form-group>
+            <button type="submit" aria-label="apply filters " pdk-button>
+              Apply <span pdk-visually-hidden>filters</span>
+            </button>
+          </pdk-form-group>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

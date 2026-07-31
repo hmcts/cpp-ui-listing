@@ -1,0 +1,43 @@
+.hearing-filters-form {
+  padding: 10px 30px;
+  margin-top: 15px;
+
+  ::ng-deep select {
+    height: 38px;
+  }
+
+  .controls > div {
+    display: inline-block;
+    padding-left: 20px;
+  }
+
+  .table-container {
+    display: flex;
+    margin-left: -15px;
+    flex-direction: column;
+  }
+
+  .table-item {
+    display: table-cell;
+    vertical-align: bottom;
+    padding: 0 15px;
+  }
+
+  .disqualification {
+    ::ng-deep select {
+      width: 150px;
+    }
+  }
+
+  @media (min-width: 48.0625em) {
+    .table-container {
+      display: table;
+    }
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,2400 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for hearing with CourtApplication and linked ListedCase 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="selected govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span
+                data-test-id="hearingStartTime"
+              >
+                10:00
+              </span>
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                      Human Trafficking
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <span
+                data-test-id="firstDefendantName"
+              >
+                Harry KANE JUNIOR
+              </span>
+              <div>
+                + 1 other
+              </div>
+              <div>
+                <a
+                  aria-label="View case details –  TFL12345"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  TFL12345
+                </a>
+              </div>
+              <reporting-restrictions>
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-white pdk-!-text-color-white"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+              <youth-flag>
+              </youth-flag>
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  2 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="firstOffenceTitle"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Wound / inflict grievous bodily harm without intent 
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+              rowspan="1"
+            >
+              <a
+                aria-label="Edit Hearing for Harry KANE JUNIOR + 1 other"
+                class="govuk-!-margin-left-4"
+                href="javascript:void(0)"
+                pdk-margin-left="4"
+              >
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for hearing with listedCase 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="selected govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingStartTime"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span>
+                10:00
+              </span>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 30%; word-break: break-all;"
+            >
+              <div>
+                <div
+                  data-test-id="applicantName"
+                >
+                   Applicantfirstname1 APPLICANTLASTNAME1 
+                </div>
+              </div>
+              <div>
+                <a
+                  aria-label="View application details – applicationRef"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  applicationRef
+                </a>
+              </div>
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  5 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Complaint for Attachment of Earnings Order 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <a
+                aria-label="Edit Hearing for  "
+                href="javascript:void(0)"
+              >
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for hearing with multiple standalone CourtApplication 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="selected govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingStartTime"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span>
+                10:00
+              </span>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 30%; word-break: break-all;"
+            >
+              <div>
+                <div
+                  data-test-id="applicantName"
+                >
+                   Applicantfirstname1 APPLICANTLASTNAME1 
+                </div>
+              </div>
+              <div>
+                <a
+                  aria-label="View application details – applicationRef"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  applicationRef
+                </a>
+              </div>
+              <div>
+                + 1 other
+              </div>
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  5 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Complaint for Attachment of Earnings Order 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <a
+                aria-label="Edit Hearing for  "
+                href="javascript:void(0)"
+              >
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for hearing with one standalone CourtApplication 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="selected govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingStartTime"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span>
+                10:00
+              </span>
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 30%; word-break: break-all;"
+            >
+              <div>
+                <div
+                  data-test-id="applicantName"
+                >
+                   Applicantfirstname1 APPLICANTLASTNAME1 
+                </div>
+              </div>
+              <div>
+                <a
+                  aria-label="View application details – applicationRef"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  applicationRef
+                </a>
+              </div>
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  5 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Complaint for Attachment of Earnings Order 
+            </td>
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <a
+                aria-label="Edit Hearing for  "
+                href="javascript:void(0)"
+              >
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for hearing with public list note 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="bottomless-border govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span
+                data-test-id="hearingStartTime"
+              >
+                12:00
+              </span>
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                      Human Trafficking
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <span
+                data-test-id="firstDefendantName"
+              >
+                Harry KANE JUNIOR
+              </span>
+              <div>
+                <a
+                  aria-label="View case details –  TFL12345"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  TFL12345
+                </a>
+              </div>
+              <reporting-restrictions>
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-red pdk-!-text-color-red"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+              <youth-flag>
+              </youth-flag>
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  2 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="firstOffenceTitle"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Wound / inflict grievous bodily harm without intent 
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+              rowspan="1"
+            >
+              <a
+                aria-label="Edit Hearing for Harry KANE JUNIOR "
+                class="govuk-!-margin-left-4"
+                href="javascript:void(0)"
+                pdk-margin-left="4"
+              >
+              </a>
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            />
+            <td
+              class="govuk-table__cell"
+              colspan="6"
+              pdk-table-cell=""
+            >
+              <b>
+                Public list note: 
+              </b>
+              <span>
+                Public list note
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for hearing without public list note 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="selected govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span
+                data-test-id="hearingStartTime"
+              >
+                10:00
+              </span>
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                      Human Trafficking
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <span
+                data-test-id="firstDefendantName"
+              >
+                Harry KANE JUNIOR
+              </span>
+              <div>
+                + 1 other
+              </div>
+              <div>
+                <a
+                  aria-label="View case details –  TFL12345"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  TFL12345
+                </a>
+              </div>
+              <reporting-restrictions>
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc33#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-white pdk-!-text-color-white"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+              <youth-flag>
+              </youth-flag>
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  2 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="firstOffenceTitle"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Wound / inflict grievous bodily harm without intent 
+            </td>
+            <td
+              class="pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+              rowspan="1"
+            >
+              <a
+                aria-label="Edit Hearing for Harry KANE JUNIOR + 1 other"
+                class="govuk-!-margin-left-4"
+                href="javascript:void(0)"
+                pdk-margin-left="4"
+              >
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should populate youth flag 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists="false"
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-!-margin-bottom-1 govuk-table__body"
+          pdk-margin-bottom="1"
+          pdk-table-body=""
+        >
+          <tr
+            class="govuk-table__row pdk-table__row--hover-highlight"
+            data-role="b1bfe644-15d3-46aa-bdeb-fe8d18c16a45"
+            data-test-id="hearingListItem"
+            highlightonhover=""
+            pdk-table-row=""
+          >
+            <td
+              class="bottomless-border govuk-table__cell"
+              pdk-table-cell=""
+              style="width: 10%;"
+            >
+              <span
+                data-test-id="hearingStartTime"
+              >
+                12:00
+              </span>
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <div
+                class="marker-width"
+              >
+                <case-markers
+                  class="case-markers"
+                >
+                  <div
+                    class="case-markers"
+                  >
+                    <div
+                      class="case-marker-title pdk-!-text-color-red"
+                      pdk-text-colour="red"
+                    >
+                      Human Trafficking
+                    </div>
+                  </div>
+                </case-markers>
+              </div>
+            </td>
+            <td
+              class="defendants bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+            >
+              <span
+                data-test-id="firstDefendantName"
+              >
+                Harry KANE JUNIOR
+              </span>
+              <div>
+                <a
+                  aria-label="View case details –  TFL12345"
+                  class="hearing-reference govuk-link govuk-caption-m"
+                  data-test-id="hearingReference"
+                  href="/prosecution-casefile/case-at-a-glance/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34"
+                  pdk-link=""
+                  pdk-typography="caption-medium"
+                  target="_blank"
+                >
+                  TFL12345
+                </a>
+              </div>
+              <reporting-restrictions>
+                <span
+                  class="reporting-restrictions-component"
+                >
+                  <a
+                    class="govuk-link govuk-body-m"
+                    href="http://baseUrl/prosecution-casefile/edit-case/926fc76b-7ec9-4bee-bb7d-b8e63d61fc34#hearings-and-decisions"
+                    pdk-link=""
+                    pdk-typography="body"
+                    target="_blank"
+                  >
+                    <abbr
+                      class="pdk-!-border-color-red pdk-!-text-color-red"
+                      title="Reporting restrictions"
+                    >
+                       RR 
+                    </abbr>
+                  </a>
+                </span>
+              </reporting-restrictions>
+              <youth-flag>
+              </youth-flag>
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingDuration"
+              pdk-table-cell=""
+            >
+              <hearing-estimate>
+                <div>
+                  2 hours
+                </div>
+              </hearing-estimate>
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="hearingType"
+              pdk-table-cell=""
+            >
+               Further plea & trial preparation 
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              data-test-id="firstOffenceTitle"
+              pdk-table-cell=""
+              style="padding-right: 0px;"
+            >
+               Wound / inflict grievous bodily harm without intent 
+            </td>
+            <td
+              class="bottomless-border pdk-!-border-color-mid-grey govuk-table__cell"
+              pdk-table-cell=""
+              rowspan="1"
+            >
+              <a
+                aria-label="Edit Hearing for Harry KANE JUNIOR "
+                class="govuk-!-margin-left-4"
+                href="javascript:void(0)"
+                pdk-margin-left="4"
+              >
+              </a>
+            </td>
+          </tr>
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <td
+              class="govuk-table__cell"
+              pdk-table-cell=""
+            />
+            <td
+              class="govuk-table__cell"
+              colspan="6"
+              pdk-table-cell=""
+            >
+              <b>
+                Public list note: 
+              </b>
+              <span>
+                Public list note
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should show open state of rectricted row with restricted being populated 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists={[Function Boolean]}
+  restrictedCourtHearingSelected={[Function Object]}
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Restrict
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <court-restrictions
+          style="vertical-align: top;"
+        >
+          <td
+            class="govuk-table__cell"
+            colspan="100%"
+            pdk-table-cell=""
+          >
+            <div
+              data-test-id="hearingListItem"
+            >
+              <div
+                class="flex-row"
+              >
+                <div
+                  class="flex-column"
+                >
+                  <details
+                    class="govuk-details"
+                    pdk-details=""
+                  >
+                    <summary
+                      class="govuk-details__summary"
+                    >
+                      <span
+                        class="govuk-details__summary-text"
+                      >
+                        Restrict details
+                      </span>
+                    </summary>
+                  </details>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                  <div
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingStartTime"
+                  >
+                     10:00 
+                  </div>
+                </div>
+                <div
+                  class="flex-column break-word"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                     Applicantfirstname1 APPLICANTLASTNAME1 
+                  </div>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                  <hearing-estimate>
+                    <div>
+                      2 hours
+                    </div>
+                  </hearing-estimate>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                  <span>
+                     Further plea & trial preparation 
+                  </span>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                   Complaint for Attachment of Earnings Order 
+                </div>
+              </div>
+            </div>
+          </td>
+        </court-restrictions>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;
+
+exports[`HearingsPerJudiciaryComponent Wrapped should show restrict list link when restrict lists is true 1`] = `
+<ng-component
+  enableAction="false"
+  hearing1={[Function Object]}
+  hearing2={[Function Object]}
+  hearingSelected={[Function Function]}
+  hearingTypes={[Function Array]}
+  hearings={[Function Array]}
+  judiciary={[Function Array]}
+  restrictLists={[Function Boolean]}
+  restrictedCourtHearingSelected="null"
+  selectedDate={[Function String]}
+>
+  <hearings-per-judiciary>
+    <div
+      class="relative-item"
+    >
+      <table
+        class="hearings-per-judge govuk-table"
+        pdk-table=""
+      >
+        <caption
+          class="govuk-table__caption"
+          data-test-id="judiciary"
+          pdk-table-caption=""
+        >
+          <div
+            class="flex-caption"
+          >
+            <span
+              data-test-id="judiciaryName"
+            >
+              RECORDER Lord Fabio TISCI and Sgt. FX TISCMAN Esq
+            </span>
+            <div>
+              <a
+                class="govuk-!-margin-right-1 govuk-link govuk-body-m"
+                href="javascript:void(0)"
+                pdk-link=""
+                pdk-margin-right="1"
+                pdk-typography="body-medium"
+              >
+                Change
+              </a>
+            </div>
+          </div>
+        </caption>
+        <thead
+          class="govuk-table__head"
+          pdk-table-head=""
+        >
+          <tr
+            class="govuk-table__row"
+            pdk-table-row=""
+          >
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Restrict
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                 Hearing Time
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Case markers
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Defendant/Respondant
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Estimate
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Type
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Offence
+              </span>
+            </th>
+            <th
+              class="govuk-table__cell"
+              pdk-table-header="col"
+              scope="col"
+            >
+              <span
+                class="govuk-visually-hidden"
+                pdk-visually-hidden=""
+              >
+                Actions
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <court-restrictions
+          style="vertical-align: top;"
+        >
+          <td
+            class="govuk-table__cell"
+            colspan="100%"
+            pdk-table-cell=""
+          >
+            <div
+              data-test-id="hearingListItem"
+            >
+              <div
+                class="flex-row"
+              >
+                <div
+                  class="flex-column"
+                >
+                  <details
+                    class="govuk-details"
+                    pdk-details=""
+                  >
+                    <summary
+                      class="govuk-details__summary"
+                    >
+                      <span
+                        class="govuk-details__summary-text"
+                      >
+                        Restrict details
+                      </span>
+                    </summary>
+                  </details>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                  <div
+                    class="govuk-visually-hidden"
+                    data-test-id="hearingStartTime"
+                  >
+                     10:00 
+                  </div>
+                </div>
+                <div
+                  class="flex-column break-word"
+                >
+                  <div
+                    data-test-id="applicantName"
+                  >
+                     Applicantfirstname1 APPLICANTLASTNAME1 
+                  </div>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                  <hearing-estimate>
+                    <div>
+                      2 hours
+                    </div>
+                  </hearing-estimate>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                  <span>
+                     Further plea & trial preparation 
+                  </span>
+                </div>
+                <div
+                  class="flex-column"
+                >
+                   Complaint for Attachment of Earnings Order 
+                </div>
+              </div>
+            </div>
+          </td>
+        </court-restrictions>
+      </table>
+    </div>
+  </hearings-per-judiciary>
+</ng-component>
+`;

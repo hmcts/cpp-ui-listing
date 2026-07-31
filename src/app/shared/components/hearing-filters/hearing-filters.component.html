@@ -1,0 +1,159 @@
+<div class="hearing-filters-form" pdk-fill-colour="light-grey">
+  @if (!resetForm) {
+    <form
+      #form="ngForm"
+      pdk-form
+      (validSubmit)="applyFilters(form)"
+      (errors)="validationErrors($event)"
+      novalidate
+      data-test-id="hearingFiltersForm"
+    >
+      <fieldset pdk-fieldset pdk-padding-bottom="0" pdk-margin-bottom="0">
+        <legend pdk-legend="small">Filter by:</legend>
+        <div class="table-container">
+          <div class="table-item">
+            <pdk-form-field
+              [errorMessages]="[
+                {
+                  rule: 'invalidEntry',
+                  message: 'Select valid court'
+                },
+                {
+                  rule: 'required',
+                  message: 'Enter a court'
+                }
+              ]"
+              label="Court"
+              labelType="small"
+            >
+              <pdk-autosuggest-lite
+                [ngModel]="currentCourtCentreOption"
+                (ngModelChange)="
+                  localSelectedOptions.courtCentreId = $event?.value;
+                  courtInputValue = null;
+                  updateValidity('courtCentreId')
+                "
+                (inputText)="
+                  courtSuggestions = getSuggestions($event, courtOptions);
+                  courtInputValue = $event;
+                  updateValidity('courtCentreId')
+                "
+                name="courtCentreId"
+                [suggestions]="courtSuggestions"
+                [suggestionKey]="'value'"
+                [suggestionTitle]="'label'"
+                [invalidEntry]="getOptionLabels(courtOptions)"
+                [inputValue]="courtInputValue"
+                required
+              >
+              </pdk-autosuggest-lite>
+            </pdk-form-field>
+          </div>
+          <div class="table-item">
+            <pdk-form-field
+              [errorMessages]="[
+                {
+                  rule: 'invalidEntry',
+                  message: 'Select valid prosecutor'
+                },
+                {
+                  rule: 'required',
+                  message: 'Enter a prosecutor'
+                }
+              ]"
+              label="Prosecutor"
+              labelType="small"
+            >
+              <pdk-autosuggest-lite
+                [ngModel]="currentProsecutorOption"
+                (ngModelChange)="
+                  localSelectedOptions.authorityId = $event?.value;
+                  prosecutorInputValue = null;
+                  updateValidity('authorityId')
+                "
+                (inputText)="
+                  prosecutorSuggestions = getSuggestions($event, prosecutorOptions);
+                  prosecutorInputValue = $event;
+                  updateValidity('authorityId')
+                "
+                name="authorityId"
+                [suggestions]="prosecutorSuggestions"
+                [suggestionKey]="'value'"
+                [suggestionTitle]="'label'"
+                [invalidEntry]="getOptionLabels(prosecutorOptions)"
+                [inputValue]="prosecutorInputValue"
+                required
+              >
+              </pdk-autosuggest-lite>
+            </pdk-form-field>
+          </div>
+          <div class="table-item">
+            <pdk-form-field
+              [errorMessages]="[
+                {
+                  rule: 'invalidEntry',
+                  message: 'Select valid hearing type'
+                },
+                {
+                  rule: 'required',
+                  message: 'Enter a hearing type'
+                }
+              ]"
+              label="Hearing type"
+              labelType="small"
+            >
+              <pdk-autosuggest-lite
+                [ngModel]="currentHearingTypeOption"
+                (ngModelChange)="
+                  localSelectedOptions.hearingTypeId = $event?.value;
+                  hearingTypeInputValue = null;
+                  updateValidity('hearingTypeId')
+                "
+                (inputText)="
+                  hearingTypesSuggestions = getSuggestions($event, hearingTypeOptions);
+                  hearingTypeInputValue = $event;
+                  updateValidity('hearingTypeId')
+                "
+                name="hearingTypeId"
+                [suggestions]="hearingTypesSuggestions"
+                [suggestionKey]="'value'"
+                [suggestionTitle]="'label'"
+                [invalidEntry]="getOptionLabels(hearingTypeOptions)"
+                [inputValue]="hearingTypeInputValue"
+                required
+              ></pdk-autosuggest-lite>
+            </pdk-form-field>
+          </div>
+          <div class="table-item">
+            <pdk-form-field label="Jurisdiction" labelType="small">
+              <pdk-select
+                [id]="'jurisdictionType'"
+                [name]="'jurisdictionType'"
+                [options]="jurisdictionOptions"
+                [(ngModel)]="localSelectedOptions.jurisdictionType"
+              >
+              </pdk-select>
+            </pdk-form-field>
+          </div>
+          <div class="table-item disqualification">
+            <pdk-form-field label="Possible disqual" labelType="small">
+              <pdk-select
+                [id]="'possibleDisqualification'"
+                [name]="'possibleDisqualification'"
+                [options]="possibleDisqualificationOptions"
+                [(ngModel)]="localSelectedOptions.possibleDisqualification"
+              >
+              </pdk-select>
+            </pdk-form-field>
+          </div>
+        </div>
+        <div class="controls" pdk-margin-right="1" pdk-margin-bottom="2">
+          <button pdk-button data-role="apply-filters-btn" type="submit" pdk-margin-bottom="0">
+            Apply filters
+          </button>
+          <a pdk-link (click)="clearFilters()" href="javascript:;"> Clear filters </a>
+        </div>
+      </fieldset>
+    </form>
+  }
+</div>

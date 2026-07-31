@@ -1,0 +1,96 @@
+<h2 pdk-typography="heading-medium" pdk-margin-top="5">Hearing details</h2>
+@if (hearingVM()) {
+  <div pdk-margin-bottom="5">
+    <dl pdk-margin-top="0">
+      <div
+        pdk-grid
+        container
+        pdk-border-colour="mid-grey"
+        pdk-margin-horizontal="0"
+        pdk-padding-bottom="2"
+        pdk-padding-top="2"
+      >
+        <dt pdk-grid one-third pdk-padding-left="0">
+          <b>Time</b>
+        </dt>
+        <dd pdk-grid two-thirds pdk-margin-left="0">
+          {{ hearingVM().time | date: 'hh:mma' | lowercase }}
+        </dd>
+      </div>
+      <div
+        pdk-grid
+        container
+        pdk-border-colour="mid-grey"
+        pdk-margin-horizontal="0"
+        pdk-padding-bottom="2"
+        pdk-padding-top="2"
+      >
+        <dt pdk-grid one-third pdk-padding-left="0">
+          <b>Duration</b>
+        </dt>
+        <dd pdk-grid two-thirds pdk-margin-left="0">
+          <span>{{ hearingVM().totalHearingDaysCount }} days</span>
+        </dd>
+      </div>
+      <div
+        pdk-grid
+        container
+        pdk-border-colour="mid-grey"
+        pdk-margin-horizontal="0"
+        pdk-padding-bottom="2"
+        pdk-padding-top="2"
+      >
+        <dt pdk-grid one-third pdk-padding-left="0">
+          <b>Hearing type</b>
+        </dt>
+        <dd pdk-grid two-thirds pdk-margin-left="0">
+          <span>{{ hearingVM().hearingType }}</span>
+          @if (hearingVM().hasReportingRestriction) {
+            <div pdk-margin-top="1">
+              <pdk-tag condensed [color]="'red'">RR</pdk-tag>
+            </div>
+          }
+        </dd>
+      </div>
+      <div
+        pdk-grid
+        container
+        pdk-border-colour="mid-grey"
+        pdk-margin-horizontal="0"
+        pdk-padding-bottom="2"
+        pdk-padding-top="2"
+      >
+        <dt pdk-grid one-third pdk-padding-left="0">
+          <b>Case(s)</b>
+        </dt>
+        <dd pdk-grid two-thirds pdk-margin-left="0">
+          @for (
+            ref of hearingVM().cases;
+            track ref.caseUrn || ref.applicationReference;
+            let last = $last
+          ) {
+            <span>
+              <a
+                target="_blank"
+                [href]="
+                  ref.caseId
+                    ? baseUrl() + '/prosecution-casefile/case-at-a-glance/' + ref.caseId
+                    : baseUrl() +
+                      '/prosecution-casefile/application-at-a-glance/' +
+                      ref.applicationId
+                "
+                pdk-link
+                unvisited
+              >
+                {{ ref.caseUrn || ref.applicationReference }}</a
+              >
+              @if (!last) {
+                <span>, </span>
+              }
+            </span>
+          }
+        </dd>
+      </div>
+    </dl>
+  </div>
+}

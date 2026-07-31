@@ -1,0 +1,33 @@
+$module: 'non-default-days';
+
+.#{$module} {
+  ul {
+    padding-left: 0;
+
+    li {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  // because the date input has a margin of 20 px (.gov-*), and its situated inside the details text
+  // give date-input a width in em and make a block element to stop date control from wrapping
+  .details-date-input {
+    display: block;
+    width: 16em;
+  }
+
+  &-button-group {
+    #cancelNonDefaultDaysForm {
+      position: relative;
+      transform: translate(0, 50%);
+    }
+  }
+
+  .non-default-days-button-group {
+    height: 2em;
+  }
+  .date {
+    margin-left: 0.75em;
+  }
+}

@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SplitHearingFormComponent should match the snapshot 1`] = `
+<split-hearing-form
+  defendantByCases={[Function Array]}
+  hearing={[Function Function]}
+  onSubmit={[Function OutputEmitterRef]}
+  wholeHearing="false"
+>
+  <h1
+    class="govuk-!-margin-bottom-2 govuk-!-margin-top-1 govuk-heading-l"
+    pdk-margin-bottom="2"
+    pdk-margin-top="1"
+    pdk-typography="heading-large"
+  >
+    Allocate hearing
+  </h1><h2
+    class="govuk-!-margin-bottom-5 govuk-body-m"
+    pdk-margin-bottom="5"
+    pdk-typography="body-medium"
+  >
+     Select only the defendants and offences you want to allocate to the new hearing
+  </h2><form
+    class="ng-untouched ng-pristine ng-valid"
+    novalidate=""
+    pdk-form=""
+  >
+    <pdk-form-field
+      label="Defendants and offences to allocate"
+      labeltype="none"
+    >
+      <pdk-form-group
+        class="pdk-form-group"
+      >
+        <fieldset
+          class="govuk-fieldset"
+          pdk-fieldset=""
+        >
+          <legend
+            class="govuk-fieldset__legend govuk-visually-hidden"
+          >
+             Defendants and offences to allocate 
+          </legend>
+          <pdk-checkbox-group>
+            <div
+              class="govuk-checkboxes"
+            >
+              <hr />
+              <div
+                data-test-id="defendant"
+              >
+                <pdk-checkbox
+                  class="govuk-!-margin-bottom-3 govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                  pdk-margin-bottom="3"
+                >
+                  <div
+                    class="govuk-checkboxes__item"
+                  >
+                    <input
+                      class="govuk-checkboxes__input"
+                      id="pdk-checkbox-GENERATED_ID"
+                      name="defendant-test-defendant-id-002"
+                      type="checkbox"
+                      value="true"
+                    />
+                    <label
+                      class="govuk-label govuk-checkboxes__label"
+                      for="pdk-checkbox-GENERATED_ID"
+                    >
+                      <span
+                        class="bold pdk-!-text-color-dark-grey govuk-body-l"
+                        data-test-id="defendantName"
+                        pdk-text-colour="dark-grey"
+                        pdk-typography="body-lead"
+                      >
+                      </span>
+                    </label>
+                  </div>
+                </pdk-checkbox>
+                <div
+                  class="govuk-!-margin-left-9 govuk-!-margin-bottom-3"
+                  data-test-id="case"
+                  pdk-margin-bottom="3"
+                  pdk-margin-left="9"
+                >
+                  <div
+                    class="govuk-heading-s"
+                    data-test-id="caseReference"
+                    pdk-typography="heading-small"
+                  >
+                     TFL12345 
+                  </div>
+                  <pdk-form-field
+                    label="Offences"
+                    labeltype="none"
+                  >
+                    <pdk-form-group
+                      class="pdk-form-group"
+                    >
+                      <fieldset
+                        class="govuk-fieldset"
+                        pdk-fieldset=""
+                      >
+                        <legend
+                          class="govuk-fieldset__legend govuk-visually-hidden"
+                        >
+                           Offences 
+                        </legend>
+                        <pdk-checkbox-group>
+                          <div
+                            class="govuk-checkboxes"
+                          >
+                            <div
+                              class="govuk-!-margin-bottom-3"
+                              pdk-margin-bottom="3"
+                            >
+                              <pdk-checkbox
+                                class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                                data-test-id="offence"
+                              >
+                                <div
+                                  class="govuk-checkboxes__item"
+                                >
+                                  <input
+                                    class="govuk-checkboxes__input"
+                                    id="pdk-checkbox-GENERATED_ID"
+                                    name="offence-test-offence-id-004-checked"
+                                    type="checkbox"
+                                    value="true"
+                                  />
+                                  <label
+                                    class="govuk-label govuk-checkboxes__label"
+                                    for="pdk-checkbox-GENERATED_ID"
+                                  >
+                                    <b
+                                      data-test-id="offenceTitle"
+                                    >
+                                      offence title
+                                    </b>
+                                    <pdk-foldable-text>
+                                      <div
+                                        class="pdk-foldable"
+                                      >
+                                        <span
+                                          class="pdk-foldable__content pdk-foldable__content__single"
+                                          id="pdk-foldable-text-GENERATED_ID"
+                                        >
+                                           some offence wording 
+                                        </span>
+                                      </div>
+                                    </pdk-foldable-text>
+                                  </label>
+                                </div>
+                              </pdk-checkbox>
+                            </div>
+                          </div>
+                        </pdk-checkbox-group>
+                      </fieldset>
+                    </pdk-form-group>
+                  </pdk-form-field>
+                </div>
+              </div>
+              <hr />
+            </div>
+          </pdk-checkbox-group>
+        </fieldset>
+      </pdk-form-group>
+    </pdk-form-field>
+    <pdk-form-group
+      class="pdk-form-group"
+    >
+      <button
+        class="govuk-button"
+        data-role="allocate-hearing-btn"
+        disabled="disabled"
+        pdk-button=""
+        type="button"
+      >
+         Allocate hearing 
+      </button>
+    </pdk-form-group>
+  </form>
+</split-hearing-form>
+`;

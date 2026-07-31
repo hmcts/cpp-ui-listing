@@ -1,0 +1,32 @@
+@if (!greaterThanOne(offences()) && hearingType() !== 'Application') {
+<div>
+  @for (offence of offences(); track offence.id) {
+  <div data-test-id="hearingOffence" class="offence">{{ offence.statementOfOffence.title }}</div>
+  }
+</div>
+} @if (greaterThanOne(offences())) {
+<details pdk-details class="font-small">
+  <summary>
+    <span class="summary">{{ offences().length }} Offences</span>
+  </summary>
+  <pdk-details-text>
+    <ul>
+      @for (offence of offences(); track offence.id) {
+      <li pdk-margin-top="2" class="offence">
+        <span data-test-id="hearingOffence">{{ offence.statementOfOffence.title }}</span>
+      </li>
+      }
+    </ul>
+  </pdk-details-text>
+</details>
+} @if (applications()) {
+<div>
+  <ul>
+    @for (type of applicationTypes; track type) {
+    <li class="application">
+      <span class="font-small">{{ type }}</span>
+    </li>
+    }
+  </ul>
+</div>
+}

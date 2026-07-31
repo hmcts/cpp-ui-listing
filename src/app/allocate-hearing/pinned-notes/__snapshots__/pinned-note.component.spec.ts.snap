@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PinnedNoteComponent should display a note 1`] = `
+<pinned-note-test
+  createdDateTime={[Function String]}
+  firstName={[Function String]}
+  lastName={[Function String]}
+  note={[Function String]}
+>
+  <pinned-note>
+    <div
+      class="govuk-!-margin-bottom-2"
+      pdk-margin-bottom="2"
+    >
+      <pdk-foldable-text
+        class="govuk-body-m"
+        pdk-typography="body-medium"
+      >
+        <div
+          class="pdk-foldable"
+        >
+          <span
+            class="pdk-foldable__content pdk-foldable__content__single"
+            id="pdk-foldable-text-GENERATED_ID"
+          >
+            Mock note content
+          </span>
+        </div>
+      </pdk-foldable-text>
+      <div
+        class="govuk-!-margin-0 govuk-body-s"
+        pdk-margin="0"
+        pdk-typography="body-small"
+      >
+        Mock First Name Mock Last Name
+      </div>
+      <div
+        class="govuk-!-margin-0 govuk-body-s"
+        pdk-margin="0"
+        pdk-typography="body-small"
+      >
+         12 November 2020, 12:00am 
+      </div>
+    </div>
+  </pinned-note>
+</pinned-note-test>
+`;
+
+exports[`PinnedNoteComponent should match the snapshot 1`] = `
+<pinned-note-test>
+  <pinned-note>
+    <div
+      class="govuk-!-margin-bottom-2"
+      pdk-margin-bottom="2"
+    >
+      <pdk-foldable-text
+        class="govuk-body-m"
+        pdk-typography="body-medium"
+      >
+        <div
+          class="pdk-foldable"
+        >
+          <span
+            class="pdk-foldable__content pdk-foldable__content__single"
+            id="pdk-foldable-text-GENERATED_ID"
+          >
+          </span>
+        </div>
+      </pdk-foldable-text>
+      <div
+        class="govuk-!-margin-0 govuk-body-s"
+        pdk-margin="0"
+        pdk-typography="body-small"
+      >
+      </div>
+      <div
+        class="govuk-!-margin-0 govuk-body-s"
+        pdk-margin="0"
+        pdk-typography="body-small"
+      >
+      </div>
+    </div>
+  </pinned-note>
+</pinned-note-test>
+`;

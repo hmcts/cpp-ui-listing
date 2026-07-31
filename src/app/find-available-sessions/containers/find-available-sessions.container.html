@@ -1,0 +1,45 @@
+<pdk-grid container pdk-margin-top="2">
+  <pdk-grid full>
+    <breadcrumbs [breadcrumbs]="breadcrumbs"></breadcrumbs>
+
+    @if (errors?.length > 0) {
+    <pdk-error-summary [errors]="errors" pdk-margin-top="4" focusOnChange></pdk-error-summary>
+    }
+
+    <h1 pdk-typography="heading-large" pdk-margin-bottom="4" pdk-margin-top="2">
+      Search for available sessions
+    </h1>
+
+    <div class="scheduling-filters-wrapper" pdk-padding-top="6">
+      <scheduling-filters
+        [organisationUnits]="organisationUnits$ | async"
+        [rotaBusinessTypes]="rotaBusinessTypes$ | async"
+        [defaultValues]="filters$ | async"
+        (filtersSubmit)="handleFiltersSubmit($event)"
+        (errors)="showValidationError($event)"
+      >
+      </scheduling-filters>
+
+      @if ((totalResults$ | async) > -1) {
+      <pdk-inset-text>
+        <b
+          >{{ (totalResults$ | async) }} session{{ (totalResults$ | async) === 1 ? '' : 's' }}
+          found. Only sessions with available time or slots are returned</b
+        >
+      </pdk-inset-text>
+      }
+
+      <scheduling-slots
+        [selectionMode]="'readonly'"
+        [totalResults]="totalResults$ | async"
+        [hearingSlots]="searchResult$ | async"
+        [rotaBusinessTypes]="rotaBusinessTypes$ | async"
+        [pageSize]="pageSize$ | async"
+        [currentPage]="currentPage$ | async"
+        (errors)="errors = $event"
+        (pageChange)="handlePageChange($event)"
+      >
+      </scheduling-slots>
+    </div>
+  </pdk-grid>
+</pdk-grid>

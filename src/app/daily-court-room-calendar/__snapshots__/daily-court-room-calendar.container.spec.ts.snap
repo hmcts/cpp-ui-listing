@@ -1,0 +1,968 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DailyCourtRoomCalendarContainer should match render the component 1`] = `
+<ng-component
+  clearSidebar={[Function Function]}
+  enableAction="false"
+  filterOptions={[Function Object]}
+  onHearingSelected={[Function Function]}
+  onSelectChangeJudiciary={[Function Function]}
+>
+  <daily-court-room-calendar>
+    <div
+      class="daily-court-room-calendar pdk-!-border-color-mid-grey"
+      data-test-id="courtRoomCalendar"
+      pdk-border-colour="mid-grey"
+    >
+      <div
+        class="hearings-panel"
+      >
+        <total-listing-hours>
+          <div>
+            Hearing: [
+    {
+      "id": "b1bfe644-15d3-46aa-bdeb-fe8d18c16a42",
+      "courtApplications": [],
+      "weekCommencingDurationInWeeks": 1,
+      "type": {
+        "id": "5591d709-4397-452c-8533-998165d58d9c",
+        "description": "Further Plea & Trial Preparation"
+      },
+      "endDate": "2018-11-10",
+      "allocated": true,
+      "judiciary": [
+        {
+          "isDeputy": true,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+          "isBenchChairman": false,
+          "judicialRoleType": {
+            "judiciaryType": "RECORDER"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "judiciaryType": "Recorder",
+            "surname": "Tisci",
+            "requestedName": "RECORDER Lord Fabio TISCI",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        },
+        {
+          "isDeputy": false,
+          "judicialId": "328bfc4e-e661-470e-ac7d-35809a4bb298",
+          "isBenchChairman": true,
+          "judicialRoleType": {
+            "judiciaryType": "CIRCUIT_JUDGE"
+          },
+          "judicialMember": {
+            "id": "328bfc4e-e661-470e-ac7d-35809a4bb298",
+            "forenames": "Corporal Fabiano",
+            "surname": "Tiscman",
+            "judiciaryType": "Circuit Judge",
+            "titleJudicialPrefix": "FX",
+            "titlePrefix": "Sgt.",
+            "titleSuffix": "Esq"
+          }
+        }
+      ],
+      "startDate": "2018-11-05",
+      "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+      "listedCases": [
+        {
+          "id": "926fc76b-7ec9-4bee-bb7d-b8e63d61fc33",
+          "defendants": [
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "abc",
+              "lastName": "Smith",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "John",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            },
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223966",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "xyz",
+              "lastName": "Kane Junior",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  },
+                  "reportingRestrictions": [
+                    {
+                      "id": ":id",
+                      "judicialResultId": ":judicialResultId",
+                      "label": ":label",
+                      "orderedDate": ":orderedDate"
+                    }
+                  ]
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "Harry",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            }
+          ],
+          "markers": [
+            {
+              "id": "6b5a9194-186e-4d96-99d6-8fb62d8efa9d",
+              "markerTypeid": "e7eff972-189c-4957-8b1e-cb45213aa64e",
+              "markerTypeCode": "HT",
+              "markerTypeDescription": "Human Trafficking"
+            }
+          ],
+          "caseIdentifier": {
+            "authorityId": "cf73207f-3ced-488a-82a0-3fba79c2ce85",
+            "authorityCode": "TFL",
+            "caseReference": "TFL12345"
+          }
+        }
+      ],
+      "hearingDays": [
+        {
+          "hearingDate": "2020-02-07T10:20:30Z",
+          "endTime": "2018-11-05T12:00:00.000Z",
+          "sequence": 1,
+          "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+          "startTime": "2018-11-05T10:00:00.000Z",
+          "durationMinutes": 120
+        },
+        {
+          "hearingDate": "2018-11-06",
+          "endTime": "2018-11-06T14:00:00.000Z",
+          "sequence": 2,
+          "courtRoomId": ":id",
+          "startTime": "2018-11-06T11:00:00.000Z",
+          "durationMinutes": 180
+        }
+      ],
+      "courtCentreId": "9b583616-049b-30f9-a14f-028a53b7cfe8",
+      "nonDefaultDays": [
+        {
+          "duration": 180,
+          "startTime": "2018-11-05T11:00:00.000Z"
+        }
+      ],
+      "nonSittingDays": [
+        "2018-11-06",
+        "2018-11-07"
+      ],
+      "hearingLanguage": "WELSH",
+      "estimatedMinutes": 300,
+      "jurisdictionType": "MAGISTRATES",
+      "listingDirections": "Wheelchair & special emergency arrangements required",
+      "prosecutorDatesToAvoid": [
+        "Monday"
+      ],
+      "reportingRestrictionReason": "Automatic anonymity under the Sexual Offences (Amendment) Act 1992"
+    },
+    {
+      "id": "b1bfe644-15d3-46aa-bdeb-fe8d18c16a45",
+      "publicListNote": "Public list note",
+      "type": {
+        "id": "5591d709-4397-452c-8533-998165d58d9c",
+        "description": "Further Plea & Trial Preparation"
+      },
+      "weekCommencingDurationInWeeks": 2,
+      "courtApplications": [],
+      "endDate": "2018-11-10",
+      "allocated": true,
+      "judiciary": [
+        {
+          "isDeputy": true,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+          "isBenchChairman": false,
+          "judicialRoleType": {
+            "judiciaryType": "RECORDER"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "surname": "Tisci",
+            "judiciaryType": "Recorder",
+            "requestedName": "RECORDER Lord Fabio TISCI",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        }
+      ],
+      "startDate": "2018-11-05",
+      "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+      "listedCases": [
+        {
+          "id": "926fc76b-7ec9-4bee-bb7d-b8e63d61fc34",
+          "defendants": [
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223966",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "xyz",
+              "lastName": "Kane Junior",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  },
+                  "reportingRestrictions": [
+                    {
+                      "id": ":id",
+                      "judicialResultId": ":judicialResultId",
+                      "label": ":label",
+                      "orderedDate": ":orderedDate"
+                    }
+                  ]
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "Harry",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            }
+          ],
+          "markers": [
+            {
+              "id": "6b5a9194-186e-4d96-99d6-8fb62d8efa9d",
+              "markerTypeid": "e7eff972-189c-4957-8b1e-cb45213aa64e",
+              "markerTypeCode": "HT",
+              "markerTypeDescription": "Human Trafficking"
+            }
+          ],
+          "caseIdentifier": {
+            "authorityId": "cf73207f-3ced-488a-82a0-3fba79c2ce85",
+            "authorityCode": "TFL",
+            "caseReference": "TFL12345"
+          }
+        }
+      ],
+      "hearingDays": [
+        {
+          "hearingDate": "2018-11-05",
+          "endTime": "2018-11-05T12:00:00.000Z",
+          "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+          "sequence": 1,
+          "startTime": "2018-11-05T12:00:00.000Z",
+          "durationMinutes": 120
+        },
+        {
+          "hearingDate": "2018-11-06",
+          "endTime": "2018-11-06T14:00:00.000Z",
+          "sequence": 2,
+          "courtRoomId": ":id1",
+          "startTime": "2018-11-06T12:00:00.000Z",
+          "durationMinutes": 180
+        }
+      ],
+      "courtCentreId": "9b583616-049b-30f9-a14f-028a53b7cfe8",
+      "nonDefaultDays": [
+        {
+          "duration": 180,
+          "startTime": "2018-11-05T11:00:00.000Z"
+        }
+      ],
+      "nonSittingDays": [
+        "2018-11-06",
+        "2018-11-07"
+      ],
+      "hearingLanguage": "WELSH",
+      "estimatedMinutes": 300,
+      "jurisdictionType": "MAGISTRATES",
+      "listingDirections": "Wheelchair & special emergency arrangements required",
+      "prosecutorDatesToAvoid": [
+        "Monday"
+      ],
+      "reportingRestrictionReason": "Automatic anonymity under the Sexual Offences (Amendment) Act 1992"
+    }
+  ]
+          </div>
+          <div>
+            Filter options: {
+    "courtCentreId": "courtCentreId",
+    "courtRoomId": "courtRoomId",
+    "searchDate": "2018-11-10"
+  }
+          </div>
+        </total-listing-hours>
+        <div
+          class="govuk-!-margin-bottom-3 govuk-!-padding-right-2"
+          pdk-margin-bottom="3"
+          pdk-padding-right="2"
+        >
+          <listing-note-container>
+            <div
+              id="listing-note-container"
+            >
+              <div>
+                courtRoomId: "courtRoomId"
+              </div>
+              <div>
+                listingNoteDate: "2018-11-10"
+              </div>
+            </div>
+          </listing-note-container>
+        </div>
+        <div>
+          <hearings-per-judiciary>
+            <div
+              id="hearings-per-judiciary"
+            >
+              <div>
+                Hearings: [
+    {
+      "id": "b1bfe644-15d3-46aa-bdeb-fe8d18c16a45",
+      "publicListNote": "Public list note",
+      "type": {
+        "id": "5591d709-4397-452c-8533-998165d58d9c",
+        "description": "Further Plea & Trial Preparation"
+      },
+      "weekCommencingDurationInWeeks": 2,
+      "courtApplications": [],
+      "endDate": "2018-11-10",
+      "allocated": true,
+      "judiciary": [
+        {
+          "isDeputy": true,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+          "isBenchChairman": false,
+          "judicialRoleType": {
+            "judiciaryType": "RECORDER"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "surname": "Tisci",
+            "judiciaryType": "Recorder",
+            "requestedName": "RECORDER Lord Fabio TISCI",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        }
+      ],
+      "startDate": "2018-11-05",
+      "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+      "listedCases": [
+        {
+          "id": "926fc76b-7ec9-4bee-bb7d-b8e63d61fc34",
+          "defendants": [
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223966",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "xyz",
+              "lastName": "Kane Junior",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  },
+                  "reportingRestrictions": [
+                    {
+                      "id": ":id",
+                      "judicialResultId": ":judicialResultId",
+                      "label": ":label",
+                      "orderedDate": ":orderedDate"
+                    }
+                  ]
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "Harry",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            }
+          ],
+          "markers": [
+            {
+              "id": "6b5a9194-186e-4d96-99d6-8fb62d8efa9d",
+              "markerTypeid": "e7eff972-189c-4957-8b1e-cb45213aa64e",
+              "markerTypeCode": "HT",
+              "markerTypeDescription": "Human Trafficking"
+            }
+          ],
+          "caseIdentifier": {
+            "authorityId": "cf73207f-3ced-488a-82a0-3fba79c2ce85",
+            "authorityCode": "TFL",
+            "caseReference": "TFL12345"
+          }
+        }
+      ],
+      "hearingDays": [
+        {
+          "hearingDate": "2018-11-05",
+          "endTime": "2018-11-05T12:00:00.000Z",
+          "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+          "sequence": 1,
+          "startTime": "2018-11-05T12:00:00.000Z",
+          "durationMinutes": 120
+        },
+        {
+          "hearingDate": "2018-11-06",
+          "endTime": "2018-11-06T14:00:00.000Z",
+          "sequence": 2,
+          "courtRoomId": ":id1",
+          "startTime": "2018-11-06T12:00:00.000Z",
+          "durationMinutes": 180
+        }
+      ],
+      "courtCentreId": "9b583616-049b-30f9-a14f-028a53b7cfe8",
+      "nonDefaultDays": [
+        {
+          "duration": 180,
+          "startTime": "2018-11-05T11:00:00.000Z"
+        }
+      ],
+      "nonSittingDays": [
+        "2018-11-06",
+        "2018-11-07"
+      ],
+      "hearingLanguage": "WELSH",
+      "estimatedMinutes": 300,
+      "jurisdictionType": "MAGISTRATES",
+      "listingDirections": "Wheelchair & special emergency arrangements required",
+      "prosecutorDatesToAvoid": [
+        "Monday"
+      ],
+      "reportingRestrictionReason": "Automatic anonymity under the Sexual Offences (Amendment) Act 1992"
+    }
+  ]
+              </div>
+              <div>
+                Judiciary: [
+    {
+      "isDeputy": true,
+      "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+      "isBenchChairman": false,
+      "judicialRoleType": {
+        "judiciaryType": "RECORDER"
+      },
+      "judicialMember": {
+        "id": "19ffac44-3533-410d-868e-81cf825844b6",
+        "forenames": "Lord Fabio",
+        "surname": "Tisci",
+        "judiciaryType": "Recorder",
+        "requestedName": "RECORDER Lord Fabio TISCI",
+        "titleJudicialPrefix": "LF",
+        "titlePrefix": "Mr."
+      }
+    }
+  ]
+              </div>
+              <div>
+                EnableAction: false
+              </div>
+              <div>
+                LatestSelection: 
+              </div>
+              <div>
+                SelectedDate: 2018-11-10
+              </div>
+              <div>
+                FilterOptions: [object Object]
+              </div>
+              <div>
+                DefaultStartTime: 10:30
+              </div>
+              <div>
+                PreSelectedHearing: 
+              </div>
+              <div>
+                TimeFormat: HH:mm
+              </div>
+              <div>
+                EnableReorder: false
+              </div>
+              <div>
+                RestrictedCourtHearingSelected: 
+              </div>
+              <div>
+                RestrictLists: 
+              </div>
+              <div>
+                WeekCommencingSelected: 
+              </div>
+              <div>
+                hearingTypes: 
+              </div>
+              <div>
+                baseUrl: "http://url.com"
+              </div>
+            </div>
+          </hearings-per-judiciary>
+        </div>
+        <div>
+          <hearings-per-judiciary>
+            <div
+              id="hearings-per-judiciary"
+            >
+              <div>
+                Hearings: [
+    {
+      "id": "b1bfe644-15d3-46aa-bdeb-fe8d18c16a42",
+      "courtApplications": [],
+      "weekCommencingDurationInWeeks": 1,
+      "type": {
+        "id": "5591d709-4397-452c-8533-998165d58d9c",
+        "description": "Further Plea & Trial Preparation"
+      },
+      "endDate": "2018-11-10",
+      "allocated": true,
+      "judiciary": [
+        {
+          "isDeputy": true,
+          "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+          "isBenchChairman": false,
+          "judicialRoleType": {
+            "judiciaryType": "RECORDER"
+          },
+          "judicialMember": {
+            "id": "19ffac44-3533-410d-868e-81cf825844b6",
+            "forenames": "Lord Fabio",
+            "judiciaryType": "Recorder",
+            "surname": "Tisci",
+            "requestedName": "RECORDER Lord Fabio TISCI",
+            "titleJudicialPrefix": "LF",
+            "titlePrefix": "Mr."
+          }
+        },
+        {
+          "isDeputy": false,
+          "judicialId": "328bfc4e-e661-470e-ac7d-35809a4bb298",
+          "isBenchChairman": true,
+          "judicialRoleType": {
+            "judiciaryType": "CIRCUIT_JUDGE"
+          },
+          "judicialMember": {
+            "id": "328bfc4e-e661-470e-ac7d-35809a4bb298",
+            "forenames": "Corporal Fabiano",
+            "surname": "Tiscman",
+            "judiciaryType": "Circuit Judge",
+            "titleJudicialPrefix": "FX",
+            "titlePrefix": "Sgt.",
+            "titleSuffix": "Esq"
+          }
+        }
+      ],
+      "startDate": "2018-11-05",
+      "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+      "listedCases": [
+        {
+          "id": "926fc76b-7ec9-4bee-bb7d-b8e63d61fc33",
+          "defendants": [
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "abc",
+              "lastName": "Smith",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "John",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            },
+            {
+              "id": "e1d32d9d-29ec-4934-a932-22a50f223966",
+              "masterDefendantId": "e1d32d9d-29ec-4934-a932-22a50f223967",
+              "courtProceedingsInitiated": "xyz",
+              "lastName": "Kane Junior",
+              "offences": [
+                {
+                  "id": "fdb77319-7305-42f7-8037-3662906a266b",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "isYouth": true,
+                  "count": 1,
+                  "orderIndex": 1,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  },
+                  "reportingRestrictions": [
+                    {
+                      "id": ":id",
+                      "judicialResultId": ":judicialResultId",
+                      "label": ":label",
+                      "orderedDate": ":orderedDate"
+                    }
+                  ]
+                },
+                {
+                  "id": "b229afeb-273d-40a7-bb6d-8092477e5194",
+                  "endDate": "2018-08-01",
+                  "startDate": "2018-08-01",
+                  "offenceCode": "OF61131",
+                  "count": 2,
+                  "orderIndex": 2,
+                  "statementOfOffence": {
+                    "title": "Wound / inflict grievous bodily harm without intent",
+                    "welshTitle": "a title in Welsh",
+                    "legislation": "Contrary to section 20 of the Offences Against the Person Act 1861.",
+                    "welshLegislation": "legislation in Welsh"
+                  }
+                }
+              ],
+              "firstName": "Harry",
+              "bailStatus": {
+                "code": "U",
+                "description": "Unconditional Bail",
+                "id": "eaf18bf8-9569-3656-a4ab-64299f9bd513"
+              },
+              "dateOfBirth": "2010-01-01",
+              "organisationId": "c54eafee-698b-4262-8883-2beca5f8e940",
+              "custodyTimeLimit": "2018-10-31",
+              "organisationName": "Bodge It & Injure People Ltd",
+              "specificRequirements": "Screen"
+            }
+          ],
+          "markers": [
+            {
+              "id": "6b5a9194-186e-4d96-99d6-8fb62d8efa9d",
+              "markerTypeid": "e7eff972-189c-4957-8b1e-cb45213aa64e",
+              "markerTypeCode": "HT",
+              "markerTypeDescription": "Human Trafficking"
+            }
+          ],
+          "caseIdentifier": {
+            "authorityId": "cf73207f-3ced-488a-82a0-3fba79c2ce85",
+            "authorityCode": "TFL",
+            "caseReference": "TFL12345"
+          }
+        }
+      ],
+      "hearingDays": [
+        {
+          "hearingDate": "2020-02-07T10:20:30Z",
+          "endTime": "2018-11-05T12:00:00.000Z",
+          "sequence": 1,
+          "courtRoomId": "e7721a38-546d-4b56-9992-ebdd772a561b",
+          "startTime": "2018-11-05T10:00:00.000Z",
+          "durationMinutes": 120
+        },
+        {
+          "hearingDate": "2018-11-06",
+          "endTime": "2018-11-06T14:00:00.000Z",
+          "sequence": 2,
+          "courtRoomId": ":id",
+          "startTime": "2018-11-06T11:00:00.000Z",
+          "durationMinutes": 180
+        }
+      ],
+      "courtCentreId": "9b583616-049b-30f9-a14f-028a53b7cfe8",
+      "nonDefaultDays": [
+        {
+          "duration": 180,
+          "startTime": "2018-11-05T11:00:00.000Z"
+        }
+      ],
+      "nonSittingDays": [
+        "2018-11-06",
+        "2018-11-07"
+      ],
+      "hearingLanguage": "WELSH",
+      "estimatedMinutes": 300,
+      "jurisdictionType": "MAGISTRATES",
+      "listingDirections": "Wheelchair & special emergency arrangements required",
+      "prosecutorDatesToAvoid": [
+        "Monday"
+      ],
+      "reportingRestrictionReason": "Automatic anonymity under the Sexual Offences (Amendment) Act 1992"
+    }
+  ]
+              </div>
+              <div>
+                Judiciary: [
+    {
+      "isDeputy": false,
+      "judicialId": "328bfc4e-e661-470e-ac7d-35809a4bb298",
+      "isBenchChairman": true,
+      "judicialRoleType": {
+        "judiciaryType": "CIRCUIT_JUDGE"
+      },
+      "judicialMember": {
+        "id": "328bfc4e-e661-470e-ac7d-35809a4bb298",
+        "forenames": "Corporal Fabiano",
+        "surname": "Tiscman",
+        "judiciaryType": "Circuit Judge",
+        "titleJudicialPrefix": "FX",
+        "titlePrefix": "Sgt.",
+        "titleSuffix": "Esq"
+      }
+    },
+    {
+      "isDeputy": true,
+      "judicialId": "19ffac44-3533-410d-868e-81cf825844b6",
+      "isBenchChairman": false,
+      "judicialRoleType": {
+        "judiciaryType": "RECORDER"
+      },
+      "judicialMember": {
+        "id": "19ffac44-3533-410d-868e-81cf825844b6",
+        "forenames": "Lord Fabio",
+        "judiciaryType": "Recorder",
+        "surname": "Tisci",
+        "requestedName": "RECORDER Lord Fabio TISCI",
+        "titleJudicialPrefix": "LF",
+        "titlePrefix": "Mr."
+      }
+    }
+  ]
+              </div>
+              <div>
+                EnableAction: false
+              </div>
+              <div>
+                LatestSelection: 
+              </div>
+              <div>
+                SelectedDate: 2018-11-10
+              </div>
+              <div>
+                FilterOptions: [object Object]
+              </div>
+              <div>
+                DefaultStartTime: 10:30
+              </div>
+              <div>
+                PreSelectedHearing: 
+              </div>
+              <div>
+                TimeFormat: HH:mm
+              </div>
+              <div>
+                EnableReorder: false
+              </div>
+              <div>
+                RestrictedCourtHearingSelected: 
+              </div>
+              <div>
+                RestrictLists: 
+              </div>
+              <div>
+                WeekCommencingSelected: 
+              </div>
+              <div>
+                hearingTypes: 
+              </div>
+              <div>
+                baseUrl: "http://url.com"
+              </div>
+            </div>
+          </hearings-per-judiciary>
+        </div>
+      </div>
+    </div>
+  </daily-court-room-calendar>
+</ng-component>
+`;
+
+exports[`DailyCourtRoomCalendarContainer should render case alert component 1`] = `
+<case-access-alert>
+  <div
+    id="case-access-alert"
+  >
+    <div>
+      Urs: [
+  "TFL12345"
+]
+    </div>
+    <div>
+      Hearing ids: [
+  "b1bfe644-15d3-46aa-bdeb-fe8d18c16a42"
+]
+    </div>
+    <div>
+      Selected group id: 
+    </div>
+    <div>
+      User id: userId
+    </div>
+  </div>
+</case-access-alert>
+`;
+
+exports[`DailyCourtRoomCalendarContainer should render listing container component 1`] = `
+<listing-note-container>
+  <div
+    id="listing-note-container"
+  >
+    <div>
+      courtRoomId: "courtRoomId"
+    </div>
+    <div>
+      listingNoteDate: "2018-11-10"
+    </div>
+  </div>
+</listing-note-container>
+`;

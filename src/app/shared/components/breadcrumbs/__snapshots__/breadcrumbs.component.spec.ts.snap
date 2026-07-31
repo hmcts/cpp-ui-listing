@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadcrumbsComponent should match the snapshot 1`] = `
+<breadcrumbs
+  breadcrumbs={[Function Function]}
+>
+  <ol
+    class="govuk-breadcrumbs govuk-breadcrumbs__list"
+    pdk-breadcrumb-list=""
+  >
+    <li
+      class="govuk-breadcrumbs__list-item"
+      pdk-breadcrumb-list-item=""
+    >
+      <a
+        class="govuk-breadcrumbs__link"
+        href="test-href-1"
+        pdk-breadcrumb=""
+        title="test-title-1"
+      >
+         test-title-1 
+      </a>
+    </li>
+    <li
+      class="govuk-breadcrumbs__list-item"
+      pdk-breadcrumb-list-item=""
+    >
+      <span>
+        test-title-2
+      </span>
+    </li>
+  </ol>
+</breadcrumbs>
+`;

@@ -1,0 +1,144 @@
+<pdk-radio-group name="selectedHearing" [(ngModel)]="selectedHearingId">
+  <table id="related-hearings" pdk-table>
+    <caption pdk-table-caption>
+      <pdk-inset-text>
+        <strong>
+          {{ hearings().length }} related
+          <span [ngPlural]="hearings().length">
+            <ng-template ngPluralCase="=1">hearing</ng-template>
+            <ng-template ngPluralCase="other">hearings</ng-template>
+          </span>
+        </strong>
+      </pdk-inset-text>
+    </caption>
+    <thead pdk-table-head>
+      <tr pdk-table-row>
+        <th id="select-action" pdk-table-header><span pdk-visually-hidden>Action</span></th>
+        <th id="date" pdk-table-header>Date</th>
+        <th id="court-details" pdk-table-header>Court Details</th>
+        <th id="hearing-type" pdk-table-header>Hearing type</th>
+        <th id="session" pdk-table-header>Session/start time</th>
+        <th id="related-case" pdk-table-header>Related cases</th>
+      </tr>
+    </thead>
+
+    @for (hearing of hearings(); track hearing.id) {
+      @for (hearingDay of hearing.hearingDays; track hearingDay.hearingDate; let i = $index) {
+        <tbody pdk-border-colour="mid-grey" pdk-table-body data-test-id="hearing">
+          <tr pdk-table-row>
+            <td pdk-table-cell headers="select-action">
+              <pdk-radio-button [value]="hearing.temporaryHearingId">
+                <span pdk-visually-hidden>Select this hearing</span>
+              </pdk-radio-button>
+            </td>
+            <td pdk-table-cell headers="date">
+              <div data-test-id="hearingStartDate" pdk-padding-right="2">
+                {{ hearingDay.startTime | cppDate: 'D MMM YYYY' }}
+              </div>
+            </td>
+            <td pdk-table-cell headers="court-details">
+              <span data-test-id="hearingCourtCentre">{{
+                getCourtCentreName(hearing.courtCentreId)
+              }}</span>
+              <br />
+              <span data-test-id="hearingCourtroom">{{
+                getCourtRoomName(hearing.courtCentreId, hearing.courtRoomId)
+              }}</span>
+              <br />
+            </td>
+            <td pdk-table-cell headers="hearing-type">
+              <div data-test-id="hearingType" class="hearing-type-text">
+                {{ formatHearingType(hearing.type) }}
+              </div>
+              <div class="hearing-case-markers">
+                <case-markers
+                  pdk-padding-top="1"
+                  class="case-markers"
+                  [hearing]="hearing"
+                  allListedCases="true"
+                >
+                </case-markers>
+              </div>
+            </td>
+            <td pdk-table-cell headers="session">
+              <div data-test-id="hearingStartTime" pdk-padding-right="2">
+                {{ hearingDay.startTime | cppDate: 'HH:mm a' }}
+              </div>
+            </td>
+            <td pdk-table-cell headers="related-case">
+              @for (listedCase of hearing.listedCases; track listedCase.id) {
+                <div data-test-id="listedCase" pdk-margin-bottom="3">
+                  <span pdk-visually-hidden> Case reference </span>
+                  <strong data-test-id="caseReference">{{
+                    listedCase.caseIdentifier.caseReference
+                  }}</strong>
+                  <pdk-inset-text pdk-margin-top="1" pdk-margin-bottom="2">
+                    @for (defendant of listedCase.defendants; track defendant.id) {
+                      <div class="defendant-name">
+                        {{ defendant | fullName }}
+                      </div>
+                    }
+                  </pdk-inset-text>
+                </div>
+              }
+              @if (hearing.courtRoomId) {
+                <a
+                  pdk-link
+                  data-role="view-hearing-details"
+                  href="javascript:void(0)"
+                  (click)="viewHearingDetails(hearing)"
+                  >View hearing details</a
+                >
+              }
+            </td>
+          </tr>
+          <tr pdk-table-row>
+            <th id="notes-for-hearing-day-{{ i }}" pdk-table-header="row" pdk-visually-hidden>
+              Notes
+            </th>
+            <td pdk-table-cell colspan="4" headers="notes-for-hearing-day-{{ i }}">
+              <div pdk-margin-top="-9" pdk-padding-right="4">
+                <listing-note-container
+                  data-test-id="hearing-day-listing-note"
+                  [courtRoomId]="hearing.courtRoomId"
+                  [listingNoteDate]="hearingDay.hearingDate | cppDate: 'YYYY-MM-DD'"
+                  (onErrors)="errors.emit($event)"
+                >
+                </listing-note-container>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      }
+    }
+  </table>
+</pdk-radio-group>
+
+<pdk-form-field
+  label="Do you want to notify to all relevant parties?"
+  labelType="small"
+  pdk-margin-top="7"
+>
+  <pdk-radio-group
+    name="sendNotificationToParties"
+    [(ngModel)]="sendNotificationToParties"
+    required
+  >
+    <pdk-radio-button [value]="true">Yes</pdk-radio-button>
+    <pdk-radio-button data-test-id="notifyFalseValue" [value]="false">No</pdk-radio-button>
+  </pdk-radio-group>
+</pdk-form-field>
+
+<button
+  type="submit"
+  pdk-button
+  pdk-margin-top="3"
+  pdk-margin-bottom="3"
+  [disabled]="isContinueButtonDisabled"
+  (click)="extendHearingForHearing()"
+>
+  Continue
+</button>
+<div>
+  <a pdk-link href="javascript:void(0)" (click)="cancel()">Cancel</a>
+</div>

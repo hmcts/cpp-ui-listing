@@ -1,0 +1,483 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PinnedNotesComponent should display a title with + 1 other 1`] = `
+<pinned-notes-test
+  pinnedCaseNotes={[Function Array]}
+  plusOtherDefendants={[Function Function]}
+>
+  <pinned-notes>
+    <dl>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          <b>
+            Pinned case notes
+          </b>
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          <div
+            class="govuk-!-margin-bottom-2"
+            pdk-margin-bottom="2"
+          >
+            <div
+              class="govuk-!-margin-bottom-1"
+              pdk-margin-bottom="1"
+            >
+              <b>
+                 59GD9012320  Harry KANE JUNIOR 
+                 + 1 other 
+              </b>
+            </div>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      a pinned note
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-07T12:15:27.851Z 
+                </div>
+              </div>
+            </pinned-note>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-07T11:50:54.604Z 
+                </div>
+              </div>
+            </pinned-note>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      Case note test
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-06T10:14:34.520Z 
+                </div>
+              </div>
+            </pinned-note>
+          </div>
+        </dd>
+      </div>
+    </dl>
+    <pdk-divider>
+      <hr
+        class="pdk-divider"
+      />
+    </pdk-divider>
+  </pinned-notes>
+</pinned-notes-test>
+`;
+
+exports[`PinnedNotesComponent should display a title with + 2 others 1`] = `
+<pinned-notes-test
+  pinnedCaseNotes={[Function Array]}
+  plusOtherDefendants={[Function Function]}
+>
+  <pinned-notes>
+    <dl>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          <b>
+            Pinned case notes
+          </b>
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          <div
+            class="govuk-!-margin-bottom-2"
+            pdk-margin-bottom="2"
+          >
+            <div
+              class="govuk-!-margin-bottom-1"
+              pdk-margin-bottom="1"
+            >
+              <b>
+                 59GD9012320  Harry KANE JUNIOR 
+                 + 2 others 
+              </b>
+            </div>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      a pinned note
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-07T12:15:27.851Z 
+                </div>
+              </div>
+            </pinned-note>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-07T11:50:54.604Z 
+                </div>
+              </div>
+            </pinned-note>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      Case note test
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-06T10:14:34.520Z 
+                </div>
+              </div>
+            </pinned-note>
+          </div>
+        </dd>
+      </div>
+    </dl>
+    <pdk-divider>
+      <hr
+        class="pdk-divider"
+      />
+    </pdk-divider>
+  </pinned-notes>
+</pinned-notes-test>
+`;
+
+exports[`PinnedNotesComponent should match the snapshot 1`] = `
+<pinned-notes-test
+  pinnedCaseNotes={[Function Array]}
+  plusOtherDefendants={[Function Function]}
+>
+  <pinned-notes>
+    <dl>
+      <div
+        class="govuk-!-margin-bottom-2 govuk-grid-row"
+        container=""
+        pdk-grid=""
+        pdk-margin-bottom="2"
+      >
+        <dt
+          class="govuk-grid-column-one-third"
+          one-third=""
+          pdk-grid=""
+        >
+          <b>
+            Pinned case notes
+          </b>
+        </dt>
+        <dd
+          class="govuk-grid-column-two-thirds"
+          pdk-grid=""
+          two-thirds=""
+        >
+          <div
+            class="govuk-!-margin-bottom-2"
+            pdk-margin-bottom="2"
+          >
+            <div
+              class="govuk-!-margin-bottom-1"
+              pdk-margin-bottom="1"
+            >
+              <b>
+                 59GD9012320  Harry KANE JUNIOR 
+              </b>
+            </div>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      a pinned note
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-07T12:15:27.851Z 
+                </div>
+              </div>
+            </pinned-note>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-07T11:50:54.604Z 
+                </div>
+              </div>
+            </pinned-note>
+            <pinned-note>
+              <div
+                class="govuk-!-margin-bottom-2"
+                pdk-margin-bottom="2"
+              >
+                <pdk-foldable-text
+                  class="govuk-body-m"
+                  pdk-typography="body-medium"
+                >
+                  <div
+                    class="pdk-foldable"
+                  >
+                    <span
+                      class="pdk-foldable__content pdk-foldable__content__single"
+                      id="pdk-foldable-text-GENERATED_ID"
+                    >
+                      Case note test
+                    </span>
+                  </div>
+                </pdk-foldable-text>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                  Emma Cleaner
+                </div>
+                <div
+                  class="govuk-!-margin-0 govuk-body-s"
+                  pdk-margin="0"
+                  pdk-typography="body-small"
+                >
+                   2020-10-06T10:14:34.520Z 
+                </div>
+              </div>
+            </pinned-note>
+          </div>
+        </dd>
+      </div>
+    </dl>
+    <pdk-divider>
+      <hr
+        class="pdk-divider"
+      />
+    </pdk-divider>
+  </pinned-notes>
+</pinned-notes-test>
+`;

@@ -1,0 +1,83 @@
+<div class="non-default-days" pdk-padding-top="5">
+  <ng-container>
+    <p class="bold" pdk-margin-bottom="3" pdk-typography="body-medium">Non default days</p>
+    @if (copyNonDefaultDays.length === 0) {
+    <span pdk-margin-bottom="5"> No days added</span>
+    }
+    <ng-container *ngTemplateOutlet="nonDefaultDaysTemplate"> </ng-container>
+  </ng-container>
+
+  <div
+    pdk-form
+    [formGroup]="formGroup"
+    (validSubmit)="submitDefaultDays()"
+    (errors)="onValidationError.emit($event)"
+  >
+    <pdk-form-field
+      #dateField
+      label="Add non default day"
+      labelType="small"
+      [errorMessages]="errorMessages"
+    >
+      <pdk-date-input
+        [minDate]="dateRange()?.startDate"
+        [maxDate]="dateRange()?.endDate"
+        class="details-date-input"
+        formControlName="date"
+        picker
+      ></pdk-date-input>
+    </pdk-form-field>
+    <pdk-form-field
+      [errorMessages]="[
+      {
+        rule: 'required',
+        message: 'Enter a start time for a non default day'
+      }
+    ]"
+      #startTimeField
+      label="Start time"
+      labelType="small"
+      pdk-margin-bottom="2"
+    >
+      <pdk-time-input [autoShift]="false" labelHidden="false" formControlName="startTime">
+      </pdk-time-input>
+    </pdk-form-field>
+    <pdk-grid container class="non-default-days-button-group">
+      <pdk-grid one-third>
+        <div>
+          <a
+            pdk-link
+            data-test-id="non-default-submit"
+            (click)="formGroupDirective.onSubmit($event)"
+            href="javascript:void(0);"
+            role="button"
+            >Add</a
+          >
+        </div>
+      </pdk-grid>
+    </pdk-grid>
+  </div>
+</div>
+
+<ng-template #nonDefaultDaysTemplate>
+  <pdk-grid container>
+    <ul>
+      @for (nonDefaultDay of copyNonDefaultDays; track nonDefaultDay.startTime; let i = $index) {
+      <li pdk-margin-bottom="1">
+        <pdk-grid class="date">
+          <span>{{ nonDefaultDay.startTime | date:'hh:mm a on d MMMM y' }}</span>
+          <a
+            pdk-link
+            (click)="cancelNonNonDefaultDay(i)"
+            href="javascript:;"
+            role="button"
+            [pdk-padding-left]="2"
+            pdk-text-colour="red"
+            >Delete</a
+          >
+        </pdk-grid>
+      </li>
+      }
+    </ul>
+  </pdk-grid>
+</ng-template>

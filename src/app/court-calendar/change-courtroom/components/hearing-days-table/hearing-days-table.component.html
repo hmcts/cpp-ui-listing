@@ -1,0 +1,68 @@
+<table pdk-table data-test-id="hearingDayList">
+  <thead pdk-table-head>
+    <tr pdk-table-row>
+      @if (!isPreview()) {
+        <th pdk-table-header>
+          <pdk-checkbox
+            name="selectAllHearingDays"
+            checkboxType="small"
+            [ngModel]="allCurrentPageDates | allHearingDaysSelected: allSelectedHearingDates()"
+            (ngModelChange)="
+              onSelectAllPaginatedHearing.emit({
+                allSelected: $event,
+                paginatedHearingDates: allCurrentPageDates
+              })
+            "
+            [ngModelOptions]="{ standalone: true }"
+            pdk-margin-bottom="4"
+          >
+            <span pdk-visually-hidden> Select all hearing days </span>
+          </pdk-checkbox>
+        </th>
+      }
+      <th pdk-table-header>Date</th>
+      <th pdk-table-header>Court Details</th>
+      <th pdk-table-header>Duration</th>
+      <th pdk-table-header>{{ !isPreview() ? 'Allocated Courtroom' : 'Reallocated Courtroom' }}</th>
+    </tr>
+  </thead>
+  <tbody pdk-table-body>
+    @for (hearingDay of currentPageHearingDays; track hearingDay.hearingDate) {
+      <tr pdk-table-row data-test-id="sessionListItem">
+        @if (!isPreview()) {
+          <td pdk-table-cell>
+            <pdk-checkbox checkboxType="small" [value]="hearingDay.hearingDate">
+              <span pdk-visually-hidden>
+                select this hearing date
+                <span aria-hidden="true">{{ hearingDay.hearingDate | date: 'dd-MM-yyyy' }}</span>
+              </span>
+            </pdk-checkbox>
+          </td>
+        }
+        <td pdk-table-cell data-test-id="date">
+          {{ hearingDay.hearingDate | date: 'dd-MM-yyyy' }}
+        </td>
+        <td pdk-table-cell data-test-id="courtDetails">{{ courtCentreName() }}</td>
+        <td pdk-table-cell data-test-id="duration">
+          <duration-cell
+            [duration]="hearingDay.durationMinutes"
+            [dayOfHearing]="hearingDay.position"
+            [totalDays]="totalNumberofHearingDays()"
+          ></duration-cell>
+        </td>
+        <td pdk-table-cell data-test-id="courtRoomDetails">
+          {{ hearingDay.courtRoomId | courtRoomName: courtRoomOptions() }}
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+@if (showPagination) {
+  <pdk-pagination
+    [currentPage]="currentPage"
+    [totalResults]="totalResults"
+    [maxPages]="3"
+    [pageSize]="pageSize"
+    (pageChange)="onPageChange($event)"
+  ></pdk-pagination>
+}

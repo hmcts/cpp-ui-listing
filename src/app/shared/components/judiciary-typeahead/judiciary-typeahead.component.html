@@ -1,0 +1,15 @@
+<div class="judiciary-typeahead">
+  <pdk-autosuggest-lite
+    #autosuggest="pdkAutosuggestLite"
+    (inputText)="input$.next($event)"
+    [ariaDescribedBy]="'judge-label'"
+    [inputWidth]="maxInputWidth()"
+    [id]="id"
+    inputType="search"
+    [suggestions]="(source$ | async) || []"
+    suggestionKey="id"
+    suggestionTitle="judicialMemberName"
+    suggestionSubtitle="ljaShortName"
+  >
+  </pdk-autosuggest-lite>
+</div>

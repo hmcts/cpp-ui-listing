@@ -1,0 +1,78 @@
+:host {
+  display: table-row;
+  .flex-row {
+    display: flex;
+    padding-top: 5px;
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+      padding-right: 20px;
+
+      ::ng-deep pdk-checkbox {
+        label {
+          padding-top: 0;
+          padding-right: 0;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    & > *:not(:last-child),
+    & > .flex-column:not(:last-child) {
+      flex: 1 1 0;
+      text-align: left;
+    }
+
+    & > *:not(:last-child),
+    & > .flex-column:nth-child(n + 2) {
+      flex: 0.5 1 0;
+      text-align: left;
+    }
+    & > *:not(:last-child),
+    & > .flex-column:nth-child(n + 3) {
+      flex: 2 1 0;
+      text-align: left;
+    }
+
+    & > .flex-column:last-child,
+    & > .div:last-child {
+      flex: 2 1 0;
+      padding-right: 0px;
+    }
+  }
+
+  .margin-non-base {
+    margin-bottom: 15px;
+  }
+}
+
+.bottomless-border {
+  border-bottom: 0px !important;
+}
+
+.break-word {
+  word-break: break-word;
+}
+
+.dotted-border-bottom {
+  border-bottom: 1px dashed;
+  padding-bottom: 10px;
+}
+
+::ng-deep {
+  .dotted-divider {
+    background-color: unset !important;
+
+    hr {
+      border: 1px dashed !important;
+    }
+  }
+}
+
+.m-t-10 {
+  margin-top: -10%;
+}
+
+.hide-case {
+  margin-top: -147px;
+}
