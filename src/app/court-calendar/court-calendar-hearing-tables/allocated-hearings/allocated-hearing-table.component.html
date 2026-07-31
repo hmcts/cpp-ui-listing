@@ -5,12 +5,13 @@
     [sectionConfig]="sectionConfig"
     [sections]="sections()"
     [sectionHeaderRenderer]="sectionHeader"
-    [rowGroupHeaderCellRenderer]="judiciaryHeader"
+    [hearingsGroupHeaderRenderers]="{ judiciaryCalendar: judiciaryHeader }"
     [actionCellRenderer]="actionsCell"
     [expandedDetailsRenderer]="hearingDetails"
     [moveAlertRenderer]="moveAlert"
     [hearingMovestate]="hearingMovestate()"
     [positionedHearingsState]="positionedHearingsState()"
+    [failedAllocationIds]="failedAllocationIds()"
     [customCellHeaderRenderers]="{
       id: selectAllCustomheader
     }"
@@ -54,17 +55,19 @@
   #judiciaryHeader
   let-judiciary="cellData"
   let-section="sectionData"
-  let-rowGroups="rowGroups"
+  let-levelData="levelData"
 >
-  <judiciary-header-cell
-    [judiciary]="judiciary"
-    [courtRoomId]="section?.courtRoomId"
-    [hearing]="rowGroups?.hearingTimeCalendar[0]?.hearings[0]"
-    [searchDate]="section?.date"
-    [editable]="true"
-    (changeJudiciary)="onNavigateChangeJudiciary.emit($event)"
-  >
-  </judiciary-header-cell>
+  <h4 pdk-typography="heading-small" pdk-margin-bottom="0">
+    <judiciary-header-cell
+      [judiciary]="judiciary"
+      [courtRoomId]="section?.courtRoomId"
+      [hearing]="levelData?.hearingTimeCalendar[0]?.hearings[0]"
+      [searchDate]="section?.date"
+      [editable]="true"
+      (changeJudiciary)="onNavigateChangeJudiciary.emit($event)"
+    >
+    </judiciary-header-cell>
+  </h4>
 </ng-template>
 
 <!--Time-->

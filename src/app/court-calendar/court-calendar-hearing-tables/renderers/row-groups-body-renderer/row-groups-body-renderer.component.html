@@ -1,14 +1,12 @@
+@let posState = positionedHearingsState();
+@let moveState = hearingMovestate();
 @for (
-  row of rowGroup[rowGroupsConfig?.dataConfig?.rowsDataPath];
+  row of $any(rowGroup())[rowsPath()];
   let isFirstRow = $first;
   let rowIndex = $index;
   track row.rowIdentifier
 ) {
-  @if (
-    row.isMaster &&
-    (row | hearingRowPositionedSuccess: positionedHearingsState) &&
-    positionedHearingsState.showAlert
-  ) {
+  @if (row.isMaster && (row | hearingRowPositionedSuccess: posState) && posState.showAlert) {
     <ng-container
       [ngTemplateOutlet]="positionChangedAlertRow"
       [ngTemplateOutletContext]="{
@@ -21,20 +19,20 @@
     data-test-id="hearing-table-row"
     role="row"
     [attr.aria-posinset]="rowIndex + 1"
-    [attr.aria-setsize]="!!row.details && rowIsexpandable ? 1 : 0"
-    aria-level="1"
+    [attr.aria-setsize]="!!row.details && rowIsexpandable() ? 1 : 0"
+    [attr.aria-level]="ariaLevel()"
     pdk-table-row
     highlightOnHover
     interactive
     [id]="row.rowIdentifier"
     (click)="toggleRow(row.rowIdentifier, $event)"
-    [attr.aria-expanded]="!!row.details && rowIsexpandable && toggleRecord[row.rowIdentifier]"
+    [attr.aria-expanded]="!!row.details && rowIsexpandable() && toggleRecord[row.rowIdentifier]"
     [class.selected-hearing-to-move]="
-      (row | hearingRowToBeMoved: hearingMovestate) ||
-      (row | hearingRowPositionedSuccess: positionedHearingsState)
+      (row | hearingRowToBeMoved: moveState) || (row | hearingRowPositionedSuccess: posState)
     "
+    [class.hearing-unallocate-failed]="failedAllocationIds()?.includes(row.id)"
   >
-    @if (!!row.details && rowIsexpandable) {
+    @if (!!row.details && rowIsexpandable()) {
       <ng-container
         [ngTemplateOutlet]="expandLinkButtonCell"
         [ngTemplateOutletContext]="{
@@ -43,14 +41,12 @@
       >
       </ng-container>
     }
-    @for (column of columnConfig; let columnIndex = $index; track columnIndex) {
+    @for (column of columnConfig(); let columnIndex = $index; track columnIndex) {
       @if (row.isMaster || !column.renderOnlyForMasterRow) {
         <td
           pdk-table-cell
           pdk-padding-left="2"
-          attr.headers="{{ sectionHeaderIdentifier }} {{ rowGroupsHeaderIdentifier }} {{
-            'header-' + (columnIndex + 1)
-          }}"
+          attr.headers="{{ levelHeaderIds() }} {{ 'header-' + (columnIndex + 1) }}"
           [ngStyle]="column.maxWidth && { width: column.maxWidth + 'px' }"
           [class.cell-border-bottom-none]="
             row.isMaster && row.instances > 1 && column.renderOnlyForMasterRow
@@ -63,14 +59,15 @@
           <div [pdk-visually-hidden]="column.isDictionaryCell && !isFirstRow ? true : false">
             <ng-container
               [ngTemplateOutlet]="
-                cellRenderers && cellRenderers[column.key] ? cellRenderers[column.key] : defaultCell
+                cellRenderers() && cellRenderers()[column.key]
+                  ? cellRenderers()[column.key]
+                  : defaultCell()
               "
               [ngTemplateOutletContext]="{
                 cellData: row[column.key],
                 rowData: row,
-                rowGroupData: rowGroup,
-                rowGroupsConfig: rowGroupsConfig,
-                sectionData: section
+                rowGroupData: rowGroup(),
+                sectionData: section()
               }"
             >
             </ng-container>
@@ -80,7 +77,7 @@
         <td pdk-table-cell [class.cell-border-bottom-none]="!row.isLastChild"></td>
       }
     }
-    @if (rowIsActionable && actionCellRenderer) {
+    @if (rowIsActionable() && actionCellRenderer()) {
       @if (row?.isMaster) {
         <ng-container
           [ngTemplateOutlet]="actionsButtonsCell"
@@ -94,7 +91,7 @@
       }
     }
   </tr>
-  @if (!!row.details && rowIsexpandable && toggleRecord[row.rowIdentifier]) {
+  @if (!!row.details && rowIsexpandable() && toggleRecord[row.rowIdentifier]) {
     <ng-container
       [ngTemplateOutlet]="hearingDetailsRow"
       [ngTemplateOutletContext]="{
@@ -110,10 +107,10 @@
 <!--Position alert-->
 <ng-template #positionChangedAlertRow let-rowData="rowData">
   <tr pdk-table-row role="alert" aria-hidden="true" [class.selected-hearing-to-move]="true">
-    @if (moveAlertRenderer) {
-      <td pdk-table-cell [colSpan]="sectionHeaderSpan" pdk-padding-vertical="0">
+    @if (moveAlertRenderer()) {
+      <td pdk-table-cell [colSpan]="sectionHeaderSpan()" pdk-padding-vertical="0">
         <ng-container
-          [ngTemplateOutlet]="moveAlertRenderer"
+          [ngTemplateOutlet]="moveAlertRenderer()"
           [ngTemplateOutletContext]="{
             rowData: rowData
           }"
@@ -128,7 +125,7 @@
 <ng-template #expandLinkButtonCell let-rowData="rowData">
   <td
     pdk-table-cell
-    attr.headers="{{ sectionHeaderIdentifier }} {{ rowGroupsHeaderIdentifier }} expandable-header"
+    attr.headers="{{ levelHeaderIds() }} expandable-header"
     pdk-padding-top="3"
     pdk-padding-right="0"
     pdk-padding-horizontal="2"
@@ -171,17 +168,16 @@
   <td
     class="action-cell"
     pdk-table-cell
-    headers="{{ sectionHeaderIdentifier }} {{ rowGroupsHeaderIdentifier }} action-header"
+    headers="{{ levelHeaderIds() }} action-header"
     pdk-padding-right="2"
     [class.cell-border-bottom-none]="rowData.isMaster && rowData.instances > 1"
   >
     <ng-container
-      [ngTemplateOutlet]="actionCellRenderer"
+      [ngTemplateOutlet]="actionCellRenderer()"
       [ngTemplateOutletContext]="{
         rowData: rowData,
-        rowGroupData: rowGroup,
-        rowGroupsConfig: rowGroupsConfig,
-        sectionData: section
+        rowGroupData: rowGroup(),
+        sectionData: section()
       }"
     >
     </ng-container>
@@ -192,21 +188,22 @@
 <ng-template #hearingDetailsRow let-rowData="rowData">
   <tr
     role="row"
-    aria-level="2"
+    [attr.aria-level]="ariaLevel() + 1"
     aria-posinset="1"
     pdk-table-row
     [id]="rowData.rowIdentifier + '-details'"
     [class.selected-hearing-to-move]="
-      (rowData | hearingRowToBeMoved: hearingMovestate) ||
-      (rowData | hearingRowPositionedSuccess: positionedHearingsState)
+      (rowData | hearingRowToBeMoved: hearingMovestate()) ||
+      (rowData | hearingRowPositionedSuccess: positionedHearingsState())
     "
+    [class.hearing-unallocate-failed]="failedAllocationIds()?.includes(rowData.id)"
   >
-    <td pdk-table-cell [colSpan]="sectionHeaderSpan" pdk-fill-colour="light-grey">
+    <td pdk-table-cell [colSpan]="sectionHeaderSpan()" pdk-fill-colour="light-grey">
       <ng-container
-        [ngTemplateOutlet]="expandedDetailsRenderer"
+        [ngTemplateOutlet]="expandedDetailsRenderer()"
         [ngTemplateOutletContext]="{
           rowData: rowData,
-          sectionData: section
+          sectionData: section()
         }"
       >
       </ng-container>

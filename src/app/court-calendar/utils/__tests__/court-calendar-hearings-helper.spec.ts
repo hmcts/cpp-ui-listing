@@ -5,8 +5,8 @@ import {
   isEligibleForEndDateChange
 } from '../court-calendar-hearings-helper';
 
-// The helper uses a module-level `getCPPDate()` (real moment instance), so dates are built
-// relative to "now" to keep assertions deterministic and clock-independent (repo idiom).
+// The helpers compare against "now", so dates are built relative to today to keep
+// assertions deterministic and clock-independent.
 const atLocalMidnight = (offsetDays: number): Date => {
   const date = new Date();
   date.setHours(0, 0, 0, 0);

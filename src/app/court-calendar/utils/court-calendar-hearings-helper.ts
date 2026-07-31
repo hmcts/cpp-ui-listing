@@ -11,22 +11,20 @@ import {
 } from '../../core';
 import {
   AllocateHearingCase,
+  AllocatedWidgetCourtroomCalendarVm,
   AllocationHearingsSectionVm,
   AllocationHearingsVM,
   AllocationType,
-  CourtCalendarFeature,
   CourtCalendarVM,
   CourtRoomCalendarVM,
   CourtRoomHearingTimeCalendar,
   CourtRoomJudicialCalendar,
-  PaginatedHearingMap,
-  CourtRoomBusinessTypeCalendar,
-  MagsWidgetCourtroomCalendarVm
+  PaginatedHearingMap
 } from '../model';
-import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.interfaces';
 import { CourtCalendarManager, getCourtCalendarManager } from './courtroom-calendar-manager';
 
-type HearingCalendarRecordLike = CourtRoomJudicialCalendar | CourtRoomBusinessTypeCalendar;
+type HearingCalendarRecordLike = CourtRoomJudicialCalendar;
 
 export function judiciaryIsEqual(
   judiciary: ExtendedJudicialRole[],
@@ -41,8 +39,7 @@ export function judiciaryIsEqual(
 export const getCourtCalendarViewModel = (
   { hearings, pagination }: Partial<PaginatedHearings>,
   courtCentre: OrganisationUnit,
-  courtRoomsByDate: Record<string, string[]>,
-  feature: CourtCalendarFeature
+  courtRoomsByDate: Record<string, string[]>
 ): CourtCalendarVM => {
   const courtRoomCalendarManager = getCourtCalendarManager<CourtRoomCalendarVM>();
   const courtRoomCalendars = sortBy(
@@ -58,7 +55,7 @@ export const getCourtCalendarViewModel = (
             )
           );
 
-          if (filteredHearingsByDate.length === 0 && feature === CourtCalendarFeature.calendar) {
+          if (filteredHearingsByDate.length === 0) {
             return calendars;
           }
 
@@ -89,13 +86,13 @@ export const getCourtCalendarViewModel = (
   };
 };
 
-export const getMagsWidgetCourtCalendarViewModel = (
+export const getAllocatedWidgetCalendarViewModel = (
   { hearings }: PaginatedHearings,
   courtCentre: OrganisationUnit,
   courtRoomsByDate: Record<string, string[]>,
   hearingSlots: HearingSlot[]
-): MagsWidgetCourtroomCalendarVm[] => {
-  const courtRoomCalendarManager = getCourtCalendarManager<MagsWidgetCourtroomCalendarVm>();
+): AllocatedWidgetCourtroomCalendarVm[] => {
+  const courtRoomCalendarManager = getCourtCalendarManager<AllocatedWidgetCourtroomCalendarVm>();
   const courtRoomCalendars = sortBy(
     Object.entries(courtRoomsByDate).reduce((viewModels, [date, courtRooms]) => {
       return [
@@ -122,9 +119,9 @@ export const getMagsWidgetCourtCalendarViewModel = (
           );
 
           return calendars;
-        }, [] as MagsWidgetCourtroomCalendarVm[])
+        }, [] as AllocatedWidgetCourtroomCalendarVm[])
       ];
-    }, [] as MagsWidgetCourtroomCalendarVm[]),
+    }, [] as AllocatedWidgetCourtroomCalendarVm[]),
     'date',
     'courtRoomName'
   );
@@ -253,7 +250,7 @@ export const dateIsWithinLastSevenDays = (endDate: string | Date): boolean => {
   const today = startOfDay(new Date());
   const end = startOfDay(endDate);
 
-  let sevenDaysAgo = startOfDay(today);
+  const sevenDaysAgo = startOfDay(today);
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
   return end.getTime() >= sevenDaysAgo.getTime() && end.getTime() < today.getTime();
 };
@@ -301,6 +298,19 @@ const spliceHearingsToSequence = (
   restHearings.splice(benchMarkIndex, 0, ...hearingsToMove);
   return restHearings;
 };
+
+export function addWorkingDays(startDate: string, workingDays: number): string {
+  const date = new Date(startDate);
+  let added = 0;
+  while (added < workingDays) {
+    date.setDate(date.getDate() + 1);
+    const day = date.getDay();
+    if (day !== 0 && day !== 6) {
+      added++;
+    }
+  }
+  return date.toISOString().split('T')[0];
+}
 
 const hearingDateFilterPredicate = (
   hearingDate: string | Date,
@@ -438,3 +448,25 @@ const getReallocateDateVariationMap = (hearings: Hearing[]) => {
     }
   );
 };
+
+export function buildBaseHearingPayload<T extends object>(
+  hearing: Hearing,
+  overrides: T = {} as T
+) {
+  return {
+    courtCentreId: hearing.courtCentreId,
+    hearingId: hearing.id,
+    hearingLanguage: hearing.hearingLanguage,
+    judiciary: hearing.judiciary,
+    jurisdictionType: hearing.jurisdictionType,
+    nonSittingDays: hearing.nonSittingDays,
+    startDate: hearing.startDate,
+    endDate: hearing.endDate,
+    publicListNote: hearing.publicListNote ?? '',
+    hasVideoLink: hearing.hasVideoLink ?? false,
+    type: hearing.type,
+    bookingType: hearing.bookingType,
+    sendNotificationToParties: hearing.sendNotificationToParties,
+    ...overrides
+  };
+}

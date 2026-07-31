@@ -31,7 +31,7 @@ import {
 } from '../../../../shared/components/date-range/date-range';
 import { NonSittingDaysComponent } from '../../../../shared/components/non-sitting-days/non-sitting-days.component';
 import { NonDefaultDaysComponent } from '../../../../shared/components/non-default-days/non-default-days.component';
-import { CourtCentre, HearingDay, NonDefaultDay } from '../../../../core';
+import { CourtCentre, HearingDay, JurisdictionType, NonDefaultDay } from '../../../../core';
 import { ChangeHearingStartTimeControlsComponent } from '../change-hearing-start-time-controls.component';
 import { DatePipe } from '@angular/common';
 
@@ -44,6 +44,10 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
   {
     rule: 'dateRangeExceeded',
     message: `End date can’t be more than 2 years after start date`
+  },
+  {
+    rule: 'weekDate',
+    message: `End date can’t be a weekend — enter a weekday`
   }
 ];
 
@@ -95,6 +99,7 @@ export class ChangeHearingDetailsCrownControlComponent implements ControlValueAc
   readonly startTime = input<string>(undefined);
   readonly startDate = input<string>(undefined);
   readonly duration = input<number>(undefined);
+  readonly jurisdictionType = input<JurisdictionType>(undefined);
   readonly onValidationError = output<ValidationError[]>();
   endDateControl: FormControl<string>;
   errorMessages = ERROR_MESSAGES;
@@ -120,11 +125,11 @@ export class ChangeHearingDetailsCrownControlComponent implements ControlValueAc
     this.endDateControl.valueChanges
       .pipe(
         distinctUntilChanged(),
-        map((endDate) => {
+        map(endDate => {
           return new DateRange(this.startDateStr, endDate);
         })
       )
-      .subscribe((val) => {
+      .subscribe(val => {
         this.dateRange = val;
         this.propagateChange(val);
       });

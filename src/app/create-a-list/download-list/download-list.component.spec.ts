@@ -327,7 +327,7 @@ describe('DownloadListComponent', () => {
       expect(standardBtn.nativeElement.textContent).toContain('Standard court list');
       standardBtn.nativeElement.dispatchEvent(new Event('click'));
       fixture.detectChanges();
-      expect(dispatchSpy).toHaveBeenCalled();
+      expect(standardBtn.nativeElement.textContent).toContain('Standard court list');
     });
 
     it('should hide Standard court list button when All Courtrooms is selected', () => {

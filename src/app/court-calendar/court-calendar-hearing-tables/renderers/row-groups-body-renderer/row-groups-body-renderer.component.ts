@@ -1,13 +1,9 @@
-import { ChangeDetectionStrategy, Component, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, input } from '@angular/core';
 import {
-  ColumnConfig,
-  PickPropertyKeys,
   BaseHearingRowDataVM,
-  RowGroupsConfig,
-  TableContext,
-  CourtCalendarGenericRecord,
-  RowGroupDataConfig
-} from '../../../model/hearing-table-renderer.vm';
+  HearingsColumnConfig,
+  HearingsTableContext
+} from '../../../model/hearing-table-renderer.interfaces';
 import { HearingTableActionsState } from '../../component-store/hearing-table-actions.store';
 import {
   HearingHasMovedPipe,
@@ -20,25 +16,6 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
   selector: 'tbody[row-group-body]',
   templateUrl: './row-groups-body-renderer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: [
-    'section',
-    'rowGroupHeaderCellRenderer',
-    'actionCellRenderer',
-    'expandedDetailsRenderer',
-    'moveAlertRenderer',
-    'cellRenderers',
-    'rowGroup',
-    'columnConfig',
-    'rowGroupsConfig',
-    'rowIsActionable',
-    'defaultCell',
-    'sectionHeaderSpan',
-    'rowIsexpandable',
-    'hearingMovestate',
-    'positionedHearingsState',
-    'sectionHeaderIdentifier',
-    'rowGroupsHeaderIdentifier'
-  ],
   imports: [
     IsHearingBeingMovedPipe,
     HearingHasMovedPipe,
@@ -49,31 +26,26 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
   ],
   styleUrls: ['./row-groups-body-renderer.component.scss']
 })
-export class RowGroupBodyRendererComponent<
-  S extends CourtCalendarGenericRecord,
-  T extends BaseHearingRowDataVM
-> {
-  rowGroupHeaderCellRenderer?: TemplateRef<TableContext<S, T>>;
-  section: S;
-  defaultCell: TemplateRef<TableContext<S, T>>;
-  actionCellRenderer?: TemplateRef<TableContext<S, T>>;
-  cellRenderers: Record<keyof T, TemplateRef<TableContext<S, T>>>;
-  expandedDetailsRenderer?: TemplateRef<TableContext<S, T>>;
-  moveAlertRenderer: TemplateRef<TableContext<S, T>>;
-  columnConfig: ColumnConfig<T>;
-  rowGroupsConfig: RowGroupsConfig<S, keyof S, PickPropertyKeys<S, keyof S>>;
-  rowGroup: Record<
-    RowGroupDataConfig<S, keyof S, PickPropertyKeys<S, keyof S>>['rowsDataPath'],
-    T[]
-  >;
-  rowIsActionable: boolean;
-  sectionHeaderSpan: number;
-  rowIsexpandable: boolean;
-  hearingMovestate: HearingTableActionsState['moveState'];
-  positionedHearingsState: HearingTableActionsState['positionedHearingsState'];
+export class RowGroupBodyRendererComponent {
+  readonly section = input<Record<string, unknown>>();
+  readonly actionCellRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly expandedDetailsRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly moveAlertRenderer = input<TemplateRef<HearingsTableContext>>();
+  readonly defaultCell = input<TemplateRef<HearingsTableContext>>();
+  readonly cellRenderers = input<Record<string, TemplateRef<HearingsTableContext>>>();
+  readonly rowGroup = input<Record<string, unknown>>();
+  readonly columnConfig = input<HearingsColumnConfig<BaseHearingRowDataVM>>();
+  readonly rowsPath = input<string>();
+  readonly ariaLevel = input<number>(1);
+  readonly rowIsActionable = input<boolean>();
+  readonly sectionHeaderSpan = input<number>();
+  readonly rowIsexpandable = input<boolean>();
+  readonly hearingMovestate = input<HearingTableActionsState['moveState']>();
+  readonly positionedHearingsState = input<HearingTableActionsState['positionedHearingsState']>();
+  readonly failedAllocationIds = input<string[]>();
+  readonly levelHeaderIds = input<string>('');
+
   toggleRecord: Record<string, boolean> = {};
-  sectionHeaderIdentifier: string;
-  rowGroupsHeaderIdentifier = '';
 
   toggleRow(rowId: string, event: Event) {
     event.stopPropagation();

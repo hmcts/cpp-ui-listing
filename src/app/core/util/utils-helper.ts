@@ -48,15 +48,15 @@ export function findDataFromSelectionValues<
   const selectedValueToCompare = selectedPropChild
     ? selection[selectionProp][selectedPropChild]
     : selectionProp
-    ? selection[selectionProp]
-    : typeof selection === 'string' || typeof selection === 'number'
-    ? selection
-    : null;
+      ? selection[selectionProp]
+      : typeof selection === 'string' || typeof selection === 'number'
+        ? selection
+        : null;
 
   if (!selectedValueToCompare) {
     return null;
   }
-  return dataList.find((data) => (data[dataProp] as any) === (selectedValueToCompare as any));
+  return dataList.find(data => (data[dataProp] as any) === (selectedValueToCompare as any));
 }
 
 export function getMomentValue(value: unknown, format?: string) {

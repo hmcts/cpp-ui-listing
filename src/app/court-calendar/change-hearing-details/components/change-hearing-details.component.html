@@ -39,6 +39,7 @@
           [selectedCourtCentre]="selectedCourtCentre()"
           [startTime]="initialValues()?.startTime"
           [duration]="initialValues()?.duration"
+          [jurisdictionType]="selectedHearing()?.jurisdictionType"
           (onValidationError)="onValidationError.emit($event)"
         >
         </change-hearing-crown-control>

@@ -25,7 +25,7 @@
         <b>Number of hearing days selected</b>
       </dt>
       <dd pdk-grid two-thirds pdk-margin-left="0">
-        <span>{{ (selectedHearingDays$ | async)?.length || 0 }} days</span>
+        <span>{{ changeCourtroomStore.selectedHearingDays()?.length || 0 }} days</span>
       </dd>
     </div>
 
@@ -41,7 +41,10 @@
         <b>Reallocated courtroom</b>
       </dt>
       <dd pdk-grid two-thirds pdk-margin-left="0">
-        <span>{{ selectedCourtroom$ | async | courtRoomName: (courtRoomOptions$ | async) }}</span>
+        <span
+          >{{ changeCourtroomStore.selectedCourtroom() | courtRoomName:
+          changeCourtroomStore.courtRooms() }}</span
+        >
       </dd>
     </div>
   </dl>

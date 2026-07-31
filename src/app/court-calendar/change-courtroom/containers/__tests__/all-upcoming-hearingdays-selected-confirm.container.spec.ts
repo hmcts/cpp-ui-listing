@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OutputEmitterRef } from '@angular/core';
-import { of, Subject } from 'rxjs';
-import { ValidationError, SelectOption } from '@cpp/pdk';
+import { signal } from '@angular/core';
+import { ValidationError } from '@cpp/pdk';
 import { By } from '@angular/platform-browser';
 import { AllFutureHearingDaysSelectedConfirmContainer } from '../all-upcoming-hearing-days-selected-confirm/all-upcoming-hearingdays-selected-confirm.container';
-import { ChangeCourtroomStateService } from '../../component-store/change-courtroom-state.service';
-import { ChangeCourtroomVM, ConfirmCourtRoomChangeEvent, caseReferncesVM } from '../../../model';
-import { HearingDay } from '../../../../core';
-import { provideRouter } from '@angular/router';
+import { ChangeCourtroomStore } from '../../component-store/change-courtroom.store';
+import { ChangeCourtroomVM, caseReferncesVM } from '../../../model';
+import { HearingDayVM } from '../../../model';
+import { provideRouter, Router } from '@angular/router';
+import { JurisdictionType } from '../../../../core';
+import { provideMockStore } from '@ngrx/store/testing';
+import { getSelectedHearing } from '../../../state/selectors/court-calendar.selectors';
 
 interface CourtRoom {
   id: string;
@@ -21,7 +23,8 @@ interface CourtRoom {
 describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
   let component: AllFutureHearingDaysSelectedConfirmContainer;
   let fixture: ComponentFixture<AllFutureHearingDaysSelectedConfirmContainer>;
-  let mockChangeCourtroomStateService: any;
+  let mockChangeCourtroomStore: any;
+  let mockRouter: Router;
 
   const mockCases: caseReferncesVM[] = [
     { caseId: '1', caseUrn: 'CASE001' },
@@ -47,14 +50,15 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
     }
   ];
 
-  const mockSelectedHearingDays: HearingDay[] = [
+  const mockSelectedHearingDays: HearingDayVM[] = [
     {
       courtRoomId: 'room2',
       hearingDate: '2024-02-01',
       startTime: '10:00',
       endTime: '16:00',
       durationMinutes: 360,
-      sequence: 1
+      sequence: 1,
+      position: 1
     },
     {
       courtRoomId: 'room2',
@@ -62,7 +66,8 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
       startTime: '10:00',
       endTime: '16:00',
       durationMinutes: 360,
-      sequence: 2
+      sequence: 2,
+      position: 2
     }
   ];
 
@@ -74,36 +79,49 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
     totalHearingDaysCount: 2,
     hasReportingRestriction: false,
     courtCentre: 'Central Court',
-    courtRooms: mockCourtRooms,
+    courtRooms: mockCourtRooms as any,
     startDate: '2024-02-01',
-    endDate: '2024-02-02'
+    endDate: '2024-02-02',
+    ouCode: 'OU001',
+    jurisdictionType: 'CROWN' as JurisdictionType
   };
 
-  const mockCourtRoomOptions: SelectOption<string>[] = [
-    { label: 'Court Room 1', value: 'room1' },
-    { label: 'Court Room 2', value: 'room2' }
-  ];
+  const mockSelectedHearing = { id: 'hearing-1', courtCentreId: 'cc-1' } as any;
 
   beforeEach(async () => {
+    mockChangeCourtroomStore = {
+      hearingVM: signal(mockHearingVM),
+      selectedCourtroom: signal('room2'),
+      selectedHearingDays: signal(mockSelectedHearingDays),
+      hearingSlots: signal([]),
+      courtRooms: signal(mockCourtRooms.map(r => ({ label: r.courtroomName, value: r.id }))),
+      upcomingHearingDays: signal([]),
+      setSelectedHearingDays: jest.fn(),
+      updateSelectedHearingDays: jest.fn(),
+      loadHearingSlots: jest.fn(),
+      confirmChange: jest.fn(),
+      reset: jest.fn()
+    };
+
     await TestBed.configureTestingModule({
       providers: [
+        provideRouter([]),
+        provideMockStore({
+          selectors: [{ selector: getSelectedHearing, value: mockSelectedHearing }]
+        }),
         {
-          provide: ChangeCourtroomStateService,
-          useValue: {
-            hearingVM$: of(mockHearingVM),
-            selectedHearingDays$: of(mockSelectedHearingDays),
-            getCourtRooms: of(mockCourtRoomOptions),
-            selectedCourtroom$: of('room2')
-          }
-        },
-        provideRouter([])
+          provide: ChangeCourtroomStore,
+          useValue: mockChangeCourtroomStore
+        }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AllFutureHearingDaysSelectedConfirmContainer);
     component = fixture.componentInstance;
 
-    mockChangeCourtroomStateService = TestBed.inject(ChangeCourtroomStateService);
+    mockChangeCourtroomStore = TestBed.inject(ChangeCourtroomStore);
+    mockRouter = TestBed.inject(Router);
+    jest.spyOn(mockRouter, 'navigate').mockImplementation(() => Promise.resolve(true));
   });
 
   describe('Component Initialization', () => {
@@ -115,63 +133,8 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
       expect(component.errors).toBeNull();
     });
 
-    it('should have EventEmitter outputs', () => {
-      expect(component.onConfirmation).toBeInstanceOf(OutputEmitterRef);
-      expect(component.onSubmitForm).toBeInstanceOf(OutputEmitterRef);
-    });
-
-    it('should inject ChangeCourtroomStateService', () => {
-      expect(component.changeCourtroomStateService).toBe(mockChangeCourtroomStateService);
-    });
-  });
-
-  describe('ngOnInit', () => {
-    it('should set up observables correctly', () => {
-      component.ngOnInit();
-
-      expect(component.hearingVM$).toBe(mockChangeCourtroomStateService.hearingVM$);
-      expect(component.selectedHearingDays$).toBe(
-        mockChangeCourtroomStateService.selectedHearingDays$
-      );
-      expect(component.courtRoomOptions$).toBe(mockChangeCourtroomStateService.getCourtRooms);
-      expect(component.selectedCourtroom$).toBe(mockChangeCourtroomStateService.selectedCourtroom$);
-    });
-
-    it('should get hearing VM data from service', (done) => {
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM).toEqual(mockHearingVM);
-        done();
-      });
-    });
-
-    it('should get selected hearing days from service', (done) => {
-      component.ngOnInit();
-
-      component.selectedHearingDays$.subscribe((hearingDays) => {
-        expect(hearingDays).toEqual(mockSelectedHearingDays);
-        expect(hearingDays).toHaveLength(2);
-        done();
-      });
-    });
-
-    it('should get court room options from service', (done) => {
-      component.ngOnInit();
-
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options).toEqual(mockCourtRoomOptions);
-        done();
-      });
-    });
-
-    it('should get selected courtroom from service', (done) => {
-      component.ngOnInit();
-
-      component.selectedCourtroom$.subscribe((courtroom) => {
-        expect(courtroom).toBe('room2');
-        done();
-      });
+    it('should inject ChangeCourtroomStore', () => {
+      expect(component.changeCourtroomStore).toBe(mockChangeCourtroomStore);
     });
   });
 
@@ -202,52 +165,50 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
   });
 
   describe('handleFormSubmission', () => {
-    it('should emit onConfirmation event when changeCourtRoom is true', () => {
-      const emitSpy = jest.spyOn(component.onConfirmation, 'emit');
+    it('should call confirmChange with selectedHearing and onSuccess callback when changeCourtRoom is true', () => {
       const formData = { changeCourtRoom: true };
 
       component.handleFormSubmission(formData);
 
-      const expectedEvent: ConfirmCourtRoomChangeEvent = {
-        confirmed: true,
-        clearSelection: false
-      };
-
-      expect(emitSpy).toHaveBeenCalledWith(expectedEvent);
+      expect(mockChangeCourtroomStore.confirmChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          selectedHearing: mockSelectedHearing,
+          onSuccess: expect.any(Function)
+        })
+      );
+      expect(mockChangeCourtroomStore.setSelectedHearingDays).not.toHaveBeenCalled();
+      expect(mockRouter.navigate).not.toHaveBeenCalled();
     });
 
-    it('should emit onConfirmation event when changeCourtRoom is false', () => {
-      const emitSpy = jest.spyOn(component.onConfirmation, 'emit');
+    it('should call setSelectedHearingDays and cancelChange when changeCourtRoom is false', () => {
       const formData = { changeCourtRoom: false };
 
       component.handleFormSubmission(formData);
 
-      const expectedEvent: ConfirmCourtRoomChangeEvent = {
-        confirmed: false,
-        clearSelection: true
-      };
-
-      expect(emitSpy).toHaveBeenCalledWith(expectedEvent);
+      expect(mockChangeCourtroomStore.confirmChange).not.toHaveBeenCalled();
+      expect(mockChangeCourtroomStore.setSelectedHearingDays).toHaveBeenCalledWith([]);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(
+        ['../all-hearing-days'],
+        expect.objectContaining({ relativeTo: expect.anything() })
+      );
     });
 
     it('should handle edge case with undefined changeCourtRoom', () => {
-      const emitSpy = jest.spyOn(component.onConfirmation, 'emit');
       const formData = { changeCourtRoom: undefined as any };
 
       component.handleFormSubmission(formData);
 
-      const expectedEvent: ConfirmCourtRoomChangeEvent = {
-        confirmed: undefined,
-        clearSelection: true
-      };
-
-      expect(emitSpy).toHaveBeenCalledWith(expectedEvent);
+      expect(mockChangeCourtroomStore.confirmChange).not.toHaveBeenCalled();
+      expect(mockChangeCourtroomStore.setSelectedHearingDays).toHaveBeenCalledWith([]);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(
+        ['../all-hearing-days'],
+        expect.objectContaining({ relativeTo: expect.anything() })
+      );
     });
   });
 
   describe('Template Integration', () => {
     beforeEach(() => {
-      component.ngOnInit();
       fixture.detectChanges();
     });
 
@@ -288,89 +249,31 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
     });
   });
 
-  describe('Observable Data Flow', () => {
-    it('should handle hearing VM observable changes', (done) => {
-      const newHearingVM: ChangeCourtroomVM = {
-        ...mockHearingVM,
-        time: '2:00 PM',
-        totalHearingDaysCount: 3
-      };
-
-      const hearingVMSubject = new Subject<ChangeCourtroomVM>();
-      mockChangeCourtroomStateService.hearingVM$ = hearingVMSubject.asObservable();
-
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM).toEqual(newHearingVM);
-        done();
-      });
-
-      hearingVMSubject.next(newHearingVM);
+  describe('Store Signal Access', () => {
+    it('should access selectedHearingDays from store', () => {
+      expect(component.changeCourtroomStore.selectedHearingDays()).toEqual(mockSelectedHearingDays);
+      expect(component.changeCourtroomStore.selectedHearingDays()).toHaveLength(2);
     });
 
-    it('should handle selected hearing days observable changes', (done) => {
-      const newHearingDays: HearingDay[] = [
-        {
-          courtRoomId: 'room2',
-          hearingDate: '2024-02-03',
-          startTime: '09:00',
-          endTime: '17:00',
-          durationMinutes: 480,
-          sequence: 1
-        }
-      ];
-
-      const hearingDaysSubject = new Subject<HearingDay[]>();
-      mockChangeCourtroomStateService.selectedHearingDays$ = hearingDaysSubject.asObservable();
-
-      component.ngOnInit();
-
-      component.selectedHearingDays$.subscribe((hearingDays) => {
-        expect(hearingDays).toEqual(newHearingDays);
-        expect(hearingDays).toHaveLength(1);
-        done();
-      });
-
-      hearingDaysSubject.next(newHearingDays);
+    it('should access selectedCourtroom from store', () => {
+      expect(component.changeCourtroomStore.selectedCourtroom()).toBe('room2');
     });
 
-    it('should handle court room options observable changes', (done) => {
-      const newOptions: SelectOption<string>[] = [{ label: 'Court Room 3', value: 'room3' }];
-
-      const courtRoomOptionsSubject = new Subject<SelectOption<string>[]>();
-      mockChangeCourtroomStateService.getCourtRooms = courtRoomOptionsSubject.asObservable();
-
-      component.ngOnInit();
-
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options).toEqual(newOptions);
-        done();
-      });
-
-      courtRoomOptionsSubject.next(newOptions);
+    it('should access hearingVM from store', () => {
+      expect(component.changeCourtroomStore.hearingVM()).toEqual(mockHearingVM);
     });
 
-    it('should handle selected courtroom observable changes', (done) => {
-      const newCourtroom = 'room3';
-
-      const courtroomSubject = new Subject<string>();
-      mockChangeCourtroomStateService.selectedCourtroom$ = courtroomSubject.asObservable();
-
-      component.ngOnInit();
-
-      component.selectedCourtroom$.subscribe((courtroom) => {
-        expect(courtroom).toBe(newCourtroom);
-        done();
-      });
-
-      courtroomSubject.next(newCourtroom);
+    it('should access courtRooms from store', () => {
+      const rooms = component.changeCourtroomStore.courtRooms();
+      expect(rooms).toEqual([
+        { label: 'Court Room 1', value: 'room1' },
+        { label: 'Court Room 2', value: 'room2' }
+      ]);
     });
   });
 
   describe('Event Handling', () => {
     beforeEach(() => {
-      component.ngOnInit();
       fixture.detectChanges();
     });
 
@@ -399,105 +302,21 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
     });
   });
 
-  describe('Error Handling', () => {
-    it('should handle null hearing VM', (done) => {
-      mockChangeCourtroomStateService.hearingVM$ = of(null);
-      component.ngOnInit();
-
-      component.hearingVM$.subscribe((hearingVM) => {
-        expect(hearingVM).toBeNull();
-        done();
-      });
-    });
-
-    it('should handle empty selected hearing days', (done) => {
-      mockChangeCourtroomStateService.selectedHearingDays$ = of([]);
-      component.ngOnInit();
-
-      component.selectedHearingDays$.subscribe((hearingDays) => {
-        expect(hearingDays).toEqual([]);
-        done();
-      });
-    });
-
-    it('should handle empty court room options', (done) => {
-      mockChangeCourtroomStateService.getCourtRooms = of([]);
-      component.ngOnInit();
-
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options).toEqual([]);
-        done();
-      });
-    });
-
-    it('should handle null selected courtroom', (done) => {
-      mockChangeCourtroomStateService.selectedCourtroom$ = of(null);
-      component.ngOnInit();
-
-      component.selectedCourtroom$.subscribe((courtroom) => {
-        expect(courtroom).toBeNull();
-        done();
-      });
-    });
-
-    it('should display 0 days when selectedHearingDays$ is null', () => {
-      mockChangeCourtroomStateService.selectedHearingDays$ = of(null);
-      component.ngOnInit();
+  describe('Template Data Binding', () => {
+    beforeEach(() => {
       fixture.detectChanges();
-
-      const daysSpan = fixture.debugElement.nativeElement.querySelector('dd span');
-      expect(daysSpan.textContent.trim()).toBe('0 days');
-    });
-  });
-
-  describe('Component Interface Implementation', () => {
-    it('should implement ConfirmCourtRoomChange interface', () => {
-      expect(component.onConfirmation).toBeDefined();
-      expect(typeof component.handleFormSubmission).toBe('function');
     });
 
-    it('should implement OnInit interface', () => {
-      expect(typeof component.ngOnInit).toBe('function');
-    });
-  });
+    it('should pass correct props to child components', () => {
+      const backButton = fixture.debugElement.query(By.css('back-button'));
+      expect(backButton.componentInstance.linkUrl()).toBe('../all-future-hearingdays-selected');
 
-  describe('Data Structure Validation', () => {
-    it('should handle hearing days with all properties', (done) => {
-      const completeHearingDays: HearingDay[] = [
-        {
-          courtRoomId: 'room1',
-          hearingDate: '2024-02-01',
-          startTime: '10:00',
-          endTime: '16:00',
-          durationMinutes: 360,
-          sequence: 1
-        }
-      ];
-
-      mockChangeCourtroomStateService.selectedHearingDays$ = of(completeHearingDays);
-      component.ngOnInit();
-
-      component.selectedHearingDays$.subscribe((hearingDays) => {
-        expect(hearingDays[0].courtRoomId).toBe('room1');
-        expect(hearingDays[0].hearingDate).toBe('2024-02-01');
-        expect(hearingDays[0].startTime).toBe('10:00');
-        expect(hearingDays[0].endTime).toBe('16:00');
-        expect(hearingDays[0].durationMinutes).toBe(360);
-        expect(hearingDays[0].sequence).toBe(1);
-        done();
-      });
-    });
-
-    it('should handle court room options with correct structure', (done) => {
-      component.ngOnInit();
-
-      component.courtRoomOptions$.subscribe((options) => {
-        expect(options[0].label).toBe('Court Room 1');
-        expect(options[0].value).toBe('room1');
-        expect(options[1].label).toBe('Court Room 2');
-        expect(options[1].value).toBe('room2');
-        done();
-      });
+      const confirmationForm = fixture.debugElement.query(
+        By.css('courtroom-change-confirmation-form')
+      );
+      expect(confirmationForm.componentInstance.confirmationLabel()).toBe(
+        'Are you sure you want to change courtroom for upcoming hearing days?'
+      );
     });
   });
 
@@ -516,58 +335,58 @@ describe('AllFutureHearingDaysSelectedConfirmContainer', () => {
     });
 
     it('should handle multiple form submissions correctly', () => {
-      const emitSpy = jest.spyOn(component.onConfirmation, 'emit');
+      jest.clearAllMocks();
 
       component.handleFormSubmission({ changeCourtRoom: true });
-      expect(emitSpy).toHaveBeenCalledWith({ confirmed: true, clearSelection: false });
+      expect(mockChangeCourtroomStore.confirmChange).toHaveBeenCalledTimes(1);
 
       component.handleFormSubmission({ changeCourtRoom: false });
-      expect(emitSpy).toHaveBeenCalledWith({ confirmed: false, clearSelection: true });
-
-      expect(emitSpy).toHaveBeenCalledTimes(2);
-    });
-  });
-
-  describe('Template Data Binding', () => {
-    beforeEach(() => {
-      component.ngOnInit();
-      fixture.detectChanges();
-    });
-
-    it('should correctly bind selected hearing days count in template', () => {
-      const hearingDaysSubject = new Subject<HearingDay[]>();
-      mockChangeCourtroomStateService.selectedHearingDays$ = hearingDaysSubject.asObservable();
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      const testCounts = [[], [{}], [{}, {}], [{}, {}, {}]];
-
-      testCounts.forEach((hearingDays, index) => {
-        hearingDaysSubject.next(hearingDays as HearingDay[]);
-        fixture.detectChanges();
-
-        const daysSpan = fixture.debugElement.nativeElement.querySelector('dd span');
-        expect(daysSpan.textContent.trim()).toBe(`${index} days`);
-      });
-    });
-
-    it('should pass correct props to child components', () => {
-      const backButton = fixture.debugElement.query(By.css('back-button'));
-      expect(backButton.componentInstance.linkUrl()).toBe('../all-future-hearingdays-selected');
-
-      const confirmationForm = fixture.debugElement.query(
-        By.css('courtroom-change-confirmation-form')
-      );
-      expect(confirmationForm.componentInstance.confirmationLabel()).toBe(
-        'Are you sure you want to change courtroom for upcoming hearing days?'
-      );
+      expect(mockChangeCourtroomStore.setSelectedHearingDays).toHaveBeenCalledWith([]);
+      expect(mockRouter.navigate).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Edge Cases', () => {
     it('should handle component destruction gracefully', () => {
-      component.ngOnInit();
+      fixture.detectChanges();
       expect(() => fixture.destroy()).not.toThrow();
+    });
+
+    it('should display 0 days when selectedHearingDays store signal is empty', () => {
+      mockChangeCourtroomStore.selectedHearingDays = signal([]);
+      fixture.detectChanges();
+
+      const daysSpan = fixture.debugElement.nativeElement.querySelector('dd span');
+      expect(daysSpan.textContent.trim()).toBe('0 days');
+    });
+
+    it('should implement OnInit interface', () => {
+      expect(typeof component.onValidationError).toBe('function');
+      expect(typeof component.handleFormSubmission).toBe('function');
+    });
+
+    it('should handle hearing days with all properties', () => {
+      const completeHearingDays: HearingDayVM[] = [
+        {
+          courtRoomId: 'room1',
+          hearingDate: '2024-02-01',
+          startTime: '10:00',
+          endTime: '16:00',
+          durationMinutes: 360,
+          sequence: 1,
+          position: 1
+        }
+      ];
+
+      mockChangeCourtroomStore.selectedHearingDays = signal(completeHearingDays);
+
+      const days = mockChangeCourtroomStore.selectedHearingDays();
+      expect(days[0].courtRoomId).toBe('room1');
+      expect(days[0].hearingDate).toBe('2024-02-01');
+      expect(days[0].startTime).toBe('10:00');
+      expect(days[0].endTime).toBe('16:00');
+      expect(days[0].durationMinutes).toBe(360);
+      expect(days[0].sequence).toBe(1);
     });
   });
 });

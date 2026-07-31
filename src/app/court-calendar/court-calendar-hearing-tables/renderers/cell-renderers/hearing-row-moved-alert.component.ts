@@ -9,7 +9,6 @@ import {
 import { HearingRowVM } from '../../../model';
 import { PdkAlertComponent, PdkCore } from '@cpp/pdk';
 import { DatePipe } from '@angular/common';
-import { asapScheduler } from 'rxjs';
 
 @Component({
   selector: 'hearing-row-moved-alert',
@@ -41,12 +40,10 @@ export class HearingRowMovedAlertComponent {
 
   constructor() {
     afterNextRender({
-      write: () => {
+      read: () => {
         const alertElement = this.alert();
-        if (alertElement && alertElement.nativeElement?.scrollIntoView) {
-          asapScheduler.schedule(() => {
-            alertElement.nativeElement.scrollIntoView({ behavior: 'auto' });
-          }, 50);
+        if (alertElement?.nativeElement?.scrollIntoView) {
+          alertElement.nativeElement.scrollIntoView({ behavior: 'auto', block: 'nearest' });
         }
       }
     });

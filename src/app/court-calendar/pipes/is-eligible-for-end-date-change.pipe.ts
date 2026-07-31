@@ -2,12 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { isEligibleForEndDateChange } from '../utils/court-calendar-hearings-helper';
 import { HearingRowVM } from '../model';
 
-@Pipe({
-  name: 'isEligibleForEndDateChange'
-})
+@Pipe({ name: 'isEligibleForEndDateChange' })
 export class IsEligibleForEndDateChangePipe implements PipeTransform {
   transform(hearing: HearingRowVM): boolean {
-    let { details } = hearing;
-    return isEligibleForEndDateChange(details);
+    return isEligibleForEndDateChange(hearing?.details);
   }
 }

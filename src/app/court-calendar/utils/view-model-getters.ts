@@ -2,12 +2,12 @@ import { sortBy, uniq } from 'lodash-es';
 import { getCPPDate } from '../../core/util';
 import { Defendant, Hearing, ListedCase, Offence } from '../../core';
 import {
-  HearingTypeVM,
+  AllocatedWidgetCourtroomCalendarVm,
+  AllocationHearingsSectionVm,
+  CourtRoomCalendarVM,
   HearingDefendantVM,
   HearingRowVM,
-  CourtRoomCalendarVM,
-  AllocationHearingsSectionVm,
-  MagsWidgetCourtroomCalendarVm,
+  HearingTypeVM,
   caseReferncesVM
 } from '../model';
 import { generateId } from '@cpp/pdk';
@@ -79,13 +79,13 @@ export function normaliseCourtCalendarVariant(
   courtCalendarVariant: Partial<AllocationHearingsSectionVm>
 ): AllocationHearingsSectionVm;
 export function normaliseCourtCalendarVariant(
-  courtCalendarVariant: Partial<MagsWidgetCourtroomCalendarVm>
-): AllocationHearingsSectionVm;
+  courtCalendarVariant: Partial<AllocatedWidgetCourtroomCalendarVm>
+): AllocatedWidgetCourtroomCalendarVm;
 export function normaliseCourtCalendarVariant(
   courtCalendarVariant: Partial<
-    CourtRoomCalendarVM | AllocationHearingsSectionVm | MagsWidgetCourtroomCalendarVm
+    CourtRoomCalendarVM | AllocationHearingsSectionVm | AllocatedWidgetCourtroomCalendarVm
   >
-): CourtRoomCalendarVM | AllocationHearingsSectionVm | MagsWidgetCourtroomCalendarVm {
+): CourtRoomCalendarVM | AllocationHearingsSectionVm | AllocatedWidgetCourtroomCalendarVm {
   const normaliseJudicialCalendar = (calendar: Partial<CourtRoomCalendarVM>): CourtRoomCalendarVM =>
     ({
       ...calendar,
@@ -119,24 +119,30 @@ export function normaliseCourtCalendarVariant(
     }) as AllocationHearingsSectionVm;
 
   const normaliseBusinessTypeCalendar = (
-    calendar: Partial<MagsWidgetCourtroomCalendarVm>
-  ): MagsWidgetCourtroomCalendarVm =>
+    calendar: Partial<AllocatedWidgetCourtroomCalendarVm>
+  ): AllocatedWidgetCourtroomCalendarVm =>
     ({
       ...calendar,
       businessTypeCalendar: sortBy(
         calendar.businessTypeCalendar.map(businessTypeCal => ({
           ...businessTypeCal,
-          hearingTimeCalendar: sortBy(
-            businessTypeCal.hearingTimeCalendar.map(hearingCal => ({
-              ...hearingCal,
-              hearings: sortTimeCalendarHearingsByMasterAndSequence(hearingCal.hearings)
-            })),
-            c => new Date(c.time).getTime()
-          )
+          sessions: businessTypeCal.sessions.map(session => ({
+            ...session,
+            judiciaryCalendar: session.judiciaryCalendar.map(judicialCal => ({
+              ...judicialCal,
+              hearingTimeCalendar: sortBy(
+                judicialCal.hearingTimeCalendar.map(hearingCal => ({
+                  ...hearingCal,
+                  hearings: sortTimeCalendarHearingsByMasterAndSequence(hearingCal.hearings)
+                })),
+                c => new Date(c.time).getTime()
+              )
+            }))
+          }))
         })),
-        'businessTypeAndSlot.businessTypeCode'
+        'businessType'
       )
-    }) as MagsWidgetCourtroomCalendarVm;
+    }) as AllocatedWidgetCourtroomCalendarVm;
 
   if ('judiciaryCalendar' in courtCalendarVariant) {
     return normaliseJudicialCalendar(courtCalendarVariant);
@@ -318,7 +324,11 @@ function shouldDisableCheckbox(
   isMultiDayMagistratesHearing: boolean,
   startTime: string
 ): boolean {
-  if (instances < 1) return undefined;
-  if (isMultiDayMagistratesHearing) return true;
+  if (instances < 1) {
+    return undefined;
+  }
+  if (isMultiDayMagistratesHearing) {
+    return true;
+  }
   return !dateIsCurrentOrGreaterThan(startTime);
 }

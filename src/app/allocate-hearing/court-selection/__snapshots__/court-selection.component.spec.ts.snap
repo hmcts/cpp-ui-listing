@@ -16,6 +16,20 @@ exports[`CourtSelectionComponent should render component 1`] = `
       class="govuk-grid-row"
       container=""
     >
+      <div
+        class="govuk-!-margin-top-2 govuk-!-margin-bottom-2"
+        pdk-margin-bottom="2"
+        pdk-margin-top="2"
+      >
+        <a
+          class="pdk-!-text-color-black govuk-back-link"
+          data-role="cancel-btn"
+          pdk-back-link=""
+          pdk-text-colour="black"
+        >
+          Back
+        </a>
+      </div>
       <h1
         class="govuk-!-margin-bottom-1 govuk-!-margin-top-2 govuk-heading-l govuk-visually-hidden"
         pdk-margin-bottom="1"
@@ -125,19 +139,6 @@ exports[`CourtSelectionComponent should render component 1`] = `
         >
            Continue 
         </button>
-        <div
-          class="govuk-!-margin-top-2"
-          pdk-margin-top="2"
-        >
-          <a
-            class="govuk-link govuk-link--no-visited-state"
-            data-role="cancel-btn"
-            pdk-link=""
-            unvisited=""
-          >
-            Back
-          </a>
-        </div>
       </form>
     </pdk-grid>
   </div>

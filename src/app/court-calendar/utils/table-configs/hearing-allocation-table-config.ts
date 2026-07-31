@@ -1,10 +1,14 @@
 import { AllocationHearingsSectionVm, AllocationType, HearingRowVM } from '../../model';
-import { ColumnConfig, HearingTableSectionConfig } from '../../model/hearing-table-renderer.vm';
+import {
+  HearingsColumnConfig,
+  HearingsTableSectionConfig
+} from '../../model/hearing-table-renderer.interfaces';
+import { defineHearingsGroupLevels } from '../hearing-table-renderer.utils';
 
 export const AllocationHearingsTableColumnConfig = (
   allocationType: AllocationType
-): ColumnConfig<HearingRowVM> => {
-  const config: ColumnConfig<HearingRowVM> = [
+): HearingsColumnConfig<HearingRowVM> => {
+  const config: HearingsColumnConfig<HearingRowVM> = [
     {
       label: 'Select all hearings',
       key: 'id',
@@ -46,11 +50,7 @@ export const AllocationHearingsTableColumnConfig = (
   return config;
 };
 
-export const AllocationHearingsTableSectionConfig: HearingTableSectionConfig<
-  AllocationHearingsSectionVm,
-  'allocationCalendar',
-  'hearingTimeCalendar'
-> = {
+export const AllocationHearingsTableSectionConfig: HearingsTableSectionConfig = {
   actionable: false,
   rowsAreExpandable: true,
   rowsExpandHeaderDescription: 'Use this column to expand the current hearing you are viewing',
@@ -59,11 +59,8 @@ export const AllocationHearingsTableSectionConfig: HearingTableSectionConfig<
   sectionHeader: {
     key: 'date'
   },
-  rowGroups: {
-    rowGroupsPath: 'allocationCalendar',
-    dataConfig: {
-      rowGroupDataPath: 'hearingTimeCalendar',
-      rowsDataPath: 'hearings'
-    }
-  }
+  groupLevels: defineHearingsGroupLevels<AllocationHearingsSectionVm>()
+    .group('allocationCalendar')
+    .group('hearingTimeCalendar')
+    .rows('hearings')
 };

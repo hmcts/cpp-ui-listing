@@ -6,17 +6,6 @@ form {
   border: 0;
 }
 
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.filter-item {
-  flex: 1;
-  flex: 1 1 100%;
-}
-
 :host ::ng-deep pdk-radio-button {
   display: inline-block;
 }
@@ -25,23 +14,6 @@ form {
   .filter-container {
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .filter-item {
-    flex: 1;
-    flex: 0 0 calc(34% - 10px);
-  }
-
-  .date-filter {
-    flex: 1;
-    flex: 0 0 calc(16% - 10px);
-  }
-
-  .filter-group-extended {
-    .filter-item {
-      flex: 1;
-      flex: 0 0 calc(25% - 10px);
-    }
   }
 
   .actions {

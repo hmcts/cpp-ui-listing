@@ -25,6 +25,13 @@ describe('ChangeHearingDetailsContainer', () => {
   const initialState = {
     courtCalendar: {
       selectedHearing: selectedHearing
+    },
+    scheduling: {
+      allocation: {
+        hearingSlots: [],
+        totalResults: 0,
+        params: null
+      }
     }
   };
 

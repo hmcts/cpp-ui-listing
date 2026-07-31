@@ -22,7 +22,8 @@ import {
   JurisdictionType,
   ExtendedJudicialRole,
   PaginatedHearingResponse,
-  PanelType
+  PanelType,
+  NonDefaultDay
 } from '../../model/hearing';
 import { TypeOfListSummary } from '../../../unscheduled-listings/unscheduled-listings.interfaces';
 import { CaseNote } from '../../../allocate-hearing/allocate-hearing.interfaces';
@@ -225,7 +226,8 @@ export class ListingService {
       bookingType: hearing.bookingType,
       priority: hearing.priority,
       specialRequirements: hearing.specialRequirements,
-      sendNotificationToParties: hearing.sendNotificationToParties
+      sendNotificationToParties: hearing.sendNotificationToParties,
+      courtRoomId: hearing?.courtRoomId
     };
     if (splitHearingUnallocated) {
       body.splitHearing = 'unallocated';
@@ -703,25 +705,18 @@ export class ListingService {
     });
   }
 
-  updateCourtRoomForSelectedHearingDays(hearingUpdatePayload: HearingAllocationPayload) {
-    const { hearingId, judiciary, ...updateBody } = hearingUpdatePayload;
+  updateCourtRoomForSelectedHearingDays({
+    hearingId,
+    ...payload
+  }: {
+    hearingId: string;
+    sendNotificationToParties: boolean;
+    nonDefaultDays: NonDefaultDay[];
+  }) {
     return this.api.commandSync({
       url: `/listing-command-api/command/api/rest/listing/hearings/${hearingId}`,
-      body: {
-        ...updateBody,
-        judiciary: judiciary
-          ? judiciary.map(
-              ({ judicialId, ...judge }) =>
-                ({
-                  judicialId: judicialId || judge.judicialMember.id,
-                  judicialRoleType: judge.judicialRoleType,
-                  isDeputy: judge.isDeputy,
-                  isBenchChairman: judge.isBenchChairman
-                }) as JudicialRole
-            )
-          : undefined
-      },
-      requestType: 'application/vnd.listing.command.update-hearing-for-listing+json',
+      body: payload,
+      requestType: 'application/vnd.listing.command.change-court-room-for-multiday-hearing+json',
       successEvent: 'public.listing.hearing-days-changed-for-hearing'
     });
   }

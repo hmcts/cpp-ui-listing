@@ -58,7 +58,6 @@ export class AllocateHearingFactory {
         hearingDateTime,
         courtCentre.id,
         courtRoomId,
-        endDate,
         courtScheduleId,
         courtCentre.oucode,
         courtSession
@@ -104,6 +103,17 @@ export class AllocateHearingFactory {
       courtApplications,
       estimatedMinutes
     } = originalHearing;
+    const virtualNonDefaultDay = this.computeVirtualNonDefaultDayForUpdate(
+      dateRange,
+      jurisdictionType,
+      startTime,
+      duration,
+      courtCentreId,
+      courtRoomId,
+      courtCentre,
+      courtScheduleId,
+      courtSession
+    );
     return {
       ...rest,
       id: originalHearing.id,
@@ -119,21 +129,7 @@ export class AllocateHearingFactory {
       hasVideoLink: values.hasVideoLink ?? false,
       judiciary: selectedJudiciary ?? judiciary,
       nonSittingDays: nonSittingDays || [],
-      nonDefaultDays:
-        dateRange.startDate !== dateRange.endDate
-          ? nonDefaultDays
-          : [
-              this.createFakeNonDefaultDay({
-                startTime,
-                duration,
-                courtCentreId,
-                courtRoomId,
-                courtScheduleId,
-                startDate: dateRange.startDate,
-                oucode: jurisdictionType === 'MAGISTRATES' ? courtCentre.oucode : undefined,
-                session: courtSession
-              })
-            ],
+      nonDefaultDays: [...virtualNonDefaultDay, ...nonDefaultDays],
       startDate: dateRange.startDate,
       endDate: dateRange.endDate,
       listedCases,
@@ -151,9 +147,10 @@ export class AllocateHearingFactory {
    * Removes unnecessary properties and ensures only expected fields are sent.
    *
    * @param {Hearing} hearing - The hearing object to be unallocated.
+   * @param {string} [courtScheduleId] - Optional courtScheduleId of a session to associate with the unallocated hearing (Crown only).
    * @returns {HearingUpdatePayload} - The transformed payload for unallocating a hearing.
    */
-  unallocateHearing(hearing: Hearing): HearingAllocationPayload {
+  unallocateHearing(hearing: Hearing, courtScheduleId?: string): HearingAllocationPayload {
     const { startTime } = hearing.hearingDays[0];
     return {
       hearingId: hearing.id,
@@ -171,7 +168,7 @@ export class AllocateHearingFactory {
           startTime: this.cppDate.format(startTime, this.cppDate.HOURS_MINUTES_24H),
           courtCentreId: hearing.courtCentreId,
           courtRoomId: undefined,
-          courtScheduleId: undefined,
+          courtScheduleId,
           duration: hearing.estimatedMinutes
         })
       ],
@@ -196,11 +193,12 @@ export class AllocateHearingFactory {
         );
         if (!!existing) {
           return [
-            ...nonDefaultDayList.filter((ndd) => ndd !== existing),
+            ...nonDefaultDayList.filter(ndd => ndd !== existing),
             {
               ...existing,
               courtCentreId,
-              roomId: courtRoomId
+              roomId: courtRoomId,
+              courtScheduleId: rest.courtScheduleId
             }
           ];
         }
@@ -249,6 +247,34 @@ export class AllocateHearingFactory {
     return this.cppDate.format(endDate);
   }
 
+  private computeVirtualNonDefaultDayForUpdate(
+    dateRange: { startDate: string; endDate: string },
+    jurisdictionType: string,
+    startTime: string,
+    duration: number,
+    courtCentreId: string,
+    courtRoomId: string,
+    courtCentre: CourtCentre,
+    courtScheduleId?: string,
+    courtSession?: string
+  ): NonDefaultDay[] {
+    if (dateRange.startDate !== dateRange.endDate && jurisdictionType === 'MAGISTRATES') {
+      return [];
+    }
+    return [
+      this.createFakeNonDefaultDay({
+        startTime,
+        duration,
+        courtCentreId,
+        courtRoomId,
+        courtScheduleId,
+        startDate: dateRange.startDate,
+        oucode: jurisdictionType === 'MAGISTRATES' ? courtCentre.oucode : undefined,
+        session: courtSession
+      })
+    ];
+  }
+
   /**
    * Generates a fake JSON NonDefaultDay object for backend as this is needed for single hearings to calculate duration in minutes from HH:mm.
    * This Nondefault day Includes start time in UTC ISO, courtCentreId, and roomId.
@@ -268,47 +294,60 @@ export class AllocateHearingFactory {
   }
 
   private computeNonDefaultDays(
-    { allocated, startDate, nonDefaultDays, estimatedMinutes, hearingDays }: Partial<Hearing>,
+    {
+      allocated,
+      startDate,
+      nonDefaultDays,
+      estimatedMinutes,
+      hearingDays,
+      hearingDayCount
+    }: Partial<Hearing>,
     newStartDate: string,
     hearingDateTime: string,
     courtCentreId: string,
     courtRoomId: string,
-    newEndDate: string,
     courtScheduleId?: string,
     courtCentreOuCode?: string,
     courtSession?: string
   ) {
     let oucode = undefined;
     let session = undefined;
+    let duration = hearingDays[0].durationMinutes;
+
+    if (!allocated) {
+      duration = estimatedMinutes;
+    }
+    if (allocated && hearingDayCount > 1) {
+      duration = hearingDayCount * 360;
+    }
     if (courtScheduleId) {
       oucode = courtCentreOuCode;
       session = courtSession;
     }
-    if (allocated && startDate === newStartDate && (nonDefaultDays ?? []).length > 0) {
-      return nonDefaultDays.map((ndf) => ({
-        ...ndf,
-        roomId: courtRoomId,
+    const virtualNonDefaultDay = [
+      this.createFakeNonDefaultDay({
+        startTime: this.cppDate.format(hearingDateTime, this.cppDate.HOURS_MINUTES_24H),
+        duration,
         courtCentreId,
+        courtRoomId,
+        startDate: newStartDate,
         courtScheduleId,
         oucode,
         session
-      }));
-    }
-    if (newStartDate === newEndDate) {
+      })
+    ];
+
+    if (allocated && startDate === newStartDate && (nonDefaultDays ?? []).length > 0) {
       return [
-        this.createFakeNonDefaultDay({
-          startTime: this.cppDate.format(hearingDateTime, this.cppDate.HOURS_MINUTES_24H),
-          duration: !allocated ? estimatedMinutes : hearingDays[0].durationMinutes,
-          courtCentreId,
-          courtRoomId,
-          startDate: newStartDate,
-          courtScheduleId,
-          oucode,
-          session
-        })
+        ...virtualNonDefaultDay,
+        ...nonDefaultDays.map(ndf => ({
+          ...ndf,
+          roomId: courtRoomId,
+          courtCentreId
+        }))
       ];
     }
-    return [];
+    return virtualNonDefaultDay;
   }
 
   private computeNonSittingDays(hearing: Partial<Hearing>, newStartDate: string) {
