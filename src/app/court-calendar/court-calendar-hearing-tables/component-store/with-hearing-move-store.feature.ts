@@ -84,7 +84,7 @@ export function withHearingMoveStore<_>() {
       onNavigateHearingActions: computed(() => {
         const act = action();
         const hearings = selectedHearings();
-        if (!act || act === 'move' || act === 'unallocate') {
+        if (!act || act === 'move' || act === 'unallocate' || act === 'change-end-date') {
           return null;
         }
         if (!hearings?.length) {

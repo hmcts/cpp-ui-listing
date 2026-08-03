@@ -149,8 +149,3 @@ export const updateSplitHearingDataSuccess = createAction('UPDATE_SPLIT_HEARING_
 export const clearAllocationType = createAction('CLEAR_ALLOCATION_TYPE');
 
 export const clearUnallocatedWidgetFilter = createAction('CLEAR_UNALLOCATED_WIDGET_FILTER');
-
-export const moveHearingEndDate = createAction(
-  'CHANGE_MULTI_DAY_HEARING_END_DATE',
-  props<{ hearing: Hearing; newEndDate: string }>()
-);

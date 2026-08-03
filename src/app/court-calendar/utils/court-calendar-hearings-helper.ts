@@ -250,7 +250,7 @@ export const dateIsWithinLastSevenDays = (endDate: string | Date): boolean => {
   const today = startOfDay(new Date());
   const end = startOfDay(endDate);
 
-  let sevenDaysAgo = startOfDay(today);
+  const sevenDaysAgo = startOfDay(today);
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
   return end.getTime() >= sevenDaysAgo.getTime() && end.getTime() < today.getTime();
 };

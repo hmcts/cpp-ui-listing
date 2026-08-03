@@ -1,14 +1,13 @@
-import { formatDate } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 import { hot, cold } from 'jasmine-marbles';
 import { CourtCalendarActions, COURT_CALENDAR_FEATURE_KEY } from '../../';
 import * as effects from '../court-calendar.effects';
 import { ApiError, ListingService } from '../../../../core';
 
-import { mockSearchFormValues, mockCourtCalendarState, MockHearing } from '../../../utils/mocks';
+import { mockSearchFormValues, mockCourtCalendarState } from '../../../utils/mocks';
 import { loadListingNotes, resetHearingSlots } from '@cpp/scheduling';
 
 let searchCourtCalendarHearings: jest.Mock;
@@ -22,7 +21,6 @@ const initialState = {
 describe('CourtCalendar', () => {
   let actions$: Observable<any>;
   let listingService: ListingService;
-  let store: MockStore;
   beforeEach(() => {
     jest.useFakeTimers();
     searchCourtCalendarHearings = jest.fn();
@@ -46,7 +44,6 @@ describe('CourtCalendar', () => {
     });
 
     listingService = TestBed.inject(ListingService);
-    store = TestBed.inject(MockStore);
   });
 
   afterEach(() => {
@@ -131,55 +128,6 @@ describe('CourtCalendar', () => {
       actions$ = hot('-a-', { a: action });
       const expected$ = cold('--b', { b: expectedAction });
       expect(effects.setCaseNotesEffect(actions$, listingService)).toBeObservable(expected$);
-    });
-
-    describe('changeHearingEndDateEffect', () => {
-      const newEndDate = '2026-07-20';
-
-      it('should update the hearing end date, then alert and refresh the calendar on success', () => {
-        const action = CourtCalendarActions.moveHearingEndDate({
-          hearing: MockHearing as any,
-          newEndDate
-        });
-
-        const response$ = cold('a|', { a: {} });
-        updateAllocatedHearing.mockReturnValueOnce(response$);
-        actions$ = hot('-a', { a: action });
-
-        const expected$ = cold('-(bc)', {
-          b: CourtCalendarActions.setAlertMessage({
-            successAlert: `Hearing date successfully changed from ${formatDate(MockHearing.endDate, 'd MMMM yyyy', 'en-GB')} to ${formatDate(newEndDate, 'd MMMM yyyy', 'en-GB')}`
-          }),
-          c: CourtCalendarActions.searchCourtCalendar({ filterOptions })
-        });
-
-        const effect$ = effects.changeHearingEndDateEffect(actions$, listingService, store);
-
-        expect(effect$).toBeObservable(expected$);
-        expect(updateAllocatedHearing).toHaveBeenCalledWith({
-          ...MockHearing,
-          endDate: newEndDate
-        });
-      });
-
-      it('should dispatch an ApiError when the update fails', () => {
-        const error = { status: 500 };
-        const apiError = new ApiError(error);
-        const action = CourtCalendarActions.moveHearingEndDate({
-          hearing: MockHearing as any,
-          newEndDate
-        });
-
-        const response$ = cold('#', null, error);
-        updateAllocatedHearing.mockReturnValueOnce(response$);
-        actions$ = hot('-a', { a: action });
-
-        const expected$ = cold('-c', { c: apiError });
-
-        const effect$ = effects.changeHearingEndDateEffect(actions$, listingService, store);
-
-        expect(effect$).toBeObservable(expected$);
-      });
     });
   });
 });
