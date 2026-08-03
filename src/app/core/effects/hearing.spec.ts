@@ -2319,7 +2319,17 @@ describe('Hearing effects', () => {
         }
       });
 
-      actions$ = hot(' -a-b-c-d-e-f-g-h', {
+      const dailyListAction = new DownloadListAction({
+        options: {
+          startDate: '2020-01-01',
+          endDate: '2020-01-01',
+          courtListType: CourtListType.DRAFT,
+          courtCentreId: 'organisationUnitId',
+          courtRoomId: 'courtroomId'
+        }
+      });
+
+      actions$ = hot(' -a-b-c-d-e-f-g-h-i', {
         a: alphabeticalListAction,
         b: publicCourtListAction,
         c: standardListAction,
@@ -2327,10 +2337,11 @@ describe('Hearing effects', () => {
         e: benchListAction,
         f: benchRestrictedListAction,
         g: judgeListAction,
-        h: ushersListAction
+        h: ushersListAction,
+        i: dailyListAction
       });
       const download$ = cold(' -(b|)   ', { b: testBlob });
-      const expected$ = cold('--x-x-x-x-x-x-x-x', { x: new DownloadListSuccessAction() });
+      const expected$ = cold('--x-x-x-x-x-x-x-x-x', { x: new DownloadListSuccessAction() });
 
       downloadCourtList.and.returnValue(download$);
 
@@ -2367,6 +2378,10 @@ describe('Hearing effects', () => {
       expect(FileSaver.saveAs).toHaveBeenCalledWith(
         testBlob,
         'Ushers list - Test Court Centre, Test Courtroom - 01-01-2020.docx'
+      );
+      expect(FileSaver.saveAs).toHaveBeenCalledWith(
+        testBlob,
+        'Daily list - Test Court Centre, Test Courtroom - 01-01-2020.pdf'
       );
     });
 

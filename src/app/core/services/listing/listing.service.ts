@@ -669,8 +669,8 @@ export class ListingService {
   }
 
   downloadPrisonList(options: SelectedFilterOptions) {
-    const url = '/progression-query-api/query/api/rest/progression/courtlist';
-    const requestType = 'application/vnd.progression.search.prison.court.list+json';
+    const url = '/courtlistpublishing-service/api/court-list-publish/prison/download';
+    const requestType = 'application/vnd.courtlistpublishing-service.prison-download.get+json';
 
     const params = this.toHttpParams(options);
     return this.api
