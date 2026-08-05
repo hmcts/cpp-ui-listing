@@ -404,7 +404,11 @@ describe('CourtCalendarContainer', () => {
 
       expect(modalRef.dispose).toHaveBeenCalled();
       expect(mockComponentStore.changeHearingEndDate).toHaveBeenCalledWith(
-        expect.objectContaining({ hearing: details, newEndDate: '2026-02-01' })
+        expect.objectContaining({
+          hearing: details,
+          newEndDate: '2026-02-01',
+          courtCentre: mockCourtCalendarState.filterOptions.courtCentre
+        })
       );
     });
 

@@ -1,16 +1,15 @@
 import { inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HearingType } from '@cpp/reference-data';
+import { HearingType, OrganisationUnit } from '@cpp/reference-data';
 import { tapResponse } from '@ngrx/operators';
 import { signalStoreFeature, type, withMethods } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { Store } from '@ngrx/store';
 import { pipe, switchMap } from 'rxjs';
 import {
-  getCourtCentres,
   Hearing,
   HearingWithSelectedCourtCentre,
-  ListingService
+  ListingService,
+  mapOrganisationUnitToCourtCentres
 } from '../../../core';
 import { CPPDate } from '../../../core/util';
 import { DateRange } from '../../../shared/components/date-range/date-range';
@@ -38,13 +37,12 @@ export function withHearingEndDateStore<_>() {
         store,
         listingService = inject(ListingService),
         allocateHearingFactory = inject(AllocateHearingFactory),
-        cppDate = inject(CPPDate),
-        ngrxStore = inject(Store)
+        cppDate = inject(CPPDate)
       ) => {
-        const courtCentres = ngrxStore.selectSignal(getCourtCentres);
         const buildUpdatedHearing = (
           hearing: Hearing,
-          newEndDate: string
+          newEndDate: string,
+          courtCentre: OrganisationUnit
         ): HearingWithSelectedCourtCentre => {
           const [{ startTime, durationMinutes, courtScheduleId }] = hearing.hearingDays;
           const isMultiDay = hearing.startDate !== newEndDate;
@@ -69,7 +67,7 @@ export function withHearingEndDateStore<_>() {
                 : durationMinutes,
               courtScheduleId
             } as ChangeHearingDetailsFormValues,
-            courtCentres().find(({ id }) => id === hearing.courtCentreId)
+            mapOrganisationUnitToCourtCentres(courtCentre)
           );
         };
 
@@ -77,13 +75,14 @@ export function withHearingEndDateStore<_>() {
           changeHearingEndDate: rxMethod<{
             hearing: Hearing;
             newEndDate: string;
+            courtCentre: OrganisationUnit;
             onSuccess: OnEndDateChangedCallback;
           }>(
             pipe(
-              switchMap(({ hearing, newEndDate, onSuccess }) => {
+              switchMap(({ hearing, newEndDate, courtCentre, onSuccess }) => {
                 const previousEndDate = hearing.endDate;
                 return listingService
-                  .updateAllocatedHearing(buildUpdatedHearing(hearing, newEndDate))
+                  .updateAllocatedHearing(buildUpdatedHearing(hearing, newEndDate, courtCentre))
                   .pipe(
                     tapResponse({
                       next: () => onSuccess({ previousEndDate, newEndDate }),
