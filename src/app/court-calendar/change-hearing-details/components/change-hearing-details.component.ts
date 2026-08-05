@@ -10,7 +10,6 @@ import {
 } from '../../../core';
 import { DateRange } from '../../../shared/components/date-range/date-range';
 import { AllocateHearingFactory } from '../../utils/allocate-hearing.factory';
-import { CPPDate } from '../../../core/util';
 import { CourtSession, HearingSlot } from '@cpp/scheduling';
 import { ChangeHearingDetailsCrownControlComponent } from './change-hearing-details-crown-control/change-hearing-details-crown-control.component';
 import { ChangeHearingDetailsMagsControlComponent } from './change-hearing-details-mags-control/change-hearing-details-mags-control.component';
@@ -69,7 +68,6 @@ export class ChangeHearingDetailsComponent {
   datePipe = new DatePipe('en-GB');
 
   allocateHearingFactory = inject(AllocateHearingFactory);
-  cppDate = inject(CPPDate);
 
   submit({
     value: { duration, ...restValues }
@@ -77,16 +75,12 @@ export class ChangeHearingDetailsComponent {
     value: Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string };
   }): void {
     const selectedHearing = this.selectedHearing();
-    const [{ courtScheduleId: existingCourtScheduleId, startTime }] = selectedHearing.hearingDays;
+    const [{ courtScheduleId: existingCourtScheduleId }] = selectedHearing.hearingDays;
     const isMultiDay = restValues.dateRange?.startDate !== restValues.dateRange?.endDate;
     let durationMinutes: number;
     let courtSession: CourtSession;
     if (isMultiDay) {
-      durationMinutes =
-        this.cppDate.countWorkingDays(
-          restValues.dateRange.startDate,
-          restValues.dateRange.endDate
-        ) * 360;
+      durationMinutes = this.allocateHearingFactory.multiDayDurationMinutes(restValues.dateRange);
     } else if (duration) {
       const durationSplit = String(duration).split(':').map(Number);
       durationMinutes = (durationSplit[0] || 0) * 60 + (durationSplit[1] || 0);
@@ -94,7 +88,7 @@ export class ChangeHearingDetailsComponent {
 
     const effectiveStartTime =
       isMultiDay || !restValues.startTime
-        ? this.cppDate.format(startTime, this.cppDate.HOURS_MINUTES_24H)
+        ? this.allocateHearingFactory.hearingStartTime(selectedHearing)
         : restValues.startTime;
 
     if (restValues.courtScheduleId) {

@@ -3,7 +3,6 @@
 exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should render correct controls for a Crown hearing 1`] = `
 <change-hearing-details
   allocateHearingFactory={[Function AllocateHearingFactory]}
-  cppDate={[Function CPPDate]}
   datePipe={[Function _DatePipe]}
   hearingSlots={[Function Function]}
   initialValues={[Function Function]}
@@ -713,7 +712,6 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
 exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should render correct controls for a Magistrate hearing 1`] = `
 <change-hearing-details
   allocateHearingFactory={[Function AllocateHearingFactory]}
-  cppDate={[Function CPPDate]}
   datePipe={[Function _DatePipe]}
   hearingSlots={[Function Function]}
   initialValues={[Function Function]}
@@ -1335,7 +1333,6 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
 exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should render the component correctly with initial state 1`] = `
 <change-hearing-details
   allocateHearingFactory={[Function AllocateHearingFactory]}
-  cppDate={[Function CPPDate]}
   datePipe={[Function _DatePipe]}
   hearingSlots={[Function Function]}
   initialValues={[Function Function]}
@@ -1921,7 +1918,6 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
 exports[`ChangeHearingDetailsComponent Form Submission should emit correct payload when submitting a single-day hearing 1`] = `
 <change-hearing-details
   allocateHearingFactory={[Function AllocateHearingFactory]}
-  cppDate={[Function CPPDate]}
   datePipe={[Function _DatePipe]}
   hearingSlots={[Function Function]}
   initialValues={[Function Function]}
