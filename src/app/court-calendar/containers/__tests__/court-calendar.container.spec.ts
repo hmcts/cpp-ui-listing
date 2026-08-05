@@ -28,7 +28,10 @@ import {
 import { Hearing } from '../../../core';
 import { HearingActionsEvent } from '../../court-calendar-hearing-tables/renderers/cell-renderers/action-cell.component';
 import { BaseHearingRowDataVM } from '../../model/hearing-table-renderer.interfaces';
-import { setHearingsToReallocate } from '../../state/actions/court-calendar.actions';
+import {
+  setAlertMessage,
+  setHearingsToReallocate
+} from '../../state/actions/court-calendar.actions';
 import { WofdWarningService } from '@cpp/application';
 import { ModalService } from '@cpp/pdk';
 import { ChangeEndDateModalComponent } from '../../court-calendar-hearing-tables/shared/modals/change-end-date-modal.component';
@@ -59,6 +62,7 @@ class MockAllocatedHearingActionsStore {
   clearAllocationResult = jest.fn();
   clearPositionedHearings = jest.fn();
   unallocate = jest.fn();
+  changeHearingEndDate = jest.fn();
 }
 
 describe('CourtCalendarContainer', () => {
@@ -329,59 +333,6 @@ describe('CourtCalendarContainer', () => {
     });
   });
 
-  describe('change-end-date action', () => {
-    const details = {
-      type: { description: 'Trial' },
-      hearingDayCount: 3,
-      endDate: '2026-01-15'
-    } as unknown as Hearing;
-    const rows = [{ id: 'h1', details } as unknown as BaseHearingRowDataVM];
-
-    it('should open the change end date modal for the change-end-date action', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
-
-      expect(modalOpen).toHaveBeenCalledWith(
-        ChangeEndDateModalComponent,
-        expect.objectContaining({
-          data: expect.objectContaining({
-            hearingTypeDescription: 'Trial',
-            hearingDayCount: 3,
-            endDate: '2026-01-15'
-          }),
-          disposeOnNavigation: true,
-          disposeOnBackDropClick: false
-        })
-      );
-    });
-
-    it('should dispose the modal and dispatch moveHearingEndDate on continue', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
-
-      const config = modalOpen.mock.calls[0][1];
-      config.data.continue('2026-02-01');
-
-      expect(modalRef.dispose).toHaveBeenCalled();
-      expect(dispatchSpy).toHaveBeenCalledWith(
-        CourtCalendarActions.moveHearingEndDate({ hearing: details, newEndDate: '2026-02-01' })
-      );
-    });
-
-    it('should dispose the modal on cancel', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
-
-      const config = modalOpen.mock.calls[0][1];
-      config.data.cancel();
-
-      expect(modalRef.dispose).toHaveBeenCalled();
-    });
-
-    it('should not open the modal when the hearing details cannot be found', () => {
-      component.onHearingAction({ action: 'change-end-date', hearingId: 'missing', rows: [] });
-
-      expect(modalOpen).not.toHaveBeenCalled();
-    });
-  });
-
   it('should dispatch setCaseNotesForCase when case notes are not present for a hearing', () => {
     component.onGetCaseNotesForId(caseId);
     expect(dispatchSpy).toHaveBeenCalledWith(CourtCalendarActions.setCaseNotesForCase({ caseId }));
@@ -416,6 +367,83 @@ describe('CourtCalendarContainer', () => {
       rowIdentifier: '',
       hearingDate: '',
       rows: []
+    });
+  });
+
+  describe('change-end-date action', () => {
+    const details = {
+      type: { description: 'Trial' },
+      hearingDayCount: 3,
+      endDate: '2026-01-15'
+    } as unknown as Hearing;
+    const rows = [{ id: 'h1', details } as unknown as BaseHearingRowDataVM];
+
+    it('should open the change end date modal for the change-end-date action', () => {
+      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
+
+      expect(modalOpen).toHaveBeenCalledWith(
+        ChangeEndDateModalComponent,
+        expect.objectContaining({
+          data: expect.objectContaining({
+            hearingTypeDescription: 'Trial',
+            hearingDayCount: 3,
+            endDate: '2026-01-15'
+          }),
+          disposeOnNavigation: true,
+          disposeOnBackDropClick: false
+        })
+      );
+      expect(mockComponentStore.selectHearing).not.toHaveBeenCalled();
+    });
+
+    it('should dispose the modal and ask the store to change the end date on continue', () => {
+      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
+
+      const config = modalOpen.mock.calls[0][1];
+      config.data.continue('2026-02-01');
+
+      expect(modalRef.dispose).toHaveBeenCalled();
+      expect(mockComponentStore.changeHearingEndDate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          hearing: details,
+          newEndDate: '2026-02-01',
+          courtCentre: mockCourtCalendarState.filterOptions.courtCentre
+        })
+      );
+    });
+
+    it('should refresh the calendar and show the success alert once the end date has changed', () => {
+      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
+      modalOpen.mock.calls[0][1].data.continue('2026-02-01');
+
+      const { onSuccess } = mockComponentStore.changeHearingEndDate.mock.calls[0][0];
+      onSuccess({ previousEndDate: '2026-01-15', newEndDate: '2026-02-01' });
+
+      expect(dispatchSpy).toHaveBeenCalledWith(
+        CourtCalendarActions.searchCourtCalendar({
+          filterOptions: mockCourtCalendarState.filterOptions
+        })
+      );
+      expect(dispatchSpy).toHaveBeenCalledWith(
+        setAlertMessage({
+          successAlert: 'Hearing date successfully changed from 15 January 2026 to 1 February 2026'
+        })
+      );
+    });
+
+    it('should dispose the modal on cancel', () => {
+      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
+
+      modalOpen.mock.calls[0][1].data.cancel();
+
+      expect(modalRef.dispose).toHaveBeenCalled();
+    });
+
+    it('should not open the modal when the hearing details cannot be found', () => {
+      component.onHearingAction({ action: 'change-end-date', hearingId: 'missing', rows: [] });
+
+      expect(modalOpen).not.toHaveBeenCalled();
+      expect(mockComponentStore.changeHearingEndDate).not.toHaveBeenCalled();
     });
   });
 

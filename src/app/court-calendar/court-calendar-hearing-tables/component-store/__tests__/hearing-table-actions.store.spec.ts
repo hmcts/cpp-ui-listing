@@ -95,12 +95,23 @@ describe('HearingTableActionsStore', () => {
     });
 
     it('should compute onNavigateHearingActions as null when action is move', () => {
+      store.selectHearing(createMockSelectedHearing('1', '2024-01-01T10:00:00'));
       store.setAction('move');
+
       expect(store.onNavigateHearingActions()).toBeNull();
     });
 
     it('should compute onNavigateHearingActions as null when action is unallocate', () => {
+      store.selectHearing(createMockSelectedHearing('1', '2024-01-01T10:00:00'));
       store.setAction('unallocate');
+
+      expect(store.onNavigateHearingActions()).toBeNull();
+    });
+
+    it('should compute onNavigateHearingActions as null when action is change-end-date', () => {
+      store.selectHearing(createMockSelectedHearing('1', '2024-01-01T10:00:00'));
+      store.setAction('change-end-date');
+
       expect(store.onNavigateHearingActions()).toBeNull();
     });
 

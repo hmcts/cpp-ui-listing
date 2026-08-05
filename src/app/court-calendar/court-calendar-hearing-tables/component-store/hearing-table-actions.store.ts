@@ -18,6 +18,11 @@ import {
   OnSuccessCallback
 } from './with-allocation-store.feature';
 import { withHearingScheduleStore } from './with-hearing-schedule-store.feature';
+import {
+  withHearingEndDateStore,
+  ChangeEndDateResult,
+  OnEndDateChangedCallback
+} from './with-hearing-end-date-store.feature';
 
 export type {
   SelectedHearingState,
@@ -27,7 +32,9 @@ export type {
   PositionedHearingsState,
   SectionAllocatedToState,
   BulkOperationResult,
-  OnSuccessCallback
+  OnSuccessCallback,
+  ChangeEndDateResult,
+  OnEndDateChangedCallback
 };
 
 export interface HearingTableActionsState {
@@ -45,6 +52,7 @@ export const HearingTableActionsStore = signalStore(
   withHearingMoveStore(),
   withHearingScheduleStore(),
   withAllocationStore(),
+  withHearingEndDateStore(),
   withMethods(store => ({
     resetState: () => {
       patchState(store, {

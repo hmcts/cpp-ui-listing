@@ -12,13 +12,13 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { getOrganisationUnits } from '@cpp/reference-data';
 import {
+  ModalService,
   PdkErrorSummaryComponent,
   PdkButton,
   PdkCore,
   PdkGrid,
-  ValidationError,
-  ModalService,
-  provideModalServices
+  provideModalServices,
+  ValidationError
 } from '@cpp/pdk';
 import { CourtCalendarFiltersComponent, CourtResultSummaryComponent } from '../components';
 import { CourtCalendarFilters } from '../model';
@@ -56,11 +56,12 @@ import { BulkActionsComponent } from '../components/bulk-actions/bulk-actions.co
 import { uniq } from 'lodash-es';
 import { SubMenuComponent } from '../../shared/components/sub-menu/sub-menu.component';
 import { PageSizeSelectorComponent } from '../../shared/components/page-size-selector/page-size-selector.component';
+import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.interfaces';
+import { Hearing } from '../../core';
 import {
   ChangeEndDateModalComponent,
   ChangeEndDateModalData
 } from '../court-calendar-hearing-tables/shared/modals/change-end-date-modal.component';
-import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.interfaces';
 
 @Component({
   selector: 'court-calendar-container',
@@ -213,9 +214,7 @@ export class CourtCalendarContainer implements OnInit {
         endDate: hearingDetails.endDate,
         continue: (newEndDate: string) => {
           modalRef.dispose();
-          this.store.dispatch(
-            CourtCalendarActions.moveHearingEndDate({ hearing: hearingDetails, newEndDate })
-          );
+          this.changeHearingEndDate(hearingDetails, newEndDate);
         },
         cancel: () => {
           modalRef.dispose();
@@ -223,6 +222,22 @@ export class CourtCalendarContainer implements OnInit {
       },
       disposeOnNavigation: true,
       disposeOnBackDropClick: false
+    });
+  }
+
+  private changeHearingEndDate(hearing: Hearing, newEndDate: string) {
+    this.allocatedHearingActionsStore.changeHearingEndDate({
+      hearing,
+      newEndDate,
+      courtCentre: this.filterOptions().courtCentre,
+      onSuccess: ({ previousEndDate }) => {
+        this.store.dispatch(
+          CourtCalendarActions.searchCourtCalendar({ filterOptions: this.filterOptions() })
+        );
+        this.store.dispatch(
+          setAlertMessage(COURT_CALENDAR_ALERTS.resolveEndDateChange(previousEndDate, newEndDate))
+        );
+      }
     });
   }
 

@@ -2,7 +2,6 @@ import { CourtCalendarActions } from '../../actions/';
 import { CourtCalendarFilters, RemoveHearingPayload } from '../../';
 import {
   mockCaseNotes,
-  MockHearing,
   mockRemoveHearingPayload,
   mockSearchFormValues
 } from '../../../utils/mocks';
@@ -66,18 +65,5 @@ describe('CourtCalendar Actions', () => {
     const action = CourtCalendarActions.resetAllocatedHearings();
 
     expect(action.type).toBe('RESET_ALLOCATED_HEARINGS');
-  });
-
-  it('should create the moveHearingEndDate action with the correct type and payload', () => {
-    const newEndDate = '2026-07-20';
-
-    const action = CourtCalendarActions.moveHearingEndDate({
-      hearing: MockHearing as any,
-      newEndDate
-    });
-
-    expect(action.type).toBe('CHANGE_MULTI_DAY_HEARING_END_DATE');
-    expect(action.hearing).toBe(MockHearing);
-    expect(action.newEndDate).toBe(newEndDate);
   });
 });

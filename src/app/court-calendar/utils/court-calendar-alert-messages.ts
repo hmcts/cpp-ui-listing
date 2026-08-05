@@ -1,7 +1,15 @@
+import { formatDate } from '@angular/common';
+
 export const COURT_CALENDAR_ALERTS = {
   ALLOCATE_TOTAL_FAILURE: 'Hearings could not be allocated. Try again.',
   UNALLOCATE_SUCCESS: 'Hearing(s) have been successfully unallocated.',
   UNALLOCATE_TOTAL_FAILURE: 'Hearings could not be unallocated. Try again.',
+
+  resolveEndDateChange(previousEndDate: string, newEndDate: string): { successAlert: string } {
+    return {
+      successAlert: `Hearing date successfully changed from ${formatDate(previousEndDate, 'd MMMM yyyy', 'en-GB')} to ${formatDate(newEndDate, 'd MMMM yyyy', 'en-GB')}`
+    };
+  },
 
   resolveUnallocate(
     processedCount: number,

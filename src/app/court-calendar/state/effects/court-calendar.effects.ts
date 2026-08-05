@@ -31,12 +31,11 @@ import {
   generateNonDefaultDays,
   getPermissionAndNotificationHandler
 } from './court-calendar.effect.utils';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AllocateHearingCase } from '../../model';
 
 import { last } from 'lodash-es';
-import { getCourtCalendarFilters, getSelectedHearing } from '../selectors';
-import { formatDate } from '@angular/common';
+import { getSelectedHearing } from '../selectors';
 
 export const searchCourtCalendarsEffect = createEffect(
   (actions$ = inject(Actions), listingService = inject(ListingService)) => {
@@ -206,32 +205,6 @@ export const removeHearingEffect = createEffect(
           catchError(err => of(new ApiError(err)))
         )
       )
-    ),
-  { functional: true }
-);
-
-export const changeHearingEndDateEffect = createEffect(
-  (actions$ = inject(Actions), listingService = inject(ListingService), store = inject(Store)) =>
-    actions$.pipe(
-      ofType(CourtCalendarActions.moveHearingEndDate),
-      withLatestFrom(store.pipe(select(getCourtCalendarFilters))),
-      switchMap(([{ hearing, newEndDate }, filterOptions]) => {
-        const previousEndDate = hearing.endDate;
-        return listingService
-          .updateAllocatedHearing({
-            ...hearing,
-            endDate: newEndDate
-          } as HearingWithSelectedCourtCentre)
-          .pipe(
-            switchMap(() => [
-              CourtCalendarActions.setAlertMessage({
-                successAlert: `Hearing date successfully changed from ${formatDate(previousEndDate, 'd MMMM yyyy', 'en-GB')} to ${formatDate(newEndDate, 'd MMMM yyyy', 'en-GB')}`
-              }),
-              CourtCalendarActions.searchCourtCalendar({ filterOptions })
-            ]),
-            catchError(err => of(new ApiError(err)))
-          );
-      })
     ),
   { functional: true }
 );
