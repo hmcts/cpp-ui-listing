@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HearingType, OrganisationUnit } from '@cpp/reference-data';
+import { OrganisationUnit } from '@cpp/reference-data';
 import {
   CourtCentre,
   ExtendedJudicialRole,
@@ -9,11 +9,9 @@ import {
   NonDefaultDay
 } from '../../core';
 import { CPPDate } from '../../core/util';
-import { DateRange } from '../../shared/components/date-range/date-range';
 import { ChangeHearingDetailsFormValues } from '../change-hearing-details/components/change-hearing-details.component';
 import { HearingAllocationPayload } from '../model';
 import { getAllocateProsecutionCases } from './court-calendar-hearings-helper';
-const SITTING_DAY_MINUTES = 360;
 
 interface NonDefaultDayData {
   startTime: string;
@@ -76,40 +74,6 @@ export class AllocateHearingFactory {
       type: rest.type,
       specialRequirements: rest.specialRequirements,
       sendNotificationToParties: rest.sendNotificationToParties
-    };
-  }
-
-  hearingStartTime({ hearingDays }: Hearing): string {
-    return this.cppDate.format(hearingDays[0].startTime, this.cppDate.HOURS_MINUTES_24H);
-  }
-
-  multiDayDurationMinutes({ startDate, endDate }: DateRange): number {
-    return this.cppDate.countWorkingDays(startDate, endDate) * SITTING_DAY_MINUTES;
-  }
-
-  hearingToUpdateValues(
-    hearing: Hearing,
-    overrides: Partial<ChangeHearingDetailsFormValues> = {}
-  ): ChangeHearingDetailsFormValues {
-    const [{ durationMinutes, courtScheduleId }] = hearing.hearingDays;
-    const dateRange = overrides.dateRange ?? new DateRange(hearing.startDate, hearing.endDate);
-    const isMultiDay = dateRange.startDate !== dateRange.endDate;
-    return {
-      hasVideoLink: !!hearing.hasVideoLink,
-      sendNotificationToParties: !!hearing.sendNotificationToParties,
-      hearingLanguage: hearing.hearingLanguage,
-      publicListNote: hearing.publicListNote,
-      nonSittingDays: hearing.nonSittingDays,
-      nonDefaultDays: hearing.hearingDayCount === 1 ? [] : hearing.nonDefaultDays,
-      selectedHearingType: {
-        id: hearing.type.id,
-        hearingDescription: hearing.type.description
-      } as HearingType,
-      dateRange,
-      startTime: this.hearingStartTime(hearing),
-      duration: isMultiDay ? this.multiDayDurationMinutes(dateRange) : durationMinutes,
-      courtScheduleId,
-      ...overrides
     };
   }
 

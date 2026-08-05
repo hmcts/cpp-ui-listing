@@ -2,8 +2,7 @@ import { fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { signalStore } from '@ngrx/signals';
 import { isEqual } from 'lodash-es';
 import { of, throwError } from 'rxjs';
-import { OrganisationUnit } from '@cpp/reference-data';
-import { ApiError, CourtCentre, Hearing, ListingService } from '../../../../core';
+import { ApiError, CourtCentre, getCourtCentres, Hearing, ListingService } from '../../../../core';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../../../../core';
 import { CPPDate } from '../../../../core/util';
@@ -45,11 +44,6 @@ const hearing = {
   nonSittingDays: ['2026-01-14']
 } as unknown as Hearing;
 
-const organisationUnit = {
-  id: 'court-centre-1',
-  oucodeL3Name: 'Test Crown Court',
-  oucode: 'OU-1'
-} as OrganisationUnit;
 const courtCentre = {
   id: 'court-centre-1',
   name: 'Test Crown Court',
@@ -71,7 +65,10 @@ describe('withHearingEndDateStore', () => {
     TestBed.configureTestingModule({
       providers: [
         TestStore,
-        provideMockStore<AppState>({ initialState: {} as AppState }),
+        provideMockStore<AppState>({
+          initialState: {} as AppState,
+          selectors: [{ selector: getCourtCentres, value: [courtCentre] }]
+        }),
         { provide: ListingService, useValue: { updateAllocatedHearing } }
       ],
       teardown: { destroyAfterEach: false }
@@ -106,12 +103,7 @@ describe('withHearingEndDateStore', () => {
     );
     updateAllocatedHearing.mockReturnValue(of({}));
 
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
+    store.changeHearingEndDate({ hearing, newEndDate: NEW_END_DATE, onSuccess });
     flush();
 
     expect(updateAllocatedHearing).toHaveBeenCalledWith(viaChangeHearingDetails);
@@ -120,18 +112,8 @@ describe('withHearingEndDateStore', () => {
   it('should change nothing on the hearing but the end date and the duration derived from it', fakeAsync(() => {
     updateAllocatedHearing.mockReturnValue(of({}));
 
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: hearing.endDate,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
+    store.changeHearingEndDate({ hearing, newEndDate: hearing.endDate, onSuccess });
+    store.changeHearingEndDate({ hearing, newEndDate: NEW_END_DATE, onSuccess });
     flush();
 
     const [[unchanged], [changed]] = updateAllocatedHearing.mock.calls;
@@ -151,12 +133,7 @@ describe('withHearingEndDateStore', () => {
   it('should carry the hearing start time and court schedule onto the virtual non default day', fakeAsync(() => {
     updateAllocatedHearing.mockReturnValue(of({}));
 
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
+    store.changeHearingEndDate({ hearing, newEndDate: NEW_END_DATE, onSuccess });
     flush();
 
     const [virtualDay] = updateAllocatedHearing.mock.calls[0][0].nonDefaultDays;
@@ -169,12 +146,7 @@ describe('withHearingEndDateStore', () => {
   it('should keep the hearing Crown - no ouCode is sent on the selected court centre', fakeAsync(() => {
     updateAllocatedHearing.mockReturnValue(of({}));
 
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
+    store.changeHearingEndDate({ hearing, newEndDate: NEW_END_DATE, onSuccess });
     flush();
 
     expect(updateAllocatedHearing.mock.calls[0][0].selectedCourtCentre).toEqual({
@@ -188,12 +160,7 @@ describe('withHearingEndDateStore', () => {
   it('should report the previous and new end dates to the caller on success', fakeAsync(() => {
     updateAllocatedHearing.mockReturnValue(of({}));
 
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
+    store.changeHearingEndDate({ hearing, newEndDate: NEW_END_DATE, onSuccess });
     flush();
 
     expect(onSuccess).toHaveBeenCalledWith({
@@ -210,7 +177,6 @@ describe('withHearingEndDateStore', () => {
     store.changeHearingEndDate({
       hearing: hearingWithoutNonDefaultDays as Hearing,
       newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
       onSuccess
     });
     flush();
@@ -225,12 +191,7 @@ describe('withHearingEndDateStore', () => {
     const error = { status: 500 };
     updateAllocatedHearing.mockReturnValue(throwError(() => error));
 
-    store.changeHearingEndDate({
-      hearing,
-      newEndDate: NEW_END_DATE,
-      courtCentre: organisationUnit,
-      onSuccess
-    });
+    store.changeHearingEndDate({ hearing, newEndDate: NEW_END_DATE, onSuccess });
     flush();
 
     expect(onSuccess).not.toHaveBeenCalled();

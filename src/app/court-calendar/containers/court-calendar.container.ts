@@ -229,7 +229,6 @@ export class CourtCalendarContainer implements OnInit {
     this.allocatedHearingActionsStore.changeHearingEndDate({
       hearing,
       newEndDate,
-      courtCentre: this.filterOptions().courtCentre,
       onSuccess: ({ previousEndDate }) => {
         this.store.dispatch(
           CourtCalendarActions.searchCourtCalendar({ filterOptions: this.filterOptions() })

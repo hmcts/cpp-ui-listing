@@ -14,7 +14,6 @@ import { ChangeDetectionStrategy } from '@angular/compiler';
 import { provideStore } from '@ngrx/store';
 import { provideRouter } from '@angular/router';
 import { mockFixtureInputs } from '../../../../../mock-data/mock-fixture-inputs';
-import { CPPDate } from '../../../../core/util';
 
 describe('ChangeHearingDetailsComponent', () => {
   let component: ChangeHearingDetailsComponent;
@@ -191,66 +190,6 @@ describe('ChangeHearingDetailsComponent', () => {
           })
         })
       );
-    });
-
-    it('should sit a Crown multi-day hearing for a full day on every working day in the range', async () => {
-      const cppDate = TestBed.inject(CPPDate);
-      mockFixtureInputs(fixture, {
-        selectedHearing: { ...selectedHearing, jurisdictionType: 'CROWN' }
-      });
-      fixture.detectChanges();
-      await fixture.whenStable();
-
-      component.submit({
-        value: {
-          ...initialHearingFormValues,
-          dateRange: { startDate: '2025-01-01', endDate: '2025-01-03' }
-        } as unknown as Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string }
-      });
-
-      const [{ updatedHearing }] = (component.onSubmit.emit as jest.Mock).mock.calls[0];
-      expect(updatedHearing.nonDefaultDays).toEqual([
-        expect.objectContaining({
-          virtual: true,
-          // Three working days in the range, each sitting a full day.
-          duration: 1080,
-          // The start time comes off the hearing, not the form, once it spans days.
-          startTime: cppDate.toUtcISO(
-            cppDate.localDate(
-              `2025-01-01 ${cppDate.format(
-                selectedHearing.hearingDays[0].startTime,
-                cppDate.HOURS_MINUTES_24H
-              )}`
-            )
-          ),
-          courtCentreId: selectedHearing.courtCentreId,
-          roomId: selectedHearing.courtRoomId
-        })
-      ]);
-    });
-
-    it('should keep the start time and duration entered on the form for a single day hearing', async () => {
-      const cppDate = TestBed.inject(CPPDate);
-      fixture.detectChanges();
-      await fixture.whenStable();
-
-      component.submit({
-        value: {
-          ...initialHearingFormValues,
-          dateRange: { startDate: '2025-01-01', endDate: '2025-01-01' },
-          startTime: '14:30',
-          duration: '4:00'
-        } as unknown as Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string }
-      });
-
-      const [{ updatedHearing }] = (component.onSubmit.emit as jest.Mock).mock.calls[0];
-      expect(updatedHearing.nonDefaultDays).toEqual([
-        expect.objectContaining({
-          virtual: true,
-          duration: 240,
-          startTime: cppDate.toUtcISO(cppDate.localDate('2025-01-01 14:30'))
-        })
-      ]);
     });
   });
 });
