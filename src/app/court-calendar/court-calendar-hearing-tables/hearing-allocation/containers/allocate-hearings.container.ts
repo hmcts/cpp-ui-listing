@@ -230,7 +230,9 @@ export class AllocateHearingsContainer implements OnDestroy {
         if (processedHearings.length > 0) {
           const filterOptions = this.filterOptions();
           const widgetFilters = this.widgetFilters();
-          this.store.dispatch(CourtCalendarActions.getUnallocatedHearings({ filterOptions }));
+          if (this.allocationType() === AllocationType.allocate) {
+            this.store.dispatch(CourtCalendarActions.getUnallocatedHearings({ filterOptions }));
+          }
           this.store.dispatch(
             CourtCalendarActions.getAllocatedHearingsForWidget({
               filterOptions: { courtType: filterOptions.courtType, ...widgetFilters }
