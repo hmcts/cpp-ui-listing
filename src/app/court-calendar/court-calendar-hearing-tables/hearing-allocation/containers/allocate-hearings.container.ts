@@ -12,7 +12,8 @@ import {
   HearingAllocationPayload,
   AllocateWidgetFilters,
   AllocatedWidgetCourtroomCalendarVm,
-  AllocationType
+  AllocationType,
+  CourtCalendarFilters
 } from '../../../model';
 import {
   CourtCalendarActions,
@@ -230,9 +231,7 @@ export class AllocateHearingsContainer implements OnDestroy {
         if (processedHearings.length > 0) {
           const filterOptions = this.filterOptions();
           const widgetFilters = this.widgetFilters();
-          if (this.allocationType() === AllocationType.allocate) {
-            this.store.dispatch(CourtCalendarActions.getUnallocatedHearings({ filterOptions }));
-          }
+          this.reloadUnallocatedHearings(filterOptions);
           this.store.dispatch(
             CourtCalendarActions.getAllocatedHearingsForWidget({
               filterOptions: { courtType: filterOptions.courtType, ...widgetFilters }
@@ -292,9 +291,7 @@ export class AllocateHearingsContainer implements OnDestroy {
             })
           );
         }
-        if (this.allocationType() === AllocationType.allocate) {
-          this.store.dispatch(CourtCalendarActions.getUnallocatedHearings({ filterOptions }));
-        }
+        this.reloadUnallocatedHearings(filterOptions);
         this.store.dispatch(
           CourtCalendarActions.getAllocatedHearingsForWidget({
             filterOptions: { courtType: filterOptions.courtType, ...widgetFilters }
@@ -396,5 +393,11 @@ export class AllocateHearingsContainer implements OnDestroy {
         }
       );
     });
+  }
+
+  private reloadUnallocatedHearings(filterOptions: CourtCalendarFilters) {
+    if (this.allocationType() === AllocationType.allocate) {
+      this.store.dispatch(CourtCalendarActions.getUnallocatedHearings({ filterOptions }));
+    }
   }
 }
