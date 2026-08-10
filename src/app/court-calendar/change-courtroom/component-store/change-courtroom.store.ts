@@ -88,6 +88,7 @@ export const ChangeCourtroomStore = signalStore(
               ouCode: vm.ouCode,
               jurisdiction: vm.jurisdictionType,
               status: CrownSessionStatus.FINAL,
+              courtSession: 'AD',
               availableDurationMins: 360,
               pageSize: 4000
             });
