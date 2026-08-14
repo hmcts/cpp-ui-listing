@@ -40,7 +40,7 @@
       (selectedTabChange)="onSelectedTabChange($event)"
     >
       @if ((isHearingStandaloneApplication$ | async) === false &&
-      (isHearingOnlyWithLinkedApplication$ | async) ===false) {
+      (isHearingOnlyWithLinkedApplication$ | async) === false) {
       <pdk-tab heading="Related hearings">
         <find-available-hearing
           [hearing]="selectedHearing"
@@ -53,9 +53,7 @@
         heading="{{selectedOrganisationUnit.jurisdictionType==='CROWN'? 'Enter hearing details': 'Find a hearing'}}"
       >
         <pdk-grid container pdk-margin-bottom="3">
-          @if (selectedOrganisationUnit.jurisdictionType === 'CROWN' ||
-          (isHearingStandaloneApplication$ | async) || (isHearingOnlyWithLinkedApplication$ |
-          async)) {
+          @if (selectedOrganisationUnit.jurisdictionType === 'CROWN') {
           <pdk-grid three-quarters>
             @if (courtCentres.length) {
             <courtrooms-filter
@@ -89,9 +87,7 @@
             </hearing-details-form>
             }
           </pdk-grid>
-          } @if (selectedOrganisationUnit.jurisdictionType === 'MAGISTRATES' &&
-          (isHearingStandaloneApplication$ | async) === false &&
-          (isHearingOnlyWithLinkedApplication$ | async) ===false) {
+          } @if (selectedOrganisationUnit.jurisdictionType === 'MAGISTRATES') {
           <magistrates-scheduling-container [courtId]="route.snapshot.queryParams.courtId">
           </magistrates-scheduling-container>
           }
