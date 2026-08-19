@@ -20,6 +20,9 @@ describe('ViewHearingRowDetailsComponent', () => {
         hasVideoLink: true,
         startDate: '2025-03-21T00:00:00Z',
         endDate: '2025-03-22T00:00:00Z',
+        tier: 'TIER_7',
+        listType: 'TYPE_1_FIXED',
+        keyReason: 'Vulnerable witness',
         courtApplications: [
           {
             id: '*',
@@ -100,6 +103,44 @@ describe('ViewHearingRowDetailsComponent', () => {
     fixture.detectChanges();
     const form = fixture.debugElement.query(By.css('form'));
     expect(form).toBeFalsy();
+  });
+
+  it('should display the tier, the list type and its reason', () => {
+    fixture.detectChanges();
+    const card = fixture.nativeElement.textContent;
+
+    expect(card).toContain('Tier 7');
+    expect(card).toContain('Type 1 (1F)');
+    expect(card).toContain('Reason:');
+    expect(card).toContain('Vulnerable witness');
+  });
+
+  it('should omit the reason when the list type is flexible', () => {
+    mockFixtureInputs(fixture, {
+      hearing: {
+        allocated: true,
+        jurisdictionType: 'CROWN',
+        tier: 'TIER_3',
+        listType: 'TYPE_2_FLEXIBLE'
+      }
+    });
+    fixture.detectChanges();
+    const card = fixture.nativeElement.textContent;
+
+    expect(card).toContain('Tier 3');
+    expect(card).toContain('Type 2 (2F)');
+    expect(card).not.toContain('Reason:');
+  });
+
+  it('should omit both rows when the hearing inherited no tier or list type', () => {
+    mockFixtureInputs(fixture, {
+      hearing: { allocated: true, jurisdictionType: 'CROWN' }
+    });
+    fixture.detectChanges();
+    const card = fixture.nativeElement.textContent;
+
+    expect(card).not.toContain('Tier');
+    expect(card).not.toContain('List type');
   });
 
   it('should emit updated hearing object when public list note is submitted', () => {
