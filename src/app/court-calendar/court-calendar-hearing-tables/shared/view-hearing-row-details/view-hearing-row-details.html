@@ -215,6 +215,44 @@
             </div>
           </dd>
         </div>
+        } @if (tierLabel()) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>Tier</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <span>{{ tierLabel() }}</span>
+          </dd>
+        </div>
+        } @if (listTypeLabel()) {
+        <div
+          pdk-grid
+          container
+          pdk-margin-bottom="3"
+          pdk-padding-bottom="2"
+          pdk-margin-horizontal="0"
+          pdk-border-colour="dark-grey"
+        >
+          <dt pdk-grid one-third pdk-padding-left="0">
+            <b>List type</b>
+          </dt>
+          <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
+            <span>{{ listTypeLabel() }}</span>
+            @if (hearing().keyReason) {
+            <div>
+              <span>Reason:&nbsp;</span>
+              <span>{{ hearing().keyReason }}</span>
+            </div>
+            }
+          </dd>
+        </div>
         }
       </dl>
     </div>

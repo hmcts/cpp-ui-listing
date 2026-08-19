@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, input, output } from '@angular/core';
 import { CaseNote } from '../../../../allocate-hearing/allocate-hearing.interfaces';
 import { CourtApplication, Defendant, Hearing, ListedCase } from '../../../../core';
 import { CaseNotesComponent } from '../../shared/case-notes/case-notes.component';
@@ -7,6 +7,7 @@ import { PdkComponents } from '../../../../shared/pdk-shared-components';
 import { FullNamePipe } from '../../../../shared/pipes/full-name.pipe';
 import { ApplicantRespondentFullNamePipe } from '../../../../shared/pipes/applicant-respondent-full-name.pipe';
 import { DatePipe, TitleCasePipe } from '@angular/common';
+import { LIST_TYPE_LABELS, TIER_LABELS } from '../../../utils/tier-and-list-type-labels';
 
 @Component({
   selector: 'allocated-hearing-row-details',
@@ -30,6 +31,9 @@ export class AllocatedHearingRowDetailsComponent implements OnInit {
   readonly applicationId = input<string>(undefined);
   readonly caseNotes = input<CaseNote[]>(undefined);
   readonly getCaseNotes = output<string>();
+  readonly tierLabel = computed(() => TIER_LABELS[this.hearing()?.tier]);
+  readonly listTypeLabel = computed(() => LIST_TYPE_LABELS[this.hearing()?.listType]);
+
   listedCase: ListedCase;
   application: CourtApplication;
   custodyDefendants: Defendant[];
@@ -42,7 +46,7 @@ export class AllocatedHearingRowDetailsComponent implements OnInit {
       if (hearing.listedCases?.length > 0) {
         this.listedCase = (hearing.listedCases ?? []).find(({ id }) => id === this.caseId());
         this.custodyDefendants = this.listedCase?.defendants.filter(
-          (def) => def.bailStatus?.code === 'C'
+          def => def.bailStatus?.code === 'C'
         );
       }
     }
