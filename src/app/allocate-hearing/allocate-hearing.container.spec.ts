@@ -42,7 +42,7 @@ describe('AllocateHearingContainer', () => {
   let getBaseUrlSpy;
 
   const store: Store<AppState> = null;
-  const paramMap = of({ get: (param) => 'mockHearingId' });
+  const paramMap = of({ get: param => 'mockHearingId' });
   const testHearing: Hearing = validHearingMock1;
   const hearings: Hearing[] = [testHearing];
   const hearingState: HearingState = {
@@ -95,7 +95,7 @@ describe('AllocateHearingContainer', () => {
 
   const mockHearingId = 'test-hearing-id';
   let router: Router;
-  const queryParamMap = of({ get: (param) => false });
+  const queryParamMap = of({ get: param => false });
 
   beforeEach(fakeAsync(() => {
     state = {
@@ -104,7 +104,7 @@ describe('AllocateHearingContainer', () => {
       listingReferenceData: listingReferenceDataState,
       display: { loading: false }
     };
-    selectSpy = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    selectSpy = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
     dispatchSpy = jasmine.createSpy('dispatch');
