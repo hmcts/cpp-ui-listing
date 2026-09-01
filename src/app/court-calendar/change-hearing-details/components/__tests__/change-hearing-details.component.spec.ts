@@ -85,6 +85,33 @@ describe('ChangeHearingDetailsComponent', () => {
       fixture.detectChanges();
       expect(fixture).toMatchSnapshot();
     });
+
+    it('should render the session dropdown for a Crown hearing', async () => {
+      mockFixtureInputs(fixture, {
+        selectedHearing: {
+          ...selectedHearing,
+          jurisdictionType: 'CROWN',
+          hearingDays: [
+            {
+              ...selectedHearing.hearingDays[0],
+              courtScheduleId: 'court-schedule-id'
+            }
+          ]
+        },
+        hearingSlots: [
+          {
+            courtScheduleId: 'court-schedule-id',
+            businessType: 'test-business-type',
+            sessionStartTime: `${selectedHearing.startDate}T09:00:00.000Z`,
+            sessionEndTime: `${selectedHearing.startDate}T12:00:00.000Z`
+          } as HearingSlot
+        ]
+      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      expect(fixture).toMatchSnapshot();
+    });
   });
 
   describe('Jurisdiction type control routing', () => {

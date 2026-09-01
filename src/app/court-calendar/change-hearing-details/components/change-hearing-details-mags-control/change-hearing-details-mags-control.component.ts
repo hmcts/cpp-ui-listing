@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ControlContainer, FormsModule, NgForm } from '@angular/forms';
 
-import { PdkCore, PdkForm, PdkSelectComponent, SelectOption } from '@cpp/pdk';
+import { PdkCore } from '@cpp/pdk';
 import { DatePipe } from '@angular/common';
 import { ChangeHearingStartTimeControlsComponent } from '../change-hearing-start-time-controls.component';
 import { HearingSlot } from '@cpp/scheduling';
-import { sortSelectOptionAlphabetical } from '@cpp/reference-data';
 import { NonSittingDaysComponent } from '../../../../shared/components/non-sitting-days/non-sitting-days.component';
-import { StartTimeBetweenSessionDirective } from './start-time-between-session-validator.directive';
+import { HearingStartTimeWithinSessionTimeComponent } from '../hearing-start-time-withing-session-time.cmponent';
 
 @Component({
   selector: 'change-hearing-mags-control',
@@ -16,12 +15,10 @@ import { StartTimeBetweenSessionDirective } from './start-time-between-session-v
   imports: [
     FormsModule,
     PdkCore,
-    PdkForm,
-    PdkSelectComponent,
     ChangeHearingStartTimeControlsComponent,
     NonSittingDaysComponent,
-    StartTimeBetweenSessionDirective,
-    DatePipe
+    DatePipe,
+    HearingStartTimeWithinSessionTimeComponent
   ],
   viewProviders: [
     {
@@ -30,7 +27,7 @@ import { StartTimeBetweenSessionDirective } from './start-time-between-session-v
     }
   ]
 })
-export class ChangeHearingDetailsMagsControlComponent implements OnInit {
+export class ChangeHearingDetailsMagsControlComponent {
   readonly originalStartTime = input<string>(undefined, { alias: 'startTime' });
   readonly startDate = input<string>(undefined);
   readonly endDate = input<string>(undefined);
@@ -41,22 +38,5 @@ export class ChangeHearingDetailsMagsControlComponent implements OnInit {
   get isMultiDay() {
     return this.startDate() !== this.endDate();
   }
-  sessionTimesOptions: SelectOption[] = [];
-  datePipe = new DatePipe('en-GB');
   timeToCompare: string;
-
-  ngOnInit() {
-    const hearingSlots = this.hearingSlots();
-    if (hearingSlots?.length > 0) {
-      this.sessionTimesOptions = hearingSlots
-        .map(({ courtScheduleId, sessionStartTime, sessionEndTime, businessType }) => ({
-          value: courtScheduleId,
-          label: `${businessType} ${this.datePipe.transform(
-            sessionStartTime,
-            'hh:mm a'
-          )} to ${this.datePipe.transform(sessionEndTime, 'hh:mm a')}`
-        }))
-        .sort(sortSelectOptionAlphabetical);
-    }
-  }
 }

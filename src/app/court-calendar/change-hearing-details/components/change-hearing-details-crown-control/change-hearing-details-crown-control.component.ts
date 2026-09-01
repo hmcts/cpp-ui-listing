@@ -34,6 +34,8 @@ import { NonDefaultDaysComponent } from '../../../../shared/components/non-defau
 import { CourtCentre, HearingDay, JurisdictionType, NonDefaultDay } from '../../../../core';
 import { ChangeHearingStartTimeControlsComponent } from '../change-hearing-start-time-controls.component';
 import { DatePipe } from '@angular/common';
+import { HearingSlot } from '@cpp/scheduling';
+import { HearingStartTimeWithinSessionTimeComponent } from '../hearing-start-time-withing-session-time.cmponent';
 
 const ERROR_MESSAGES: ErrorMessageConfig[] = [
   { rule: 'required', message: 'Enter an end date' },
@@ -65,7 +67,8 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
     PdkCheckBox,
     PdkDateInput,
     PdkCore,
-    DatePipe
+    DatePipe,
+    HearingStartTimeWithinSessionTimeComponent
   ],
   providers: [
     {
@@ -101,6 +104,9 @@ export class ChangeHearingDetailsCrownControlComponent implements ControlValueAc
   readonly duration = input<number>(undefined);
   readonly jurisdictionType = input<JurisdictionType>(undefined);
   readonly onValidationError = output<ValidationError[]>();
+  readonly hearingSlots = input<HearingSlot[]>([]);
+  readonly hearingCourtScheduleId = input<string>(undefined);
+  timeToCompare: string;
   endDateControl: FormControl<string>;
   errorMessages = ERROR_MESSAGES;
   dateRange: DateRange;
