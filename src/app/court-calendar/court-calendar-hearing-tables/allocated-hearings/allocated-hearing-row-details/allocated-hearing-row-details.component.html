@@ -98,48 +98,6 @@
             }
           </dd>
         </div>
-        @if (tierLabel()) {
-          <div
-            pdk-grid
-            container
-            pdk-margin-bottom="3"
-            pdk-padding-left="2"
-            pdk-padding-bottom="2"
-            pdk-margin-horizontal="0"
-            pdk-border-colour="dark-grey"
-          >
-            <dt pdk-grid one-half>
-              <b>Tier</b>
-            </dt>
-            <dd pdk-grid one-half pdk-margin-left="0">
-              <span>{{ tierLabel() }}</span>
-            </dd>
-          </div>
-        }
-        @if (listTypeLabel()) {
-          <div
-            pdk-grid
-            container
-            pdk-margin-bottom="3"
-            pdk-padding-left="2"
-            pdk-padding-bottom="2"
-            pdk-margin-horizontal="0"
-            pdk-border-colour="dark-grey"
-          >
-            <dt pdk-grid one-half>
-              <b>List type</b>
-            </dt>
-            <dd pdk-grid one-half pdk-margin-left="0">
-              <span>{{ listTypeLabel() }}</span>
-              @if (hearing().keyReason) {
-                <div>
-                  <span>Reason:&nbsp;</span>
-                  <span>{{ hearing().keyReason }}</span>
-                </div>
-              }
-            </dd>
-          </div>
-        }
       </dl>
     </div>
     @if (!!listedCase) {
@@ -152,6 +110,28 @@
             }
           </div>
         </section>
+        @if (tierLabel()) {
+          <section pdk-margin-bottom="4">
+            <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Tier</h4>
+            <div class="flex-display">
+              <span>{{ tierLabel() }}</span>
+            </div>
+          </section>
+        }
+        @if (listTypeLabel()) {
+          <section pdk-margin-bottom="4">
+            <h4 pdk-typography="heading-small" pdk-margin-bottom="2">List Type and reason</h4>
+            <div class="flex-display flex-display-column">
+              <span>{{ listTypeLabel() }}</span>
+              @if (hearing().keyReason) {
+                <div>
+                  <span>Key Reason:&nbsp;</span>
+                  <span>{{ hearing().keyReason }}</span>
+                </div>
+              }
+            </div>
+          </section>
+        }
         @if (caseNotes()?.length > 0) {
           <section>
             <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Case notes</h4>
