@@ -1,11 +1,22 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  forwardRef,
+  input,
+  untracked
+} from '@angular/core';
 import {
   ControlContainer,
   ControlValueAccessor,
   FormControl,
+  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgForm,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validator
 } from '@angular/forms';
 import { PdkForm, PdkSelectComponent, generateId, ErrorMessageConfig } from '@cpp/pdk';
 import { DatePipe } from '@angular/common';
@@ -27,6 +38,11 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => HearingStartTimeWithinSessionTimeComponent)
+    },
+    {
+      provide: NG_VALIDATORS,
       multi: true,
       useExisting: forwardRef(() => HearingStartTimeWithinSessionTimeComponent)
     }
@@ -61,7 +77,7 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
     `
   ]
 })
-export class HearingStartTimeWithinSessionTimeComponent implements ControlValueAccessor {
+export class HearingStartTimeWithinSessionTimeComponent implements ControlValueAccessor, Validator {
   readonly hearingSlots = input<HearingSlot[]>([]);
   readonly startTime = input<string>(undefined);
   readonly id = generateId('hearing-start-time-within-session-time');
@@ -83,11 +99,17 @@ export class HearingStartTimeWithinSessionTimeComponent implements ControlValueA
   );
 
   private propagateChange: (courtScheduleId: string) => void = () => {};
+  private revalidate: () => void = () => {};
 
   constructor() {
     this.control.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe(courtScheduleId => this.propagateChange(courtScheduleId));
+
+    effect(() => {
+      this.startTime();
+      untracked(() => this.revalidate());
+    });
   }
 
   writeValue(courtScheduleId: string): void {
@@ -99,4 +121,13 @@ export class HearingStartTimeWithinSessionTimeComponent implements ControlValueA
   }
 
   registerOnTouched(): void {}
+
+  registerOnValidatorChange(fn: () => void): void {
+    this.revalidate = fn;
+  }
+
+  validate(): ValidationErrors | null {
+    this.control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    return this.control.errors;
+  }
 }

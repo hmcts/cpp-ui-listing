@@ -819,7 +819,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                28 January 2025 
             </p>
             <hearing-start-time-within-session-time
-              class="ng-untouched ng-valid ng-dirty"
+              class="ng-untouched ng-dirty ng-valid"
               name="courtScheduleId"
             >
               <pdk-form-field
@@ -2059,7 +2059,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
               </pdk-form-group>
             </pdk-form-field>
             <hearing-start-time-within-session-time
-              class="ng-untouched ng-valid ng-dirty"
+              class="ng-untouched ng-dirty ng-valid"
               name="courtScheduleId"
             >
               <pdk-form-field
