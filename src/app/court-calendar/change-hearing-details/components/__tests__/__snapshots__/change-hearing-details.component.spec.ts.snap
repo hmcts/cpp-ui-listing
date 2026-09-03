@@ -818,7 +818,10 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
             >
                28 January 2025 
             </p>
-            <div>
+            <hearing-start-time-within-session-time
+              class="ng-untouched ng-dirty ng-valid"
+              name="courtScheduleId"
+            >
               <pdk-form-field
                 label="Session"
                 labeltype="small"
@@ -828,20 +831,18 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                 >
                   <label
                     class="govuk-label govuk-label--s"
-                    for="pdk-select-GENERATED_ID"
+                    for="hearing-start-time-within-session-time-GENERATED_ID"
                   >
                      Session 
                   </label>
                   <pdk-select
                     class="ng-untouched ng-pristine ng-valid"
                     justified=""
-                    name="courtScheduleId"
                     required=""
                   >
                     <select
                       class="govuk-select pdk-select--justified"
-                      id="pdk-select-GENERATED_ID"
-                      name="courtScheduleId"
+                      id="hearing-start-time-within-session-time-GENERATED_ID"
                       required=""
                     >
                       <option
@@ -853,7 +854,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                   </pdk-select>
                 </pdk-form-group>
               </pdk-form-field>
-            </div>
+            </hearing-start-time-within-session-time>
             <change-hearing-start-time-controls>
               <div
                 class="timeDuration"
@@ -1816,6 +1817,753 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                         pdk-label=""
                       >
                         Welsh
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                </div>
+              </pdk-radio-group>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field
+          label="Do you want to notify all relevant parties?"
+          labeltype="small"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-fieldset__legend--s"
+              >
+                 Do you want to notify all relevant parties? 
+              </legend>
+              <pdk-radio-group
+                class="ng-untouched ng-pristine ng-valid"
+                name="sendNotificationToParties"
+                required=""
+              >
+                <div
+                  class="govuk-radios"
+                >
+                  <pdk-radio-button>
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="true"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        Yes
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                  <pdk-radio-button>
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="false"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        No
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                </div>
+              </pdk-radio-group>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <div
+          class="action-btn"
+        >
+          <button
+            class="govuk-button"
+            data-role="apply-filters-btn"
+            pdk-button=""
+            type="submit"
+          >
+            Save changes
+          </button>
+          <a
+            class="govuk-link"
+            href="javascript:void(0);"
+            pdk-link=""
+          >
+            Cancel
+          </a>
+        </div>
+      </form>
+    </pdk-grid>
+  </pdk-grid>
+</change-hearing-details>
+`;
+
+exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should render the session dropdown for a Crown hearing 1`] = `
+<change-hearing-details
+  allocateHearingFactory={[Function AllocateHearingFactory]}
+  cppDate={[Function CPPDate]}
+  datePipe={[Function _DatePipe]}
+  hearingSlots={[Function Function]}
+  initialValues={[Function Function]}
+  onCancel={[Function OutputEmitterRef]}
+  onSubmit={[Function OutputEmitterRef]}
+  onValidationError={[Function OutputEmitterRef]}
+  selectedCourtCentre={[Function Function]}
+  selectedHearing={[Function Function]}
+>
+  <pdk-grid
+    class="govuk-grid-row"
+    container=""
+  >
+    <pdk-grid
+      class="govuk-grid-column-one-third"
+      one-third=""
+    >
+      <form
+        class="ng-untouched ng-valid ng-dirty"
+        data-test-id="hearingDetailsForm"
+        novalidate=""
+        pdk-form=""
+      >
+        <pdk-form-field
+          label="Hearing type"
+          labeltype="small"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <label
+              class="govuk-label govuk-label--s"
+              for="pdk-form-control-undefined-GENERATED_ID"
+            >
+               Hearing type 
+            </label>
+            <cpp-hearing-type-autosuggest
+              class="ng-untouched ng-pristine ng-valid"
+              jurisdictiontype="initialValues.jurisdictionType"
+              name="selectedHearingType"
+              placeholder="All hearing types"
+              required=""
+            >
+              <pdk-autosuggest-lite>
+                <pdk-autosuggest
+                  highlightcolor="blue"
+                >
+                  <pdk-interaction-container>
+                    <div>
+                      <div
+                        class="pdk-autosuggest"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-controls="pdk-autosuggest__suggestions-container-GENERATED_ID-listbox"
+                          aria-describedby="pdk-autosuggest__instructions-GENERATED_ID"
+                          aria-expanded="false"
+                          autocomplete="off"
+                          class="pdk-autosuggest__input ng-untouched ng-pristine ng-valid govuk-input"
+                          id="pdk-form-control-undefined-GENERATED_ID"
+                          role="combobox"
+                          type="text"
+                        />
+                        <span
+                          class="govuk-visually-hidden"
+                          id="pdk-autosuggest__instructions-GENERATED_ID"
+                          pdk-visually-hidden=""
+                        >
+                           When autocomplete results are available, use the up and down arrows to review and Enter to select. Touch device users, explore options with swipe gestures. 
+                        </span>
+                        <span
+                          aria-live="polite"
+                          class="govuk-visually-hidden"
+                          pdk-visually-hidden=""
+                          role="status"
+                        >
+                        </span>
+                        <div
+                          class="pdk-autosuggest__suggestions-container"
+                          id="pdk-autosuggest__suggestions-container-GENERATED_ID"
+                        >
+                        </div>
+                      </div>
+                    </div>
+                  </pdk-interaction-container>
+                </pdk-autosuggest>
+              </pdk-autosuggest-lite>
+            </cpp-hearing-type-autosuggest>
+          </pdk-form-group>
+        </pdk-form-field>
+        <change-hearing-crown-control
+          class="ng-untouched ng-valid ng-dirty"
+          name="dateRange"
+        >
+          <div>
+            <h4
+              class="govuk-!-margin-bottom-1"
+              pdk-margin-bottom="1"
+            >
+              Start date
+            </h4>
+            <p
+              class="govuk-!-margin-top-1"
+              pdk-margin-top="1"
+            >
+               28 January 2025 
+            </p>
+            <pdk-form-field>
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <pdk-checkbox
+                  class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                  name="multiDay"
+                >
+                  <div
+                    class="govuk-checkboxes__item"
+                  >
+                    <input
+                      class="govuk-checkboxes__input"
+                      id="multiDay"
+                      name="multiDay"
+                      type="checkbox"
+                      value="true"
+                    />
+                    <label
+                      class="govuk-label govuk-checkboxes__label"
+                      for="multiDay"
+                    >
+                       This is a multi-day hearing 
+                    </label>
+                  </div>
+                </pdk-checkbox>
+              </pdk-form-group>
+            </pdk-form-field>
+            <hearing-start-time-within-session-time
+              class="ng-untouched ng-dirty ng-valid"
+              name="courtScheduleId"
+            >
+              <pdk-form-field
+                label="Session"
+                labeltype="small"
+              >
+                <pdk-form-group
+                  class="pdk-form-group"
+                >
+                  <label
+                    class="govuk-label govuk-label--s"
+                    for="hearing-start-time-within-session-time-GENERATED_ID"
+                  >
+                     Session 
+                  </label>
+                  <pdk-select
+                    class="ng-untouched ng-pristine ng-valid"
+                    justified=""
+                    required=""
+                  >
+                    <select
+                      class="govuk-select pdk-select--justified"
+                      id="hearing-start-time-within-session-time-GENERATED_ID"
+                      required=""
+                    >
+                      <option
+                        value="court-schedule-id"
+                      >
+                         test-business-type 09:00 AM to 12:00 PM 
+                      </option>
+                    </select>
+                  </pdk-select>
+                </pdk-form-group>
+              </pdk-form-field>
+            </hearing-start-time-within-session-time>
+            <change-hearing-start-time-controls>
+              <div
+                class="timeDuration"
+              >
+                <pdk-form-field
+                  label="Start time"
+                  labeltype="small"
+                >
+                  <pdk-form-group
+                    class="pdk-form-group"
+                  >
+                    <fieldset
+                      class="govuk-fieldset"
+                      pdk-fieldset=""
+                    >
+                      <legend
+                        class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                      >
+                         Start time 
+                      </legend>
+                      <pdk-time-input
+                        autoshift="false"
+                        class="ng-untouched ng-valid ng-dirty"
+                        labelhidden="false"
+                        name="startTime"
+                        required=""
+                      >
+                        <div
+                          class="pdk-time-input ng-untouched ng-pristine ng-valid"
+                        >
+                          <div
+                            class="pdk-time-input__item pdk-time-input__item--hour"
+                          >
+                            <label
+                              class="govuk-label"
+                              for="pdk-time-input-GENERATED_ID-hours"
+                              pdk-label=""
+                            >
+                               Hours 
+                            </label>
+                            <input
+                              autocomplete="off"
+                              class="ng-untouched ng-pristine govuk-input govuk-input--width-2 ng-valid"
+                              formcontrolname="hours"
+                              id="pdk-time-input-GENERATED_ID-hours"
+                              maxlength="2"
+                              name="timeHours"
+                              pattern="[0-9]*"
+                              required=""
+                              type="text"
+                            />
+                          </div>
+                          <div
+                            class="pdk-time-input__item"
+                          >
+                            <label
+                              class="govuk-label"
+                              for="pdk-time-input-GENERATED_ID-minutes"
+                              pdk-label=""
+                            >
+                               Minutes 
+                            </label>
+                            <input
+                              autocomplete="off"
+                              class="ng-untouched ng-pristine govuk-input govuk-input--width-2 ng-valid"
+                              formcontrolname="minutes"
+                              id="pdk-time-input-GENERATED_ID-minutes"
+                              maxlength="2"
+                              minlength="2"
+                              name="timeMinutes"
+                              pattern="[0-9]*"
+                              required=""
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                      </pdk-time-input>
+                    </fieldset>
+                  </pdk-form-group>
+                </pdk-form-field>
+                <pdk-form-field
+                  label="Duration"
+                  labeltype="small"
+                >
+                  <pdk-form-group
+                    class="pdk-form-group"
+                  >
+                    <fieldset
+                      class="govuk-fieldset"
+                      pdk-fieldset=""
+                    >
+                      <legend
+                        class="govuk-fieldset__legend govuk-fieldset__legend--s"
+                      >
+                         Duration 
+                      </legend>
+                      <pdk-time-input
+                        autoshift="false"
+                        class="ng-untouched ng-valid ng-dirty"
+                        labelhidden="false"
+                        name="duration"
+                        required=""
+                      >
+                        <div
+                          class="pdk-time-input ng-untouched ng-pristine ng-valid"
+                        >
+                          <div
+                            class="pdk-time-input__item pdk-time-input__item--hour"
+                          >
+                            <label
+                              class="govuk-label"
+                              for="pdk-time-input-GENERATED_ID-hours"
+                              pdk-label=""
+                            >
+                               Hours 
+                            </label>
+                            <input
+                              autocomplete="off"
+                              class="ng-untouched ng-pristine govuk-input govuk-input--width-2 ng-valid"
+                              formcontrolname="hours"
+                              id="pdk-time-input-GENERATED_ID-hours"
+                              maxlength="2"
+                              name="timeHours"
+                              pattern="[0-9]*"
+                              required=""
+                              type="text"
+                            />
+                          </div>
+                          <div
+                            class="pdk-time-input__item"
+                          >
+                            <label
+                              class="govuk-label"
+                              for="pdk-time-input-GENERATED_ID-minutes"
+                              pdk-label=""
+                            >
+                               Minutes 
+                            </label>
+                            <input
+                              autocomplete="off"
+                              class="ng-untouched ng-pristine govuk-input govuk-input--width-2 ng-valid"
+                              formcontrolname="minutes"
+                              id="pdk-time-input-GENERATED_ID-minutes"
+                              maxlength="2"
+                              minlength="2"
+                              name="timeMinutes"
+                              pattern="[0-9]*"
+                              required=""
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                      </pdk-time-input>
+                    </fieldset>
+                  </pdk-form-group>
+                </pdk-form-field>
+              </div>
+            </change-hearing-start-time-controls>
+          </div>
+        </change-hearing-crown-control>
+        <judiciary-input>
+          <fieldset
+            class="no-border"
+            style="margin-bottom: 0;"
+          >
+            <legend
+              class="govuk-!-margin-bottom-0 no-border govuk-heading-s"
+              pdk-margin-bottom="0"
+              pdk-typography="heading-small"
+            >
+               Edit judiciary 
+            </legend>
+            <pdk-form-field
+              class="govuk-!-margin-bottom-1"
+              label="Judiciary"
+              labeltype="none"
+              pdk-margin-bottom="1"
+            >
+              <pdk-form-group
+                class="pdk-form-group"
+              >
+                <fieldset
+                  class="govuk-fieldset"
+                  pdk-fieldset=""
+                >
+                  <legend
+                    class="govuk-fieldset__legend govuk-visually-hidden"
+                  >
+                     Judiciary 
+                  </legend>
+                  <pdk-checkbox-group
+                    class="ng-untouched ng-pristine ng-valid"
+                    name="judicialRoleType"
+                  >
+                    <div
+                      class="govuk-checkboxes"
+                    >
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="CIRCUIT_JUDGE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Judge 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="DISTRICT_JUDGE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             District Judge 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="DEPUTY_DISTRICT_JUDGE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Deputy District Judge 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox
+                        class="govuk-checkboxes"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="RECORDER"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Recorder 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                      <pdk-checkbox
+                        class="govuk-checkboxes ng-untouched ng-pristine ng-valid"
+                        style="margin-bottom: 10px;"
+                        value="MAGISTRATE"
+                      >
+                        <div
+                          class="govuk-checkboxes__item"
+                        >
+                          <input
+                            class="govuk-checkboxes__input"
+                            id="pdk-checkbox-GENERATED_ID"
+                            name="pdk-checkbox-group-GENERATED_ID"
+                            type="checkbox"
+                            value="MAGISTRATE"
+                          />
+                          <label
+                            class="govuk-label govuk-checkboxes__label"
+                            for="pdk-checkbox-GENERATED_ID"
+                          >
+                             Magistrates 
+                          </label>
+                        </div>
+                      </pdk-checkbox>
+                    </div>
+                  </pdk-checkbox-group>
+                </fieldset>
+              </pdk-form-group>
+            </pdk-form-field>
+          </fieldset>
+        </judiciary-input>
+        <pdk-form-field
+          label="Public list note (optional)"
+          labeltype="small"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <label
+              class="govuk-label govuk-label--s"
+              for="public-list-details"
+            >
+               Public list note (optional) 
+            </label>
+            <input
+              class="govuk-input ng-untouched ng-pristine ng-valid"
+              id="public-list-details"
+              maxlength="100"
+              name="publicListNote"
+              pdk-input=""
+              pdk-text-input=""
+              type="text"
+            />
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field
+          label="Hearing language"
+          labeltype="small"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-fieldset__legend--s"
+              >
+                 Hearing language 
+              </legend>
+              <pdk-radio-group
+                class="ng-untouched ng-pristine ng-valid"
+                name="hearingLanguage"
+                required=""
+              >
+                <div
+                  class="govuk-radios"
+                >
+                  <pdk-radio-button
+                    value="ENGLISH"
+                  >
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="ENGLISH"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        English
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                  <pdk-radio-button
+                    value="WELSH"
+                  >
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="WELSH"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        Welsh
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                </div>
+              </pdk-radio-group>
+            </fieldset>
+          </pdk-form-group>
+        </pdk-form-field>
+        <pdk-form-field
+          label="Video hearing"
+          labeltype="small"
+        >
+          <pdk-form-group
+            class="pdk-form-group"
+          >
+            <fieldset
+              class="govuk-fieldset"
+              pdk-fieldset=""
+            >
+              <legend
+                class="govuk-fieldset__legend govuk-fieldset__legend--s"
+              >
+                 Video hearing 
+              </legend>
+              <pdk-radio-group
+                class="ng-untouched ng-pristine ng-valid"
+                name="hasVideoLink"
+                required=""
+              >
+                <div
+                  class="govuk-radios"
+                >
+                  <pdk-radio-button>
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="true"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        Yes
+                      </label>
+                    </div>
+                  </pdk-radio-button>
+                  <pdk-radio-button>
+                    <div
+                      class="govuk-radios__item"
+                    >
+                      <input
+                        class="govuk-radios__input"
+                        id="pdk-radio-GENERATED_ID"
+                        name="pdk-radio-group-GENERATED_ID"
+                        type="radio"
+                        value="false"
+                      />
+                      <label
+                        class="govuk-radios__label govuk-label"
+                        for="pdk-radio-GENERATED_ID"
+                        pdk-label=""
+                      >
+                        No
                       </label>
                     </div>
                   </pdk-radio-button>

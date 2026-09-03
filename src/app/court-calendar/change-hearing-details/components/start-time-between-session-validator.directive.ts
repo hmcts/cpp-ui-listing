@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Directive, effect, forwardRef, inject, input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { HearingSlot } from '@cpp/scheduling';
-import { CPPDate } from '../../../../core/util';
+import { CPPDate } from '../../../core/util';
 
 @Directive({
   selector: '[startTimeBetweenSession]',
