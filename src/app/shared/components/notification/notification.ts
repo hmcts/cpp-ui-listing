@@ -8,12 +8,20 @@ import {
 } from '@angular/core';
 import * as _ from 'lodash-es';
 import moment from 'moment';
-import { CourtCentre, CourtRoom, Defendant, Hearing, ListedCase } from '../../../core';
+import {
+  CourtApplication,
+  CourtCentre,
+  CourtRoom,
+  Defendant,
+  Hearing,
+  ListedCase
+} from '../../../core';
 import { LastAllocatedHearing } from './../../../core/model/last-allocated-hearing';
 import { HearingSlotAllocation } from '@cpp/scheduling';
 import { NgPlural, NgPluralCase, DatePipe } from '@angular/common';
 import { PdkContextPanelComponent, PdkMarginDirective } from '@cpp/pdk';
 import { DefendantsNameAlphabeticallyPipe } from '../../pipes/defendants-name-alphabetically.pipe';
+import { ApplicantRespondentFullNamePipe } from '../../pipes/applicant-respondent-full-name.pipe';
 
 @Component({
   selector: 'app-notification',
@@ -26,14 +34,7 @@ import { DefendantsNameAlphabeticallyPipe } from '../../pipes/defendants-name-al
       }
     `
   ],
-  imports: [
-    PdkContextPanelComponent,
-    NgPlural,
-    NgPluralCase,
-    PdkMarginDirective,
-    DatePipe,
-    DefendantsNameAlphabeticallyPipe
-  ]
+  imports: [PdkContextPanelComponent, NgPlural, NgPluralCase, PdkMarginDirective, DatePipe]
 })
 export class AppNotificationComponent implements OnChanges, OnDestroy {
   readonly split = input<boolean>(undefined);
@@ -44,13 +45,16 @@ export class AppNotificationComponent implements OnChanges, OnDestroy {
   readonly onDestroy = output<void>();
 
   defendants: Defendant[];
+  displayNames: string;
   courtCentre: CourtCentre;
   courtRoom: CourtRoom;
   startTime: string;
   listedCases: string[];
 
   ngOnChanges(): void {
-    this.defendants = this.getAllDefendants(this.lastAllocatedHearing().hearing);
+    const hearing = this.lastAllocatedHearing().hearing;
+    this.defendants = this.getAllDefendants(hearing);
+    this.displayNames = this.getDisplayNames(hearing);
     this.courtCentre = this.getCourtCentre(
       this.courtCentres(),
       this.lastAllocatedHearing().hearing.courtCentreId
@@ -85,12 +89,23 @@ export class AppNotificationComponent implements OnChanges, OnDestroy {
     return _.flatten(_.map(hearing.listedCases, 'defendants'));
   }
 
+  private getDisplayNames(hearing: Hearing): string {
+    return this.defendants.length
+      ? new DefendantsNameAlphabeticallyPipe().transform(this.defendants)
+      : this.getSubjectName(hearing.courtApplications);
+  }
+
+  private getSubjectName(courtApplications: CourtApplication[]): string {
+    const subject = courtApplications?.[0]?.subject;
+    return subject ? new ApplicantRespondentFullNamePipe().transform(subject) : '';
+  }
+
   private getCourtCentre(courtCentres: CourtCentre[], courtCentreId: string) {
-    return courtCentres.find((cc) => cc.id === courtCentreId);
+    return courtCentres.find(cc => cc.id === courtCentreId);
   }
 
   private getCourtRoom(courtCentre: CourtCentre, courtRoomId: string) {
-    return courtCentre.courtRooms.find((courtRoom) => courtRoom.id === courtRoomId);
+    return courtCentre.courtRooms.find(courtRoom => courtRoom.id === courtRoomId);
   }
 
   private getAllListedCases(listedCases: ListedCase[]): string[] {
