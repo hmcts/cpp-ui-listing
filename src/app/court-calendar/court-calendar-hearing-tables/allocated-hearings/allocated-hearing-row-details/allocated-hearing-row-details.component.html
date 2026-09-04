@@ -100,8 +100,8 @@
         </div>
       </dl>
     </div>
-    @if (!!listedCase) {
-      <div pdk-grid two-thirds pdk-padding-left="6">
+    <div pdk-grid two-thirds pdk-padding-left="6">
+      @if (!!listedCase) {
         <section pdk-margin-bottom="4">
           <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Defendants</h4>
           <div class="flex-display">
@@ -110,10 +110,8 @@
             }
           </div>
         </section>
-      </div>
-    }
-    @if (!!application) {
-      <div pdk-grid two-thirds pdk-padding-left="6">
+      }
+      @if (!!application) {
         <section pdk-margin-bottom="4">
           <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Applicant</h4>
           <div class="flex-display">
@@ -132,20 +130,16 @@
             </div>
           </section>
         }
-      </div>
-    }
-    @if (tierLabel()) {
-      <div pdk-grid two-thirds pdk-padding-left="6">
+      }
+      @if (tierLabel()) {
         <section pdk-margin-bottom="4">
           <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Tier</h4>
           <div class="flex-display">
             <span>{{ tierLabel() }}</span>
           </div>
         </section>
-      </div>
-    }
-    @if (listTypeLabel()) {
-      <div pdk-grid two-thirds pdk-padding-left="6">
+      }
+      @if (listTypeLabel()) {
         <section pdk-margin-bottom="4">
           <h4 pdk-typography="heading-small" pdk-margin-bottom="2">List Type and reason</h4>
           <div class="flex-display flex-display-column">
@@ -158,16 +152,14 @@
             }
           </div>
         </section>
-      </div>
-    }
+      }
 
-    @if (caseNotes()?.length > 0 && !!listedCase) {
-      <div pdk-grid two-thirds pdk-padding-left="6">
+      @if (caseNotes()?.length > 0 && !!listedCase) {
         <section>
           <h4 pdk-typography="heading-small" pdk-margin-bottom="2">Case notes</h4>
           <case-notes [caseNotes]="caseNotes()"></case-notes>
         </section>
-      </div>
-    }
+      }
+    </div>
   </div>
 }
