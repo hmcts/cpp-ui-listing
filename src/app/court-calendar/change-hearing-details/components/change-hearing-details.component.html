@@ -39,6 +39,8 @@
           [selectedCourtCentre]="selectedCourtCentre()"
           [startTime]="initialValues()?.startTime"
           [duration]="initialValues()?.duration"
+          [hearingSlots]="hearingSlots()"
+          [hearingCourtScheduleId]="selectedHearing()?.hearingDays[0]?.courtScheduleId"
           [jurisdictionType]="selectedHearing()?.jurisdictionType"
           (onValidationError)="onValidationError.emit($event)"
         >

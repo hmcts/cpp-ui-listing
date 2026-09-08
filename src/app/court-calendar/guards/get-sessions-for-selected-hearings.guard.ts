@@ -7,7 +7,11 @@ import { getSelectedHearing } from '../state/selectors/court-calendar.selectors'
 
 import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 import { ERROR_ROUTE_PATHS } from '@cpp/application';
-import { loadHearingSlotsSuccess, SearchHearingSlotsParams } from '@cpp/scheduling';
+import {
+  CrownSessionStatus,
+  loadHearingSlotsSuccess,
+  SearchHearingSlotsParams
+} from '@cpp/scheduling';
 import { getOrganisationUnits } from '@cpp/reference-data';
 import { SchedulingService } from '@cpp/scheduling';
 
@@ -23,22 +27,22 @@ export const getSessionsForSeelectedHearingGuard: CanActivateFn = (
     withLatestFrom(store.pipe(select(getOrganisationUnits))),
     take(1),
     switchMap(([selectedHearing, courtCentres]) => {
-      if (selectedHearing.jurisdictionType === 'CROWN') {
-        return of(true);
-      }
       const courtCentre = courtCentres.find(({ id }) => selectedHearing.courtCentreId === id);
-      const { jurisdictionType, hearingDayCount, hearingDays, startDate, endDate } =
+      const { jurisdictionType, hearingDayCount, hearingDays, startDate, endDate, courtRoomId } =
         selectedHearing;
       const isMultiday = !!hearingDayCount ? hearingDayCount > 1 : hearingDays.length > 1;
+      const isCrown = jurisdictionType === 'CROWN';
       const slotsParams: SearchHearingSlotsParams & { isMultiday?: boolean } = {
         sessionStartDate: startDate,
         sessionEndDate: endDate,
+        courtRoomId,
         panel: 'ADULT,YOUTH',
         ouCode: courtCentre.oucode,
         pageSize: 500,
         pageNumber: 1,
         showOverbookedSlots: true,
         jurisdiction: jurisdictionType,
+        status: isCrown ? CrownSessionStatus.FINAL : undefined,
         isMultiday
       };
       return scheduleService.searchHearingSlots(slotsParams).pipe(

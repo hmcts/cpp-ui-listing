@@ -55,8 +55,17 @@
     </pdk-checkbox-conditional>
   }
   @if (!multiDay.value) {
+    @if (hearingSlots()?.length > 0) {
+      <change-hearing-session-selector
+        name="courtScheduleId"
+        [ngModel]="hearingCourtScheduleId()"
+        [hearingSlots]="hearingSlots()"
+        [startTime]="timeToCompare"
+      ></change-hearing-session-selector>
+    }
     <change-hearing-start-time-controls
       [startTime]="startTime()"
+      (startTimeChange)="timeToCompare = $event"
       [duration]="duration()"
     ></change-hearing-start-time-controls>
   }
