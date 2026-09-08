@@ -35,7 +35,7 @@ import { CourtCentre, HearingDay, JurisdictionType, NonDefaultDay } from '../../
 import { ChangeHearingStartTimeControlsComponent } from '../change-hearing-start-time-controls.component';
 import { DatePipe } from '@angular/common';
 import { HearingSlot } from '@cpp/scheduling';
-import { HearingStartTimeWithinSessionTimeComponent } from '../hearing-start-time-withing-session-time.cmponent';
+import { ChangeHearingSessionSelectorComponent } from '../change-hearing-session-selector.component';
 
 const ERROR_MESSAGES: ErrorMessageConfig[] = [
   { rule: 'required', message: 'Enter an end date' },
@@ -68,7 +68,7 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
     PdkDateInput,
     PdkCore,
     DatePipe,
-    HearingStartTimeWithinSessionTimeComponent
+    ChangeHearingSessionSelectorComponent
   ],
   providers: [
     {

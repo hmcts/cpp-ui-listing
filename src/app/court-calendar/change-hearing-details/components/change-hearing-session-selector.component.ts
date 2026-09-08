@@ -32,19 +32,19 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
 ];
 
 @Component({
-  selector: 'hearing-start-time-within-session-time',
+  selector: 'change-hearing-session-selector',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, PdkForm, PdkSelectComponent, StartTimeBetweenSessionDirective],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => HearingStartTimeWithinSessionTimeComponent)
+      useExisting: forwardRef(() => ChangeHearingSessionSelectorComponent)
     },
     {
       provide: NG_VALIDATORS,
       multi: true,
-      useExisting: forwardRef(() => HearingStartTimeWithinSessionTimeComponent)
+      useExisting: forwardRef(() => ChangeHearingSessionSelectorComponent)
     }
   ],
   template: `
@@ -77,7 +77,7 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
     `
   ]
 })
-export class HearingStartTimeWithinSessionTimeComponent implements ControlValueAccessor, Validator {
+export class ChangeHearingSessionSelectorComponent implements ControlValueAccessor, Validator {
   readonly hearingSlots = input<HearingSlot[]>([]);
   readonly startTime = input<string>(undefined);
   readonly id = generateId('hearing-start-time-within-session-time');

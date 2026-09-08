@@ -818,7 +818,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
             >
                28 January 2025 
             </p>
-            <hearing-start-time-within-session-time
+            <change-hearing-session-selector
               class="ng-untouched ng-dirty ng-valid"
               name="courtScheduleId"
             >
@@ -854,7 +854,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                   </pdk-select>
                 </pdk-form-group>
               </pdk-form-field>
-            </hearing-start-time-within-session-time>
+            </change-hearing-session-selector>
             <change-hearing-start-time-controls>
               <div
                 class="timeDuration"
@@ -2058,7 +2058,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                 </pdk-checkbox>
               </pdk-form-group>
             </pdk-form-field>
-            <hearing-start-time-within-session-time
+            <change-hearing-session-selector
               class="ng-untouched ng-dirty ng-valid"
               name="courtScheduleId"
             >
@@ -2094,7 +2094,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
                   </pdk-select>
                 </pdk-form-group>
               </pdk-form-field>
-            </hearing-start-time-within-session-time>
+            </change-hearing-session-selector>
             <change-hearing-start-time-controls>
               <div
                 class="timeDuration"

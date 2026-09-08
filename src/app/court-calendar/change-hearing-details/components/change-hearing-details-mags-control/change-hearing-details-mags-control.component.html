@@ -13,12 +13,12 @@
   }
   @if (!isMultiDay) {
     @if (hearingSlots()?.length > 0) {
-      <hearing-start-time-within-session-time
+      <change-hearing-session-selector
         name="courtScheduleId"
         [ngModel]="hearingCourtScheduleId()"
         [hearingSlots]="hearingSlots()"
         [startTime]="timeToCompare"
-      ></hearing-start-time-within-session-time>
+      ></change-hearing-session-selector>
     }
     <change-hearing-start-time-controls
       [startTime]="originalStartTime()"

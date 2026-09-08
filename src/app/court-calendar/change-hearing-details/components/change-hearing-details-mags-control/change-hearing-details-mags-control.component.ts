@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import { ChangeHearingStartTimeControlsComponent } from '../change-hearing-start-time-controls.component';
 import { HearingSlot } from '@cpp/scheduling';
 import { NonSittingDaysComponent } from '../../../../shared/components/non-sitting-days/non-sitting-days.component';
-import { HearingStartTimeWithinSessionTimeComponent } from '../hearing-start-time-withing-session-time.cmponent';
+import { ChangeHearingSessionSelectorComponent } from '../change-hearing-session-selector.component';
 
 @Component({
   selector: 'change-hearing-mags-control',
@@ -18,7 +18,7 @@ import { HearingStartTimeWithinSessionTimeComponent } from '../hearing-start-tim
     ChangeHearingStartTimeControlsComponent,
     NonSittingDaysComponent,
     DatePipe,
-    HearingStartTimeWithinSessionTimeComponent
+    ChangeHearingSessionSelectorComponent
   ],
   viewProviders: [
     {
