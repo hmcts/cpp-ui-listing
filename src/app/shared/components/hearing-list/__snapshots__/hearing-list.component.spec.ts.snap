@@ -602,9 +602,9 @@ exports[`HearingListComponent Pagination should display pagination if total resu
                   pdk-typography="heading-small"
                 >
                   <div
-                    data-test-id="applicantName"
+                    data-test-id="subjectName"
                   >
-                    TEST FIRST TEST LAST
+                    SUBJECT FIRST SUBJECT LAST
                   </div>
                   <div>
                     <a
@@ -660,7 +660,7 @@ exports[`HearingListComponent Pagination should display pagination if total resu
                   rowspan="1"
                 >
                   <a
-                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    aria-label="Allocate Hearing for SUBJECT FIRST SUBJECT LAST"
                     class="govuk-link"
                     data-test-id="allocateHearing"
                     href="javascript:void(0);"
@@ -671,7 +671,7 @@ exports[`HearingListComponent Pagination should display pagination if total resu
                       class="govuk-visually-hidden"
                       pdk-visually-hidden=""
                     >
-                       hearing for TEST FIRST TEST LAST
+                       hearing for SUBJECT FIRST SUBJECT LAST
                     </span>
                   </a>
                 </td>
@@ -1372,9 +1372,9 @@ exports[`HearingListComponent Pagination should display the current page with ex
                   pdk-typography="heading-small"
                 >
                   <div
-                    data-test-id="applicantName"
+                    data-test-id="subjectName"
                   >
-                    TEST FIRST TEST LAST
+                    SUBJECT FIRST SUBJECT LAST
                   </div>
                   <div>
                     <a
@@ -1430,7 +1430,7 @@ exports[`HearingListComponent Pagination should display the current page with ex
                   rowspan="1"
                 >
                   <a
-                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    aria-label="Allocate Hearing for SUBJECT FIRST SUBJECT LAST"
                     class="govuk-link"
                     data-test-id="allocateHearing"
                     href="javascript:void(0);"
@@ -1441,7 +1441,7 @@ exports[`HearingListComponent Pagination should display the current page with ex
                       class="govuk-visually-hidden"
                       pdk-visually-hidden=""
                     >
-                       hearing for TEST FIRST TEST LAST
+                       hearing for SUBJECT FIRST SUBJECT LAST
                     </span>
                   </a>
                 </td>
@@ -2142,9 +2142,9 @@ exports[`HearingListComponent Pagination should not display pagination if total 
                   pdk-typography="heading-small"
                 >
                   <div
-                    data-test-id="applicantName"
+                    data-test-id="subjectName"
                   >
-                    TEST FIRST TEST LAST
+                    SUBJECT FIRST SUBJECT LAST
                   </div>
                   <div>
                     <a
@@ -2200,7 +2200,7 @@ exports[`HearingListComponent Pagination should not display pagination if total 
                   rowspan="1"
                 >
                   <a
-                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    aria-label="Allocate Hearing for SUBJECT FIRST SUBJECT LAST"
                     class="govuk-link"
                     data-test-id="allocateHearing"
                     href="javascript:void(0);"
@@ -2211,7 +2211,7 @@ exports[`HearingListComponent Pagination should not display pagination if total 
                       class="govuk-visually-hidden"
                       pdk-visually-hidden=""
                     >
-                       hearing for TEST FIRST TEST LAST
+                       hearing for SUBJECT FIRST SUBJECT LAST
                     </span>
                   </a>
                 </td>
@@ -2825,9 +2825,9 @@ exports[`HearingListComponent should create the right templates with actions 1`]
                   pdk-typography="heading-small"
                 >
                   <div
-                    data-test-id="applicantName"
+                    data-test-id="subjectName"
                   >
-                    TEST FIRST TEST LAST
+                    SUBJECT FIRST SUBJECT LAST
                   </div>
                   <div>
                     <a
@@ -2883,7 +2883,7 @@ exports[`HearingListComponent should create the right templates with actions 1`]
                   rowspan="1"
                 >
                   <a
-                    aria-label="Allocate Hearing for TEST FIRST TEST LAST"
+                    aria-label="Allocate Hearing for SUBJECT FIRST SUBJECT LAST"
                     class="govuk-link"
                     data-test-id="allocateHearing"
                     href="javascript:void(0);"
@@ -2894,7 +2894,7 @@ exports[`HearingListComponent should create the right templates with actions 1`]
                       class="govuk-visually-hidden"
                       pdk-visually-hidden=""
                     >
-                       hearing for TEST FIRST TEST LAST
+                       hearing for SUBJECT FIRST SUBJECT LAST
                     </span>
                   </a>
                 </td>
@@ -3425,9 +3425,9 @@ exports[`HearingListComponent should create the right templates without actions 
                   pdk-typography="heading-small"
                 >
                   <div
-                    data-test-id="applicantName"
+                    data-test-id="subjectName"
                   >
-                    TEST FIRST TEST LAST
+                    SUBJECT FIRST SUBJECT LAST
                   </div>
                   <div>
                     <a

@@ -25,7 +25,7 @@ export interface UnscheduledHearingsForAllDefendants {
 }
 
 export interface UnscheduledHearingsForAllApplications {
-  applicationDetails: Pick<CourtApplication, 'id' | 'applicant'>;
+  applicationDetails: Pick<CourtApplication, 'id' | 'subject'>;
   urn: string;
   hearings: Hearing[];
 }

@@ -84,6 +84,11 @@ export const courtApplicationSingleRespondentMock: CourtApplication = {
     firstName: 'ApplicantFirstName1',
     isRespondent: false
   },
+  subject: {
+    lastName: 'SubjectLastName1',
+    firstName: 'SubjectFirstName1',
+    isRespondent: false
+  },
   respondents: [
     {
       lastName: 'ApplicationSingleRespondantLastName1',
@@ -154,9 +159,9 @@ export const mockResultTwo: UnscheduledHearingsForAllApplications[] = [
   {
     applicationDetails: {
       id: '8e8465df-779b-444e-80dc-15633b6c5fd8',
-      applicant: {
-        lastName: 'ApplicantLastName1',
-        firstName: 'ApplicantFirstName1',
+      subject: {
+        lastName: 'SubjectLastName1',
+        firstName: 'SubjectFirstName1',
         isRespondent: false
       }
     },

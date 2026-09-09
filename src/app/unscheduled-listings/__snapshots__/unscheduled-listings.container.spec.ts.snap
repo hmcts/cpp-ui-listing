@@ -460,7 +460,7 @@ exports[`UnscheduledListingsContainer should dispatch ListUnscheduledHearingsAct
                         pdk-table-cell=""
                         width="20%"
                       >
-                         ApplicantFirstName1 ApplicantLastName1 
+                         SubjectFirstName1 SubjectLastName1 
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -476,7 +476,7 @@ exports[`UnscheduledListingsContainer should dispatch ListUnscheduledHearingsAct
                         width="20%"
                       >
                         <a
-                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          aria-label="View application details  of SubjectFirstName1 SubjectLastName1 – Test-application-reference"
                           class="hearing-reference govuk-link govuk-caption-m"
                           data-test-id="hearingReference"
                           href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
@@ -505,7 +505,7 @@ exports[`UnscheduledListingsContainer should dispatch ListUnscheduledHearingsAct
                             </dt>
                             <dd>
                               <a
-                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                aria-label="Allocate hearing for SubjectFirstName1 SubjectLastName1 – "
                                 class="allocate-link govuk-!-margin-left-2 govuk-link"
                                 href="javascript:void(0);"
                                 pdk-link=""
@@ -991,7 +991,7 @@ exports[`UnscheduledListingsContainer should match snapshot with hearings 1`] = 
                         pdk-table-cell=""
                         width="20%"
                       >
-                         ApplicantFirstName1 ApplicantLastName1 
+                         SubjectFirstName1 SubjectLastName1 
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -1007,7 +1007,7 @@ exports[`UnscheduledListingsContainer should match snapshot with hearings 1`] = 
                         width="20%"
                       >
                         <a
-                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          aria-label="View application details  of SubjectFirstName1 SubjectLastName1 – Test-application-reference"
                           class="hearing-reference govuk-link govuk-caption-m"
                           data-test-id="hearingReference"
                           href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
@@ -1036,7 +1036,7 @@ exports[`UnscheduledListingsContainer should match snapshot with hearings 1`] = 
                             </dt>
                             <dd>
                               <a
-                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                aria-label="Allocate hearing for SubjectFirstName1 SubjectLastName1 – "
                                 class="allocate-link govuk-!-margin-left-2 govuk-link"
                                 href="javascript:void(0);"
                                 pdk-link=""
@@ -1522,7 +1522,7 @@ exports[`UnscheduledListingsContainer should match snapshot with hearings 2`] = 
                         pdk-table-cell=""
                         width="20%"
                       >
-                         ApplicantFirstName1 ApplicantLastName1 
+                         SubjectFirstName1 SubjectLastName1 
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -1538,7 +1538,7 @@ exports[`UnscheduledListingsContainer should match snapshot with hearings 2`] = 
                         width="20%"
                       >
                         <a
-                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          aria-label="View application details  of SubjectFirstName1 SubjectLastName1 – Test-application-reference"
                           class="hearing-reference govuk-link govuk-caption-m"
                           data-test-id="hearingReference"
                           href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
@@ -1567,7 +1567,7 @@ exports[`UnscheduledListingsContainer should match snapshot with hearings 2`] = 
                             </dt>
                             <dd>
                               <a
-                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                aria-label="Allocate hearing for SubjectFirstName1 SubjectLastName1 – "
                                 class="allocate-link govuk-!-margin-left-2 govuk-link"
                                 href="javascript:void(0);"
                                 pdk-link=""
@@ -2053,7 +2053,7 @@ exports[`UnscheduledListingsContainer should match snapshot without hearings 1`]
                         pdk-table-cell=""
                         width="20%"
                       >
-                         ApplicantFirstName1 ApplicantLastName1 
+                         SubjectFirstName1 SubjectLastName1 
                       </td>
                       <td
                         class="govuk-table__cell"
@@ -2069,7 +2069,7 @@ exports[`UnscheduledListingsContainer should match snapshot without hearings 1`]
                         width="20%"
                       >
                         <a
-                          aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                          aria-label="View application details  of SubjectFirstName1 SubjectLastName1 – Test-application-reference"
                           class="hearing-reference govuk-link govuk-caption-m"
                           data-test-id="hearingReference"
                           href="http://url.com/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
@@ -2098,7 +2098,7 @@ exports[`UnscheduledListingsContainer should match snapshot without hearings 1`]
                             </dt>
                             <dd>
                               <a
-                                aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – "
+                                aria-label="Allocate hearing for SubjectFirstName1 SubjectLastName1 – "
                                 class="allocate-link govuk-!-margin-left-2 govuk-link"
                                 href="javascript:void(0);"
                                 pdk-link=""
