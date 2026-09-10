@@ -158,11 +158,11 @@ export class HearingListComponent {
     );
   }
 
-  getStandaloneApplicantName(application: CourtApplication): string {
-    if (application.applicant.firstName) {
-      return `${application.applicant.firstName} ${application.applicant.lastName.toUpperCase()}`;
+  getStandaloneSubjectName(application: CourtApplication): string {
+    if (application.subject.firstName) {
+      return `${application.subject.firstName} ${application.subject.lastName.toUpperCase()}`;
     } else {
-      return `${application.applicant.lastName.toUpperCase()}`;
+      return `${application.subject.lastName.toUpperCase()}`;
     }
   }
 
