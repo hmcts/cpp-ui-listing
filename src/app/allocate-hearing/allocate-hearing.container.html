@@ -40,7 +40,7 @@
       (selectedTabChange)="onSelectedTabChange($event)"
     >
       @if ((isHearingStandaloneApplication$ | async) === false &&
-      (isHearingOnlyWithLinkedApplication$ | async) ===false) {
+      (isHearingOnlyWithLinkedApplication$ | async) === false) {
       <pdk-tab heading="Related hearings">
         <find-available-hearing
           [hearing]="selectedHearing"

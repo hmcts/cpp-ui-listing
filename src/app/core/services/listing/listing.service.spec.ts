@@ -45,7 +45,7 @@ import { ListingNote } from '@cpp/scheduling';
 
 jest.mock('uuid/v4');
 
-uuid.mockImplementation(() => {
+jest.mocked(uuid).mockImplementation(() => {
   return 'mock-uuid';
 });
 
@@ -1313,8 +1313,8 @@ describe('ListingService', () => {
         expect(query$).toBeObservable(expected$);
 
         expect(http.query).toHaveBeenCalledWith({
-          url: '/progression-query-api/query/api/rest/progression/courtlist',
-          requestType: 'application/vnd.progression.search.prison.court.list+json',
+          url: '/courtlistpublishing-service/api/court-list-publish/prison/download',
+          requestType: 'application/vnd.courtlistpublishing-service.prison-download.get+json',
           responseType: 'blob',
           params
         });
