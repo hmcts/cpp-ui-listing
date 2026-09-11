@@ -44,18 +44,17 @@
         }
         @if (!isWeekCommencing) {
           <li>
-            @if (!isWeekCommencing) {
-              <button
-                pdk-margin-bottom="3"
-                data-role="sharedfinallists-button"
-                pdk-button="secondary"
-                type="button"
-                class="download-file final auto-width"
-                (click)="openModal(template, 'final')"
-              >
-                <span pdk-typography="body">Share final list</span>
-              </button>
-            }
+            <button
+              pdk-margin-bottom="3"
+              data-role="sharedfinallists-button"
+              pdk-button="secondary"
+              type="button"
+              class="download-file final auto-width"
+              (click)="openModal(template, 'final')"
+            >
+              <span pdk-typography="body">Share final list</span>
+            </button>
+
             <span
               data-role="publish-status-message-final"
               pdk-typography="body-small"
@@ -146,6 +145,30 @@
             </li>
           </ul>
         }
+      </pdk-related>
+    }
+    @if (
+      (hearingsByDateAndRoom().length > 0 || weekHearingsByDateAndRoom().length > 0) &&
+      !isWeekCommencing
+    ) {
+      <pdk-related>
+        <ul pdk-list>
+          <li>
+            <h2 pdk-typography="heading-medium">Daily list</h2>
+          </li>
+          <li>
+            <button
+              pdk-margin-bottom="3"
+              data-role="dailylist-button"
+              pdk-button="secondary"
+              type="button"
+              class="download-file daily auto-width"
+              (click)="downloadList(CourtListType.DRAFT, false)"
+            >
+              <span pdk-typography="body">All courtrooms</span>
+            </button>
+          </li>
+        </ul>
       </pdk-related>
     }
   </div>

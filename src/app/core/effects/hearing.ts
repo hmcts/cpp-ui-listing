@@ -616,6 +616,9 @@ export class HearingEffects {
                 extension = '.docx';
                 listType = `Ushers list`;
                 break;
+              case 'DRAFT':
+                listType = `Daily list`;
+                break;
             }
 
             FileSaver.saveAs(
