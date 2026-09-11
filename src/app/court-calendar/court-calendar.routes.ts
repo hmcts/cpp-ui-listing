@@ -91,35 +91,50 @@ export const courtCalendarRoutes: Routes = [
         loadComponent: () =>
           import('./change-courtroom/containers/hearing-days-selection.container').then(
             c => c.HearingDaysSelectionContainer
-          )
+          ),
+        data: {
+          title: 'Change Courtroom | Common Platform'
+        }
       },
       {
         path: 'selected-hearing-days',
         loadComponent: () =>
           import('./change-courtroom/containers/selected-hearing-days.container').then(
             c => c.SelectedHearingDaysContainer
-          )
+          ),
+        data: {
+          title: 'Check courtroom change for selected hearing days | Common Platform'
+        }
       },
       {
         path: 'all-future-hearingdays-selected',
         loadComponent: () =>
           import('./change-courtroom/containers/all-upcoming-hearing-days-selected/all-upcoming-hearingdays-selected.container').then(
             c => c.AllFutureHearingDaysSelectedContainer
-          )
+          ),
+        data: {
+          title: 'Change courtroom for upcoming hearing days | Common Platform'
+        }
       },
       {
         path: 'all-future-hearingdays-selected-confirm',
         loadComponent: () =>
           import('./change-courtroom/containers/all-upcoming-hearing-days-selected-confirm/all-upcoming-hearingdays-selected-confirm.container').then(
             c => c.AllFutureHearingDaysSelectedConfirmContainer
-          )
+          ),
+        data: {
+          title: 'Check courtroom change for upcoming hearing days | Common Platform'
+        }
       },
       {
         path: 'success-banner',
         loadComponent: () =>
           import('./change-courtroom/containers/success-banner.container').then(
             c => c.SuccessBannerContainer
-          )
+          ),
+        data: {
+          title: 'Courtrooms changed | Common Platform'
+        }
       }
     ],
     data: {
