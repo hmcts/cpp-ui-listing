@@ -45,7 +45,7 @@ import { ListingNote } from '@cpp/scheduling';
 
 jest.mock('uuid/v4');
 
-uuid.mockImplementation(() => {
+jest.mocked(uuid).mockImplementation(() => {
   return 'mock-uuid';
 });
 
