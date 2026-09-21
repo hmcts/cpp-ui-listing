@@ -393,6 +393,41 @@ exports[`DownloadListComponent judge list should show when a crown court is sele
           </ul>
         </div>
       </pdk-related>
+      <pdk-related>
+        <div
+          class="pdk-related"
+        >
+          <ul
+            class="govuk-list"
+            pdk-list=""
+          >
+            <li>
+              <h2
+                class="govuk-heading-m"
+                pdk-typography="heading-medium"
+              >
+                Daily list
+              </h2>
+            </li>
+            <li>
+              <button
+                class="download-file daily auto-width govuk-!-margin-bottom-3 govuk-button govuk-button--secondary"
+                data-role="dailylist-button"
+                pdk-button="secondary"
+                pdk-margin-bottom="3"
+                type="button"
+              >
+                <span
+                  class="govuk-body-m"
+                  pdk-typography="body"
+                >
+                  All courtrooms
+                </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </pdk-related>
     </div>
   </download-list>
 </ng-component>

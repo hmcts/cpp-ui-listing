@@ -18,6 +18,7 @@ import {
 } from '../../core/model/hearing';
 import { DownloadListComponent } from './download-list.component';
 import { userPermissions } from '../../config';
+import { CourtListType } from '../models/mags-publish-list.dto';
 
 const publishCourtListPermission: RequiredPermission = userPermissions.publicCourtList;
 
@@ -552,6 +553,37 @@ describe('DownloadListComponent', () => {
       fixture.detectChanges();
       const usherslistBtn = fixture.debugElement.query(By.css('[data-role="usherslist-button"]'));
       expect(usherslistBtn).toBeFalsy();
+    });
+
+    it('should show Daily list download button if Crown Court and fixed date (not week commencing) is selected', () => {
+      hostComponent.crownSelected = true;
+      fixture.detectChanges();
+      const dailylistBtn = fixture.debugElement.query(By.css('[data-role="dailylist-button"]'));
+      expect(dailylistBtn).toBeTruthy();
+      expect(component.isWeekCommencing).toBe(false);
+    });
+
+    it('should NOT show Daily list download button if Crown Court and week commencing is selected', () => {
+      hostComponent.selectedOptions = {
+        ...hostComponent.selectedOptions,
+        courtRoomId: '1414ea28-8b0e-3ba7-8f97-f2bb6d5dd38c',
+        endDate: '2019-11-10',
+        startDate: '2019-11-04'
+      };
+      hostComponent.crownSelected = true;
+      fixture.detectChanges();
+      const dailylistBtn = fixture.debugElement.query(By.css('[data-role="dailylist-button"]'));
+      expect(dailylistBtn).toBeFalsy();
+      expect(component.isWeekCommencing).toBe(true);
+    });
+
+    it('should dispatch download of the DAILY list when the Daily list button is clicked', () => {
+      hostComponent.crownSelected = true;
+      fixture.detectChanges();
+      const downloadListSpy = spyOn(component, 'downloadList').and.callThrough();
+      const dailylistBtn = fixture.debugElement.query(By.css('[data-role="dailylist-button"]'));
+      dailylistBtn.nativeElement.click();
+      expect(downloadListSpy).toHaveBeenCalledWith(CourtListType.DRAFT, false);
     });
 
     it('should FORMAT Published message if date contains UTC ', () => {
