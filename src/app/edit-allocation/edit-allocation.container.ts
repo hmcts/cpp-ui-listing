@@ -25,6 +25,7 @@ import {
   ClearLastAllocatedHearingAction,
   CourtCentre,
   CourtroomsFilter,
+  ExtendedJudicialRole,
   getCourtCentres,
   getEditAllocationError,
   getHearingTypes,
@@ -34,6 +35,7 @@ import {
   getTrialTypesFilteredByType,
   Hearing,
   HearingType,
+  HearingWithSelectedCourtCentre,
   SearchAllocatedHearingsAction,
   setEditAllocationError,
   setHearingToEditAllocation,
@@ -132,7 +134,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.store
       .select(getCourtCentres)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((courtCentres) => {
+      .subscribe(courtCentres => {
         this.courtCentres = courtCentres;
         this.fetchQueryParams();
         this.cd.detectChanges();
@@ -141,7 +143,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.store
       .select(getEditAllocationError)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((error) => {
+      .subscribe(error => {
         if (error) {
           this.errors = [error];
         }
@@ -165,14 +167,14 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
 
   canActivateSplit(hearing: Hearing): boolean {
     return (hearing.listedCases || []).some(
-      (kase) =>
+      kase =>
         kase.defendants.length > 1 ||
-        kase.defendants.some((defendant) => defendant.offences.length > 1)
+        kase.defendants.some(defendant => defendant.offences.length > 1)
     );
   }
 
   splitHearing(hearing: Hearing) {
-    this.router.navigate([`/split/${hearing.id}`]).then((e) => {
+    this.router.navigate([`/split/${hearing.id}`]).then(e => {
       this.window.scroll(0, 0);
     });
   }
@@ -180,7 +182,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
   onSelectCourtCentre(event: { type: 'change' } | FilterOption) {
     if ('value' in event && this.eventIsCourtCentreSelection(event)) {
       this.selectedCourtCentre = this.courtCentres.find(
-        (courtCentre) => courtCentre.id === event.value
+        courtCentre => courtCentre.id === event.value
       );
     } else if ('type' in event && event.type && event.type === 'change') {
       this.selectedCourtCentre = undefined;
@@ -192,12 +194,21 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.clearSelectedHearing();
   }
 
-  changeJudiciary({ hearings, judiciary }) {
+  changeJudiciary({
+    hearings,
+    judiciary,
+    johSource
+  }: {
+    hearings: HearingWithSelectedCourtCentre[];
+    judiciary: ExtendedJudicialRole[];
+    johSource?: string;
+  }) {
     this.showJudiciaryForm = false;
     this.store.dispatch(
       new ChangeJudicaryForHearingsAction({
         hearings,
-        judiciary: judiciary.filter((judic) => !!judic) // this is to handle gaps in magistrates (eg Winger 2 present but not Winger 1, etc)
+        judiciary: judiciary.filter(judic => !!judic),
+        johSource
       })
     );
   }
@@ -259,7 +270,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
         endTime: this.activatedRoute.snapshot.queryParams.endTime
       };
       this.selectedCourtCentre = this.courtCentres.find(
-        (courtCentre) => courtCentre.id === this.filterOptions.courtCentreId
+        courtCentre => courtCentre.id === this.filterOptions.courtCentreId
       );
       this.selectedHearingId = this.activatedRoute.snapshot.queryParams.hearingId;
       this.filterSubmit(this.filterOptions);

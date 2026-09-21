@@ -9,6 +9,7 @@ import {
   Hearing
 } from '../../../core';
 import { DateRange } from '../../../shared/components/date-range/date-range';
+import { resolveJohSource } from '../../../core/util';
 import { AllocateHearingFactory } from '../../utils/allocate-hearing.factory';
 import { CourtSession, HearingSlot } from '@cpp/scheduling';
 import { ChangeHearingDetailsCrownControlComponent } from './change-hearing-details-crown-control/change-hearing-details-crown-control.component';
@@ -16,16 +17,15 @@ import { ChangeHearingDetailsMagsControlComponent } from './change-hearing-detai
 import { FormsModule } from '@angular/forms';
 import { JudiciaryInputComponent } from '../../../shared/components/judiciary-input/judiciary-input.component';
 import { PdkComponents } from '../../../shared/pdk-shared-components';
-export interface ChangeHearingDetailsFormValues
-  extends Pick<
-    Hearing,
-    | 'hasVideoLink'
-    | 'sendNotificationToParties'
-    | 'hearingLanguage'
-    | 'publicListNote'
-    | 'nonDefaultDays'
-    | 'nonSittingDays'
-  > {
+export interface ChangeHearingDetailsFormValues extends Pick<
+  Hearing,
+  | 'hasVideoLink'
+  | 'sendNotificationToParties'
+  | 'hearingLanguage'
+  | 'publicListNote'
+  | 'nonDefaultDays'
+  | 'nonSittingDays'
+> {
   dateRange: DateRange;
   selectedHearingType: HearingType;
   startTime: string;
@@ -65,7 +65,7 @@ export class ChangeHearingDetailsComponent {
   readonly onValidationError = output<ValidationError[]>();
   readonly onSubmit = output<AllocatingHearingDetailsWithCourtCentre>();
   readonly onCancel = output<void>();
-  selectedJudiary: ExtendedJudicialRole[];
+  selectedJudiciary: ExtendedJudicialRole[];
   datePipe = new DatePipe('en-GB');
 
   constructor(private allocateHearingFactory: AllocateHearingFactory) {}
@@ -97,7 +97,12 @@ export class ChangeHearingDetailsComponent {
       selectedHearing,
       { duration: durationMinutes, ...restValues, courtSession },
       this.selectedCourtCentre(),
-      this.selectedJudiary
+      this.selectedJudiciary
+    );
+
+    updatedHearing.johSource = resolveJohSource(
+      selectedHearing.jurisdictionType,
+      this.selectedJudiciary
     );
 
     this.onSubmit.emit({

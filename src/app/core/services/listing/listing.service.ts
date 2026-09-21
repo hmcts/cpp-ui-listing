@@ -167,6 +167,7 @@ export class ListingService {
       priority?: string;
       specialRequirements?: string[];
       sendNotificationToParties?: boolean;
+      johSource?: string;
     },
     splitHearingUnallocated = false
   ): Observable<unknown> {
@@ -225,7 +226,8 @@ export class ListingService {
       bookingType: hearing.bookingType,
       priority: hearing.priority,
       specialRequirements: hearing.specialRequirements,
-      sendNotificationToParties: hearing.sendNotificationToParties
+      sendNotificationToParties: hearing.sendNotificationToParties,
+      johSource: hearing.johSource
     };
     if (splitHearingUnallocated) {
       body.splitHearing = 'unallocated';
@@ -283,7 +285,8 @@ export class ListingService {
         hearingLanguage: hearing.hearingLanguage,
         publicListNote,
         hasVideoLink,
-        sendNotificationToParties: hearing.sendNotificationToParties
+        sendNotificationToParties: hearing.sendNotificationToParties,
+        johSource: hearing.johSource
       }
     });
   }

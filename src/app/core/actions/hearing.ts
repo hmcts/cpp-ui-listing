@@ -257,6 +257,7 @@ export class ChangeJudicaryForHearingsAction implements Action {
     public payload: {
       hearings: HearingWithSelectedCourtCentre[];
       judiciary: ExtendedJudicialRole[];
+      johSource?: string;
     }
   ) {}
 }
@@ -268,6 +269,7 @@ export class ChangeJudicaryForHearingsSuccessAction implements Action {
     public payload: {
       hearings: Hearing[];
       judiciary: ExtendedJudicialRole[];
+      johSource?: string;
     }
   ) {}
 }

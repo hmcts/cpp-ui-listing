@@ -84,6 +84,7 @@ export interface Hearing {
   tier?: HearingTier;
   listType?: HearingListType;
   keyReason?: string;
+  johSource?: string;
 }
 
 export interface HearingWithSelectedCourtCentre extends Hearing {

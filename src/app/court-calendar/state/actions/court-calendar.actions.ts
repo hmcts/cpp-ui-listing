@@ -69,6 +69,7 @@ export const changeHearingsJudiciaryAction = createAction(
   props<{
     hearings: HearingWithSelectedCourtCentre[];
     judiciary: ExtendedJudicialRole[];
+    johSource?: string;
     filterOptions: CourtCalendarFilters;
   }>()
 );

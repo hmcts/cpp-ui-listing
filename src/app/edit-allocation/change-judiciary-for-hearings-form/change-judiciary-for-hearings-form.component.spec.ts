@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { CourtCentre, Hearing } from '../../core/';
+import { CourtCentre, ExtendedJudicialRole, Hearing } from '../../core/';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ChangeJudiciaryForHearingsFormComponent } from './change-judiciary-for-hearings-form.component';
 import { courtCentresMock, validHearingMock1 } from '../../../mock-data/test-fixtures';
@@ -69,5 +69,48 @@ describe('ChangeJudiciaryForHearingsFormComponent', () => {
 
       expect(component.onSubmit.emit).toHaveBeenCalled();
     }));
+  });
+
+  describe('johSource', () => {
+    it('should not set johSource when the judiciary selection is not changed', () => {
+      spyOn(component.onSubmit, 'emit');
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([validHearingMock1]),
+        judiciary: component.data.judiciary,
+        johSource: undefined
+      });
+    });
+
+    it('should set johSource to MANUAL when the judiciary selection is changed', () => {
+      spyOn(component.onSubmit, 'emit');
+      const selectedJudiciary: ExtendedJudicialRole[] = [
+        { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
+      ];
+      component.selectedJudiciary = selectedJudiciary;
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([validHearingMock1]),
+        judiciary: selectedJudiciary,
+        johSource: 'MANUAL'
+      });
+    });
+
+    it('should not set johSource when all judiciary are unchecked', () => {
+      spyOn(component.onSubmit, 'emit');
+      component.selectedJudiciary = [];
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([validHearingMock1]),
+        judiciary: [],
+        johSource: undefined
+      });
+    });
   });
 });

@@ -8,7 +8,12 @@ import { ReferenceDataService } from '@cpp/reference-data';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment-timezone';
 import { of } from 'rxjs';
-import { CourtCentre, Hearing, HearingWithSelectedCourtCentre } from '../../../core';
+import {
+  CourtCentre,
+  ExtendedJudicialRole,
+  Hearing,
+  HearingWithSelectedCourtCentre
+} from '../../../core';
 import {
   courtCentreId1,
   courtCentreId2,
@@ -386,7 +391,7 @@ describe('HearingDetailsFormComponent', () => {
     // pdk-autosuggest input element uses a randomly generated name attribute.
     // Need to make this a fixed name so Jest tests pass between test runs.
     const judgesTypeaheadEl = fixture.debugElement.queryAll(By.css('pdk-autosuggest input'));
-    judgesTypeaheadEl.forEach((element) => (element.nativeElement.name = 'stubbed-name'));
+    judgesTypeaheadEl.forEach(element => (element.nativeElement.name = 'stubbed-name'));
     getJudicialMembersByNamePattern.and.returnValue([[...judicialmembers]]);
   });
 
@@ -709,6 +714,69 @@ describe('HearingDetailsFormComponent', () => {
 
     expect(component.onSubmit.emit).toHaveBeenCalledTimes(1);
     expect(component.onValidationError.emit).toHaveBeenCalledTimes(1);
+  });
+
+  describe('johSource', () => {
+    it('should not set johSource when the judiciary selection is not changed', () => {
+      fixture.detectChanges();
+      spyOn(component.onSubmit, 'emit');
+      makeStartTimeAndDurationDefaultForCourtCentre();
+      clickNotifyParties();
+
+      submitForm();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        originHearing: { ...singleDayHearing1, sendNotificationToParties: false },
+        updatedHearing: {
+          ...expectedHearingWithDefaultStartTimeAndDuration,
+          jurisdictionType: 'MAGISTRATES',
+          johSource: undefined
+        }
+      });
+    });
+
+    it('should set johSource to MANUAL when the judiciary selection is changed', () => {
+      fixture.detectChanges();
+      spyOn(component.onSubmit, 'emit');
+      makeStartTimeAndDurationDefaultForCourtCentre();
+      clickNotifyParties();
+      const selectedJudiciary: ExtendedJudicialRole[] = [
+        { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
+      ];
+      component.selectedJudiciary = selectedJudiciary;
+
+      submitForm();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        originHearing: { ...singleDayHearing1, sendNotificationToParties: false },
+        updatedHearing: {
+          ...expectedHearingWithDefaultStartTimeAndDuration,
+          jurisdictionType: 'MAGISTRATES',
+          judiciary: selectedJudiciary,
+          johSource: 'MANUAL'
+        }
+      });
+    });
+
+    it('should not set johSource when all judiciary are unchecked', () => {
+      fixture.detectChanges();
+      spyOn(component.onSubmit, 'emit');
+      makeStartTimeAndDurationDefaultForCourtCentre();
+      clickNotifyParties();
+      component.selectedJudiciary = [];
+
+      submitForm();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        originHearing: { ...singleDayHearing1, sendNotificationToParties: false },
+        updatedHearing: {
+          ...expectedHearingWithDefaultStartTimeAndDuration,
+          jurisdictionType: 'MAGISTRATES',
+          judiciary: [],
+          johSource: undefined
+        }
+      });
+    });
   });
 
   it('should fire an event when calling onCancel', () => {

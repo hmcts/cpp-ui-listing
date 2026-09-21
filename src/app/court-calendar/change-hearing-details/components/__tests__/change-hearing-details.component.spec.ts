@@ -124,6 +124,61 @@ describe('ChangeHearingDetailsComponent', () => {
       expect(fixture).toMatchSnapshot();
     });
 
+    const johSourceFormValue = {
+      dateRange: { startDate: '2025-01-01', endDate: '2025-01-01' },
+      selectedHearingType: { id: '123', hearingDescription: 'Mock Hearing' },
+      startTime: '10:00',
+      duration: '4:00',
+      hasVideoLink: true,
+      sendNotificationToParties: false,
+      hearingLanguage: 'ENGLISH',
+      nonDefaultDays: [],
+      nonSittingDays: []
+    } as Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string };
+
+    it('should not set johSource when the judiciary selection is not changed', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      component.submit({ value: johSourceFormValue });
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          updatedHearing: expect.objectContaining({ johSource: undefined })
+        })
+      );
+    });
+
+    it('should set johSource to MANUAL when the judiciary selection is changed', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      component.selectedJudiciary = [
+        { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
+      ];
+      component.submit({ value: johSourceFormValue });
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          updatedHearing: expect.objectContaining({ johSource: 'MANUAL' })
+        })
+      );
+    });
+
+    it('should not set johSource when all judiciary are unchecked', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      component.selectedJudiciary = [];
+      component.submit({ value: johSourceFormValue });
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          updatedHearing: expect.objectContaining({ johSource: undefined })
+        })
+      );
+    });
+
     it('should emit correct payload when submitting multi-day hearing', async () => {
       const multiDayValues = {
         ...initialHearingFormValues,

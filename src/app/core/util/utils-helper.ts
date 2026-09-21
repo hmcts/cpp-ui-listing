@@ -1,4 +1,27 @@
 import moment from 'moment';
+import { ExtendedJudicialRole, JurisdictionType } from '../model';
+
+/**
+ * Flags a manual judiciary change so rota auto-assignment won't overwrite it.
+ * Magistrates only - Crown has no rota auto-assignment.
+ *
+ * @param jurisdictionType - the hearing's jurisdiction.
+ * @param selectedJudiciary - the user's edited judiciary selection, or
+ *  `undefined` if the user made no change (not the same as an empty selection).
+ */
+export function resolveJohSource(
+  jurisdictionType: JurisdictionType,
+  selectedJudiciary: ExtendedJudicialRole[] | undefined
+): string | undefined {
+  if (jurisdictionType !== 'MAGISTRATES') {
+    return undefined;
+  }
+  if (!selectedJudiciary || selectedJudiciary.length === 0) {
+    return undefined;
+  }
+
+  return 'MANUAL';
+}
 
 /**
  * Use this method to find a single data object from a data object array,
@@ -48,15 +71,15 @@ export function findDataFromSelectionValues<
   const selectedValueToCompare = selectedPropChild
     ? selection[selectionProp][selectedPropChild]
     : selectionProp
-    ? selection[selectionProp]
-    : typeof selection === 'string' || typeof selection === 'number'
-    ? selection
-    : null;
+      ? selection[selectionProp]
+      : typeof selection === 'string' || typeof selection === 'number'
+        ? selection
+        : null;
 
   if (!selectedValueToCompare) {
     return null;
   }
-  return dataList.find((data) => (data[dataProp] as any) === (selectedValueToCompare as any));
+  return dataList.find(data => (data[dataProp] as any) === (selectedValueToCompare as any));
 }
 
 export function getMomentValue(value: unknown, format?: string) {
