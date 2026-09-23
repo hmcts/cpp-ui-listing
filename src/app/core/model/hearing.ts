@@ -317,6 +317,17 @@ export enum PublishCourtListType {
   Final = 'FINAL'
 }
 
+const PUBLISH_COURT_LIST_TYPE_LABELS: Record<PublishCourtListType, string> = {
+  [PublishCourtListType.Firm]: 'firm',
+  [PublishCourtListType.Warn]: 'advance',
+  [PublishCourtListType.Draft]: 'draft',
+  [PublishCourtListType.Final]: 'final'
+};
+
+export function getPublishCourtListLabel(listType: string): string {
+  return PUBLISH_COURT_LIST_TYPE_LABELS[listType?.toUpperCase()] ?? listType?.toLowerCase();
+}
+
 export type JurisdictionType = 'MAGISTRATES' | 'CROWN';
 
 export const DEFAULT_PAGINATION_ITEMS_PER_PAGE = 50;
