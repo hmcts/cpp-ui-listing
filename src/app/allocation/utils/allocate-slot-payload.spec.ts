@@ -79,7 +79,8 @@ describe('allocate-slot-payload', () => {
         hearingSlotAllocations,
         sendNotificationToParties: true,
         filters: { bookingType: 'T' },
-        redirectTo: ['/unallocated']
+        redirectTo: ['/unallocated'],
+        isSplit: false
       });
     });
 
@@ -91,6 +92,28 @@ describe('allocate-slot-payload', () => {
           submit: { hearingSlotAllocations },
           queryParams: { allocated: 'true' } as Params
         }).sendNotificationToParties
+      ).toBe(false);
+    });
+
+    it('sets isSplit to true when the split query param is present', () => {
+      const hearingSlotAllocations = [] as HearingSlotAllocation[];
+      expect(
+        buildSlotAllocatePayload({
+          hearingId: 'H1',
+          submit: { hearingSlotAllocations },
+          queryParams: { split: 'true' } as Params
+        }).isSplit
+      ).toBe(true);
+    });
+
+    it('sets isSplit to false when the split query param is absent', () => {
+      const hearingSlotAllocations = [] as HearingSlotAllocation[];
+      expect(
+        buildSlotAllocatePayload({
+          hearingId: 'H1',
+          submit: { hearingSlotAllocations },
+          queryParams: {} as Params
+        }).isSplit
       ).toBe(false);
     });
   });

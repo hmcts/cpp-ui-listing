@@ -47,6 +47,7 @@ type SlotAllocatePayload = {
   filters?: AllocateHearingFilters;
   redirectTo: string[];
   sendNotificationToParties: boolean;
+  isSplit: boolean;
 };
 
 export function buildSlotAllocatePayload({
@@ -68,6 +69,7 @@ export function buildSlotAllocatePayload({
       : undefined,
     sendNotificationToParties: sendNotificationToParties ?? false,
     filters,
-    redirectTo: redirectAfterAllocate(queryParams)
+    redirectTo: redirectAfterAllocate(queryParams),
+    isSplit: !!queryParams.split
   };
 }

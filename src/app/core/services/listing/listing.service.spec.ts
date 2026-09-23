@@ -432,8 +432,7 @@ describe('ListingService', () => {
           ...updatedHearing,
           weekCommencingStartDate: '2018-05-30',
           weekCommencingEndDate: '2018-05-30',
-          weekCommencingDurationInWeeks: 1,
-          splitHearing: 'unallocated'
+          weekCommencingDurationInWeeks: 1
         },
         ['courtRoomId']
       );
@@ -451,11 +450,9 @@ describe('ListingService', () => {
         courtRoomId: undefined
       };
       const prosecutionCases = [];
-      const splitHearingUnallocated = true;
       const command$ = service.updateUnallocatedHearing(
         hearingWithWeekCommencing,
-        prosecutionCases,
-        splitHearingUnallocated
+        prosecutionCases
       );
 
       expect(command$).toBeObservable(expected$);
@@ -465,6 +462,23 @@ describe('ListingService', () => {
         successEvent: 'public.listing.hearing-days-changed-for-hearing',
         body: expectedBody
       });
+    });
+
+    it('#updateUnallocatedHearing with isSplit uses the split media type', () => {
+      const response = { body: '*' };
+      const response$ = cold('-a|', { a: response });
+      const expected$ = cold('-b|', { b: response });
+
+      http.commandSync = jasmine.createSpy('updateUnallocatedHearing').and.returnValue(response$);
+      const prosecutionCases = [];
+      const command$ = service.updateUnallocatedHearing(hearing, prosecutionCases, true);
+
+      expect(command$).toBeObservable(expected$);
+      expect(http.commandSync).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          requestType: 'application/vnd.listing.command.split-hearing+json'
+        })
+      );
     });
 
     it('#allocateHearing', () => {
@@ -485,11 +499,10 @@ describe('ListingService', () => {
       const response = { body: '*' };
       const response$ = cold('-a|', { a: response });
       const expected$ = cold('-b|', { b: response });
-      const splitHearingUnallocated = false;
 
       http.commandSync = jasmine.createSpy('allocateHearing').and.returnValue(response$);
 
-      const command$ = service.allocateHearing(params, splitHearingUnallocated);
+      const command$ = service.allocateHearing(params);
 
       const { hearingId: id, ...body } = params;
 
@@ -510,6 +523,31 @@ describe('ListingService', () => {
           ]
         }
       });
+    });
+
+    it('#allocateHearing with isSplit uses the split media type and drops splitHearing flag', () => {
+      const params = {
+        hearingId: 'hearingId',
+        courtCentreId: '*',
+        judiciary: [] as ExtendedJudicialRole[]
+      } as Parameters<ListingService['allocateHearing']>[0];
+
+      const response = { body: '*' };
+      const response$ = cold('-a|', { a: response });
+      const expected$ = cold('-b|', { b: response });
+
+      http.commandSync = jasmine.createSpy('allocateHearing').and.returnValue(response$);
+
+      const command$ = service.allocateHearing(params, true);
+
+      expect(command$).toBeObservable(expected$);
+      expect(http.commandSync).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          requestType: 'application/vnd.listing.command.split-hearing+json'
+        })
+      );
+      const [[callArgs]] = (http.commandSync as jasmine.Spy).calls.allArgs();
+      expect(Object.keys(callArgs.body)).not.toContain('splitHearing');
     });
 
     describe('#getCaseNotesForCases', () => {

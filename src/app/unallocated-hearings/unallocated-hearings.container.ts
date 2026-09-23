@@ -40,8 +40,7 @@ import {
   getLastAllocatedMagsHearing,
   getMagsHearingSchedule,
   ClearHearingSlots,
-  getUnallocatedHearingsByPage,
-  splitHearingUnallocated
+  getUnallocatedHearingsByPage
 } from '../core';
 import { jurisdiction$ } from '../core/util/constants';
 import { SelectedFilterOptions, LastAllocatedHearing } from '../core/model/';
@@ -232,7 +231,6 @@ export class UnallocatedHearingsContainer implements OnDestroy {
     this.router.navigate([`/split/${hearing.id}`]).then(() => {
       this.window.scroll(0, 0);
     });
-    this.store.dispatch(splitHearingUnallocated({ splitHearingUnallocated: true }));
   }
 
   clearNotification(): void {

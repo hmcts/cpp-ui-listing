@@ -4,8 +4,7 @@ import {
   HearingAction,
   setCaseNotes,
   setEditAllocationError,
-  setHearingToEditAllocation,
-  splitHearingUnallocated
+  setHearingToEditAllocation
 } from '../actions';
 import * as HearingActions from '../actions/hearing';
 import { TypeOfListSummary } from '../../unscheduled-listings/unscheduled-listings.interfaces';
@@ -41,7 +40,6 @@ export interface HearingState {
   scheduledHearingForAllocation: Hearing;
   hearingSchedule: HearingSchedule;
   caseNotes?: Record<string, CaseNotesMap>;
-  hasSplitHearingFromUnallocated: boolean;
   editAllocationError?: ValidationError;
   hearingToEditAllocation?: Hearing;
 }
@@ -60,7 +58,6 @@ const initialState: HearingState = {
   scheduledHearingForAllocation: null,
   hearingSchedule: null,
   hearingCourtList: null,
-  hasSplitHearingFromUnallocated: false,
   editAllocationError: null,
   hearingToEditAllocation: null
 };
@@ -118,7 +115,7 @@ export function hearingLegacyReducer(
     case HearingActions.UPDATE_ALLOCATED_HEARING_ACTION:
       // Filter previous version and add updated hearing
       const currentAllocated: Hearing[] = [...state.allocated].filter(
-        (h) => h.id !== action.payload.updatedHearing.id
+        h => h.id !== action.payload.updatedHearing.id
       );
       return {
         ...state,
@@ -129,7 +126,7 @@ export function hearingLegacyReducer(
     case HearingActions.UPDATE_ALLOCATED_HEARING_SUCCESS_ACTION:
       // Filter previous version and add updated hearing
       const currentHearings: Hearing[] = [...state.allocated].filter(
-        (h) => h.id !== action.payload.id
+        h => h.id !== action.payload.id
       );
       return {
         ...state,
@@ -203,7 +200,7 @@ export function hearingLegacyReducer(
       if (state.restrictedHearing) {
         const allocatedRestricted = state.restrictedHearing.id;
         const { hearings } = action.payload;
-        allocatedUpdateRestricted = hearings.find((a) => a.id === allocatedRestricted);
+        allocatedUpdateRestricted = hearings.find(a => a.id === allocatedRestricted);
       }
       return {
         ...state,
@@ -213,15 +210,15 @@ export function hearingLegacyReducer(
 
     // todo : code this in a nicer way....
     case HearingActions.SEQUENCE_HEARINGS_SUCCESS_ACTION:
-      const updatedHearings = state.allocated.map((stateHearing) => {
+      const updatedHearings = state.allocated.map(stateHearing => {
         const sequencedHearing: SequenceHearing = action.payload.hearings.find(
-          (item) => item.id === stateHearing.id
+          item => item.id === stateHearing.id
         );
 
         if (sequencedHearing) {
-          const updatedSequenceDays = stateHearing.hearingDays.map((stateDay) => {
+          const updatedSequenceDays = stateHearing.hearingDays.map(stateDay => {
             const sequencedDay: SequenceDay = sequencedHearing.sequenceHearingDays.find(
-              (item) => item.hearingDate === stateDay.hearingDate
+              item => item.hearingDate === stateDay.hearingDate
             );
             if (sequencedDay) {
               return {
@@ -245,8 +242,8 @@ export function hearingLegacyReducer(
 
       return {
         ...state,
-        allocated: state.allocated.map((allocated) => {
-          const matchedHearing = hearings.find((item) => item.id === allocated.id);
+        allocated: state.allocated.map(allocated => {
+          const matchedHearing = hearings.find(item => item.id === allocated.id);
           return matchedHearing ? { ...allocated, judiciary } : allocated;
         })
       };
@@ -265,7 +262,7 @@ export function hearingLegacyReducer(
     case HearingActions.COURT_RESTRICTION_SUCCESS_ACTION:
       const allocatedHearings = [...state.allocated];
       const selectedHearingId = action.payload.courtRestriction.hearingId;
-      const restrictedHearing = allocatedHearings.find((h) => h.id === selectedHearingId);
+      const restrictedHearing = allocatedHearings.find(h => h.id === selectedHearingId);
       return {
         ...state,
         restrictedHearing
@@ -286,7 +283,7 @@ export function hearingLegacyReducer(
       };
 
       const publishCourtListStatuses = [
-        ...state.publishCourtListStatuses.filter((s) => s.publishCourtListType !== listType),
+        ...state.publishCourtListStatuses.filter(s => s.publishCourtListType !== listType),
         optomisticStatus
       ];
       return {
@@ -323,10 +320,6 @@ export const hearingReducer = createReducer(
     caseNotes
   })),
 
-  on(splitHearingUnallocated, (state, { splitHearingUnallocated }) => ({
-    ...state,
-    hasSplitHearingFromUnallocated: splitHearingUnallocated
-  })),
   on(setEditAllocationError, (state, { editAllocationError }) => ({
     ...state,
     editAllocationError

@@ -93,7 +93,7 @@ describe('hearing selectors', () => {
     it('should return the state of all the unallocated hearings', () => {
       let result;
 
-      store.select(fromSelectors.getUnallocatedHearings).subscribe((value) => (result = value));
+      store.select(fromSelectors.getUnallocatedHearings).subscribe(value => (result = value));
 
       expect(result).toEqual([hearingOne]);
     });
@@ -101,9 +101,7 @@ describe('hearing selectors', () => {
     it('should return the state of all the unallocated hearings with pagination', () => {
       let result;
 
-      store
-        .select(fromSelectors.getUnallocatedHearingsByPage)
-        .subscribe((value) => (result = value));
+      store.select(fromSelectors.getUnallocatedHearingsByPage).subscribe(value => (result = value));
 
       expect(result).toEqual({
         hearings: [hearingOne],
@@ -120,13 +118,13 @@ describe('hearing selectors', () => {
 
       store
         .select(fromSelectors.getUnallocatedHearingById('H001'))
-        .subscribe((value) => (result = value));
+        .subscribe(value => (result = value));
 
       expect(result).toEqual(hearingOne);
 
       store
         .select(fromSelectors.getUnallocatedHearingById('H002'))
-        .subscribe((value) => (result = value));
+        .subscribe(value => (result = value));
 
       expect(result).toEqual(undefined);
     });
@@ -136,7 +134,7 @@ describe('hearing selectors', () => {
 
       store
         .select(fromSelectors.getHearingByDefendantsGroup('H001'))
-        .subscribe((value) => (result = value));
+        .subscribe(value => (result = value));
 
       expect(result).toEqual(hearingByDefendants);
     });
@@ -152,7 +150,7 @@ describe('hearing selectors', () => {
 
       store
         .select(fromSelectors.getScheduledHearingForAllocation)
-        .subscribe((value) => (result = value));
+        .subscribe(value => (result = value));
 
       expect(result).toEqual(hearingOne);
     });
@@ -175,7 +173,7 @@ describe('hearing selectors', () => {
     it('should return the state of all the unscheduled hearings', () => {
       let result;
 
-      store.select(fromSelectors.getUnscheduledHearings).subscribe((value) => (result = value));
+      store.select(fromSelectors.getUnscheduledHearings).subscribe(value => (result = value));
 
       expect(result).toEqual({
         hearings: [hearingOne],
@@ -196,7 +194,7 @@ describe('hearing selectors', () => {
     it('should return the state of all typeOfList', () => {
       let result;
 
-      store.select(fromSelectors.getTypeOfList).subscribe((value) => (result = value));
+      store.select(fromSelectors.getTypeOfList).subscribe(value => (result = value));
 
       expect(result).toEqual([typeOfList]);
     });
@@ -215,7 +213,7 @@ describe('hearing selectors', () => {
     it('should return the state of all the last allocated hearings', () => {
       let result;
 
-      store.select(fromSelectors.getLastAllocatedHearing).subscribe((value) => (result = value));
+      store.select(fromSelectors.getLastAllocatedHearing).subscribe(value => (result = value));
 
       expect(result).toEqual({
         hearing: hearingOne,
@@ -232,7 +230,7 @@ describe('hearing selectors', () => {
     it('should return the state of all the available hearings', () => {
       let result;
 
-      store.select(fromSelectors.getAvailableHearings).subscribe((value) => (result = value));
+      store.select(fromSelectors.getAvailableHearings).subscribe(value => (result = value));
 
       expect(result).toEqual([]);
     });
@@ -254,9 +252,7 @@ describe('hearing selectors', () => {
     it('should return the state of all the published statuses', () => {
       let result;
 
-      store
-        .select(fromSelectors.getPublishCourtListStatuses)
-        .subscribe((value) => (result = value));
+      store.select(fromSelectors.getPublishCourtListStatuses).subscribe(value => (result = value));
 
       expect(result).toEqual(statuses);
     });
@@ -285,9 +281,7 @@ describe('hearing selectors', () => {
 
     it('should return the state of mags hearing', () => {
       let result;
-      store
-        .select(fromSelectors.getLastAllocatedMagsHearing)
-        .subscribe((value) => (result = value));
+      store.select(fromSelectors.getLastAllocatedMagsHearing).subscribe(value => (result = value));
 
       expect(result).toEqual({
         hearing: hearingMags,
@@ -327,7 +321,7 @@ describe('hearing selectors', () => {
 
     it('should return the mags schedule', () => {
       let result;
-      store.select(fromSelectors.getMagsHearingSchedule).subscribe((value) => (result = value));
+      store.select(fromSelectors.getMagsHearingSchedule).subscribe(value => (result = value));
 
       expect(result).toEqual(payload);
     });
@@ -348,7 +342,7 @@ describe('hearing selectors', () => {
 
         store
           .select(fromSelectors.isScheduledAllocatedHearingStandaloneApplication)
-          .subscribe((value) => (result = value));
+          .subscribe(value => (result = value));
 
         expect(result).toBeTruthy();
       });
@@ -369,7 +363,7 @@ describe('hearing selectors', () => {
 
         store
           .select(fromSelectors.isScheduledAllocatedHearingStandaloneApplication)
-          .subscribe((value) => (result = value));
+          .subscribe(value => (result = value));
 
         expect(result).toBeFalsy();
       });
@@ -392,7 +386,7 @@ describe('hearing selectors', () => {
 
         store
           .select(fromSelectors.isScheduledAllocatedHearingOnlyWithLinkedApplication)
-          .subscribe((value) => (result = value));
+          .subscribe(value => (result = value));
 
         expect(result).toBeTruthy();
       });
@@ -413,7 +407,7 @@ describe('hearing selectors', () => {
 
         store
           .select(fromSelectors.isScheduledAllocatedHearingOnlyWithLinkedApplication)
-          .subscribe((value) => (result = value));
+          .subscribe(value => (result = value));
 
         expect(result).toBeFalsy();
       });
@@ -636,22 +630,7 @@ describe('hearing selectors', () => {
 
       store
         .select(fromSelectors.hasAllocatedHearingsByDateRange)
-        .subscribe((value) => (result = value));
-
-      expect(result).toEqual(true);
-    });
-  });
-
-  describe('Split hearing from Unallocated journey', () => {
-    beforeEach(() => {
-      store.dispatch(fromActions.splitHearingUnallocated({ splitHearingUnallocated: true }));
-    });
-    it('should return true when split hearing clicked from unallocated journey', () => {
-      let result;
-
-      store
-        .select(fromSelectors.hasSplitHearingFromUnallocated)
-        .subscribe((value) => (result = value));
+        .subscribe(value => (result = value));
 
       expect(result).toEqual(true);
     });
@@ -664,7 +643,7 @@ describe('hearing selectors', () => {
     it('should return true when split hearing clicked from unallocated journey', () => {
       let error;
 
-      store.select(fromSelectors.getEditAllocationError).subscribe((e) => (error = e));
+      store.select(fromSelectors.getEditAllocationError).subscribe(e => (error = e));
 
       expect(error).toEqual(editAllocationError);
     });

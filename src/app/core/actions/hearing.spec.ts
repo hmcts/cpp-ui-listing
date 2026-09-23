@@ -25,7 +25,6 @@ import {
   setEditAllocationError,
   SetPublishListStatusAction,
   SetPublishListStatusSuccessAction,
-  splitHearingUnallocated,
   TypeOfListAction,
   TypeOfListActionSuccess
 } from './hearing';
@@ -532,15 +531,6 @@ describe('hearing actions', () => {
     expect(action).toEqual({
       type: 'SEARCH_ALLOCATED_HEARINGS_FOR_PRISON_LIST',
       options
-    });
-  });
-
-  it('Should dispatch splitHearingUnallocated when split hearing done from Unallocated journey', () => {
-    const input = true;
-    const action = splitHearingUnallocated({ splitHearingUnallocated: input });
-    expect(action).toEqual({
-      type: 'SPLIT_HEARING_UNALLOCATED',
-      splitHearingUnallocated: true
     });
   });
 

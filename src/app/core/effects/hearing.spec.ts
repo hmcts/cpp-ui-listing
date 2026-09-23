@@ -491,8 +491,7 @@ describe('Hearing effects', () => {
       expect(effects.allocateHearing$).toBeObservable(expected$);
       expect(updateUnallocatedHearing).toHaveBeenCalledWith(
         inputAction.payload.updatedHearing,
-        prosecutionCaseIds,
-        false
+        prosecutionCaseIds
       );
       expect(navigate).toHaveBeenCalledWith(['/unallocated']);
     });

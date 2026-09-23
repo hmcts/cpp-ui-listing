@@ -169,24 +169,19 @@ export class ListingService {
       specialRequirements?: string[];
       sendNotificationToParties?: boolean;
     },
-    splitHearingUnallocated = false
+    isSplit = false
   ): Observable<unknown> {
     return this.api.commandSync({
       url: `/listing-command-api/command/api/rest/listing/hearings/${hearingId}`,
-      requestType: 'application/vnd.listing.command.update-hearing-for-listing+json',
+      requestType: isSplit
+        ? 'application/vnd.listing.command.split-hearing+json'
+        : 'application/vnd.listing.command.update-hearing-for-listing+json',
       successEvent: 'public.listing.hearing-changes-saved',
-      body: splitHearingUnallocated
-        ? {
-            ...body,
-            judiciary: judiciary ? judiciary.map(({ judicialMember, ...rest }) => rest) : undefined,
-            prosecutionCases: prosecutionCases.length ? prosecutionCases : undefined,
-            splitHearing: 'unallocated'
-          }
-        : {
-            ...body,
-            judiciary: judiciary ? judiciary.map(({ judicialMember, ...rest }) => rest) : undefined,
-            prosecutionCases: prosecutionCases.length ? prosecutionCases : undefined
-          }
+      body: {
+        ...body,
+        judiciary: judiciary ? judiciary.map(({ judicialMember, ...rest }) => rest) : undefined,
+        prosecutionCases: prosecutionCases.length ? prosecutionCases : undefined
+      }
     });
   }
 
@@ -199,10 +194,10 @@ export class ListingService {
         offences: { offenceId: string }[];
       }[];
     }[] = [],
-    splitHearingUnallocated = false
+    isSplit = false
   ): Observable<unknown> {
     const { publicListNote = '', hasVideoLink = false } = hearing;
-    const body: Record<string, unknown> & { splitHearing?: string } = {
+    const body: Record<string, unknown> = {
       courtCentreId: hearing.courtCentreId,
       type: hearing.type,
       nonSittingDays: hearing.nonSittingDays,
@@ -229,9 +224,6 @@ export class ListingService {
       sendNotificationToParties: hearing.sendNotificationToParties,
       courtRoomId: hearing?.courtRoomId
     };
-    if (splitHearingUnallocated) {
-      body.splitHearing = 'unallocated';
-    }
     if (hearing.weekCommencingStartDate) {
       body.weekCommencingStartDate = hearing.weekCommencingStartDate;
       body.weekCommencingEndDate = hearing.weekCommencingEndDate;
@@ -243,7 +235,9 @@ export class ListingService {
 
     return this.api.commandSync({
       url: `/listing-command-api/command/api/rest/listing/hearings/${hearing.id}`,
-      requestType: 'application/vnd.listing.command.update-hearing-for-listing+json',
+      requestType: isSplit
+        ? 'application/vnd.listing.command.split-hearing+json'
+        : 'application/vnd.listing.command.update-hearing-for-listing+json',
       successEvent: 'public.listing.hearing-days-changed-for-hearing',
       body
     });
