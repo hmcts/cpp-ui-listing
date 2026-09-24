@@ -52,7 +52,7 @@ import {
   CPPDate,
   findDataFromSelectionValues,
   getCPPDate,
-  resolveJohSource
+  resolveJudiciaryAssignmentSource
 } from '../../../core/util';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
@@ -741,7 +741,10 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
       nonDefaultDays,
       jurisdictionType,
       judiciary: this.selectedJudiciary || judiciary,
-      johSource: resolveJohSource(jurisdictionType, this.selectedJudiciary)
+      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(
+        jurisdictionType,
+        this.selectedJudiciary
+      )
     };
 
     // when editing allocated multi day hearings, the backend needs to know the 'selected' court details

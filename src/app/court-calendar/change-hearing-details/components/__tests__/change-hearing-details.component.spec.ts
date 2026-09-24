@@ -4,6 +4,7 @@ import {
   ChangeHearingDetailsFormValues
 } from '../change-hearing-details.component';
 import { reducers } from '../../../../core/reducers';
+import { JudiciaryAssignmentSource } from '../../../../core/model';
 import {
   initialHearingFormValues,
   mockSelectedCourtCentre,
@@ -124,7 +125,7 @@ describe('ChangeHearingDetailsComponent', () => {
       expect(fixture).toMatchSnapshot();
     });
 
-    const johSourceFormValue = {
+    const judiciaryAssignmentSourceFormValue = {
       dateRange: { startDate: '2025-01-01', endDate: '2025-01-01' },
       selectedHearingType: { id: '123', hearingDescription: 'Mock Hearing' },
       startTime: '10:00',
@@ -136,45 +137,47 @@ describe('ChangeHearingDetailsComponent', () => {
       nonSittingDays: []
     } as Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string };
 
-    it('should not set johSource when the judiciary selection is not changed', async () => {
+    it('should not set judiciaryAssignmentSource when the judiciary selection is not changed', async () => {
       fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
-      component.submit({ value: johSourceFormValue });
+      component.submit({ value: judiciaryAssignmentSourceFormValue });
 
       expect(component.onSubmit.emit).toHaveBeenCalledWith(
         expect.objectContaining({
-          updatedHearing: expect.objectContaining({ johSource: undefined })
+          updatedHearing: expect.objectContaining({ judiciaryAssignmentSource: undefined })
         })
       );
     });
 
-    it('should set johSource to MANUAL when the judiciary selection is changed', async () => {
+    it('should set judiciaryAssignmentSource to MANUAL when the judiciary selection is changed', async () => {
       fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
       component.selectedJudiciary = [
         { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
       ];
-      component.submit({ value: johSourceFormValue });
+      component.submit({ value: judiciaryAssignmentSourceFormValue });
 
       expect(component.onSubmit.emit).toHaveBeenCalledWith(
         expect.objectContaining({
-          updatedHearing: expect.objectContaining({ johSource: 'MANUAL' })
+          updatedHearing: expect.objectContaining({
+            judiciaryAssignmentSource: JudiciaryAssignmentSource.MANUAL
+          })
         })
       );
     });
 
-    it('should not set johSource when all judiciary are unchecked', async () => {
+    it('should not set judiciaryAssignmentSource when all judiciary are unchecked', async () => {
       fixture.detectChanges();
       await fixture.whenStable();
       fixture.detectChanges();
       component.selectedJudiciary = [];
-      component.submit({ value: johSourceFormValue });
+      component.submit({ value: judiciaryAssignmentSourceFormValue });
 
       expect(component.onSubmit.emit).toHaveBeenCalledWith(
         expect.objectContaining({
-          updatedHearing: expect.objectContaining({ johSource: undefined })
+          updatedHearing: expect.objectContaining({ judiciaryAssignmentSource: undefined })
         })
       );
     });

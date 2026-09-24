@@ -6,6 +6,7 @@ import {
   ExtendedJudicialRole,
   HearingSchedule,
   HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource,
   PaginatedHearings,
   PublishStatus,
   SequenceHearing
@@ -257,7 +258,7 @@ export class ChangeJudicaryForHearingsAction implements Action {
     public payload: {
       hearings: HearingWithSelectedCourtCentre[];
       judiciary: ExtendedJudicialRole[];
-      johSource?: string;
+      judiciaryAssignmentSource?: JudiciaryAssignmentSource;
     }
   ) {}
 }
@@ -269,7 +270,7 @@ export class ChangeJudicaryForHearingsSuccessAction implements Action {
     public payload: {
       hearings: Hearing[];
       judiciary: ExtendedJudicialRole[];
-      johSource?: string;
+      judiciaryAssignmentSource?: JudiciaryAssignmentSource;
     }
   ) {}
 }

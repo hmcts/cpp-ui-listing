@@ -11,7 +11,8 @@ import {
   ExtendedJudicialRole,
   getCourtCentres,
   Hearing,
-  HearingWithSelectedCourtCentre
+  HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource
 } from '../../core';
 import { ChangeJudiciaryForHearingsFormComponent } from '../../edit-allocation/change-judiciary-for-hearings-form/change-judiciary-for-hearings-form.component';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
@@ -90,18 +91,18 @@ export class EditJudiciaryContainer implements OnInit {
   onChangeJudiciary({
     hearings,
     judiciary,
-    johSource
+    judiciaryAssignmentSource
   }: {
     hearings: HearingWithSelectedCourtCentre[];
     judiciary: ExtendedJudicialRole[];
-    johSource?: string;
+    judiciaryAssignmentSource?: JudiciaryAssignmentSource;
   }) {
     this.store.pipe(select(getCourtCalendarFilters), take(1)).subscribe(filterOptions => {
       this.store.dispatch(
         CourtCalendarActions.changeHearingsJudiciaryAction({
           hearings,
           judiciary: (judiciary ?? []).filter(judic => !!judic),
-          johSource,
+          judiciaryAssignmentSource,
           filterOptions: {
             ...filterOptions,
             courtRoomId: this.route.snapshot.queryParams.courtRoomId

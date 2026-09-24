@@ -9,7 +9,7 @@ import {
   Hearing
 } from '../../../core';
 import { DateRange } from '../../../shared/components/date-range/date-range';
-import { resolveJohSource } from '../../../core/util';
+import { resolveJudiciaryAssignmentSource } from '../../../core/util';
 import { AllocateHearingFactory } from '../../utils/allocate-hearing.factory';
 import { CourtSession, HearingSlot } from '@cpp/scheduling';
 import { ChangeHearingDetailsCrownControlComponent } from './change-hearing-details-crown-control/change-hearing-details-crown-control.component';
@@ -100,7 +100,7 @@ export class ChangeHearingDetailsComponent {
       this.selectedJudiciary
     );
 
-    updatedHearing.johSource = resolveJohSource(
+    updatedHearing.judiciaryAssignmentSource = resolveJudiciaryAssignmentSource(
       selectedHearing.jurisdictionType,
       this.selectedJudiciary
     );

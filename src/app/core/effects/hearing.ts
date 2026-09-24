@@ -243,7 +243,7 @@ export class HearingEffects {
                     priority: updatedHearing.priority,
                     specialRequirements: updatedHearing.specialRequirements,
                     sendNotificationToParties: updatedHearing.sendNotificationToParties,
-                    johSource: updatedHearing.johSource
+                    judiciaryAssignmentSource: updatedHearing.judiciaryAssignmentSource
                   },
                   splitHearingUnallocated
                 ),
@@ -554,7 +554,7 @@ export class HearingEffects {
     this.actions$.pipe(
       ofType(HearingActions.CHANGE_JUDICIARY_FOR_HEARINGS_ACTION),
       switchMap((action: ChangeJudicaryForHearingsAction) => {
-        const { hearings, judiciary: judiciaries, johSource } = action.payload;
+        const { hearings, judiciary: judiciaries, judiciaryAssignmentSource } = action.payload;
 
         const permissionHandler$ = this.permissionsHandlerForJudiciaries(hearings, judiciaries);
 
@@ -569,7 +569,7 @@ export class HearingEffects {
             hearings: hearings.map(h => h.id),
             judiciary:
               judiciaries && judiciaries.map(({ judicialMember, ...rest }) => rest as JudicialRole),
-            johSource
+            judiciaryAssignmentSource
           }),
           permissionHandler$,
           notificationHandler$

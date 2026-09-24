@@ -11,6 +11,7 @@ import {
   Hearing,
   HearingWithSelectedCourtCentre,
   JudicialRole,
+  JudiciaryAssignmentSource,
   JudiciaryForHearings,
   Offence,
   SearchAvailableHearingsFormOptions,
@@ -167,7 +168,7 @@ export class ListingService {
       priority?: string;
       specialRequirements?: string[];
       sendNotificationToParties?: boolean;
-      johSource?: string;
+      judiciaryAssignmentSource?: JudiciaryAssignmentSource;
     },
     splitHearingUnallocated = false
   ): Observable<unknown> {
@@ -227,7 +228,7 @@ export class ListingService {
       priority: hearing.priority,
       specialRequirements: hearing.specialRequirements,
       sendNotificationToParties: hearing.sendNotificationToParties,
-      johSource: hearing.johSource
+      judiciaryAssignmentSource: hearing.judiciaryAssignmentSource
     };
     if (splitHearingUnallocated) {
       body.splitHearing = 'unallocated';
@@ -286,7 +287,7 @@ export class ListingService {
         publicListNote,
         hasVideoLink,
         sendNotificationToParties: hearing.sendNotificationToParties,
-        johSource: hearing.johSource
+        judiciaryAssignmentSource: hearing.judiciaryAssignmentSource
       }
     });
   }

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { ExtendedJudicialRole, JurisdictionType } from '../model';
+import { ExtendedJudicialRole, JudiciaryAssignmentSource, JurisdictionType } from '../model';
 
 /**
  * Flags a manual judiciary change so rota auto-assignment won't overwrite it.
@@ -9,10 +9,10 @@ import { ExtendedJudicialRole, JurisdictionType } from '../model';
  * @param selectedJudiciary - the user's edited judiciary selection, or
  *  `undefined` if the user made no change (not the same as an empty selection).
  */
-export function resolveJohSource(
+export function resolveJudiciaryAssignmentSource(
   jurisdictionType: JurisdictionType,
   selectedJudiciary: ExtendedJudicialRole[] | undefined
-): string | undefined {
+): JudiciaryAssignmentSource | undefined {
   if (jurisdictionType !== 'MAGISTRATES') {
     return undefined;
   }
@@ -20,7 +20,7 @@ export function resolveJohSource(
     return undefined;
   }
 
-  return 'MANUAL';
+  return JudiciaryAssignmentSource.MANUAL;
 }
 
 /**

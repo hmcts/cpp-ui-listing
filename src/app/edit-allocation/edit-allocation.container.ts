@@ -42,7 +42,12 @@ import {
   splitHearingUnallocated,
   UpdateAllocatedHearingAction
 } from '../core/';
-import { FilterOption, HearingSchedule, LastAllocatedHearing } from '../core/model/';
+import {
+  FilterOption,
+  HearingSchedule,
+  JudiciaryAssignmentSource,
+  LastAllocatedHearing
+} from '../core/model/';
 import { AppConfigService } from '../config';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DailyCourtRoomCalendarContainer } from '../daily-court-room-calendar/daily-court-room-calendar.container';
@@ -197,18 +202,18 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
   changeJudiciary({
     hearings,
     judiciary,
-    johSource
+    judiciaryAssignmentSource
   }: {
     hearings: HearingWithSelectedCourtCentre[];
     judiciary: ExtendedJudicialRole[];
-    johSource?: string;
+    judiciaryAssignmentSource?: JudiciaryAssignmentSource;
   }) {
     this.showJudiciaryForm = false;
     this.store.dispatch(
       new ChangeJudicaryForHearingsAction({
         hearings,
         judiciary: judiciary.filter(judic => !!judic),
-        johSource
+        judiciaryAssignmentSource
       })
     );
   }

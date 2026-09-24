@@ -102,7 +102,12 @@ export const changeJudiciaryForHearings = createEffect(
     actions$.pipe(
       ofType(CourtCalendarActions.changeHearingsJudiciaryAction),
       switchMap(action => {
-        const { hearings, judiciary: judiciaries, johSource, filterOptions } = action;
+        const {
+          hearings,
+          judiciary: judiciaries,
+          judiciaryAssignmentSource,
+          filterOptions
+        } = action;
         const courtRoom = filterOptions.courtCentre.courtrooms.find(
           cr => cr.id === filterOptions.courtRoomId
         );
@@ -117,7 +122,7 @@ export const changeJudiciaryForHearings = createEffect(
             hearings: hearings.map(h => h.id),
             judiciary:
               judiciaries && judiciaries.map(({ judicialMember, ...rest }) => rest as JudicialRole),
-            johSource
+            judiciaryAssignmentSource
           })
           .pipe(
             switchMap(() =>

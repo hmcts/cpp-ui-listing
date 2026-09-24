@@ -5,7 +5,8 @@ import {
   JudicialRoleType,
   Hearing,
   CourtCentre,
-  HearingWithSelectedCourtCentre
+  HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource
 } from '../../core';
 import {
   ValidationError,
@@ -18,7 +19,7 @@ import {
 } from '@cpp/pdk';
 import { FormsModule } from '@angular/forms';
 import { JudiciaryInputComponent } from '../../shared/components/judiciary-input/judiciary-input.component';
-import { resolveJohSource } from '../../core/util';
+import { resolveJudiciaryAssignmentSource } from '../../core/util';
 
 interface JudiciaryModel {
   judiciary: ExtendedJudicialRole[];
@@ -28,7 +29,7 @@ interface JudiciaryModel {
 interface ChangeJudiciary {
   hearings: HearingWithSelectedCourtCentre[];
   judiciary: ExtendedJudicialRole[];
-  johSource?: string;
+  judiciaryAssignmentSource?: JudiciaryAssignmentSource;
 }
 
 @Component({
@@ -72,7 +73,10 @@ export class ChangeJudiciaryForHearingsFormComponent implements OnChanges {
     const changedJudicary = {
       hearings: this.mapCourtCentresToHearings(this.hearings()),
       judiciary: this.selectedJudiciary ?? this.data?.judiciary ?? [],
-      johSource: resolveJohSource(this.hearings()?.[0]?.jurisdictionType, this.selectedJudiciary)
+      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(
+        this.hearings()?.[0]?.jurisdictionType,
+        this.selectedJudiciary
+      )
     };
 
     this.onSubmit.emit(changedJudicary);

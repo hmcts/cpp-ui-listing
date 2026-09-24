@@ -12,7 +12,8 @@ import {
   CourtCentre,
   ExtendedJudicialRole,
   Hearing,
-  HearingWithSelectedCourtCentre
+  HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource
 } from '../../../core';
 import {
   courtCentreId1,
@@ -716,8 +717,8 @@ describe('HearingDetailsFormComponent', () => {
     expect(component.onValidationError.emit).toHaveBeenCalledTimes(1);
   });
 
-  describe('johSource', () => {
-    it('should not set johSource when the judiciary selection is not changed', () => {
+  describe('judiciaryAssignmentSource', () => {
+    it('should not set judiciaryAssignmentSource when the judiciary selection is not changed', () => {
       fixture.detectChanges();
       spyOn(component.onSubmit, 'emit');
       makeStartTimeAndDurationDefaultForCourtCentre();
@@ -730,12 +731,12 @@ describe('HearingDetailsFormComponent', () => {
         updatedHearing: {
           ...expectedHearingWithDefaultStartTimeAndDuration,
           jurisdictionType: 'MAGISTRATES',
-          johSource: undefined
+          judiciaryAssignmentSource: undefined
         }
       });
     });
 
-    it('should set johSource to MANUAL when the judiciary selection is changed', () => {
+    it('should set judiciaryAssignmentSource to MANUAL when the judiciary selection is changed', () => {
       fixture.detectChanges();
       spyOn(component.onSubmit, 'emit');
       makeStartTimeAndDurationDefaultForCourtCentre();
@@ -753,12 +754,12 @@ describe('HearingDetailsFormComponent', () => {
           ...expectedHearingWithDefaultStartTimeAndDuration,
           jurisdictionType: 'MAGISTRATES',
           judiciary: selectedJudiciary,
-          johSource: 'MANUAL'
+          judiciaryAssignmentSource: JudiciaryAssignmentSource.MANUAL
         }
       });
     });
 
-    it('should not set johSource when all judiciary are unchecked', () => {
+    it('should not set judiciaryAssignmentSource when all judiciary are unchecked', () => {
       fixture.detectChanges();
       spyOn(component.onSubmit, 'emit');
       makeStartTimeAndDurationDefaultForCourtCentre();
@@ -773,7 +774,7 @@ describe('HearingDetailsFormComponent', () => {
           ...expectedHearingWithDefaultStartTimeAndDuration,
           jurisdictionType: 'MAGISTRATES',
           judiciary: [],
-          johSource: undefined
+          judiciaryAssignmentSource: undefined
         }
       });
     });
