@@ -219,6 +219,11 @@
           "firstName": "TEST FIRST",
           "isRespondent": false
         },
+        "subject": {
+          "lastName": "SUBJECT LAST",
+          "firstName": "SUBJECT FIRST",
+          "isRespondent": false
+        },
         "respondents": [
           {
             "lastName": "PARTY LAST NAME",

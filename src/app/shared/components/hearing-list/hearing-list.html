@@ -199,7 +199,7 @@
             }
             <td pdk-table-cell data-test-id="hearingType">{{ formatHearingType(hearing.type) }}</td>
             <td pdk-table-cell pdk-typography="heading-small">
-              <div data-test-id="applicantName">{{ getStandaloneApplicantName(application) }}</div>
+              <div data-test-id="subjectName">{{ getStandaloneSubjectName(application) }}</div>
               <div>
                 <a
                   pdk-link
@@ -237,10 +237,10 @@
                 pdk-link
                 (click)="allocate(hearing)"
                 href="javascript:void(0);"
-                attr.aria-label="Allocate Hearing for {{ getStandaloneApplicantName(application) }}"
+                attr.aria-label="Allocate Hearing for {{ getStandaloneSubjectName(application) }}"
                 >Allocate
                 <span pdk-visually-hidden>
-                  hearing for {{ getStandaloneApplicantName(application) }}</span
+                  hearing for {{ getStandaloneSubjectName(application) }}</span
                 ></a
               >
             </td>
