@@ -162,7 +162,7 @@ exports[`DownloadListComponent judge list should NOT show when week commencing i
                   class="govuk-body-m"
                   pdk-typography="body"
                 >
-                  Share warn list
+                  Share advance list
                 </span>
               </button>
               <span
