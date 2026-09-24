@@ -59,8 +59,8 @@ describe('HearingListComponent', () => {
   it('should render the standalone application details', () => {
     const hearing = mockData[2];
     expect(component.isStandaloneApplication(hearing)).toBe(true);
-    expect(component.getStandaloneApplicantName(hearing.courtApplications[0])).toEqual(
-      'TEST FIRST TEST LAST'
+    expect(component.getStandaloneSubjectName(hearing.courtApplications[0])).toEqual(
+      'SUBJECT FIRST SUBJECT LAST'
     );
     expect(component.getStandaloneRespondentNames(hearing.courtApplications[0])).toEqual([
       'PARTY FIRST NAME PARTY LAST NAME'

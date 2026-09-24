@@ -74,24 +74,24 @@
 
       @for (
         application of unscheduledHearingsForApplications();
-        track application.applicationDetails.applicant.id
+        track application.applicationDetails.subject.id
       ) {
         <tbody pdk-table-body class="hearing-body">
           <ng-container>
             <tr
               pdk-table-row
-              id="defendant-{{ application.applicationDetails.applicant.id }}"
-              attr.name="{{ application.applicationDetails.applicant.id }}"
+              id="defendant-{{ application.applicationDetails.subject.id }}"
+              attr.name="{{ application.applicationDetails.subject.id }}"
               style="vertical-align: top"
             >
               <td
                 data-test-id="partyName"
                 pdk-table-cell
                 width="20%"
-                attr.data-defendant-id="defendant-{{ application.applicationDetails.applicant.id }}"
+                attr.data-defendant-id="defendant-{{ application.applicationDetails.subject.id }}"
               >
-                {{ application.applicationDetails.applicant?.firstName }}
-                {{ application.applicationDetails.applicant?.lastName }}
+                {{ application.applicationDetails.subject?.firstName }}
+                {{ application.applicationDetails.subject?.lastName }}
               </td>
               <td pdk-table-cell width="20%">-</td>
               <td data-test-id="hearingReference" pdk-table-cell width="20%">
@@ -102,10 +102,8 @@
                   data-test-id="hearingReference"
                   target="_blank"
                   attr.aria-label="View application details  of {{
-                    application.applicationDetails.applicant?.firstName
-                  }} {{ application.applicationDetails.applicant?.lastName }} – {{
-                    application.urn
-                  }}"
+                    application.applicationDetails.subject?.firstName
+                  }} {{ application.applicationDetails.subject?.lastName }} – {{ application.urn }}"
                   href="{{ baseUrl() }}/prosecution-casefile/application-at-a-glance/{{
                     application.applicationDetails.id
                   }}"
@@ -127,8 +125,8 @@
                           href="javascript:void(0);"
                           pdk-margin-left="2"
                           attr.aria-label="Allocate hearing for {{
-                            application.applicationDetails.applicant?.firstName
-                          }} {{ application.applicationDetails.applicant?.lastName }} – {{
+                            application.applicationDetails.subject?.firstName
+                          }} {{ application.applicationDetails.subject?.lastName }} – {{
                             hearingDetails?.typeOfList?.description
                           }}"
                         >
