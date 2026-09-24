@@ -26,6 +26,17 @@ export interface JudicialRole {
   isBenchChairman?: boolean;
 }
 
+export type HearingTier =
+  | 'TIER_1'
+  | 'TIER_2'
+  | 'TIER_3'
+  | 'TIER_4'
+  | 'TIER_5'
+  | 'TIER_6'
+  | 'TIER_7';
+
+export type HearingListType = 'TYPE_1_FIXED' | 'TYPE_2_FLEXIBLE';
+
 export interface Hearing {
   id: string;
   type: HearingType;
@@ -70,6 +81,9 @@ export interface Hearing {
   hearingDayCount?: number;
   hearingDayPosition?: number;
   resulted?: boolean;
+  tier?: HearingTier;
+  listType?: HearingListType;
+  keyReason?: string;
 }
 
 export interface HearingWithSelectedCourtCentre extends Hearing {

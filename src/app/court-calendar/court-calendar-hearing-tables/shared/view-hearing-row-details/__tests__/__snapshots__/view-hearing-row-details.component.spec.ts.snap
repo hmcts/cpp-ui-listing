@@ -9,9 +9,11 @@ exports[`ViewHearingRowDetailsComponent should create the component 1`] = `
   custodyDefendants={[Function Array]}
   getCaseNotes={[Function OutputEmitterRef]}
   hearing={[Function Function]}
+  listTypeLabel={[Function Function]}
   listedCase={[Function Object]}
   offences={[Function Function]}
   publicListNote={[Function Function]}
+  tierLabel={[Function Function]}
   updateHearingPublicListNote={[Function OutputEmitterRef]}
 >
   <h2
@@ -404,6 +406,76 @@ exports[`ViewHearingRowDetailsComponent should create the component 1`] = `
               <span>
                 Yes
               </span>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                Tier
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                Tier 7
+              </span>
+            </dd>
+          </div>
+          <div
+            class="pdk-!-border-color-dark-grey govuk-!-margin-bottom-3 govuk-!-margin-left-0 govuk-!-margin-right-0 govuk-!-padding-bottom-2 govuk-grid-row"
+            container=""
+            pdk-border-colour="dark-grey"
+            pdk-grid=""
+            pdk-margin-bottom="3"
+            pdk-margin-horizontal="0"
+            pdk-padding-bottom="2"
+          >
+            <dt
+              class="govuk-!-padding-left-0 govuk-grid-column-one-third"
+              one-third=""
+              pdk-grid=""
+              pdk-padding-left="0"
+            >
+              <b>
+                List type
+              </b>
+            </dt>
+            <dd
+              class="govuk-!-margin-left-0 govuk-!-padding-left-0 govuk-grid-column-two-thirds"
+              pdk-grid=""
+              pdk-margin-left="0"
+              pdk-padding-left="0"
+              two-thirds=""
+            >
+              <span>
+                Type 1 (1F)
+              </span>
+              <div>
+                <span>
+                  Reason: 
+                </span>
+                <span>
+                  Vulnerable witness
+                </span>
+              </div>
             </dd>
           </div>
         </dl>
