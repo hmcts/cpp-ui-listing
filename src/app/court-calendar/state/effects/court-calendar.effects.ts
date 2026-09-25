@@ -342,11 +342,14 @@ export const allocateSelectedHearingSlotsEffect = createEffect(
             ]
           );
           return forkJoin([
-            listingService.allocateHearing({
-              ...payload,
-              hearingId: selectedHearing.id,
-              prosecutionCases: getAllocateProsecutionCases(listedCases)
-            }),
+            listingService.allocateHearing(
+              {
+                ...payload,
+                hearingId: selectedHearing.id,
+                prosecutionCases: getAllocateProsecutionCases(listedCases)
+              },
+              true
+            ),
             notificationAndPermissionHandler$
           ]).pipe(
             switchMap(() => [

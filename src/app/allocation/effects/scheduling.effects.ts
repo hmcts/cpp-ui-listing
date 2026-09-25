@@ -21,7 +21,6 @@ import {
   AppState,
   getReferenceDataHearingTypes,
   getScheduledHearingForAllocation,
-  hasSplitHearingFromUnallocated,
   HearingSlotJudiciary,
   JudicialRole,
   JudiciaryGroupMapType,
@@ -41,7 +40,7 @@ export class SchedulingEffects {
   allocateHearing$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AllocationActions.allocateHearing),
-      withLatestFrom(this.store, this.store.select(hasSplitHearingFromUnallocated)),
+      withLatestFrom(this.store),
       switchMap(
         ([
           {
@@ -49,10 +48,10 @@ export class SchedulingEffects {
             hearingType: selectedHearingType,
             filters = {},
             redirectTo,
-            sendNotificationToParties
+            sendNotificationToParties,
+            isSplit = false
           },
-          state,
-          splitHearingUnallocated
+          state
         ]) => {
           function getCourtCentreIdByOuCode(ouCode: string, units: OrganisationUnit[]): string {
             const matchedUnit = units.find(unit => unit.oucode === ouCode);
@@ -190,7 +189,7 @@ export class SchedulingEffects {
                 ...dates,
                 ...filters
               },
-              splitHearingUnallocated
+              isSplit
             )
             .pipe(
               mapTo(new AllocateHearingMagsAction({ hearingSlotAllocations })),

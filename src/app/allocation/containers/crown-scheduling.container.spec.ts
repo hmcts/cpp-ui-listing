@@ -255,7 +255,36 @@ describe('CrownSchedulingContainer', () => {
         hearingSlotAllocations,
         filters: filtersForCrownAllocateSearch(searchParams),
         redirectTo: ['/unallocated'],
-        sendNotificationToParties: false
+        sendNotificationToParties: false,
+        isSplit: false
+      })
+    );
+  });
+
+  it('should dispatch allocateHearing with isSplit true when the split query param is present', () => {
+    activatedRoute.snapshot.queryParams = {
+      isUnscheduled: false,
+      courtId: 'COURT004',
+      split: 'true'
+    };
+    const scheduling = fixture.debugElement.query(By.css('crown-scheduling'));
+    const hearingSlotAllocations = [
+      {
+        hearingSlotTime: new Date().toISOString(),
+        hearingSlot: { courtScheduleId: '*' }
+      }
+    ] as HearingSlotAllocation[];
+
+    scheduling.componentInstance.hearingSlotAllocationsSubmit.emit({ hearingSlotAllocations });
+
+    expect(store.dispatch).toHaveBeenCalledWith(
+      allocateHearing({
+        hearingId: 'HEARING1',
+        hearingSlotAllocations,
+        filters: filtersForCrownAllocateSearch(searchParams),
+        redirectTo: ['/unallocated'],
+        sendNotificationToParties: false,
+        isSplit: true
       })
     );
   });

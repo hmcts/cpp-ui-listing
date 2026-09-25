@@ -1,4 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
@@ -8,7 +10,7 @@ import * as effects from '../court-calendar.effects';
 import { ApiError, ListingService } from '../../../../core';
 
 import { mockSearchFormValues, mockCourtCalendarState } from '../../../utils/mocks';
-import { loadListingNotes, resetHearingSlots } from '@cpp/scheduling';
+import { loadListingNotes, resetHearingSlots, HearingSlotAllocation } from '@cpp/scheduling';
 
 let searchCourtCalendarHearings: jest.Mock;
 let sequenceHearingSync: jest.Mock;
@@ -128,6 +130,104 @@ describe('CourtCalendar', () => {
       actions$ = hot('-a-', { a: action });
       const expected$ = cold('--b', { b: expectedAction });
       expect(effects.setCaseNotesEffect(actions$, listingService)).toBeObservable(expected$);
+    });
+  });
+
+  describe('allocateSelectedHearingSlotsEffect', () => {
+    let allocateHearing: jest.Mock;
+    let navigate: jest.Mock;
+    let store: Store;
+
+    const selectedHearing = {
+      id: 'hearingId',
+      type: { id: 'typeId', description: 'First hearing' },
+      hearingLanguage: 'ENGLISH',
+      judiciary: [],
+      nonSittingDays: [],
+      publicListNote: '',
+      hasVideoLink: false,
+      listedCases: []
+    };
+
+    const hearingSlotAllocations = [
+      {
+        hearingSlotTime: '2020-01-01T09:00:00.000Z',
+        duration: 30,
+        hearingSlot: {
+          courtHouseId: 'courtCentreId',
+          courtRoomId: 'courtRoomId',
+          courtRoomNumber: 2900,
+          courtScheduleId: 'A',
+          courtSession: 'AM',
+          ouCode: 'WESTMINSTER',
+          sessionDate: '2020-01-01'
+        }
+      }
+    ] as HearingSlotAllocation[];
+
+    beforeEach(() => {
+      allocateHearing = jest.fn();
+      navigate = jest.fn();
+
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [
+          provideMockActions(() => actions$),
+          provideMockStore({
+            initialState: {
+              [COURT_CALENDAR_FEATURE_KEY]: { ...mockCourtCalendarState, selectedHearing },
+              referenceData: {
+                organisationUnits: [
+                  { id: 'courtCentreId', oucode: 'WESTMINSTER', oucodeL1Code: 'B' }
+                ],
+                hearingTypes: []
+              },
+              scheduling: { allocation: { params: {} } }
+            }
+          }),
+          { provide: ListingService, useValue: { allocateHearing } },
+          { provide: Router, useValue: { navigate } }
+        ]
+      });
+
+      listingService = TestBed.inject(ListingService);
+      store = TestBed.inject(Store);
+    });
+
+    it('should call listingService.allocateHearing with isSplit true and navigate to court-calendar on success', () => {
+      const action = CourtCalendarActions.allocateSelectedHearingSlots({
+        hearingSlotAllocations,
+        sendNotificationToParties: true
+      });
+
+      const response$ = cold('-a|', { a: {} });
+      const expected$ = cold('---(abc)', {
+        a: CourtCalendarActions.updateSplitHearingDataSuccess(),
+        b: CourtCalendarActions.setAlertMessage({
+          successAlert: 'The split hearing has been allocated.'
+        }),
+        c: CourtCalendarActions.setSelectedHearingData({ selectedHearing: null })
+      });
+
+      allocateHearing.mockReturnValueOnce(response$);
+      actions$ = hot('-a-', { a: action });
+
+      expect(
+        effects.allocateSelectedHearingSlotsEffect(actions$, store, listingService, {
+          navigate
+        } as unknown as Router)
+      ).toBeObservable(expected$);
+
+      expect(allocateHearing).toHaveBeenCalledWith(
+        expect.objectContaining({
+          hearingId: selectedHearing.id,
+          courtCentreId: 'courtCentreId',
+          courtRoomId: 'courtRoomId',
+          jurisdictionType: 'MAGISTRATES',
+          prosecutionCases: undefined
+        }),
+        true
+      );
     });
   });
 });

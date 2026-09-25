@@ -11,5 +11,6 @@ export const allocateHearing = createAction(
     filters?: AllocateHearingFilters;
     redirectTo: string[];
     sendNotificationToParties: boolean;
+    isSplit?: boolean;
   }>()
 );

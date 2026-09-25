@@ -413,6 +413,25 @@ describe('Scheduling effects', () => {
       );
     });
 
+    it('should call listingService.allocateHearing with isSplit true when the action payload has isSplit set', () => {
+      const splitAllocateHearing = { ...allocateHearing, isSplit: true };
+      splitAllocateHearing.sendNotificationToParties = true;
+      const allocateHearingAction = new AllocateHearingMagsAction({
+        hearingSlotAllocations: splitAllocateHearing.hearingSlotAllocations
+      });
+
+      actions$ = hot(' -a-----', { a: splitAllocateHearing });
+      const allocate$ = cold(' -(b|)');
+      const expected$ = cold('--(x)', {
+        x: allocateHearingAction
+      });
+
+      listingService.allocateHearing = jest.fn().mockReturnValueOnce(allocate$);
+
+      expect(effects.allocateHearing$).toBeObservable(expected$);
+      expect(listingService.allocateHearing).toHaveBeenCalledWith(expect.anything(), true);
+    });
+
     it('should allocate a magistrates hearing with WESTMINSTER allocation set to a duration of 1 when there are no matching hearing types', () => {
       store.dispatch(ReferenceDataActions.loadHearingTypesSuccess({ hearingTypes: [] }));
       const allocateHearingAction = new AllocateHearingMagsAction({
