@@ -1,14 +1,22 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PdkCore, PdkGrid, PdkInsetTextComponent, ValidationError } from '@cpp/pdk';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { PdkInsetTextComponent, PdkCore, PdkGrid, ValidationError } from '@cpp/pdk';
-import { AsyncPipe } from '@angular/common';
-import { AppState, CourtCentre, Hearing, getCourtCentres } from '../../core';
-import { CourtCalendarActions, getCourtCalendarFilters } from '../state';
+import {
+  AppState,
+  CourtCentre,
+  ExtendedJudicialRole,
+  getCourtCentres,
+  Hearing,
+  HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource
+} from '../../core';
 import { ChangeJudiciaryForHearingsFormComponent } from '../../edit-allocation/change-judiciary-for-hearings-form/change-judiciary-for-hearings-form.component';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
+import { CourtCalendarActions, getCourtCalendarFilters } from '../state';
 
 @Component({
   selector: 'edit-judiciary-container',
@@ -77,15 +85,24 @@ export class EditJudiciaryContainer implements OnInit {
   }
 
   ngOnInit(): void {
-    this.allocatedHearings$ = this.route.data.pipe(map((data) => data['allocatedHearings']));
+    this.allocatedHearings$ = this.route.data.pipe(map(data => data['allocatedHearings']));
   }
 
-  onChangeJudiciary({ hearings, judiciary }) {
-    this.store.pipe(select(getCourtCalendarFilters), take(1)).subscribe((filterOptions) => {
+  onChangeJudiciary({
+    hearings,
+    judiciary,
+    judiciaryAssignmentSource
+  }: {
+    hearings: HearingWithSelectedCourtCentre[];
+    judiciary: ExtendedJudicialRole[];
+    judiciaryAssignmentSource?: JudiciaryAssignmentSource;
+  }) {
+    this.store.pipe(select(getCourtCalendarFilters), take(1)).subscribe(filterOptions => {
       this.store.dispatch(
         CourtCalendarActions.changeHearingsJudiciaryAction({
           hearings,
-          judiciary: (judiciary ?? []).filter((judic) => !!judic),
+          judiciary: (judiciary ?? []).filter(judic => !!judic),
+          judiciaryAssignmentSource,
           filterOptions: {
             ...filterOptions,
             courtRoomId: this.route.snapshot.queryParams.courtRoomId

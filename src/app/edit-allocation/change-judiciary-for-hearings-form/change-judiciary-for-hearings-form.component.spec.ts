@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { CourtCentre, Hearing } from '../../core/';
+import { CourtCentre, ExtendedJudicialRole, Hearing, JudiciaryAssignmentSource } from '../../core/';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ChangeJudiciaryForHearingsFormComponent } from './change-judiciary-for-hearings-form.component';
 import { courtCentresMock, validHearingMock1 } from '../../../mock-data/test-fixtures';
@@ -69,5 +69,48 @@ describe('ChangeJudiciaryForHearingsFormComponent', () => {
 
       expect(component.onSubmit.emit).toHaveBeenCalled();
     }));
+  });
+
+  describe('judiciaryAssignmentSource', () => {
+    it('should not set judiciaryAssignmentSource when the judiciary selection is not changed', () => {
+      spyOn(component.onSubmit, 'emit');
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([validHearingMock1]),
+        judiciary: component.data.judiciary,
+        judiciaryAssignmentSource: undefined
+      });
+    });
+
+    it('should set judiciaryAssignmentSource to MANUAL when the judiciary selection is changed', () => {
+      spyOn(component.onSubmit, 'emit');
+      const selectedJudiciary: ExtendedJudicialRole[] = [
+        { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
+      ];
+      component.selectedJudiciary = selectedJudiciary;
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([validHearingMock1]),
+        judiciary: selectedJudiciary,
+        judiciaryAssignmentSource: JudiciaryAssignmentSource.MANUAL
+      });
+    });
+
+    it('should not set judiciaryAssignmentSource when all judiciary are unchecked', () => {
+      spyOn(component.onSubmit, 'emit');
+      component.selectedJudiciary = [];
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([validHearingMock1]),
+        judiciary: [],
+        judiciaryAssignmentSource: undefined
+      });
+    });
   });
 });

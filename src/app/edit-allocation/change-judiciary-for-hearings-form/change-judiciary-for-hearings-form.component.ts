@@ -5,7 +5,8 @@ import {
   JudicialRoleType,
   Hearing,
   CourtCentre,
-  HearingWithSelectedCourtCentre
+  HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource
 } from '../../core';
 import {
   ValidationError,
@@ -18,6 +19,7 @@ import {
 } from '@cpp/pdk';
 import { FormsModule } from '@angular/forms';
 import { JudiciaryInputComponent } from '../../shared/components/judiciary-input/judiciary-input.component';
+import { resolveJudiciaryAssignmentSource } from '../../core/util';
 
 interface JudiciaryModel {
   judiciary: ExtendedJudicialRole[];
@@ -25,8 +27,9 @@ interface JudiciaryModel {
 }
 
 interface ChangeJudiciary {
-  hearings: Hearing[];
+  hearings: HearingWithSelectedCourtCentre[];
   judiciary: ExtendedJudicialRole[];
+  judiciaryAssignmentSource?: JudiciaryAssignmentSource;
 }
 
 @Component({
@@ -53,12 +56,12 @@ export class ChangeJudiciaryForHearingsFormComponent implements OnChanges {
   readonly onValidationError = output<ValidationError[]>();
 
   data: JudiciaryModel = { judiciary: [], judicialRoleType: null };
-  selectedJudiary: ExtendedJudicialRole[];
+  selectedJudiciary: ExtendedJudicialRole[];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hearings?.currentValue?.length > 0) {
       const [firstHearing] = changes.hearings?.currentValue as Hearing[];
-      const judiciary = [...(firstHearing.judiciary ?? [])].filter((judic) => !!judic); // this is to handle gaps in magistrates (eg Winger 2 present but not Winger 1, etc)
+      const judiciary = [...(firstHearing.judiciary ?? [])].filter(judic => !!judic); // this is to handle gaps in magistrates (eg Winger 2 present but not Winger 1, etc)
       this.data = {
         judiciary,
         judicialRoleType: judiciary[0] ? judiciary[0].judicialRoleType : null
@@ -69,7 +72,11 @@ export class ChangeJudiciaryForHearingsFormComponent implements OnChanges {
   submit() {
     const changedJudicary = {
       hearings: this.mapCourtCentresToHearings(this.hearings()),
-      judiciary: this.selectedJudiary ?? this.data?.judiciary ?? []
+      judiciary: this.selectedJudiciary ?? this.data?.judiciary ?? [],
+      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(
+        this.hearings()?.[0]?.jurisdictionType,
+        this.selectedJudiciary
+      )
     };
 
     this.onSubmit.emit(changedJudicary);
@@ -81,8 +88,8 @@ export class ChangeJudiciaryForHearingsFormComponent implements OnChanges {
   }
 
   mapCourtCentresToHearings(hearings: Hearing[]): HearingWithSelectedCourtCentre[] {
-    return hearings.map((hearing) => {
-      const selectedCourtCentre = this.courtCentres().find((cc) => cc.id === hearing.courtCentreId);
+    return hearings.map(hearing => {
+      const selectedCourtCentre = this.courtCentres().find(cc => cc.id === hearing.courtCentreId);
       return {
         ...hearing,
         selectedCourtCentre: {
