@@ -4,6 +4,8 @@ export const COURT_CALENDAR_ALERTS = {
   ALLOCATE_TOTAL_FAILURE: 'Hearings could not be allocated. Try again.',
   UNALLOCATE_SUCCESS: 'Hearing(s) have been successfully unallocated.',
   UNALLOCATE_TOTAL_FAILURE: 'Hearings could not be unallocated. Try again.',
+  NO_SESSIONS_FOR_HEARING_CHANGE:
+    'There are no sessions to move this hearing, please create sessions with this date and courtroom.',
 
   resolveEndDateChange(previousEndDate: string, newEndDate: string): { successAlert: string } {
     return {

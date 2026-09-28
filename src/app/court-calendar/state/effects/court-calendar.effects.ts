@@ -19,6 +19,7 @@ import {
   getAllocateProsecutionCases,
   mapResponseToPaginatedHearingMap
 } from '../../utils/court-calendar-hearings-helper';
+import { COURT_CALENDAR_ALERTS } from '../../utils/court-calendar-alert-messages';
 import {
   getSearchParams,
   isMagistratesCourt,
@@ -179,7 +180,16 @@ export const updateSelectedHearingEffect = createEffect(
           tap(() => {
             router.navigate(['/court-calendar']);
           }),
-          catchError(err => of(new ApiError(err)))
+          catchError((httpError: HttpErrorResponse) => {
+            if (httpError.status === 422 && originHearing.jurisdictionType === 'CROWN') {
+              return of(
+                CourtCalendarActions.setAlertMessage({
+                  failureAlert: COURT_CALENDAR_ALERTS.NO_SESSIONS_FOR_HEARING_CHANGE
+                })
+              );
+            }
+            return of(new ApiError(httpError));
+          })
         );
       })
     ),
