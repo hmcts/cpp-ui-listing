@@ -1,6 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
@@ -10,7 +8,7 @@ import * as effects from '../court-calendar.effects';
 import { ApiError, ListingService } from '../../../../core';
 
 import { mockSearchFormValues, mockCourtCalendarState } from '../../../utils/mocks';
-import { loadListingNotes, resetHearingSlots, HearingSlotAllocation } from '@cpp/scheduling';
+import { loadListingNotes, resetHearingSlots } from '@cpp/scheduling';
 
 let searchCourtCalendarHearings: jest.Mock;
 let sequenceHearingSync: jest.Mock;
@@ -133,101 +131,58 @@ describe('CourtCalendar', () => {
     });
   });
 
-  describe('allocateSelectedHearingSlotsEffect', () => {
-    let allocateHearing: jest.Mock;
-    let navigate: jest.Mock;
-    let store: Store;
+  describe('updateSelectedHearingEffect', () => {
+    const noAvailabilityError = { status: 422 };
+    const router = { navigate: jest.fn() } as any;
+    const runEffect = () =>
+      effects.updateSelectedHearingEffect(actions$ as any, listingService, router);
+    const hearingFor = (jurisdictionType: string) =>
+      ({ id: 'hearing-1', jurisdictionType, judiciary: [] }) as any;
 
-    const selectedHearing = {
-      id: 'hearingId',
-      type: { id: 'typeId', description: 'First hearing' },
-      hearingLanguage: 'ENGLISH',
-      judiciary: [],
-      nonSittingDays: [],
-      publicListNote: '',
-      hasVideoLink: false,
-      listedCases: []
-    };
-
-    const hearingSlotAllocations = [
-      {
-        hearingSlotTime: '2020-01-01T09:00:00.000Z',
-        duration: 30,
-        hearingSlot: {
-          courtHouseId: 'courtCentreId',
-          courtRoomId: 'courtRoomId',
-          courtRoomNumber: 2900,
-          courtScheduleId: 'A',
-          courtSession: 'AM',
-          ouCode: 'WESTMINSTER',
-          sessionDate: '2020-01-01'
-        }
-      }
-    ] as HearingSlotAllocation[];
-
-    beforeEach(() => {
-      allocateHearing = jest.fn();
-      navigate = jest.fn();
-
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        providers: [
-          provideMockActions(() => actions$),
-          provideMockStore({
-            initialState: {
-              [COURT_CALENDAR_FEATURE_KEY]: { ...mockCourtCalendarState, selectedHearing },
-              referenceData: {
-                organisationUnits: [
-                  { id: 'courtCentreId', oucode: 'WESTMINSTER', oucodeL1Code: 'B' }
-                ],
-                hearingTypes: []
-              },
-              scheduling: { allocation: { params: {} } }
-            }
-          }),
-          { provide: ListingService, useValue: { allocateHearing } },
-          { provide: Router, useValue: { navigate } }
-        ]
+    it('should raise a no sessions failure alert instead of an ApiError for a Crown hearing', () => {
+      updateAllocatedHearing.mockReturnValue(cold('-#', {}, noAvailabilityError));
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateSelectedHearingData({
+          originHearing: hearingFor('CROWN'),
+          updatedHearing: hearingFor('CROWN')
+        })
       });
 
-      listingService = TestBed.inject(ListingService);
-      store = TestBed.inject(Store);
+      expect(runEffect()).toBeObservable(
+        cold('--b', {
+          b: CourtCalendarActions.setAlertMessage({
+            failureAlert:
+              'There are no sessions to move this hearing, please create sessions with this date and courtroom.'
+          })
+        })
+      );
     });
 
-    it('should call listingService.allocateHearing with isSplit true and navigate to court-calendar on success', () => {
-      const action = CourtCalendarActions.allocateSelectedHearingSlots({
-        hearingSlotAllocations,
-        sendNotificationToParties: true
+    it('should dispatch ApiError for no availability on a non-Crown hearing', () => {
+      updateAllocatedHearing.mockReturnValue(cold('-#', {}, noAvailabilityError));
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateSelectedHearingData({
+          originHearing: hearingFor('MAGISTRATES'),
+          updatedHearing: hearingFor('MAGISTRATES')
+        })
       });
 
-      const response$ = cold('-a|', { a: {} });
-      const expected$ = cold('---(abc)', {
-        a: CourtCalendarActions.updateSplitHearingDataSuccess(),
-        b: CourtCalendarActions.setAlertMessage({
-          successAlert: 'The split hearing has been allocated.'
-        }),
-        c: CourtCalendarActions.setSelectedHearingData({ selectedHearing: null })
-      });
-
-      allocateHearing.mockReturnValueOnce(response$);
-      actions$ = hot('-a-', { a: action });
-
-      expect(
-        effects.allocateSelectedHearingSlotsEffect(actions$, store, listingService, {
-          navigate
-        } as unknown as Router)
-      ).toBeObservable(expected$);
-
-      expect(allocateHearing).toHaveBeenCalledWith(
-        expect.objectContaining({
-          hearingId: selectedHearing.id,
-          courtCentreId: 'courtCentreId',
-          courtRoomId: 'courtRoomId',
-          jurisdictionType: 'MAGISTRATES',
-          prosecutionCases: undefined
-        }),
-        true
+      expect(runEffect()).toBeObservable(
+        cold('--b', { b: new ApiError(noAvailabilityError as any) })
       );
+    });
+
+    it('should dispatch ApiError for any other failure on a Crown hearing', () => {
+      const error = { status: 500 };
+      updateAllocatedHearing.mockReturnValue(cold('-#', {}, error));
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateSelectedHearingData({
+          originHearing: hearingFor('CROWN'),
+          updatedHearing: hearingFor('CROWN')
+        })
+      });
+
+      expect(runEffect()).toBeObservable(cold('--b', { b: new ApiError(error as any) }));
     });
   });
 });

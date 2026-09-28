@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
 import { PdkErrorSummaryComponent, PdkCore, PdkGrid, ValidationError } from '@cpp/pdk';
 import { HearingType } from '@cpp/reference-data';
 import {
@@ -7,11 +7,12 @@ import {
 } from '../components/change-hearing-details.component';
 import { AllocatingHearingDetailsWithCourtCentre, getCourtCentres, Hearing } from '../../../core';
 import { Store } from '@ngrx/store';
-import { getSelectedHearing } from '../../state/selectors';
+import { getCourtCalendarAlert, getSelectedHearing } from '../../state/selectors';
 import { CourtCalendarActions } from '../../state';
 import { Router } from '@angular/router';
 import { getSearchResults } from '@cpp/scheduling';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
+import { CourtCalendarAlertComponent } from '../../components/court-calendar-alert.component';
 
 @Component({
   selector: 'change-hearing-details-container',
@@ -21,6 +22,12 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
         <back-button [linkUrl]="'../../'"></back-button>
         @if (errors()) {
           <pdk-error-summary focusOnChange="true" [errors]="errors()"> </pdk-error-summary>
+        }
+        @if (noSessionAvailableAlert()) {
+          <court-calendar-alert-panel
+            [alertEntity]="noSessionAvailableAlert()"
+            shouldFocus="true"
+          ></court-calendar-alert-panel>
         }
         <h1 pdk-typography="heading-large" pdk-margin-bottom="3" pdk-margin-top="2">
           Change Hearing Details
@@ -42,10 +49,11 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
     BackButtonComponent,
     PdkErrorSummaryComponent,
     PdkCore,
-    ChangeHearingDetailsComponent
+    ChangeHearingDetailsComponent,
+    CourtCalendarAlertComponent
   ]
 })
-export class ChangehearingDetailsContainer {
+export class ChangehearingDetailsContainer implements OnDestroy {
   private readonly store = inject(Store);
   private readonly route = inject(Router);
   private readonly courtCentres = this.store.selectSignal(getCourtCentres);
@@ -57,6 +65,7 @@ export class ChangehearingDetailsContainer {
   );
   readonly initialValues = computed(() => this.getInitialValues(this.selectedHearing() as Hearing));
   readonly errors = signal<ValidationError[]>(null);
+  readonly noSessionAvailableAlert = this.store.selectSignal(getCourtCalendarAlert);
 
   updateHearing({ originHearing, updatedHearing }: AllocatingHearingDetailsWithCourtCentre): void {
     this.store.dispatch(
@@ -71,6 +80,12 @@ export class ChangehearingDetailsContainer {
 
   showValidationError(errors: ValidationError[]): void {
     this.errors.set(errors);
+  }
+
+  ngOnDestroy(): void {
+    if (this.noSessionAvailableAlert()?.failureAlert) {
+      this.store.dispatch(CourtCalendarActions.setAlertMessage({ failureAlert: undefined }));
+    }
   }
 
   private getInitialValues(selectedHearing: Hearing): ChangeHearingDetailsFormValues {

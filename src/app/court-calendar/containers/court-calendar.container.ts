@@ -237,6 +237,11 @@ export class CourtCalendarContainer implements OnInit {
         this.store.dispatch(
           setAlertMessage(COURT_CALENDAR_ALERTS.resolveEndDateChange(previousEndDate, newEndDate))
         );
+      },
+      onError: () => {
+        this.store.dispatch(
+          setAlertMessage({ failureAlert: COURT_CALENDAR_ALERTS.NO_SESSIONS_FOR_HEARING_CHANGE })
+        );
       }
     });
   }
