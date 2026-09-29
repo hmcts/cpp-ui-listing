@@ -59,12 +59,21 @@ describe('HearingListComponent', () => {
   it('should render the standalone application details', () => {
     const hearing = mockData[2];
     expect(component.isStandaloneApplication(hearing)).toBe(true);
-    expect(component.getStandaloneSubjectName(hearing.courtApplications[0])).toEqual(
+    expect(component.getStandalonePartyName(hearing.courtApplications[0])).toEqual(
       'SUBJECT FIRST SUBJECT LAST'
     );
     expect(component.getStandaloneRespondentNames(hearing.courtApplications[0])).toEqual([
       'PARTY FIRST NAME PARTY LAST NAME'
     ]);
+  });
+
+  it('should fall back to the applicant name when there is no subject', () => {
+    const application = {
+      ...mockData[2].courtApplications[0],
+      subject: undefined,
+      applicant: { firstName: 'APPLICANT FIRST', lastName: 'Applicant Last' }
+    };
+    expect(component.getStandalonePartyName(application)).toEqual('APPLICANT FIRST APPLICANT LAST');
   });
 
   it('should return the earliest custody time', () => {

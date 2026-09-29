@@ -51,12 +51,13 @@ export const getUnscheduledHearingsForAllApplications = createSelector(
       if ((hearing.courtApplications || []).length > 0) {
         hearing.courtApplications.forEach(application => {
           const newHearing = { ...hearing };
-          const { id, subject, applicationReference } = application;
+          const { id, subject, applicant, applicationReference } = application;
 
           const applicationData = {
             applicationDetails: {
               id,
-              subject
+              subject,
+              applicant
             },
             urn: applicationReference,
             hearings: [newHearing]
