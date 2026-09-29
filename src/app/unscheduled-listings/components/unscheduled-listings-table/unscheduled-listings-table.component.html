@@ -74,24 +74,26 @@
 
       @for (
         application of unscheduledHearingsForApplications();
-        track application.applicationDetails.subject.id
+        track application.applicationDetails.id
       ) {
+        @let party =
+          application.applicationDetails.subject ?? application.applicationDetails.applicant;
         <tbody pdk-table-body class="hearing-body">
           <ng-container>
             <tr
               pdk-table-row
-              id="defendant-{{ application.applicationDetails.subject.id }}"
-              attr.name="{{ application.applicationDetails.subject.id }}"
+              id="defendant-{{ party?.id }}"
+              attr.name="{{ party?.id }}"
               style="vertical-align: top"
             >
               <td
                 data-test-id="partyName"
                 pdk-table-cell
                 width="20%"
-                attr.data-defendant-id="defendant-{{ application.applicationDetails.subject.id }}"
+                attr.data-defendant-id="defendant-{{ party?.id }}"
               >
-                {{ application.applicationDetails.subject?.firstName }}
-                {{ application.applicationDetails.subject?.lastName }}
+                {{ party?.firstName }}
+                {{ party?.lastName }}
               </td>
               <td pdk-table-cell width="20%">-</td>
               <td data-test-id="hearingReference" pdk-table-cell width="20%">
@@ -101,9 +103,9 @@
                   pdk-typography="caption-medium"
                   data-test-id="hearingReference"
                   target="_blank"
-                  attr.aria-label="View application details  of {{
-                    application.applicationDetails.subject?.firstName
-                  }} {{ application.applicationDetails.subject?.lastName }} – {{ application.urn }}"
+                  attr.aria-label="View application details  of {{ party?.firstName }} {{
+                    party?.lastName
+                  }} – {{ application.urn }}"
                   href="{{ baseUrl() }}/prosecution-casefile/application-at-a-glance/{{
                     application.applicationDetails.id
                   }}"
@@ -124,11 +126,9 @@
                           pdk-link
                           href="javascript:void(0);"
                           pdk-margin-left="2"
-                          attr.aria-label="Allocate hearing for {{
-                            application.applicationDetails.subject?.firstName
-                          }} {{ application.applicationDetails.subject?.lastName }} – {{
-                            hearingDetails?.typeOfList?.description
-                          }}"
+                          attr.aria-label="Allocate hearing for {{ party?.firstName }} {{
+                            party?.lastName
+                          }} – {{ hearingDetails?.typeOfList?.description }}"
                         >
                           Allocate
                         </a>
