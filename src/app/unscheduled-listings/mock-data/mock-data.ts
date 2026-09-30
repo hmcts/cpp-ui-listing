@@ -163,6 +163,11 @@ export const mockResultTwo: UnscheduledHearingsForAllApplications[] = [
         lastName: 'SubjectLastName1',
         firstName: 'SubjectFirstName1',
         isRespondent: false
+      },
+      applicant: {
+        lastName: 'ApplicantLastName1',
+        firstName: 'ApplicantFirstName1',
+        isRespondent: false
       }
     },
     urn: 'Test-application-reference',
