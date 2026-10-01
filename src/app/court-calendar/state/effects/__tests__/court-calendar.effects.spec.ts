@@ -252,7 +252,7 @@ describe('CourtCalendar', () => {
         cold('--b', {
           b: CourtCalendarActions.setAlertMessage({
             failureAlert:
-              'There are no sessions to move this hearing, please create sessions with this date and courtroom.'
+              'There are no sessions in the required courtroom for one or more days of the hearing. Please create any missing sessions for the correct courtroom and all days of the hearing.'
           })
         })
       );
