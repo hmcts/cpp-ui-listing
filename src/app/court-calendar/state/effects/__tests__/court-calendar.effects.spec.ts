@@ -230,4 +230,59 @@ describe('CourtCalendar', () => {
       );
     });
   });
+
+  describe('updateSelectedHearingEffect', () => {
+    const noAvailabilityError = { status: 422 };
+    const router = { navigate: jest.fn() } as any;
+    const runEffect = () =>
+      effects.updateSelectedHearingEffect(actions$ as any, listingService, router);
+    const hearingFor = (jurisdictionType: string) =>
+      ({ id: 'hearing-1', jurisdictionType, judiciary: [] }) as any;
+
+    it('should raise a no sessions failure alert instead of an ApiError for a Crown hearing', () => {
+      updateAllocatedHearing.mockReturnValue(cold('-#', {}, noAvailabilityError));
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateSelectedHearingData({
+          originHearing: hearingFor('CROWN'),
+          updatedHearing: hearingFor('CROWN')
+        })
+      });
+
+      expect(runEffect()).toBeObservable(
+        cold('--b', {
+          b: CourtCalendarActions.setAlertMessage({
+            failureAlert:
+              'There are no sessions in the required courtroom for one or more days of the hearing. Please create any missing sessions for the correct courtroom and all days of the hearing.'
+          })
+        })
+      );
+    });
+
+    it('should dispatch ApiError for no availability on a non-Crown hearing', () => {
+      updateAllocatedHearing.mockReturnValue(cold('-#', {}, noAvailabilityError));
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateSelectedHearingData({
+          originHearing: hearingFor('MAGISTRATES'),
+          updatedHearing: hearingFor('MAGISTRATES')
+        })
+      });
+
+      expect(runEffect()).toBeObservable(
+        cold('--b', { b: new ApiError(noAvailabilityError as any) })
+      );
+    });
+
+    it('should dispatch ApiError for any other failure on a Crown hearing', () => {
+      const error = { status: 500 };
+      updateAllocatedHearing.mockReturnValue(cold('-#', {}, error));
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateSelectedHearingData({
+          originHearing: hearingFor('CROWN'),
+          updatedHearing: hearingFor('CROWN')
+        })
+      });
+
+      expect(runEffect()).toBeObservable(cold('--b', { b: new ApiError(error as any) }));
+    });
+  });
 });

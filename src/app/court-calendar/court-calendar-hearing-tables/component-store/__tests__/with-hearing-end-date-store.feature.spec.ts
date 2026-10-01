@@ -201,4 +201,21 @@ describe('withHearingEndDateStore', () => {
     expect(onSuccess).not.toHaveBeenCalled();
     expect(dispatchSpy).toHaveBeenCalledWith(new ApiError(error as any));
   }));
+
+  it('should hand a 422 to the caller instead of the global error handler', fakeAsync(() => {
+    const onError = jest.fn();
+    updateAllocatedHearing.mockReturnValue(throwError(() => ({ status: 422 })));
+
+    store.changeHearingEndDate({
+      hearing,
+      newEndDate: NEW_END_DATE,
+      courtCentre,
+      onSuccess,
+      onError
+    });
+    flush();
+
+    expect(onError).toHaveBeenCalled();
+    expect(dispatchSpy).not.toHaveBeenCalled();
+  }));
 });

@@ -77,16 +77,23 @@ export function withHearingEndDateStore<_>() {
             newEndDate: string;
             courtCentre: OrganisationUnit;
             onSuccess: OnEndDateChangedCallback;
+            onError?: () => void;
           }>(
             pipe(
-              switchMap(({ hearing, newEndDate, courtCentre, onSuccess }) => {
+              switchMap(({ hearing, newEndDate, courtCentre, onSuccess, onError }) => {
                 const previousEndDate = hearing.endDate;
                 return listingService
                   .updateAllocatedHearing(buildUpdatedHearing(hearing, newEndDate, courtCentre))
                   .pipe(
                     tapResponse({
                       next: () => onSuccess({ previousEndDate, newEndDate }),
-                      error: (err: HttpErrorResponse) => store.handleError(err)
+                      error: (httpError: HttpErrorResponse) => {
+                        if (httpError.status === 422 && onError) {
+                          onError();
+                          return;
+                        }
+                        store.handleError(httpError);
+                      }
                     })
                   );
               })

@@ -431,6 +431,23 @@ describe('CourtCalendarContainer', () => {
       );
     });
 
+    it('should show the no sessions failure alert without refreshing when there is no availability', () => {
+      component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
+      modalOpen.mock.calls[0][1].data.continue('2026-02-01');
+      dispatchSpy.mockClear();
+
+      const { onError } = mockComponentStore.changeHearingEndDate.mock.calls[0][0];
+      onError();
+
+      expect(dispatchSpy).toHaveBeenCalledTimes(1);
+      expect(dispatchSpy).toHaveBeenCalledWith(
+        setAlertMessage({
+          failureAlert:
+            'There are no sessions in the required courtroom for one or more days of the hearing. Please create any missing sessions for the correct courtroom and all days of the hearing.'
+        })
+      );
+    });
+
     it('should dispose the modal on cancel', () => {
       component.onHearingAction({ action: 'change-end-date', hearingId: 'h1', rows });
 

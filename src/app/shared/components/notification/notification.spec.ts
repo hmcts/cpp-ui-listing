@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HearingSlot, HearingSlotAllocation } from '@cpp/scheduling';
 import moment from 'moment';
-import { courtCentresMock, validHearingMock1 } from '../../../../mock-data/test-fixtures';
+import {
+  courtCentresMock,
+  validHearingMock1,
+  validHearingSingleStandaloneApplicationMock
+} from '../../../../mock-data/test-fixtures';
 import { BailStatus } from '../../../core';
 import { LastAllocatedHearing } from './../../../core/model/last-allocated-hearing';
 import { AppNotificationComponent } from './notification';
@@ -106,6 +110,16 @@ describe('AppNotificationComponent', () => {
     expect(content).toEqual(
       'Harry KANE JUNIOR, John SMITH has been allocated to Liverpool Crown Court, on week commencing 4 October 2018 at 11:00'
     );
+  });
+
+  it('should display the subject name for a standalone application', () => {
+    testHostComponent.lastAllocatedHearing = {
+      hearing: validHearingSingleStandaloneApplicationMock,
+      availableHearing: false
+    };
+    fixture.detectChanges();
+
+    expect(component.displayNames).toEqual('Applicantfirstname1 APPLICANTLASTNAME1');
   });
 
   it('should display the first defendant alphabetically by suranme', () => {
