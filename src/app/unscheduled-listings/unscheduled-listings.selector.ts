@@ -10,10 +10,10 @@ export const getUnscheduledHearingsForAllDefendants = createSelector(
   getUnscheduledHearings,
   ({ hearings: unscheduledHearings }): UnscheduledHearingsForAllDefendants[] => {
     const defendantHearingsMap = new Map();
-    unscheduledHearings.forEach((hearing) => {
+    unscheduledHearings.forEach(hearing => {
       if ((hearing.courtApplications || []).length === 0) {
-        hearing.listedCases.forEach((kase) =>
-          kase.defendants.forEach((def) => {
+        hearing.listedCases.forEach(kase =>
+          kase.defendants.forEach(def => {
             const newHearing = { ...hearing };
             const { id, firstName, lastName, dateOfBirth } = def;
 
@@ -47,15 +47,16 @@ export const getUnscheduledHearingsForAllApplications = createSelector(
   getUnscheduledHearings,
   ({ hearings: unscheduledHearings }): UnscheduledHearingsForAllApplications[] => {
     const applicationHearingsMap = new Map();
-    unscheduledHearings.forEach((hearing) => {
+    unscheduledHearings.forEach(hearing => {
       if ((hearing.courtApplications || []).length > 0) {
-        hearing.courtApplications.forEach((application) => {
+        hearing.courtApplications.forEach(application => {
           const newHearing = { ...hearing };
-          const { id, applicant, applicationReference } = application;
+          const { id, subject, applicant, applicationReference } = application;
 
           const applicationData = {
             applicationDetails: {
               id,
+              subject,
               applicant
             },
             urn: applicationReference,

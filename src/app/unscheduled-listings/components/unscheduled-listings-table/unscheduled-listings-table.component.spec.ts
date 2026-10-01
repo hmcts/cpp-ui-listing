@@ -50,6 +50,21 @@ describe('UnscheduledListingsTableComponent', () => {
     expect(fixture).toMatchSnapshot();
   });
 
+  it('should show the applicant name when there is no subject', () => {
+    mockFixtureInputs(fixture, {
+      unscheduledHearingsForApplications: [
+        {
+          ...mockResultTwo[0],
+          applicationDetails: { ...mockResultTwo[0].applicationDetails, subject: undefined }
+        }
+      ]
+    });
+    fixture.detectChanges();
+    const partyName = fixture.nativeElement.querySelector('[data-test-id="partyName"]');
+    expect(partyName.textContent).toContain('ApplicantFirstName1');
+    expect(partyName.textContent).toContain('ApplicantLastName1');
+  });
+
   it('should allocate hearing', () => {
     mockFixtureInputs(fixture, {
       unscheduledHearings: mockData
