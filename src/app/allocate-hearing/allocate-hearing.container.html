@@ -54,9 +54,7 @@
           @if (selectedOrganisationUnit.jurisdictionType === 'CROWN') {
           <crown-scheduling-container [courtId]="route.snapshot.queryParams.courtId">
           </crown-scheduling-container>
-          } @if (selectedOrganisationUnit.jurisdictionType === 'MAGISTRATES' &&
-          (isHearingStandaloneApplication$ | async) === false &&
-          (isHearingOnlyWithLinkedApplication$ | async) === false) {
+          } @if (selectedOrganisationUnit.jurisdictionType === 'MAGISTRATES') {
           <magistrates-scheduling-container [courtId]="route.snapshot.queryParams.courtId">
           </magistrates-scheduling-container>
           }
