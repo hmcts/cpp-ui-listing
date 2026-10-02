@@ -62,7 +62,7 @@ describe('UnscheduledListingsContainer', () => {
   let state: AppState;
 
   let store: Store<AppState>;
-  const paramMap = of({ get: (param) => 'id1' });
+  const paramMap = of({ get: param => 'id1' });
   const selectedCourtRoomId = 'courtRoomId1';
   const listedCase1: ListedCase = {
     id: 'listedCaseId',
@@ -117,6 +117,11 @@ describe('UnscheduledListingsContainer', () => {
     applicant: {
       lastName: 'ApplicantLastName1',
       firstName: 'ApplicantFirstName1',
+      isRespondent: false
+    },
+    subject: {
+      lastName: 'SubjectLastName1',
+      firstName: 'SubjectFirstName1',
       isRespondent: false
     },
     respondents: [
@@ -240,7 +245,7 @@ describe('UnscheduledListingsContainer', () => {
       })
     );
     scrollSpy = jasmine.createSpy('scroll');
-    selectSpy = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    selectSpy = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
     dispatchSpy = jasmine.createSpy('dispatch');
@@ -275,7 +280,7 @@ describe('UnscheduledListingsContainer', () => {
     const storeCopy: Store<AppState> = TestBed.inject(Store);
     state.hearings.unscheduled.hearings = [];
     state.display.showUnscheduledHearings = true;
-    storeCopy.select = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    storeCopy.select = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
 
@@ -300,7 +305,7 @@ describe('UnscheduledListingsContainer', () => {
   it('should match snapshot with hearings', () => {
     const storeCopy: Store<AppState> = TestBed.inject(Store);
     state.display.showUnscheduledHearings = false;
-    storeCopy.select = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    storeCopy.select = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
 
@@ -392,7 +397,7 @@ describe('UnscheduledListingsContainer', () => {
     component.clearNotification();
 
     const allArgs = dispatchSpy.calls.allArgs() as Array<[{ type: string }]>;
-    const actions = allArgs.map((p) => p[0].type);
+    const actions = allArgs.map(p => p[0].type);
 
     expect(actions).toContain('CLEAR_UNSCHEDULED_HEARINGS');
     expect(actions).toContain('CLEAR_HEARING_SLOTS');

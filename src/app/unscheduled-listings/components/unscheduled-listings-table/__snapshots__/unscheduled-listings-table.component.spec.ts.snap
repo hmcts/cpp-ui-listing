@@ -1069,7 +1069,7 @@ exports[`UnscheduledListingsTableComponent should show unscheduled hearings for 
               pdk-table-cell=""
               width="20%"
             >
-               ApplicantFirstName1 ApplicantLastName1 
+               SubjectFirstName1 SubjectLastName1 
             </td>
             <td
               class="govuk-table__cell"
@@ -1085,7 +1085,7 @@ exports[`UnscheduledListingsTableComponent should show unscheduled hearings for 
               width="20%"
             >
               <a
-                aria-label="View application details  of ApplicantFirstName1 ApplicantLastName1 – Test-application-reference"
+                aria-label="View application details  of SubjectFirstName1 SubjectLastName1 – Test-application-reference"
                 class="hearing-reference govuk-link govuk-caption-m"
                 data-test-id="hearingReference"
                 href="/prosecution-casefile/application-at-a-glance/8e8465df-779b-444e-80dc-15633b6c5fd8"
@@ -1115,7 +1115,7 @@ exports[`UnscheduledListingsTableComponent should show unscheduled hearings for 
                   </dt>
                   <dd>
                     <a
-                      aria-label="Allocate hearing for ApplicantFirstName1 ApplicantLastName1 – mock-type-of-list-description"
+                      aria-label="Allocate hearing for SubjectFirstName1 SubjectLastName1 – mock-type-of-list-description"
                       class="allocate-link govuk-!-margin-left-2 govuk-link"
                       href="javascript:void(0);"
                       pdk-link=""
