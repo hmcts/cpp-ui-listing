@@ -1,7 +1,7 @@
 @if (lastAllocatedHearing().availableHearing) {
 <pdk-context-panel class="app-notification" icon="tick" type="confirmation">
   @if (!lastAllocatedHearing().availableHearing) {
-  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">{{ displayNames }} </span>
   <span class="font-medium">has been allocated </span>
   } @if (lastAllocatedHearing().availableHearing) {
   <span [ngPlural]="listedCases.length">
@@ -21,7 +21,7 @@
 } @if (lastAllocatedHearing().hearing.weekCommencingStartDate === null && !allocation() &&
 !lastAllocatedHearing().availableHearing) {
 <pdk-context-panel class="app-notification" icon="tick" type="confirmation">
-  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">{{ displayNames }} </span>
   <span class="font-medium">has been allocated </span>
   <span class="font-medium">to {{ courtCentre.name }}, {{ courtRoom.name }} </span>
   <span class="font-medium">on </span>{{ lastAllocatedHearing().hearing.startDate | date: 'd MMMM
@@ -30,7 +30,7 @@
 } @if (lastAllocatedHearing().hearing.weekCommencingStartDate !== null && !allocation() &&
 !lastAllocatedHearing().availableHearing) {
 <pdk-context-panel class="app-notification" icon="tick" type="confirmation">
-  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">{{ displayNames }} </span>
   <span class="font-medium">has been allocated </span>
   <span class="font-medium">to {{ courtCentre.name }}, {{ courtRoom?.name }} </span>
   @if (lastAllocatedHearing().hearing.weekCommencingStartDate) {
@@ -50,7 +50,7 @@
   @if (split()) {
   <span> <span>Split has been successful</span> <br /></span>
   }
-  <span class="font-medium">{{ defendants | defendantsNameAlphabetically }} </span>
+  <span class="font-medium">{{ displayNames }} </span>
   <span class="font-medium">has been allocated </span>
   <span class="font-medium"
     >to {{ allocation().hearingSlot.courtHouseName }}, {{ allocation().hearingSlot.courtRoomName }}
