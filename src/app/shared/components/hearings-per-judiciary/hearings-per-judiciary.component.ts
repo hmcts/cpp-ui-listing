@@ -16,7 +16,7 @@ import {
   Hearing,
   HearingsGroupedByStartTime
 } from '../../../core';
-import { CourtApplication, CourtroomsFilter } from '../../../core/model';
+import { CourtApplication, CourtroomsFilter, ListedCase } from '../../../core/model';
 import { CourtApplicationPartyType } from '../../../core/model/court-application';
 import { CourtRestriction, CourtRestrictionEventType } from '../../../core/model/court-restriction';
 import {
@@ -365,5 +365,10 @@ export class HearingsPerJudiciaryComponent implements OnChanges {
       applicationId: application.id,
       applicationTypeCode: application.applicationTypeCode
     });
+  }
+
+  bulkCase(listedCase: ListedCase): boolean {
+    let { isCivil, isGroupMaster, isGroupMember } = listedCase;
+    return !!(isCivil && (isGroupMaster || isGroupMember));
   }
 }

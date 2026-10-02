@@ -86,7 +86,7 @@
           [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
           [class.bottomless-border]="hearing.publicListNote"
         >
-          @if (!hearing.totalCases || hearing.totalCases === 1) {
+          @if (!bulkCase(listedCase)) {
           <span data-test-id="firstDefendantName"
             >{{ getAllDefendantsByIndexListedCase(hearing, indexListedCase) |
             findFirstDefendantAlphabetically | fullName }}</span
@@ -115,8 +115,10 @@
           </reporting-restrictions>
           <youth-flag [defendants]="listedCase.defendants"></youth-flag>
           } @else {
-          <div data-test-id="numberOfDefendants">{{ hearing.totalCases + " " + 'DEFENDANTS'}}</div>
-          <div data-test-id="numberOfCases">{{ hearing.totalCases + " " + 'CASES'}}</div>
+          <div data-test-id="numberOfDefendants">
+            {{ hearing.numberOfGroupCases + " " + 'DEFENDANTS'}}
+          </div>
+          <div data-test-id="numberOfCases">{{ hearing.numberOfGroupCases + " " + 'CASES'}}</div>
           }
         </td>
         <td
