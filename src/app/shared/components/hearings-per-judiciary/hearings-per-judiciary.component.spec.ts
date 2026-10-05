@@ -79,8 +79,8 @@ describe('HearingsPerJudiciaryComponent', () => {
       hostComponent.hearings = [
         {
           ...validHearingMock1,
-          totalCases: 1000,
-          listedCases: [{ ...validHearingMock1.listedCases[0], isGroupMaster: true }]
+          numberOfGroupCases: 1000,
+          listedCases: [{ ...validHearingMock1.listedCases[0], isCivil: true, isGroupMaster: true }]
         }
       ];
       fixture.detectChanges();
@@ -94,6 +94,23 @@ describe('HearingsPerJudiciaryComponent', () => {
 
       expect(numberOfDefendants.textContent.trim()).toBe('1000 DEFENDANTS');
       expect(numberOfCases.textContent.trim()).toBe('1000 CASES');
+    });
+
+    it('should display defendant name when number of group cases is missing for a civil group case', () => {
+      hostComponent.hearings = [
+        {
+          ...validHearingMock1,
+          listedCases: [{ ...validHearingMock1.listedCases[0], isCivil: true, isGroupMaster: true }]
+        }
+      ];
+      fixture.detectChanges();
+
+      expect(
+        fixture.debugElement.query(By.css('div[data-test-id="numberOfDefendants"]'))
+      ).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
+      ).not.toBeNull();
     });
 
     it('should match Jest snapshot for hearing without public list note', () => {

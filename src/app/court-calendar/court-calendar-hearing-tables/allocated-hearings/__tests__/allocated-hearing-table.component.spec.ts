@@ -5,6 +5,8 @@ import { HearingActionsEvent } from '../../renderers/cell-renderers/action-cell.
 import { courtRoomCalendarMock, mockCaseId, mockCourtCalendarState } from '../../../utils/mocks';
 import { JudicialMemberNamePipe } from '@cpp/reference-data';
 import { WofdWarningService } from '@cpp/application';
+import { By } from '@angular/platform-browser';
+import { CourtRoomCalendarVM } from '../../../model';
 
 class MockAppConfigService {
   getBaseUrl() {
@@ -120,5 +122,43 @@ describe('AllocatedHearingTableContainer', () => {
     spyOn(fakeEvent, 'stopPropagation');
     component.preventDefault(fakeEvent);
     expect(fakeEvent.stopPropagation).toHaveBeenCalled();
+  });
+
+  it('should display group case summary in the defendant cell for a civil group case', () => {
+    const [section] = courtRoomCalendarMock;
+    const [judiciaryCalendar] = section.judiciaryCalendar;
+    const [timeCalendar] = judiciaryCalendar.hearingTimeCalendar;
+    const [hearing] = timeCalendar.hearings;
+    fixture.componentRef.setInput('sections', [
+      {
+        ...section,
+        judiciaryCalendar: [
+          {
+            ...judiciaryCalendar,
+            hearingTimeCalendar: [
+              {
+                ...timeCalendar,
+                hearings: [
+                  {
+                    ...hearing,
+                    defendants: {
+                      ...hearing.defendants,
+                      civilGroupCaseCount: 25
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ] as CourtRoomCalendarVM[]);
+    fixture.detectChanges();
+
+    expect(
+      fixture.debugElement
+        .query(By.css('[data-test-id="numberOfDefendants"]'))
+        .nativeElement.textContent.trim()
+    ).toBe('25 DEFENDANTS');
   });
 });
