@@ -173,7 +173,7 @@ function getDefendantsVM({
       defendants: listedCase?.defendants ?? [],
       caseUrn: listedCase?.caseIdentifier?.caseReference,
       caseId: listedCase.id,
-      civilGroupCaseCount: isCivilGroupCase(listedCase) ? numberOfGroupCases : undefined
+      numberOfGroupCases: isCivilGroupCase(listedCase) ? numberOfGroupCases : undefined
     };
   } else if (courtApplications.length > 0) {
     const { applicationReference, id, applicant, respondents, applicationTypeCode } =

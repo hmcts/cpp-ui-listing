@@ -143,7 +143,7 @@ describe('AllocatedHearingTableContainer', () => {
                     ...hearing,
                     defendants: {
                       ...hearing.defendants,
-                      civilGroupCaseCount: 25
+                      numberOfGroupCases: 25
                     }
                   }
                 ]

@@ -12,9 +12,9 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
   selector: 'defendant-cell',
   template: `
     <div data-test-id="defendants" class="defendants">
-      @if (defendantData.civilGroupCaseCount) {
+      @if (defendantData.numberOfGroupCases) {
         <group-case-summary
-          [groupCaseCount]="defendantData.civilGroupCaseCount"
+          [groupCaseCount]="defendantData.numberOfGroupCases"
         ></group-case-summary>
       } @else if (displayDefendants?.length > 0) {
         @for (defendant of displayDefendants; track defendant.id) {
