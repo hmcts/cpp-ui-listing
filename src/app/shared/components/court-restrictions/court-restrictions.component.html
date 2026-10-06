@@ -35,7 +35,11 @@
               class="flex-column break-word"
               [class.dotted-border-bottom]="hasDottedBorder(hearing().listedCases.length, i)"
             >
-              @if (!hearing().totalCases || hearing().totalCases === 1) {
+              @if (isCivilGroupCase(case) && hearing().numberOfGroupCases) {
+                <group-case-summary
+                  [groupCaseCount]="hearing().numberOfGroupCases"
+                ></group-case-summary>
+              } @else {
                 <span data-test-id="firstDefendantName">{{
                   getDefendantName(firstDefendant(i))
                 }}</span>
@@ -57,8 +61,6 @@
                 >
                 </reporting-restrictions>
                 <youth-flag [defendants]="case.defendants"></youth-flag>
-              } @else {
-                <span data-test-id="firstDefendantName">{{ bulkCaseDefendantName(case) }}</span>
               }
             </div>
             <div
@@ -163,7 +165,11 @@
                 </div>
               </div>
               <div data-test-id="defendantName" class="flex-column break-word">
-                @if (!hearing().totalCases || hearing().totalCases === 1) {
+                @if (isCivilGroupCase(case) && hearing().numberOfGroupCases) {
+                  <group-case-summary
+                    [groupCaseCount]="hearing().numberOfGroupCases"
+                  ></group-case-summary>
+                } @else {
                   {{ getDefendantName(defendant) }}
                   <div>
                     <div pdk-typography="caption-medium">
@@ -179,8 +185,6 @@
                       <youth-flag [defendants]="[defendant]"></youth-flag>
                     }
                   </div>
-                } @else {
-                  <span data-test-id="firstDefendantName">{{ bulkCaseDefendantName(case) }}</span>
                 }
               </div>
               <div class="flex-column">

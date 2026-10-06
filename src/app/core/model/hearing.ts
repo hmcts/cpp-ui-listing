@@ -68,7 +68,6 @@ export interface Hearing {
   typeOfList?: TypeOfListOptions;
   publicListNote?: string;
   hasVideoLink?: boolean;
-  totalCases?: number;
   startTime?: string;
   bookingType?: string;
   priority?: string;

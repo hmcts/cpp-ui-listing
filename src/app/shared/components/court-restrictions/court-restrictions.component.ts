@@ -30,6 +30,8 @@ import { HearingEstimateComponent } from '../hearing-estimate/hearing-estimate.c
 import { FormsModule } from '@angular/forms';
 import { CapitalizeFirstLetterPipe } from '../../pipes/capitalize-first-letter.pipe';
 import { ApplicantRespondentFullNamePipe } from '../../pipes/applicant-respondent-full-name.pipe';
+import { isCivilGroupCase } from '../../../../app/core/util';
+import { GroupCaseSummaryComponent } from '../group-case-summary/group-case-summary.component';
 
 @Component({
   selector: 'court-restrictions',
@@ -58,7 +60,8 @@ import { ApplicantRespondentFullNamePipe } from '../../pipes/applicant-responden
     NgClass,
     AsyncPipe,
     CapitalizeFirstLetterPipe,
-    ApplicantRespondentFullNamePipe
+    ApplicantRespondentFullNamePipe,
+    GroupCaseSummaryComponent
   ],
   providers: [FullNamePipe]
 })
@@ -81,6 +84,7 @@ export class CourtRestrictionsComponent {
   }>();
 
   readonly restrictionEventType = CourtRestrictionEventType;
+  protected readonly isCivilGroupCase = isCivilGroupCase;
 
   firstDefendant(indexListedCase: number) {
     return this.sortCaseDefendants(this.hearing().listedCases[indexListedCase])[0];
@@ -193,12 +197,5 @@ export class CourtRestrictionsComponent {
   showEstimateTime(hearing: Hearing, index: number): boolean {
     const numberOfListedCases = hearing.listedCases.length;
     return index === 0 && numberOfListedCases >= 1;
-  }
-
-  bulkCaseDefendantName(kase: ListedCase) {
-    const hearing = this.hearing();
-    return kase && !!kase.isGroupMaster && hearing.totalCases
-      ? `${hearing.totalCases} DEFENDANTS`
-      : '';
   }
 }

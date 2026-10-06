@@ -71,9 +71,9 @@ describe('CourtRestrictionsComponent', () => {
     it('should display number of defendants in bulk hearing', () => {
       hostComponent.hearing = cloneDeep(validHearingMock1);
       hostComponent.hearing.listedCases = [
-        { ...hostComponent.hearing.listedCases[0], isGroupMaster: true }
+        { ...hostComponent.hearing.listedCases[0], isCivil: true, isGroupMaster: true }
       ];
-      hostComponent.hearing.totalCases = 1000;
+      hostComponent.hearing.numberOfGroupCases = 1000;
       fixture.detectChanges();
       expect(fixture).toMatchSnapshot();
     });

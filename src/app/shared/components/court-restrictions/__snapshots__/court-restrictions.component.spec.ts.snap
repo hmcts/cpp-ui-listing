@@ -1175,11 +1175,22 @@ exports[`CourtRestrictionsComponent Wrapped Mocked should display number of defe
             class="flex-column break-word"
             id="defendant_b1bfe644-15d3-46aa-bdeb-fe8d18c16a42_TFL12345_0"
           >
-            <span
-              data-test-id="firstDefendantName"
-            >
-              1000 DEFENDANTS
-            </span>
+            <group-case-summary>
+              <div
+                data-test-id="numberOfDefendants"
+              >
+                <strong>
+                  1000 DEFENDANTS 
+                </strong>
+              </div>
+              <div
+                data-test-id="numberOfCases"
+              >
+                <strong>
+                  1000 CASES
+                </strong>
+              </div>
+            </group-case-summary>
           </div>
           <div
             class="flex-column"
