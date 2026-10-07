@@ -71,6 +71,11 @@
               [pdk-border-colour]="'mid-grey'"
               [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
             >
+              @if (isCivilGroupCase(kase) && hearing.numberOfGroupCases) {
+              <group-case-summary
+                [groupCaseCount]="hearing.numberOfGroupCases"
+              ></group-case-summary>
+              } @else {
               <div data-test-id="firstDefendantName">{{ firstDefendantName(kase.defendants) }}</div>
               @if (plusOtherDefendants(kase.defendants)) {
               <div>{{ plusOtherDefendants(kase.defendants) }}</div>
@@ -95,6 +100,7 @@
               >
               </reporting-restrictions>
               <youth-flag [defendants]="kase.defendants"></youth-flag>
+              }
             </td>
             <td
               [class.no-border]="!!trialTypes().length"

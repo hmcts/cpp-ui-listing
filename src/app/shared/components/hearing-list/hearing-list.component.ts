@@ -7,7 +7,7 @@ import {
   FindFirstDefendantAlphabeticallyPipe,
   FullNamePipe
 } from '../../pipes';
-import { CPPDate, getCPPDate } from '../../../core/util';
+import { CPPDate, getCPPDate, isCivilGroupCase } from '../../../core/util';
 import { Hearing } from '../../../core/model';
 import { TrialType } from '@cpp/reference-data';
 import { WofdWarningService } from '@cpp/application';
@@ -18,6 +18,7 @@ import { CaseMarkersComponent } from '../case-markers/case-markers.component';
 import { ReportingRestrictionsComponent } from '../reporting-restrictions/reporting-restrictions.component';
 import { YouthFlagComponent } from '../youth-flag/youth-flag.component';
 import { HearingOffencesComponent } from '../hearing-offences/hearing-offences.component';
+import { GroupCaseSummaryComponent } from '../group-case-summary/group-case-summary.component';
 
 @Component({
   selector: 'hearing-list',
@@ -30,7 +31,8 @@ import { HearingOffencesComponent } from '../hearing-offences/hearing-offences.c
     CaseMarkersComponent,
     ReportingRestrictionsComponent,
     YouthFlagComponent,
-    HearingOffencesComponent
+    HearingOffencesComponent,
+    GroupCaseSummaryComponent
   ],
   providers: [
     CapitalizeFirstLetterPipe,
@@ -53,6 +55,7 @@ export class HearingListComponent {
   readonly onAllocate = output<Hearing>();
   readonly onSplitHearing = output<Hearing>();
   private readonly dateUtil: CPPDate;
+  protected readonly isCivilGroupCase = isCivilGroupCase;
 
   private readonly wofdWarningService = inject(WofdWarningService);
 

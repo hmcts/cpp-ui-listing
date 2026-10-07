@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { AppConfigService } from '../../../config';
 import { HearingListComponent } from './hearing-list.component';
@@ -113,6 +114,41 @@ describe('HearingListComponent', () => {
       prosecutorCode: 'Prosecutor populated'
     };
     expect(component.getProsecutor(kases[0])).toBe('Prosecutor populated');
+  });
+
+  describe('Civil group cases', () => {
+    const civilGroupHearing = (numberOfGroupCases?: number) => ({
+      ...mockData[1],
+      numberOfGroupCases,
+      listedCases: [{ ...mockData[1].listedCases[0], isCivil: true, isGroupMaster: true }]
+    });
+
+    it('should display group case summary when number of group cases is present', () => {
+      hostComponent.hearings = [civilGroupHearing(1000)];
+      fixture.detectChanges();
+
+      expect(
+        fixture.debugElement
+          .query(By.css('[data-test-id="numberOfDefendants"]'))
+          .nativeElement.textContent.trim()
+      ).toBe('1000 DEFENDANTS');
+      expect(
+        fixture.debugElement
+          .query(By.css('[data-test-id="numberOfCases"]'))
+          .nativeElement.textContent.trim()
+      ).toBe('1000 CASES');
+      expect(fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))).toBeNull();
+    });
+
+    it('should display defendant name when number of group cases is missing', () => {
+      hostComponent.hearings = [civilGroupHearing()];
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('[data-test-id="numberOfDefendants"]'))).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
+      ).not.toBeNull();
+    });
   });
 
   describe('Pagination', () => {
