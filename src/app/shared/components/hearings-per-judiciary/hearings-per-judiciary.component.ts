@@ -18,7 +18,7 @@ import {
 } from '../../../core';
 import { CourtApplication, CourtroomsFilter } from '../../../core/model';
 import { CourtApplicationPartyType } from '../../../core/model/court-application';
-import { isCivilGroupCase } from '../../../core/util';
+import { isGroupedCivilCase } from '../../../core/util';
 import { CourtRestriction, CourtRestrictionEventType } from '../../../core/model/court-restriction';
 import {
   FindFirstDefendantAlphabeticallyPipe,
@@ -120,7 +120,7 @@ export class HearingsPerJudiciaryComponent implements OnChanges {
   sortedHearings: Hearing[];
   selectedHearing: Hearing;
   focussedHearing: Hearing = undefined;
-  protected readonly isCivilGroupCase = isCivilGroupCase;
+  protected readonly isGroupedCivilCase = isGroupedCivilCase;
 
   constructor(
     private findFirstDefendantAlphabetically: FindFirstDefendantAlphabeticallyPipe,

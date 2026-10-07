@@ -86,7 +86,7 @@
           [class.dotted-border]="isCellWithDottedBorderBottom(hearing, indexListedCase)"
           [class.bottomless-border]="hearing.publicListNote"
         >
-          @if (isCivilGroupCase(listedCase) && hearing.numberOfGroupCases) {
+          @if (isGroupedCivilCase(listedCase) && hearing.numberOfGroupCases) {
           <group-case-summary [groupCaseCount]="hearing.numberOfGroupCases"></group-case-summary>
           } @else {
           <span data-test-id="firstDefendantName"
