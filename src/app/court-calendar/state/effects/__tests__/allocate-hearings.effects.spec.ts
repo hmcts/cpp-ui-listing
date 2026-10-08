@@ -191,15 +191,11 @@ describe('CourtCalendar', () => {
         );
       });
 
-      it('should search magistrates unallocated hearings by the selected business type', () => {
+      it('should not filter magistrates unallocated hearings by business type', () => {
         const payload = runEffect({ ...unallocatedFilterOptions, courtType: 'MAGISTRATES' });
 
-        expect(payload).toEqual(
-          expect.objectContaining({
-            businessType: 'businessType',
-            jurisdictionType: 'MAGISTRATES'
-          })
-        );
+        expect(payload.businessType).toBeUndefined();
+        expect(payload.jurisdictionType).toBe('MAGISTRATES');
       });
 
       it('should not send the court session to the unallocated hearings search', () => {

@@ -95,7 +95,7 @@ export const getUnallocatedHearingsEffect = createEffect(
             jurisdictionType: courtType,
             courtCentreId: courtCentre.id,
             hearingTypeId: hearingType?.id,
-            businessType,
+            businessType: courtType === 'CROWN' ? businessType : undefined,
             ouCode: businessType || courtSession !== 'Any' ? courtCentre.oucode : undefined,
             allocated: false
           };
