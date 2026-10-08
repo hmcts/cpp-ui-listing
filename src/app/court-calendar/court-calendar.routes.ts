@@ -16,7 +16,6 @@ import {
 import { getUnallocatedHearingsGuard } from './guards/get-unallocated-hearings.guard';
 import { loadHearingScheduleGuard } from './guards/load-hearing-schedule.guard';
 import { reallocateHearingsNavGuard } from './guards/reallocate-hearings-nav-guard';
-import { getSessionsForSeelectedHearingGuard } from './guards/get-sessions-for-selected-hearings.guard';
 
 export enum CourtCalendarRoutes {
   //:TODO add routes for all sub pages
@@ -62,7 +61,6 @@ export const courtCalendarRoutes: Routes = [
     children: [
       {
         path: '',
-        canActivate: [getSessionsForSeelectedHearingGuard],
         loadComponent: () =>
           import('./change-hearing-details/containers/change-hearing-details.container').then(
             c => c.ChangehearingDetailsContainer

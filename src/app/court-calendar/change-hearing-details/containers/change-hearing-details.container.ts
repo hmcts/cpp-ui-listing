@@ -10,9 +10,9 @@ import { Store } from '@ngrx/store';
 import { getCourtCalendarAlert, getSelectedHearing } from '../../state/selectors';
 import { CourtCalendarActions } from '../../state';
 import { Router } from '@angular/router';
-import { getSearchResults } from '@cpp/scheduling';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
 import { CourtCalendarAlertComponent } from '../../components/court-calendar-alert.component';
+import { ChangeHearingDetailsStore } from '../component-store/change-hearing-details.store';
 
 @Component({
   selector: 'change-hearing-details-container',
@@ -36,7 +36,7 @@ import { CourtCalendarAlertComponent } from '../../components/court-calendar-ale
           [initialValues]="initialValues()"
           [selectedHearing]="selectedHearing()"
           [selectedCourtCentre]="selectedCourtCentre()"
-          [hearingSlots]="hearingSlots()"
+          [hearingSlots]="changeHearingDetailsStore.startDateSessions()"
           (onSubmit)="updateHearing($event)"
           (onCancel)="cancelSelectedHearingData()"
           (onValidationError)="showValidationError($event)"
@@ -51,15 +51,16 @@ import { CourtCalendarAlertComponent } from '../../components/court-calendar-ale
     PdkCore,
     ChangeHearingDetailsComponent,
     CourtCalendarAlertComponent
-  ]
+  ],
+  providers: [ChangeHearingDetailsStore]
 })
 export class ChangehearingDetailsContainer implements OnDestroy {
   private readonly store = inject(Store);
   private readonly route = inject(Router);
   private readonly courtCentres = this.store.selectSignal(getCourtCentres);
+  readonly changeHearingDetailsStore = inject(ChangeHearingDetailsStore);
 
   readonly selectedHearing = this.store.selectSignal(getSelectedHearing);
-  readonly hearingSlots = this.store.selectSignal(getSearchResults);
   readonly selectedCourtCentre = computed(() =>
     this.courtCentres().find(cc => cc.id === (this.selectedHearing() as Hearing)?.courtCentreId)
   );
