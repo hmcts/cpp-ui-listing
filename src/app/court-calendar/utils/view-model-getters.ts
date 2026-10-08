@@ -1,5 +1,5 @@
 import { sortBy, uniq } from 'lodash-es';
-import { getCPPDate, isCivilGroupCase } from '../../core/util';
+import { getCPPDate, isGroupedCivilCase } from '../../core/util';
 import { Defendant, Hearing, ListedCase, Offence } from '../../core';
 import {
   HearingTypeVM,
@@ -173,7 +173,7 @@ function getDefendantsVM({
       defendants: listedCase?.defendants ?? [],
       caseUrn: listedCase?.caseIdentifier?.caseReference,
       caseId: listedCase.id,
-      numberOfGroupCases: isCivilGroupCase(listedCase) ? numberOfGroupCases : undefined
+      numberOfGroupCases: isGroupedCivilCase(listedCase) ? numberOfGroupCases : undefined
     };
   } else if (courtApplications.length > 0) {
     const { applicationReference, id, applicant, respondents, applicationTypeCode } =

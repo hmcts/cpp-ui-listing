@@ -1,5 +1,5 @@
 import { ListedCase } from '../model';
 
-export function isCivilGroupCase(listedCase: ListedCase | undefined): boolean {
+export function isGroupedCivilCase(listedCase: ListedCase | undefined): boolean {
   return !!listedCase?.isCivil && !!(listedCase.isGroupMaster || listedCase.isGroupMember);
 }
