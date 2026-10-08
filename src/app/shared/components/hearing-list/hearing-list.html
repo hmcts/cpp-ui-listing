@@ -71,7 +71,7 @@
               [pdk-border-colour]="'mid-grey'"
               [class.dotted-border]="isCellWithDottedBorderBottom(hearing, i)"
             >
-              @if (isCivilGroupCase(kase) && hearing.numberOfGroupCases) {
+              @if (isGroupedCivilCase(kase) && hearing.numberOfGroupCases) {
               <group-case-summary
                 [groupCaseCount]="hearing.numberOfGroupCases"
               ></group-case-summary>
