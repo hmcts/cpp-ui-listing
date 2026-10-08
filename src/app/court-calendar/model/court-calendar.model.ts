@@ -128,6 +128,7 @@ export interface HearingDefendantVM {
   applicationReference?: string;
   applicationId?: string;
   applicationTypeCode?: string;
+  numberOfGroupCases?: number;
 }
 
 export interface HearingDayVM extends HearingDay {
