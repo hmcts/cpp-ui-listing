@@ -1,6 +1,7 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { JsonPipe } from '@angular/common';
+import { By } from '@angular/platform-browser';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import {
@@ -15,6 +16,11 @@ import { CourtCalendarActions } from '../../../state';
 import { Router } from '@angular/router';
 import { ValidationErrors } from '@angular/forms';
 import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
+import { ChangeHearingDetailsStore } from '../../component-store/change-hearing-details.store';
+
+class MockChangeHearingDetailsStore {
+  startDateSessions = signal<HearingSlot[]>([]);
+}
 
 describe('ChangeHearingDetailsContainer', () => {
   let fixture: ComponentFixture<ChangehearingDetailsContainer>;
@@ -51,10 +57,14 @@ describe('ChangeHearingDetailsContainer', () => {
     })
       .overrideComponent(ChangehearingDetailsContainer, {
         remove: {
-          imports: [ChangeHearingDetailsComponent, BackButtonComponent]
+          imports: [ChangeHearingDetailsComponent, BackButtonComponent],
+          providers: [ChangeHearingDetailsStore]
         },
         add: {
-          imports: [MockChangeHearingDetailsComponent, MockBackButtonComponent]
+          imports: [MockChangeHearingDetailsComponent, MockBackButtonComponent],
+          providers: [
+            { provide: ChangeHearingDetailsStore, useClass: MockChangeHearingDetailsStore }
+          ]
         }
       })
       .compileComponents();
@@ -70,6 +80,20 @@ describe('ChangeHearingDetailsContainer', () => {
 
   it('should create the change hearing details container', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should pass only the start date sessions to the change hearing details form', () => {
+    const startDateSessions = [
+      { courtScheduleId: 'nth-12', sessionDate: '2026-10-12' } as HearingSlot
+    ];
+    (
+      component.changeHearingDetailsStore as unknown as MockChangeHearingDetailsStore
+    ).startDateSessions.set(startDateSessions);
+    fixture.detectChanges();
+
+    const form = fixture.debugElement.query(By.directive(MockChangeHearingDetailsComponent))
+      .componentInstance as MockChangeHearingDetailsComponent;
+    expect(form.hearingSlots()).toEqual(startDateSessions);
   });
 
   it('should dispatch action on update hearing details', async () => {
