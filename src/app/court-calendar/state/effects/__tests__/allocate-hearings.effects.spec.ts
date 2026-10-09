@@ -3,7 +3,13 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 import { cold, hot } from 'jasmine-marbles';
-import { CourtCalendarActions, COURT_CALENDAR_FEATURE_KEY, PaginatedHearingMap } from '../..';
+import { HearingType } from '@cpp/reference-data';
+import {
+  CourtCalendarActions,
+  CourtCalendarFilters,
+  COURT_CALENDAR_FEATURE_KEY,
+  PaginatedHearingMap
+} from '../..';
 import * as effects from '../allocate-hearings.effects';
 import { ApiError, Hearing, ListingService } from '../../../../core';
 
@@ -122,6 +128,80 @@ describe('CourtCalendar', () => {
         const effect$ = effects.getAllocatedHearingsForWidgetEffect(actions$, listingService);
 
         expect(effect$).toBeObservable(expected$);
+      });
+    });
+
+    describe('Unallocated Hearings', () => {
+      const unallocatedFilterOptions = {
+        ...mockSearchFormValues,
+        courtType: 'CROWN' as const,
+        courtCentre: { ...mockSearchFormValues.courtCentre, oucode: 'B01EF00' }
+      };
+      const hearingType = { id: 'hearingTypeId', hearingDescription: 'Trial' } as HearingType;
+
+      const runEffect = (filterOptions: CourtCalendarFilters) => {
+        actions$ = cold('-a', {
+          a: CourtCalendarActions.getUnallocatedHearings({ filterOptions })
+        });
+        searchCourtCalendarHearings.mockReturnValueOnce(
+          cold('b|', { b: { hearings: [], results: 0, pageCount: 1 } })
+        );
+        const effect$ = effects.getUnallocatedHearingsEffect(actions$, listingService);
+        const expected$ = cold('-c', {
+          c: CourtCalendarActions.getUnallocatedHearingsSuccess({
+            payload: {
+              paginatedHearings: {
+                hearings: [],
+                pagination: { totalNumber: 0, currentPage: 1, pageCount: 1 }
+              }
+            }
+          })
+        });
+        expect(effect$).toBeObservable(expected$);
+        return searchCourtCalendarHearings.mock.calls[0][0];
+      };
+
+      it('should search unallocated hearings by the selected business type', () => {
+        const payload = runEffect(unallocatedFilterOptions);
+
+        expect(payload).toEqual(
+          expect.objectContaining({
+            businessType: 'businessType',
+            ouCode: 'B01EF00',
+            allocated: false
+          })
+        );
+      });
+
+      it('should not filter by business type when no business type is selected', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, businessType: undefined });
+
+        expect(payload.businessType).toBeUndefined();
+        expect(payload.ouCode).toBeUndefined();
+      });
+
+      it('should search by both hearing type and business type when both are selected', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, hearingType });
+
+        expect(payload).toEqual(
+          expect.objectContaining({
+            businessType: 'businessType',
+            hearingTypeId: 'hearingTypeId'
+          })
+        );
+      });
+
+      it('should not filter magistrates unallocated hearings by business type', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, courtType: 'MAGISTRATES' });
+
+        expect(payload.businessType).toBeUndefined();
+        expect(payload.jurisdictionType).toBe('MAGISTRATES');
+      });
+
+      it('should not send the court session to the unallocated hearings search', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, courtSession: 'AM' });
+
+        expect(payload.courtSession).toBeUndefined();
       });
     });
 
