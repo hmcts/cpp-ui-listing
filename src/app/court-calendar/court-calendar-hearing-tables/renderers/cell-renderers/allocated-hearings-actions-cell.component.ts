@@ -88,8 +88,7 @@ export class AllocatedHearingsActionsCellComponent implements OnInit {
       this.actionOptions.push(...extraOptions);
     }
 
-    const canChangeCourtroom =
-      jurisdictionType === 'CROWN' && hearingDayCount > 1 && dateIsCurrentOrGreaterThan(endDate);
+    const canChangeCourtroom = hearingDayCount > 1 && dateIsCurrentOrGreaterThan(endDate);
 
     if (canChangeCourtroom) {
       this.actionOptions.push({ label: 'Change courtroom', value: 'change' });
