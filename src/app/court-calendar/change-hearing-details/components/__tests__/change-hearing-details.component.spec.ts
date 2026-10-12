@@ -65,6 +65,7 @@ describe('ChangeHearingDetailsComponent', () => {
           {
             courtScheduleId: 'court-schedule-id',
             businessType: 'test-business-type',
+            sessionDate: selectedHearing.startDate,
             sessionStartTime: `${selectedHearing.startDate}T09:00:00.000Z`,
             sessionEndTime: `${selectedHearing.startDate}T12:00:00.000Z`
           } as HearingSlot
@@ -102,6 +103,7 @@ describe('ChangeHearingDetailsComponent', () => {
           {
             courtScheduleId: 'court-schedule-id',
             businessType: 'test-business-type',
+            sessionDate: selectedHearing.startDate,
             sessionStartTime: `${selectedHearing.startDate}T09:00:00.000Z`,
             sessionEndTime: `${selectedHearing.startDate}T12:00:00.000Z`
           } as HearingSlot

@@ -80,6 +80,7 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
 export class ChangeHearingSessionSelectorComponent implements ControlValueAccessor, Validator {
   readonly hearingSlots = input<HearingSlot[]>([]);
   readonly startTime = input<string>(undefined);
+  readonly sessionDate = input<string>(undefined);
   readonly id = generateId('hearing-start-time-within-session-time');
   readonly control = new FormControl<string>(null);
   readonly errorMessages = ERROR_MESSAGES;
@@ -88,6 +89,7 @@ export class ChangeHearingSessionSelectorComponent implements ControlValueAccess
 
   readonly sessionTimesOptions = computed<SelectOption[]>(() =>
     (this.hearingSlots() ?? [])
+      .filter(({ sessionDate }) => sessionDate === this.sessionDate())
       .map(({ courtScheduleId, sessionStartTime, sessionEndTime, businessType }) => ({
         value: courtScheduleId,
         label: `${businessType} ${this.datePipe.transform(
