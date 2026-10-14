@@ -38,7 +38,8 @@ import {
   PdkTableCellDirective,
   PdkBorderColorDirective,
   PdkLinkDirective,
-  PdkTypographyDirective
+  PdkTypographyDirective,
+  PdkTagComponent
 } from '@cpp/pdk';
 import { NgTemplateOutlet } from '@angular/common';
 import { CaseMarkersComponent } from '../case-markers/case-markers.component';
@@ -85,7 +86,8 @@ import { GroupCaseSummaryComponent } from '../group-case-summary/group-case-summ
     FullNamePipe,
     ApplicantRespondentFullNamePipe,
     JudiciaryMemberNamesPipe,
-    StartTimeByMatchedHearingDayPipe
+    StartTimeByMatchedHearingDayPipe,
+    PdkTagComponent
   ],
   providers: [
     FindFirstDefendantAlphabeticallyPipe,

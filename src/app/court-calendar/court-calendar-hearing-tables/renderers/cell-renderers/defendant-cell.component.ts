@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, inject, OnInit } from '@angular/core';
-import { PdkCore } from '@cpp/pdk';
+import { PdkCore, PdkTagComponent } from '@cpp/pdk';
 import { ApplicantRespondent, Defendant } from '../../../../core';
 import { ApplicantRespondentFullNamePipe } from '../../../../shared/pipes/applicant-respondent-full-name.pipe';
 import { FullNamePipe } from '../../../../shared/pipes/full-name.pipe';
@@ -12,29 +12,31 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
   selector: 'defendant-cell',
   template: `
     <div data-test-id="defendants" class="defendants">
-      @if (defendantData.numberOfGroupCases) {
-        <group-case-summary
-          [groupCaseCount]="defendantData.numberOfGroupCases"
-        ></group-case-summary>
-      } @else if (displayDefendants?.length > 0) {
-        @for (defendant of displayDefendants; track defendant.id) {
-          <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
-            {{ defendant | fullName
-            }}{{
-              defendant.isYouth && defendant.bailStatus?.code === 'C'
-                ? ' (Y, C)'
-                : defendant.isYouth
-                  ? ' (Y)'
-                  : defendant.bailStatus?.code === 'C'
-                    ? ' (C)'
-                    : ''
-            }}</span
-          >
-        }
-        @if (otherDefendants.length > 0) {
-          <span>
-            {{ otherDefendants | plusMore }}
-          </span>
+      @if (defendantData.numberOfGroupCases || displayDefendants?.length > 0) {
+        @if (defendantData.numberOfGroupCases) {
+          <group-case-summary
+            [groupCaseCount]="defendantData.numberOfGroupCases"
+          ></group-case-summary>
+        } @else {
+          @for (defendant of displayDefendants; track defendant.id) {
+            <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
+              {{ defendant | fullName
+              }}{{
+                defendant.isYouth && defendant.bailStatus?.code === 'C'
+                  ? ' (Y, C)'
+                  : defendant.isYouth
+                    ? ' (Y)'
+                    : defendant.bailStatus?.code === 'C'
+                      ? ' (C)'
+                      : ''
+              }}</span
+            >
+          }
+          @if (otherDefendants.length > 0) {
+            <span>
+              {{ otherDefendants | plusMore }}
+            </span>
+          }
         }
         <div>
           <a
@@ -47,6 +49,11 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
             ><span pdk-visually-hidden>Case reference</span> {{ defendantData.caseUrn }}</a
           >
         </div>
+        @if (defendantData.numberOfGroupCases) {
+          <div pdk-margin-top="1">
+            <pdk-tag data-test-id="bulkCasesTag" [color]="'grey'">Bulk Cases</pdk-tag>
+          </div>
+        }
       } @else {
         @if (hasRespondents || !!applicant) {
           @for (respondent of displayRespondents; track respondent.id) {
@@ -90,7 +97,8 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
     ApplicantRespondentFullNamePipe,
     FullNamePipe,
     PdkCore,
-    GroupCaseSummaryComponent
+    GroupCaseSummaryComponent,
+    PdkTagComponent
   ],
   styles: [
     `

@@ -95,7 +95,7 @@
           >
           @if (plusOtherDefendantsByIndexListedCase(hearing, indexListedCase)) {
           <div>{{ plusOtherDefendantsByIndexListedCase(hearing, indexListedCase) }}</div>
-          }
+          } }
           <div>
             <a
               pdk-link
@@ -108,6 +108,11 @@
               >{{listedCase.caseIdentifier.caseReference}}</a
             >
           </div>
+          @if (isGroupedCivilCase(listedCase)) {
+          <div pdk-margin-top="1">
+            <pdk-tag data-test-id="bulkCasesTag" [color]="'grey'">Bulk Cases</pdk-tag>
+          </div>
+          }
           <reporting-restrictions
             [caseId]="listedCase.id"
             [defendants]="listedCase?.defendants"
@@ -116,7 +121,6 @@
           >
           </reporting-restrictions>
           <youth-flag [defendants]="listedCase.defendants"></youth-flag>
-          }
         </td>
         <td
           data-test-id="hearingDuration"
