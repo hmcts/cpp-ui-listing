@@ -79,8 +79,8 @@ describe('HearingsPerJudiciaryComponent', () => {
       hostComponent.hearings = [
         {
           ...validHearingMock1,
-          numberOfGroupCases: 1000,
-          listedCases: [{ ...validHearingMock1.listedCases[0], isCivil: true, isGroupMaster: true }]
+          totalCases: 1000,
+          listedCases: [{ ...validHearingMock1.listedCases[0], isGroupMaster: true }]
         }
       ];
       fixture.detectChanges();
@@ -94,70 +94,6 @@ describe('HearingsPerJudiciaryComponent', () => {
 
       expect(numberOfDefendants.textContent.trim()).toBe('1000 DEFENDANTS');
       expect(numberOfCases.textContent.trim()).toBe('1000 CASES');
-    });
-
-    it('should display defendant name when number of group cases is missing for a civil group case', () => {
-      hostComponent.hearings = [
-        {
-          ...validHearingMock1,
-          listedCases: [{ ...validHearingMock1.listedCases[0], isCivil: true, isGroupMaster: true }]
-        }
-      ];
-      fixture.detectChanges();
-
-      expect(
-        fixture.debugElement.query(By.css('div[data-test-id="numberOfDefendants"]'))
-      ).toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
-      ).not.toBeNull();
-    });
-
-    it('should display case reference and Bulk Cases tag for a civil group case', () => {
-      hostComponent.hearings = [
-        {
-          ...validHearingMock1,
-          numberOfGroupCases: 1000,
-          listedCases: [{ ...validHearingMock1.listedCases[0], isCivil: true, isGroupMember: true }]
-        }
-      ];
-      fixture.detectChanges();
-
-      const hearingReference = fixture.debugElement.query(
-        By.css('[data-test-id="hearingReference"]')
-      ).nativeElement;
-      const bulkCasesTag = fixture.debugElement.query(
-        By.css('[data-test-id="bulkCasesTag"]')
-      ).nativeElement;
-
-      expect(hearingReference.textContent.trim()).toBe(
-        validHearingMock1.listedCases[0].caseIdentifier.caseReference
-      );
-      expect(bulkCasesTag.textContent.trim()).toBe('Bulk Cases');
-    });
-
-    it('should not display Bulk Cases tag for a non-civil group case', () => {
-      hostComponent.hearings = [
-        {
-          ...validHearingMock1,
-          listedCases: [
-            { ...validHearingMock1.listedCases[0], isCivil: false, isGroupMaster: true }
-          ]
-        }
-      ];
-      fixture.detectChanges();
-
-      expect(fixture.debugElement.query(By.css('[data-test-id="bulkCasesTag"]'))).toBeNull();
-    });
-
-    it('should not display Bulk Cases tag for a non-group case', () => {
-      hostComponent.hearings = [validHearingMock1];
-      fixture.detectChanges();
-
-      expect(fixture.debugElement.query(By.css('[data-test-id="bulkCasesTag"]'))).toBeNull();
-      expect(
-        fixture.debugElement.query(By.css('[data-test-id="hearingReference"]'))
-      ).not.toBeNull();
     });
 
     it('should match Jest snapshot for hearing without public list note', () => {

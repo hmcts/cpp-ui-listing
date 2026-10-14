@@ -18,7 +18,6 @@ import {
 } from '../../../core';
 import { CourtApplication, CourtroomsFilter } from '../../../core/model';
 import { CourtApplicationPartyType } from '../../../core/model/court-application';
-import { isGroupedCivilCase } from '../../../core/util';
 import { CourtRestriction, CourtRestrictionEventType } from '../../../core/model/court-restriction';
 import {
   FindFirstDefendantAlphabeticallyPipe,
@@ -38,8 +37,7 @@ import {
   PdkTableCellDirective,
   PdkBorderColorDirective,
   PdkLinkDirective,
-  PdkTypographyDirective,
-  PdkTagComponent
+  PdkTypographyDirective
 } from '@cpp/pdk';
 import { NgTemplateOutlet } from '@angular/common';
 import { CaseMarkersComponent } from '../case-markers/case-markers.component';
@@ -53,14 +51,12 @@ import { FullNamePipe } from '../../pipes/full-name.pipe';
 import { ApplicantRespondentFullNamePipe } from '../../pipes/applicant-respondent-full-name.pipe';
 import { JudiciaryMemberNamesPipe } from '../../pipes/judiciary-member-names.pipe';
 import { StartTimeByMatchedHearingDayPipe } from '../../pipes/start-time-by-matched-hearing-day.pipe';
-import { GroupCaseSummaryComponent } from '../group-case-summary/group-case-summary.component';
 @Component({
   selector: 'hearings-per-judiciary',
   styleUrls: ['./hearings-per-judiciary.scss'],
   templateUrl: './hearings-per-judiciary.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    GroupCaseSummaryComponent,
     PdkTableComponent,
     PdkTableCaptionDirective,
     NgTemplateOutlet,
@@ -86,8 +82,7 @@ import { GroupCaseSummaryComponent } from '../group-case-summary/group-case-summ
     FullNamePipe,
     ApplicantRespondentFullNamePipe,
     JudiciaryMemberNamesPipe,
-    StartTimeByMatchedHearingDayPipe,
-    PdkTagComponent
+    StartTimeByMatchedHearingDayPipe
   ],
   providers: [
     FindFirstDefendantAlphabeticallyPipe,
@@ -122,7 +117,6 @@ export class HearingsPerJudiciaryComponent implements OnChanges {
   sortedHearings: Hearing[];
   selectedHearing: Hearing;
   focussedHearing: Hearing = undefined;
-  protected readonly isGroupedCivilCase = isGroupedCivilCase;
 
   constructor(
     private findFirstDefendantAlphabetically: FindFirstDefendantAlphabeticallyPipe,
