@@ -17,7 +17,8 @@ import {
   HearingsGroupedByDateAndRoom,
   HearingsGroupedByJudiciaryAndRoom,
   Hearing,
-  UnallocatedHearings
+  UnallocatedHearings,
+  PublishCourtListType
 } from '../core/model/hearing';
 import { CreateAListContainer } from './create-a-list.container';
 import { Title } from '@angular/platform-browser';
@@ -497,6 +498,28 @@ describe('CreateAListContainer', () => {
 
       expect(dispatchSpy).toHaveBeenLastCalledWith(
         new SearchAllocatedHearingsByDateRangeAction({ options: { ...selectedOptions } })
+      );
+    });
+
+    it('should show ADVANCE in the published message when the WARN list is published', () => {
+      component.selectedOptions = { ...component.selectedOptions, courtCentre: 'Liverpool Crown' };
+      component.onListPublished({
+        publishCourtListType: PublishCourtListType.Warn,
+        displayDate: 'Week commencing 4 November 2019'
+      });
+      expect(component.publishCourtListMessage).toBe(
+        'ADVANCE hearing list published: Liverpool Crown, All courtrooms, Week commencing 4 November 2019'
+      );
+    });
+
+    it('should keep the list type name in the published message for other lists', () => {
+      component.selectedOptions = { ...component.selectedOptions, courtCentre: 'Liverpool Crown' };
+      component.onListPublished({
+        publishCourtListType: PublishCourtListType.Firm,
+        displayDate: 'Week commencing 4 November 2019'
+      });
+      expect(component.publishCourtListMessage).toBe(
+        'FIRM hearing list published: Liverpool Crown, All courtrooms, Week commencing 4 November 2019'
       );
     });
   });
