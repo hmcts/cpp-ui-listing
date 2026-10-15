@@ -50,7 +50,6 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
             {{ otherDefendants | plusMore }}
           </span>
         }
-
         <div>
           <a
             pdk-link
