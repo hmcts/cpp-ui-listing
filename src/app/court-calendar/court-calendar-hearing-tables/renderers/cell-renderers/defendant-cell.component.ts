@@ -1,17 +1,36 @@
 import { ChangeDetectionStrategy, Component, HostListener, inject, OnInit } from '@angular/core';
-import { PdkCore } from '@cpp/pdk';
+import { PdkCore, PdkTagComponent } from '@cpp/pdk';
 import { ApplicantRespondent, Defendant } from '../../../../core';
 import { ApplicantRespondentFullNamePipe } from '../../../../shared/pipes/applicant-respondent-full-name.pipe';
 import { FullNamePipe } from '../../../../shared/pipes/full-name.pipe';
 import { HearingDefendantVM } from '../../../model';
 import { PlusMorePipe } from '../../../pipes/plus-more.pipe';
 import { WofdWarningService } from '@cpp/application';
+import { GroupCaseSummaryComponent } from '../../../../shared/components/group-case-summary/group-case-summary.component';
 
 @Component({
   selector: 'defendant-cell',
   template: `
     <div data-test-id="defendants" class="defendants">
-      @if (displayDefendants?.length > 0) {
+      @if (defendantData.numberOfGroupCases) {
+        <group-case-summary
+          [groupCaseCount]="defendantData.numberOfGroupCases"
+        ></group-case-summary>
+        <div>
+          <a
+            pdk-link
+            class="hearing-reference"
+            pdk-typography="caption-medium"
+            data-test-id="hearingReference"
+            target="_blank"
+            href="{{ baseUrl }}/prosecution-casefile/case-at-a-glance/{{ defendantData.caseId }}"
+            ><span pdk-visually-hidden>Case reference</span> {{ defendantData.caseUrn }}</a
+          >
+        </div>
+        <div pdk-margin-top="1">
+          <pdk-tag data-test-id="bulkCasesTag" [color]="'grey'">Bulk Cases</pdk-tag>
+        </div>
+      } @else if (displayDefendants?.length > 0) {
         @for (defendant of displayDefendants; track defendant.id) {
           <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
             {{ defendant | fullName
@@ -80,7 +99,14 @@ import { WofdWarningService } from '@cpp/application';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ['defendantData', 'baseUrl'],
-  imports: [PlusMorePipe, ApplicantRespondentFullNamePipe, FullNamePipe, PdkCore],
+  imports: [
+    PlusMorePipe,
+    ApplicantRespondentFullNamePipe,
+    FullNamePipe,
+    PdkCore,
+    GroupCaseSummaryComponent,
+    PdkTagComponent
+  ],
   styles: [
     `
       .defendants {
