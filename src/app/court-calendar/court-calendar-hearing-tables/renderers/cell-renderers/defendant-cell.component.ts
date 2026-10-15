@@ -12,32 +12,10 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
   selector: 'defendant-cell',
   template: `
     <div data-test-id="defendants" class="defendants">
-      @if (defendantData.numberOfGroupCases || displayDefendants?.length > 0) {
-        @if (defendantData.numberOfGroupCases) {
-          <group-case-summary
-            [groupCaseCount]="defendantData.numberOfGroupCases"
-          ></group-case-summary>
-        } @else {
-          @for (defendant of displayDefendants; track defendant.id) {
-            <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
-              {{ defendant | fullName
-              }}{{
-                defendant.isYouth && defendant.bailStatus?.code === 'C'
-                  ? ' (Y, C)'
-                  : defendant.isYouth
-                    ? ' (Y)'
-                    : defendant.bailStatus?.code === 'C'
-                      ? ' (C)'
-                      : ''
-              }}</span
-            >
-          }
-          @if (otherDefendants.length > 0) {
-            <span>
-              {{ otherDefendants | plusMore }}
-            </span>
-          }
-        }
+      @if (defendantData.numberOfGroupCases) {
+        <group-case-summary
+          [groupCaseCount]="defendantData.numberOfGroupCases"
+        ></group-case-summary>
         <div>
           <a
             pdk-link
@@ -49,11 +27,41 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
             ><span pdk-visually-hidden>Case reference</span> {{ defendantData.caseUrn }}</a
           >
         </div>
-        @if (defendantData.numberOfGroupCases) {
-          <div pdk-margin-top="1">
-            <pdk-tag data-test-id="bulkCasesTag" [color]="'grey'">Bulk Cases</pdk-tag>
-          </div>
+        <div pdk-margin-top="1">
+          <pdk-tag data-test-id="bulkCasesTag" [color]="'grey'">Bulk Cases</pdk-tag>
+        </div>
+      } @else if (displayDefendants?.length > 0) {
+        @for (defendant of displayDefendants; track defendant.id) {
+          <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
+            {{ defendant | fullName
+            }}{{
+              defendant.isYouth && defendant.bailStatus?.code === 'C'
+                ? ' (Y, C)'
+                : defendant.isYouth
+                  ? ' (Y)'
+                  : defendant.bailStatus?.code === 'C'
+                    ? ' (C)'
+                    : ''
+            }}</span
+          >
         }
+        @if (otherDefendants.length > 0) {
+          <span>
+            {{ otherDefendants | plusMore }}
+          </span>
+        }
+
+        <div>
+          <a
+            pdk-link
+            class="hearing-reference"
+            pdk-typography="caption-medium"
+            data-test-id="hearingReference"
+            target="_blank"
+            href="{{ baseUrl }}/prosecution-casefile/case-at-a-glance/{{ defendantData.caseId }}"
+            ><span pdk-visually-hidden>Case reference</span> {{ defendantData.caseUrn }}</a
+          >
+        </div>
       } @else {
         @if (hasRespondents || !!applicant) {
           @for (respondent of displayRespondents; track respondent.id) {
