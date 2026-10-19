@@ -22,15 +22,17 @@
         <b>Public list note (optional)</b>
       </dt>
       <dd pdk-grid two-thirds pdk-margin-left="0" pdk-padding-left="0">
-        <input
-          type="text"
+        <textarea
+          pdk-text-input
+          pdk-resize
           name="publicListNote"
           #model="ngModel"
           [ngModel]="publicListNote()"
           pdk-input
-          maxlength="150"
-        />
-        <pdk-character-count [value]="model.value" limit="150"> </pdk-character-count>
+          [maxlength]="publicListNoteMaxLength"
+        ></textarea>
+        <pdk-character-count [value]="model.value" [limit]="publicListNoteMaxLength">
+        </pdk-character-count>
       </dd>
     </div>
   </form>
