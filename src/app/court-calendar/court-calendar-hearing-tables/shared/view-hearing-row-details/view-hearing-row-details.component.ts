@@ -5,12 +5,13 @@ import { OffenceWordingCellComponent } from '../../renderers/cell-renderers/offe
 import { CaseNotesComponent } from '../case-notes/case-notes.component';
 import { CustodyStatusComponent } from '../custody-status/custody-status.component';
 import { FormsModule } from '@angular/forms';
-import { PdkCharacterCountComponent } from '@cpp/pdk';
+import { PdkCharacterCountComponent, PdkResizeDirective } from '@cpp/pdk';
 import { FullNamePipe } from '../../../../shared/pipes/full-name.pipe';
 import { ApplicantRespondentFullNamePipe } from '../../../../shared/pipes/applicant-respondent-full-name.pipe';
 import { PdkComponents } from '../../../../shared/pdk-shared-components';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { LIST_TYPE_LABELS, TIER_LABELS } from '../../../utils/tier-and-list-type-labels';
+import { PUBLIC_LIST_NOTE_MAX_LENGTH } from '../../../../core/util/constants';
 
 @Component({
   selector: 'view-hearing-row-details',
@@ -23,6 +24,7 @@ import { LIST_TYPE_LABELS, TIER_LABELS } from '../../../utils/tier-and-list-type
     CaseNotesComponent,
     CustodyStatusComponent,
     PdkCharacterCountComponent,
+    PdkResizeDirective,
     FullNamePipe,
     ApplicantRespondentFullNamePipe,
     PdkComponents,
@@ -41,6 +43,7 @@ export class ViewHearingRowDetailsComponent implements OnInit {
   readonly updateHearingPublicListNote = output<Hearing>();
   readonly tierLabel = computed(() => TIER_LABELS[this.hearing()?.tier]);
   readonly listTypeLabel = computed(() => LIST_TYPE_LABELS[this.hearing()?.listType]);
+  readonly publicListNoteMaxLength = PUBLIC_LIST_NOTE_MAX_LENGTH;
 
   listedCase: ListedCase;
   application: CourtApplication;

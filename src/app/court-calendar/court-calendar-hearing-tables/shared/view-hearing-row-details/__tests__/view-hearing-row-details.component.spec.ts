@@ -96,6 +96,22 @@ describe('ViewHearingRowDetailsComponent', () => {
     expect(form).toBeTruthy();
   });
 
+  it('should render the public list note as a textarea limited to 200 characters with a character count', async () => {
+    mockFixtureInputs(fixture, {
+      hearing: { allocated: false, jurisdictionType: 'CROWN' }
+    });
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const publicListNote = fixture.debugElement.query(By.css('[name="publicListNote"]'));
+    const characterCount = fixture.debugElement.query(By.css('pdk-character-count'));
+
+    expect(publicListNote.nativeElement.tagName).toBe('TEXTAREA');
+    expect(publicListNote.nativeElement.getAttribute('maxlength')).toBe('200');
+    expect(characterCount.nativeElement.textContent).toContain('You have 200 characters remaining');
+  });
+
   it('should not display the public list note form when hearing is allocated', () => {
     mockFixtureInputs(fixture, {
       hearing: { allocated: true, jurisdictionType: 'CROWN' }
