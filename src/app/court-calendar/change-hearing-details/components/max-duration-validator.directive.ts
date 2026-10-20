@@ -1,4 +1,4 @@
-import { Directive, effect, forwardRef, input, untracked } from '@angular/core';
+import { Directive, effect, forwardRef, input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 @Directive({
@@ -18,7 +18,7 @@ export class MaxDurationDirective implements Validator {
   constructor() {
     effect(() => {
       this.maxDuration();
-      untracked(() => this.validateOnChange());
+      this.validateOnChange();
     });
   }
 
