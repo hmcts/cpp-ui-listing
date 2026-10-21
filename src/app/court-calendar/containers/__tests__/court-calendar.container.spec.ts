@@ -35,6 +35,7 @@ import {
 import { WofdWarningService } from '@cpp/application';
 import { ModalService } from '@cpp/pdk';
 import { ChangeEndDateModalComponent } from '../../court-calendar-hearing-tables/shared/modals/change-end-date-modal.component';
+import { COURT_CALENDAR_ALERTS } from '../../utils/court-calendar-alert-messages';
 
 class MockAppConfigService {
   getConfig() {
@@ -442,8 +443,7 @@ describe('CourtCalendarContainer', () => {
       expect(dispatchSpy).toHaveBeenCalledTimes(1);
       expect(dispatchSpy).toHaveBeenCalledWith(
         setAlertMessage({
-          failureAlert:
-            'One or more days of this hearing have no session in the required courtroom. Create sessions in that courtroom for all hearing days.'
+          failureAlert: COURT_CALENDAR_ALERTS.NO_SESSIONS_FOR_HEARING_CHANGE
         })
       );
     });
