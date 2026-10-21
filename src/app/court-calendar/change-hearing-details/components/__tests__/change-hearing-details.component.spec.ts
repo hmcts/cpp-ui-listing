@@ -221,4 +221,49 @@ describe('ChangeHearingDetailsComponent', () => {
       );
     });
   });
+
+  describe('Duration Validation', () => {
+    const maxDurationMessage =
+      'Hearing duration cannot be more than 6 hours. Enter a duration of 6 hours or less.';
+
+    const typeInto = (name: string, value: string): void => {
+      const input: HTMLInputElement = fixture.nativeElement.querySelector(
+        `pdk-time-input[name="duration"] input[name="${name}"]`
+      );
+      input.value = value;
+      input.dispatchEvent(new Event('input'));
+    };
+
+    const saveChanges = async (): Promise<void> => {
+      fixture.nativeElement.querySelector('[data-role="apply-filters-btn"]').click();
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+    };
+
+    beforeEach(async () => {
+      jest.spyOn(component.onSubmit, 'emit');
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+    });
+
+    it('should block saving and show an error when the duration is more than 6 hours', async () => {
+      typeInto('timeHours', '06');
+      typeInto('timeMinutes', '01');
+      await saveChanges();
+
+      expect(component.onSubmit.emit).not.toHaveBeenCalled();
+      expect(fixture.nativeElement.textContent).toContain(maxDurationMessage);
+    });
+
+    it('should save when the duration is exactly 6 hours', async () => {
+      typeInto('timeHours', '06');
+      typeInto('timeMinutes', '00');
+      await saveChanges();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledTimes(1);
+      expect(fixture.nativeElement.textContent).not.toContain(maxDurationMessage);
+    });
+  });
 });
