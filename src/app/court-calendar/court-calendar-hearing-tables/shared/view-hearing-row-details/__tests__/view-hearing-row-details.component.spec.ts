@@ -112,6 +112,17 @@ describe('ViewHearingRowDetailsComponent', () => {
     expect(characterCount.nativeElement.textContent).toContain('You have 200 characters remaining');
   });
 
+  it('should wrap a long unbroken public list note for an allocated Crown hearing', () => {
+    const longPublicListNote = 'A'.repeat(200);
+    mockFixtureInputs(fixture, {
+      hearing: { allocated: true, jurisdictionType: 'CROWN', publicListNote: longPublicListNote }
+    });
+    fixture.detectChanges();
+
+    const publicListNote = fixture.debugElement.query(By.css('dd span.wrap-long-text'));
+    expect(publicListNote.nativeElement.textContent).toBe(longPublicListNote);
+  });
+
   it('should not display the public list note form when hearing is allocated', () => {
     mockFixtureInputs(fixture, {
       hearing: { allocated: true, jurisdictionType: 'CROWN' }
