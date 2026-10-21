@@ -443,7 +443,7 @@ describe('CourtCalendarContainer', () => {
       expect(dispatchSpy).toHaveBeenCalledWith(
         setAlertMessage({
           failureAlert:
-            'There are no sessions in the required courtroom for one or more days of the hearing. Please create any missing sessions for the correct courtroom and all days of the hearing.'
+            'One or more days of this hearing have no session in the required courtroom. Create sessions in that courtroom for all hearing days.'
         })
       );
     });
