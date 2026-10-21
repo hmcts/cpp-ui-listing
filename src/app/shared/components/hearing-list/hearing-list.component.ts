@@ -19,7 +19,6 @@ import { ReportingRestrictionsComponent } from '../reporting-restrictions/report
 import { YouthFlagComponent } from '../youth-flag/youth-flag.component';
 import { HearingOffencesComponent } from '../hearing-offences/hearing-offences.component';
 import { GroupCaseSummaryComponent } from '../group-case-summary/group-case-summary.component';
-import { PdkTagComponent } from '@cpp/pdk';
 
 @Component({
   selector: 'hearing-list',
@@ -33,8 +32,7 @@ import { PdkTagComponent } from '@cpp/pdk';
     ReportingRestrictionsComponent,
     YouthFlagComponent,
     HearingOffencesComponent,
-    GroupCaseSummaryComponent,
-    PdkTagComponent
+    GroupCaseSummaryComponent
   ],
   providers: [
     CapitalizeFirstLetterPipe,

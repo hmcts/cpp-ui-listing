@@ -140,11 +140,48 @@ describe('HearingListComponent', () => {
       expect(fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))).toBeNull();
     });
 
+    it('should pass case reference and link to group case summary', () => {
+      const hearing = civilGroupHearing(1000);
+      const [kase] = hearing.listedCases;
+      hostComponent.hearings = [hearing];
+      fixture.detectChanges();
+
+      const caseLink = fixture.debugElement.query(
+        By.css('group-case-summary [data-test-id="hearingReference"]')
+      ).nativeElement;
+      expect(caseLink.textContent.trim()).toBe(
+        `Case reference ${kase.caseIdentifier.caseReference}`
+      );
+      expect(caseLink.getAttribute('href')).toBe(
+        `/prosecution-casefile/case-at-a-glance/${kase.id}`
+      );
+      expect(
+        fixture.debugElement.query(By.css('group-case-summary [data-test-id="bulkCasesTag"]'))
+      ).not.toBeNull();
+    });
+
     it('should display defendant name when number of group cases is missing', () => {
       hostComponent.hearings = [civilGroupHearing()];
       fixture.detectChanges();
 
+      expect(fixture.debugElement.query(By.css('group-case-summary'))).toBeNull();
       expect(fixture.debugElement.query(By.css('[data-test-id="numberOfDefendants"]'))).toBeNull();
+      expect(fixture.debugElement.query(By.css('[data-test-id="bulkCasesTag"]'))).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
+      ).not.toBeNull();
+    });
+
+    it('should not display group case summary for a non-grouped civil case', () => {
+      hostComponent.hearings = [
+        {
+          ...civilGroupHearing(1000),
+          listedCases: [{ ...mockData[1].listedCases[0], isCivil: true, isGroupMaster: false }]
+        }
+      ];
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('group-case-summary'))).toBeNull();
       expect(
         fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
       ).not.toBeNull();

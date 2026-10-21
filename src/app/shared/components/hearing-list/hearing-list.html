@@ -74,25 +74,10 @@
               @if (isGroupedCivilCase(kase) && hearing.numberOfGroupCases) {
               <group-case-summary
                 [groupCaseCount]="hearing.numberOfGroupCases"
+                [baseUrl]="baseUrl()"
+                [caseId]="kase.id"
+                [caseUrn]="kase.caseIdentifier.caseReference"
               ></group-case-summary>
-              <div>
-                <a
-                  pdk-link
-                  pdk-margin-bottom="1"
-                  class="hearing-reference"
-                  pdk-typography="caption-medium"
-                  data-test-id="hearingReference"
-                  target="_blank"
-                  style="inline-size: 158px"
-                  [attr.aria-label]="'View case details for ' + firstDefendantName(kase.defendants)"
-                  href="{{ baseUrl() }}/prosecution-casefile/case-at-a-glance/{{ kase.id }}"
-                  >{{ kase.caseIdentifier.caseReference }}</a
-                >
-              </div>
-              <div pdk-margin-top="1">
-                <pdk-tag data-test-id="bulkCasesTag" [color]="'grey'">Bulk Cases</pdk-tag>
-              </div>
-
               } @else {
               <div data-test-id="firstDefendantName">{{ firstDefendantName(kase.defendants) }}</div>
               @if (plusOtherDefendants(kase.defendants)) {
