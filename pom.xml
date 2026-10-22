@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>uk.gov.moj.cpp.ui</groupId>
@@ -8,7 +10,7 @@
     </parent>
     <groupId>uk.gov.moj.cpp.ui</groupId>
     <artifactId>ui-listing</artifactId>
-    <version>19.0.26-SNAPSHOT</version>
+    <version>19.0.26-CIMD-4368-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <protractor.baseUrl>http://localhost:4200</protractor.baseUrl>
