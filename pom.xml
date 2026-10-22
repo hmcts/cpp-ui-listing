@@ -10,7 +10,7 @@
     </parent>
     <groupId>uk.gov.moj.cpp.ui</groupId>
     <artifactId>ui-listing</artifactId>
-    <version>19.0.26-CIMD-4368-SNAPSHOT</version>
+    <version>19.0.27-CIMD-4368-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <protractor.baseUrl>http://localhost:4200</protractor.baseUrl>
