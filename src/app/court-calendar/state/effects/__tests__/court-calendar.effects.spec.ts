@@ -10,6 +10,7 @@ import * as effects from '../court-calendar.effects';
 import { ApiError, ListingService } from '../../../../core';
 
 import { mockSearchFormValues, mockCourtCalendarState } from '../../../utils/mocks';
+import { COURT_CALENDAR_ALERTS } from '../../../utils/court-calendar-alert-messages';
 import { loadListingNotes, resetHearingSlots, HearingSlotAllocation } from '@cpp/scheduling';
 
 let searchCourtCalendarHearings: jest.Mock;
@@ -251,8 +252,7 @@ describe('CourtCalendar', () => {
       expect(runEffect()).toBeObservable(
         cold('--b', {
           b: CourtCalendarActions.setAlertMessage({
-            failureAlert:
-              'There are no sessions in the required courtroom for one or more days of the hearing. Please create any missing sessions for the correct courtroom and all days of the hearing.'
+            failureAlert: COURT_CALENDAR_ALERTS.NO_SESSIONS_FOR_HEARING_CHANGE
           })
         })
       );

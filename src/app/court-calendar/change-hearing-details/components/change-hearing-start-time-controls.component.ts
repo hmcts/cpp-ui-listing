@@ -3,6 +3,7 @@ import { ControlContainer, FormsModule, NgForm } from '@angular/forms';
 import { TransformDurationMinutesPipe } from '../../../shared/pipes/transform-duration.pipe';
 import { PdkForm, PdkTimeInputComponent } from '@cpp/pdk';
 import { DatePipe } from '@angular/common';
+import { MaxDurationDirective } from './max-duration-validator.directive';
 
 @Component({
   selector: 'change-hearing-start-time-controls',
@@ -44,6 +45,11 @@ import { DatePipe } from '@angular/common';
           {
             rule: 'timeExists',
             message: 'Enter a valid duration'
+          },
+          {
+            rule: 'maxDurationExceeded',
+            message:
+              'Hearing duration cannot be more than 6 hours. Enter a duration of 6 hours or less.'
           }
         ]"
       >
@@ -52,13 +58,21 @@ import { DatePipe } from '@angular/common';
           labelHidden="false"
           autoShift="false"
           required
+          [maxDuration]="360"
           [ngModel]="duration() | transformDurationMinutes"
         >
         </pdk-time-input>
       </pdk-form-field>
     </div>
   `,
-  imports: [DatePipe, TransformDurationMinutesPipe, PdkTimeInputComponent, FormsModule, PdkForm],
+  imports: [
+    DatePipe,
+    TransformDurationMinutesPipe,
+    PdkTimeInputComponent,
+    FormsModule,
+    PdkForm,
+    MaxDurationDirective
+  ],
   viewProviders: [
     {
       provide: ControlContainer,
@@ -71,6 +85,9 @@ import { DatePipe } from '@angular/common';
         display: flex;
         justify-content: space-between;
         width: 600px;
+      }
+      .timeDuration > pdk-form-field {
+        flex: 1 1 0;
       }
     `
   ]
