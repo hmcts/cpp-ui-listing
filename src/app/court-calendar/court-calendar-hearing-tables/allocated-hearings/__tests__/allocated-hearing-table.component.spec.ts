@@ -143,6 +143,8 @@ describe('AllocatedHearingTableContainer', () => {
                     ...hearing,
                     defendants: {
                       ...hearing.defendants,
+                      caseId: 'group-case-id',
+                      caseUrn: 'GROUPURN1',
                       numberOfGroupCases: 25
                     }
                   }
@@ -160,5 +162,17 @@ describe('AllocatedHearingTableContainer', () => {
         .query(By.css('[data-test-id="numberOfDefendants"]'))
         .nativeElement.textContent.trim()
     ).toBe('25 DEFENDANTS');
+
+    const caseLink = fixture.debugElement.query(
+      By.css('group-case-summary [data-test-id="hearingReference"]')
+    ).nativeElement;
+    expect(caseLink.textContent.trim()).toBe('Case reference GROUPURN1');
+    expect(caseLink.getAttribute('href')).toBe(
+      'mock-base-url//prosecution-casefile/case-at-a-glance/group-case-id'
+    );
+    expect(
+      fixture.debugElement.query(By.css('group-case-summary [data-test-id="bulkCasesTag"]'))
+    ).not.toBeNull();
+    expect(fixture.debugElement.query(By.css('[data-test-id="defendant"]'))).toBeNull();
   });
 });

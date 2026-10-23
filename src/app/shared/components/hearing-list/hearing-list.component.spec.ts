@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { AppConfigService } from '../../../config';
 import { HearingListComponent } from './hearing-list.component';
@@ -113,6 +114,78 @@ describe('HearingListComponent', () => {
       prosecutorCode: 'Prosecutor populated'
     };
     expect(component.getProsecutor(kases[0])).toBe('Prosecutor populated');
+  });
+
+  describe('Civil group cases', () => {
+    const civilGroupHearing = (numberOfGroupCases?: number) => ({
+      ...mockData[1],
+      numberOfGroupCases,
+      listedCases: [{ ...mockData[1].listedCases[0], isCivil: true, isGroupMaster: true }]
+    });
+
+    it('should display group case summary when number of group cases is present', () => {
+      hostComponent.hearings = [civilGroupHearing(1000)];
+      fixture.detectChanges();
+
+      expect(
+        fixture.debugElement
+          .query(By.css('[data-test-id="numberOfDefendants"]'))
+          .nativeElement.textContent.trim()
+      ).toBe('1000 DEFENDANTS');
+      expect(
+        fixture.debugElement
+          .query(By.css('[data-test-id="numberOfCases"]'))
+          .nativeElement.textContent.trim()
+      ).toBe('1000 CASES');
+      expect(fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))).toBeNull();
+    });
+
+    it('should pass case reference and link to group case summary', () => {
+      const hearing = civilGroupHearing(1000);
+      const [kase] = hearing.listedCases;
+      hostComponent.hearings = [hearing];
+      fixture.detectChanges();
+
+      const caseLink = fixture.debugElement.query(
+        By.css('group-case-summary [data-test-id="hearingReference"]')
+      ).nativeElement;
+      expect(caseLink.textContent.trim()).toBe(
+        `Case reference ${kase.caseIdentifier.caseReference}`
+      );
+      expect(caseLink.getAttribute('href')).toBe(
+        `/prosecution-casefile/case-at-a-glance/${kase.id}`
+      );
+      expect(
+        fixture.debugElement.query(By.css('group-case-summary [data-test-id="bulkCasesTag"]'))
+      ).not.toBeNull();
+    });
+
+    it('should display defendant name when number of group cases is missing', () => {
+      hostComponent.hearings = [civilGroupHearing()];
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('group-case-summary'))).toBeNull();
+      expect(fixture.debugElement.query(By.css('[data-test-id="numberOfDefendants"]'))).toBeNull();
+      expect(fixture.debugElement.query(By.css('[data-test-id="bulkCasesTag"]'))).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
+      ).not.toBeNull();
+    });
+
+    it('should not display group case summary for a non-grouped civil case', () => {
+      hostComponent.hearings = [
+        {
+          ...civilGroupHearing(1000),
+          listedCases: [{ ...mockData[1].listedCases[0], isCivil: true, isGroupMaster: false }]
+        }
+      ];
+      fixture.detectChanges();
+
+      expect(fixture.debugElement.query(By.css('group-case-summary'))).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('[data-test-id="firstDefendantName"]'))
+      ).not.toBeNull();
+    });
   });
 
   describe('Pagination', () => {
