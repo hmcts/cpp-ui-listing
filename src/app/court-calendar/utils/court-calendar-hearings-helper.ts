@@ -36,6 +36,17 @@ export function judiciaryIsEqual(
   );
 }
 
+export function isAllDayDurationBased(slot: HearingSlot | undefined): boolean {
+  return slot?.courtSession === 'AD' && !slot.slotBased;
+}
+
+export function findAllDayDurationBasedSession(
+  hearingSlots: HearingSlot[],
+  sessionDate: string
+): HearingSlot | undefined {
+  return hearingSlots.find(slot => slot.sessionDate === sessionDate && isAllDayDurationBased(slot));
+}
+
 export const getCourtCalendarViewModel = (
   { hearings, pagination }: Partial<PaginatedHearings>,
   courtCentre: OrganisationUnit,
