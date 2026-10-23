@@ -3,7 +3,7 @@
   <p pdk-margin-top="1">
     {{ startDate() | date: 'dd MMMM yyyy' }}
   </p>
-  <pdk-form-field>
+  <pdk-form-field [errorMessages]="isMultiDayErrorMessages">
     <pdk-checkbox
       [id]="'multiDay'"
       name="multiDay"
@@ -11,6 +11,8 @@
       #multiDay="ngModel"
       (ngModelChange)="invertMultiDay($event)"
       [ngModelOptions]="{ standalone: true }"
+      [requiresAllDayDurationBasedSession]="startDate()"
+      [hearingSlots]="hearingSlots()"
     >
       This is a multi-day hearing
     </pdk-checkbox>

@@ -12,6 +12,7 @@ import { CPPDate } from '../../core/util';
 import { ChangeHearingDetailsFormValues } from '../change-hearing-details/components/change-hearing-details.component';
 import { HearingAllocationPayload } from '../model';
 import { getAllocateProsecutionCases } from './court-calendar-hearings-helper';
+import { CourtSession } from '@cpp/scheduling';
 
 interface NonDefaultDayData {
   startTime: string;
@@ -21,7 +22,7 @@ interface NonDefaultDayData {
   startDate: string;
   courtScheduleId?: string;
   oucode?: string;
-  session?: string;
+  session?: CourtSession;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -43,7 +44,7 @@ export class AllocateHearingFactory {
     hearingDateTime: string,
     judiciary: ExtendedJudicialRole[],
     courtScheduleId?: string,
-    courtSession?: string
+    courtSession?: CourtSession
   ): HearingAllocationPayload {
     const endDate = this.getEndDate(startDate, rest);
     return {
@@ -256,7 +257,7 @@ export class AllocateHearingFactory {
     courtRoomId: string,
     courtCentre: CourtCentre,
     courtScheduleId?: string,
-    courtSession?: string
+    courtSession?: CourtSession
   ): NonDefaultDay[] {
     if (dateRange.startDate !== dateRange.endDate && jurisdictionType === 'MAGISTRATES') {
       return [];
@@ -308,7 +309,7 @@ export class AllocateHearingFactory {
     courtRoomId: string,
     courtScheduleId?: string,
     courtCentreOuCode?: string,
-    courtSession?: string
+    courtSession?: CourtSession
   ) {
     let oucode = undefined;
     let session = undefined;
