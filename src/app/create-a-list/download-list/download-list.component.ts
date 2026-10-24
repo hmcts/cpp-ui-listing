@@ -14,8 +14,7 @@ import { getMomentValue } from '../../core/util';
 import {
   PublishStatus,
   PublishCourtListType,
-  HearingsGroupedByDateAndRoom,
-  getPublishCourtListLabel
+  HearingsGroupedByDateAndRoom
 } from '../../core/model/hearing';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -149,7 +148,7 @@ export class DownloadListComponent implements OnChanges {
     } else {
       timeAndDate = moment.utc(rawdate);
     }
-    return `Previous ${getPublishCourtListLabel(listType)} list published ${timeAndDate.format('HH:mm D MMM')}`;
+    return `Previous ${listType.toLowerCase()} list published ${timeAndDate.format('HH:mm D MMM')}`;
   }
 
   getListOfCourtroomsWithHearings(
@@ -220,10 +219,10 @@ export class DownloadListComponent implements OnChanges {
   }
 
   openModal(template: TemplateRef<any>, listName: string) {
-    const label = getPublishCourtListLabel(listName);
-    this.listText = `Publish ${label} list`;
+    const lowerCasedName = listName.toLowerCase();
+    this.listText = `Publish ${lowerCasedName} list`;
 
-    this.modalConfirmMessage = `Are you sure you want to publish the ${label} hearing list?`;
+    this.modalConfirmMessage = `Are you sure you want to publish the ${lowerCasedName} hearing list?`;
     this.publishListNameSelected = <PublishCourtListType>listName.toUpperCase();
     this.modalRef = this.modalService.show(template);
   }
