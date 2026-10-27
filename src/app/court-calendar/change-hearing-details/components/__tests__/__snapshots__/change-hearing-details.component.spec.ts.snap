@@ -690,7 +690,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
         >
           <button
             class="govuk-button"
-            data-role="apply-filters-btn"
+            data-role="save-hearing-changes-btn"
             pdk-button=""
             type="submit"
           >
@@ -1313,7 +1313,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
         >
           <button
             class="govuk-button"
-            data-role="apply-filters-btn"
+            data-role="save-hearing-changes-btn"
             pdk-button=""
             type="submit"
           >
@@ -1899,7 +1899,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
         >
           <button
             class="govuk-button"
-            data-role="apply-filters-btn"
+            data-role="save-hearing-changes-btn"
             pdk-button=""
             type="submit"
           >
@@ -2646,7 +2646,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
         >
           <button
             class="govuk-button"
-            data-role="apply-filters-btn"
+            data-role="save-hearing-changes-btn"
             pdk-button=""
             type="submit"
           >
@@ -3232,7 +3232,7 @@ exports[`ChangeHearingDetailsComponent Form Submission should emit correct paylo
         >
           <button
             class="govuk-button"
-            data-role="apply-filters-btn"
+            data-role="save-hearing-changes-btn"
             pdk-button=""
             type="submit"
           >

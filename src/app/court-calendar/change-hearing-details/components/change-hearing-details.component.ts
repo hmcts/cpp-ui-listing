@@ -17,6 +17,13 @@ import { ChangeHearingDetailsMagsControlComponent } from './change-hearing-detai
 import { FormsModule } from '@angular/forms';
 import { JudiciaryInputComponent } from '../../../shared/components/judiciary-input/judiciary-input.component';
 import { PdkComponents } from '../../../shared/pdk-shared-components';
+import {
+  findAllDayDurationBasedSession,
+  isAllDayDurationBased
+} from '../../utils/court-calendar-hearings-helper';
+
+const WORKING_DAY_IN_MINUTES = 360;
+
 export interface ChangeHearingDetailsFormValues extends Pick<
   Hearing,
   | 'hasVideoLink'
@@ -77,46 +84,36 @@ export class ChangeHearingDetailsComponent {
     value: Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string };
   }): void {
     const selectedHearing = this.selectedHearing();
-    const [{ courtScheduleId: existingCourtScheduleId, startTime }] = selectedHearing.hearingDays;
+    const [{ courtScheduleId: existingCourtScheduleId, startTime: existingStartTime }] =
+      selectedHearing.hearingDays;
     const isMultiDay = restValues.dateRange?.startDate !== restValues.dateRange?.endDate;
-    let durationMinutes: number;
-    let courtSession: CourtSession;
-    if (isMultiDay) {
-      durationMinutes =
-        this.cppDate.countWorkingDays(
+    const courtScheduleId = isMultiDay
+      ? this.allDayDurationBasedCourtScheduleIdOn(
           restValues.dateRange.startDate,
-          restValues.dateRange.endDate
-        ) * 360;
-    } else if (duration) {
-      const durationSplit = String(duration).split(':').map(Number);
-      durationMinutes = (durationSplit[0] || 0) * 60 + (durationSplit[1] || 0);
-    }
-
-    const effectiveStartTime =
-      isMultiDay || !restValues.startTime
-        ? this.cppDate.format(startTime, this.cppDate.HOURS_MINUTES_24H)
-        : restValues.startTime;
-
-    if (restValues.courtScheduleId) {
-      ({ courtSession } = this.hearingSlots().find(
-        ({ courtScheduleId }) => courtScheduleId === restValues.courtScheduleId
-      ));
-    }
+          existingCourtScheduleId
+        )
+      : (restValues.courtScheduleId ?? existingCourtScheduleId);
 
     if (!restValues.dateRange && selectedHearing.jurisdictionType === 'MAGISTRATES') {
       restValues.dateRange = new DateRange(selectedHearing.startDate, selectedHearing.endDate);
     }
-
-    const courtScheduleId = restValues.courtScheduleId ?? existingCourtScheduleId;
 
     const updatedHearing = this.allocateHearingFactory.updateAllocatedHearing(
       selectedHearing,
       {
         ...restValues,
         courtScheduleId,
-        courtSession,
-        startTime: effectiveStartTime,
-        duration: durationMinutes
+        courtSession: this.findHearingSlot(courtScheduleId)?.courtSession,
+        startTime:
+          isMultiDay || !restValues.startTime
+            ? this.cppDate.format(existingStartTime, this.cppDate.HOURS_MINUTES_24H)
+            : restValues.startTime,
+        duration: isMultiDay
+          ? this.cppDate.countWorkingDays(
+              restValues.dateRange.startDate,
+              restValues.dateRange.endDate
+            ) * WORKING_DAY_IN_MINUTES
+          : this.durationInMinutes(duration)
       },
       this.selectedCourtCentre(),
       this.selectedJudiary
@@ -130,7 +127,28 @@ export class ChangeHearingDetailsComponent {
 
   cancel(): void {
     this.onValidationError.emit(null);
-    // TODO: The 'emit' function requires a mandatory void argument
     this.onCancel.emit();
+  }
+
+  private allDayDurationBasedCourtScheduleIdOn(
+    startDate: string,
+    existingCourtScheduleId: string
+  ): string {
+    if (isAllDayDurationBased(this.findHearingSlot(existingCourtScheduleId))) {
+      return existingCourtScheduleId;
+    }
+    return findAllDayDurationBasedSession(this.hearingSlots(), startDate).courtScheduleId;
+  }
+
+  private findHearingSlot(courtScheduleId: string): HearingSlot | undefined {
+    return this.hearingSlots().find(slot => slot.courtScheduleId === courtScheduleId);
+  }
+
+  private durationInMinutes(duration: string): number | undefined {
+    if (!duration) {
+      return undefined;
+    }
+    const [hours, minutes] = String(duration).split(':').map(Number);
+    return (hours || 0) * 60 + (minutes || 0);
   }
 }

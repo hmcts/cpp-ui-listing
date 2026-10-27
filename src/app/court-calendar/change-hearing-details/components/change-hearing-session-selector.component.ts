@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  forwardRef,
-  input,
-  untracked
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input } from '@angular/core';
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -101,17 +93,11 @@ export class ChangeHearingSessionSelectorComponent implements ControlValueAccess
   );
 
   private propagateChange: (courtScheduleId: string) => void = () => {};
-  private revalidate: () => void = () => {};
 
   constructor() {
     this.control.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe(courtScheduleId => this.propagateChange(courtScheduleId));
-
-    effect(() => {
-      this.startTime();
-      untracked(() => this.revalidate());
-    });
   }
 
   writeValue(courtScheduleId: string): void {
@@ -124,12 +110,7 @@ export class ChangeHearingSessionSelectorComponent implements ControlValueAccess
 
   registerOnTouched(): void {}
 
-  registerOnValidatorChange(fn: () => void): void {
-    this.revalidate = fn;
-  }
-
   validate(): ValidationErrors | null {
-    this.control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
     return this.control.errors;
   }
 }
