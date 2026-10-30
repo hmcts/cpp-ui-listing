@@ -221,8 +221,7 @@ export class ListingService {
       bookingType: hearing.bookingType,
       priority: hearing.priority,
       specialRequirements: hearing.specialRequirements,
-      sendNotificationToParties: hearing.sendNotificationToParties,
-      courtRoomId: hearing?.courtRoomId
+      sendNotificationToParties: hearing.sendNotificationToParties
     };
     if (hearing.weekCommencingStartDate) {
       body.weekCommencingStartDate = hearing.weekCommencingStartDate;
