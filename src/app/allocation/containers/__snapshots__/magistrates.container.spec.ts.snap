@@ -7,6 +7,7 @@ exports[`MagistratesSchedulingContainerComponent should compile correctly 1`] = 
   defaultFilters$={[Function Observable]}
   filters$={[Function _Store]}
   hearingTypePlaceholder={[Function Object]}
+  isEnforcementCase$={[Function Observable]}
   organisationUnits$={[Function _Store]}
   pageSize$={[Function _Store]}
   rotaBusinessTypes$={[Function _Store]}

@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { ValidationError } from '@cpp/pdk';
+import { ModalService, ValidationError } from '@cpp/pdk';
 import { OrganisationUnit } from '@cpp/reference-data';
 import {
   ALLOCATION_FORM_CONFIGS,
@@ -14,6 +14,13 @@ import { provideStore } from '@ngrx/store';
 import { reducers } from '../../core/';
 import { CppHttp } from '@cpp/core';
 import { mockFixtureInputs } from '../../../mock-data/mock-fixture-inputs';
+import {
+  CPPDate,
+  ENFORCEMENT_BUSINESS_TYPE_CODE,
+  PAST_DATE_MESSAGES,
+  PastDateCheck
+} from '../../core/util';
+import { PastDateWarningModalComponent } from './past-date-warning-modal.component';
 
 describe('MagistratesSchedulingComponent', () => {
   let fixture: ComponentFixture<MagistratesSchedulingComponent>;
@@ -257,6 +264,116 @@ describe('MagistratesSchedulingComponent', () => {
 
     it('should render the slots', () => {
       expect(fixture).toMatchSnapshot();
+    });
+  });
+  describe('past-dated allocation', () => {
+    const today = '2026-10-23';
+    const filtersFor = (sessionStartDate: string, businessType?: string) =>
+      ({ sessionStartDate, businessType, panel: 'ADULT' }) as SchedulingFilters;
+    let modalService: ModalService;
+    let modalRef: { dispose: jest.Mock };
+
+    beforeEach(() => {
+      jest
+        .spyOn(TestBed.inject(CPPDate), 'getCurrentDate')
+        .mockReturnValue(new Date(`${today}T10:00:00`));
+      modalService = fixture.debugElement.injector.get(ModalService);
+      modalRef = { dispose: jest.fn() };
+      jest.spyOn(modalService, 'open').mockReturnValue(modalRef as any);
+      jest.spyOn(fixture.componentInstance.filtersSubmit, 'emit');
+    });
+
+    describe('for a non-Enforcement case', () => {
+      it('only allows today and future dates', () => {
+        expect(fixture.componentInstance.minimumDate()).toBe(today);
+        expect(fixture.componentInstance.startDateErrorMessages()).toContainEqual({
+          rule: 'minDate',
+          message: PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementCase]
+        });
+      });
+
+      it('searches when the start date is today', () => {
+        fixture.componentInstance.handleSubmitFilters(filtersFor(today));
+
+        expect(fixture.componentInstance.filtersSubmit.emit).toHaveBeenCalledWith(
+          filtersFor(today)
+        );
+        expect(modalService.open).not.toHaveBeenCalled();
+      });
+
+      it('shows an error and does not search when the start date is in the past', () => {
+        fixture.componentInstance.handleSubmitFilters(
+          filtersFor('2026-10-22', ENFORCEMENT_BUSINESS_TYPE_CODE)
+        );
+
+        expect(fixture.componentInstance.errors).toEqual([
+          { id: 'sessionStartDate', message: PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementCase] }
+        ]);
+        expect(fixture.componentInstance.filtersSubmit.emit).not.toHaveBeenCalled();
+        expect(modalService.open).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('for an Enforcement case', () => {
+      beforeEach(() => {
+        mockFixtureInputs(fixture, { isEnforcementCase: true });
+      });
+
+      it('allows dates up to 31 days in the past', () => {
+        expect(fixture.componentInstance.minimumDate()).toBe('2026-09-22');
+        expect(fixture.componentInstance.startDateErrorMessages()).toContainEqual({
+          rule: 'minDate',
+          message: PAST_DATE_MESSAGES[PastDateCheck.TooFarInPast]
+        });
+      });
+
+      it('shows a warning and searches on Continue when the date is in the past', () => {
+        const filters = filtersFor('2026-10-01', ENFORCEMENT_BUSINESS_TYPE_CODE);
+        fixture.componentInstance.handleSubmitFilters(filters);
+
+        expect(modalService.open).toHaveBeenCalledWith(
+          PastDateWarningModalComponent,
+          expect.anything()
+        );
+        expect(fixture.componentInstance.filtersSubmit.emit).not.toHaveBeenCalled();
+
+        const { data } = (modalService.open as jest.Mock).mock.calls[0][1];
+        data.continue();
+
+        expect(modalRef.dispose).toHaveBeenCalled();
+        expect(fixture.componentInstance.filtersSubmit.emit).toHaveBeenCalledWith(filters);
+      });
+
+      it('does not search when the warning is cancelled', () => {
+        fixture.componentInstance.handleSubmitFilters(
+          filtersFor('2026-10-01', ENFORCEMENT_BUSINESS_TYPE_CODE)
+        );
+        const { data } = (modalService.open as jest.Mock).mock.calls[0][1];
+        data.cancel();
+
+        expect(modalRef.dispose).toHaveBeenCalled();
+        expect(fixture.componentInstance.filtersSubmit.emit).not.toHaveBeenCalled();
+      });
+
+      it('shows an error when the Business Type is not Enforcement', () => {
+        fixture.componentInstance.handleSubmitFilters(filtersFor('2026-10-01', 'GEN'));
+
+        expect(fixture.componentInstance.errors).toEqual([
+          {
+            id: 'sessionStartDate',
+            message: PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementBusinessType]
+          }
+        ]);
+        expect(fixture.componentInstance.filtersSubmit.emit).not.toHaveBeenCalled();
+        expect(modalService.open).not.toHaveBeenCalled();
+      });
+
+      it('searches without a warning when the date is today or later', () => {
+        fixture.componentInstance.handleSubmitFilters(filtersFor('2026-10-30', 'GEN'));
+
+        expect(fixture.componentInstance.filtersSubmit.emit).toHaveBeenCalled();
+        expect(modalService.open).not.toHaveBeenCalled();
+      });
     });
   });
 });
