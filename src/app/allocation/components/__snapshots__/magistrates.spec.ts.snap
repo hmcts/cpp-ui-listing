@@ -10,12 +10,16 @@ exports[`MagistratesSchedulingComponent should compile correctly 1`] = `
   hearingSlotAllocationsSubmit={[Function OutputEmitterRef]}
   hearingSlots={[Function Function]}
   hearingSlotsCancel={[Function OutputEmitterRef]}
+  isEnforcementCase={[Function Function]}
   minimumDate={[Function Function]}
+  modalService={[Function _ModalService]}
   organisationUnits={[Function Function]}
   pageChange={[Function OutputEmitterRef]}
   pageSize={[Function Function]}
   rotaBusinessTypes={[Function Function]}
   slotsRef="undefined"
+  startDateErrorMessages={[Function Function]}
+  today={[Function Function]}
   totalResults={[Function Function]}
 >
   <div
@@ -859,12 +863,16 @@ exports[`MagistratesSchedulingComponent should display the courtrooms for the se
   hearingSlotAllocationsSubmit={[Function OutputEmitterRef]}
   hearingSlots={[Function Function]}
   hearingSlotsCancel={[Function OutputEmitterRef]}
+  isEnforcementCase={[Function Function]}
   minimumDate={[Function Function]}
+  modalService={[Function _ModalService]}
   organisationUnits={[Function Function]}
   pageChange={[Function OutputEmitterRef]}
   pageSize={[Function Function]}
   rotaBusinessTypes={[Function Function]}
   slotsRef="undefined"
+  startDateErrorMessages={[Function Function]}
+  today={[Function Function]}
   totalResults={[Function Function]}
 >
   <div
@@ -1712,12 +1720,16 @@ exports[`MagistratesSchedulingComponent should raise an error summary 1`] = `
   hearingSlotAllocationsSubmit={[Function OutputEmitterRef]}
   hearingSlots={[Function Function]}
   hearingSlotsCancel={[Function OutputEmitterRef]}
+  isEnforcementCase={[Function Function]}
   minimumDate={[Function Function]}
+  modalService={[Function _ModalService]}
   organisationUnits={[Function Function]}
   pageChange={[Function OutputEmitterRef]}
   pageSize={[Function Function]}
   rotaBusinessTypes={[Function Function]}
   slotsRef="undefined"
+  startDateErrorMessages={[Function Function]}
+  today={[Function Function]}
   totalResults={[Function Function]}
 >
   <pdk-error-summary>
@@ -2593,12 +2605,16 @@ exports[`MagistratesSchedulingComponent should render a search containing no res
   hearingSlotAllocationsSubmit={[Function OutputEmitterRef]}
   hearingSlots={[Function Function]}
   hearingSlotsCancel={[Function OutputEmitterRef]}
+  isEnforcementCase={[Function Function]}
   minimumDate={[Function Function]}
+  modalService={[Function _ModalService]}
   organisationUnits={[Function Function]}
   pageChange={[Function OutputEmitterRef]}
   pageSize={[Function Function]}
   rotaBusinessTypes={[Function Function]}
   slotsRef="undefined"
+  startDateErrorMessages={[Function Function]}
+  today={[Function Function]}
   totalResults={[Function Function]}
 >
   <div
@@ -3451,12 +3467,16 @@ exports[`MagistratesSchedulingComponent when hearing slots exist should render t
   hearingSlotAllocationsSubmit={[Function OutputEmitterRef]}
   hearingSlots={[Function Function]}
   hearingSlotsCancel={[Function OutputEmitterRef]}
+  isEnforcementCase={[Function Function]}
   minimumDate={[Function Function]}
+  modalService={[Function _ModalService]}
   organisationUnits={[Function Function]}
   pageChange={[Function OutputEmitterRef]}
   pageSize={[Function Function]}
   rotaBusinessTypes={[Function Function]}
   slotsRef={[Function _SchedulingSlotsComponent]}
+  startDateErrorMessages={[Function Function]}
+  today={[Function Function]}
   totalResults={[Function Function]}
 >
   <div

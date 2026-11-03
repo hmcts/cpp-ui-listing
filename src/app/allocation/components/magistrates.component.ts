@@ -8,8 +8,16 @@ import {
   input,
   output
 } from '@angular/core';
-import { CPPDate } from '../../core/util';
 import {
+  checkPastDate,
+  CPPDate,
+  getEarliestEnforcementDate,
+  PAST_DATE_MESSAGES,
+  PastDateCheck
+} from '../../core/util';
+import {
+  ModalService,
+  provideModalServices,
   ValidationError,
   PdkErrorSummaryComponent,
   PdkMarginDirective,
@@ -26,10 +34,15 @@ import {
   SchedulingSlotsComponent,
   SchedulingFiltersComponent
 } from '@cpp/scheduling';
+import {
+  PastDateWarningModalComponent,
+  PastDateWarningModalData
+} from './past-date-warning-modal.component';
 
 @Component({
   selector: 'magistrates-scheduling',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideModalServices()],
   template: `
     @let filterValues = filters();
     @if (errors) {
@@ -41,6 +54,7 @@ import {
         [rotaBusinessTypes]="rotaBusinessTypes()"
         [defaultValues]="filterValues"
         [minimumDate]="minimumDate()"
+        [startDateErrorMessages]="startDateErrorMessages()"
         (filtersSubmit)="handleSubmitFilters($event)"
         (errors)="errors = $event"
       >
@@ -93,10 +107,25 @@ export class MagistratesSchedulingComponent {
   readonly pageSize = input(10);
   readonly rotaBusinessTypes = input<RotaBusinessType[]>([]);
   readonly totalResults = input(-1);
+  readonly isEnforcementCase = input(false);
 
   private readonly dateUtil = inject(CPPDate);
+  private readonly modalService = inject(ModalService);
 
-  readonly minimumDate = computed(() => this.dateUtil.format(this.dateUtil.getCurrentDate()));
+  private readonly today = computed(() => this.dateUtil.format(this.dateUtil.getCurrentDate()));
+  // Enforcement cases may be allocated up to 31 days in the past; the Business Type is checked on submit.
+  readonly minimumDate = computed(() =>
+    this.isEnforcementCase() ? getEarliestEnforcementDate(this.today()) : this.today()
+  );
+  readonly startDateErrorMessages = computed(() => [
+    { rule: 'required', message: 'Enter a start date' },
+    {
+      rule: 'minDate',
+      message: this.isEnforcementCase()
+        ? PAST_DATE_MESSAGES[PastDateCheck.TooFarInPast]
+        : PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementCase]
+    }
+  ]);
   readonly filtersSubmit = output<SchedulingFilters>();
   readonly hearingSlotAllocationsSubmit = output<{
     hearingSlotAllocations: HearingSlotAllocation[];
@@ -119,6 +148,40 @@ export class MagistratesSchedulingComponent {
   }
 
   handleSubmitFilters(filters: SchedulingFilters) {
+    const pastDateCheck = checkPastDate({
+      isEnforcementCase: this.isEnforcementCase(),
+      businessType: filters.businessType,
+      startDate: filters.sessionStartDate,
+      today: this.today()
+    });
+
+    if (pastDateCheck === PastDateCheck.Allowed) {
+      this.submitFilters(filters);
+    } else if (pastDateCheck === PastDateCheck.Warning) {
+      this.confirmPastDate(filters);
+    } else {
+      this.errors = [{ id: 'sessionStartDate', message: PAST_DATE_MESSAGES[pastDateCheck] }];
+    }
+  }
+
+  private confirmPastDate(filters: SchedulingFilters) {
+    const modalRef = this.modalService.open<PastDateWarningModalData>(
+      PastDateWarningModalComponent,
+      {
+        data: {
+          continue: () => {
+            modalRef.dispose();
+            this.submitFilters(filters);
+          },
+          cancel: () => modalRef.dispose()
+        },
+        disposeOnNavigation: true,
+        disposeOnBackDropClick: false
+      }
+    );
+  }
+
+  private submitFilters(filters: SchedulingFilters) {
     if (this.slotsRef) {
       this.slotsRef.reset();
     }

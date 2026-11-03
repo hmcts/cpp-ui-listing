@@ -14,6 +14,7 @@ import moment from 'moment';
 import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { AppState, getHearingById } from '../../core';
+import { isEnforcementHearing } from '../../core/util';
 import {
   getSearchMetadata,
   getSearchParams,
@@ -54,6 +55,7 @@ export interface AllocateHearingParams {
       [pageSize]="pageSize$ | async"
       [rotaBusinessTypes]="rotaBusinessTypes$ | async"
       [totalResults]="totalResults$ | async"
+      [isEnforcementCase]="isEnforcementCase$ | async"
       (filtersSubmit)="handleFiltersSubmit($event)"
       (hearingSlotsCancel)="handleHearingSlotsCancel()"
       (hearingSlotAllocationsSubmit)="handleSubmitHearingSlotAllocations($event)"
@@ -77,6 +79,7 @@ export class MagistratesSchedulingContainerComponent {
   rotaBusinessTypes$: Observable<RotaBusinessType[]>;
   searchResult$: Observable<HearingSlot[]>;
   totalResults$: Observable<number>;
+  isEnforcementCase$: Observable<boolean>;
   hearingTypePlaceholder: HearingType = {
     id: 'All',
     hearingCode: 'All',
@@ -94,7 +97,7 @@ export class MagistratesSchedulingContainerComponent {
     private router: Router
   ) {
     const metadata$ = this.store.pipe(select(getSearchMetadata));
-    this.currentPage$ = metadata$.pipe(map((metadata) => metadata.currentPage));
+    this.currentPage$ = metadata$.pipe(map(metadata => metadata.currentPage));
 
     this.defaultFilters$ = combineLatest([this.route.params, this.route.queryParams]).pipe(
       withLatestFrom(this.store),
@@ -103,7 +106,7 @@ export class MagistratesSchedulingContainerComponent {
         const organisationUnits = getOrganisationUnits(state);
         const hearing = getHearingById(params.id)(state);
         const courtCentreId = courtId;
-        const organisationUnit = organisationUnits.find((ou) => ou.id === courtCentreId);
+        const organisationUnit = organisationUnits.find(ou => ou.id === courtCentreId);
 
         const courtRoomId =
           hearing.courtCentreId === courtCentreId ? hearing.courtRoomId : undefined;
@@ -127,18 +130,18 @@ export class MagistratesSchedulingContainerComponent {
     );
 
     this.filters$ = this.store.pipe(select(getSearchParams)).pipe(
-      switchMap((filters) => {
+      switchMap(filters => {
         if (filters) {
           return this.store.pipe(
             take(1),
-            map((state) => {
+            map(state => {
               const { ...params } = filters as SearchHearingSlotsParams;
               let hearingType = this.hearingTypePlaceholder;
               return {
                 ...params,
                 hearingType,
                 organisationUnit: getOrganisationUnits(state).find(
-                  (organisationUnit) => organisationUnit.oucode === params.ouCode
+                  organisationUnit => organisationUnit.oucode === params.ouCode
                 )
               };
             })
@@ -148,10 +151,14 @@ export class MagistratesSchedulingContainerComponent {
       })
     );
     this.organisationUnits$ = this.store.pipe(select(getOrganisationUnits));
-    this.pageSize$ = metadata$.pipe(map((metadata) => metadata.pageSize));
+    this.pageSize$ = metadata$.pipe(map(metadata => metadata.pageSize));
     this.rotaBusinessTypes$ = this.store.pipe(select(getRotaBusinessTypes));
     this.searchResult$ = this.store.pipe(select(getSearchResults));
-    this.totalResults$ = metadata$.pipe(map((metadata) => metadata.totalResults));
+    this.totalResults$ = metadata$.pipe(map(metadata => metadata.totalResults));
+    this.isEnforcementCase$ = this.route.params.pipe(
+      switchMap(params => this.store.pipe(select(getHearingById(params.id)))),
+      map(isEnforcementHearing)
+    );
   }
 
   handleFiltersSubmit({ hearingType, organisationUnit, ...filters }: SchedulingFilters) {
@@ -176,9 +183,9 @@ export class MagistratesSchedulingContainerComponent {
       .pipe(
         select(getSearchParams),
         take(1),
-        map((params) => ({ ...params, pageNumber }))
+        map(params => ({ ...params, pageNumber }))
       )
-      .subscribe((queryParams) => {
+      .subscribe(queryParams => {
         this.reloadWithQueryParams(queryParams);
       });
   }
@@ -200,7 +207,7 @@ export class MagistratesSchedulingContainerComponent {
     this.filters$
       .pipe(
         take(1),
-        map((filters) => {
+        map(filters => {
           return {
             hearingId: this.route.snapshot.params.id,
             hearingSlotAllocations,
@@ -218,7 +225,7 @@ export class MagistratesSchedulingContainerComponent {
           };
         })
       )
-      .subscribe((payload) => {
+      .subscribe(payload => {
         if (this.route.snapshot?.queryParams?.referrer === CourtCalendarFeature.calendar) {
           this.store.dispatch(
             magistratesSplitHearings({
