@@ -116,6 +116,13 @@ export class CPPDate {
     return momentA && momentB ? momentA.isBefore(momentB) : false;
   }
 
+  // Compares calendar days, ignoring the time of day
+  isBeforeDay(dateA: Date | string, dateB: Date | string): boolean {
+    const momentA = getMomentValue(dateA);
+    const momentB = getMomentValue(dateB);
+    return momentA && momentB ? momentA.isBefore(momentB, this.DAY as unitOfTime.StartOf) : false;
+  }
+
   isSameOrAfter(dateA: Date | string, dateB: Date | string, format?: string) {
     const momentA = getMomentValue(dateA, format);
     const momentB = getMomentValue(dateB, format);

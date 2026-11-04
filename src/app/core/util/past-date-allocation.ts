@@ -1,10 +1,12 @@
-import moment from 'moment';
 import { Hearing } from '../model/hearing';
+import { getCPPDate } from './cpp-date';
 
 // Enforcement cases are identified by the prosecuting authority (prosecutor short name 'ENFORC').
 export const ENFORCEMENT_AUTHORITY_CODE = 'ENFORC';
 export const ENFORCEMENT_BUSINESS_TYPE_CODE = 'ENF';
 export const MAX_DAYS_IN_PAST_FOR_ENFORCEMENT = 31;
+
+const dateUtil = getCPPDate();
 
 export enum PastDateCheck {
   Allowed = 'ALLOWED',
@@ -34,7 +36,7 @@ export function isEnforcementHearing(hearing?: Pick<Hearing, 'listedCases'>): bo
 }
 
 export function getEarliestEnforcementDate(today: string): string {
-  return moment(today).subtract(MAX_DAYS_IN_PAST_FOR_ENFORCEMENT, 'days').format('YYYY-MM-DD');
+  return dateUtil.format(dateUtil.subtract(today, MAX_DAYS_IN_PAST_FOR_ENFORCEMENT));
 }
 
 /**
@@ -51,7 +53,7 @@ export function checkPastDate({
   startDate: string;
   today: string;
 }): PastDateCheck {
-  if (!moment(startDate).isBefore(today, 'day')) {
+  if (!dateUtil.isBeforeDay(startDate, today)) {
     return PastDateCheck.Allowed;
   }
   if (!isEnforcementCase) {
@@ -60,7 +62,7 @@ export function checkPastDate({
   if (businessType !== ENFORCEMENT_BUSINESS_TYPE_CODE) {
     return PastDateCheck.NotEnforcementBusinessType;
   }
-  if (moment(startDate).isBefore(getEarliestEnforcementDate(today), 'day')) {
+  if (dateUtil.isBeforeDay(startDate, getEarliestEnforcementDate(today))) {
     return PastDateCheck.TooFarInPast;
   }
   return PastDateCheck.Warning;
@@ -82,7 +84,11 @@ export function checkAmendedPastDate({
   startDate: string;
   today: string;
 }): PastDateCheck {
-  if (originalStartDate && moment(startDate).isSame(originalStartDate, 'day')) {
+  if (
+    originalStartDate &&
+    startDate &&
+    dateUtil.isSame(startDate, originalStartDate, dateUtil.DAY)
+  ) {
     return PastDateCheck.Allowed;
   }
   return checkPastDate({
