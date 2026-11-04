@@ -1,9 +1,19 @@
 import { takeUntil } from 'rxjs/operators';
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  inject,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import moment from 'moment';
 import {
+  ModalService,
+  provideModalServices,
   ValidationError,
   PdkErrorSummaryComponent,
   PdkMarginDirective,
@@ -44,7 +54,14 @@ import { FilterOption, HearingSchedule, LastAllocatedHearing } from '../core/mod
 import { AppConfigService } from '../config';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DailyCourtRoomCalendarContainer } from '../daily-court-room-calendar/daily-court-room-calendar.container';
-import { CPPDate, getCPPDate } from '../core/util';
+import {
+  checkAmendedPastDate,
+  CPPDate,
+  getCPPDate,
+  isEnforcementHearing,
+  PAST_DATE_MESSAGES,
+  PastDateCheck
+} from '../core/util';
 import { Breadcrumb } from '../core/model/shared/breadcrumb';
 import { TrialType } from '@cpp/reference-data';
 import { AsyncPipe } from '@angular/common';
@@ -53,10 +70,15 @@ import { AppNotificationComponent } from '../shared/components/notification/noti
 import { CourtroomsFilterComponent } from '../allocate-hearing/courtrooms-filter/courtrooms-filter.component';
 import { HearingDetailsFormComponent } from '../shared/components/hearing-details-form/hearing-details-form.component';
 import { ChangeJudiciaryForHearingsFormComponent } from './change-judiciary-for-hearings-form/change-judiciary-for-hearings-form.component';
+import {
+  PastDateWarningModalComponent,
+  PastDateWarningModalData
+} from '../allocation/components/past-date-warning-modal.component';
 
 @Component({
   selector: 'edit-allocation',
   templateUrl: './edit-allocation.html',
+  providers: [provideModalServices()],
   imports: [
     PdkErrorSummaryComponent,
     PdkMarginDirective,
@@ -107,6 +129,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
   ];
 
   private readonly dateUtil: CPPDate;
+  private readonly modalService = inject(ModalService);
 
   constructor(
     private store: Store<AppState>,
@@ -132,7 +155,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.store
       .select(getCourtCentres)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((courtCentres) => {
+      .subscribe(courtCentres => {
         this.courtCentres = courtCentres;
         this.fetchQueryParams();
         this.cd.detectChanges();
@@ -141,7 +164,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.store
       .select(getEditAllocationError)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((error) => {
+      .subscribe(error => {
         if (error) {
           this.errors = [error];
         }
@@ -165,14 +188,14 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
 
   canActivateSplit(hearing: Hearing): boolean {
     return (hearing.listedCases || []).some(
-      (kase) =>
+      kase =>
         kase.defendants.length > 1 ||
-        kase.defendants.some((defendant) => defendant.offences.length > 1)
+        kase.defendants.some(defendant => defendant.offences.length > 1)
     );
   }
 
   splitHearing(hearing: Hearing) {
-    this.router.navigate([`/split/${hearing.id}`]).then((e) => {
+    this.router.navigate([`/split/${hearing.id}`]).then(e => {
       this.window.scroll(0, 0);
     });
   }
@@ -180,14 +203,50 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
   onSelectCourtCentre(event: { type: 'change' } | FilterOption) {
     if ('value' in event && this.eventIsCourtCentreSelection(event)) {
       this.selectedCourtCentre = this.courtCentres.find(
-        (courtCentre) => courtCentre.id === event.value
+        courtCentre => courtCentre.id === event.value
       );
     } else if ('type' in event && event.type && event.type === 'change') {
       this.selectedCourtCentre = undefined;
     }
   }
 
-  updateHearing({ originHearing, updatedHearing }: AllocatingHearingDetails) {
+  updateHearing(hearingDetails: AllocatingHearingDetails) {
+    const { originHearing, updatedHearing } = hearingDetails;
+    const pastDateCheck = checkAmendedPastDate({
+      isEnforcementCase: isEnforcementHearing(originHearing),
+      originalStartDate: originHearing.startDate,
+      startDate: updatedHearing.startDate,
+      today: this.dateUtil.format(this.dateUtil.getCurrentDate())
+    });
+
+    if (pastDateCheck === PastDateCheck.Allowed) {
+      this.saveHearing(hearingDetails);
+    } else if (pastDateCheck === PastDateCheck.Warning) {
+      this.confirmPastDate(hearingDetails);
+    } else {
+      this.errors = [{ id: 'dateRange', message: PAST_DATE_MESSAGES[pastDateCheck] }];
+    }
+  }
+
+  private confirmPastDate(hearingDetails: AllocatingHearingDetails) {
+    const modalRef = this.modalService.open<PastDateWarningModalData>(
+      PastDateWarningModalComponent,
+      {
+        data: {
+          continue: () => {
+            modalRef.dispose();
+            this.saveHearing(hearingDetails);
+          },
+          cancel: () => modalRef.dispose()
+        },
+        disposeOnNavigation: true,
+        disposeOnBackDropClick: false
+      }
+    );
+  }
+
+  private saveHearing({ originHearing, updatedHearing }: AllocatingHearingDetails) {
+    this.errors = null;
     this.store.dispatch(new UpdateAllocatedHearingAction({ originHearing, updatedHearing }));
     this.clearSelectedHearing();
   }
@@ -197,7 +256,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.store.dispatch(
       new ChangeJudicaryForHearingsAction({
         hearings,
-        judiciary: judiciary.filter((judic) => !!judic) // this is to handle gaps in magistrates (eg Winger 2 present but not Winger 1, etc)
+        judiciary: judiciary.filter(judic => !!judic) // this is to handle gaps in magistrates (eg Winger 2 present but not Winger 1, etc)
       })
     );
   }
@@ -259,7 +318,7 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
         endTime: this.activatedRoute.snapshot.queryParams.endTime
       };
       this.selectedCourtCentre = this.courtCentres.find(
-        (courtCentre) => courtCentre.id === this.filterOptions.courtCentreId
+        courtCentre => courtCentre.id === this.filterOptions.courtCentreId
       );
       this.selectedHearingId = this.activatedRoute.snapshot.queryParams.hearingId;
       this.filterSubmit(this.filterOptions);

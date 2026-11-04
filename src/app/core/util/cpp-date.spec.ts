@@ -209,6 +209,18 @@ describe('UICoreDateService', () => {
     expect(isBefore).toBe(true);
   });
 
+  it('isBeforeDay should compare calendar days, ignoring the time of day', () => {
+    expect(dateService.isBeforeDay('2026-10-22', '2026-10-23')).toBe(true);
+    expect(dateService.isBeforeDay('2026-10-23T08:00:00', '2026-10-23T17:00:00')).toBe(false);
+    expect(dateService.isBeforeDay('2026-10-23', '2026-10-23')).toBe(false);
+    expect(dateService.isBeforeDay('2026-10-24', '2026-10-23')).toBe(false);
+  });
+
+  it('isBeforeDay should be false when either date is missing or invalid', () => {
+    expect(dateService.isBeforeDay(undefined, '2026-10-23')).toBe(false);
+    expect(dateService.isBeforeDay('2026-10-23', 'not a date')).toBe(false);
+  });
+
   it('It should calculate time difference between 2 days', () => {
     const currentYear = new Date().getFullYear();
     const month = 10;

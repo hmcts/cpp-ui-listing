@@ -22,6 +22,9 @@ import {
 import { AppConfigService } from '../../app/config';
 import { DailyCourtRoomCalendarContainer } from '../daily-court-room-calendar/daily-court-room-calendar.container';
 import { By } from '@angular/platform-browser';
+import { ModalService } from '@cpp/pdk';
+import { ENFORCEMENT_AUTHORITY_CODE, PAST_DATE_MESSAGES, PastDateCheck } from '../core/util';
+import { PastDateWarningModalComponent } from '../allocation/components/past-date-warning-modal.component';
 
 @Component({
   template: ` <edit-allocation> </edit-allocation> `,
@@ -150,7 +153,7 @@ describe('EditAllocationContainer', () => {
       hearings,
       referenceData
     };
-    selectSpy = jasmine.createSpy('select').and.callFake((selectorFunc) => {
+    selectSpy = jasmine.createSpy('select').and.callFake(selectorFunc => {
       return of(selectorFunc.call(store, state));
     });
     dispatchSpy = jasmine.createSpy('dispatch');
@@ -250,5 +253,103 @@ describe('EditAllocationContainer', () => {
 
       expect(fixture).toMatchSnapshot();
     }));
+
+    describe('amending to a past date', () => {
+      const today = '2026-10-23';
+      const enforcementHearing: Hearing = {
+        ...testHearing,
+        startDate: '2026-10-10',
+        listedCases: testHearing.listedCases.map(listedCase => ({
+          ...listedCase,
+          caseIdentifier: {
+            ...listedCase.caseIdentifier,
+            authorityCode: ENFORCEMENT_AUTHORITY_CODE
+          }
+        }))
+      };
+      const amend = (originHearing: Hearing, startDate: string) => ({
+        originHearing,
+        updatedHearing: { ...originHearing, startDate }
+      });
+      let modalService: ModalService;
+      let modalRef: { dispose: jest.Mock };
+
+      beforeEach(() => {
+        jest
+          .spyOn(component['dateUtil'], 'getCurrentDate')
+          .mockReturnValue(new Date(`${today}T10:00:00`));
+        modalService = fixture.debugElement
+          .query(By.directive(EditAllocationContainer))
+          .injector.get(ModalService);
+        modalRef = { dispose: jest.fn() };
+        jest.spyOn(modalService, 'open').mockReturnValue(modalRef as any);
+        dispatchSpy.calls.reset();
+      });
+
+      it('saves without a warning when the date is not changed', () => {
+        component.updateHearing(amend(enforcementHearing, '2026-10-10'));
+
+        expect(modalService.open).not.toHaveBeenCalled();
+        expect(dispatchSpy).toHaveBeenCalledWith(
+          new UpdateAllocatedHearingAction(amend(enforcementHearing, '2026-10-10'))
+        );
+      });
+
+      it('saves without a warning when the date is changed to today or later', () => {
+        component.updateHearing(amend(enforcementHearing, '2026-10-30'));
+
+        expect(modalService.open).not.toHaveBeenCalled();
+        expect(dispatchSpy).toHaveBeenCalled();
+      });
+
+      it('shows a warning and saves on Continue for an Enforcement case within 31 days', () => {
+        const hearingDetails = amend(enforcementHearing, '2026-10-01');
+        component.updateHearing(hearingDetails);
+
+        expect(modalService.open).toHaveBeenCalledWith(
+          PastDateWarningModalComponent,
+          expect.anything()
+        );
+        expect(dispatchSpy).not.toHaveBeenCalled();
+
+        const { data } = (modalService.open as jest.Mock).mock.calls[0][1];
+        data.continue();
+
+        expect(modalRef.dispose).toHaveBeenCalled();
+        expect(dispatchSpy).toHaveBeenCalledWith(new UpdateAllocatedHearingAction(hearingDetails));
+      });
+
+      it('does not save when the warning is cancelled', () => {
+        component.updateHearing(amend(enforcementHearing, '2026-10-01'));
+        const { data } = (modalService.open as jest.Mock).mock.calls[0][1];
+        data.cancel();
+
+        expect(modalRef.dispose).toHaveBeenCalled();
+        expect(dispatchSpy).not.toHaveBeenCalled();
+      });
+
+      it('shows an error and does not save for an Enforcement case more than 31 days back', () => {
+        component.selectedHearing = enforcementHearing;
+        component.updateHearing(amend(enforcementHearing, '2026-09-21'));
+
+        expect(component.errors).toEqual([
+          { id: 'dateRange', message: PAST_DATE_MESSAGES[PastDateCheck.TooFarInPast] }
+        ]);
+        expect(component.selectedHearing).toEqual(enforcementHearing);
+        expect(dispatchSpy).not.toHaveBeenCalled();
+        expect(modalService.open).not.toHaveBeenCalled();
+      });
+
+      it('shows an error and does not save for a non-Enforcement case', () => {
+        const hearing = { ...testHearing, startDate: '2026-10-30' };
+        component.updateHearing(amend(hearing, '2026-10-22'));
+
+        expect(component.errors).toEqual([
+          { id: 'dateRange', message: PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementCase] }
+        ]);
+        expect(dispatchSpy).not.toHaveBeenCalled();
+        expect(modalService.open).not.toHaveBeenCalled();
+      });
+    });
   });
 });
