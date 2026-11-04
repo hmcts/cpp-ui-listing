@@ -1,5 +1,6 @@
 import { ListedCase } from '../model/hearing';
 import {
+  checkAmendedPastDate,
   checkPastDate,
   ENFORCEMENT_AUTHORITY_CODE,
   ENFORCEMENT_BUSINESS_TYPE_CODE,
@@ -76,6 +77,40 @@ describe('past-date-allocation', () => {
       expect(checkPastDate({ ...enforcement, startDate: '2026-10-23T23:59:00' })).toBe(
         PastDateCheck.Allowed
       );
+    });
+  });
+
+  describe('checkAmendedPastDate', () => {
+    const today = '2026-10-23';
+
+    it.each`
+      isEnforcementCase | originalStartDate | startDate       | expected
+      ${true}           | ${'2026-10-10'}   | ${'2026-10-10'} | ${PastDateCheck.Allowed}
+      ${false}          | ${'2026-10-10'}   | ${'2026-10-10'} | ${PastDateCheck.Allowed}
+      ${true}           | ${'2026-10-10'}   | ${'2026-10-01'} | ${PastDateCheck.Warning}
+      ${true}           | ${'2026-10-10'}   | ${'2026-09-21'} | ${PastDateCheck.TooFarInPast}
+      ${true}           | ${'2026-10-10'}   | ${'2026-10-30'} | ${PastDateCheck.Allowed}
+      ${true}           | ${undefined}      | ${'2026-10-01'} | ${PastDateCheck.Warning}
+      ${false}          | ${'2026-10-30'}   | ${'2026-10-01'} | ${PastDateCheck.NotEnforcementCase}
+      ${false}          | ${'2026-10-01'}   | ${'2026-10-30'} | ${PastDateCheck.Allowed}
+    `(
+      'returns $expected for enforcement case=$isEnforcementCase, original date=$originalStartDate, new date=$startDate',
+      ({ isEnforcementCase, originalStartDate, startDate, expected }) => {
+        expect(
+          checkAmendedPastDate({ isEnforcementCase, originalStartDate, startDate, today })
+        ).toBe(expected);
+      }
+    );
+
+    it('treats an unchanged date as unchanged when only the time of day differs', () => {
+      expect(
+        checkAmendedPastDate({
+          isEnforcementCase: false,
+          originalStartDate: '2026-10-10T09:00:00Z',
+          startDate: '2026-10-10',
+          today
+        })
+      ).toBe(PastDateCheck.Allowed);
     });
   });
 });

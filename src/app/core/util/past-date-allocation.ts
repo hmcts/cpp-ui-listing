@@ -65,3 +65,30 @@ export function checkPastDate({
   }
   return PastDateCheck.Warning;
 }
+
+/**
+ * Applies the past-dated allocation rule when amending an allocated hearing. The rule only applies
+ * when the start date changes. An allocated hearing does not carry a Business Type, so the
+ * Enforcement Business Type is assumed and only the case and date rules are checked.
+ */
+export function checkAmendedPastDate({
+  isEnforcementCase,
+  originalStartDate,
+  startDate,
+  today
+}: {
+  isEnforcementCase: boolean;
+  originalStartDate?: string;
+  startDate: string;
+  today: string;
+}): PastDateCheck {
+  if (originalStartDate && moment(startDate).isSame(originalStartDate, 'day')) {
+    return PastDateCheck.Allowed;
+  }
+  return checkPastDate({
+    isEnforcementCase,
+    businessType: ENFORCEMENT_BUSINESS_TYPE_CODE,
+    startDate,
+    today
+  });
+}
