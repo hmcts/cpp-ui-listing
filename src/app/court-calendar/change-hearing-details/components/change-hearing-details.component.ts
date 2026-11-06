@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { ValidationError } from '@cpp/pdk';
+import { PdkCharacterCountComponent, PdkResizeDirective, ValidationError } from '@cpp/pdk';
 import { CppReferenceDataComponents, HearingType } from '@cpp/reference-data';
 import {
   AllocatingHearingDetailsWithCourtCentre,
@@ -17,6 +17,7 @@ import { ChangeHearingDetailsMagsControlComponent } from './change-hearing-detai
 import { FormsModule } from '@angular/forms';
 import { JudiciaryInputComponent } from '../../../shared/components/judiciary-input/judiciary-input.component';
 import { PdkComponents } from '../../../shared/pdk-shared-components';
+import { PUBLIC_LIST_NOTE_MAX_LENGTH } from '../../../core/util/constants';
 export interface ChangeHearingDetailsFormValues extends Pick<
   Hearing,
   | 'hasVideoLink'
@@ -40,6 +41,8 @@ export interface ChangeHearingDetailsFormValues extends Pick<
   imports: [
     CppReferenceDataComponents,
     PdkComponents,
+    PdkResizeDirective,
+    PdkCharacterCountComponent,
     FormsModule,
     ChangeHearingDetailsCrownControlComponent,
     ChangeHearingDetailsMagsControlComponent,
@@ -67,6 +70,7 @@ export class ChangeHearingDetailsComponent {
   readonly onCancel = output<void>();
   selectedJudiciary: ExtendedJudicialRole[];
   datePipe = new DatePipe('en-GB');
+  readonly publicListNoteMaxLength = PUBLIC_LIST_NOTE_MAX_LENGTH;
 
   constructor(private allocateHearingFactory: AllocateHearingFactory) {}
 

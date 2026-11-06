@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SectionTableRendererComponent } from '../section-table-renderer.component';
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { HearingTableSectionConfig } from '../../../../model/hearing-table-renderer.vm';
 import {
   AllocatedTableColumnConfig,
@@ -80,6 +81,44 @@ describe('SectionTableRendererComponent', () => {
       fixture.detectChanges();
       const rowGroupBodyEls = el.nativeElement.querySelectorAll('tbody[row-group-body]');
       expect(rowGroupBodyEls.length).toBeGreaterThan(0);
+    });
+
+    it('should wrap long unbroken text in default cells', () => {
+      const longPublicListNote = 'A'.repeat(200);
+      component.sectionConfig = {
+        rowGroups: {
+          rowGroupsPath: 'judiciaryCalendar',
+          dataConfig: {
+            rowGroupDataPath: 'hearingTimeCalendar',
+            rowsDataPath: 'hearings'
+          }
+        }
+      } as any;
+      component.columnConfig = [{ label: 'Public list notes', key: 'publicListNote' }];
+      component.sections = [
+        {
+          judiciaryCalendar: [
+            {
+              hearingTimeCalendar: [
+                {
+                  hearings: [
+                    {
+                      id: 'abc',
+                      rowIdentifier: 'abc',
+                      isMaster: true,
+                      publicListNote: longPublicListNote
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ];
+
+      fixture.detectChanges();
+      const defaultCell = el.query(By.css('tbody[row-group-body] td span.wrap-long-text'));
+      expect(defaultCell.nativeElement.textContent.trim()).toBe(longPublicListNote);
     });
   });
 });

@@ -9,6 +9,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
   onCancel={[Function OutputEmitterRef]}
   onSubmit={[Function OutputEmitterRef]}
   onValidationError={[Function OutputEmitterRef]}
+  publicListNoteMaxLength={[Function Number]}
   selectedCourtCentre={[Function Function]}
   selectedHearing={[Function Function]}
 >
@@ -462,15 +463,24 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
             >
                Public list note (optional) 
             </label>
-            <input
+            <textarea
               class="govuk-input ng-untouched ng-pristine ng-valid"
               id="public-list-details"
-              maxlength="100"
+              maxlength="200"
               name="publicListNote"
               pdk-input=""
+              pdk-resize=""
               pdk-text-input=""
-              type="text"
+              style="resize: none; min-height: NaNpx; max-height: NaNpx;"
             />
+            <pdk-character-count>
+              <span
+                aria-live="polite"
+                class="govuk-hint govuk-character-count__message"
+              >
+                 You have 200 characters remaining 
+              </span>
+            </pdk-character-count>
           </pdk-form-group>
         </pdk-form-field>
         <pdk-form-field
@@ -718,6 +728,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
   onCancel={[Function OutputEmitterRef]}
   onSubmit={[Function OutputEmitterRef]}
   onValidationError={[Function OutputEmitterRef]}
+  publicListNoteMaxLength={[Function Number]}
   selectedCourtCentre={[Function Function]}
   selectedHearing={[Function Function]}
 >
@@ -1339,6 +1350,7 @@ exports[`ChangeHearingDetailsComponent Change Hearing Screen Rendering should re
   onCancel={[Function OutputEmitterRef]}
   onSubmit={[Function OutputEmitterRef]}
   onValidationError={[Function OutputEmitterRef]}
+  publicListNoteMaxLength={[Function Number]}
   selectedCourtCentre={[Function Function]}
   selectedHearing={[Function Function]}
 >
@@ -1924,6 +1936,7 @@ exports[`ChangeHearingDetailsComponent Form Submission should emit correct paylo
   onCancel={[Function OutputEmitterRef]}
   onSubmit={[Function OutputEmitterRef]}
   onValidationError={[Function OutputEmitterRef]}
+  publicListNoteMaxLength={[Function Number]}
   selectedCourtCentre={[Function Function]}
   selectedHearing={[Function Function]}
 >

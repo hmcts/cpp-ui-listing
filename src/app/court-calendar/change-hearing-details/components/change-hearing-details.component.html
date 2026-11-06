@@ -64,15 +64,20 @@
 
       @if (selectedHearing()?.jurisdictionType === 'CROWN') {
         <pdk-form-field label="Public list note (optional)" labelType="small">
-          <input
+          <textarea
             pdk-text-input
+            pdk-resize
+            #publicListNoteModel="ngModel"
             [ngModel]="initialValues()?.publicListNote"
-            maxlength="100"
-            type="text"
+            [maxlength]="publicListNoteMaxLength"
             [id]="'public-list-details'"
             name="publicListNote"
             pdk-input
-          />
+          ></textarea>
+          <pdk-character-count
+            [value]="publicListNoteModel.value"
+            [limit]="publicListNoteMaxLength"
+          ></pdk-character-count>
         </pdk-form-field>
       }
 

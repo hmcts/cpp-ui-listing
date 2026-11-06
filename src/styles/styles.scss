@@ -111,6 +111,10 @@
   font-weight: 700 !important;
 }
 
+.wrap-long-text {
+  overflow-wrap: anywhere;
+}
+
 .flex-display {
   display: flex;
   flex-wrap: wrap;
