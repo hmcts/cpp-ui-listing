@@ -32,13 +32,7 @@ export interface JudicialRole {
 }
 
 export type HearingTier =
-  | 'TIER_1'
-  | 'TIER_2'
-  | 'TIER_3'
-  | 'TIER_4'
-  | 'TIER_5'
-  | 'TIER_6'
-  | 'TIER_7';
+  'TIER_1' | 'TIER_2' | 'TIER_3' | 'TIER_4' | 'TIER_5' | 'TIER_6' | 'TIER_7';
 
 export type HearingListType = 'TYPE_1_FIXED' | 'TYPE_2_FLEXIBLE';
 
@@ -90,6 +84,7 @@ export interface Hearing {
   listType?: HearingListType;
   keyReason?: string;
   judiciaryAssignmentSource?: JudiciaryAssignmentSource;
+  numberOfGroupCases?: number;
 }
 
 export interface HearingWithSelectedCourtCentre extends Hearing {
