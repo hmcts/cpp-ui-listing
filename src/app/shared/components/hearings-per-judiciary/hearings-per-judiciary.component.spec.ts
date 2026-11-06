@@ -108,6 +108,15 @@ describe('HearingsPerJudiciaryComponent', () => {
       expect(fixture).toMatchSnapshot();
     });
 
+    it('should wrap a long unbroken public list note', () => {
+      const longPublicListNote = 'A'.repeat(200);
+      hostComponent.hearings = [{ ...validHearingMock2, publicListNote: longPublicListNote }];
+      fixture.detectChanges();
+
+      const publicListNote = fixture.debugElement.query(By.css('td span.wrap-long-text'));
+      expect(publicListNote.nativeElement.textContent).toBe(longPublicListNote);
+    });
+
     it('should match Jest snapshot for hearing with CourtApplication and linked ListedCase', () => {
       hostComponent.hearings = [validHearingSingleLinkedApplicationMock];
       fixture.detectChanges();

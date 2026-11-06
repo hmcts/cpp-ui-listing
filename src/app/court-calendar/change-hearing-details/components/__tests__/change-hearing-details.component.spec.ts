@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import {
   ChangeHearingDetailsComponent,
   ChangeHearingDetailsFormValues
@@ -84,6 +85,24 @@ describe('ChangeHearingDetailsComponent', () => {
       await fixture.whenStable();
       fixture.detectChanges();
       expect(fixture).toMatchSnapshot();
+    });
+
+    it('should render the public list note as a textarea limited to 200 characters with a character count for a Crown hearing', async () => {
+      mockFixtureInputs(fixture, {
+        selectedHearing: { ...selectedHearing, jurisdictionType: 'CROWN' }
+      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const publicListNote = fixture.debugElement.query(By.css('[name="publicListNote"]'));
+      const characterCount = fixture.debugElement.query(By.css('pdk-character-count'));
+
+      expect(publicListNote.nativeElement.tagName).toBe('TEXTAREA');
+      expect(publicListNote.nativeElement.getAttribute('maxlength')).toBe('200');
+      expect(characterCount.nativeElement.textContent).toContain(
+        'You have 200 characters remaining'
+      );
     });
   });
 

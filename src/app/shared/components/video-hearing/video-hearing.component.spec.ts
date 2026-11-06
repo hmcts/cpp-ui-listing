@@ -35,6 +35,20 @@ describe('VideoHearingComponent', () => {
     expect(fixture).toMatchSnapshot();
   });
 
+  it('should render the public list note as a textarea limited to 200 characters with a character count', async () => {
+    testHostComponent.jurisdictionType = 'CROWN';
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const publicListNote = fixture.debugElement.query(By.css('[name="publicListNote"]'));
+    const characterCount = fixture.debugElement.query(By.css('pdk-character-count'));
+
+    expect(publicListNote.nativeElement.tagName).toBe('TEXTAREA');
+    expect(publicListNote.nativeElement.getAttribute('maxlength')).toBe('200');
+    expect(characterCount.nativeElement.textContent).toContain('You have 200 characters remaining');
+  });
+
   it('should not display video hearing form for magistrates jurisdiction type', () => {
     testHostComponent.hasVideoLink = true;
     testHostComponent.publicListNote = 'test-public-list-note';

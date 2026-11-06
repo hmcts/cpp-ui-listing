@@ -6,8 +6,11 @@ import {
   PdkCheckboxComponent,
   PdkMarginDirective,
   PdkTextInputDirective,
-  PdkInput
+  PdkInput,
+  PdkResizeDirective,
+  PdkCharacterCountComponent
 } from '@cpp/pdk';
+import { PUBLIC_LIST_NOTE_MAX_LENGTH } from '../../../core/util/constants';
 
 @Component({
   selector: 'video-hearing',
@@ -24,15 +27,20 @@ import {
     <ng-container>
       <div pdk-margin-bottom="7">
         <pdk-form-field label="Public list note" labelType="small">
-          <input
+          <textarea
             pdk-text-input
+            pdk-resize
+            #publicListNoteModel="ngModel"
             [ngModel]="publicListNote()"
-            maxlength="80"
-            type="text"
+            [maxlength]="publicListNoteMaxLength"
             [id]="'public-list-details'"
             name="publicListNote"
             pdk-input
-          />
+          ></textarea>
+          <pdk-character-count
+            [value]="publicListNoteModel.value"
+            [limit]="publicListNoteMaxLength"
+          ></pdk-character-count>
         </pdk-form-field>
       </div>
     </ng-container>
@@ -46,13 +54,16 @@ import {
     FormsModule,
     PdkMarginDirective,
     PdkTextInputDirective,
-    PdkInput
+    PdkInput,
+    PdkResizeDirective,
+    PdkCharacterCountComponent
   ]
 })
 export class VideoHearingComponent {
   readonly hasVideoLink = model(false);
   readonly publicListNote = input<string>(undefined);
   readonly jurisdictionType = input<string>(undefined);
+  readonly publicListNoteMaxLength = PUBLIC_LIST_NOTE_MAX_LENGTH;
 
   togglepublicListNote() {
     this.hasVideoLink.set(!this.hasVideoLink());
