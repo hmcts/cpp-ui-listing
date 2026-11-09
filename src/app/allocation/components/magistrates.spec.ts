@@ -320,12 +320,43 @@ describe('MagistratesSchedulingComponent', () => {
         mockFixtureInputs(fixture, { isEnforcementCase: true });
       });
 
-      it('allows dates up to 31 days in the past', () => {
+      const selectBusinessType = (businessType: string) => {
+        fixture.detectChanges();
+        const { filtersRef } = fixture.componentInstance;
+        filtersRef.formModel = { ...filtersRef.formModel, businessType };
+        fixture.detectChanges();
+      };
+
+      it('only allows today and future dates until the Enforcement Business Type is selected', () => {
+        expect(fixture.componentInstance.minimumDate()).toBe(today);
+        expect(fixture.componentInstance.startDateErrorMessages()).toContainEqual({
+          rule: 'minDate',
+          message: PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementBusinessType]
+        });
+
+        selectBusinessType('GEN');
+
+        expect(fixture.componentInstance.minimumDate()).toBe(today);
+      });
+
+      it('allows dates up to 31 days in the past when the Enforcement Business Type is selected', () => {
+        selectBusinessType(ENFORCEMENT_BUSINESS_TYPE_CODE);
+
+        expect(fixture.componentInstance.selectedBusinessType()).toBe(
+          ENFORCEMENT_BUSINESS_TYPE_CODE
+        );
         expect(fixture.componentInstance.minimumDate()).toBe('2026-09-22');
         expect(fixture.componentInstance.startDateErrorMessages()).toContainEqual({
           rule: 'minDate',
           message: PAST_DATE_MESSAGES[PastDateCheck.TooFarInPast]
         });
+      });
+
+      it('stops allowing past dates when the Business Type changes away from Enforcement', () => {
+        selectBusinessType(ENFORCEMENT_BUSINESS_TYPE_CODE);
+        selectBusinessType(undefined);
+
+        expect(fixture.componentInstance.minimumDate()).toBe(today);
       });
 
       it('shows a warning and searches on Continue when the date is in the past', () => {
