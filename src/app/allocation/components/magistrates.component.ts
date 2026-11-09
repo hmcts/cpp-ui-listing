@@ -2,15 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  DoCheck,
   inject,
   Inject,
   ViewChild,
   input,
-  output
+  output,
+  signal
 } from '@angular/core';
 import {
   checkPastDate,
   CPPDate,
+  ENFORCEMENT_BUSINESS_TYPE_CODE,
   getEarliestEnforcementDate,
   PAST_DATE_MESSAGES,
   PastDateCheck
@@ -50,6 +53,7 @@ import {
     }
     <div pdk-margin-bottom="6" pdk-padding-left="6" pdk-padding-right="6">
       <scheduling-filters
+        #filtersRef
         [organisationUnits]="organisationUnits()"
         [rotaBusinessTypes]="rotaBusinessTypes()"
         [defaultValues]="filterValues"
@@ -99,7 +103,7 @@ import {
     SchedulingSlotsComponent
   ]
 })
-export class MagistratesSchedulingComponent {
+export class MagistratesSchedulingComponent implements DoCheck {
   readonly currentPage = input(0);
   readonly filters = input<Partial<SchedulingFilters>>(undefined);
   readonly hearingSlots = input<HearingSlot[]>([]);
@@ -113,19 +117,25 @@ export class MagistratesSchedulingComponent {
   private readonly modalService = inject(ModalService);
 
   private readonly today = computed(() => this.dateUtil.format(this.dateUtil.getCurrentDate()));
-  // Enforcement cases may be allocated up to 31 days in the past; the Business Type is checked on submit.
+  readonly selectedBusinessType = signal<string | undefined>(undefined);
+  private readonly pastDatesAllowed = computed(
+    () => this.isEnforcementCase() && this.selectedBusinessType() === ENFORCEMENT_BUSINESS_TYPE_CODE
+  );
   readonly minimumDate = computed(() =>
-    this.isEnforcementCase() ? getEarliestEnforcementDate(this.today()) : this.today()
+    this.pastDatesAllowed() ? getEarliestEnforcementDate(this.today()) : this.today()
   );
   readonly startDateErrorMessages = computed(() => [
     { rule: 'required', message: 'Enter a start date' },
-    {
-      rule: 'minDate',
-      message: this.isEnforcementCase()
-        ? PAST_DATE_MESSAGES[PastDateCheck.TooFarInPast]
-        : PAST_DATE_MESSAGES[PastDateCheck.NotEnforcementCase]
-    }
+    { rule: 'minDate', message: PAST_DATE_MESSAGES[this.minimumDateCheck()] }
   ]);
+  private readonly minimumDateCheck = computed(() => {
+    if (!this.isEnforcementCase()) {
+      return PastDateCheck.NotEnforcementCase;
+    }
+    return this.pastDatesAllowed()
+      ? PastDateCheck.TooFarInPast
+      : PastDateCheck.NotEnforcementBusinessType;
+  });
   readonly filtersSubmit = output<SchedulingFilters>();
   readonly hearingSlotAllocationsSubmit = output<{
     hearingSlotAllocations: HearingSlotAllocation[];
@@ -135,6 +145,7 @@ export class MagistratesSchedulingComponent {
   readonly hearingSlotsCancel = output<unknown>();
   readonly pageChange = output<number>();
   @ViewChild('slotsRef') slotsRef: SchedulingSlotsComponent;
+  @ViewChild('filtersRef') filtersRef: SchedulingFiltersComponent;
 
   constructor(
     @Inject(ALLOCATION_FORM_CONFIGS)
@@ -142,6 +153,14 @@ export class MagistratesSchedulingComponent {
   ) {}
 
   errors: ValidationError[] | null;
+  ngDoCheck() {
+    const businessType = this.filtersRef
+      ? this.filtersRef.formModel?.businessType
+      : this.filters()?.businessType;
+    if (businessType !== this.selectedBusinessType()) {
+      this.selectedBusinessType.set(businessType);
+    }
+  }
 
   get allocationFormConfig(): AllocationsFormConfig {
     return this.allocationFormConfigs['showNotification'];
