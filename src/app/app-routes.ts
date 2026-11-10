@@ -102,13 +102,13 @@ export const appRoutes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'allocated',
+            redirectTo: 'court-calendar',
             pathMatch: 'full'
           },
           {
             path: 'allocated',
             loadChildren: () =>
-              import('./edit-allocation/edit-allocation.routes').then((m) => m.routes),
+              import('./edit-allocation/edit-allocation.routes').then(m => m.routes),
             runGuardsAndResolvers: 'always',
             canActivate: [UserServiceExistsGuard, TrialTypesGuard, UserDetailsGuard],
             data: {
@@ -131,7 +131,7 @@ export const appRoutes: Routes = [
               {
                 path: '',
                 loadChildren: () =>
-                  import('./unallocated-hearings/unallocated-hearings.routes').then((m) => m.routes)
+                  import('./unallocated-hearings/unallocated-hearings.routes').then(m => m.routes)
               },
               {
                 path: ':id',
@@ -154,20 +154,23 @@ export const appRoutes: Routes = [
           },
           {
             path: 'split/:id',
-            loadChildren: () =>
-              import('./split-hearing/split-hearing.routes').then((m) => m.routes),
+            loadChildren: () => import('./split-hearing/split-hearing.routes').then(m => m.routes),
             runGuardsAndResolvers: 'always',
-            canActivate: [UserServiceExistsGuard, UnallocatedHearingExistsGuard, UserDetailsGuard],
+            canActivate: [
+              UserDetailsGuard,
+              UserPermissionsExistGuard,
+              UnallocatedHearingExistsGuard
+            ],
             data: {
               title: 'Allocate hearing | Common Platform',
-              userServiceExistsPredicate: allocatedHearingsGuardHelper,
-              userServiceExistsErrorRedirectTo: `/${ERROR_ROUTE_PATHS.unauthorised}`
+              userPermissionsExistsPredicate: manageCourtcalendarGuardHelper,
+              userPermissionsExistsErrorRedirectTo: `/${ERROR_ROUTE_PATHS.unauthorised}`
             }
           },
           {
             path: 'court-calendar',
             loadChildren: () =>
-              import('./court-calendar/court-calendar.routes').then((m) => m.courtCalendarRoutes),
+              import('./court-calendar/court-calendar.routes').then(m => m.courtCalendarRoutes),
             runGuardsAndResolvers: 'always',
             canActivate: [UserDetailsGuard, UserPermissionsExistGuard],
             data: {
@@ -178,8 +181,7 @@ export const appRoutes: Routes = [
           },
           {
             path: 'create-a-list',
-            loadChildren: () =>
-              import('./create-a-list/create-a-list.routes').then((m) => m.routes),
+            loadChildren: () => import('./create-a-list/create-a-list.routes').then(m => m.routes),
             runGuardsAndResolvers: 'always',
             canActivate: [UserServiceExistsGuard, UserDetailsGuard, PublicHolidaysGuard],
             data: {
@@ -191,7 +193,7 @@ export const appRoutes: Routes = [
           {
             path: 'unscheduled',
             loadChildren: () =>
-              import('./unscheduled-listings/unscheduled-listings.routes').then((m) => m.routes),
+              import('./unscheduled-listings/unscheduled-listings.routes').then(m => m.routes),
             runGuardsAndResolvers: 'always',
             canActivate: [UserServiceExistsGuard],
             data: {
@@ -203,7 +205,7 @@ export const appRoutes: Routes = [
           {
             path: 'create-prison-list',
             loadChildren: () =>
-              import('./create-prison-list/create-prison-list.routes').then((m) => m.routes),
+              import('./create-prison-list/create-prison-list.routes').then(m => m.routes),
             runGuardsAndResolvers: 'always',
             canActivate: [UserDetailsGuard, PublicHolidaysGuard, UserPermissionsExistGuard],
             data: {
@@ -215,9 +217,7 @@ export const appRoutes: Routes = [
           {
             path: 'find-available-sessions',
             loadChildren: () =>
-              import('./find-available-sessions/find-available-session.routes').then(
-                (m) => m.routes
-              ),
+              import('./find-available-sessions/find-available-session.routes').then(m => m.routes),
             runGuardsAndResolvers: 'always',
             canActivate: [RotaBusinessTypesGuard],
             data: {
