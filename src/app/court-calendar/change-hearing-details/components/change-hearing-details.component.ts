@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-import { ValidationError } from '@cpp/pdk';
+import { PdkCharacterCountComponent, PdkResizeDirective, ValidationError } from '@cpp/pdk';
 import { CppReferenceDataComponents, HearingType } from '@cpp/reference-data';
 import {
   AllocatingHearingDetailsWithCourtCentre,
@@ -9,6 +9,7 @@ import {
   Hearing
 } from '../../../core';
 import { DateRange } from '../../../shared/components/date-range/date-range';
+import { resolveJudiciaryAssignmentSource } from '../../../core/util';
 import { AllocateHearingFactory } from '../../utils/allocate-hearing.factory';
 import { CPPDate } from '../../../core/util';
 import { CourtSession, HearingSlot } from '@cpp/scheduling';
@@ -21,6 +22,7 @@ import {
   findAllDayDurationBasedSession,
   isAllDayDurationBased
 } from '../../utils/court-calendar-hearings-helper';
+import { PUBLIC_LIST_NOTE_MAX_LENGTH } from '../../../core/util/constants';
 
 const WORKING_DAY_IN_MINUTES = 360;
 
@@ -47,6 +49,8 @@ export interface ChangeHearingDetailsFormValues extends Pick<
   imports: [
     CppReferenceDataComponents,
     PdkComponents,
+    PdkResizeDirective,
+    PdkCharacterCountComponent,
     FormsModule,
     ChangeHearingDetailsCrownControlComponent,
     ChangeHearingDetailsMagsControlComponent,
@@ -72,8 +76,9 @@ export class ChangeHearingDetailsComponent {
   readonly onValidationError = output<ValidationError[]>();
   readonly onSubmit = output<AllocatingHearingDetailsWithCourtCentre>();
   readonly onCancel = output<void>();
-  selectedJudiary: ExtendedJudicialRole[];
+  selectedJudiciary: ExtendedJudicialRole[];
   datePipe = new DatePipe('en-GB');
+  readonly publicListNoteMaxLength = PUBLIC_LIST_NOTE_MAX_LENGTH;
 
   allocateHearingFactory = inject(AllocateHearingFactory);
   cppDate = inject(CPPDate);
@@ -116,7 +121,12 @@ export class ChangeHearingDetailsComponent {
           : this.durationInMinutes(duration)
       },
       this.selectedCourtCentre(),
-      this.selectedJudiary
+      this.selectedJudiciary
+    );
+
+    updatedHearing.judiciaryAssignmentSource = resolveJudiciaryAssignmentSource(
+      selectedHearing.jurisdictionType,
+      this.selectedJudiciary
     );
 
     this.onSubmit.emit({

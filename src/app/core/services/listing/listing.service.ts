@@ -11,6 +11,7 @@ import {
   Hearing,
   HearingWithSelectedCourtCentre,
   JudicialRole,
+  JudiciaryAssignmentSource,
   JudiciaryForHearings,
   Offence,
   SearchAvailableHearingsFormOptions,
@@ -168,6 +169,7 @@ export class ListingService {
       priority?: string;
       specialRequirements?: string[];
       sendNotificationToParties?: boolean;
+      judiciaryAssignmentSource?: JudiciaryAssignmentSource;
     },
     isSplit = false
   ): Observable<unknown> {
@@ -221,7 +223,8 @@ export class ListingService {
       bookingType: hearing.bookingType,
       priority: hearing.priority,
       specialRequirements: hearing.specialRequirements,
-      sendNotificationToParties: hearing.sendNotificationToParties
+      sendNotificationToParties: hearing.sendNotificationToParties,
+      judiciaryAssignmentSource: hearing.judiciaryAssignmentSource
     };
     if (hearing.weekCommencingStartDate) {
       body.weekCommencingStartDate = hearing.weekCommencingStartDate;
@@ -278,7 +281,8 @@ export class ListingService {
         hearingLanguage: hearing.hearingLanguage,
         publicListNote,
         hasVideoLink,
-        sendNotificationToParties: hearing.sendNotificationToParties
+        sendNotificationToParties: hearing.sendNotificationToParties,
+        judiciaryAssignmentSource: hearing.judiciaryAssignmentSource
       }
     });
   }

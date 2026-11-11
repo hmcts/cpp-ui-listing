@@ -1,7 +1,8 @@
 import {
   ExtendedJudicialRole,
   HearingType,
-  HearingWithSelectedCourtCentre
+  HearingWithSelectedCourtCentre,
+  JudiciaryAssignmentSource
 } from './../../../core/model/hearing';
 import { createAction, props } from '@ngrx/store';
 import { CaseNote } from '../../../allocate-hearing/allocate-hearing.interfaces';
@@ -58,6 +59,7 @@ export const changeHearingsJudiciaryAction = createAction(
   props<{
     hearings: HearingWithSelectedCourtCentre[];
     judiciary: ExtendedJudicialRole[];
+    judiciaryAssignmentSource?: JudiciaryAssignmentSource;
     filterOptions: CourtCalendarFilters;
   }>()
 );

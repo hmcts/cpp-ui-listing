@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import {
   ChangeHearingDetailsComponent,
   ChangeHearingDetailsFormValues
 } from '../change-hearing-details.component';
 import { reducers } from '../../../../core/reducers';
+import { JudiciaryAssignmentSource } from '../../../../core/model';
 import {
   initialHearingFormValues,
   mockSelectedCourtCentre,
@@ -137,6 +139,24 @@ describe('ChangeHearingDetailsComponent', () => {
       fixture.detectChanges();
       expect(fixture).toMatchSnapshot();
     });
+
+    it('should render the public list note as a textarea limited to 200 characters with a character count for a Crown hearing', async () => {
+      mockFixtureInputs(fixture, {
+        selectedHearing: { ...selectedHearing, jurisdictionType: 'CROWN' }
+      });
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const publicListNote = fixture.debugElement.query(By.css('[name="publicListNote"]'));
+      const characterCount = fixture.debugElement.query(By.css('pdk-character-count'));
+
+      expect(publicListNote.nativeElement.tagName).toBe('TEXTAREA');
+      expect(publicListNote.nativeElement.getAttribute('maxlength')).toBe('200');
+      expect(characterCount.nativeElement.textContent).toContain(
+        'You have 200 characters remaining'
+      );
+    });
   });
 
   describe('Jurisdiction type control routing', () => {
@@ -200,6 +220,63 @@ describe('ChangeHearingDetailsComponent', () => {
         })
       );
       expect(fixture).toMatchSnapshot();
+    });
+
+    const judiciaryAssignmentSourceFormValue = {
+      dateRange: { startDate: '2025-01-01', endDate: '2025-01-01' },
+      selectedHearingType: { id: '123', hearingDescription: 'Mock Hearing' },
+      startTime: '10:00',
+      duration: '4:00',
+      hasVideoLink: true,
+      sendNotificationToParties: false,
+      hearingLanguage: 'ENGLISH',
+      nonDefaultDays: [],
+      nonSittingDays: []
+    } as Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string };
+
+    it('should not set judiciaryAssignmentSource when the judiciary selection is not changed', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      component.submit({ value: judiciaryAssignmentSourceFormValue });
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          updatedHearing: expect.objectContaining({ judiciaryAssignmentSource: undefined })
+        })
+      );
+    });
+
+    it('should set judiciaryAssignmentSource to MANUAL when the judiciary selection is changed', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      component.selectedJudiciary = [
+        { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
+      ];
+      component.submit({ value: judiciaryAssignmentSourceFormValue });
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          updatedHearing: expect.objectContaining({
+            judiciaryAssignmentSource: JudiciaryAssignmentSource.MANUAL
+          })
+        })
+      );
+    });
+
+    it('should not set judiciaryAssignmentSource when all judiciary are unchecked', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
+      fixture.detectChanges();
+      component.selectedJudiciary = [];
+      component.submit({ value: judiciaryAssignmentSourceFormValue });
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          updatedHearing: expect.objectContaining({ judiciaryAssignmentSource: undefined })
+        })
+      );
     });
 
     it('should emit correct payload when submitting multi-day hearing', async () => {

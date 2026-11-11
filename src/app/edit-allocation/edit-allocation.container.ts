@@ -25,6 +25,7 @@ import {
   ClearLastAllocatedHearingAction,
   CourtCentre,
   CourtroomsFilter,
+  ExtendedJudicialRole,
   getCourtCentres,
   getEditAllocationError,
   getHearingTypes,
@@ -34,12 +35,18 @@ import {
   getTrialTypesFilteredByType,
   Hearing,
   HearingType,
+  HearingWithSelectedCourtCentre,
   SearchAllocatedHearingsAction,
   setEditAllocationError,
   setHearingToEditAllocation,
   UpdateAllocatedHearingAction
 } from '../core/';
-import { FilterOption, HearingSchedule, LastAllocatedHearing } from '../core/model/';
+import {
+  FilterOption,
+  HearingSchedule,
+  JudiciaryAssignmentSource,
+  LastAllocatedHearing
+} from '../core/model/';
 import { AppConfigService } from '../config';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DailyCourtRoomCalendarContainer } from '../daily-court-room-calendar/daily-court-room-calendar.container';
@@ -190,12 +197,21 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
     this.clearSelectedHearing();
   }
 
-  changeJudiciary({ hearings, judiciary }) {
+  changeJudiciary({
+    hearings,
+    judiciary,
+    judiciaryAssignmentSource
+  }: {
+    hearings: HearingWithSelectedCourtCentre[];
+    judiciary: ExtendedJudicialRole[];
+    judiciaryAssignmentSource?: JudiciaryAssignmentSource;
+  }) {
     this.showJudiciaryForm = false;
     this.store.dispatch(
       new ChangeJudicaryForHearingsAction({
         hearings,
-        judiciary: judiciary.filter(judic => !!judic) // this is to handle gaps in magistrates (eg Winger 2 present but not Winger 1, etc)
+        judiciary: judiciary.filter(judic => !!judic),
+        judiciaryAssignmentSource
       })
     );
   }
