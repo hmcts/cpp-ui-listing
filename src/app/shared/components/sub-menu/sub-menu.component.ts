@@ -82,7 +82,7 @@ export class SubMenuComponent {
         ];
 
         if (hasCourtCalendarAccess) {
-          menuItems.push({
+          menuItems.unshift({
             routerLink: '/court-calendar',
             linkText: 'Court calendar'
           });
