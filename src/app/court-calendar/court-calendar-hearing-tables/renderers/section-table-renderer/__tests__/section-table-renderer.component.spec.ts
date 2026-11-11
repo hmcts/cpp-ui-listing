@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SectionTableRendererComponent } from '../section-table-renderer.component';
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { HearingsTableSectionConfig } from '../../../../model/hearing-table-renderer.interfaces';
 import { defineHearingsGroupLevels } from '../../../../utils/hearing-table-renderer.utils';
 import {
@@ -82,6 +83,44 @@ describe('SectionTableRendererComponent', () => {
       fixture.detectChanges();
       const rowGroupBodyEls = el.nativeElement.querySelectorAll('tbody[row-group-body]');
       expect(rowGroupBodyEls.length).toBeGreaterThan(0);
+    });
+
+    it('should wrap long unbroken text in default cells', () => {
+      const longPublicListNote = 'A'.repeat(200);
+      fixture.componentRef.setInput('sectionConfig', {
+        actionable: false,
+        hasTableSectionHeader: false,
+        groupLevels: defineHearingsGroupLevels<{ rowGroups: { rows: unknown[] }[] }>()
+          .group('rowGroups')
+          .rows('rows')
+      } as HearingsTableSectionConfig);
+
+      fixture.componentRef.setInput('columnConfig', [
+        { label: 'Public list notes', key: 'publicListNote' }
+      ]);
+
+      fixture.componentRef.setInput('sections', [
+        {
+          sectionIdentifier: 'test-section',
+          courtCentre: null,
+          rowGroups: [
+            {
+              rows: [
+                {
+                  id: 'abc',
+                  rowIdentifier: 'abc',
+                  isMaster: true,
+                  publicListNote: longPublicListNote
+                }
+              ]
+            }
+          ]
+        }
+      ]);
+
+      fixture.detectChanges();
+      const defaultCell = el.query(By.css('tbody[row-group-body] td span.wrap-long-text'));
+      expect(defaultCell.nativeElement.textContent.trim()).toBe(longPublicListNote);
     });
   });
 });

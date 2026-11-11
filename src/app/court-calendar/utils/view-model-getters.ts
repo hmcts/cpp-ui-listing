@@ -1,5 +1,5 @@
 import { sortBy, uniq } from 'lodash-es';
-import { getCPPDate } from '../../core/util';
+import { getCPPDate, isGroupedCivilCase } from '../../core/util';
 import { Defendant, Hearing, ListedCase, Offence } from '../../core';
 import {
   AllocatedWidgetCourtroomCalendarVm,
@@ -169,7 +169,8 @@ function getHearingTypeVm({ type, listedCase }: Partial<HearingForCaseInstance>)
 
 function getDefendantsVM({
   listedCase,
-  courtApplications
+  courtApplications,
+  numberOfGroupCases
 }: Partial<HearingForCaseInstance>): HearingDefendantVM {
   let defendantVm: HearingDefendantVM = {};
   if (!!listedCase) {
@@ -177,7 +178,8 @@ function getDefendantsVM({
       ...defendantVm,
       defendants: listedCase?.defendants ?? [],
       caseUrn: listedCase?.caseIdentifier?.caseReference,
-      caseId: listedCase.id
+      caseId: listedCase.id,
+      numberOfGroupCases: isGroupedCivilCase(listedCase) ? numberOfGroupCases : undefined
     };
   } else if (courtApplications.length > 0) {
     const { applicationReference, id, applicant, respondents, applicationTypeCode } =

@@ -229,7 +229,8 @@ export class HearingEffects {
                   bookingType: updatedHearing.bookingType,
                   priority: updatedHearing.priority,
                   specialRequirements: updatedHearing.specialRequirements,
-                  sendNotificationToParties: updatedHearing.sendNotificationToParties
+                  sendNotificationToParties: updatedHearing.sendNotificationToParties,
+                  judiciaryAssignmentSource: updatedHearing.judiciaryAssignmentSource
                 },
                 false
               ),
@@ -540,7 +541,7 @@ export class HearingEffects {
     this.actions$.pipe(
       ofType(HearingActions.CHANGE_JUDICIARY_FOR_HEARINGS_ACTION),
       switchMap((action: ChangeJudicaryForHearingsAction) => {
-        const { hearings, judiciary: judiciaries } = action.payload;
+        const { hearings, judiciary: judiciaries, judiciaryAssignmentSource } = action.payload;
 
         const permissionHandler$ = this.permissionsHandlerForJudiciaries(hearings, judiciaries);
 
@@ -554,7 +555,8 @@ export class HearingEffects {
           this.listing.changeJudiciaryForHearings({
             hearings: hearings.map(h => h.id),
             judiciary:
-              judiciaries && judiciaries.map(({ judicialMember, ...rest }) => rest as JudicialRole)
+              judiciaries && judiciaries.map(({ judicialMember, ...rest }) => rest as JudicialRole),
+            judiciaryAssignmentSource
           }),
           permissionHandler$,
           notificationHandler$

@@ -860,7 +860,9 @@ exports[`Sequence Hearings should not display the reorder component (reorder the
                   <b>
                     Public list note: 
                   </b>
-                  <span>
+                  <span
+                    class="wrap-long-text"
+                  >
                     Public list note
                   </span>
                 </td>
@@ -1434,7 +1436,9 @@ exports[`Sequence Hearings should render correctly 1`] = `
                   <b>
                     Public list note: 
                   </b>
-                  <span>
+                  <span
+                    class="wrap-long-text"
+                  >
                     Public list note
                   </span>
                 </td>

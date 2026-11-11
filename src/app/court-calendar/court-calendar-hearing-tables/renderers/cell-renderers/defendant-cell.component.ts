@@ -6,14 +6,19 @@ import { FullNamePipe } from '../../../../shared/pipes/full-name.pipe';
 import { HearingDefendantVM } from '../../../model';
 import { PlusMorePipe } from '../../../pipes/plus-more.pipe';
 import { WofdWarningService } from '@cpp/application';
+import { GroupCaseSummaryComponent } from '../../../../shared/components/group-case-summary/group-case-summary.component';
 
 @Component({
   selector: 'defendant-cell',
   template: `
     <div data-test-id="defendants" class="defendants">
-      @if (displayDefendants?.length > 0) {
+      @if (defendantData.numberOfGroupCases) {
+        <group-case-summary
+          [groupCaseCount]="defendantData.numberOfGroupCases"
+        ></group-case-summary>
+      } @else if (displayDefendants?.length > 0) {
         @for (defendant of displayDefendants; track defendant.id) {
-          <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
+          <span class="wrap-long-text" data-test-id="defendant" [pdk-margin-bottom]="1">
             {{ defendant | fullName
             }}{{
               defendant.isYouth && defendant.bailStatus?.code === 'C'
@@ -80,17 +85,19 @@ import { WofdWarningService } from '@cpp/application';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ['defendantData', 'baseUrl'],
-  imports: [PlusMorePipe, ApplicantRespondentFullNamePipe, FullNamePipe, PdkCore],
+  imports: [
+    PlusMorePipe,
+    ApplicantRespondentFullNamePipe,
+    FullNamePipe,
+    PdkCore,
+    GroupCaseSummaryComponent
+  ],
   styles: [
     `
       .defendants {
         display: flex;
         flex-direction: column;
         max-width: 100%;
-      }
-
-      .defendant-name {
-        word-break: break-word;
       }
     `
   ]
