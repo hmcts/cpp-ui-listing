@@ -1157,15 +1157,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>
@@ -2354,15 +2363,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>
@@ -3551,15 +3569,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>
@@ -4748,15 +4775,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>
@@ -5910,15 +5946,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>
@@ -7072,15 +7117,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>
@@ -8234,15 +8288,24 @@ exports[`HearingDetailsFormComponent should show component fields for hearing de
                 >
                    Public list note 
                 </label>
-                <input
+                <textarea
                   class="ng-untouched ng-pristine ng-valid govuk-input"
                   id="public-list-details"
-                  maxlength="80"
+                  maxlength="200"
                   name="publicListNote"
                   pdk-input=""
+                  pdk-resize=""
                   pdk-text-input=""
-                  type="text"
+                  style="resize: none; min-height: NaNpx; max-height: NaNpx;"
                 />
+                <pdk-character-count>
+                  <span
+                    aria-live="polite"
+                    class="govuk-hint govuk-character-count__message"
+                  >
+                     You have 200 characters remaining 
+                  </span>
+                </pdk-character-count>
               </pdk-form-group>
             </pdk-form-field>
           </div>

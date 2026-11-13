@@ -1335,7 +1335,9 @@ exports[`HearingsPerJudiciaryComponent Wrapped should match Jest snapshot for he
               <b>
                 Public list note: 
               </b>
-              <span>
+              <span
+                class="wrap-long-text"
+              >
                 Public list note
               </span>
             </td>
@@ -1917,7 +1919,9 @@ exports[`HearingsPerJudiciaryComponent Wrapped should populate youth flag 1`] = 
               <b>
                 Public list note: 
               </b>
-              <span>
+              <span
+                class="wrap-long-text"
+              >
                 Public list note
               </span>
             </td>

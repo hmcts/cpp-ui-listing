@@ -13,6 +13,7 @@ exports[`ViewHearingRowDetailsComponent should create the component 1`] = `
   listedCase={[Function Object]}
   offences={[Function Function]}
   publicListNote={[Function Function]}
+  publicListNoteMaxLength={[Function Number]}
   tierLabel={[Function Function]}
   updateHearingPublicListNote={[Function OutputEmitterRef]}
 >
@@ -67,21 +68,21 @@ exports[`ViewHearingRowDetailsComponent should create the component 1`] = `
           pdk-padding-left="0"
           two-thirds=""
         >
-          <input
+          <textarea
             class="ng-untouched ng-pristine ng-valid govuk-input"
-            maxlength="150"
+            maxlength="200"
             name="publicListNote"
             pdk-input=""
-            type="text"
+            pdk-resize=""
+            pdk-text-input=""
+            style="resize: none; min-height: NaNpx; max-height: NaNpx;"
           />
-          <pdk-character-count
-            limit="150"
-          >
+          <pdk-character-count>
             <span
               aria-live="polite"
               class="govuk-hint govuk-character-count__message"
             >
-               You have 150 characters remaining 
+               You have 200 characters remaining 
             </span>
           </pdk-character-count>
         </dd>

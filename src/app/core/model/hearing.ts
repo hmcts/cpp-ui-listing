@@ -6,6 +6,11 @@ import { JudicialMember, JudiciaryTypeGroup } from '@cpp/reference-data';
 import { DateRange } from '../../shared/components/date-range/date-range';
 import { HearingSlotAllocation, ListingNote } from '@cpp/scheduling';
 
+export enum JudiciaryAssignmentSource {
+  MANUAL = 'MANUAL',
+  AUTO = 'AUTO'
+}
+
 export interface JudiciaryGroupMapType {
   [key: string]: JudiciaryTypeGroup;
 }
@@ -27,13 +32,7 @@ export interface JudicialRole {
 }
 
 export type HearingTier =
-  | 'TIER_1'
-  | 'TIER_2'
-  | 'TIER_3'
-  | 'TIER_4'
-  | 'TIER_5'
-  | 'TIER_6'
-  | 'TIER_7';
+  'TIER_1' | 'TIER_2' | 'TIER_3' | 'TIER_4' | 'TIER_5' | 'TIER_6' | 'TIER_7';
 
 export type HearingListType = 'TYPE_1_FIXED' | 'TYPE_2_FLEXIBLE';
 
@@ -84,6 +83,7 @@ export interface Hearing {
   tier?: HearingTier;
   listType?: HearingListType;
   keyReason?: string;
+  judiciaryAssignmentSource?: JudiciaryAssignmentSource;
   numberOfGroupCases?: number;
 }
 
@@ -316,6 +316,17 @@ export enum PublishCourtListType {
   Warn = 'WARN',
   Draft = 'DRAFT',
   Final = 'FINAL'
+}
+
+const PUBLISH_COURT_LIST_TYPE_LABELS: Record<PublishCourtListType, string> = {
+  [PublishCourtListType.Firm]: 'firm',
+  [PublishCourtListType.Warn]: 'advance',
+  [PublishCourtListType.Draft]: 'draft',
+  [PublishCourtListType.Final]: 'final'
+};
+
+export function getPublishCourtListLabel(listType: string): string {
+  return PUBLISH_COURT_LIST_TYPE_LABELS[listType?.toUpperCase()] ?? listType?.toLowerCase();
 }
 
 export type JurisdictionType = 'MAGISTRATES' | 'CROWN';
