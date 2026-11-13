@@ -238,7 +238,9 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Time
                     </span>
                   </div>
@@ -251,7 +253,9 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Duration
                     </span>
                   </div>
@@ -264,7 +268,9 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Hearing type
                     </span>
                   </div>
@@ -277,7 +283,9 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Defendants
                     </span>
                   </div>
@@ -290,7 +298,9 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Offences (by severity)
                     </span>
                   </div>
@@ -303,7 +313,9 @@ exports[`CourtCalendarContainer should disable Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Public list notes
                     </span>
                   </div>
@@ -783,7 +795,9 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Time
                     </span>
                   </div>
@@ -796,7 +810,9 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Duration
                     </span>
                   </div>
@@ -809,7 +825,9 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Hearing type
                     </span>
                   </div>
@@ -822,7 +840,9 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Defendants
                     </span>
                   </div>
@@ -835,7 +855,9 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Offences (by severity)
                     </span>
                   </div>
@@ -848,7 +870,9 @@ exports[`CourtCalendarContainer should display Reallocate and Unallocate buttons
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Public list notes
                     </span>
                   </div>
@@ -1141,7 +1165,9 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Time
                     </span>
                   </div>
@@ -1154,7 +1180,9 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Duration
                     </span>
                   </div>
@@ -1167,7 +1195,9 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Hearing type
                     </span>
                   </div>
@@ -1180,7 +1210,9 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Defendants
                     </span>
                   </div>
@@ -1193,7 +1225,9 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Offences (by severity)
                     </span>
                   </div>
@@ -1206,7 +1240,9 @@ exports[`CourtCalendarContainer should display Reallocate button  when courtType
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Public list notes
                     </span>
                   </div>
@@ -1686,7 +1722,9 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Time
                     </span>
                   </div>
@@ -1699,7 +1737,9 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Duration
                     </span>
                   </div>
@@ -1712,7 +1752,9 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Hearing type
                     </span>
                   </div>
@@ -1725,7 +1767,9 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Defendants
                     </span>
                   </div>
@@ -1738,7 +1782,9 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Offences (by severity)
                     </span>
                   </div>
@@ -1751,7 +1797,9 @@ exports[`CourtCalendarContainer should enable Reallocate and Unallocate buttons 
                   scope="col"
                 >
                   <div>
-                    <span>
+                    <span
+                      class="wrap-long-text"
+                    >
                        Public list notes
                     </span>
                   </div>

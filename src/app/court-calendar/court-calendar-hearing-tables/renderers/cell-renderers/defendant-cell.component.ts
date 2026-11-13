@@ -21,7 +21,7 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
         ></group-case-summary>
       } @else if (displayDefendants?.length > 0) {
         @for (defendant of displayDefendants; track defendant.id) {
-          <span class="defendant-name" data-test-id="defendant" [pdk-margin-bottom]="1">
+          <span class="wrap-long-text" data-test-id="defendant" [pdk-margin-bottom]="1">
             {{ defendant | fullName
             }}{{
               defendant.isYouth && defendant.bailStatus?.code === 'C'
@@ -101,10 +101,6 @@ import { GroupCaseSummaryComponent } from '../../../../shared/components/group-c
         display: flex;
         flex-direction: column;
         max-width: 100%;
-      }
-
-      .defendant-name {
-        word-break: break-word;
       }
     `
   ]

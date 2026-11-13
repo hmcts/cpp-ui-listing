@@ -529,7 +529,7 @@ describe('DownloadListComponent', () => {
       expect(sharefirmlistsBtn).toBeTruthy();
       expect(component.isWeekCommencing).toBe(true);
       expect(component.mapPublishStatuses(PublishCourtListType.Warn)).toBe(
-        'Previous warn list published 10:45 14 Nov'
+        'Previous advance list published 10:45 14 Nov'
       );
     });
 
@@ -595,7 +595,7 @@ describe('DownloadListComponent', () => {
         failureMessage: ''
       };
       expect(component.formatMessageWithDate(publishStatus)).toBe(
-        'Previous warn list published 08:03 14 Nov'
+        'Previous advance list published 08:03 14 Nov'
       );
     });
 
@@ -612,7 +612,7 @@ describe('DownloadListComponent', () => {
         failureMessage: ''
       };
       expect(component.formatMessageWithDate(publishStatus)).toBe(
-        'Previous warn list published 10:45 14 Nov'
+        'Previous advance list published 10:45 14 Nov'
       );
     });
 
@@ -665,6 +665,31 @@ describe('DownloadListComponent', () => {
       );
       expect(component.publishListNameSelected).toBe('DRAFT');
       expect(modalShowSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should open Modal with advance display text but keep WARN as the publish list type', () => {
+      component.openModal(null, 'warn');
+      expect(component.listText).toBe('Publish advance list');
+      expect(component.modalConfirmMessage).toBe(
+        'Are you sure you want to publish the advance hearing list?'
+      );
+      expect(component.publishListNameSelected).toBe(PublishCourtListType.Warn);
+      expect(modalShowSpy).toHaveBeenCalled();
+    });
+
+    it('should show Share advance list label and open modal with WARN list type when clicked', () => {
+      hostComponent.selectedOptions = {
+        ...hostComponent.selectedOptions,
+        endDate: '2019-11-10',
+        startDate: '2019-11-04'
+      };
+      hostComponent.crownSelected = true;
+      fixture.detectChanges();
+      const openModalSpy = spyOn(component, 'openModal');
+      const advanceBtn = fixture.debugElement.query(By.css('[data-role="sharewarnlists-button"]'));
+      expect(advanceBtn.nativeElement.textContent.trim()).toBe('Share advance list');
+      advanceBtn.nativeElement.click();
+      expect(openModalSpy).toHaveBeenCalledWith(expect.anything(), 'warn');
     });
 
     it('should Send the correct data when the list is published', () => {
