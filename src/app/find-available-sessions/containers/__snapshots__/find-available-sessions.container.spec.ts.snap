@@ -2,19 +2,27 @@
 
 exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
 <find-available-sessions-container
+  CrownSessionStatus={[Function Object]}
   appConfig={[Function Object]}
   breadcrumbs={[Function Array]}
-  currentPage$={[Function _Store]}
-  filters$={[Function _Store]}
+  courtQueryParams={[Function Function]}
+  currentPage={[Function Function]}
+  defaultFilters$={[Function Observable]}
+  errors={[Function Function]}
+  filters={[Function Function]}
   hearingTypePlaceholder={[Function Object]}
-  organisationUnits$={[Function _Store]}
-  pageSize$={[Function _Store]}
-  rotaBusinessTypes$={[Function _Store]}
+  jurisdictionType={[Function Function]}
+  metadata$={[Function _Store]}
+  organisationUnits={[Function Function]}
+  pageSize={[Function Function]}
+  rotaBusinessTypes={[Function Function]}
   route={[Function Object]}
   router={[Function Object]}
-  searchResult$={[Function _Store]}
+  schedulingFilters$={[Function _Store]}
+  searchResult={[Function Function]}
+  showCourtSelection={[Function Function]}
   store={[Function _Store]}
-  totalResults$={[Function _Store]}
+  totalResults={[Function Function]}
 >
   <pdk-grid
     class="govuk-!-margin-top-2 govuk-grid-row"
@@ -45,6 +53,20 @@ exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
           </li>
         </ol>
       </breadcrumbs>
+      <div
+        class="govuk-!-margin-top-2 govuk-!-margin-bottom-1"
+        pdk-margin-bottom="1"
+        pdk-margin-top="2"
+      >
+        <a
+          class="govuk-back-link"
+          data-role="find-sessions-search-back"
+          href="javascript:void(0)"
+          pdk-back-link=""
+        >
+          Back
+        </a>
+      </div>
       <h1
         class="govuk-!-margin-bottom-4 govuk-!-margin-top-2 govuk-heading-l"
         pdk-margin-bottom="4"
@@ -57,10 +79,38 @@ exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
         class="scheduling-filters-wrapper govuk-!-padding-top-6"
         pdk-padding-top="6"
       >
-        <scheduling-filters>
+        <magistrates-scheduling-filters>
           <form>
             <div>
-              [object Object]
+              {
+    "ouCode": "OUCODEL34",
+    "oucodeL2Code": "2",
+    "courtSession": "AM",
+    "sessionStartDate": "2019-01-01",
+    "sessionEndDate": "2019-01-31",
+    "panel": "ADULT",
+    "businessType": "HEARINGTYPE002",
+    "jurisdiction": "MAGISTRATES",
+    "hearingType": {
+      "id": "All",
+      "hearingCode": "All",
+      "seqId": 0,
+      "defaultDurationMin": 0,
+      "welshHearingDescription": "",
+      "hearingDescription": "All hearing types",
+      "magistratesFlag": true,
+      "crownFlag": true
+    },
+    "organisationUnit": {
+      "id": "COURT004",
+      "oucode": "OUCODEL34",
+      "oucodeL1Code": "B",
+      "oucodeL2Code": "2",
+      "oucodeL2Name": "ouL2 Y",
+      "oucodeL3Code": "OUCODEL34",
+      "oucodeL3Name": "D"
+    }
+  }
             </div>
             <button
               type="submit"
@@ -68,7 +118,7 @@ exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
               Submit
             </button>
           </form>
-        </scheduling-filters>
+        </magistrates-scheduling-filters>
         <pdk-inset-text>
           <div
             class="govuk-inset-text"
@@ -78,7 +128,7 @@ exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
             </b>
           </div>
         </pdk-inset-text>
-        <scheduling-slots>
+        <magistrates-scheduling-slots>
           <div>
             [object Object]
           </div>
@@ -199,7 +249,7 @@ exports[`FindAvailableSessionsContainer should compile correctly 1`] = `
               </nav>
             </div>
           </pdk-pagination>
-        </scheduling-slots>
+        </magistrates-scheduling-slots>
       </div>
     </pdk-grid>
   </pdk-grid>

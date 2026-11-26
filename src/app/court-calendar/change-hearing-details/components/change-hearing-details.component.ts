@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { PdkCharacterCountComponent, PdkResizeDirective, ValidationError } from '@cpp/pdk';
 import { CppReferenceDataComponents, HearingType } from '@cpp/reference-data';
 import {
@@ -11,13 +11,21 @@ import {
 import { DateRange } from '../../../shared/components/date-range/date-range';
 import { resolveJudiciaryAssignmentSource } from '../../../core/util';
 import { AllocateHearingFactory } from '../../utils/allocate-hearing.factory';
+import { CPPDate } from '../../../core/util';
 import { CourtSession, HearingSlot } from '@cpp/scheduling';
 import { ChangeHearingDetailsCrownControlComponent } from './change-hearing-details-crown-control/change-hearing-details-crown-control.component';
 import { ChangeHearingDetailsMagsControlComponent } from './change-hearing-details-mags-control/change-hearing-details-mags-control.component';
 import { FormsModule } from '@angular/forms';
 import { JudiciaryInputComponent } from '../../../shared/components/judiciary-input/judiciary-input.component';
 import { PdkComponents } from '../../../shared/pdk-shared-components';
+import {
+  findAllDayDurationBasedSession,
+  isAllDayDurationBased
+} from '../../utils/court-calendar-hearings-helper';
 import { PUBLIC_LIST_NOTE_MAX_LENGTH } from '../../../core/util/constants';
+
+const WORKING_DAY_IN_MINUTES = 360;
+
 export interface ChangeHearingDetailsFormValues extends Pick<
   Hearing,
   | 'hasVideoLink'
@@ -72,34 +80,46 @@ export class ChangeHearingDetailsComponent {
   datePipe = new DatePipe('en-GB');
   readonly publicListNoteMaxLength = PUBLIC_LIST_NOTE_MAX_LENGTH;
 
-  constructor(private allocateHearingFactory: AllocateHearingFactory) {}
+  allocateHearingFactory = inject(AllocateHearingFactory);
+  cppDate = inject(CPPDate);
 
   submit({
     value: { duration, ...restValues }
   }: {
     value: Omit<ChangeHearingDetailsFormValues, 'duration'> & { duration: string };
   }): void {
-    let durationMinutes: number;
-    let courtSession: CourtSession;
-    if (duration) {
-      const durationSplit = String(duration).split(':').map(Number);
-      durationMinutes = (durationSplit[0] || 0) * 60 + (durationSplit[1] || 0);
-    }
-
-    if (restValues.courtScheduleId) {
-      ({ courtSession } = this.hearingSlots().find(
-        ({ courtScheduleId }) => courtScheduleId === restValues.courtScheduleId
-      ));
-    }
-
     const selectedHearing = this.selectedHearing();
+    const [{ courtScheduleId: existingCourtScheduleId, startTime: existingStartTime }] =
+      selectedHearing.hearingDays;
+    const isMultiDay = restValues.dateRange?.startDate !== restValues.dateRange?.endDate;
+    const courtScheduleId = isMultiDay
+      ? this.allDayDurationBasedCourtScheduleIdOn(
+          restValues.dateRange.startDate,
+          existingCourtScheduleId
+        )
+      : (restValues.courtScheduleId ?? existingCourtScheduleId);
+
     if (!restValues.dateRange && selectedHearing.jurisdictionType === 'MAGISTRATES') {
       restValues.dateRange = new DateRange(selectedHearing.startDate, selectedHearing.endDate);
     }
 
     const updatedHearing = this.allocateHearingFactory.updateAllocatedHearing(
       selectedHearing,
-      { duration: durationMinutes, ...restValues, courtSession },
+      {
+        ...restValues,
+        courtScheduleId,
+        courtSession: this.findHearingSlot(courtScheduleId)?.courtSession,
+        startTime:
+          isMultiDay || !restValues.startTime
+            ? this.cppDate.format(existingStartTime, this.cppDate.HOURS_MINUTES_24H)
+            : restValues.startTime,
+        duration: isMultiDay
+          ? this.cppDate.countWorkingDays(
+              restValues.dateRange.startDate,
+              restValues.dateRange.endDate
+            ) * WORKING_DAY_IN_MINUTES
+          : this.durationInMinutes(duration)
+      },
       this.selectedCourtCentre(),
       this.selectedJudiciary
     );
@@ -117,7 +137,28 @@ export class ChangeHearingDetailsComponent {
 
   cancel(): void {
     this.onValidationError.emit(null);
-    // TODO: The 'emit' function requires a mandatory void argument
     this.onCancel.emit();
+  }
+
+  private allDayDurationBasedCourtScheduleIdOn(
+    startDate: string,
+    existingCourtScheduleId: string
+  ): string {
+    if (isAllDayDurationBased(this.findHearingSlot(existingCourtScheduleId))) {
+      return existingCourtScheduleId;
+    }
+    return findAllDayDurationBasedSession(this.hearingSlots(), startDate).courtScheduleId;
+  }
+
+  private findHearingSlot(courtScheduleId: string): HearingSlot | undefined {
+    return this.hearingSlots().find(slot => slot.courtScheduleId === courtScheduleId);
+  }
+
+  private durationInMinutes(duration: string): number | undefined {
+    if (!duration) {
+      return undefined;
+    }
+    const [hours, minutes] = String(duration).split(':').map(Number);
+    return (hours || 0) * 60 + (minutes || 0);
   }
 }

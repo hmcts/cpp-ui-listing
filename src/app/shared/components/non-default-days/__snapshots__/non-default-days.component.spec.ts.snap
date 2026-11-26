@@ -11,6 +11,7 @@ exports[`NonDefaultDaysComponent should create the component 1`] = `
   formGroup={[Function FormGroup]}
   formGroupDirective={[Function _FormGroupDirective]}
   hearingDays={[Function Function]}
+  jurisdictionType={[Function Function]}
   onValidationError={[Function OutputEmitterRef]}
   parentCourtRoomId={[Function Function]}
   propagateChange={[Function Function]}

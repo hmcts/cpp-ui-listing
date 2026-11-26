@@ -6,7 +6,7 @@
 <h1 pdk-typography="heading-large" pdk-margin-bottom="3" pdk-margin-top="2">
   Change courtroom for upcoming hearing days
 </h1>
-@if (hearingVM$ | async; as hearingVm) {
+@if (store.hearingVM(); as hearingVm) {
 <hearing-details-section [hearingVM]="hearingVm" [baseUrl]="getBaseUrl()"></hearing-details-section>
 <no-of-selected-hearing-days [selectedHearingDays]="hearingVm.upComingHearingDays">
 </no-of-selected-hearing-days>
@@ -25,19 +25,20 @@
       labelType="small"
       hintText="Select new courtroom for the hearing(s)"
       [errorMessages]="[
-        {
-          rule: 'required',
-          message: 'Enter a court room'
-        }
+        { rule: 'required', message: 'Enter a court room' },
+        { rule: 'courtRoomAvailability', message: courtRoomAvailabilityError() }
       ]"
     >
       <pdk-select
-        [ngModel]="selectedCourtRoomId"
-        (ngModelChange)="selectedCourtRoomId = $event"
+        [ngModel]="selectedCourtRoomId()"
+        (ngModelChange)="selectedCourtRoomId.set($event)"
         [name]="'courtRoomId'"
-        [options]="courtRoomOptions$ | async"
+        [options]="store.courtRooms()"
         placeholder="Select a courtroom"
         required="true"
+        courtRoomAvailability
+        [slots]="store.hearingSlots()"
+        [hearingDays]="upcomingHearingDates()"
       >
       </pdk-select>
     </pdk-form-field>

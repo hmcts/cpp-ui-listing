@@ -3,7 +3,7 @@ import { Hearing, CourtApplication } from '../../core/model';
 import {
   CourtCalendarState,
   CourtRoomCalendarVM,
-  MagsWidgetCourtroomCalendarVm,
+  AllocatedWidgetCourtroomCalendarVm,
   HearingAllocationPayload,
   RemoveHearingVM
 } from '../../court-calendar/model';
@@ -596,10 +596,6 @@ export const courtRoomMagCalendarMock = [
     sectionIdentifier: `${mockRoomId}-${hearingsMock.hearings[0].startDate}`,
     businessTypeCalendar: [
       {
-        businessTypeAndSlot: {
-          businessTypeCode: 'Remands',
-          session: { startTime: '10:00', endTime: '12:00' }
-        },
         hearingTimeCalendar: [
           {
             time: '2024-12-20T10:00:00',
@@ -614,10 +610,6 @@ export const courtRoomMagCalendarMock = [
                 dateTime: '2024-12-20T10:00',
                 duration: 45,
                 judiciary: [],
-                businessTypeAndSlot: {
-                  businessTypeCode: 'Hearing',
-                  session: { startTime: '10:00', endTime: '12:00' }
-                },
                 defendants: {
                   defendants: hearingsMock.hearings[0].listedCases?.[0]?.defendants || [],
                   caseUrn: 'mockUrn',
@@ -639,10 +631,6 @@ export const courtRoomMagCalendarMock = [
         ]
       },
       {
-        businessTypeAndSlot: {
-          businessTypeCode: 'Remands',
-          session: { startTime: '13:00', endTime: '15:00' }
-        },
         hearingTimeCalendar: [
           {
             time: '2024-12-20T13:00:00',
@@ -659,10 +647,6 @@ export const courtRoomMagCalendarMock = [
     sectionIdentifier: `${mockRoomId2}-${hearingsMock.hearings[0].startDate}`,
     businessTypeCalendar: [
       {
-        businessTypeAndSlot: {
-          businessTypeCode: 'Bail cases',
-          session: { startTime: '09:30', endTime: '11:30' }
-        },
         hearingTimeCalendar: [
           {
             time: '2024-12-20T09:30:00',
@@ -677,10 +661,6 @@ export const courtRoomMagCalendarMock = [
                 dateTime: '2024-12-20T09:30',
                 duration: 60,
                 judiciary: [],
-                businessTypeAndSlot: {
-                  businessTypeCode: 'Hearing',
-                  session: { startTime: '09:30', endTime: '11:30' }
-                },
                 defendants: {
                   defendants: hearingsMock.hearings[0].listedCases?.[0]?.defendants || [],
                   caseUrn: 'mockUrn2',
@@ -702,10 +682,6 @@ export const courtRoomMagCalendarMock = [
         ]
       },
       {
-        businessTypeAndSlot: {
-          businessTypeCode: 'Bail cases',
-          session: { startTime: '14:00', endTime: '16:00' }
-        },
         hearingTimeCalendar: [
           {
             time: '2024-12-20T14:00:00',
@@ -715,7 +691,7 @@ export const courtRoomMagCalendarMock = [
       }
     ]
   }
-] as unknown as MagsWidgetCourtroomCalendarVm[];
+] as unknown as AllocatedWidgetCourtroomCalendarVm[];
 
 export const courCalendarVMMock = {
   courtRoomCalendars: courtRoomCalendarMock,
@@ -733,7 +709,7 @@ export const mockCourtCalendarState = {
   allocated: {
     courtRoomMapByDate: { [hearingsMock.hearings[0].startDate]: [mockRoomId] },
     paginatedHearings: {
-      hearings: hearingsMock.hearings.map((hearing) => ({
+      hearings: hearingsMock.hearings.map(hearing => ({
         ...hearing,
         hearingDayCount: 2,
         hearingDayPosition: 1

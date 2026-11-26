@@ -1,4 +1,4 @@
-import { Component, OnInit, input, linkedSignal, output } from '@angular/core';
+import { Component, OnInit, computed, input, linkedSignal, output, signal } from '@angular/core';
 import {
   PdkButton,
   PdkCheckBox,
@@ -19,6 +19,8 @@ import { uniq } from 'lodash-es';
 import { HearingDayVM } from '../../../../court-calendar/model';
 import { getCPPDate } from '../../../../core/util';
 import { FormsModule } from '@angular/forms';
+import { HearingSlot } from '@cpp/scheduling';
+import { CourtRoomAvailabilityDirective } from '../../directives/court-room-availability.validator.directive';
 
 export interface SelectionNavigateEvent {
   selectedHearingDays: HearingDayVM[];
@@ -40,7 +42,8 @@ export interface SelectionNavigateEvent {
     DatePipe,
     NgPlural,
     NgPluralCase,
-    PdkMinCountValidatorDirective
+    PdkMinCountValidatorDirective,
+    CourtRoomAvailabilityDirective
   ],
   styles: [
     `
@@ -63,6 +66,7 @@ export class HearingDaysSelectionFormComponent implements OnInit {
   readonly courtRoomOptions = input<SelectOption<string>[]>([]);
   readonly startDate = input<string>(undefined);
   readonly endDate = input<string>(undefined);
+  readonly slots = input<HearingSlot[]>([]);
   readonly selectedHearingDays = input<HearingDayVM[]>();
 
   readonly onValidationError = output<ValidationError[]>();
@@ -76,8 +80,14 @@ export class HearingDaysSelectionFormComponent implements OnInit {
     }
     return [];
   });
-  selectedCourtRoomId: string | null = null;
+  readonly selectedCourtRoomId = signal<string | null>(null);
   hasOnlyTodayHearingDay: boolean = false;
+
+  readonly courtRoomAvailabilityError = computed(() => {
+    const label =
+      this.courtRoomOptions().find(o => o.value === this.selectedCourtRoomId())?.label ?? '';
+    return `No sessions are available for ${label}`;
+  });
 
   private readonly dateUtil = getCPPDate();
 
@@ -99,7 +109,7 @@ export class HearingDaysSelectionFormComponent implements OnInit {
     this.selectedHearingDateValues.set(
       event.allSelected
         ? uniq([...event.paginatedHearingDates, ...previouslySelectedDates])
-        : previouslySelectedDates.filter((date) => !event.paginatedHearingDates.includes(date))
+        : previouslySelectedDates.filter(date => !event.paginatedHearingDates.includes(date))
     );
   }
 
@@ -113,7 +123,7 @@ export class HearingDaysSelectionFormComponent implements OnInit {
     hearingDaysSelection: string[];
     courtRoomId: string;
   }): void {
-    const selectedHearingDays = this.allUpcomingHearingDays().filter((day) =>
+    const selectedHearingDays = this.allUpcomingHearingDays().filter(day =>
       hearingDaysSelection.includes(day.hearingDate)
     );
 

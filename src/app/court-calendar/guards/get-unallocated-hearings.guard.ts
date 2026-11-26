@@ -1,14 +1,13 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { of } from 'rxjs';
-import { switchMap, catchError, tap, take, withLatestFrom } from 'rxjs/operators';
-import { getQueryParams } from '../../core';
+import { combineLatest, of } from 'rxjs';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { CPPDate } from '../../core/util';
 import {
   CourtCalendarFeatureState,
-  getJurisdictionTypeFromFeature,
   getCourtCalendarFilters,
+  getHearingTypeFor,
   getSelectedCourtFor
 } from '../state';
 import { getUnallocatedHearings } from '../state/actions/court-calendar.actions';
@@ -18,46 +17,47 @@ export const getUnallocatedHearingsGuard: CanActivateFn = (route: ActivatedRoute
   const router = inject(Router);
   const cppDate = inject(CPPDate);
   const { courtCentreId } = route.params;
-  return store.pipe(
-    select(getCourtCalendarFilters),
-    take(1),
-    tap(() => {
-      if (!courtCentreId) {
-        router.navigate(['/court-calendar']);
-      }
-    }),
-    withLatestFrom(
-      store.pipe(select(getSelectedCourtFor(courtCentreId))),
-      store.pipe(select(getQueryParams)),
-      store.pipe(select(getJurisdictionTypeFromFeature))
-    ),
-    switchMap(
-      ([{ startDate, endDate, ...restOptions }, courtCentre, queryParams, jurisdictionType]) => {
-        let courtType = restOptions?.courtType || jurisdictionType;
-        if (!startDate) {
-          startDate = queryParams?.startDate || cppDate.format(new Date());
-          endDate = queryParams?.endDate || startDate;
-        }
+  const queryParams = route.queryParams;
 
-        store.dispatch(
-          getUnallocatedHearings({
-            filterOptions: {
-              ...restOptions,
-              startDate,
-              endDate,
-              courtCentre,
-              courtType,
-              pageNumber: 1,
-              pageSize: 40 // Always reset to 40 on navigation
-            }
-          })
-        );
-        return of(true);
+  if (!courtCentreId) {
+    router.navigate(['/court-calendar']);
+    return of(false);
+  }
+
+  return combineLatest([
+    store.pipe(select(getCourtCalendarFilters), take(1)),
+    store.pipe(select(getSelectedCourtFor(courtCentreId)), take(1)),
+    store.pipe(select(getHearingTypeFor(queryParams.hearingType)), take(1))
+  ]).pipe(
+    switchMap(([filters, selectedCourt, hearingTypeFromParams]) => {
+      const courtCentre = filters?.courtCentre ?? selectedCourt;
+
+      if (!courtCentre) {
+        router.navigate(['/court-calendar']);
+        return of(false);
       }
-    ),
-    catchError(() => {
-      router.navigate(['/technical-error']);
-      return of(false);
-    })
+
+      const startDate = filters?.startDate ?? queryParams.startDate ?? cppDate.format(new Date());
+
+      store.dispatch(
+        getUnallocatedHearings({
+          filterOptions: {
+            courtCentre,
+            startDate,
+            endDate: filters?.endDate ?? queryParams.endDate ?? startDate,
+            courtType: filters?.courtType ?? queryParams.jurisdiction,
+            courtSession: filters?.courtSession ?? queryParams.courtSession,
+            businessType: filters?.businessType ?? queryParams.businessType,
+            courtRoomId: filters?.courtRoomId ?? queryParams.courtRoomId,
+            hearingType: filters?.hearingType ?? hearingTypeFromParams,
+            pageNumber: 1,
+            pageSize: 40
+          }
+        })
+      );
+
+      return of(true);
+    }),
+    catchError(() => of(false))
   );
 };

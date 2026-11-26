@@ -1,0 +1,170 @@
+@let widgetFilters = filterOptions();
+@let sectionList = sections();
+<pdk-grid container>
+  <div pdk-grid full>
+    <h2 pdk-typography="heading-large">
+      Allocated hearings
+      @if (isCrown) {
+        <span pdk-visually-hidden> for Crown courts</span>
+      } @else {
+        <span pdk-visually-hidden> for magistrates courts</span>
+      }
+    </h2>
+
+    <allocated-hearings-widget-filter
+      [filterOptions]="widgetFilters"
+      [jurisdictionType]="jurisdictionType()"
+      (onSubmit)="onSubmit.emit($event)"
+      (errors)="errors.emit($event)"
+      pdk-margin-bottom="3"
+    ></allocated-hearings-widget-filter>
+
+    <div pdk-margin-top="1" pdk-margin-bottom="3">
+      @if (
+        selectedAllocationHearings() | noSessionSlotAvaliable: sectionList : eligibleScheduleIds()
+      ) {
+        <pdk-alert icon="true" type="notice">
+          There are no sessions available that match your selection
+        </pdk-alert>
+      }
+    </div>
+
+    @if (sectionList?.length > 0) {
+      <div
+        section-accordion-renderer
+        [columnConfig]="columnConfig"
+        [sectionConfig]="sectionConfig"
+        [sections]="sectionList"
+        [actionCellRenderer]="actionsCell"
+        [expandedDetailsRenderer]="hearingDetails"
+        [moveAlertRenderer]="moveAlert"
+        [hearingsGroupHeaderRenderers]="{
+          businessTypeCalendar: businessTypeHeader,
+          sessions: sessionHeader,
+          judiciaryCalendar: judiciaryHeader
+        }"
+        [positionedHearingsState]="positionedHearingsState()"
+        [failedAllocationIds]="failedAllocationIds()"
+        [sectionOpenState]="sectionOpenState"
+        [sectionAlertRenderer]="sectionAlertRenderer"
+        (accordionOpenChange)="onAccordionOpenChange($event)"
+        [cellRenderers]="{
+          dateTime: timeCell,
+          duration: durationCell,
+          hearingType: hearingTypeCell,
+          defendants: defendantCell
+        }"
+        [titleResolver]="sectionTitleResolver"
+      ></div>
+    }
+  </div>
+</pdk-grid>
+
+<!-- CELL TEMPLATE RENDERERS -->
+
+<!-- Business Type Header -->
+<ng-template #businessTypeHeader let-businessType="cellData" let-levelData="levelData">
+  <h4 pdk-typography="heading-small" pdk-margin-bottom="2">
+    <span data-test-id="businessType">
+      {{ businessTypeLabel(businessType) }}
+    </span>
+    <span pdk-margin-left="2" pdk-typography="body">
+      {{ levelData | businessTypeTotalHearingsSummary }}
+    </span>
+  </h4>
+</ng-template>
+
+<!-- Session Header -->
+<ng-template #sessionHeader let-slot="cellData" let-section="sectionData" let-levelData="levelData">
+  <business-session-header-cell
+    [slot]="slot"
+    [hearingsDurationSummary]="levelData | businessTypeTotalHearingsSummary"
+    [selectedAllocationHearings]="selectedAllocationHearings()"
+    [eligibleScheduleIds]="eligibleScheduleIds()"
+    (allocate)="allocate(section, $event)"
+  ></business-session-header-cell>
+</ng-template>
+
+<!-- Judiciary Header -->
+<ng-template #judiciaryHeader let-judiciary="cellData" let-section="sectionData">
+  <h6 pdk-typography="heading-small" pdk-margin-bottom="0">
+    <judiciary-header-cell [judiciary]="judiciary"></judiciary-header-cell>
+  </h6>
+</ng-template>
+
+<!-- Time -->
+<ng-template #timeCell let-dateTime="cellData">
+  <time-cell [dateTime]="dateTime"></time-cell>
+</ng-template>
+
+<!-- Duration -->
+<ng-template #durationCell let-duration="cellData" let-hearing="rowData">
+  <duration-cell
+    [duration]="duration"
+    [dayOfHearing]="hearing.details?.hearingDayPosition"
+    [totalDays]="hearing.details?.hearingDayCount"
+  ></duration-cell>
+</ng-template>
+
+<!-- Hearing type -->
+<ng-template #hearingTypeCell let-hearingType="cellData" let-hearing="rowData">
+  <hearing-type-cell [hearingType]="hearingType" [isMaster]="hearing.isMaster"></hearing-type-cell>
+</ng-template>
+
+<!-- Defendants -->
+<ng-template #defendantCell let-defendants="cellData">
+  <defendant-cell [defendantData]="defendants" [baseUrl]="baseUrl"></defendant-cell>
+</ng-template>
+
+<!-- Allocated Hearing details -->
+<ng-template #hearingDetails let-hearingRow="rowData">
+  <view-hearing-row-details
+    [hearing]="hearingRow.details"
+    [offences]="hearingRow.offences"
+    [caseId]="hearingRow.defendants?.caseId"
+    [applicationId]="hearingRow.defendants?.applicationId"
+    [caseNotes]="caseNotesMap()[hearingRow.defendants.caseId]"
+    [publicListNote]="hearingRow?.publicListNote"
+    (getCaseNotes)="onGetCaseNote.emit($event)"
+  ></view-hearing-row-details>
+</ng-template>
+
+<!-- Move alert -->
+<ng-template #moveAlert let-hearingRow="rowData">
+  <hearing-row-moved-alert [hearingRow]="hearingRow"></hearing-row-moved-alert>
+</ng-template>
+
+<!-- Actions -->
+<ng-template #actionsCell let-hearing="rowData">
+  @if (isCrown) {
+    <allocated-crown-widget-actions-cell
+      [sectionInAllocateState]="selectedAllocationHearings().length > 0"
+      [hearing]="hearing"
+      (unallocate)="onUnallocate.emit($event)"
+    ></allocated-crown-widget-actions-cell>
+  }
+</ng-template>
+
+<!-- Section alert renderer -->
+<ng-template #sectionAlertRenderer let-section="sectionData">
+  @if (
+    sectionAllocatedToState()?.courtRoomId === section.courtRoomId &&
+    sectionAllocatedToState()?.numOfHearingsAllocated >= 1
+  ) {
+    <pdk-alert icon="true" type="success">
+      <span [ngPlural]="sectionAllocatedToState()?.numOfHearingsAllocated">
+        {{ sectionAllocatedToState()?.numOfHearingsAllocated }}
+        @if (
+          sectionAllocatedToState()?.totalHearingsAttempted >
+          sectionAllocatedToState()?.numOfHearingsAllocated
+        ) {
+          of {{ sectionAllocatedToState()?.totalHearingsAttempted }}
+        }
+        <ng-template ngPluralCase="=1"> hearing</ng-template>
+        <ng-template ngPluralCase="other"> hearings</ng-template>
+        allocated successfully
+        <span pdk-visually-hidden>in {{ section.courtRoomName }}</span>
+      </span>
+    </pdk-alert>
+  }
+</ng-template>

@@ -391,11 +391,6 @@ export const downloadPrisonListAction = createAction(
 
 export const downloadPrisonListSuccessAction = createAction('DOWNLOAD_PRISON_LIST_SUCCESS');
 
-export const splitHearingUnallocated = createAction(
-  'SPLIT_HEARING_UNALLOCATED',
-  props<{ splitHearingUnallocated: boolean }>()
-);
-
 export const setEditAllocationError = createAction(
   'SET_EDIT_ALLOCATION_ERROR',
   props<{ editAllocationError: ValidationError }>()
@@ -461,6 +456,5 @@ export type HearingAction =
   | ReturnType<typeof setCaseNotes>
   | ReturnType<typeof searchAllocatedHearingsForPrisonListAction>
   | ReturnType<typeof downloadPrisonListAction>
-  | ReturnType<typeof splitHearingUnallocated>
   | ReturnType<typeof setEditAllocationError>
   | ReturnType<typeof setHearingToEditAllocation>;

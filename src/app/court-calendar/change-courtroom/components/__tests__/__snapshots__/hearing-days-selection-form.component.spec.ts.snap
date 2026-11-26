@@ -4,6 +4,7 @@ exports[`HearingDaysSelectionFormComponent should create the component 1`] = `
 <hearing-days-selection-form
   allUpcomingHearingDays={[Function Function]}
   courtCentreName={[Function Function]}
+  courtRoomAvailabilityError={[Function Function]}
   courtRoomOptions={[Function Function]}
   dateUtil={[Function CPPDate]}
   endDate={[Function Function]}
@@ -11,9 +12,10 @@ exports[`HearingDaysSelectionFormComponent should create the component 1`] = `
   onChangeForAllNavigate={[Function OutputEmitterRef]}
   onSelectionNavigate={[Function OutputEmitterRef]}
   onValidationError={[Function OutputEmitterRef]}
-  selectedCourtRoomId="null"
+  selectedCourtRoomId={[Function Function]}
   selectedHearingDateValues={[Function Function]}
   selectedHearingDays={[Function Function]}
+  slots={[Function Function]}
   startDate={[Function Function]}
   totalHearingDaysCount={[Function Function]}
 >
@@ -484,6 +486,7 @@ exports[`HearingDaysSelectionFormComponent should create the component 1`] = `
               </pdk-hint>
               <pdk-select
                 class="ng-untouched ng-pristine ng-valid"
+                courtroomavailability=""
                 placeholder="Select a courtroom"
                 required=""
               >

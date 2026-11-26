@@ -1,20 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChangeCourtroomStateService } from '../component-store/change-courtroom-state.service';
-import { Observable } from 'rxjs';
-import { ChangeCourtroomVM } from '../../../court-calendar/model';
+import { ChangeCourtroomStore } from '../component-store/change-courtroom.store';
 import { PdkContextPanelComponent, PdkButton, PdkCore } from '@cpp/pdk';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'success-banner-container',
-  imports: [PdkContextPanelComponent, PdkCore, PdkButton, AsyncPipe],
+  imports: [PdkContextPanelComponent, PdkCore, PdkButton],
   template: `
     <pdk-context-panel title="Courtrooms changed" class="success-panel" pdk-margin-bottom="3">
       <div class="case-details">
         <span class="case-label">Case number</span>
         @for (
-          case of (hearingVM$ | async)?.cases;
+          case of changeCourtroomStore.hearingVM()?.cases;
           track case.caseUrn || case.applicationReference;
           let last = $last
         ) {
@@ -62,14 +59,8 @@ import { AsyncPipe } from '@angular/common';
   ]
 })
 export class SuccessBannerContainer {
-  private router = inject(Router);
-  changeCourtroomStateService = inject(ChangeCourtroomStateService);
-
-  hearingVM$: Observable<ChangeCourtroomVM>;
-
-  constructor() {
-    this.hearingVM$ = this.changeCourtroomStateService.hearingVM$;
-  }
+  private readonly router = inject(Router);
+  readonly changeCourtroomStore = inject(ChangeCourtroomStore);
 
   goToCourtCalendar(): void {
     this.router.navigate(['/court-calendar']);

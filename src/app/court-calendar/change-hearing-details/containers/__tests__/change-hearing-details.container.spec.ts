@@ -25,6 +25,13 @@ describe('ChangeHearingDetailsContainer', () => {
   const initialState = {
     courtCalendar: {
       selectedHearing: selectedHearing
+    },
+    scheduling: {
+      allocation: {
+        hearingSlots: [],
+        totalResults: 0,
+        params: null
+      }
     }
   };
 
@@ -87,6 +94,45 @@ describe('ChangeHearingDetailsContainer', () => {
       CourtCalendarActions.setSelectedHearingData({ selectedHearing: null })
     );
     expect(navigate).toHaveBeenCalledWith(['/court-calendar']);
+  });
+
+  describe('no sessions failure alert', () => {
+    const failureAlert = 'There are no sessions to move this hearing';
+    const setAlert = (alert: { successAlert?: string; failureAlert?: string }) => {
+      store.setState({
+        ...initialState,
+        courtCalendar: { ...initialState.courtCalendar, ...alert }
+      });
+      fixture.detectChanges();
+    };
+
+    it('should show the failure alert raised by the hearing update', () => {
+      setAlert({ failureAlert });
+
+      expect(
+        fixture.nativeElement.querySelector('[data-test-id="success-alert-message"]').textContent
+      ).toContain(failureAlert);
+    });
+
+    it('should clear the failure alert on leaving so it does not show on the court calendar', () => {
+      setAlert({ failureAlert });
+      dispatchSpy.calls.reset();
+
+      fixture.destroy();
+
+      expect(dispatchSpy).toHaveBeenCalledWith(
+        CourtCalendarActions.setAlertMessage({ failureAlert: undefined })
+      );
+    });
+
+    it('should keep the success alert on leaving after a successful update', () => {
+      setAlert({ successAlert: 'The hearing details have been updated' });
+      dispatchSpy.calls.reset();
+
+      fixture.destroy();
+
+      expect(dispatchSpy).not.toHaveBeenCalled();
+    });
   });
 });
 

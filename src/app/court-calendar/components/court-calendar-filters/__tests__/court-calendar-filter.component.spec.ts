@@ -93,35 +93,15 @@ describe('CourtCalendarFiltersComponent', () => {
     expect(component.courtroomOptions[0].value).toBe('2');
   });
 
-  it('should return true if date is after two weeks from the start date', () => {
-    const startDate = new Date().toISOString();
-    const disabledDate = new Date();
-    disabledDate.setDate(disabledDate.getDate() + 15); // 15 days ahead
-
-    const result = component.isDateDisabled(startDate)(disabledDate);
-
-    expect(result).toBeTruthy();
-  });
-
-  it('should return false if date is within two weeks from the start date', () => {
-    const startDate = new Date().toISOString();
-    const enabledDate = new Date();
-    enabledDate.setDate(enabledDate.getDate() + 5); // 5 days ahead
-
-    const result = component.isDateDisabled(startDate)(enabledDate);
-
-    expect(result).toBeFalsy();
-  });
-
   it('should submit the form with values selected', () => {
     spyOn(component.submitForm, 'emit');
-    const params = {
+    const params: CourtCalendarFilters = {
       courtCentre: mockOrganisationUnits[0],
       businessType: 'TypeA',
       courtRoomId: 'mockCourtRoomId-B',
       startDate: '2023-01-01',
       endDate: '2023-01-31',
-      session: 'AM',
+      courtSession: 'AM',
       pageNumber: 1
     };
     component.handleSubmitForm(params);

@@ -3,7 +3,7 @@ import {
   HearingHasMovedPipe,
   IsNonMovingMemberOfHearingsGroupPipe
 } from '../move-hearing-action.pipes';
-import { BaseHearingRowDataVM } from '../../model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../model/hearing-table-renderer.interfaces';
 import { HearingTableActionsState } from '../../court-calendar-hearing-tables/component-store/hearing-table-actions.store';
 
 const baseRow: BaseHearingRowDataVM = {

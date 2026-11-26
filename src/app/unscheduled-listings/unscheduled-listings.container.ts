@@ -53,6 +53,7 @@ import {
   showNoHearingsMessage
 } from './unscheduled-listings.selector';
 import { HearingSchedule, PaginatedHearings } from '../core/model/hearing';
+import { HearingSlotAllocation } from '@cpp/scheduling';
 import { getOrganisationUnits, OrganisationUnit } from '@cpp/reference-data';
 import { getHasApiActivity } from '../core/selectors/api';
 import { AppState } from '../core';
@@ -215,7 +216,7 @@ export class UnscheduledListingsContainer implements OnDestroy {
       this.selectedHearingFilters$
         .pipe(
           take(1),
-          map((selectedFilters) => {
+          map(selectedFilters => {
             return new ListUnscheduledHearingsAction(
               cleanDeep({ ...selectedFilters, pageNumber: page, pageSize: this.pageSize })
             );
@@ -224,5 +225,9 @@ export class UnscheduledListingsContainer implements OnDestroy {
         .subscribe(this.store);
       this.elementRef.nativeElement.scrollIntoView({ block: 'start' });
     }
+  }
+
+  getEarliestAllocation(allocations: HearingSlotAllocation[]): HearingSlotAllocation | undefined {
+    return [...allocations].sort((a, b) => a.hearingSlotTime.localeCompare(b.hearingSlotTime))[0];
   }
 }

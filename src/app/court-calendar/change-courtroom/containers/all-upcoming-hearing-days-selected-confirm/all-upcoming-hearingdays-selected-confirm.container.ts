@@ -1,23 +1,14 @@
-import { Component, inject, OnInit, output } from '@angular/core';
-import {
-  SelectOption,
-  ValidationError,
-  PdkErrorSummaryComponent,
-  PdkCore,
-  PdkGrid
-} from '@cpp/pdk';
-import { ChangeCourtroomStateService } from '../../component-store/change-courtroom-state.service';
-import {
-  ChangeCourtroomVM,
-  ConfirmCourtRoomChange,
-  ConfirmCourtRoomChangeEvent
-} from '../../../model';
-import { Observable } from 'rxjs';
-import { HearingDay } from '../../../../core';
-import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ValidationError, PdkErrorSummaryComponent, PdkCore, PdkGrid } from '@cpp/pdk';
+import { ChangeCourtroomStore } from '../../component-store/change-courtroom.store';
 import { CourtRoomNamePipe } from '../../../../shared/pipes/court-room-name.pipe';
 import { CourtroomChangeConfirmationFormComponent } from '../../components/courtroom-change-confirmation-form/courtroom-change-confirmation-form.component';
 import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core';
+import { setSelectedHearingData } from '../../../state/actions/court-calendar.actions';
+import { getSelectedHearing } from '../../../state/selectors/court-calendar.selectors';
 
 @Component({
   selector: 'all-upcoming-hearingdays-selected-confirm',
@@ -32,45 +23,45 @@ import { BackButtonComponent } from '../../../../shared/components/back-button/b
   imports: [
     PdkCore,
     PdkGrid,
-    AsyncPipe,
     CourtRoomNamePipe,
     CourtroomChangeConfirmationFormComponent,
     BackButtonComponent,
     PdkErrorSummaryComponent
   ]
 })
-export class AllFutureHearingDaysSelectedConfirmContainer
-  implements OnInit, ConfirmCourtRoomChange
-{
-  readonly onConfirmation = output<ConfirmCourtRoomChangeEvent>();
-  errors: ValidationError[] = null;
-  hearingVM$: Observable<ChangeCourtroomVM>;
-  selectedHearingDays$: Observable<HearingDay[]>;
-  courtRoomOptions$: Observable<SelectOption<string>[]>;
-  selectedCourtroom$: Observable<string>;
-
-  readonly onSubmitForm = output<{
-    changeCourtRoomConfirmation: string;
-  }>();
-
-  changeCourtroomStateService = inject(ChangeCourtroomStateService);
-
-  ngOnInit(): void {
-    this.hearingVM$ = this.changeCourtroomStateService.hearingVM$;
-    this.selectedHearingDays$ = this.changeCourtroomStateService.selectedHearingDays$;
-    this.courtRoomOptions$ = this.changeCourtroomStateService.getCourtRooms;
-    this.selectedCourtroom$ = this.changeCourtroomStateService.selectedCourtroom$;
-  }
+export class AllFutureHearingDaysSelectedConfirmContainer {
+  errors: ValidationError[] | null = null;
+  readonly changeCourtroomStore = inject(ChangeCourtroomStore);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly ngrxStore = inject(Store<AppState>);
+  private readonly selectedHearing = this.ngrxStore.selectSignal(getSelectedHearing);
 
   onValidationError(errors: ValidationError[]) {
     this.errors = errors;
   }
 
   handleFormSubmission({ changeCourtRoom }: { changeCourtRoom: boolean }): void {
-    this.onConfirmation.emit({ confirmed: changeCourtRoom, clearSelection: !changeCourtRoom });
+    if (changeCourtRoom) {
+      const selectedHearing = this.selectedHearing();
+      this.changeCourtroomStore.confirmChange({
+        selectedHearing,
+        onSuccess: () => {
+          this.ngrxStore.dispatch(setSelectedHearingData({ selectedHearing: null }));
+          this.router.navigate([
+            '/court-calendar/change-courtroom',
+            selectedHearing.id,
+            'success-banner'
+          ]);
+        }
+      });
+    } else {
+      this.changeCourtroomStore.setSelectedHearingDays([]);
+      this.router.navigate(['../all-hearing-days'], { relativeTo: this.route });
+    }
   }
 
   clearSelection() {
-    this.changeCourtroomStateService.setSelectedHearingDays([]);
+    this.changeCourtroomStore.setSelectedHearingDays([]);
   }
 }

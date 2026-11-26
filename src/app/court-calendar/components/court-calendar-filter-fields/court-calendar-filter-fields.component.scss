@@ -1,0 +1,8 @@
+.filter-group {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+}
+.filter-group > :last-child {
+  grid-column: span 2;
+}

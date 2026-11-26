@@ -160,5 +160,12 @@ describe('court-calendar.effect.utils', () => {
       const withoutDefault = generateNonDefaultDays(input, undefined as any);
       expect(withoutDefault[0].duration).toBe(1);
     });
+
+    it('should always mark generated non default days as virtual', () => {
+      const input = [{ hearingSlotTime: '10:00', hearingSlot: { courtScheduleId: '1' } }] as any;
+
+      const result = generateNonDefaultDays(input, { defaultDurationMin: 30 } as any);
+      expect(result[0].virtual).toBe(true);
+    });
   });
 });

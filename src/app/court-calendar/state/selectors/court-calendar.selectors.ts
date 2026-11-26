@@ -1,81 +1,58 @@
 import { DatePipe } from '@angular/common';
-import { getOrganisationUnits, OrganisationUnit } from '@cpp/reference-data';
+import {
+  getOrganisationUnits,
+  getRotaBusinessTypesByJurisdiction,
+  HearingType,
+  OrganisationUnit
+} from '@cpp/reference-data';
 import { getSearchResults, HearingSlot } from '@cpp/scheduling';
 import { createSelector, defaultMemoize, MemoizedSelector } from '@ngrx/store';
-import { AppState, getRouteData, JurisdictionType } from '../../../core';
+import { AppState } from '../../../core';
+import { getHearingTypes } from '../../../core/selectors';
 import { TimeDurationPipe } from '../../pipes/time-duration.pipe';
-import {
-  AllocationType,
-  CourtCalendarFeature,
-  PaginatedHearings,
-  RemoveHearingVM,
-  ChangeCourtroomVM
-} from '../../model';
+import { AllocationType, PaginatedHearings, RemoveHearingVM, ChangeCourtroomVM } from '../../model';
 import {
   getAllocationHearingsViewModel,
   getCourtCalendarViewModel,
-  getMagsWidgetCourtCalendarViewModel
+  getAllocatedWidgetCalendarViewModel
 } from '../../utils/court-calendar-hearings-helper';
 import { CourtCalendarFeatureState } from '../court-calendar.state';
 import { caseReferencesVM } from '../../utils/view-model-getters';
 
 export const getCourtCalendarState = (state: CourtCalendarFeatureState) => state.courtCalendar;
-export const getCourtCalendarFeature = createSelector(getRouteData, (data) => {
-  if (!!data) {
-    return data['feature'] as CourtCalendarFeature;
-  }
-});
-
-export const getJurisdictionTypeFromFeature = createSelector(
-  getCourtCalendarFeature,
-  (feature): JurisdictionType => {
-    if (feature === CourtCalendarFeature.allocateCrown) {
-      return 'CROWN';
-    }
-    if (feature === CourtCalendarFeature.allocateMag) {
-      return 'MAGISTRATES';
-    }
-    return undefined;
-  }
-);
-
 export const getCourtCalendarFilters = createSelector(
   getCourtCalendarState,
-  (state) => state?.filterOptions
+  state => state?.filterOptions
 );
 
 export const getAllocatedHearingsMap = createSelector(
   getCourtCalendarState,
-  (state) => state?.allocated
+  state => state?.allocated
 );
 
 export const getUnallocatedHearingsMap = createSelector(
   getCourtCalendarState,
-  (state) => state?.unallocated?.hearingMap
-);
-export const getFailedAllocationIds = createSelector(
-  getCourtCalendarState,
-  (state) => state?.failedAllocationIds ?? []
+  state => state?.unallocated?.hearingMap
 );
 
 export const getAllocatedHearings = createSelector(
   getAllocatedHearingsMap,
-  (hearingsMap) => hearingsMap?.paginatedHearings
+  hearingsMap => hearingsMap?.paginatedHearings
 );
 
 export const getUnallocatedHearings = createSelector(
   getUnallocatedHearingsMap,
-  (hearingsMap) => hearingsMap?.paginatedHearings
+  hearingsMap => hearingsMap?.paginatedHearings
 );
 
 export const getHearingsToReallocate = createSelector(
   getCourtCalendarState,
-  (state) => state?.hearingsToReallocate
+  state => state?.hearingsToReallocate
 );
 
 export const getAllocationType = createSelector(
   getCourtCalendarState,
-  (state) => state?.allocationType
+  state => state?.allocationType
 );
 
 export const getAllocationHearings = createSelector(
@@ -91,31 +68,23 @@ export const getAllocationHearings = createSelector(
 
 export const getAllocateWidgetFilter = createSelector(
   getCourtCalendarState,
-  (state) => state?.unallocated?.allocateWidgetFilter
+  state => state?.unallocated?.allocateWidgetFilter
 );
 
 export const getAllocatedCourtRoomsByDate = createSelector(
   getAllocatedHearingsMap,
-  (hearingsMap) => hearingsMap?.courtRoomMapByDate
+  hearingsMap => hearingsMap?.courtRoomMapByDate
 );
 
 export const getCourtCalendarVM = createSelector(
   getAllocatedHearings,
   getAllocatedCourtRoomsByDate,
   getCourtCalendarFilters,
-  getAllocateWidgetFilter,
-  getCourtCalendarFeature,
-  (paginatedHearings, courtRoomsByDate, filters, widgetFilter, feature) => {
-    let courtCentre = filters.courtCentre;
-    if (feature !== 'CALENDAR' && widgetFilter.courtCentre) {
-      courtCentre = widgetFilter.courtCentre;
-    }
-
-    return getCourtCalendarViewModel(paginatedHearings, courtCentre, courtRoomsByDate, feature);
-  }
+  (paginatedHearings, courtRoomsByDate, filters) =>
+    getCourtCalendarViewModel(paginatedHearings, filters.courtCentre, courtRoomsByDate)
 );
 
-export const getMagsWidgetCourtCalendarVm = createSelector(
+export const getAllocatedWidgetCalendarVm = createSelector(
   getAllocatedHearings,
   getAllocatedCourtRoomsByDate,
   getCourtCalendarFilters,
@@ -123,7 +92,7 @@ export const getMagsWidgetCourtCalendarVm = createSelector(
   getSearchResults,
   (paginatedHearings, courtRoomsByDate, filters, widgetFilter, hearingSlots) => {
     const courtCentre = widgetFilter?.courtCentre ?? filters.courtCentre;
-    return getMagsWidgetCourtCalendarViewModel(
+    return getAllocatedWidgetCalendarViewModel(
       paginatedHearings,
       courtCentre,
       courtRoomsByDate,
@@ -143,10 +112,10 @@ export const getAllocationHearingsVM = createSelector(
 
 export const getCaseNotesMap = createSelector(
   getCourtCalendarState,
-  (state) => state?.caseNotesMap ?? {}
+  state => state?.caseNotesMap ?? {}
 );
 
-export const getCourtCalendarAlert = createSelector(getCourtCalendarState, (state) => {
+export const getCourtCalendarAlert = createSelector(getCourtCalendarState, state => {
   if (state?.successAlert || state?.failureAlert) {
     return { successAlert: state?.successAlert, failureAlert: state?.failureAlert };
   }
@@ -155,8 +124,16 @@ export const getCourtCalendarAlert = createSelector(getCourtCalendarState, (stat
 
 export const getSelectedHearing = createSelector(
   getCourtCalendarState,
-  (state) => state.selectedHearing
+  state => state.selectedHearing
 );
+
+export const getRotaBusinessTypesForCurrentJurisdiction = (state: CourtCalendarFeatureState) => {
+  const filters = getCourtCalendarFilters(state);
+  if (!filters?.courtType) {
+    return [];
+  }
+  return getRotaBusinessTypesByJurisdiction(filters.courtType)(state);
+};
 
 export const getRemoveHearingVm = createSelector(
   getSelectedHearing,
@@ -167,8 +144,8 @@ export const getRemoveHearingVm = createSelector(
     if (!hearing) {
       return null;
     }
-    const courtCentre = courtCentres.find((orgUnit) => orgUnit.id === hearing.courtCentreId);
-    const courtRoom = courtCentre.courtrooms?.find((cRoom) => cRoom?.id === hearing.courtRoomId);
+    const courtCentre = courtCentres.find(orgUnit => orgUnit.id === hearing.courtCentreId);
+    const courtRoom = courtCentre.courtrooms?.find(cRoom => cRoom?.id === hearing.courtRoomId);
     let totalHearingdurations: number = 0;
     if (hearing.hearingDayCount <= 1) {
       totalHearingdurations = hearing.hearingDays[0].durationMinutes;
@@ -205,7 +182,7 @@ export const getChangeCourtroomVm = createSelector(
       return null;
     }
 
-    const courtCentre = courtCentres.find((orgUnit) => orgUnit.id === hearing.courtCentreId);
+    const courtCentre = courtCentres.find(orgUnit => orgUnit.id === hearing.courtCentreId);
     const courtRooms = courtCentre?.courtrooms ?? [];
 
     const today = new Date();
@@ -236,21 +213,30 @@ export const getChangeCourtroomVm = createSelector(
       courtCentre: courtCentre?.oucodeL3Name || '',
       courtRooms,
       startDate: hearing.startDate,
-      endDate: hearing.endDate
+      endDate: hearing.endDate,
+      ouCode: courtCentre?.oucode || '',
+      jurisdictionType: hearing.jurisdictionType
     };
   }
 );
 
 export const getSelectedCourtFor = (id: string): MemoizedSelector<AppState, OrganisationUnit> =>
   defaultMemoize((courtCentreId: string) =>
-    createSelector(getOrganisationUnits, (units) => units.find(({ id }) => id === courtCentreId))
+    createSelector(getOrganisationUnits, units => units.find(({ id }) => id === courtCentreId))
+  ).memoized(id);
+
+export const getHearingTypeFor = (id: string): MemoizedSelector<AppState, HearingType> =>
+  defaultMemoize((hearingTypeId: string) =>
+    createSelector(getHearingTypes, hearingTypes =>
+      (hearingTypes ?? []).find(({ id }) => id === hearingTypeId)
+    )
   ).memoized(id);
 
 export const getSessionsForSelectedHearingBusinessType = (
   scheduleId: string
 ): MemoizedSelector<AppState, HearingSlot[]> =>
   defaultMemoize((id: string) =>
-    createSelector(getSearchResults, (hearingSlots) => {
+    createSelector(getSearchResults, hearingSlots => {
       const currentHearingSlot = (hearingSlots ?? []).find(
         ({ courtScheduleId }) => courtScheduleId === id
       );

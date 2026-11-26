@@ -10,7 +10,7 @@ export const getUnallocatedHearingsByPage = (state: AppState) => state.hearings.
 
 export const getUnallocatedHearingById = (id: string) => {
   return (state: AppState) =>
-    state.hearings.unallocated.hearings.find((hearing) => hearing.id === id);
+    state.hearings.unallocated.hearings.find(hearing => hearing.id === id);
 };
 
 export const getHearingById = (id: string) =>
@@ -18,7 +18,7 @@ export const getHearingById = (id: string) =>
     getUnallocatedHearings,
     getAllocatedHearings,
     (unAllocatedHearings: Hearing[] = [], allocatedHearings: Hearing[] = []) => {
-      return [...unAllocatedHearings, ...allocatedHearings].find((hearing) => hearing.id === id);
+      return [...unAllocatedHearings, ...allocatedHearings].find(hearing => hearing.id === id);
     }
   );
 
@@ -26,7 +26,7 @@ export const getUnAllocatedCaseIds = createSelector(
   (state: AppState) => state.hearings.unallocated.hearings,
   (hearings, hearingId: string) => {
     if (hearings && Array.isArray(hearings)) {
-      const hearing = hearings.find((hearing) => hearing.id === hearingId);
+      const hearing = hearings.find(hearing => hearing.id === hearingId);
       if (hearing) {
         return (hearing.listedCases || []).map(({ id }) => id);
       }
@@ -39,7 +39,7 @@ export const getUnAllocatedCasesPerHearing = createSelector(
   (state: AppState) => state.hearings.unallocated.hearings,
   (hearings, hearingId: string) => {
     if (hearings && Array.isArray(hearings)) {
-      const hearing = hearings.find((hearing) => hearing.id === hearingId);
+      const hearing = hearings.find(hearing => hearing.id === hearingId);
       if (hearing) {
         return hearing.listedCases || [];
       }
@@ -71,11 +71,11 @@ export const getPinnedCaseNotesForHearing = createSelector(
             !!caseNotes[hearingId][id] &&
             Object.values(caseNotes[hearingId][id]).some(({ isPinned }) => isPinned)
         )
-        .map((listedCase) => {
+        .map(listedCase => {
           return {
             caseDetails: listedCase,
             caseNotes: caseNotes[hearingId][listedCase.id]
-              .filter((item) => !!item.isPinned)
+              .filter(item => !!item.isPinned)
               .sort(
                 (a, b) =>
                   new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime()
@@ -88,7 +88,7 @@ export const getPinnedCaseNotesForHearing = createSelector(
 );
 
 export const getAllocatedHearingById = (id: string) => {
-  return (state: AppState) => state.hearings.allocated.find((hearing) => hearing.id === id);
+  return (state: AppState) => state.hearings.allocated.find(hearing => hearing.id === id);
 };
 
 export const getUnscheduledHearings = (state: AppState) => state.hearings.unscheduled;
@@ -108,14 +108,14 @@ export const getScheduledHearingForAllocation = (state: AppState) =>
 
 export const isScheduledAllocatedHearingStandaloneApplication = createSelector(
   getScheduledHearingForAllocation,
-  (hearing) =>
+  hearing =>
     !!hearing &&
     (!hearing.listedCases || (!!hearing.listedCases && hearing.listedCases.length === 0))
 );
 
 export const isScheduledAllocatedHearingOnlyWithLinkedApplication = createSelector(
   getScheduledHearingForAllocation,
-  (hearing) => {
+  hearing => {
     if (!hearing) {
       return false;
     }
@@ -135,14 +135,14 @@ export const isScheduledAllocatedHearingOnlyWithLinkedApplication = createSelect
 
 export const getAvailableHearings = (state: AppState) => state.hearings.available;
 
-export const getTodaysHearing = createSelector(getAllocatedHearings, (hearings) => {
+export const getTodaysHearing = createSelector(getAllocatedHearings, hearings => {
   const today = moment();
-  return hearings.filter((hearing) =>
-    hearing.hearingDays.some((day) => moment(day.hearingDate).isSame(today, 'day'))
+  return hearings.filter(hearing =>
+    hearing.hearingDays.some(day => moment(day.hearingDate).isSame(today, 'day'))
   );
 });
 
-export const getTodaysHearingIds = createSelector(getTodaysHearing, (hearings) =>
+export const getTodaysHearingIds = createSelector(getTodaysHearing, hearings =>
   hearings.map(({ id }) => id)
 );
 
@@ -151,7 +151,7 @@ export const filterUrns = (hearings?: Hearing[]) =>
     return [
       ...urns,
       ...(hearing.listedCases || []).map(({ caseIdentifier }) => caseIdentifier.caseReference),
-      ...(hearing.courtApplications || []).map((app) => app.applicationReference)
+      ...(hearing.courtApplications || []).map(app => app.applicationReference)
     ];
   }, []);
 
@@ -188,10 +188,10 @@ export const getHearingByDefendantsGroup = (id: string) =>
         []
       );
 
-      const hasDefendantChecked = (currentDefendant) => {
+      const hasDefendantChecked = currentDefendant => {
         if (scheduledHearing) {
           const selectedDefendant = allScheduledDefendants.find(
-            (def) => def.id === currentDefendant.id
+            def => def.id === currentDefendant.id
           );
           return (
             selectedDefendant &&
@@ -204,11 +204,11 @@ export const getHearingByDefendantsGroup = (id: string) =>
       const hasOffenceChecked = (currentOffence, currentDefendant) => {
         if (scheduledHearing) {
           const selectedDefendant = allScheduledDefendants.find(
-            (def) => def.id === currentDefendant.id
+            def => def.id === currentDefendant.id
           );
           return (
             selectedDefendant &&
-            !!selectedDefendant.offences.find((off) => off.id === currentOffence.id)
+            !!selectedDefendant.offences.find(off => off.id === currentOffence.id)
           );
         }
         return false;
@@ -228,10 +228,10 @@ export const getHearingByDefendantsGroup = (id: string) =>
       for (const defendant of allDefendantsSortedByCourtProceedingsInitiated) {
         if (
           !allDefendantsToBeDisplayed.find(
-            (def) => def.masterDefendantId === defendant.masterDefendantId
+            def => def.masterDefendantId === defendant.masterDefendantId
           ) &&
-          !allDefendantsToBeDisplayed.find((def) => def.id === defendant.masterDefendantId) &&
-          !allDefendantsToBeDisplayed.find((def) => def.masterDefendantId === defendant.id)
+          !allDefendantsToBeDisplayed.find(def => def.id === defendant.masterDefendantId) &&
+          !allDefendantsToBeDisplayed.find(def => def.masterDefendantId === defendant.id)
         ) {
           allDefendantsToBeDisplayed.push({
             ...defendant,
@@ -249,7 +249,7 @@ export const getHearingByDefendantsGroup = (id: string) =>
           let newCase;
           if (
             kase.defendants.some(
-              (defendantFromCase) =>
+              defendantFromCase =>
                 defendantFromCase.masterDefendantId === defendant.masterDefendantId ||
                 defendantFromCase.id === defendant.masterDefendantId ||
                 defendantFromCase.masterDefendantId === defendant.id
@@ -259,7 +259,7 @@ export const getHearingByDefendantsGroup = (id: string) =>
             delete newCase.defendants;
 
             const caseDefendant = kase.defendants.find(
-              (defendantFromCase) =>
+              defendantFromCase =>
                 defendantFromCase.masterDefendantId === defendant.masterDefendantId ||
                 defendantFromCase.id === defendant.masterDefendantId ||
                 defendantFromCase.masterDefendantId === defendant.id
@@ -268,7 +268,7 @@ export const getHearingByDefendantsGroup = (id: string) =>
             newCase.defendantId = caseDefendant.id;
             newCase.offences = sortBy(caseDefendant.offences, ['count']);
 
-            const offencesWithFlag = newCase.offences.map((off) => ({
+            const offencesWithFlag = newCase.offences.map(off => ({
               ...off,
               visible: false,
               checked: hasOffenceChecked(off, caseDefendant)
@@ -301,9 +301,6 @@ export const hasAllocatedHearingsByDateRange = createSelector(
     return hearingCourtList?.hearings?.length > 0 ? true : false;
   }
 );
-
-export const hasSplitHearingFromUnallocated = (state: AppState) =>
-  state.hearings.hasSplitHearingFromUnallocated;
 
 export const getEditAllocationError = (state: AppState) => state.hearings.editAllocationError;
 export const getHearingToEditAllocation = (state: AppState) =>

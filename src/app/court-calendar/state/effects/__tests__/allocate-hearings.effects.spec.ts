@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { Observable, of } from 'rxjs';
+import { provideMockStore } from '@ngrx/store/testing';
+import { Observable } from 'rxjs';
 import { cold, hot } from 'jasmine-marbles';
+import { HearingType } from '@cpp/reference-data';
 import {
   CourtCalendarActions,
+  CourtCalendarFilters,
   COURT_CALENDAR_FEATURE_KEY,
-  getFailedAllocationIds,
   PaginatedHearingMap
 } from '../..';
 import * as effects from '../allocate-hearings.effects';
@@ -17,15 +18,35 @@ import { TestColdObservable } from 'jasmine-marbles/src/test-observables';
 import { SchedulingService } from '@cpp/scheduling';
 
 let searchCourtCalendarHearings: jest.Mock;
+const schedulingServiceMock = { searchHearingSlots: jest.fn() };
 
-let store: MockStore;
+const mockWidgetFilter = {
+  startDate: '2025-01-28',
+  courtCentre: {
+    id: 'courtCentreId',
+    oucode: 'B01EF00',
+    courtrooms: []
+  }
+};
+
 const initialState = {
-  [COURT_CALENDAR_FEATURE_KEY]: mockCourtCalendarState
+  [COURT_CALENDAR_FEATURE_KEY]: {
+    ...mockCourtCalendarState,
+    filterOptions: {
+      ...mockSearchFormValues,
+      courtCentre: {
+        ...mockSearchFormValues.courtCentre,
+        oucode: 'B01EF00'
+      }
+    },
+    unallocated: {
+      allocateWidgetFilter: mockWidgetFilter
+    }
+  }
 };
 describe('CourtCalendar', () => {
   let actions$: Observable<any>;
   let listingService: ListingService;
-  let schedulingService: SchedulingService;
   beforeEach(() => {
     jest.useFakeTimers();
     searchCourtCalendarHearings = jest.fn();
@@ -39,29 +60,17 @@ describe('CourtCalendar', () => {
             searchCourtCalendarHearings
           }
         },
-        {
-          provide: SchedulingService,
-          useValue: {
-            schedulingService
-          }
-        }
+        { provide: SchedulingService, useValue: schedulingServiceMock }
       ]
     });
 
     listingService = TestBed.inject(ListingService);
-    schedulingService = TestBed.inject(SchedulingService);
-    store = TestBed.inject(MockStore);
   });
 
   describe('Allocate hearings Effects', () => {
     describe('Allocated Hearings Widget', () => {
       let expectedPayload: PaginatedHearingMap;
       let response$: TestColdObservable;
-      const mockSearchHearingSlots = () => {
-        schedulingService.searchHearingSlots = jest
-          .fn()
-          .mockReturnValue(of({ hearingSlots: null, totalResults: 0 }));
-      };
 
       beforeEach(() => {
         expectedPayload = {
@@ -93,67 +102,12 @@ describe('CourtCalendar', () => {
           })
         });
         searchCourtCalendarHearings.mockReturnValueOnce(response$);
-        mockSearchHearingSlots();
 
-        const effect$ = effects.getAllocatedHearingsForWidgetEffect(
-          actions$,
-          listingService,
-          schedulingService
-        );
+        const effect$ = effects.getAllocatedHearingsForWidgetEffect(actions$, listingService);
 
-        const expected$ = cold('--b', {
+        const expected$ = cold('-b', {
           b: CourtCalendarActions.getAllocatedHearingsForWidgetSuccess({
             payload: expectedPayload
-          })
-        });
-        expect(effect$).toBeObservable(expected$);
-      });
-
-      it('should dispatch getAllocatedHearingsForWidgetSuccess action when allocated hearings for widget is fired after new Allocation', () => {
-        actions$ = cold('-a', {
-          a: CourtCalendarActions.getAllocatedHearingsForWidget({
-            filterOptions: mockSearchFormValues,
-            onSectionAllocate: true
-          })
-        });
-        searchCourtCalendarHearings.mockReturnValueOnce(response$);
-        mockSearchHearingSlots();
-
-        const effect$ = effects.getAllocatedHearingsForWidgetEffect(
-          actions$,
-          listingService,
-          schedulingService
-        );
-
-        const expected$ = cold('--b', {
-          b: CourtCalendarActions.getAllocatedHearingsForWidgetSuccess({
-            payload: expectedPayload,
-            onSectionAllocate: true
-          })
-        });
-        expect(effect$).toBeObservable(expected$);
-      });
-
-      it('should dispatch getAllocatedHearingsForWidgetSuccess action when allocated hearings for widget is fired after new sequence', () => {
-        actions$ = cold('-a', {
-          a: CourtCalendarActions.getAllocatedHearingsForWidget({
-            filterOptions: mockSearchFormValues,
-            onSequenceOnly: true
-          })
-        });
-        searchCourtCalendarHearings.mockReturnValueOnce(response$);
-        mockSearchHearingSlots();
-
-        const effect$ = effects.getAllocatedHearingsForWidgetEffect(
-          actions$,
-          listingService,
-          schedulingService
-        );
-
-        const expected$ = cold('--b', {
-          b: CourtCalendarActions.getAllocatedHearingsForWidgetSuccess({
-            payload: expectedPayload,
-            onSequenceOnly: true
           })
         });
         expect(effect$).toBeObservable(expected$);
@@ -170,101 +124,119 @@ describe('CourtCalendar', () => {
         const expected$ = cold('-c', { c: apiError });
 
         searchCourtCalendarHearings.mockReturnValueOnce(hearings$);
-        schedulingService.searchHearingSlots = jest
-          .fn()
-          .mockReturnValueOnce(of({ hearingSlots: null, totalResults: 0 }));
 
-        const effect$ = effects.getAllocatedHearingsForWidgetEffect(
-          actions$,
-          listingService,
-          schedulingService
-        );
+        const effect$ = effects.getAllocatedHearingsForWidgetEffect(actions$, listingService);
 
         expect(effect$).toBeObservable(expected$);
       });
+    });
 
-      it('should fire the component store trigger when allocation in successful on new allocations', () => {
+    describe('Unallocated Hearings', () => {
+      const unallocatedFilterOptions = {
+        ...mockSearchFormValues,
+        courtType: 'CROWN' as const,
+        courtCentre: { ...mockSearchFormValues.courtCentre, oucode: 'B01EF00' }
+      };
+      const hearingType = { id: 'hearingTypeId', hearingDescription: 'Trial' } as HearingType;
+
+      const runEffect = (filterOptions: CourtCalendarFilters) => {
         actions$ = cold('-a', {
-          a: CourtCalendarActions.getAllocatedHearingsForWidgetSuccess({
-            payload: expectedPayload,
-            onSectionAllocate: true
-          })
+          a: CourtCalendarActions.getUnallocatedHearings({ filterOptions })
         });
-
-        const expected$ = cold('-b', {
-          b: CourtCalendarActions.triggerComponentOnSectionAllocated({ failedHearingIds: [] })
-        });
-        expect(effects.getAllocatedHearingsForWidgetSuccessEffect(actions$, store)).toBeObservable(
-          expected$
+        searchCourtCalendarHearings.mockReturnValueOnce(
+          cold('b|', { b: { hearings: [], results: 0, pageCount: 1 } })
         );
-      });
-
-      it('should fire the component store trigger when allocation in successful on some allocations', () => {
-        store.overrideSelector(getFailedAllocationIds, ['id1']);
-        actions$ = cold('-a', {
-          a: CourtCalendarActions.getAllocatedHearingsForWidgetSuccess({
-            payload: expectedPayload,
-            onSectionAllocate: true
+        const effect$ = effects.getUnallocatedHearingsEffect(actions$, listingService);
+        const expected$ = cold('-c', {
+          c: CourtCalendarActions.getUnallocatedHearingsSuccess({
+            payload: {
+              paginatedHearings: {
+                hearings: [],
+                pagination: { totalNumber: 0, currentPage: 1, pageCount: 1 }
+              }
+            }
           })
         });
-
-        const expected$ = cold('-b', {
-          b: CourtCalendarActions.triggerComponentOnSectionAllocated({ failedHearingIds: ['id1'] })
-        });
-        expect(effects.getAllocatedHearingsForWidgetSuccessEffect(actions$, store)).toBeObservable(
-          expected$
-        );
-      });
-
-      it('should fire the component store trigger when sequence in successful', () => {
-        actions$ = cold('-a', {
-          a: CourtCalendarActions.getAllocatedHearingsForWidgetSuccess({
-            payload: expectedPayload,
-            onSequenceOnly: true
-          })
-        });
-
-        const expected$ = cold('-b', {
-          b: CourtCalendarActions.triggerComponentOnSequenceOnly()
-        });
-        expect(effects.getAllocatedHearingsForWidgetSuccessEffect(actions$, store)).toBeObservable(
-          expected$
-        );
-      });
-
-      it('should dispatch updateHearingPublicListNoteSuccess when hearing is updated successfully', () => {
-        const mockHearing = {
-          id: 'hearing-id',
-          listedCases: [{ id: 'case-1' }]
-        } as Hearing;
-
-        const prosecutionCases = [
-          { id: 'case-1', prosecutionCaseId: 'a1b2c3d4-e5f6-7890-abcd-1234567890ef' }
-        ];
-
-        actions$ = hot('-a', {
-          a: CourtCalendarActions.updateHearingPublicListNote({
-            updatedUnallocatedHearing: mockHearing
-          })
-        });
-
-        listingService.extractProsecutionCasesIdsFromHearing = jest
-          .fn()
-          .mockReturnValue(prosecutionCases);
-
-        const response$ = cold('-b|', { b: {} });
-        listingService.updateUnallocatedHearing = jest.fn().mockReturnValue(response$);
-
-        const expected$ = cold('--c', {
-          c: CourtCalendarActions.updateHearingPublicListNoteSuccess({
-            updatedUnallocatedHearing: mockHearing
-          })
-        });
-
-        const effect$ = effects.updateHearingPublicListNoteEffect(actions$, listingService);
-
         expect(effect$).toBeObservable(expected$);
+        return searchCourtCalendarHearings.mock.calls[0][0];
+      };
+
+      it('should search unallocated hearings by the selected business type', () => {
+        const payload = runEffect(unallocatedFilterOptions);
+
+        expect(payload).toEqual(
+          expect.objectContaining({
+            businessType: 'businessType',
+            ouCode: 'B01EF00',
+            allocated: false
+          })
+        );
       });
+
+      it('should not filter by business type when no business type is selected', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, businessType: undefined });
+
+        expect(payload.businessType).toBeUndefined();
+        expect(payload.ouCode).toBeUndefined();
+      });
+
+      it('should search by both hearing type and business type when both are selected', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, hearingType });
+
+        expect(payload).toEqual(
+          expect.objectContaining({
+            businessType: 'businessType',
+            hearingTypeId: 'hearingTypeId'
+          })
+        );
+      });
+
+      it('should not filter magistrates unallocated hearings by business type', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, courtType: 'MAGISTRATES' });
+
+        expect(payload.businessType).toBeUndefined();
+        expect(payload.jurisdictionType).toBe('MAGISTRATES');
+      });
+
+      it('should not send the court session to the unallocated hearings search', () => {
+        const payload = runEffect({ ...unallocatedFilterOptions, courtSession: 'AM' });
+
+        expect(payload.courtSession).toBeUndefined();
+      });
+    });
+
+    it('should dispatch updateHearingPublicListNoteSuccess when hearing is updated successfully', () => {
+      const mockHearing = {
+        id: 'hearing-id',
+        listedCases: [{ id: 'case-1' }]
+      } as Hearing;
+
+      const prosecutionCases = [
+        { id: 'case-1', prosecutionCaseId: 'a1b2c3d4-e5f6-7890-abcd-1234567890ef' }
+      ];
+
+      actions$ = hot('-a', {
+        a: CourtCalendarActions.updateHearingPublicListNote({
+          updatedUnallocatedHearing: mockHearing
+        })
+      });
+
+      listingService.extractProsecutionCasesIdsFromHearing = jest
+        .fn()
+        .mockReturnValue(prosecutionCases);
+
+      const response$ = cold('-b|', { b: {} });
+      listingService.updateUnallocatedHearing = jest.fn().mockReturnValue(response$);
+
+      const expected$ = cold('--c', {
+        c: CourtCalendarActions.updateHearingPublicListNoteSuccess({
+          updatedUnallocatedHearing: mockHearing
+        })
+      });
+
+      const effect$ = effects.updateHearingPublicListNoteEffect(actions$, listingService);
+
+      expect(effect$).toBeObservable(expected$);
     });
   });
 });

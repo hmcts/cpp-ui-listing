@@ -1,29 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
 import { PdkErrorSummaryComponent, PdkCore, PdkGrid, ValidationError } from '@cpp/pdk';
-import { AsyncPipe } from '@angular/common';
 import { HearingType } from '@cpp/reference-data';
 import {
   ChangeHearingDetailsComponent,
   ChangeHearingDetailsFormValues
 } from '../components/change-hearing-details.component';
-import {
-  AllocatingHearingDetailsWithCourtCentre,
-  AppState,
-  CourtCentre,
-  getCourtCentres,
-  Hearing
-} from '../../../core';
-import { combineLatest, Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import {
-  getSelectedHearing,
-  getSessionsForSelectedHearingBusinessType
-} from '../../state/selectors';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { AllocatingHearingDetailsWithCourtCentre, getCourtCentres, Hearing } from '../../../core';
+import { Store } from '@ngrx/store';
+import { getCourtCalendarAlert, getSelectedHearing } from '../../state/selectors';
 import { CourtCalendarActions } from '../../state';
 import { Router } from '@angular/router';
-import { HearingSlot } from '@cpp/scheduling';
+import { getSearchResults } from '@cpp/scheduling';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
+import { CourtCalendarAlertComponent } from '../../components/court-calendar-alert.component';
 
 @Component({
   selector: 'change-hearing-details-container',
@@ -31,17 +20,23 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
     <pdk-grid container>
       <pdk-grid full>
         <back-button [linkUrl]="'../../'"></back-button>
-        @if (errors) {
-          <pdk-error-summary focusOnChange="true" [errors]="errors"> </pdk-error-summary>
+        @if (errors()) {
+          <pdk-error-summary focusOnChange="true" [errors]="errors()"> </pdk-error-summary>
+        }
+        @if (noSessionAvailableAlert()) {
+          <court-calendar-alert-panel
+            [alertEntity]="noSessionAvailableAlert()"
+            shouldFocus="true"
+          ></court-calendar-alert-panel>
         }
         <h1 pdk-typography="heading-large" pdk-margin-bottom="3" pdk-margin-top="2">
           Change Hearing Details
         </h1>
         <change-hearing-details
-          [initialValues]="initialValues$ | async"
-          [selectedHearing]="selectedHearing$ | async"
-          [selectedCourtCentre]="selectedCourtCentre$ | async"
-          [hearingSlots]="hearingSlots$ | async"
+          [initialValues]="initialValues()"
+          [selectedHearing]="selectedHearing()"
+          [selectedCourtCentre]="selectedCourtCentre()"
+          [hearingSlots]="hearingSlots()"
           (onSubmit)="updateHearing($event)"
           (onCancel)="cancelSelectedHearingData()"
           (onValidationError)="showValidationError($event)"
@@ -50,53 +45,51 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
     </pdk-grid>
   `,
   imports: [
-    AsyncPipe,
     PdkGrid,
     BackButtonComponent,
     PdkErrorSummaryComponent,
     PdkCore,
-    ChangeHearingDetailsComponent
+    ChangeHearingDetailsComponent,
+    CourtCalendarAlertComponent
   ]
 })
-export class ChangehearingDetailsContainer implements OnInit {
-  selectedHearing$: Observable<Hearing | {}>;
-  initialValues$: Observable<ChangeHearingDetailsFormValues>;
-  courtCentres: CourtCentre[];
-  selectedCourtCentre$: Observable<CourtCentre>;
-  errors: ValidationError[] = null;
-  hearingSlots$: Observable<HearingSlot[]>;
-  constructor(
-    private store: Store<AppState>,
-    private route: Router
-  ) {}
+export class ChangehearingDetailsContainer implements OnDestroy {
+  private readonly store = inject(Store);
+  private readonly route = inject(Router);
+  private readonly courtCentres = this.store.selectSignal(getCourtCentres);
 
-  ngOnInit(): void {
-    this.selectedHearing$ = this.store.pipe(select(getSelectedHearing));
-    this.selectedCourtCentre$ = combineLatest([
-      this.store.select(getCourtCentres),
-      this.selectedHearing$
-    ]).pipe(
-      map(([courtCentres, selectedHearing]) => {
-        const courtCentreId = (selectedHearing as Hearing)?.courtCentreId;
-        return courtCentres.find((cc) => cc.id === courtCentreId);
-      })
+  readonly selectedHearing = this.store.selectSignal(getSelectedHearing);
+  readonly hearingSlots = this.store.selectSignal(getSearchResults);
+  readonly selectedCourtCentre = computed(() =>
+    this.courtCentres().find(cc => cc.id === (this.selectedHearing() as Hearing)?.courtCentreId)
+  );
+  readonly initialValues = computed(() => this.getInitialValues(this.selectedHearing() as Hearing));
+  readonly errors = signal<ValidationError[]>(null);
+  readonly noSessionAvailableAlert = this.store.selectSignal(getCourtCalendarAlert);
+
+  updateHearing({ originHearing, updatedHearing }: AllocatingHearingDetailsWithCourtCentre): void {
+    this.store.dispatch(
+      CourtCalendarActions.updateSelectedHearingData({ originHearing, updatedHearing })
     );
-    this.initialValues$ = this.selectedHearing$.pipe(
-      map((selectedHearing: Hearing) => this.getInitialValues(selectedHearing))
-    );
-    this.hearingSlots$ = this.selectedHearing$.pipe(
-      filter((hearing: Hearing) => hearing?.jurisdictionType === 'MAGISTRATES'),
-      switchMap(({ hearingDays }: Hearing) =>
-        this.store.pipe(
-          select(getSessionsForSelectedHearingBusinessType(hearingDays[0]?.courtScheduleId))
-        )
-      )
-    );
+  }
+
+  cancelSelectedHearingData(): void {
+    this.store.dispatch(CourtCalendarActions.setSelectedHearingData({ selectedHearing: null }));
+    this.route.navigate(['/court-calendar']);
+  }
+
+  showValidationError(errors: ValidationError[]): void {
+    this.errors.set(errors);
+  }
+
+  ngOnDestroy(): void {
+    if (this.noSessionAvailableAlert()?.failureAlert) {
+      this.store.dispatch(CourtCalendarActions.setAlertMessage({ failureAlert: undefined }));
+    }
   }
 
   private getInitialValues(selectedHearing: Hearing): ChangeHearingDetailsFormValues {
     if (!selectedHearing) return null;
-
     return {
       hasVideoLink: selectedHearing.hasVideoLink,
       sendNotificationToParties: selectedHearing.sendNotificationToParties,
@@ -115,23 +108,5 @@ export class ChangehearingDetailsContainer implements OnInit {
       startTime: selectedHearing.hearingDays[0].startTime,
       duration: selectedHearing.hearingDays[0].durationMinutes
     };
-  }
-
-  async updateHearing({ originHearing, updatedHearing }: AllocatingHearingDetailsWithCourtCentre) {
-    this.store.dispatch(
-      CourtCalendarActions.updateSelectedHearingData({
-        originHearing,
-        updatedHearing
-      })
-    );
-  }
-
-  cancelSelectedHearingData() {
-    this.store.dispatch(CourtCalendarActions.setSelectedHearingData({ selectedHearing: null }));
-    this.route.navigate(['/court-calendar']);
-  }
-
-  showValidationError(errors: ValidationError[]) {
-    this.errors = errors;
   }
 }

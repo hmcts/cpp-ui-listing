@@ -1,14 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { SelectOption, ValidationError, PdkErrorSummaryComponent, PdkCore } from '@cpp/pdk';
-import { ChangeCourtroomStateService } from '../component-store/change-courtroom-state.service';
+import { Component, inject } from '@angular/core';
+import { ValidationError, PdkErrorSummaryComponent, PdkCore } from '@cpp/pdk';
+import { ChangeCourtroomStore } from '../component-store/change-courtroom.store';
 import {
   HearingDaysSelectionFormComponent,
   SelectionNavigateEvent
 } from '../components/hearing-days-selection-form/hearing-days-selection-form.component';
-import { Observable, of } from 'rxjs';
-import { ChangeCourtroomVM } from '../../model';
-import { AsyncPipe } from '@angular/common';
-import { HearingDay } from '../../../core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HearingDetailsSectionComponent } from '../components/hearing-details-section/hearing-details-section.component';
 import { AppConfigService } from '../../../config';
@@ -26,20 +22,21 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
       Change Courtroom <span pdk-visually-hidden> for hearing days</span>
     </h1>
 
-    @if (hearingVM$ | async; as hearingVM) {
+    @if (changeCourtroomStore.hearingVM(); as hearingVM) {
       <hearing-details-section
         [hearingVM]="hearingVM"
-        [baseUrl]="getBaseUrl()"
+        [baseUrl]="appConfig.getBaseUrl()"
       ></hearing-details-section>
       <div pdk-margin-top="4">
         <hearing-days-selection-form
-          [allUpcomingHearingDays]="(hearingVM$ | async)?.upComingHearingDays"
-          [totalHearingDaysCount]="(hearingVM$ | async)?.totalHearingDaysCount"
+          [allUpcomingHearingDays]="changeCourtroomStore.upcomingHearingDays()"
+          [totalHearingDaysCount]="changeCourtroomStore.hearingVM()?.totalHearingDaysCount"
           [courtCentreName]="hearingVM?.courtCentre"
           [startDate]="hearingVM?.startDate"
           [endDate]="hearingVM?.endDate"
-          [selectedHearingDays]="selectedHearingDays$ | async"
-          [courtRoomOptions]="courtroomOptions$ | async"
+          [slots]="changeCourtroomStore.hearingSlots()"
+          [selectedHearingDays]="changeCourtroomStore.selectedHearingDays()"
+          [courtRoomOptions]="changeCourtroomStore.courtRooms()"
           (onValidationError)="showValidationError($event)"
           (onSelectionNavigate)="selectHearingDaysAndNavigate($event)"
           (onChangeForAllNavigate)="navigateToChangeForAll()"
@@ -49,49 +46,33 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
   `,
   imports: [
     HearingDaysSelectionFormComponent,
-    AsyncPipe,
     HearingDetailsSectionComponent,
     BackButtonComponent,
     PdkErrorSummaryComponent,
     PdkCore
   ]
 })
-export class HearingDaysSelectionContainer implements OnInit {
-  errors: ValidationError[] = null;
-  hearingVM$: Observable<ChangeCourtroomVM>;
-  selectedHearingDays$: Observable<HearingDay[]>;
-  courtroomOptions$: Observable<SelectOption<string>[]>;
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-  changeCourtroomStateService = inject(ChangeCourtroomStateService);
-  appConfig = inject(AppConfigService);
-
-  ngOnInit(): void {
-    this.hearingVM$ = this.changeCourtroomStateService.hearingVM$;
-    this.selectedHearingDays$ = this.changeCourtroomStateService.selectedHearingDays$;
-    this.courtroomOptions$ = this.changeCourtroomStateService.getCourtRooms;
-  }
+export class HearingDaysSelectionContainer {
+  errors: ValidationError[] | null = null;
+  readonly changeCourtroomStore = inject(ChangeCourtroomStore);
+  readonly router = inject(Router);
+  readonly route = inject(ActivatedRoute);
+  readonly appConfig = inject(AppConfigService);
 
   showValidationError(errors: ValidationError[]) {
     this.errors = errors;
   }
 
   navigateToChangeForAll() {
-    this.changeCourtroomStateService.setSelectedHearingDays([]);
+    this.changeCourtroomStore.setSelectedHearingDays([]);
     this.router.navigate(['../all-future-hearingdays-selected'], { relativeTo: this.route });
   }
 
   selectHearingDaysAndNavigate({ selectedHearingDays, courtRoomId }: SelectionNavigateEvent) {
-    this.changeCourtroomStateService.updateSelectedHearingDays(
-      of({
-        hearingDays: selectedHearingDays,
-        courtRoomId
-      })
-    );
+    this.changeCourtroomStore.updateSelectedHearingDays({
+      hearingDays: selectedHearingDays,
+      courtRoomId
+    });
     this.router.navigate(['../selected-hearing-days'], { relativeTo: this.route });
-  }
-
-  getBaseUrl() {
-    return this.appConfig.getBaseUrl();
   }
 }

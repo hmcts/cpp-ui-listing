@@ -8,7 +8,7 @@ import {
   HearingTableActionsState,
   MoveEvent
 } from '../../../../court-calendar-hearing-tables/component-store/hearing-table-actions.store';
-import { BaseHearingRowDataVM } from '../../../../../court-calendar/model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../../../../court-calendar/model/hearing-table-renderer.interfaces';
 import { HearingRowActionItem } from '../../../shared/hearing-row-actions-dropdown/hearing-row-actions-dropdown.component';
 import * as courtCalendarHelper from '../../../../../court-calendar/utils/court-calendar-hearings-helper';
 
@@ -238,14 +238,15 @@ describe('AllocatedHearingsActionsCellComponent', () => {
         ]);
       });
 
-      it('should add Magistrate extra options for current/future multi-day hearing', () => {
+      it('should add Magistrate extra options and Change courtroom for current/future multi-day hearing', () => {
         component.hearing.details.hearingDayCount = 2;
         component.ngOnInit();
 
         expect(component.actionOptions).toEqual([
           { label: 'Edit', value: 'edit' },
           { label: 'Move position', value: 'move' },
-          { label: 'Remove', value: 'remove' }
+          { label: 'Remove', value: 'remove' },
+          { label: 'Change courtroom', value: 'change' }
         ]);
       });
 

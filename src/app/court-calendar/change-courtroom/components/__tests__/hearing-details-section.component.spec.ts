@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HearingDetailsSectionComponent } from '../hearing-details-section/hearing-details-section.component';
 import { ChangeCourtroomVM } from '../../../model';
+import { JurisdictionType } from '../../../../core';
 
 interface CaseReference {
   caseId?: string;
@@ -29,7 +30,9 @@ describe('HearingDetailsSectionComponent', () => {
     courtCentre: 'Central Court',
     courtRooms: [],
     startDate: '2024-02-01',
-    endDate: '2024-02-03'
+    endDate: '2024-02-03',
+    ouCode: 'OU001',
+    jurisdictionType: 'CROWN' as JurisdictionType
   };
 
   const mockBaseUrl = 'https://test-app.com';

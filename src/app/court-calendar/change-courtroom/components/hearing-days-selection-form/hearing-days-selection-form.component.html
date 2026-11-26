@@ -1,9 +1,11 @@
-@if (allUpcomingHearingDays().length > 0) {
+@let upcomingDays = allUpcomingHearingDays();
+@let rooms = courtRoomOptions();
+@if (upcomingDays.length > 0) {
   <div class="result-summary">
     <p pdk-typography="body" class="summary-text" pdk-margin-top="1">
       Showing
-      <span [ngPlural]="allUpcomingHearingDays().length">
-        {{ allUpcomingHearingDays().length }}
+      <span [ngPlural]="upcomingDays.length">
+        {{ upcomingDays.length }}
         <ng-template ngPluralCase="=1"> hearing day</ng-template>
         <ng-template ngPluralCase="other"> hearing days</ng-template>
       </span>
@@ -54,10 +56,10 @@
         >
           <hearing-days-table
             [isPreview]="false"
-            [allUpcomingHearingDays]="allUpcomingHearingDays()"
+            [allUpcomingHearingDays]="upcomingDays"
             [allSelectedHearingDates]="hearingDates.value"
             [courtCentreName]="courtCentreName()"
-            [courtRoomOptions]="courtRoomOptions()"
+            [courtRoomOptions]="rooms"
             [totalNumberofHearingDays]="totalHearingDaysCount()"
             (onSelectAllPaginatedHearing)="
               selectAllPaginatedHearingDays($event, hearingDates.value)
@@ -72,19 +74,20 @@
           labelType="small"
           hintText="Select new courtroom for the hearing(s)"
           [errorMessages]="[
-            {
-              rule: 'required',
-              message: 'Enter a court room'
-            }
+            { rule: 'required', message: 'Enter a court room' },
+            { rule: 'courtRoomAvailability', message: courtRoomAvailabilityError() }
           ]"
         >
           <pdk-select
-            [ngModel]="selectedCourtRoomId"
-            (ngModelChange)="selectedCourtRoomId = $event"
+            [ngModel]="selectedCourtRoomId()"
+            (ngModelChange)="selectedCourtRoomId.set($event)"
             [name]="'courtRoomId'"
             [options]="courtRoomOptions()"
             placeholder="Select a courtroom"
             required="true"
+            courtRoomAvailability
+            [slots]="slots()"
+            [hearingDays]="hearingDates.value ?? []"
           >
           </pdk-select>
         </pdk-form-field>
