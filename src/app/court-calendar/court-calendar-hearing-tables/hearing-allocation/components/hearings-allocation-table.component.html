@@ -1,6 +1,9 @@
+@let sectionItems = sections();
+@let total = totalNumber();
+@let size = pageSize();
 @if (isUnallocatedType) {
   <h2 pdk-typography="heading-large">
-    {{ sections()?.length > 0 ? totalNumber() : 0 }} Unallocated hearings
+    {{ sectionItems?.length > 0 ? total : 0 }} Unallocated hearings
   </h2>
 }
 @if (!isUnallocatedType) {
@@ -9,10 +12,10 @@
     <span pdk-visually-hidden> to reallocate</span>
   </h2>
 }
-@if (sections()?.length > 0) {
+@if (sectionItems?.length > 0) {
   @if (isUnallocatedType) {
     <page-size-selector
-      [pageSize]="pageSize()"
+      [pageSize]="size"
       (pageSizeChange)="onPageSizeChange($event)"
     ></page-size-selector>
   }
@@ -20,7 +23,7 @@
     section-table-renderer
     [columnConfig]="columnConfig"
     [sectionConfig]="sectionConfig"
-    [sections]="sections()"
+    [sections]="sectionItems"
     [sectionHeaderRenderer]="sectionHeader"
     [expandedDetailsRenderer]="hearingDetails"
     [customCellHeaderRenderers]="{
@@ -42,13 +45,13 @@
     <p>No more hearings to reallocate.</p>
   }
 }
-@if (totalNumber() > pageSize()) {
+@if (total > size) {
   <pdk-pagination
     [currentPage]="currentPage()"
-    [totalResults]="totalNumber()"
-    [pageSize]="pageSize()"
+    [totalResults]="total"
+    [pageSize]="size"
     [maxPages]="7"
-    (pageChange)="pageChange.emit({ pageNumber: $event, pageSize: pageSize() })"
+    (pageChange)="pageChange.emit({ pageNumber: $event, pageSize: size })"
   >
   </pdk-pagination>
 }

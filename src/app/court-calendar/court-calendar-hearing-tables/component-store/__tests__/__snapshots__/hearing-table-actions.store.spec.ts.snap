@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HearingTableActionsStore snapshot testing should match initial state snapshot 1`] = `
+{
+  "currentAction": null,
+  "eligibleScheduleIds": null,
+  "moveState": undefined,
+  "onNavigateHearingActions": null,
+  "positionedHearingsState": undefined,
+  "selectedHearings": [],
+}
+`;

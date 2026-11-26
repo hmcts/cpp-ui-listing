@@ -31,9 +31,20 @@ import {
 } from '../../../../shared/components/date-range/date-range';
 import { NonSittingDaysComponent } from '../../../../shared/components/non-sitting-days/non-sitting-days.component';
 import { NonDefaultDaysComponent } from '../../../../shared/components/non-default-days/non-default-days.component';
-import { CourtCentre, HearingDay, NonDefaultDay } from '../../../../core';
+import { CourtCentre, HearingDay, JurisdictionType, NonDefaultDay } from '../../../../core';
 import { ChangeHearingStartTimeControlsComponent } from '../change-hearing-start-time-controls.component';
 import { DatePipe } from '@angular/common';
+import { HearingSlot } from '@cpp/scheduling';
+import { ChangeHearingSessionSelectorComponent } from '../change-hearing-session-selector.component';
+import { RequiresAllDayDurationBasedSessionDirective } from '../requires-all-day-duration-based-session-validator.directive';
+
+const IS_MULTI_DAY_ERROR_MESSAGES: ErrorMessageConfig[] = [
+  {
+    rule: 'noAllDayDurationBasedSession',
+    message:
+      'Cannot change to a multi-day hearing. There is no All Day duration based session on {{startDate}}'
+  }
+];
 
 const ERROR_MESSAGES: ErrorMessageConfig[] = [
   { rule: 'required', message: 'Enter an end date' },
@@ -44,6 +55,10 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
   {
     rule: 'dateRangeExceeded',
     message: `End date can’t be more than 2 years after start date`
+  },
+  {
+    rule: 'weekDate',
+    message: `End date can’t be a weekend — enter a weekday`
   }
 ];
 
@@ -61,7 +76,9 @@ const ERROR_MESSAGES: ErrorMessageConfig[] = [
     PdkCheckBox,
     PdkDateInput,
     PdkCore,
-    DatePipe
+    DatePipe,
+    ChangeHearingSessionSelectorComponent,
+    RequiresAllDayDurationBasedSessionDirective
   ],
   providers: [
     {
@@ -95,9 +112,14 @@ export class ChangeHearingDetailsCrownControlComponent implements ControlValueAc
   readonly startTime = input<string>(undefined);
   readonly startDate = input<string>(undefined);
   readonly duration = input<number>(undefined);
+  readonly jurisdictionType = input<JurisdictionType>(undefined);
   readonly onValidationError = output<ValidationError[]>();
+  readonly hearingSlots = input<HearingSlot[]>([]);
+  readonly hearingCourtScheduleId = input<string>(undefined);
+  timeToCompare: string;
   endDateControl: FormControl<string>;
   errorMessages = ERROR_MESSAGES;
+  isMultiDayErrorMessages = IS_MULTI_DAY_ERROR_MESSAGES;
   dateRange: DateRange;
   get isMultiDay() {
     return this.startDateStr !== this.endDateControl.value;
@@ -120,11 +142,11 @@ export class ChangeHearingDetailsCrownControlComponent implements ControlValueAc
     this.endDateControl.valueChanges
       .pipe(
         distinctUntilChanged(),
-        map((endDate) => {
+        map(endDate => {
           return new DateRange(this.startDateStr, endDate);
         })
       )
-      .subscribe((val) => {
+      .subscribe(val => {
         this.dateRange = val;
         this.propagateChange(val);
       });

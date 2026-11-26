@@ -6,17 +6,14 @@ import {
   getAllocatedCourtRoomsByDate,
   getAllocatedHearingsMap,
   getCaseNotesMap,
-  getCourtCalendarFeature,
-  getJurisdictionTypeFromFeature,
   getUnallocatedHearingsMap,
-  getFailedAllocationIds,
   getUnallocatedHearings,
   getHearingsToReallocate,
   getAllocationType,
   getAllocationHearings,
   getAllocateWidgetFilter,
   getCourtCalendarVM,
-  getMagsWidgetCourtCalendarVm,
+  getAllocatedWidgetCalendarVm,
   getAllocationHearingsVM,
   getCourtCalendarAlert,
   getSelectedHearing,
@@ -32,13 +29,12 @@ import {
   mockOrganisationUnits
 } from '../../../utils/mocks';
 
-// Ensure mockOrganisationUnits has the correct id to match selectedHearing
 const mockOrgUnitsWithId = mockOrganisationUnits.map((unit, index) => ({
   ...unit,
   id: selectedHearing.courtCentreId || `mock-court-centre-${index}`
 }));
-import { CourtCalendarFeature, AllocationType } from '../../../model';
-import { AppState, getRouteData } from '../../../../core';
+import { AllocationType } from '../../../model';
+import { AppState } from '../../../../core';
 import { HearingSlot } from '@cpp/scheduling';
 import { getSearchResults } from '@cpp/scheduling';
 
@@ -111,73 +107,6 @@ describe('CourtCalendar Selectors', () => {
     });
   });
 
-  describe('getCourtCalendarFeature', () => {
-    it('should return feature when route data exists', () => {
-      store.overrideSelector(getRouteData, { feature: CourtCalendarFeature.calendar });
-      const result = store.select(getCourtCalendarFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBe(CourtCalendarFeature.calendar);
-      });
-    });
-
-    it('should return undefined when route data is null', () => {
-      store.overrideSelector(getRouteData, null);
-      const result = store.select(getCourtCalendarFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBeUndefined();
-      });
-    });
-
-    it('should return undefined when route data is undefined', () => {
-      store.overrideSelector(getRouteData, undefined);
-      const result = store.select(getCourtCalendarFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBeUndefined();
-      });
-    });
-  });
-
-  describe('getJurisdictionTypeFromFeature', () => {
-    it('should return CROWN when feature is allocateCrown', () => {
-      store.overrideSelector(getRouteData, { feature: CourtCalendarFeature.allocateCrown });
-      const result = store.select(getJurisdictionTypeFromFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBe('CROWN');
-      });
-    });
-
-    it('should return MAGISTRATES when feature is allocateMag', () => {
-      store.overrideSelector(getRouteData, { feature: CourtCalendarFeature.allocateMag });
-      const result = store.select(getJurisdictionTypeFromFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBe('MAGISTRATES');
-      });
-    });
-
-    it('should return undefined when feature is calendar', () => {
-      store.overrideSelector(getRouteData, { feature: CourtCalendarFeature.calendar });
-      const result = store.select(getJurisdictionTypeFromFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBeUndefined();
-      });
-    });
-
-    it('should return undefined when feature is undefined', () => {
-      store.overrideSelector(getRouteData, null);
-      const result = store.select(getJurisdictionTypeFromFeature);
-
-      result.subscribe((value) => {
-        expect(value).toBeUndefined();
-      });
-    });
-  });
-
   describe('getUnallocatedHearingsMap', () => {
     it('should select unallocated hearings map from the state', () => {
       const unallocatedHearingMap = {
@@ -198,35 +127,6 @@ describe('CourtCalendar Selectors', () => {
       const result = getUnallocatedHearingsMap(state);
 
       expect(result).toEqual(unallocatedHearingMap);
-    });
-  });
-
-  describe('getFailedAllocationIds', () => {
-    it('should return failed allocation ids from the state', () => {
-      const failedIds = ['id1', 'id2'];
-      const state = {
-        courtCalendar: {
-          ...mockCourtCalendarState,
-          failedAllocationIds: failedIds
-        }
-      } as unknown as CourtCalendarFeatureState;
-
-      const result = getFailedAllocationIds(state);
-
-      expect(result).toEqual(failedIds);
-    });
-
-    it('should return empty array when failedAllocationIds is undefined', () => {
-      const state = {
-        courtCalendar: {
-          ...mockCourtCalendarState,
-          failedAllocationIds: undefined
-        }
-      } as unknown as CourtCalendarFeatureState;
-
-      const result = getFailedAllocationIds(state);
-
-      expect(result).toEqual([]);
     });
   });
 
@@ -297,7 +197,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getAllocationHearings);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toEqual(unallocatedHearings);
       });
     });
@@ -311,7 +211,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getAllocationHearings);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toEqual({ hearings: hearingsToReallocate });
       });
     });
@@ -339,8 +239,7 @@ describe('CourtCalendar Selectors', () => {
   });
 
   describe('getCourtCalendarVM', () => {
-    it('should use filters.courtCentre when feature is CALENDAR', () => {
-      store.overrideSelector(getRouteData, { feature: CourtCalendarFeature.calendar });
+    it('should return a view model using filters.courtCentre', () => {
       store.overrideSelector(
         getAllocatedHearings,
         mockCourtCalendarState.allocated.paginatedHearings
@@ -350,47 +249,16 @@ describe('CourtCalendar Selectors', () => {
         mockCourtCalendarState.allocated.courtRoomMapByDate
       );
       store.overrideSelector(getCourtCalendarFilters, mockCourtCalendarState.filterOptions);
-      store.overrideSelector(getAllocateWidgetFilter, {
-        courtCentre: mockCourtCalendarState.filterOptions.courtCentre,
-        startDate: mockCourtCalendarState.filterOptions.startDate
-      } as any);
-      store.overrideSelector(getCourtCalendarFeature, CourtCalendarFeature.calendar);
 
       const result = store.select(getCourtCalendarVM);
 
-      result.subscribe((value) => {
-        expect(value).toBeDefined();
-      });
-    });
-
-    it('should use widgetFilter.courtCentre when feature is not CALENDAR and widgetFilter has courtCentre', () => {
-      store.overrideSelector(getRouteData, { feature: CourtCalendarFeature.allocateCrown });
-      const widgetFilter = {
-        courtCentre: mockCourtCalendarState.filterOptions.courtCentre,
-        startDate: mockCourtCalendarState.filterOptions.startDate
-      };
-
-      store.overrideSelector(
-        getAllocatedHearings,
-        mockCourtCalendarState.allocated.paginatedHearings
-      );
-      store.overrideSelector(
-        getAllocatedCourtRoomsByDate,
-        mockCourtCalendarState.allocated.courtRoomMapByDate
-      );
-      store.overrideSelector(getCourtCalendarFilters, mockCourtCalendarState.filterOptions);
-      store.overrideSelector(getAllocateWidgetFilter, widgetFilter);
-      store.overrideSelector(getCourtCalendarFeature, CourtCalendarFeature.allocateCrown);
-
-      const result = store.select(getCourtCalendarVM);
-
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
       });
     });
   });
 
-  describe('getMagsWidgetCourtCalendarVm', () => {
+  describe('getAllocatedWidgetCalendarVm', () => {
     it('should use widgetFilter.courtCentre when available', () => {
       const widgetFilter = {
         courtCentre: mockCourtCalendarState.filterOptions.courtCentre,
@@ -410,9 +278,9 @@ describe('CourtCalendar Selectors', () => {
       store.overrideSelector(getAllocateWidgetFilter, widgetFilter);
       store.overrideSelector(getSearchResults, hearingSlots);
 
-      const result = store.select(getMagsWidgetCourtCalendarVm);
+      const result = store.select(getAllocatedWidgetCalendarVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
       });
     });
@@ -436,9 +304,9 @@ describe('CourtCalendar Selectors', () => {
       store.overrideSelector(getAllocateWidgetFilter, widgetFilter);
       store.overrideSelector(getSearchResults, hearingSlots);
 
-      const result = store.select(getMagsWidgetCourtCalendarVm);
+      const result = store.select(getAllocatedWidgetCalendarVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
       });
     });
@@ -455,7 +323,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getAllocationHearingsVM);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
       });
     });
@@ -552,7 +420,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeNull();
       });
     });
@@ -578,7 +446,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
         expect(value?.duration).toBeDefined();
         expect(value?.multiDayHearing.isMultiDay).toBe('No');
@@ -600,7 +468,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
         expect(value?.multiDayHearing.isMultiDay).toBe('Yes');
       });
@@ -628,7 +496,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.videoHearing).toBe('Yes');
       });
     });
@@ -655,7 +523,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.videoHearing).toBe('No');
       });
     });
@@ -682,7 +550,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hearingLanguage).toBeDefined();
       });
     });
@@ -709,7 +577,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getRemoveHearingVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hearingLanguage).toBe('English');
       });
     });
@@ -726,7 +594,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeNull();
       });
     });
@@ -762,7 +630,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
         expect(value?.upComingHearingDays.length).toBe(1);
         expect(value?.upComingHearingDays[0].hearingDate).toBe(
@@ -802,7 +670,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
         expect(value?.upComingHearingDays.length).toBe(2);
       });
@@ -838,7 +706,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hasReportingRestriction).toBe(true);
       });
     });
@@ -873,7 +741,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hasReportingRestriction).toBe(false);
       });
     });
@@ -893,7 +761,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hasReportingRestriction).toBe(false);
       });
     });
@@ -913,7 +781,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hasReportingRestriction).toBe(false);
       });
     });
@@ -933,7 +801,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
         expect(value?.courtCentre).toBe('');
         expect(value?.courtRooms).toEqual([]);
@@ -957,7 +825,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
         expect(value?.courtRooms).toEqual([]);
       });
@@ -981,7 +849,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(getChangeCourtroomVm);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value?.hearingType).toBe('');
       });
     });
@@ -1000,7 +868,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(selector);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeDefined();
       });
     });
@@ -1016,7 +884,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(selector);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toBeUndefined();
       });
     });
@@ -1054,10 +922,10 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(selector);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value.length).toBe(2);
         expect(
-          value.every((slot) => slot.businessType === 'Type1' && slot.courtRoomId === 'room-1')
+          value.every(slot => slot.businessType === 'Type1' && slot.courtRoomId === 'room-1')
         ).toBe(true);
       });
     });
@@ -1070,7 +938,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(selector);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toEqual([]);
       });
     });
@@ -1083,7 +951,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(selector);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toEqual([]);
       });
     });
@@ -1104,7 +972,7 @@ describe('CourtCalendar Selectors', () => {
 
       const result = store.select(selector);
 
-      result.subscribe((value) => {
+      result.subscribe(value => {
         expect(value).toEqual([]);
       });
     });

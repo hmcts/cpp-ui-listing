@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../model/hearing-table-renderer.interfaces';
 import { HearingTableActionsState } from '../court-calendar-hearing-tables/component-store/hearing-table-actions.store';
 
 @Pipe({ name: 'hearingRowToBeMoved' })

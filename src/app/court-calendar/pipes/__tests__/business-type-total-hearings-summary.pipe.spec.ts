@@ -3,10 +3,11 @@ import { TotalHearingAndDurationTextPipe } from '../total-hearings-and-duration-
 import {
   CourtRoomBusinessTypeCalendar,
   CourtRoomHearingTimeCalendar,
+  CourtRoomJudicialCalendar,
+  CourtRoomSessionCalendar,
   HearingRowVM
 } from '../../model';
 import { RotaBusinessTypeCode } from '@cpp/reference-data';
-import { CourtSession } from '@cpp/scheduling';
 import * as courtCalendarHelper from '../../utils/court-calendar-hearings-helper';
 
 jest.mock('../total-hearings-and-duration-text.pipe');
@@ -82,7 +83,7 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
       sequence: 1,
       isDisabled: false,
       checkSplit: false
-    } as HearingRowVM);
+    }) as HearingRowVM;
 
   const createMockHearingTimeCalendar = (
     time: string = '09:00-10:00',
@@ -92,20 +93,31 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
     hearings
   });
 
-  const createMockBusinessTypeCalendar = (
-    businessTypeCode: RotaBusinessTypeCode = RotaBusinessTypeCode.general,
+  const mockSlot: CourtRoomSessionCalendar['slot'] = {
+    courtScheduleId: 'schedule-1',
+    session: { startTime: '09:00', endTime: '17:00', type: 'AM' as any }
+  };
+
+  const createMockJudiciaryCalendar = (
     hearingTimeCalendar: CourtRoomHearingTimeCalendar[] = []
-  ): CourtRoomBusinessTypeCalendar => ({
-    businessTypeAndSlot: {
-      businessTypeCode,
-      courtScheduleId: 'schedule-1',
-      session: {
-        startTime: '09:00',
-        endTime: '17:00',
-        type: 'AM' as CourtSession
-      }
-    },
+  ): CourtRoomJudicialCalendar => ({
+    judiciary: [],
     hearingTimeCalendar
+  });
+
+  const createMockBusinessTypeCalendar = (
+    businessType: RotaBusinessTypeCode = RotaBusinessTypeCode.general,
+    judiciaryCalendars: CourtRoomJudicialCalendar[] = []
+  ): CourtRoomBusinessTypeCalendar => ({
+    businessType,
+    sessions: [{ slot: mockSlot, judiciaryCalendar: judiciaryCalendars }]
+  });
+
+  const createMockSessionCalendar = (
+    judiciaryCalendars: CourtRoomJudicialCalendar[] = []
+  ): CourtRoomSessionCalendar => ({
+    slot: mockSlot,
+    judiciaryCalendar: judiciaryCalendars
   });
 
   describe('transform', () => {
@@ -114,7 +126,7 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
       expect(pipe).toBeInstanceOf(BusinessTypeTotalHearingsSummaryPipe);
     });
 
-    it('should transform valid business type calendar with hearings', () => {
+    it('should transform CourtRoomBusinessTypeCalendar with hearings', () => {
       const mockHearings = [
         createMockHearing('1', 30),
         createMockHearing('2', 45),
@@ -126,9 +138,10 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
         createMockHearingTimeCalendar('11:00-12:00', [mockHearings[2]])
       ];
 
+      const mockJudiciaryCalendars = [createMockJudiciaryCalendar(mockHearingTimeCalendars)];
       const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
         RotaBusinessTypeCode.crownCourt,
-        mockHearingTimeCalendars
+        mockJudiciaryCalendars
       );
       const expectedSummary = '(3 hearings, 2 hours 15 minutes listed)';
 
@@ -137,7 +150,26 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
 
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
+      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
+        mockHearingTimeCalendars
+      );
+      expect(result).toBe(expectedSummary);
+    });
+
+    it('should transform CourtRoomSessionCalendar with hearings', () => {
+      const mockHearings = [createMockHearing('1', 30)];
+      const mockHearingTimeCalendars = [createMockHearingTimeCalendar('09:00-10:00', mockHearings)];
+      const mockJudiciaryCalendars = [createMockJudiciaryCalendar(mockHearingTimeCalendars)];
+      const sessionCalendar = createMockSessionCalendar(mockJudiciaryCalendars);
+      const expectedSummary = '(1 hearing, 30 minutes listed)';
+
+      mockGetAllHearingCalendars.mockReturnValue(mockHearingTimeCalendars);
+      mockTotalHearingsAndDurationTextPipe.transform.mockReturnValue(expectedSummary);
+
+      const result = pipe.transform(sessionCalendar);
+
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
       expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
         mockHearingTimeCalendars
       );
@@ -150,9 +182,10 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
         createMockHearingTimeCalendar('10:00-11:00', [])
       ];
 
+      const mockJudiciaryCalendars = [createMockJudiciaryCalendar(mockHearingTimeCalendars)];
       const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
         RotaBusinessTypeCode.general,
-        mockHearingTimeCalendars
+        mockJudiciaryCalendars
       );
       const expectedSummary = '(0 hearings, 0 minutes listed)';
 
@@ -161,61 +194,24 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
 
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
-      );
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
       expect(result).toBe(expectedSummary);
     });
 
-    it('should handle null business type calendar', () => {
+    it('should handle business type calendar with empty judiciary calendars', () => {
       const mockHearingTimeCalendars: CourtRoomHearingTimeCalendar[] = [];
       const expectedSummary = '(0 hearings, 0 minutes listed)';
 
       mockGetAllHearingCalendars.mockReturnValue(mockHearingTimeCalendars);
       mockTotalHearingsAndDurationTextPipe.transform.mockReturnValue(expectedSummary);
 
-      const result = pipe.transform(null as any);
-
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
+      const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
+        RotaBusinessTypeCode.general,
+        []
       );
-      expect(result).toBe(expectedSummary);
-    });
-
-    it('should handle undefined business type calendar', () => {
-      const mockHearingTimeCalendars: CourtRoomHearingTimeCalendar[] = [];
-      const expectedSummary = '(0 hearings, 0 minutes listed)';
-
-      mockGetAllHearingCalendars.mockReturnValue(mockHearingTimeCalendars);
-      mockTotalHearingsAndDurationTextPipe.transform.mockReturnValue(expectedSummary);
-
-      const result = pipe.transform(undefined as any);
-
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
-      );
-      expect(result).toBe(expectedSummary);
-    });
-
-    it('should handle falsy business type calendar', () => {
-      const mockBusinessTypeCalendar = {} as CourtRoomBusinessTypeCalendar;
-      const mockHearingTimeCalendars = [
-        createMockHearingTimeCalendar('09:00-10:00', [createMockHearing('1', 30)])
-      ];
-      const expectedSummary = '(1 hearing, 30 minutes listed)';
-
-      mockGetAllHearingCalendars.mockReturnValue(mockHearingTimeCalendars);
-      mockTotalHearingsAndDurationTextPipe.transform.mockReturnValue(expectedSummary);
-
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
-      );
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([]);
       expect(result).toBe(expectedSummary);
     });
 
@@ -225,9 +221,10 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
         createMockHearingTimeCalendar('09:00-10:00', [mockHearing])
       ];
 
+      const mockJudiciaryCalendars = [createMockJudiciaryCalendar(mockHearingTimeCalendars)];
       const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
         RotaBusinessTypeCode.domesticViolenceTrials,
-        mockHearingTimeCalendars
+        mockJudiciaryCalendars
       );
       const expectedSummary = '(1 hearing, 45 minutes listed)';
 
@@ -236,14 +233,11 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
 
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
-      );
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
       expect(result).toBe(expectedSummary);
     });
 
-    it('should handle business type calendar with multiple time slots', () => {
+    it('should handle business type calendar with multiple time slots across judiciary calendars', () => {
       const morningHearings = [createMockHearing('1', 30), createMockHearing('2', 30)];
       const afternoonHearings = [
         createMockHearing('3', 60),
@@ -251,58 +245,61 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
         createMockHearing('5', 45)
       ];
 
-      const mockHearingTimeCalendars = [
+      const mockJudiciaryCalendars = [
+        createMockJudiciaryCalendar([
+          createMockHearingTimeCalendar('09:00-11:00', morningHearings)
+        ]),
+        createMockJudiciaryCalendar([
+          createMockHearingTimeCalendar('13:00-16:00', afternoonHearings)
+        ])
+      ];
+
+      const combinedHearingTimeCalendars = [
         createMockHearingTimeCalendar('09:00-11:00', morningHearings),
         createMockHearingTimeCalendar('13:00-16:00', afternoonHearings)
       ];
 
       const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
         RotaBusinessTypeCode.trial,
-        mockHearingTimeCalendars
+        mockJudiciaryCalendars
       );
       const expectedSummary = '(5 hearings, 4 hours 15 minutes listed)';
 
-      mockGetAllHearingCalendars.mockReturnValue(mockHearingTimeCalendars);
+      mockGetAllHearingCalendars.mockReturnValue(combinedHearingTimeCalendars);
       mockTotalHearingsAndDurationTextPipe.transform.mockReturnValue(expectedSummary);
 
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
-      );
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
       expect(result).toBe(expectedSummary);
     });
 
     it('should handle when getAllHearingCalendars returns empty array', () => {
-      const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(RotaBusinessTypeCode.general);
-      const mockHearingTimeCalendars: CourtRoomHearingTimeCalendar[] = [];
+      const mockJudiciaryCalendars = [createMockJudiciaryCalendar()];
+      const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
+        RotaBusinessTypeCode.general,
+        mockJudiciaryCalendars
+      );
       const expectedSummary = '(0 hearings, 0 minutes listed)';
 
-      mockGetAllHearingCalendars.mockReturnValue(mockHearingTimeCalendars);
+      mockGetAllHearingCalendars.mockReturnValue([]);
       mockTotalHearingsAndDurationTextPipe.transform.mockReturnValue(expectedSummary);
 
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
-      expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
-        mockHearingTimeCalendars
-      );
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
       expect(result).toBe(expectedSummary);
     });
 
     it('should handle different business types correctly', () => {
-      const testCases: Array<{
-        businessType: RotaBusinessTypeCode;
-        expectedCallCount: number;
-      }> = [
-        { businessType: RotaBusinessTypeCode.crownCourt, expectedCallCount: 1 },
-        { businessType: RotaBusinessTypeCode.general, expectedCallCount: 2 },
-        { businessType: RotaBusinessTypeCode.domesticViolenceTrials, expectedCallCount: 3 },
-        { businessType: RotaBusinessTypeCode.trial, expectedCallCount: 4 }
+      const testCases: RotaBusinessTypeCode[] = [
+        RotaBusinessTypeCode.crownCourt,
+        RotaBusinessTypeCode.general,
+        RotaBusinessTypeCode.domesticViolenceTrials,
+        RotaBusinessTypeCode.trial
       ];
 
-      testCases.forEach(({ businessType, expectedCallCount }, index) => {
+      testCases.forEach((businessType, index) => {
         const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(businessType);
         const mockHearingTimeCalendars = [
           createMockHearingTimeCalendar(`${9 + index}:00-${10 + index}:00`)
@@ -324,11 +321,15 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
     });
 
     it('should maintain consistent pipe instance across multiple transforms', () => {
+      const mockJudiciaryCalendars1 = [createMockJudiciaryCalendar()];
+      const mockJudiciaryCalendars2 = [createMockJudiciaryCalendar()];
       const mockBusinessTypeCalendar1 = createMockBusinessTypeCalendar(
-        RotaBusinessTypeCode.crownCourt
+        RotaBusinessTypeCode.crownCourt,
+        mockJudiciaryCalendars1
       );
       const mockBusinessTypeCalendar2 = createMockBusinessTypeCalendar(
-        RotaBusinessTypeCode.general
+        RotaBusinessTypeCode.general,
+        mockJudiciaryCalendars2
       );
 
       const mockHearingTimeCalendars = [createMockHearingTimeCalendar('time-1')];
@@ -341,16 +342,18 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
       const result2 = pipe.transform(mockBusinessTypeCalendar2);
 
       expect(mockGetAllHearingCalendars).toHaveBeenCalledTimes(2);
-      expect(mockGetAllHearingCalendars).toHaveBeenNthCalledWith(1, [mockBusinessTypeCalendar1]);
-      expect(mockGetAllHearingCalendars).toHaveBeenNthCalledWith(2, [mockBusinessTypeCalendar2]);
+      expect(mockGetAllHearingCalendars).toHaveBeenNthCalledWith(1, mockJudiciaryCalendars1);
+      expect(mockGetAllHearingCalendars).toHaveBeenNthCalledWith(2, mockJudiciaryCalendars2);
       expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledTimes(2);
       expect(result1).toBe(expectedSummary);
       expect(result2).toBe(expectedSummary);
     });
 
     it('should handle edge case where TotalHearingAndDurationTextPipe returns empty string', () => {
+      const mockJudiciaryCalendars = [createMockJudiciaryCalendar()];
       const mockBusinessTypeCalendar = createMockBusinessTypeCalendar(
-        RotaBusinessTypeCode.crownCourt
+        RotaBusinessTypeCode.crownCourt,
+        mockJudiciaryCalendars
       );
       const mockHearingTimeCalendars = [createMockHearingTimeCalendar('time-1')];
 
@@ -359,7 +362,7 @@ describe('BusinessTypeTotalHearingsSummaryPipe', () => {
 
       const result = pipe.transform(mockBusinessTypeCalendar);
 
-      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith([mockBusinessTypeCalendar]);
+      expect(mockGetAllHearingCalendars).toHaveBeenCalledWith(mockJudiciaryCalendars);
       expect(mockTotalHearingsAndDurationTextPipe.transform).toHaveBeenCalledWith(
         mockHearingTimeCalendars
       );

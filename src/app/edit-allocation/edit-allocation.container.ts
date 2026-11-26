@@ -39,7 +39,6 @@ import {
   SearchAllocatedHearingsAction,
   setEditAllocationError,
   setHearingToEditAllocation,
-  splitHearingUnallocated,
   UpdateAllocatedHearingAction
 } from '../core/';
 import {
@@ -134,7 +133,6 @@ export class EditAllocationContainer implements OnDestroy, OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(splitHearingUnallocated({ splitHearingUnallocated: false }));
     this.trialTypes$ = this.store.select(getTrialTypesFilteredByType);
     this.store
       .select(getCourtCentres)

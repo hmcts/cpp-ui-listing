@@ -40,8 +40,7 @@ import {
   getLastAllocatedMagsHearing,
   getMagsHearingSchedule,
   ClearHearingSlots,
-  getUnallocatedHearingsByPage,
-  splitHearingUnallocated
+  getUnallocatedHearingsByPage
 } from '../core';
 import { jurisdiction$ } from '../core/util/constants';
 import { SelectedFilterOptions, LastAllocatedHearing } from '../core/model/';
@@ -60,6 +59,7 @@ import {
   PdkWarningTextComponent
 } from '@cpp/pdk';
 import { HearingSchedule, UnallocatedHearings } from '../core/model/hearing';
+import { HearingSlotAllocation } from '@cpp/scheduling';
 import { getHasApiActivity } from '../core/selectors/api';
 import { AsyncPipe } from '@angular/common';
 import { SubMenuComponent } from '../shared/components/sub-menu/sub-menu.component';
@@ -231,7 +231,6 @@ export class UnallocatedHearingsContainer implements OnDestroy {
     this.router.navigate([`/split/${hearing.id}`]).then(() => {
       this.window.scroll(0, 0);
     });
-    this.store.dispatch(splitHearingUnallocated({ splitHearingUnallocated: true }));
   }
 
   clearNotification(): void {
@@ -239,12 +238,16 @@ export class UnallocatedHearingsContainer implements OnDestroy {
     this.store.dispatch(new ClearHearingSlots());
   }
 
+  getEarliestAllocation(allocations: HearingSlotAllocation[]): HearingSlotAllocation | undefined {
+    return [...allocations].sort((a, b) => a.hearingSlotTime.localeCompare(b.hearingSlotTime))[0];
+  }
+
   updatePageNumber(page: number) {
     if (page) {
       this.selectedHearingFilters$
         .pipe(
           take(1),
-          map((selectedFilters) => {
+          map(selectedFilters => {
             const options = this.getOptions(selectedFilters);
             return new ListUnallocatedFixedAndWeekCommencingHearings({
               ...options,

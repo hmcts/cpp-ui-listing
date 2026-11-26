@@ -39,6 +39,9 @@
           [selectedCourtCentre]="selectedCourtCentre()"
           [startTime]="initialValues()?.startTime"
           [duration]="initialValues()?.duration"
+          [hearingSlots]="hearingSlots()"
+          [hearingCourtScheduleId]="selectedHearing()?.hearingDays[0]?.courtScheduleId"
+          [jurisdictionType]="selectedHearing()?.jurisdictionType"
           (onValidationError)="onValidationError.emit($event)"
         >
         </change-hearing-crown-control>
@@ -134,7 +137,7 @@
         </pdk-radio-group>
       </pdk-form-field>
       <div class="action-btn">
-        <button pdk-button data-role="apply-filters-btn" type="submit">Save changes</button>
+        <button pdk-button data-role="save-hearing-changes-btn" type="submit">Save changes</button>
         <a pdk-link (click)="cancel()" href="javascript:void(0);">Cancel</a>
       </div>
     </form>

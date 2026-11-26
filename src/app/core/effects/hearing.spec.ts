@@ -85,7 +85,8 @@ import {
   updateListingNote as updateListingNoteAction,
   updateListingNoteSuccess,
   createListingNote as createListingNoteAction,
-  ListingNotesService
+  ListingNotesService,
+  SearchHearingSlotsParams
 } from '@cpp/scheduling';
 import { CppHttp } from '@cpp/core';
 import { CourtListType } from '../../create-a-list/models/mags-publish-list.dto';
@@ -490,8 +491,7 @@ describe('Hearing effects', () => {
       expect(effects.allocateHearing$).toBeObservable(expected$);
       expect(updateUnallocatedHearing).toHaveBeenCalledWith(
         inputAction.payload.updatedHearing,
-        prosecutionCaseIds,
-        false
+        prosecutionCaseIds
       );
       expect(navigate).toHaveBeenCalledWith(['/unallocated']);
     });
@@ -1084,7 +1084,7 @@ describe('Hearing effects', () => {
     startDate.setDate(startDate.getDate() + 1);
     const formattedStartDate = startDate.toISOString().split('T')[0];
 
-    const searchHearingSlotsParams = {
+    const searchHearingSlotsParams: SearchHearingSlotsParams = {
       courtRoomId: testHearing.courtRoomId,
       sessionStartDate: formattedStartDate,
       sessionEndDate: formattedStartDate,
@@ -1093,7 +1093,8 @@ describe('Hearing effects', () => {
       ouCode: 'oucode',
       pageNumber: 1,
       pageSize: 10,
-      showOverbookedSlots: true
+      showOverbookedSlots: true,
+      jurisdiction: 'MAGISTRATES'
     };
 
     beforeEach(() => {

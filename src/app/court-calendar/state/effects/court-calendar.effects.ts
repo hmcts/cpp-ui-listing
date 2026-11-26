@@ -4,11 +4,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiError } from '../../../core/actions/api';
 import { CourtCalendarActions } from '../actions';
 import { forkJoin, of } from 'rxjs';
-import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import {
   HearingWithSelectedCourtCentre,
   ChangeJudicaryForHearingsSuccessAction,
   JudicialRole,
+  JurisdictionType,
   ListingService,
   PaginatedHearingResponse,
   SelectedFilterOptions,
@@ -18,18 +19,24 @@ import {
   getAllocateProsecutionCases,
   mapResponseToPaginatedHearingMap
 } from '../../utils/court-calendar-hearings-helper';
-import { getSearchParams, loadListingNotes, resetHearingSlots } from '@cpp/scheduling';
+import { COURT_CALENDAR_ALERTS } from '../../utils/court-calendar-alert-messages';
+import {
+  getSearchParams,
+  isMagistratesCourt,
+  loadListingNotes,
+  resetHearingSlots
+} from '@cpp/scheduling';
+import { getOrganisationUnits } from '@cpp/reference-data';
 import { Router } from '@angular/router';
 import {
   generateNonDefaultDays,
   getPermissionAndNotificationHandler
 } from './court-calendar.effect.utils';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AllocateHearingCase } from '../../model';
 
-import { getCourtCalendarFilters, getSelectedHearing } from '../selectors';
-import { AllocateHearingFactory } from '../../utils/allocate-hearing.factory';
-import { formatDate } from '@angular/common';
+import { last } from 'lodash-es';
+import { getSelectedHearing } from '../selectors';
 
 export const searchCourtCalendarsEffect = createEffect(
   (actions$ = inject(Actions), listingService = inject(ListingService)) => {
@@ -44,8 +51,7 @@ export const searchCourtCalendarsEffect = createEffect(
             endDate,
             hearingType,
             ...restOfParams
-          },
-          onSequenceOnly
+          }
         }) => {
           const hearingsEndDate = !endDate ? restOfParams.startDate : endDate;
           const hasSession =
@@ -73,7 +79,7 @@ export const searchCourtCalendarsEffect = createEffect(
             })),
             switchMap(({ payload, notes }) => {
               return [
-                CourtCalendarActions.searchCourtCalendarSuccess({ payload, onSequenceOnly }),
+                CourtCalendarActions.searchCourtCalendarSuccess({ payload }),
                 loadListingNotes({ notes }),
                 resetHearingSlots()
               ];
@@ -84,16 +90,6 @@ export const searchCourtCalendarsEffect = createEffect(
       )
     );
   },
-  { functional: true }
-);
-
-export const searchCourtCalendarsSuccessEffect = createEffect(
-  (actions$ = inject(Actions)) =>
-    actions$.pipe(
-      ofType(CourtCalendarActions.searchCourtCalendarSuccess),
-      filter(({ onSequenceOnly }) => onSequenceOnly),
-      map(() => CourtCalendarActions.triggerComponentOnSequenceOnly())
-    ),
   { functional: true }
 );
 
@@ -190,7 +186,16 @@ export const updateSelectedHearingEffect = createEffect(
           tap(() => {
             router.navigate(['/court-calendar']);
           }),
-          catchError(err => of(new ApiError(err)))
+          catchError((httpError: HttpErrorResponse) => {
+            if (httpError.status === 422 && originHearing.jurisdictionType === 'CROWN') {
+              return of(
+                CourtCalendarActions.setAlertMessage({
+                  failureAlert: COURT_CALENDAR_ALERTS.NO_SESSIONS_FOR_HEARING_CHANGE
+                })
+              );
+            }
+            return of(new ApiError(httpError));
+          })
         );
       })
     ),
@@ -220,39 +225,8 @@ export const removeHearingEffect = createEffect(
   { functional: true }
 );
 
-export const changeHearingEndDateEffect = createEffect(
-  (actions$ = inject(Actions), listingService = inject(ListingService), store = inject(Store)) =>
-    actions$.pipe(
-      ofType(CourtCalendarActions.moveHearingEndDate),
-      withLatestFrom(store.pipe(select(getCourtCalendarFilters))),
-      switchMap(([{ hearing, newEndDate }, filterOptions]) => {
-        const previousEndDate = hearing.endDate;
-        return listingService
-          .updateAllocatedHearing({
-            ...hearing,
-            endDate: newEndDate
-          } as HearingWithSelectedCourtCentre)
-          .pipe(
-            switchMap(() => [
-              CourtCalendarActions.setAlertMessage({
-                successAlert: `Hearing date successfully changed from ${formatDate(previousEndDate, 'd MMMM yyyy', 'en-GB')} to ${formatDate(newEndDate, 'd MMMM yyyy', 'en-GB')}`
-              }),
-              CourtCalendarActions.searchCourtCalendar({ filterOptions })
-            ]),
-            catchError(err => of(new ApiError(err)))
-          );
-      })
-    ),
-  { functional: true }
-);
-
 export const splitHearingEffect = createEffect(
-  (
-    action$ = inject(Actions),
-    store = inject(Store),
-    listingService = inject(ListingService),
-    router = inject(Router)
-  ) =>
+  (action$ = inject(Actions), listingService = inject(ListingService), router = inject(Router)) =>
     action$.pipe(
       ofType(CourtCalendarActions.splitHearings),
       switchMap(({ originHearing, updatedHearing }) => {
@@ -312,7 +286,7 @@ export const splitHearingEffect = createEffect(
   { functional: true }
 );
 
-export const magistratesSplitHearingEffect = createEffect(
+export const allocateSelectedHearingSlotsEffect = createEffect(
   (
     action$ = inject(Actions),
     store = inject(Store),
@@ -320,32 +294,53 @@ export const magistratesSplitHearingEffect = createEffect(
     router = inject(Router)
   ) =>
     action$.pipe(
-      ofType(CourtCalendarActions.magistratesSplitHearings),
+      ofType(CourtCalendarActions.allocateSelectedHearingSlots),
       withLatestFrom(store, store.select(getSelectedHearing), store.select(getSearchParams)),
       switchMap(
         ([
-          { hearingSlotAllocations, sendNotificationToParties },
+          { hearingSlotAllocations, sendNotificationToParties, hearingType: selectedHearingType },
           state,
           selectedHearing,
           schedulingParams
         ]) => {
           const [firstSlot] = hearingSlotAllocations;
-          const hearingType = getReferenceDataHearingTypeById(selectedHearing.type.id)(state);
-          const nonDefaultDays = generateNonDefaultDays(hearingSlotAllocations, hearingType);
+          const type = selectedHearingType ?? selectedHearing.type;
+          const referenceDataHearingType = getReferenceDataHearingTypeById(type.id)(state);
+          const nonDefaultDays = generateNonDefaultDays(
+            hearingSlotAllocations,
+            referenceDataHearingType
+          );
           const { listedCases } = selectedHearing;
+
+          const organisationUnits = getOrganisationUnits(state);
+          const selectedCourt = organisationUnits.find(
+            unit => unit.oucode === firstSlot.hearingSlot.ouCode
+          );
+          const jurisdictionType: JurisdictionType = isMagistratesCourt(selectedCourt)
+            ? 'MAGISTRATES'
+            : 'CROWN';
+
+          const startDate = firstSlot.hearingSlot.sessionDate;
+          const endDate = last(hearingSlotAllocations).hearingSlot.sessionDate;
+
           const payload = {
             courtCentreId: firstSlot.hearingSlot?.courtHouseId,
             courtRoomId: firstSlot.hearingSlot.courtRoomId,
-            startDate: schedulingParams.sessionStartDate,
-            endDate: schedulingParams.sessionEndDate,
+            startDate,
+            endDate:
+              jurisdictionType === 'MAGISTRATES'
+                ? endDate
+                : startDate === endDate
+                  ? endDate
+                  : (schedulingParams.sessionEndDate ?? endDate),
             hearingLanguage: selectedHearing.hearingLanguage,
             judiciary: selectedHearing.judiciary,
-            jurisdictionType: selectedHearing.jurisdictionType,
+            jurisdictionType,
             nonDefaultDays,
             nonSittingDays: selectedHearing.nonSittingDays,
             publicListNote: selectedHearing.publicListNote,
             hasVideoLink: selectedHearing.hasVideoLink,
-            type: selectedHearing.type,
+            type,
             bookingType: selectedHearing.bookingType,
             priority: selectedHearing.priority,
             specialRequirements: selectedHearing.specialRequirements,
@@ -363,11 +358,14 @@ export const magistratesSplitHearingEffect = createEffect(
             ]
           );
           return forkJoin([
-            listingService.allocateHearing({
-              ...payload,
-              hearingId: selectedHearing.id,
-              prosecutionCases: getAllocateProsecutionCases(listedCases)
-            }),
+            listingService.allocateHearing(
+              {
+                ...payload,
+                hearingId: selectedHearing.id,
+                prosecutionCases: getAllocateProsecutionCases(listedCases)
+              },
+              true
+            ),
             notificationAndPermissionHandler$
           ]).pipe(
             switchMap(() => [
@@ -384,67 +382,6 @@ export const magistratesSplitHearingEffect = createEffect(
           );
         }
       )
-    ),
-  { functional: true }
-);
-
-export const updateCourtRoomsForHearingDaysEffect = createEffect(
-  (
-    actions$ = inject(Actions),
-    listingService = inject(ListingService),
-    store = inject(Store),
-    router = inject(Router),
-    allocateFactory = inject(AllocateHearingFactory)
-  ) =>
-    actions$.pipe(
-      ofType(CourtCalendarActions.updateSelectedHearingDays),
-      withLatestFrom(store.select(getSelectedHearing)),
-      switchMap(([{ updatedHearingDays }, selectedHearing]) => {
-        const { listedCases, hearingDays, courtRoomId } = selectedHearing;
-
-        const prosecutionCases: AllocateHearingCase[] = getAllocateProsecutionCases(listedCases);
-
-        const updatedNonDefaultHearingDays = allocateFactory.parseBulkVirtualNonDefaultDays(
-          selectedHearing,
-          updatedHearingDays
-        );
-
-        const isAllDaysUpdated = hearingDays?.length === updatedNonDefaultHearingDays.length;
-        const updatedCourtRoomId = isAllDaysUpdated
-          ? updatedNonDefaultHearingDays[0]?.roomId
-          : courtRoomId;
-
-        const updateHearingPayload = {
-          courtCentreId: selectedHearing.courtCentreId,
-          courtRoomId: updatedCourtRoomId,
-          endDate: selectedHearing.endDate,
-          hearingId: selectedHearing.id,
-          hearingLanguage: selectedHearing.hearingLanguage,
-          judiciary: selectedHearing.judiciary,
-          jurisdictionType: selectedHearing.jurisdictionType,
-          nonDefaultDays: updatedNonDefaultHearingDays,
-          nonSittingDays: selectedHearing.nonSittingDays,
-          prosecutionCases,
-          startDate: selectedHearing.startDate,
-          publicListNote: selectedHearing.publicListNote,
-          hasVideoLink: selectedHearing.hasVideoLink,
-          type: selectedHearing.type,
-          bookingType: selectedHearing.bookingType,
-          sendNotificationToParties: selectedHearing.sendNotificationToParties
-        };
-
-        return forkJoin([
-          listingService.updateCourtRoomForSelectedHearingDays(updateHearingPayload)
-        ]).pipe(
-          switchMap(() => [CourtCalendarActions.setSelectedHearingData({ selectedHearing: null })]),
-          tap(() => {
-            router.navigate([
-              `/court-calendar/change-courtroom/${selectedHearing.id}/success-banner`
-            ]);
-          }),
-          catchError(err => of(new ApiError(err)))
-        );
-      })
     ),
   { functional: true }
 );

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withErrorHandlerAdapter snapshot testing should match method signature snapshot 1`] = `
+{
+  "methodExists": true,
+  "methodName": "handleError",
+  "methodType": "function",
+}
+`;

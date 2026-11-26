@@ -59,6 +59,7 @@ export interface ChangeEndDateModalData extends Record<string, unknown> {
               name="newEndDate"
               [ngModel]="todayDate"
               [futureDate]="true"
+              [weekDate]="true"
               required
               picker
             >

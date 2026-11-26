@@ -274,6 +274,17 @@ exports[`SubMenuComponent should render when the user has Court Calendar access 
               routerlinkactive=""
             >
               <a
+                href="/court-calendar"
+              >
+                Court calendar
+              </a>
+            </li>
+            <li
+              class="pdk-service-nav-list-item govuk-service-navigation__item"
+              pdk-service-nav-list-item=""
+              routerlinkactive=""
+            >
+              <a
                 href="/unallocated"
               >
                 Unallocated Hearings
@@ -310,17 +321,6 @@ exports[`SubMenuComponent should render when the user has Court Calendar access 
                 href="/unscheduled"
               >
                 Unscheduled list
-              </a>
-            </li>
-            <li
-              class="pdk-service-nav-list-item govuk-service-navigation__item"
-              pdk-service-nav-list-item=""
-              routerlinkactive=""
-            >
-              <a
-                href="/court-calendar"
-              >
-                Court calendar
               </a>
             </li>
           </ul>

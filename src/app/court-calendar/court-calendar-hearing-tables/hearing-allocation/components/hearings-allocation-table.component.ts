@@ -19,9 +19,9 @@ import {
 } from '../../../model';
 import {
   BaseHearingTable,
-  ColumnConfig,
-  HearingTableSectionConfig
-} from '../../../model/hearing-table-renderer.vm';
+  HearingsColumnConfig,
+  HearingsTableSectionConfig
+} from '../../../model/hearing-table-renderer.interfaces';
 import { DefendantCellComponent } from '../../renderers/cell-renderers/defendant-cell.component';
 import { HearingTypeCellComponent } from '../../renderers/cell-renderers/hearing-type-cell.component';
 import { SectionTableRendererComponent } from '../../renderers/section-table-renderer/section-table-renderer.component';
@@ -74,12 +74,7 @@ import { DatePipe, NgTemplateOutlet } from '@angular/common';
     `
   ]
 })
-export class HearingsAllocationTableComponent
-  implements
-    BaseHearingTable<AllocationHearingsSectionVm, 'allocationCalendar', 'hearingTimeCalendar'>,
-    OnChanges,
-    OnInit
-{
+export class HearingsAllocationTableComponent implements BaseHearingTable, OnChanges, OnInit {
   readonly sections = input<AllocationHearingsSectionVm[]>(undefined);
   readonly allocationType = input<AllocationType>(undefined);
   readonly selectedHearings = input<SelectedHearingState[]>([]);
@@ -106,13 +101,8 @@ export class HearingsAllocationTableComponent
   allMasterHearingRows: HearingRowVM[];
 
   constructor(private appConfig: AppConfigService) {}
-  rows?: AllocationHearingsSectionVm[];
-  sectionConfig?: HearingTableSectionConfig<
-    AllocationHearingsSectionVm,
-    'allocationCalendar',
-    'hearingTimeCalendar'
-  >;
-  columnConfig: ColumnConfig<HearingRowVM>;
+  sectionConfig?: HearingsTableSectionConfig;
+  columnConfig: HearingsColumnConfig<HearingRowVM>;
 
   ngOnInit(): void {
     this.sectionConfig = AllocationHearingsTableSectionConfig;
@@ -128,21 +118,26 @@ export class HearingsAllocationTableComponent
     if (!event) {
       this.onSelectAllHearings.emit([]);
     } else {
-      const selectedHearings = this.allMasterHearingRows.map(({ id, dateTime }) => ({
+      const selectedHearings = this.allMasterHearingRows.map(({ id, dateTime, duration }) => ({
         hearingId: id,
-        hearingDateTime: dateTime
+        hearingDateTime: dateTime,
+        duration
       }));
       this.onSelectAllHearings.emit(selectedHearings);
     }
   }
 
   select(hearing: HearingRowVM) {
-    this.onSelectHearing.emit({ hearingId: hearing.id, hearingDateTime: hearing.dateTime });
+    this.onSelectHearing.emit({
+      hearingId: hearing.id,
+      hearingDateTime: hearing.dateTime,
+      duration: hearing.duration
+    });
   }
 
   isSelected(hearing: HearingRowVM) {
     return this.selectedHearings().some(
-      (h) => h.hearingId === hearing.id && h.hearingDateTime === hearing.dateTime
+      h => h.hearingId === hearing.id && h.hearingDateTime === hearing.dateTime
     );
   }
 

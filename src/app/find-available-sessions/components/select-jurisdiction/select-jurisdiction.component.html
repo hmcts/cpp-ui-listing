@@ -1,0 +1,58 @@
+<form
+  pdk-form
+  novalidate
+  data-test-id="select-jurisdiction"
+  (errors)="errors.emit($event)"
+  (validSubmit)="onContinue()"
+>
+  <pdk-form-field
+    label="Select jurisdiction"
+    labelType="small"
+    [errorMessages]="[{ rule: 'required', message: 'Select jurisdiction' }]"
+  >
+    <pdk-radio-group
+      name="selectJurisdictionType"
+      [ngModel]="jurisdiction()"
+      (ngModelChange)="onJurisdictionChange($event)"
+      required
+    >
+      <pdk-radio-button value="MAGISTRATES">Magistrates' Court </pdk-radio-button>
+      @if (jurisdiction() !== 'CROWN') {
+        <pdk-radio-conditional>
+          @if (jurisdiction() === 'MAGISTRATES') {
+            <ng-container [ngTemplateOutlet]="courtCentreTemplate" />
+          }
+        </pdk-radio-conditional>
+      }
+      <pdk-radio-button value="CROWN">Crown Court </pdk-radio-button>
+      @if (jurisdiction() === 'CROWN') {
+        <pdk-radio-conditional>
+          <ng-container [ngTemplateOutlet]="courtCentreTemplate" />
+        </pdk-radio-conditional>
+      }
+    </pdk-radio-group>
+  </pdk-form-field>
+
+  <ng-template #courtCentreTemplate>
+    <pdk-form-field
+      label="Select court"
+      labelType="small"
+      pdk-margin-top="3"
+      [errorMessages]="courtErrorMessages"
+    >
+      <cpp-organisation-unit-autosuggest
+        id="select-jurisdiction-court-centre"
+        name="courtCentre"
+        [ngModel]="courtCentre()"
+        (ngModelChange)="courtCentre.set($event)"
+        [jurisdictionCode]="jurisdiction() === 'CROWN' ? 'C' : 'B'"
+        required
+        data-role="select-jurisdiction-court-centre-input"
+      ></cpp-organisation-unit-autosuggest>
+    </pdk-form-field>
+  </ng-template>
+
+  <div class="select-jurisdiction__actions" pdk-margin-top="4">
+    <button pdk-button type="submit" data-role="continue-btn">Continue</button>
+  </div>
+</form>

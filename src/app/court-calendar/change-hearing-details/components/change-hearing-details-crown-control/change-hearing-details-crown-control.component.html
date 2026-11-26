@@ -3,7 +3,7 @@
   <p pdk-margin-top="1">
     {{ startDate() | date: 'dd MMMM yyyy' }}
   </p>
-  <pdk-form-field>
+  <pdk-form-field [errorMessages]="isMultiDayErrorMessages">
     <pdk-checkbox
       [id]="'multiDay'"
       name="multiDay"
@@ -11,6 +11,8 @@
       #multiDay="ngModel"
       (ngModelChange)="invertMultiDay($event)"
       [ngModelOptions]="{ standalone: true }"
+      [requiresAllDayDurationBasedSession]="startDate()"
+      [hearingSlots]="hearingSlots()"
     >
       This is a multi-day hearing
     </pdk-checkbox>
@@ -22,6 +24,7 @@
           [id]="'hearing-endDate'"
           [formControl]="endDateControl"
           [minDate]="minDate"
+          weekDate
           required
           picker
         >
@@ -31,6 +34,7 @@
         <non-sitting-days
           name="nonSittingDays"
           [dateRange]="dateRange"
+          [jurisdictionType]="jurisdictionType()"
           [ngModel]="nonSittingDays()"
           (onValidationError)="onValidationError.emit($event)"
         >
@@ -44,6 +48,7 @@
             [hearingDays]="hearingDays()"
             [ngModel]="nonDefaultDays()"
             [defaultStartTime]="selectedCourtCentre().defaultStartTime"
+            [jurisdictionType]="jurisdictionType()"
             (onValidationError)="onValidationError.emit($event)"
           >
           </non-default-days>
@@ -52,8 +57,18 @@
     </pdk-checkbox-conditional>
   }
   @if (!multiDay.value) {
+    @if (hearingSlots()?.length > 0) {
+      <change-hearing-session-selector
+        name="courtScheduleId"
+        [ngModel]="hearingCourtScheduleId()"
+        [hearingSlots]="hearingSlots()"
+        [sessionDate]="startDate()"
+        [startTime]="timeToCompare"
+      ></change-hearing-session-selector>
+    }
     <change-hearing-start-time-controls
       [startTime]="startTime()"
+      (startTimeChange)="timeToCompare = $event"
       [duration]="duration()"
     ></change-hearing-start-time-controls>
   }

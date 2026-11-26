@@ -1,29 +1,21 @@
 import { ChangeDetectionStrategy, Component, OnInit, input, model, output } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import {
   PdkForm,
   SelectOption,
   ValidationError,
-  PdkInsetTextComponent,
   PdkRadio,
   PdkCore,
-  PdkSelectComponent,
   PdkGrid,
-  PdkDateInput,
-  PdkDatePicker,
   PdkButton
 } from '@cpp/pdk';
-import { CppReferenceDataComponents, OrganisationUnit } from '@cpp/reference-data';
-import moment from 'moment';
-
-import { CourtCalendarFilters } from '../../model';
+import { OrganisationUnit } from '@cpp/reference-data';
 import { FormsModule } from '@angular/forms';
 
+import { CourtCalendarFilters } from '../../model';
+import { CourtCalendarFilterFieldsComponent } from '../court-calendar-filter-fields/court-calendar-filter-fields.component';
+
 enum Court {
-  CROWN_COURT = 'CROWN',
-  MAGISTRATES_COURT = 'MAGISTRATES',
-  CROWN_COURT_CODE = 'C',
-  MAGS_COURT_CODE = 'B'
+  CROWN_COURT_CODE = 'C'
 }
 
 @Component({
@@ -32,18 +24,13 @@ enum Court {
   templateUrl: './court-calendar-filters.component.html',
   styleUrls: ['./court-calendar-filters.component.scss'],
   imports: [
-    CppReferenceDataComponents,
-    DatePipe,
-    PdkForm,
     FormsModule,
-    PdkInsetTextComponent,
+    PdkForm,
     PdkRadio,
     PdkCore,
-    PdkSelectComponent,
     PdkGrid,
-    PdkDateInput,
-    PdkDatePicker,
-    PdkButton
+    PdkButton,
+    CourtCalendarFilterFieldsComponent
   ]
 })
 export class CourtCalendarFiltersComponent implements OnInit {
@@ -57,15 +44,6 @@ export class CourtCalendarFiltersComponent implements OnInit {
   courtType: 'CROWN' | 'MAGISTRATES';
   courtroomOptions: SelectOption<string>[] = [];
   hasCrownCourt: boolean = false;
-
-  startDateLabel: string;
-  endDateLabel: string;
-  courtSessionOptions: SelectOption<CourtCalendarFilters['courtSession'] | undefined>[] = [
-    { value: 'Any', label: 'Any' },
-    { value: 'AM', label: 'AM' },
-    { value: 'PM', label: 'PM' },
-    { value: 'AD', label: 'All day' }
-  ];
 
   ngOnInit(): void {
     const initialValues = this.initialValues();
@@ -95,22 +73,13 @@ export class CourtCalendarFiltersComponent implements OnInit {
   handleCourtCentreChange(courtCentre: OrganisationUnit): void {
     this.hasCrownCourt = courtCentre?.oucodeL1Code === Court.CROWN_COURT_CODE;
     this.courtroomOptions =
-      courtCentre?.courtrooms?.map((courtroom) => ({
+      courtCentre?.courtrooms?.map(courtroom => ({
         value: courtroom.id,
         label: courtroom.courtroomName
       })) || [];
   }
 
-  isDateDisabled = (startDate: string) => (date: Date) => {
-    const twoWeeksFromStartDate = moment(startDate).add(2, 'weeks');
-    return moment(date).isAfter(twoWeeksFromStartDate);
-  };
-
   handleSubmitForm(values: CourtCalendarFilters): void {
-    const filters = {
-      ...values,
-      pageNumber: 1
-    };
-    this.submitForm.emit(filters);
+    this.submitForm.emit({ ...values, pageNumber: 1 });
   }
 }

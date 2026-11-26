@@ -13,7 +13,7 @@ import {
   IsHearingBeingMovedPipe,
   IsNonMovingMemberOfHearingsGroupPipe
 } from '../../../pipes/move-hearing-action.pipes';
-import { BaseHearingRowDataVM } from '../../../model/hearing-table-renderer.vm';
+import { BaseHearingRowDataVM } from '../../../model/hearing-table-renderer.interfaces';
 import { MoveHearingsButtonsComponent } from './move-hearing-positions-buttons.component';
 
 export interface HearingActionsEvent {
@@ -92,7 +92,7 @@ export class ActionsCellComponent {
   actionOptions: HearingRowActionItem[] = [];
 
   get masterRows(): BaseHearingRowDataVM[] {
-    return this.group.filter((row) => row.isMaster);
+    return this.group.filter(row => row.isMaster);
   }
 
   get shouldInsertBefore() {

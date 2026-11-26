@@ -23,7 +23,8 @@ import {
   JurisdictionType,
   ExtendedJudicialRole,
   PaginatedHearingResponse,
-  PanelType
+  PanelType,
+  NonDefaultDay
 } from '../../model/hearing';
 import { TypeOfListSummary } from '../../../unscheduled-listings/unscheduled-listings.interfaces';
 import { CaseNote } from '../../../allocate-hearing/allocate-hearing.interfaces';
@@ -170,24 +171,19 @@ export class ListingService {
       sendNotificationToParties?: boolean;
       judiciaryAssignmentSource?: JudiciaryAssignmentSource;
     },
-    splitHearingUnallocated = false
+    isSplit = false
   ): Observable<unknown> {
     return this.api.commandSync({
       url: `/listing-command-api/command/api/rest/listing/hearings/${hearingId}`,
-      requestType: 'application/vnd.listing.command.update-hearing-for-listing+json',
+      requestType: isSplit
+        ? 'application/vnd.listing.command.split-hearing+json'
+        : 'application/vnd.listing.command.update-hearing-for-listing+json',
       successEvent: 'public.listing.hearing-changes-saved',
-      body: splitHearingUnallocated
-        ? {
-            ...body,
-            judiciary: judiciary ? judiciary.map(({ judicialMember, ...rest }) => rest) : undefined,
-            prosecutionCases: prosecutionCases.length ? prosecutionCases : undefined,
-            splitHearing: 'unallocated'
-          }
-        : {
-            ...body,
-            judiciary: judiciary ? judiciary.map(({ judicialMember, ...rest }) => rest) : undefined,
-            prosecutionCases: prosecutionCases.length ? prosecutionCases : undefined
-          }
+      body: {
+        ...body,
+        judiciary: judiciary ? judiciary.map(({ judicialMember, ...rest }) => rest) : undefined,
+        prosecutionCases: prosecutionCases.length ? prosecutionCases : undefined
+      }
     });
   }
 
@@ -200,10 +196,10 @@ export class ListingService {
         offences: { offenceId: string }[];
       }[];
     }[] = [],
-    splitHearingUnallocated = false
+    isSplit = false
   ): Observable<unknown> {
     const { publicListNote = '', hasVideoLink = false } = hearing;
-    const body: Record<string, unknown> & { splitHearing?: string } = {
+    const body: Record<string, unknown> = {
       courtCentreId: hearing.courtCentreId,
       type: hearing.type,
       nonSittingDays: hearing.nonSittingDays,
@@ -230,9 +226,6 @@ export class ListingService {
       sendNotificationToParties: hearing.sendNotificationToParties,
       judiciaryAssignmentSource: hearing.judiciaryAssignmentSource
     };
-    if (splitHearingUnallocated) {
-      body.splitHearing = 'unallocated';
-    }
     if (hearing.weekCommencingStartDate) {
       body.weekCommencingStartDate = hearing.weekCommencingStartDate;
       body.weekCommencingEndDate = hearing.weekCommencingEndDate;
@@ -244,7 +237,9 @@ export class ListingService {
 
     return this.api.commandSync({
       url: `/listing-command-api/command/api/rest/listing/hearings/${hearing.id}`,
-      requestType: 'application/vnd.listing.command.update-hearing-for-listing+json',
+      requestType: isSplit
+        ? 'application/vnd.listing.command.split-hearing+json'
+        : 'application/vnd.listing.command.update-hearing-for-listing+json',
       successEvent: 'public.listing.hearing-days-changed-for-hearing',
       body
     });
@@ -707,25 +702,18 @@ export class ListingService {
     });
   }
 
-  updateCourtRoomForSelectedHearingDays(hearingUpdatePayload: HearingAllocationPayload) {
-    const { hearingId, judiciary, ...updateBody } = hearingUpdatePayload;
+  updateCourtRoomForSelectedHearingDays({
+    hearingId,
+    ...payload
+  }: {
+    hearingId: string;
+    sendNotificationToParties: boolean;
+    nonDefaultDays: NonDefaultDay[];
+  }) {
     return this.api.commandSync({
       url: `/listing-command-api/command/api/rest/listing/hearings/${hearingId}`,
-      body: {
-        ...updateBody,
-        judiciary: judiciary
-          ? judiciary.map(
-              ({ judicialId, ...judge }) =>
-                ({
-                  judicialId: judicialId || judge.judicialMember.id,
-                  judicialRoleType: judge.judicialRoleType,
-                  isDeputy: judge.isDeputy,
-                  isBenchChairman: judge.isBenchChairman
-                }) as JudicialRole
-            )
-          : undefined
-      },
-      requestType: 'application/vnd.listing.command.update-hearing-for-listing+json',
+      body: payload,
+      requestType: 'application/vnd.listing.command.change-court-room-for-multiday-hearing+json',
       successEvent: 'public.listing.hearing-days-changed-for-hearing'
     });
   }

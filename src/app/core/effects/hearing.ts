@@ -3,8 +3,7 @@ import {
   getAvailableHearings,
   getHearingToEditAllocation,
   getJudiciaries,
-  getScheduledHearingForAllocation,
-  hasSplitHearingFromUnallocated
+  getScheduledHearingForAllocation
 } from '../selectors';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -180,86 +179,73 @@ export class HearingEffects {
   allocateHearing$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(HearingActions.ALLOCATE_HEARING_ACTION),
-      withLatestFrom(
-        this.store.select(getScheduledHearingForAllocation),
-        this.store.select(hasSplitHearingFromUnallocated)
-      ),
-      switchMap(
-        ([{ payload }, hearing, splitHearingUnallocated]: [
-          AllocateHearingAction,
-          Hearing,
-          boolean
-        ]) => {
-          const { listedCases } = hearing;
-          const { originHearing, updatedHearing } = payload;
+      withLatestFrom(this.store.select(getScheduledHearingForAllocation)),
+      switchMap(([{ payload }, hearing]: [AllocateHearingAction, Hearing]) => {
+        const { listedCases } = hearing;
+        const { originHearing, updatedHearing } = payload;
 
-          const { hasVideoLink = false, publicListNote = '' } = updatedHearing;
-          const prosecutionCases: {
-            caseId: string;
-            defendants: {
-              defendantId: string;
-              offences: { offenceId: string }[];
-            }[];
-          }[] =
-            !!listedCases && listedCases.length > 0
-              ? this.listing.extractProsecutionCasesIdsFromHearing(hearing)
-              : [];
+        const { hasVideoLink = false, publicListNote = '' } = updatedHearing;
+        const prosecutionCases: {
+          caseId: string;
+          defendants: {
+            defendantId: string;
+            offences: { offenceId: string }[];
+          }[];
+        }[] =
+          !!listedCases && listedCases.length > 0
+            ? this.listing.extractProsecutionCasesIdsFromHearing(hearing)
+            : [];
 
-          const permissionHandler$ = this.permissionsHandlerForJudiciaries(
-            [originHearing],
-            updatedHearing.judiciary
-          );
+        const permissionHandler$ = this.permissionsHandlerForJudiciaries(
+          [originHearing],
+          updatedHearing.judiciary
+        );
 
-          const notificationHandler$ = this.notificationsHandlerForJudiciaries(
-            [originHearing],
-            [updatedHearing as HearingWithSelectedCourtCentre],
-            updatedHearing.judiciary
-          );
+        const notificationHandler$ = this.notificationsHandlerForJudiciaries(
+          [originHearing],
+          [updatedHearing as HearingWithSelectedCourtCentre],
+          updatedHearing.judiciary
+        );
 
-          return forkJoin([
-            updatedHearing.weekCommencingStartDate
-              ? this.listing.updateUnallocatedHearing(
-                  updatedHearing,
+        return forkJoin([
+          updatedHearing.weekCommencingStartDate
+            ? this.listing.updateUnallocatedHearing(updatedHearing, prosecutionCases)
+            : this.listing.allocateHearing(
+                {
+                  courtCentreId: updatedHearing.courtCentreId,
+                  courtRoomId: updatedHearing.courtRoomId,
+                  endDate: updatedHearing.endDate,
+                  hearingId: updatedHearing.id,
+                  hearingLanguage: updatedHearing.hearingLanguage,
+                  judiciary: updatedHearing.judiciary,
+                  jurisdictionType: updatedHearing.jurisdictionType,
+                  nonDefaultDays: updatedHearing.nonDefaultDays,
+                  nonSittingDays: updatedHearing.nonSittingDays,
                   prosecutionCases,
-                  splitHearingUnallocated
-                )
-              : this.listing.allocateHearing(
-                  {
-                    courtCentreId: updatedHearing.courtCentreId,
-                    courtRoomId: updatedHearing.courtRoomId,
-                    endDate: updatedHearing.endDate,
-                    hearingId: updatedHearing.id,
-                    hearingLanguage: updatedHearing.hearingLanguage,
-                    judiciary: updatedHearing.judiciary,
-                    jurisdictionType: updatedHearing.jurisdictionType,
-                    nonDefaultDays: updatedHearing.nonDefaultDays,
-                    nonSittingDays: updatedHearing.nonSittingDays,
-                    prosecutionCases,
-                    startDate: updatedHearing.startDate,
-                    publicListNote,
-                    hasVideoLink,
-                    type: updatedHearing.type,
-                    bookingType: updatedHearing.bookingType,
-                    priority: updatedHearing.priority,
-                    specialRequirements: updatedHearing.specialRequirements,
-                    sendNotificationToParties: updatedHearing.sendNotificationToParties,
-                    judiciaryAssignmentSource: updatedHearing.judiciaryAssignmentSource
-                  },
-                  splitHearingUnallocated
-                ),
-            permissionHandler$,
-            notificationHandler$
-          ]).pipe(
-            tap(() =>
-              !!this.activatedRoute.snapshot.queryParams.isUnscheduled
-                ? this.router.navigate(['/unscheduled'])
-                : this.router.navigate(['/unallocated'])
-            ),
-            map(() => new AllocateHearingSuccessAction()),
-            catchError(err => of(new ApiError(err)))
-          );
-        }
-      )
+                  startDate: updatedHearing.startDate,
+                  publicListNote,
+                  hasVideoLink,
+                  type: updatedHearing.type,
+                  bookingType: updatedHearing.bookingType,
+                  priority: updatedHearing.priority,
+                  specialRequirements: updatedHearing.specialRequirements,
+                  sendNotificationToParties: updatedHearing.sendNotificationToParties,
+                  judiciaryAssignmentSource: updatedHearing.judiciaryAssignmentSource
+                },
+                false
+              ),
+          permissionHandler$,
+          notificationHandler$
+        ]).pipe(
+          tap(() =>
+            !!this.activatedRoute.snapshot.queryParams.isUnscheduled
+              ? this.router.navigate(['/unscheduled'])
+              : this.router.navigate(['/unallocated'])
+          ),
+          map(() => new AllocateHearingSuccessAction()),
+          catchError(err => of(new ApiError(err)))
+        );
+      })
     )
   );
   updateAllocatedHearing$: Observable<Action> = createEffect(() =>
@@ -309,7 +295,8 @@ export class HearingEffects {
             ouCode: updatedHearing.selectedCourtCentre.ouCode,
             pageNumber: 1,
             pageSize: 10,
-            showOverbookedSlots: true
+            showOverbookedSlots: true,
+            jurisdiction: 'MAGISTRATES'
           };
 
           return this.scheduling.searchHearingSlots(searchParams).pipe(

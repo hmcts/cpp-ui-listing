@@ -16,7 +16,6 @@ import { cloneDeep } from 'lodash-es';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { CourtCalendarFeature } from '../court-calendar/model';
 import { setSelectedHearingData } from '../court-calendar/state/actions/court-calendar.actions';
 import { BackButtonComponent } from '../shared/components/back-button/back-button.component';
 import { SplitHearingFormComponent } from './split-hearing-form/split-hearing-form.component';
@@ -110,6 +109,6 @@ export class SplitHearingContainer implements OnInit {
   }
 
   get referrer(): boolean {
-    return this.route.snapshot?.queryParams?.referrer === CourtCalendarFeature.calendar;
+    return this.route.snapshot?.queryParams?.referrer === 'CALENDAR';
   }
 }

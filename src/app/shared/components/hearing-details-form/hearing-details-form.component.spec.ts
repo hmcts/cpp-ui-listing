@@ -626,8 +626,7 @@ describe('HearingDetailsFormComponent', () => {
 
     expect(onSubmitSpy).toHaveBeenCalledTimes(1);
     const submissionPayload = onSubmitSpy.calls.mostRecent().args[0].updatedHearing as
-      | Hearing
-      | HearingWithSelectedCourtCentre;
+      Hearing | HearingWithSelectedCourtCentre;
     expect(submissionPayload.nonSittingDays).toHaveLength(0);
   });
 
@@ -650,8 +649,7 @@ describe('HearingDetailsFormComponent', () => {
     submitForm();
     expect(component.onSubmit.emit).toHaveBeenCalledTimes(1);
     const submissionPayload = onSubmitSpy.calls.mostRecent().args[0].updatedHearing as
-      | Hearing
-      | HearingWithSelectedCourtCentre;
+      Hearing | HearingWithSelectedCourtCentre;
     expect(submissionPayload.nonDefaultDays).toHaveLength(0);
   });
 

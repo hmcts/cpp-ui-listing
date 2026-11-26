@@ -3,7 +3,6 @@ import {
   Component,
   forwardRef,
   OnChanges,
-  OnInit,
   SimpleChanges,
   ViewChild,
   input,
@@ -12,10 +11,13 @@ import {
 import {
   ErrorMessageConfig,
   PdkCore,
-  PdkDateInput,
+  PdkDateInputComponent,
   PdkForm,
   PdkGrid,
+  PdkMaxDateValidatorDirective,
+  PdkMinDateValidatorDirective,
   PdkTimeInputComponent,
+  PdkWeekDateValidatorDirective,
   ValidationError
 } from '@cpp/pdk';
 import { HearingDay, NonDefaultDay } from '../../../core/model/hearing';
@@ -41,8 +43,11 @@ import { DatePipe, NgTemplateOutlet } from '@angular/common';
     ReactiveFormsModule,
     PdkCore,
     PdkForm,
-    PdkDateInput,
+    PdkMinDateValidatorDirective,
+    PdkMaxDateValidatorDirective,
     PdkTimeInputComponent,
+    PdkDateInputComponent,
+    PdkWeekDateValidatorDirective,
     PdkGrid,
     DatePipe,
     NgTemplateOutlet
@@ -56,12 +61,13 @@ import { DatePipe, NgTemplateOutlet } from '@angular/common';
     DatePipe
   ]
 })
-export class NonDefaultDaysComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class NonDefaultDaysComponent implements ControlValueAccessor, OnChanges {
   readonly courtCentreId = input<string>(undefined);
   readonly parentCourtRoomId = input<string>(undefined);
   readonly hearingDays = input<HearingDay[]>(undefined);
   readonly defaultStartTime = input<string>(undefined);
   readonly dateRange = input<DateRange>(undefined);
+  readonly jurisdictionType = input<'CROWN' | 'MAGISTRATES'>(undefined);
   readonly onValidationError = output<ValidationError[]>();
   @ViewChild(FormGroupDirective, { static: true }) formGroupDirective: FormGroupDirective;
   propagateChange: (nonDefaultDays: NonDefaultDay[]) => void = () => {};
@@ -76,10 +82,6 @@ export class NonDefaultDaysComponent implements ControlValueAccessor, OnInit, On
 
   constructor(private datePipe: DatePipe) {
     this.dateUtil = getCPPDate();
-  }
-
-  ngOnInit(): void {
-    this.formGroup.patchValue({ startTime: this.defaultStartTime() });
   }
 
   ngOnChanges(change: SimpleChanges): void {
@@ -116,6 +118,10 @@ export class NonDefaultDaysComponent implements ControlValueAccessor, OnInit, On
               dateRange.startDate,
               'd MMMM yyyy'
             )} - enter valid date`
+          },
+          {
+            rule: 'weekDate',
+            message: 'non-default days cannot be a weekend — enter a weekday'
           }
         ];
       }
@@ -133,7 +139,7 @@ export class NonDefaultDaysComponent implements ControlValueAccessor, OnInit, On
   submitDefaultDays() {
     const nonDefaultDay: NonDefaultDay = this.createNonDefaultDay(this.formGroup.value);
     const nonDefaultFormattedDate = this.dateUtil.startOf(nonDefaultDay.startTime, 'day');
-    const filteredNonDefaultDays = this.copyNonDefaultDays.filter((ndd) => {
+    const filteredNonDefaultDays = this.copyNonDefaultDays.filter(ndd => {
       const nddFormattedDate = this.dateUtil.startOf(ndd.startTime, 'day');
       return !this.dateUtil.isSame(nddFormattedDate, nonDefaultFormattedDate);
     });

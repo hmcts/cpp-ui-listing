@@ -20,9 +20,12 @@ import {
 import {
   ErrorMessageConfig,
   PdkCore,
-  PdkDateInput,
+  PdkDateInputComponent,
   PdkForm,
   PdkGrid,
+  PdkMaxDateValidatorDirective,
+  PdkMinDateValidatorDirective,
+  PdkWeekDateValidatorDirective,
   ValidationError
 } from '@cpp/pdk';
 import { DateRange } from '../date-range/date-range';
@@ -38,7 +41,10 @@ import { DatePipe, NgTemplateOutlet } from '@angular/common';
     ReactiveFormsModule,
     PdkGrid,
     PdkCore,
-    PdkDateInput,
+    PdkMinDateValidatorDirective,
+    PdkMaxDateValidatorDirective,
+    PdkDateInputComponent,
+    PdkWeekDateValidatorDirective,
     PdkForm,
     DatePipe,
     NgTemplateOutlet
@@ -55,6 +61,7 @@ import { DatePipe, NgTemplateOutlet } from '@angular/common';
 export class NonSittingDaysComponent implements ControlValueAccessor, OnChanges {
   readonly dateRange = input<DateRange>(undefined);
   readonly readOnly = input(false);
+  readonly jurisdictionType = input<'CROWN' | 'MAGISTRATES'>(undefined);
   readonly onCancel = output<string[]>();
   readonly onValidationError = output<ValidationError[]>();
   @ViewChild(FormGroupDirective, { static: false }) formGroupDirective: FormGroupDirective;
@@ -67,6 +74,7 @@ export class NonSittingDaysComponent implements ControlValueAccessor, OnChanges 
   errorMessages: ErrorMessageConfig[];
 
   constructor(private datePipe: DatePipe) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.dateRange?.currentValue) {
       const dateRange = this.dateRange();
@@ -102,6 +110,10 @@ export class NonSittingDaysComponent implements ControlValueAccessor, OnChanges 
               dateRange.startDate,
               'd MMMM yyyy'
             )} and ${this.datePipe.transform(dateRange.endDate, 'd MMMM yyyy')}`
+          },
+          {
+            rule: 'weekDate',
+            message: 'non-sitting days cannot be a weekend — enter a weekday'
           }
         ];
       }
