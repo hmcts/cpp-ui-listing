@@ -1,26 +1,17 @@
 import moment from 'moment';
-import { ExtendedJudicialRole, JudiciaryAssignmentSource, JurisdictionType } from '../model';
+import { ExtendedJudicialRole, JudiciaryAssignmentSource } from '../model';
 
 /**
  * Flags a manual judiciary change so rota auto-assignment won't overwrite it.
- * Magistrates only - Crown has no rota auto-assignment.
+ * Applies to both Magistrates and Crown hearings.
  *
- * @param jurisdictionType - the hearing's jurisdiction.
  * @param selectedJudiciary - the user's edited judiciary selection, or
  *  `undefined` if the user made no change (not the same as an empty selection).
  */
 export function resolveJudiciaryAssignmentSource(
-  jurisdictionType: JurisdictionType,
   selectedJudiciary: ExtendedJudicialRole[] | undefined
 ): JudiciaryAssignmentSource | undefined {
-  if (jurisdictionType !== 'MAGISTRATES') {
-    return undefined;
-  }
-  if (!selectedJudiciary || selectedJudiciary.length === 0) {
-    return undefined;
-  }
-
-  return JudiciaryAssignmentSource.MANUAL;
+  return selectedJudiciary?.length ? JudiciaryAssignmentSource.MANUAL : undefined;
 }
 
 /**

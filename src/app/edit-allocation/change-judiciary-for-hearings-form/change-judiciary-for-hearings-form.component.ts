@@ -73,10 +73,7 @@ export class ChangeJudiciaryForHearingsFormComponent implements OnChanges {
     const changedJudicary = {
       hearings: this.mapCourtCentresToHearings(this.hearings()),
       judiciary: this.selectedJudiciary ?? this.data?.judiciary ?? [],
-      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(
-        this.hearings()?.[0]?.jurisdictionType,
-        this.selectedJudiciary
-      )
+      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(this.selectedJudiciary)
     };
 
     this.onSubmit.emit(changedJudicary);
