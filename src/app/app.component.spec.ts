@@ -23,7 +23,24 @@ describe('App page component', () => {
   let store: Store<AppState>;
   const mockSubject = new BehaviorSubject<{ matches: boolean }>({ matches: true });
   let observe: jest.Mock;
+
+  let mockHref = '';
+
   beforeEach(() => {
+    mockHref = '';
+    Object.defineProperty(window, 'location', {
+      value: {
+        get href() {
+          return mockHref;
+        },
+        set href(value: string) {
+          mockHref = value;
+        },
+      },
+      writable: true,
+      configurable: true,
+    });
+
     observe = jest.fn(() => mockSubject);
     TestBed.configureTestingModule({
       providers: [
@@ -94,6 +111,24 @@ describe('App page component', () => {
       TestBed.inject(AppConfigService).cppHomeUrl = 'https://cpp.home';
       fixture.detectChanges();
       expect(fixture).toMatchSnapshot();
+    });
+
+    it('should redirect to search page when handleSearch is called with null', () => {
+      TestBed.inject(AppConfigService).cppHomeUrl = 'http://base-url';
+      fixture.componentInstance.handleSearch(null);
+
+      expect(window.location.href).toBe(
+        `http://base-url/search?referrer=${encodeURIComponent(document.baseURI)}`
+      );
+    });
+
+    it('should redirect to search page with reference when handleSearch is called with a ref', () => {
+      TestBed.inject(AppConfigService).cppHomeUrl = 'http://base-url';
+      fixture.componentInstance.handleSearch('ABC123');
+
+      expect(window.location.href).toBe(
+        `http://base-url/search?referrer=${encodeURIComponent(document.baseURI)}&reference=ABC123`
+      );
     });
   });
 });
