@@ -100,6 +100,25 @@ describe('ChangeJudiciaryForHearingsFormComponent', () => {
       });
     });
 
+    it('should set judiciaryAssignmentSource to MANUAL when the judiciary selection is changed for a Crown hearing', () => {
+      const crownHearing: Hearing = { ...validHearingMock1, jurisdictionType: 'CROWN' };
+      fixture.componentRef.setInput('hearings', [crownHearing]);
+      fixture.detectChanges();
+      spyOn(component.onSubmit, 'emit');
+      const selectedJudiciary: ExtendedJudicialRole[] = [
+        { judicialId: '1', judicialRoleType: { judiciaryType: 'RECORDER' } }
+      ];
+      component.selectedJudiciary = selectedJudiciary;
+
+      component.submit();
+
+      expect(component.onSubmit.emit).toHaveBeenCalledWith({
+        hearings: component.mapCourtCentresToHearings([crownHearing]),
+        judiciary: selectedJudiciary,
+        judiciaryAssignmentSource: JudiciaryAssignmentSource.MANUAL
+      });
+    });
+
     it('should not set judiciaryAssignmentSource when all judiciary are unchecked', () => {
       spyOn(component.onSubmit, 'emit');
       component.selectedJudiciary = [];

@@ -741,10 +741,7 @@ export class HearingDetailsFormComponent implements OnChanges, OnDestroy {
       nonDefaultDays,
       jurisdictionType,
       judiciary: this.selectedJudiciary || judiciary,
-      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(
-        jurisdictionType,
-        this.selectedJudiciary
-      )
+      judiciaryAssignmentSource: resolveJudiciaryAssignmentSource(this.selectedJudiciary)
     };
 
     // when editing allocated multi day hearings, the backend needs to know the 'selected' court details

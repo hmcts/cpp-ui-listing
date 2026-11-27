@@ -125,7 +125,6 @@ export class ChangeHearingDetailsComponent {
     );
 
     updatedHearing.judiciaryAssignmentSource = resolveJudiciaryAssignmentSource(
-      selectedHearing.jurisdictionType,
       this.selectedJudiciary
     );
 
